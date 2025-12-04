@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { SimpleButton as Button } from './SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './SimpleUI';
 import { RealSelect } from './SimpleSelect';
-import { SimpleCheckbox as Checkbox } from './SimpleCheckbox';
 import { GraduationCap, ArrowLeft } from './SimpleIcons';
 import type { User, UserType } from '../App';
 
@@ -14,6 +13,7 @@ interface RegistrationProps {
 export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps) {
   const [step, setStep] = useState<'type' | 'form'>('type');
   const [userType, setUserType] = useState<UserType | null>(null);
+  const [formStep, setFormStep] = useState(1); // Шаг формы для школьников
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   // Общие поля
@@ -30,17 +30,97 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
   const [city, setCity] = useState('');
   const [schoolName, setSchoolName] = useState('');
   const [address, setAddress] = useState('');
-  const [status, setStatus] = useState('');
-  const [familyType, setFamilyType] = useState('');
-  const [lowIncome, setLowIncome] = useState(false);
-  const [housingType, setHousingType] = useState('');
+  const [age, setAge] = useState('');
+  const [grade, setGrade] = useState('');
+  const [gradeLetter, setGradeLetter] = useState('');
 
   const handleTypeSelect = (type: UserType) => {
     setUserType(type);
     setStep('form');
+    setFormStep(1); // Сброс на первый шаг формы
   };
 
-  const validateForm = (): boolean => {
+  // Список регионов
+  const regions = [
+    { value: 'москва', label: 'Москва' },
+    { value: 'санкт-петербург', label: 'Санкт-Петербург' },
+    { value: 'московская область', label: 'Московская область' },
+    { value: 'ленинградская область', label: 'Ленинградская область' },
+    { value: 'краснодарский край', label: 'Краснодарский край' },
+    { value: 'свердловская область', label: 'Свердловская область' },
+    { value: 'новосибирская область', label: 'Новосибирская область' },
+    { value: 'татарстан', label: 'Республика Татарстан' },
+    { value: 'башкортостан', label: 'Республика Башкортостан' },
+    { value: 'нижегородская область', label: 'Нижегородская область' },
+    { value: 'челябинская область', label: 'Челябинская область' },
+    { value: 'самарская область', label: 'Самарская область' },
+    { value: 'ростовская область', label: 'Ростовская область' },
+    { value: 'красноярский край', label: 'Красноярский край' },
+  ];
+
+  // Список городов в зависимости от региона
+  const getCitiesByRegion = (regionValue: string) => {
+    const citiesMap: { [key: string]: { value: string; label: string }[] } = {
+      'москва': [{ value: 'москва', label: 'Москва' }],
+      'санкт-петербург': [{ value: 'санкт-петербург', label: 'Санкт-Петербург' }],
+      'московская область': [
+        { value: 'балашиха', label: 'Балашиха' },
+        { value: 'подольск', label: 'Подольск' },
+        { value: 'химки', label: 'Химки' },
+        { value: 'королёв', label: 'Королёв' },
+        { value: 'мытищи', label: 'Мытищи' },
+      ],
+      'ленинградская область': [
+        { value: 'гатчина', label: 'Гатчина' },
+        { value: 'выборг', label: 'Выборг' },
+        { value: 'всеволожск', label: 'Всеволожск' },
+      ],
+      'краснодарский край': [
+        { value: 'краснодар', label: 'Краснодар' },
+        { value: 'сочи', label: 'Сочи' },
+        { value: 'новороссийск', label: 'Новороссийск' },
+      ],
+      'свердловская область': [
+        { value: 'екатеринбург', label: 'Екатеринбург' },
+        { value: 'нижний тагил', label: 'Нижний Тагил' },
+      ],
+      'новосибирская область': [
+        { value: 'новосибирск', label: 'Новосибирск' },
+        { value: 'бердск', label: 'Бердск' },
+      ],
+      'татарстан': [
+        { value: 'казань', label: 'Казань' },
+        { value: 'набережные челны', label: 'Набережные Челны' },
+      ],
+      'башкортостан': [
+        { value: 'уфа', label: 'Уфа' },
+        { value: 'стерлитамак', label: 'Стерлитамак' },
+      ],
+      'нижегородская область': [
+        { value: 'нижний новгород', label: 'Нижний Новгород' },
+        { value: 'дзержинск', label: 'Дзержинск' },
+      ],
+      'челябинская область': [
+        { value: 'челябинск', label: 'Челябинск' },
+        { value: 'магнитогорск', label: 'Магнитогорск' },
+      ],
+      'самарская область': [
+        { value: 'самара', label: 'Самара' },
+        { value: 'тольятти', label: 'Тольятти' },
+      ],
+      'ростовская область': [
+        { value: 'ростов-на-дону', label: 'Ростов-на-Дону' },
+        { value: 'таганрог', label: 'Таганрог' },
+      ],
+      'красноярский край': [
+        { value: 'красноярск', label: 'Красноярск' },
+        { value: 'норильск', label: 'Норильск' },
+      ],
+    };
+    return citiesMap[regionValue] || [];
+  };
+
+  const validateStep1 = (): boolean => {
     const newErrors: { [key: string]: string } = {};
 
     if (!email) {
@@ -64,23 +144,75 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
       if (!firstName) newErrors.firstName = 'Имя обязательно';
       if (!middleName) newErrors.middleName = 'Отчество обязательно';
       if (!gender) newErrors.gender = 'Пол обязателен';
-      if (!region) newErrors.region = 'Регион обязателен';
-      if (!city) newErrors.city = 'Город обязателен';
-      if (!schoolName) newErrors.schoolName = 'Название школы обязательно';
-      if (!address) newErrors.address = 'Адрес обязателен';
-      if (!status) newErrors.status = 'Статус обязателен';
-      if (!familyType) newErrors.familyType = 'Тип семьи обязателен';
-      if (!housingType) newErrors.housingType = 'Тип жилья обязателен';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const validateStep2 = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (userType === 'школьник') {
+      if (!region) newErrors.region = 'Регион обязателен';
+      if (!city) newErrors.city = 'Город обязателен';
+      if (!address) newErrors.address = 'Адрес обязателен';
+      if (!schoolName) newErrors.schoolName = 'Название школы обязательно';
+      if (!age) newErrors.age = 'Возраст обязателен';
+      if (!grade) newErrors.grade = 'Класс обязателен';
+      if (!gradeLetter) newErrors.gradeLetter = 'Буква класса обязательна';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!email) {
+      newErrors.email = 'Email обязателен';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Некорректный email';
+    }
+
+    if (!password) {
+      newErrors.password = 'Пароль обязателен';
+    } else if (password.length < 6) {
+      newErrors.password = 'Пароль должен содержать минимум 6 символов';
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Пароли не совпадают';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNextStep = () => {
+    if (validateStep1()) {
+      setFormStep(2);
+      setErrors({}); // Очистка ошибок при переходе
+    }
+  };
+
+  const handlePrevStep = () => {
+    setFormStep(1);
+    setErrors({}); // Очистка ошибок при возврате
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm() || !userType) return;
+    // Для школьников проверяем второй шаг, для других - весь формат
+    if (userType === 'школьник' && formStep === 2) {
+      if (!validateStep2()) return;
+    } else if (userType !== 'школьник') {
+      if (!validateForm() || !userType) return;
+    } else {
+      return; // Не должны попасть сюда
+    }
 
     const user: User = {
       email,
@@ -97,10 +229,9 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
       user.city = city;
       user.schoolName = schoolName;
       user.address = address;
-      user.status = status;
-      user.familyType = familyType;
-      user.lowIncome = lowIncome;
-      user.housingType = housingType;
+      user.age = parseInt(age);
+      user.grade = parseInt(grade);
+      user.gradeLetter = gradeLetter;
     }
 
     onRegister(user);
@@ -130,7 +261,7 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
               <div className="text-left w-full">
                 <p className="mb-1 text-gray-900 group-hover:text-indigo-700 transition-colors">Школьник</p>
                 <p className="text-sm text-gray-500 group-hover:text-indigo-600 transition-colors">
-                  Я учусь в школе или являюсь выпускником/абитуриентом
+                  Я учусь в школе
                 </p>
               </div>
             </Button>
@@ -154,7 +285,7 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
               <div className="text-left w-full">
                 <p className="mb-1 text-gray-900 group-hover:text-indigo-700 transition-colors">Специалист</p>
                 <p className="text-sm text-gray-500 group-hover:text-indigo-600 transition-colors">
-                  Я уже работаю или ищу новую профессию
+                  Я уже работаю
                 </p>
               </div>
             </Button>
@@ -187,59 +318,60 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
                 Регистрация - {userType}
               </CardTitle>
               <CardDescription>
-                Заполните все обязательные поля
+                {userType === 'школьник' && formStep === 1 && 'Шаг 1 из 2: Учётные данные и личная информация'}
+                {userType === 'школьник' && formStep === 2 && 'Шаг 2 из 2: Место проживания и образование'}
+                {userType !== 'школьник' && 'Заполните все обязательные поля'}
               </CardDescription>
             </div>
           </div>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
-            {/* Общие поля */}
-            <div className="space-y-4">
-              <div className="pb-2 border-b border-gray-100">
-                <h4 className="text-sm text-indigo-600">Учетные данные</h4>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Электронная почта *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="example@mail.ru"
-                />
-                {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="password">Пароль (минимум 6 символов) *</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••"
-                  />
-                  {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Подтверждение пароля *</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="••••••"
-                  />
-                  {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
-                </div>
-              </div>
-            </div>
-
-            {/* Поля для школьника */}
-            {userType === 'школьник' && (
+            {/* Поля для школьника - Шаг 1 */}
+            {userType === 'школьник' && formStep === 1 && (
               <>
+                <div className="space-y-4">
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Учетные данные</h4>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Электронная почта *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="example@mail.ru"
+                    />
+                    {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Пароль (минимум 6 символов) *</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="••••••"
+                      />
+                      {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="confirmPassword">Подтверждение пароля *</Label>
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="••••••"
+                      />
+                      {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="space-y-4">
                   <div className="pb-2 border-b border-gray-100">
                     <h4 className="text-sm text-indigo-600">Личная информация</h4>
@@ -291,7 +423,12 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
                     {errors.gender && <p className="text-sm text-red-600">{errors.gender}</p>}
                   </div>
                 </div>
+              </>
+            )}
 
+            {/* Поля для школьника - Шаг 2 */}
+            {userType === 'школьник' && formStep === 2 && (
+              <>
                 <div className="space-y-4">
                   <div className="pb-2 border-b border-gray-100">
                     <h4 className="text-sm text-indigo-600">Место проживания</h4>
@@ -299,21 +436,25 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="region">Регион *</Label>
-                      <Input
-                        id="region"
+                      <RealSelect
                         value={region}
-                        onChange={(e) => setRegion(e.target.value)}
-                        placeholder="Московская область"
+                        onValueChange={(value) => {
+                          setRegion(value);
+                          setCity(''); // Сброс города при смене региона
+                        }}
+                        placeholder="Выберите регион"
+                        options={regions}
                       />
                       {errors.region && <p className="text-sm text-red-600">{errors.region}</p>}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="city">Город *</Label>
-                      <Input
-                        id="city"
+                      <RealSelect
                         value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        placeholder="Москва"
+                        onValueChange={setCity}
+                        placeholder="Выберите город"
+                        options={getCitiesByRegion(region)}
+                        disabled={!region}
                       />
                       {errors.city && <p className="text-sm text-red-600">{errors.city}</p>}
                     </div>
@@ -347,100 +488,167 @@ export function Registration({ onRegister, onSwitchToLogin }: RegistrationProps)
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="status">Статус *</Label>
+                    <Label htmlFor="age">Возраст *</Label>
                     <RealSelect
-                      value={status}
-                      onValueChange={setStatus}
-                      placeholder="Выберите статус"
-                      options={[
-                        { value: 'ученик', label: 'Ученик' },
-                        { value: 'выпускник', label: 'Выпускник' },
-                        { value: 'абитуриент', label: 'Абитуриент' },
-                      ]}
+                      value={age}
+                      onValueChange={setAge}
+                      placeholder="Выберите возраст"
+                      options={Array.from({ length: 14 }, (_, i) => ({
+                        value: String(i + 6),
+                        label: String(i + 6),
+                      }))}
                     />
-                    {errors.status && <p className="text-sm text-red-600">{errors.status}</p>}
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="pb-2 border-b border-gray-100">
-                    <h4 className="text-sm text-indigo-600">Социальная информация</h4>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="familyType">Тип семьи *</Label>
-                    <RealSelect
-                      value={familyType}
-                      onValueChange={setFamilyType}
-                      placeholder="Выберите тип семьи"
-                      options={[
-                        { value: 'полная', label: 'Полная' },
-                        { value: 'неполная', label: 'Неполная' },
-                      ]}
-                    />
-                    {errors.familyType && <p className="text-sm text-red-600">{errors.familyType}</p>}
+                    {errors.age && <p className="text-sm text-red-600">{errors.age}</p>}
                   </div>
 
-                  <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                    <Checkbox
-                      id="lowIncome"
-                      checked={lowIncome}
-                      onCheckedChange={(checked) => setLowIncome(checked as boolean)}
-                    />
-                    <Label htmlFor="lowIncome" className="cursor-pointer">
-                      Малообеспеченная семья
-                    </Label>
-                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="grade">Класс *</Label>
+                      <RealSelect
+                        value={grade}
+                        onValueChange={setGrade}
+                        placeholder="Выберите класс"
+                        options={Array.from({ length: 11 }, (_, i) => ({
+                          value: String(i + 1),
+                          label: `${i + 1} класс`,
+                        }))}
+                      />
+                      {errors.grade && <p className="text-sm text-red-600">{errors.grade}</p>}
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="housingType">Тип жилья *</Label>
-                    <RealSelect
-                      value={housingType}
-                      onValueChange={setHousingType}
-                      placeholder="Выберите тип жилья"
-                      options={[
-                        { value: 'квартира', label: 'Квартира' },
-                        { value: 'частный дом', label: 'Частный дом' },
-                        { value: 'общежитие', label: 'Общежитие' },
-                      ]}
-                    />
-                    {errors.housingType && <p className="text-sm text-red-600">{errors.housingType}</p>}
+                    <div className="space-y-2">
+                      <Label htmlFor="gradeLetter">Буква класса *</Label>
+                      <RealSelect
+                        value={gradeLetter}
+                        onValueChange={setGradeLetter}
+                        placeholder="Выберите букву"
+                        options={[
+                          { value: 'а', label: 'А' },
+                          { value: 'б', label: 'Б' },
+                          { value: 'в', label: 'В' },
+                          { value: 'г', label: 'Г' },
+                          { value: 'д', label: 'Д' },
+                        ]}
+                      />
+                      {errors.gradeLetter && <p className="text-sm text-red-600">{errors.gradeLetter}</p>}
+                    </div>
                   </div>
                 </div>
               </>
             )}
 
-            {/* Заглушки для студентов и специалистов */}
+            {/* Общие поля для студентов и специалистов */}
             {(userType === 'студент' || userType === 'специалист') && (
-              <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-amber-100 rounded-lg">
-                    <svg className="size-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+              <>
+                <div className="space-y-4">
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Учетные данные</h4>
                   </div>
-                  <div>
-                    <p className="text-amber-900 mb-1">В разработке</p>
-                    <p className="text-sm text-amber-700">
-                      Дополнительные поля для {userType}ов находятся в разработке.
-                      Пока достаточно email и пароля для регистрации.
-                    </p>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Электронная почта *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="example@mail.ru"
+                    />
+                    {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Пароль (минимум 6 символов) *</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="••••••"
+                      />
+                      {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="confirmPassword">Подтверждение пароля *</Label>
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="••••••"
+                      />
+                      {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
+                    </div>
                   </div>
                 </div>
-              </div>
+
+                <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-amber-100 rounded-lg">
+                      <svg className="size-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-amber-900 mb-1">В разработке</p>
+                      <p className="text-sm text-amber-700">
+                        Дополнительные поля для {userType}ов находятся в разработке.
+                        Пока достаточно email и пароля для регистрации.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </CardContent>
           <CardFooter className="flex gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setStep('type')}
-            >
-              <ArrowLeft className="size-4 mr-2" />
-              Назад
-            </Button>
-            <Button type="submit" className="flex-1">
-              Зарегистрироваться
-            </Button>
+            {userType === 'школьник' && formStep === 1 ? (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setStep('type')}
+                >
+                  <ArrowLeft className="size-4 mr-2" />
+                  Назад
+                </Button>
+                <Button 
+                  type="button" 
+                  className="flex-1"
+                  onClick={handleNextStep}
+                >
+                  Далее
+                </Button>
+              </>
+            ) : userType === 'школьник' && formStep === 2 ? (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handlePrevStep}
+                >
+                  <ArrowLeft className="size-4 mr-2" />
+                  Назад
+                </Button>
+                <Button type="submit" className="flex-1">
+                  Зарегистрироваться
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setStep('type')}
+                >
+                  <ArrowLeft className="size-4 mr-2" />
+                  Назад
+                </Button>
+                <Button type="submit" className="flex-1">
+                  Зарегистрироваться
+                </Button>
+              </>
+            )}
           </CardFooter>
         </form>
       </Card>

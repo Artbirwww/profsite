@@ -3,7 +3,6 @@ import { SimpleButton as Button } from './SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './SimpleUI';
 import { SimpleProgress as Progress } from './SimpleProgress';
 import { ArrowLeft } from './SimpleIcons';
-import { TemperamentTest } from './TemperamentTest';
 import type { User, TestGroup, TestResult } from '../App';
 
 interface TestPageProps {
@@ -302,12 +301,7 @@ const groupsData = {
   },
 };
 
-export function TestPage({ user, testGroup, onComplete, onBack }: TestPageProps) {
-  // Если это тест темперамента, используем специальный компонент
-  if (testGroup === 'temperament') {
-    return <TemperamentTest user={user} onComplete={onComplete} onBack={onBack} />;
-  }
-
+export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPageProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
 

@@ -3,6 +3,7 @@ import { Login } from './components/Login';
 import { Registration } from './components/Registration';
 import { TestPage } from './components/TestPage';
 import { ResultsPage } from './components/ResultsPage';
+import { Dashboard } from './components/Dashboard';
 
 export type UserType = 'школьник' | 'студент' | 'специалист';
 
@@ -20,27 +21,36 @@ export interface User {
   schoolName?: string;
   address?: string;
   status?: string;
-  familyType?: string;
-  lowIncome?: boolean;
-  housingType?: string;
+  age?: number;
+  grade?: number;
+  gradeLetter?: string;
 }
 
 export interface TestResult {
   userId: string;
-  belbin: { [key: string]: number };
-  klimov: { [key: string]: number };
-  psychoticism: number;
-  neuroticism: number;
-  recommendedProfession: string;
+  temperament?: { [key: string]: number };
+  groupRoles?: { [key: string]: number };
+  professionalOrientation?: { [key: string]: number };
+  engineeringThinking?: { [key: string]: number };
+  intellectualPotential?: { [key: string]: number };
+  belbin?: { [key: string]: number }; // Оставляем для совместимости
+  klimov?: { [key: string]: number }; // Оставляем для совместимости
+  psychoticism?: number;
+  neuroticism?: number;
+  recommendedProfession?: string;
 }
 
-type Page = 'login' | 'register' | 'test' | 'results';
+export type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
+
+type Page = 'login' | 'register' | 'dashboard' | 'test' | 'results';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('login');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [testResult, setTestResult] = useState<TestResult | null>(null);
   const [users, setUsers] = useState<User[]>([]);
+  const [completedGroups, setCompletedGroups] = useState<TestGroup[]>([]);
+  const [currentTestGroup, setCurrentTestGroup] = useState<TestGroup | null>(null);
 
   // Загрузка пользователей из localStorage
   useEffect(() => {
@@ -61,7 +71,8 @@ export default function App() {
     const user = users.find(u => u.email === email && u.password === password);
     if (user) {
       setCurrentUser(user);
-      setCurrentPage('test');
+      setCurrentPage('dashboard');
+      setCompletedGroups([]);
       return true;
     }
     return false;
@@ -70,17 +81,43 @@ export default function App() {
   const handleRegister = (user: User) => {
     setUsers([...users, user]);
     setCurrentUser(user);
+    setCurrentPage('dashboard');
+  };
+
+  const handleStartTest = (group: TestGroup) => {
+    setCurrentTestGroup(group);
     setCurrentPage('test');
   };
 
-  const handleTestComplete = (result: TestResult) => {
-    setTestResult(result);
-    setCurrentPage('results');
+  const handleTestGroupComplete = (groupResult: Partial<TestResult>) => {
+    if (!currentTestGroup) return;
+    
+    // Обновляем результаты теста
+    setTestResult(prev => ({
+      ...prev,
+      userId: currentUser?.email || '',
+      ...groupResult,
+    }) as TestResult);
+
+    // Добавляем группу в завершенные
+    const newCompletedGroups = [...completedGroups, currentTestGroup];
+    setCompletedGroups(newCompletedGroups);
+    
+    // Если все группы пройдены, переходим к результатам
+    if (newCompletedGroups.length === 5) {
+      setCurrentPage('results');
+    } else {
+      setCurrentPage('dashboard');
+    }
+    
+    setCurrentTestGroup(null);
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
     setTestResult(null);
+    setCompletedGroups([]);
+    setCurrentTestGroup(null);
     setCurrentPage('login');
   };
 
@@ -100,11 +137,22 @@ export default function App() {
         />
       )}
       
-      {currentPage === 'test' && currentUser && (
+      {currentPage === 'dashboard' && currentUser && (
+        <Dashboard
+          user={currentUser}
+          completedGroups={completedGroups}
+          onStartTest={handleStartTest}
+          onLogout={handleLogout}
+          onViewResults={() => setCurrentPage('results')}
+        />
+      )}
+      
+      {currentPage === 'test' && currentUser && currentTestGroup && (
         <TestPage
           user={currentUser}
-          onComplete={handleTestComplete}
-          onLogout={handleLogout}
+          testGroup={currentTestGroup}
+          onComplete={handleTestGroupComplete}
+          onBack={() => setCurrentPage('dashboard')}
         />
       )}
       
@@ -112,7 +160,11 @@ export default function App() {
         <ResultsPage
           result={testResult}
           user={currentUser}
-          onRetakeTest={() => setCurrentPage('test')}
+          onRetakeTest={() => {
+            setCompletedGroups([]);
+            setTestResult(null);
+            setCurrentPage('dashboard');
+          }}
           onLogout={handleLogout}
         />
       )}

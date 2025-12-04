@@ -54,18 +54,20 @@ export function SimpleSelectItem({ value, children }: SelectItemProps) {
 }
 
 // Реальная реализация селекта через нативный select
-export function RealSelect({ value, onValueChange, placeholder, options }: {
+export function RealSelect({ value, onValueChange, placeholder, options, disabled }: {
   value: string;
   onValueChange: (value: string) => void;
   placeholder?: string;
   options: { value: string; label: string }[];
+  disabled?: boolean;
 }) {
   return (
     <div className="relative">
       <select
         value={value}
         onChange={(e) => onValueChange(e.target.value)}
-        className="w-full h-11 px-4 pr-10 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all appearance-none cursor-pointer hover:border-gray-300"
+        disabled={disabled}
+        className="w-full h-11 px-4 pr-10 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all appearance-none cursor-pointer hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {placeholder && (
           <option value="" disabled>
