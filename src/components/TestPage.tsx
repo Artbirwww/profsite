@@ -5,6 +5,7 @@ import { SimpleProgress as Progress } from './SimpleProgress';
 import { ArrowLeft } from './SimpleIcons';
 import { TemperamentTest } from './TemperamentTest';
 import { GroupRolesTest } from './GroupRolesTest';
+import { ProfessionalOrientationTest } from './ProfessionalOrientationTest';
 import type { User, TestGroup, TestResult } from '../App';
 
 interface TestPageProps {
@@ -312,6 +313,11 @@ export function TestPage({ user, testGroup, onComplete, onBack }: TestPageProps)
   // Если это тест групповых ролей, используем специальный компонент
   if (testGroup === 'groupRoles') {
     return <GroupRolesTest user={user} onComplete={onComplete} onBack={onBack} />;
+  }
+
+  // Если это тест профессиональной направленности, используем специальный компонент
+  if (testGroup === 'professionalOrientation') {
+    return <ProfessionalOrientationTest user={user} onComplete={onComplete} onBack={onBack} />;
   }
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
