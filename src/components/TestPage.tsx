@@ -6,6 +6,7 @@ import { ArrowLeft } from './SimpleIcons';
 import { TemperamentTest } from './TemperamentTest';
 import { GroupRolesTest } from './GroupRolesTest';
 import { ProfessionalOrientationTest } from './ProfessionalOrientationTest';
+import { EngineeringThinkingTest } from './EngineeringThinkingTest';
 import type { User, TestGroup, TestResult } from '../App';
 
 interface TestPageProps {
@@ -209,7 +210,7 @@ const groupsData = {
         options: [
           { value: 'high', label: 'Увлекает и доставляет удовольствие', score: 3 },
           { value: 'medium', label: 'Интересно, если задача практична', score: 2 },
-          { value: 'low', label: 'Делаю, если необходимо', score: 1 },
+          { value: 'low', label: 'Делаю, если необхо��имо', score: 1 },
           { value: 'none', label: 'Вызывает затруднения', score: 0 },
         ],
       },
@@ -318,6 +319,11 @@ export function TestPage({ user, testGroup, onComplete, onBack }: TestPageProps)
   // Если это тест профессиональной направленности, используем специальный компонент
   if (testGroup === 'professionalOrientation') {
     return <ProfessionalOrientationTest user={user} onComplete={onComplete} onBack={onBack} />;
+  }
+
+  // Если это тест инженерного мышления, используем специальный компонент
+  if (testGroup === 'engineeringThinking') {
+    return <EngineeringThinkingTest user={user} onComplete={onComplete} onBack={onBack} />;
   }
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
