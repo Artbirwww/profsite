@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../../contexts/AppContext';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/layout/card';
-import { GraduationCap, LogOut, Check, BarChart3 } from '../../SimpleIcons';
+import { GraduationCap, LogOut, Check, BarChart3 } from '../../ui/display/SimpleIcons';
 
 const testGroups = [
   {

@@ -1,4 +1,4 @@
-import { Check } from '../../SimpleIcons';
+import { Check } from '../display/SimpleIcons';
 
 interface CheckboxProps {
   id?: string;

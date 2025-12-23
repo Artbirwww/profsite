@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../SimpleUI';
-import { SimpleProgress as Progress } from '../../SimpleProgress';
-import { ArrowLeft } from '../../SimpleIcons';
+import { SimpleProgress as Progress } from '../../ui/feedback/SimpleProgress';
+import { ArrowLeft } from '../../ui/display/SimpleIcons';
 import type { User, TestGroup, TestResult } from '../../../App';
 
 interface TestPageProps {

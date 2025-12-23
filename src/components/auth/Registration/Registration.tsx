@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../../contexts/AppContext';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../SimpleUI';
-import { RealSelect } from '../../SimpleSelect';
-import { GraduationCap, ArrowLeft } from '../../SimpleIcons';
+import { RealSelect } from '../../ui/inputs/SimpleSelect';
+import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
 
 export function Registration() {
   const { handleRegister } = useApp();

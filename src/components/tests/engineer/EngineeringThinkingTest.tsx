@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../SimpleUI';
-import { ArrowLeft, Clock } from '../../SimpleIcons';
+import { ArrowLeft, Clock } from '../../ui/display/SimpleIcons';
 import type { User, TestResult } from '../../../App';
 
 interface EngineeringThinkingTestProps {

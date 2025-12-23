@@ -1,6 +1,6 @@
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Badge } from '../../SimpleUI';
-import { LogOut, RefreshCw, Award } from '../../SimpleIcons';
+import { LogOut, RefreshCw, Award } from '../../ui/display/SimpleIcons';
 import type { User, TestResult } from '../App';
 
 interface ResultsPageProps {

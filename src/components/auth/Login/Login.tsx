@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../../contexts/AppContext'; // ← путь обновлён
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
-import { GraduationCap } from '../../SimpleIcons';
+import { GraduationCap } from '../../ui/display/SimpleIcons';
 
 export function Login() {
   const { handleLogin } = useApp();
