@@ -1,20 +1,41 @@
 // src/components/auth/Registration/Registration.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../../../contexts/AppContext';
+import { useAuth } from '../../../contexts/AuthContext'; // ✅ ИСПРАВЛЕНО: useAuth вместо useApp
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../SimpleUI';
 import { RealSelect } from '../../ui/inputs/SimpleSelect';
 import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
 
+// ✅ Добавлены типы (чтобы не было ошибок)
+type UserType = 'школьник' | 'студент' | 'специалист';
+
+interface User {
+  email: string;
+  password: string;
+  type: UserType;
+  lastName?: string;
+  firstName?: string;
+  middleName?: string;
+  gender?: string;
+  region?: string;
+  city?: string;
+  schoolName?: string;
+  address?: string;
+  age?: number;
+  grade?: number;
+  gradeLetter?: string;
+}
+
 export function Registration() {
-  const { handleRegister } = useApp();
+  const { register } = useAuth(); // ✅ ИСПРАВЛЕНО: register из AuthContext
   const navigate = useNavigate();
 
   const [step, setStep] = useState<'type' | 'form'>('type');
   const [userType, setUserType] = useState<UserType | null>(null);
   const [formStep, setFormStep] = useState(1);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Общие поля
   const [email, setEmail] = useState('');
@@ -91,7 +112,7 @@ export function Registration() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (userType === 'школьник') {
@@ -105,24 +126,46 @@ export function Registration() {
       if (!validateStep1()) return;
     }
 
-    const user: User = { email, password, type: userType! };
-    if (userType === 'школьник') {
-      user.lastName = lastName;
-      user.firstName = firstName;
-      user.middleName = middleName;
-      user.gender = gender;
-      user.region = region;
-      user.city = city;
-      user.schoolName = schoolName;
-      user.address = address;
-      user.age = Number(age);
-      user.grade = Number(grade);
-      user.gradeLetter = gradeLetter;
-    }
+    // ✅ Собираем данные
+    const userData = {
+      email,
+      password,
+      type: userType!,
+      ...(userType === 'школьник' && {
+        lastName,
+        firstName,
+        middleName,
+        gender,
+        region,
+        city,
+        schoolName,
+        address,
+        age: Number(age),
+        grade: Number(grade),
+        gradeLetter,
+      }),
+    };
 
-    // ✅ Главное: вызов регистрации + переход
-    handleRegister(user);
-    navigate('/dashboard', { replace: true });
+    try {
+      setIsSubmitting(true);
+      
+      // ✅ Вызываем register из AuthContext (он сохранит token и user)
+      await register(
+        userData.email,
+        userData.password,
+        userData.firstName,
+        userData.lastName
+      );
+
+      // ✅ ГАРАНТИРОВАННЫЙ РЕДИРЕКТ в /dashboard
+      navigate('/dashboard', { replace: true });
+      
+    } catch (err) {
+      console.error('Registration error:', err);
+      setErrors({ submit: err instanceof Error ? err.message : 'Ошибка регистрации' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (step === 'type') {
@@ -145,20 +188,25 @@ export function Registration() {
                 variant="outline"
                 className="w-full h-auto py-6 hover:border-indigo-300 hover:bg-indigo-50 group"
                 onClick={() => handleTypeSelect(type)}
+                disabled={isSubmitting}
               >
                 <div className="text-left w-full">
-                  <p className="mb-1 text-gray-900 group-hover:text-indigo-700">{type === 'школьник' ? 'Школьник' : type === 'студент' ? 'Студент' : 'Специалист'}</p>
+                  <p className="mb-1 text-gray-900 group-hover:text-indigo-700">
+                    {type === 'школьник' ? 'Школьник' : type === 'студент' ? 'Студент' : 'Специалист'}
+                  </p>
                   <p className="text-sm text-gray-500">
-                    {type === 'школьник' ? 'Я учусь в школе'
-                    : type === 'студент' ? 'Я обучаюсь в ВУЗе или колледже'
-                    : 'Я уже работаю'}
+                    {type === 'школьник'
+                      ? 'Я учусь в школе'
+                      : type === 'студент'
+                      ? 'Я обучаюсь в ВУЗе или колледже'
+                      : 'Я уже работаю'}
                   </p>
                 </div>
               </Button>
             ))}
           </CardContent>
           <CardFooter>
-            <Button variant="ghost" className="w-full" onClick={() => navigate('/login')}>
+            <Button variant="ghost" className="w-full" onClick={() => navigate('/login')} disabled={isSubmitting}>
               <ArrowLeft className="size-4 mr-2" /> Назад к входу
             </Button>
           </CardFooter>
@@ -187,38 +235,74 @@ export function Registration() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
+            {errors.submit && (
+              <div className="p-3 bg-red-50 text-red-700 border border-red-200 rounded-lg text-sm">
+                {errors.submit}
+              </div>
+            )}
+
             {userType === 'школьник' && formStep === 1 && (
               <>
                 <div className="space-y-4">
-                  <div className="pb-2 border-b border-gray-100"><h4 className="text-sm text-indigo-600">Учётные данные</h4></div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Учётные данные</h4>
+                  </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email *</Label>
-                    <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="example@mail.ru" />
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="example@mail.ru"
+                      disabled={isSubmitting}
+                    />
                     {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label>Пароль *</Label>
-                      <Input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••" />
+                      <Input
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder="••••••"
+                        disabled={isSubmitting}
+                      />
                       {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
                     </div>
                     <div className="space-y-2">
                       <Label>Подтвердите пароль *</Label>
-                      <Input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="••••••" />
+                      <Input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        placeholder="••••••"
+                        disabled={isSubmitting}
+                      />
                       {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
                     </div>
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="pb-2 border-b border-gray-100"><h4 className="text-sm text-indigo-600">Личная информация</h4></div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Личная информация</h4>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {(['lastName', 'firstName', 'middleName'] as const).map(field => (
                       <div key={field} className="space-y-2">
                         <Label>{field === 'lastName' ? 'Фамилия' : field === 'firstName' ? 'Имя' : 'Отчество'} *</Label>
                         <Input
                           value={field === 'lastName' ? lastName : field === 'firstName' ? firstName : middleName}
-                          onChange={e => field === 'lastName' ? setLastName(e.target.value) : field === 'firstName' ? setFirstName(e.target.value) : setMiddleName(e.target.value)}
+                          onChange={e =>
+                            field === 'lastName'
+                              ? setLastName(e.target.value)
+                              : field === 'firstName'
+                              ? setFirstName(e.target.value)
+                              : setMiddleName(e.target.value)
+                          }
                           placeholder={field === 'lastName' ? 'Иванов' : field === 'firstName' ? 'Иван' : 'Иванович'}
+                          disabled={isSubmitting}
                         />
                         {errors[field] && <p className="text-sm text-red-600">{errors[field]}</p>}
                       </div>
@@ -230,7 +314,11 @@ export function Registration() {
                       value={gender}
                       onValueChange={setGender}
                       placeholder="Выберите пол"
-                      options={[{ value: 'мужской', label: 'Мужской' }, { value: 'женский', label: 'Женский' }]}
+                      options={[
+                        { value: 'мужской', label: 'Мужской' },
+                        { value: 'женский', label: 'Женский' },
+                      ]}
+                      disabled={isSubmitting}
                     />
                     {errors.gender && <p className="text-sm text-red-600">{errors.gender}</p>}
                   </div>
@@ -241,15 +329,21 @@ export function Registration() {
             {userType === 'школьник' && formStep === 2 && (
               <>
                 <div className="space-y-4">
-                  <div className="pb-2 border-b border-gray-100"><h4 className="text-sm text-indigo-600">Место проживания</h4></div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Место проживания</h4>
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label>Регион *</Label>
                       <RealSelect
                         value={region}
-                        onValueChange={v => { setRegion(v); setCity(''); }}
+                        onValueChange={v => {
+                          setRegion(v);
+                          setCity('');
+                        }}
                         placeholder="Выберите регион"
                         options={regions}
+                        disabled={isSubmitting}
                       />
                       {errors.region && <p className="text-sm text-red-600">{errors.region}</p>}
                     </div>
@@ -260,22 +354,34 @@ export function Registration() {
                         onValueChange={setCity}
                         placeholder="Выберите город"
                         options={getCitiesByRegion(region)}
-                        disabled={!region}
+                        disabled={!region || isSubmitting}
                       />
                       {errors.city && <p className="text-sm text-red-600">{errors.city}</p>}
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label>Адрес *</Label>
-                    <Input value={address} onChange={e => setAddress(e.target.value)} placeholder="Улица, дом, квартира" />
+                    <Input
+                      value={address}
+                      onChange={e => setAddress(e.target.value)}
+                      placeholder="Улица, дом, квартира"
+                      disabled={isSubmitting}
+                    />
                     {errors.address && <p className="text-sm text-red-600">{errors.address}</p>}
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="pb-2 border-b border-gray-100"><h4 className="text-sm text-indigo-600">Образование</h4></div>
+                  <div className="pb-2 border-b border-gray-100">
+                    <h4 className="text-sm text-indigo-600">Образование</h4>
+                  </div>
                   <div className="space-y-2">
                     <Label>Школа *</Label>
-                    <Input value={schoolName} onChange={e => setSchoolName(e.target.value)} placeholder="МБОУ СОШ №1" />
+                    <Input
+                      value={schoolName}
+                      onChange={e => setSchoolName(e.target.value)}
+                      placeholder="МБОУ СОШ №1"
+                      disabled={isSubmitting}
+                    />
                     {errors.schoolName && <p className="text-sm text-red-600">{errors.schoolName}</p>}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -285,7 +391,11 @@ export function Registration() {
                         value={age}
                         onValueChange={setAge}
                         placeholder="Возраст"
-                        options={Array.from({ length: 14 }, (_, i) => ({ value: String(i + 6), label: `${i + 6}` }))}
+                        options={Array.from({ length: 14 }, (_, i) => ({
+                          value: String(i + 6),
+                          label: `${i + 6}`,
+                        }))}
+                        disabled={isSubmitting}
                       />
                       {errors.age && <p className="text-sm text-red-600">{errors.age}</p>}
                     </div>
@@ -295,7 +405,11 @@ export function Registration() {
                         value={grade}
                         onValueChange={setGrade}
                         placeholder="Класс"
-                        options={Array.from({ length: 11 }, (_, i) => ({ value: String(i + 1), label: `${i + 1}` }))}
+                        options={Array.from({ length: 11 }, (_, i) => ({
+                          value: String(i + 1),
+                          label: `${i + 1}`,
+                        }))}
+                        disabled={isSubmitting}
                       />
                       {errors.grade && <p className="text-sm text-red-600">{errors.grade}</p>}
                     </div>
@@ -305,7 +419,12 @@ export function Registration() {
                         value={gradeLetter}
                         onValueChange={setGradeLetter}
                         placeholder="Буква"
-                        options={[{ value: 'а', label: 'А' }, { value: 'б', label: 'Б' }, { value: 'в', label: 'В' }]}
+                        options={[
+                          { value: 'а', label: 'А' },
+                          { value: 'б', label: 'Б' },
+                          { value: 'в', label: 'В' },
+                        ]}
+                        disabled={isSubmitting}
                       />
                       {errors.gradeLetter && <p className="text-sm text-red-600">{errors.gradeLetter}</p>}
                     </div>
@@ -318,18 +437,37 @@ export function Registration() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label>Email *</Label>
-                  <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="example@mail.ru" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="example@mail.ru"
+                    disabled={isSubmitting}
+                  />
                   {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Пароль *</Label>
-                    <Input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••" />
+                    <Input
+                      type="password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      placeholder="••••••"
+                      disabled={isSubmitting}
+                    />
                     {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
                   </div>
                   <div className="space-y-2">
                     <Label>Подтвердите пароль *</Label>
-                    <Input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="••••••" />
+                    <Input
+                      type="password"
+                      value={confirmPassword}
+                      onChange={e => setConfirmPassword(e.target.value)}
+                      placeholder="••••••"
+                      disabled={isSubmitting}
+                    />
                     {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
                   </div>
                 </div>
@@ -342,24 +480,45 @@ export function Registration() {
           <CardFooter className="flex gap-3">
             {userType === 'школьник' && formStep === 1 ? (
               <>
-                <Button type="button" variant="outline" onClick={() => setStep('type')}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setStep('type')}
+                  disabled={isSubmitting}
+                >
                   <ArrowLeft className="size-4 mr-1" /> Назад
                 </Button>
-                <Button type="submit" className="flex-1">Далее</Button>
+                <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                  {isSubmitting ? 'Регистрация...' : 'Далее'}
+                </Button>
               </>
             ) : userType === 'школьник' && formStep === 2 ? (
               <>
-                <Button type="button" variant="outline" onClick={() => setFormStep(1)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setFormStep(1)}
+                  disabled={isSubmitting}
+                >
                   <ArrowLeft className="size-4 mr-1" /> Назад
                 </Button>
-                <Button type="submit" className="flex-1">Зарегистрироваться</Button>
+                <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                  {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
+                </Button>
               </>
             ) : (
               <>
-                <Button type="button" variant="outline" onClick={() => setStep('type')}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setStep('type')}
+                  disabled={isSubmitting}
+                >
                   <ArrowLeft className="size-4 mr-1" /> Назад
                 </Button>
-                <Button type="submit" className="flex-1">Зарегистрироваться</Button>
+                <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                  {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
+                </Button>
               </>
             )}
           </CardFooter>

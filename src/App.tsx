@@ -1,138 +1,83 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { AppContext } from './contexts/AppContext';
+// ✅ УДАЛЕНО: BrowserRouter (теперь только в main.tsx)
 
-// Компоненты
+// Провайдеры — остаются, но ВНЕ роутера (в main.tsx)
+// ✅ AuthProvider, TestProvider, AppProvider — теперь в main.tsx
+
+// Auth components
 import { Login } from './components/auth/Login/Login';
 import { Registration } from './components/auth/Registration/Registration';
+
+// Test components
 import { Dashboard } from './components/tests/testpage/Dashboard';
 import { TestPage } from './components/tests/testpage/TestPage';
+import { TestPageNew } from './components/tests/testpage/TestPageNew';
 import { ResultsPage } from './components/tests/resultspage/ResultsPage';
 
-// ——— AppProvider: держит всё состояние ———
-export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [testResult, setTestResult] = useState<TestResult | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
-  const [completedGroups, setCompletedGroups] = useState<TestGroup[]>([]);
-  const [currentTestGroup, setCurrentTestGroup] = useState<TestGroup | null>(null);
+// Individual test components
+import EngineeringThinkingTest from './components/tests/engineer/EngineeringThinkingTest';
+import GroupRolesTest from './components/tests/grouproles/GroupRolesTest';
+import IqPotentialTest from './components/tests/iqpotencial/iqpotencial';
+import ProfessionalOrientationTest from './components/tests/profsphere/ProfessionalOrientationTest';
+import TemperamentTest from './components/tests/temperament/TemperamentTest';
 
-  useEffect(() => {
-    const saved = localStorage.getItem('users');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setUsers(parsed);
-      } catch (e) {
-        console.warn('⚠️ Некорректные данные в localStorage.users — сброшены');
-        localStorage.removeItem('users');
-      }
-    }
-  }, []);
+// Layout & routing
+import MainLayout from './components/layout/MainLayout';
+import { ProtectedRoute } from './components/routing/ProtectedRoute';
 
-  useEffect(() => {
-    if (users.length > 0) {
-      localStorage.setItem('users', JSON.stringify(users));
-    }
-  }, [users]);
-
-  const handleLogin = (email: string, password: string): boolean => {
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-      setCurrentUser(user);
-      setCompletedGroups([]);
-      return true;
-    }
-    return false;
-  };
-
-  const handleRegister = (user: User) => {
-    const newUser = { ...user };
-    setUsers(prev => [...prev, newUser]);
-    setCurrentUser(newUser);
-    setCompletedGroups([]);
-    // ✅ сброс результатов при новой регистрации
-    setTestResult(null);
-  };
-
-  const handleStartTest = (group: TestGroup) => {
-    setCurrentTestGroup(group);
-  };
-
-  const handleTestGroupComplete = (groupResult: Partial<TestResult>) => {
-    if (!currentTestGroup || !currentUser) return;
-
-    const updatedResult = {
-      ...(testResult || { userId: currentUser.email }),
-      ...groupResult,
-    } as TestResult;
-
-    setTestResult(updatedResult);
-    const newCompleted = [...completedGroups, currentTestGroup];
-    setCompletedGroups(newCompleted);
-    setCurrentTestGroup(null);
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    setTestResult(null);
-    setCompletedGroups([]);
-    setCurrentTestGroup(null);
-  };
-
-  return (
-    <AppContext.Provider
-      value={{
-        currentUser,
-        testResult,
-        completedGroups,
-        currentTestGroup,
-        handleLogin,
-        handleRegister,
-        handleStartTest,
-        handleTestGroupComplete,
-        handleLogout,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
-  );
-}
-
-// ——— Хук для страниц с защитой ———
+// Хуки — обновлены: используем useAuth вместо useApp для пользователя
+import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
 
-const ProtectedRoute = ({ children, requireResult = false }: { children: React.ReactNode; requireResult?: boolean }) => {
-  const { currentUser, testResult } = useApp();
-  if (!currentUser) return <Navigate to="/login" replace />;
+// Типы
+type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
+
+// ——— Хук для страниц с защитой (ОБНОВЛЁН: убран currentUser из useApp) ———
+const LegacyProtectedRoute = ({ 
+  children, 
+  requireResult = false 
+}: { 
+  children: React.ReactNode; 
+  requireResult?: boolean 
+}) => {
+  const { user } = useAuth(); // ✅ из AuthContext
+  const { testResult } = useApp(); // ✅ из AppContext
+
+  if (!user) return <Navigate to="/login" replace />;
   if (requireResult && !testResult) return <Navigate to="/dashboard" replace />;
   return <>{children}</>;
 };
 
 // ——— Страницы ———
 function DashboardPage() {
-  const { currentUser, completedGroups, handleStartTest, handleLogout } = useApp();
+  const { user } = useAuth();
+  const { completedGroups, handleStartTest } = useApp();
+
+  if (!user) return null;
+
   return (
     <Dashboard
-      user={currentUser!}
+      user={user}
       completedGroups={completedGroups}
       onStartTest={handleStartTest}
-      onLogout={handleLogout}
-      onViewResults={() => { /* не используем window.location — роутинг через контекст */ }}
+      onLogout={() => { /* будет в Dashboard.tsx */ }}
+      onViewResults={() => {}}
     />
   );
 }
 
 function TestPageWrapper() {
-  const { currentUser, handleTestGroupComplete } = useApp();
+  const { user } = useAuth();
+  const { handleTestGroupComplete } = useApp();
   const { group } = useParams<{ group: TestGroup }>();
 
-  if (!currentUser || !group) return <Navigate to="/dashboard" replace />;
+  if (!user || !group) return <Navigate to="/dashboard" replace />;
 
   return (
     <TestPage
-      user={currentUser}
+      user={user}
       testGroup={group}
       onComplete={handleTestGroupComplete}
       onBack={() => window.history.back()}
@@ -141,48 +86,50 @@ function TestPageWrapper() {
 }
 
 function ResultsPageWrapper() {
-  const { currentUser, testResult } = useApp();
-  if (!currentUser || !testResult) return <Navigate to="/dashboard" replace />;
-  return <ResultsPage result={testResult} user={currentUser} />;
+  const { user } = useAuth();
+  const { testResult } = useApp();
+
+  if (!user || !testResult) return <Navigate to="/dashboard" replace />;
+  return <ResultsPage result={testResult} user={user} />;
 }
 
-// ——— Корневой App ———
+// ——— Корневой App (БЕЗ Router!) ———
 export default function App() {
   return (
-    <AppProvider>
-      <Router>
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/test/:group"
-              element={
-                <ProtectedRoute>
-                  <TestPageWrapper />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/results"
-              element={
-                <ProtectedRoute requireResult>
-                  <ResultsPageWrapper />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          </Routes>
-        </div>
-      </Router>
-    </AppProvider>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <Routes>
+        {/* Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
+            {/* Legacy routes */}
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/test/:group" element={<TestPageWrapper />} />
+            <Route path="/results" element={<ResultsPageWrapper />} />
+            
+            {/* New test routes */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/tests">
+              <Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
+              <Route path="group-roles" element={<GroupRolesTest />} />
+              <Route path="iq-potential" element={<IqPotentialTest />} />
+              <Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
+              <Route path="temperament" element={<TemperamentTest />} />
+              <Route path=":testType" element={<TestPageNew />} />
+            </Route>
+            
+            {/* Results */}
+            <Route path="/my-results" element={<ResultsPage />} />
+            <Route path="/my-results/:testType" element={<ResultsPage />} />
+          </Route>
+        </Route>
+        
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </div>
   );
 }

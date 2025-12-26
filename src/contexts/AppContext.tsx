@@ -1,26 +1,14 @@
 // src/contexts/AppContext.tsx
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useAuth } from './AuthContext'; // ← подключаем AuthContext для получения user
 
-// Типы — копируем из App.tsx
-export type UserType = 'школьник' | 'студент' | 'специалист';
-
-export interface User {
-  email: string;
-  password: string;
-  type: UserType;
-  lastName?: string;
-  firstName?: string;
-  middleName?: string;
-  gender?: string;
-  region?: string;
-  city?: string;
-  schoolName?: string;
-  address?: string;
-  status?: string;
-  age?: number;
-  grade?: number;
-  gradeLetter?: string;
-}
+// Типы — оставляем только то, что касается тестов
+export type TestGroup = 
+  | 'temperament' 
+  | 'groupRoles' 
+  | 'professionalOrientation' 
+  | 'engineeringThinking' 
+  | 'intellectualPotential';
 
 export interface TestResult {
   userId: string;
@@ -36,33 +24,79 @@ export interface TestResult {
   recommendedProfession?: string;
 }
 
-export type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
-
-// Интерфейс контекста
+// Интерфейс контекста — БЕЗ currentUser и методов авторизации
 export interface AppContextType {
-  currentUser: User | null;
   testResult: TestResult | null;
   completedGroups: TestGroup[];
   currentTestGroup: TestGroup | null;
-  handleLogin: (email: string, password: string) => boolean;
-  handleRegister: (user: User) => void;
   handleStartTest: (group: TestGroup) => void;
   handleTestGroupComplete: (groupResult: Partial<TestResult>) => void;
-  handleLogout: () => void;
 }
 
-// Создаём контекст с заглушкой (настоящий — в AppProvider)
-export const AppContext = createContext<AppContextType>({
-  currentUser: null,
-  testResult: null,
-  completedGroups: [],
-  currentTestGroup: null,
-  handleLogin: () => false,
-  handleRegister: () => {},
-  handleStartTest: () => {},
-  handleTestGroupComplete: () => {},
-  handleLogout: () => {},
-});
+// Создаём контекст
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Хук для использования
-export const useApp = () => useContext(AppContext);
+// Провайдер
+export function AppProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth(); // ← получаем user из AuthContext
+  const [testResult, setTestResult] = useState<TestResult | null>(null);
+  const [completedGroups, setCompletedGroups] = useState<TestGroup[]>([]);
+  const [currentTestGroup, setCurrentTestGroup] = useState<TestGroup | null>(null);
+
+  // Восстановление ТОЛЬКО тестовых данных из localStorage
+  useEffect(() => {
+    const savedResult = localStorage.getItem('testResult');
+    const savedGroups = localStorage.getItem('completedGroups');
+
+    if (savedResult) setTestResult(JSON.parse(savedResult));
+    if (savedGroups) setCompletedGroups(JSON.parse(savedGroups));
+  }, []);
+
+  // Запуск теста
+  const handleStartTest = (group: TestGroup) => {
+    setCurrentTestGroup(group);
+  };
+
+  // Завершение группы тестов
+  const handleTestGroupComplete = (groupResult: Partial<TestResult>) => {
+    const newResult = {
+      userId: user?.email || 'anonymous',
+      ...(testResult || {}),
+      ...groupResult,
+    };
+
+    setTestResult(newResult);
+    localStorage.setItem('testResult', JSON.stringify(newResult));
+
+    if (currentTestGroup && !completedGroups.includes(currentTestGroup)) {
+      const newCompleted = [...completedGroups, currentTestGroup];
+      setCompletedGroups(newCompleted);
+      localStorage.setItem('completedGroups', JSON.stringify(newCompleted));
+    }
+
+    setCurrentTestGroup(null);
+  };
+
+  const value: AppContextType = {
+    testResult,
+    completedGroups,
+    currentTestGroup,
+    handleStartTest,
+    handleTestGroupComplete,
+  };
+
+  return (
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
+  );
+}
+
+// Хук
+export const useApp = (): AppContextType => {
+  const context = useContext(AppContext);
+  if (context === undefined) {
+    throw new Error('useApp must be used within AppProvider');
+  }
+  return context;
+};
