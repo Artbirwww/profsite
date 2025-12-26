@@ -114,57 +114,42 @@ export function Registration() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (userType === 'школьник') {
-      if (formStep === 1) {
-        if (validateStep1()) setFormStep(2);
-        return;
-      } else if (formStep === 2) {
-        if (!validateStep2()) return;
-      }
-    } else {
-      if (!validateStep1()) return;
+  if (userType === 'школьник') {
+    if (formStep === 1) {
+      if (validateStep1()) setFormStep(2);
+      return;
+    } else if (formStep === 2) {
+      if (!validateStep2()) return;
     }
+  } else {
+    if (!validateStep1()) return;
+  }
 
-    const userData = {
-      email,
-      password,
-      type: userType!,
-      ...(userType === 'школьник' && {
-        lastName,
-        firstName,
-        middleName,
-        gender,
-        region,
-        city,
-        schoolName,
-        address,
-        age: Number(age),
-        grade: Number(grade),
-        gradeLetter,
-      }),
-    };
+  // ✅ Формируем данные ДО вызова
+  const emailVal = email.trim();
+  const passwordVal = password;
+  const firstNameVal = userType === 'школьник' ? firstName.trim() : '';
+  const lastNameVal = userType === 'школьник' ? lastName.trim() : '';
 
-    try {
-      setIsSubmitting(true);
-      
-      await register(
-        userData.email,
-        userData.password,
-        userData.firstName,
-        userData.lastName
-      );
+  try {
+    setIsSubmitting(true);
 
-      navigate('/dashboard', { replace: true });
-      
-    } catch (err) {
-      console.error('Registration error:', err);
-      setErrors({ submit: err instanceof Error ? err.message : 'Ошибка регистрации' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    // ✅ Передаём только строки — никаких undefined
+    await register(emailVal, passwordVal, firstNameVal, lastNameVal);
+
+    // ✅ После успешной регистрации — редирект
+    navigate('/dashboard', { replace: true });
+
+  } catch (err) {
+    console.error('Registration error:', err);
+    const msg = err instanceof Error ? err.message : 'Неизвестная ошибка регистрации';
+    setErrors({ submit: msg });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   if (step === 'type') {
     return (

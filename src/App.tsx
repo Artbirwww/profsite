@@ -1,5 +1,5 @@
 // src/App.tsx
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 // ✅ УДАЛЕНО: BrowserRouter (теперь только в main.tsx)
 
@@ -52,18 +52,28 @@ const LegacyProtectedRoute = ({
 
 // ——— Страницы ———
 function DashboardPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { completedGroups, handleStartTest } = useApp();
+  const navigate = useNavigate();
 
   if (!user) return null;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login', { replace: true });
+  };
+
+  const handleViewResults = () => {
+    navigate('/my-results');
+  };
 
   return (
     <Dashboard
       user={user}
       completedGroups={completedGroups}
       onStartTest={handleStartTest}
-      onLogout={() => { /* будет в Dashboard.tsx */ }}
-      onViewResults={() => {}}
+      onLogout={handleLogout}
+      onViewResults={handleViewResults}
     />
   );
 }
