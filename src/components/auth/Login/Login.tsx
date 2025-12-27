@@ -1,35 +1,39 @@
 // src/components/auth/Login/Login.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../../../contexts/AppContext';
+import { useAuth } from '../../../contexts/AuthContext'; // Импортируем useAuth вместо useApp
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
 import { GraduationCap } from '../../ui/display/SimpleIcons';
-// Импортируем изображение
 import unlimitedBg from '../../../res/img/unnamed.png';
 
 export function Login() {
-  const { handleLogin } = useApp();
+  const { login } = useAuth(); // Используем login из AuthContext
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => { // Делаем асинхронным
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     if (!email || !password) {
       setError('Пожалуйста, заполните все поля');
+      setIsLoading(false);
       return;
     }
 
-    const success = handleLogin(email, password);
-    if (success) {
+    try {
+      await login(email, password); // Теперь login - это асинхронная функция
       navigate('/dashboard');
-    } else {
-      setError('Неверный email или пароль');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Неверный email или пароль');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,7 +48,6 @@ export function Login() {
         backgroundAttachment: 'fixed',
       }}
     >
-      {/* Затемняющий слой для лучшей читаемости текста */}
       <div className="absolute inset-0 bg-black/30" />
       
       <div className="relative z-10 w-full max-w-md">
@@ -72,6 +75,7 @@ export function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   className="bg-white/80"
+                  disabled={isLoading}
                 />
               </div>
               <div className="space-y-2">
@@ -84,6 +88,7 @@ export function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   className="bg-white/80"
+                  disabled={isLoading}
                 />
               </div>
               {error && (
@@ -93,14 +98,15 @@ export function Login() {
               )}
             </CardContent>
             <CardFooter className="flex flex-col space-y-3">
-              <Button type="submit" className="w-full">
-                Войти
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? 'Вход...' : 'Войти'}
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 className="w-full border-white/30 bg-white/60 hover:bg-white/80"
                 onClick={() => navigate('/register')}
+                disabled={isLoading}
               >
                 Зарегистрироваться
               </Button>

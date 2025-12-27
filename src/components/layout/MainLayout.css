@@ -1,0 +1,208 @@
+/* MainLayout.css - Адаптированный дизайн сайдбара */
+.main-layout-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* Сайдбар с вашим дизайном */
+.sidebar {
+  width: 260px;
+  background-color: rgba(36, 40, 50, 1);
+  background-image: linear-gradient(
+    139deg,
+    rgba(36, 40, 50, 1) 0%,
+    rgba(36, 40, 50, 1) 0%,
+    rgba(37, 28, 40, 1) 100%
+  );
+  user-select: none;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Навигационный список */
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Элементы навигации */
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #7e8590;
+  gap: 12px;
+  transition: all 0.3s ease-out;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  border: 2px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-link:hover {
+  background-color: var(--color, #5353ff);
+  color: var(--hover-color, #fff);
+  border-color: var(--hover-stroke, transparent);
+}
+
+.nav-link.active {
+  background-color: var(--color, #5353ff);
+  color: var(--hover-color, #fff);
+  border-color: var(--hover-stroke, transparent);
+}
+
+/* Иконки в навигации */
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease-out;
+  stroke: #7e8590;
+  flex-shrink: 0;
+}
+
+.nav-link:hover .nav-icon,
+.nav-link.active .nav-icon {
+  stroke: var(--hover-stroke, #fff);
+}
+
+/* Разделитель */
+.nav-separator {
+  border-top: 1.5px solid #42434a;
+  margin: 12px 0;
+}
+
+/* Основное содержимое */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-content-inner {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  background-color: #f3f4f6;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+    border-radius: 0;
+  }
+  
+  .nav-link {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-layout-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+  }
+  
+  .nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  
+  .nav-link {
+    justify-content: center;
+    padding: 8px 12px;
+  }
+  
+  .nav-separator {
+    display: none;
+  }
+  
+  .nav-text {
+    display: none;
+  }
+  
+  .nav-link .nav-icon {
+    margin: 0;
+  }
+}
+
+/* Анимации */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-item {
+  animation: slideIn 0.3s ease-out forwards;
+  animation-delay: calc(var(--item-index, 0) * 0.1s);
+  opacity: 0;
+}
+
+/* Специфичные цвета для пунктов меню */
+.nav-item.dashboard {
+  --color: #5353ff;
+  --hover-color: #fff;
+  --hover-stroke: #fff;
+}
+
+.nav-item.tests {
+  --color: #5353ff;
+  --hover-color: #fff;
+  --hover-stroke: #fff;
+}
+
+.nav-item.results {
+  --color: #5353ff;
+  --hover-color: #fff;
+  --hover-stroke: #fff;
+}
+
+.nav-item.profile {
+  --color: rgba(56, 45, 71, 0.836);
+  --hover-color: #bd89ff;
+  --hover-stroke: #bd89ff;
+}
+
+.nav-item.logout {
+  --color: #8e2a2a;
+  --hover-color: #fff;
+  --hover-stroke: #fff;
+}
+
+/* Эффект нажатия */
+.nav-link:active {
+  transform: scale(0.96);
+}
