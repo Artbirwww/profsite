@@ -1,4 +1,4 @@
-// src/components/tests/testpage/TestPage.tsx
+// Данный файл раньше выступал заместо дашборда, скоро я солью 3 этих файла в единый файл
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useApp } from '../../../contexts/AppContext';
@@ -11,66 +11,6 @@ import { GroupRolesTest } from '../grouproles/GroupRolesTest';
 import { ProfessionalOrientationTest } from '../profsphere/ProfessionalOrientationTest';
 import { EngineeringThinkingTest } from '../engineer/EngineeringThinkingTest';
 
-// Данные о группах тестов (только для generic-тестов)
-const groupsData = {
-  intellectualPotential: {
-    title: 'Интеллектуальный потенциал',
-    description: 'Анализ когнитивных способностей',
-    icon: '🧠',
-    questions: [
-      {
-        id: 'i1',
-        question: 'Новую информацию я:',
-        options: [
-          { value: 'high', label: 'Усваиваю быстро и легко запоминаю', score: 3 },
-          { value: 'medium', label: 'Понимаю после объяснения', score: 2 },
-          { value: 'low', label: 'Требуется повторение', score: 1 },
-          { value: 'none', label: 'Усваиваю с трудом', score: 0 },
-        ],
-      },
-      {
-        id: 'i2',
-        question: 'При решении сложных задач:',
-        options: [
-          { value: 'high', label: 'Нахожу несколько способов решения', score: 3 },
-          { value: 'medium', label: 'Следую известному алгоритму', score: 2 },
-          { value: 'low', label: 'Нужна помощь или подсказка', score: 1 },
-          { value: 'none', label: 'Испытываю значительные затруднения', score: 0 },
-        ],
-      },
-      {
-        id: 'i3',
-        question: 'Моя память:',
-        options: [
-          { value: 'high', label: 'Отличная, легко запоминаю детали', score: 3 },
-          { value: 'medium', label: 'Хорошая для важной информации', score: 2 },
-          { value: 'low', label: 'Средняя, иногда забываю', score: 1 },
-          { value: 'none', label: 'Часто испытываю трудности с запоминанием', score: 0 },
-        ],
-      },
-      {
-        id: 'i4',
-        question: 'Анализ и синтез информации:',
-        options: [
-          { value: 'high', label: 'Легко выделяю главное и делаю выводы', score: 3 },
-          { value: 'medium', label: 'Справляюсь при наличии времени', score: 2 },
-          { value: 'low', label: 'Требуется структурированная информация', score: 1 },
-          { value: 'none', label: 'Вызывает затруднения', score: 0 },
-        ],
-      },
-      {
-        id: 'i5',
-        question: 'Обучение новым навыкам:',
-        options: [
-          { value: 'high', label: 'Осваиваю быстро и самостоятельно', score: 3 },
-          { value: 'medium', label: 'Требуется практика и инструкции', score: 2 },
-          { value: 'low', label: 'Нужно много времени и помощь', score: 1 },
-          { value: 'none', label: 'Предпочитаю не учиться новому', score: 0 },
-        ],
-      },
-    ],
-  },
-};
 
 export function TestPage() {
   const { group } = useParams<{ group: string }>();

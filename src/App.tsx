@@ -11,9 +11,9 @@ import { Login } from './components/auth/Login/Login';
 import { Registration } from './components/auth/Registration/Registration';
 
 // Test components
-import { Dashboard } from './components/tests/testpage/Dashboard';
-import { TestPage } from './components/tests/testpage/TestPage';
-import { TestPageNew } from './components/tests/testpage/TestPageNew';
+import { Dashboard } from './components/tests/dashboard/Dashboard';
+import { TestPage } from './components/tests/dashboard/TestPage';
+import { TestPageNew } from './components/tests/dashboard/TestPageNew';
 import { ResultsPage } from './components/tests/resultspage/ResultsPage';
 
 // Individual test components
