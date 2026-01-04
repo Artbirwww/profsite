@@ -30,6 +30,7 @@ import { ProtectedRoute } from './components/routing/ProtectedRoute';
 // Хуки — обновлены: используем useAuth вместо useApp для пользователя
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
+import { PupilDataLoading } from './components/admin/data-loading/PupilDataLoading';
 
 // Типы
 type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
@@ -115,6 +116,9 @@ export default function App() {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
+            {/*В будущем добавить защищенные роуты + доступ по ролям, к примеру для админа, роли будут доступны при входе в систему от сервака */}
+            {/*Роуты по ролям временно просто в protected*/}
+            <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
             {/* Legacy routes */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/test/:group" element={<TestPageWrapper />} />
