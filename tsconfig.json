@@ -19,8 +19,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite/client", "node"], // Добавьте это
+    "types": ["vite/client"], // Добавьте это
     "typeRoots": ["./node_modules/@types", "./src/types"] // Добавьте это
   },
-  "include": ["src", "src/types/**/*"]
+  "include": ["src", "src/types/**/*", "vite-env.d.ts"]
 }
