@@ -142,6 +142,31 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
           </CardContent>
         </Card>
 
+        {/* Info Card */}
+        {!allCompleted && (
+          <Card>
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3 text-sm text-gray-600">
+                <div className="p-2 bg-indigo-100 rounded-lg">
+                  <svg className="size-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="mb-2">
+                    Для получения полных результатов необходимо пройти все 5 групп тестирования.
+                    Каждая группа содержит 5 вопросов.
+                  </p>
+                  <p>
+                    После прохождения группы она станет недоступной, и вы вернётесь в личный кабинет.
+                    Как только вы завершите все группы, вы автоматически перейдёте к результатам.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Test Groups Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testGroups.map((group) => {
@@ -186,30 +211,6 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
           })}
         </div>
 
-        {/* Info Card */}
-        {!allCompleted && (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-3 text-sm text-gray-600">
-                <div className="p-2 bg-indigo-100 rounded-lg">
-                  <svg className="size-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="mb-2">
-                    Для получения полных результатов необходимо пройти все 5 групп тестирования.
-                    Каждая группа содержит 5 вопросов.
-                  </p>
-                  <p>
-                    После прохождения группы она станет недоступной, и вы вернётесь в личный кабинет.
-                    Как только вы завершите все группы, вы автоматически перейдёте к результатам.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </div>
   );

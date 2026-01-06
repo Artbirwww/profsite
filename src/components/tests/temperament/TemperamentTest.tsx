@@ -604,57 +604,47 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
               <button
                 onClick={() => handleAnswer(true)}
                 disabled={isSubmitting}
+                style={
+                  answers[currentQuestion] === true
+                    ? {
+                        borderColor: '#6362f7',
+                        color: '#6362f7',
+                        backgroundColor: 'rgba(99, 98, 247, 0.1)',
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                        transform: 'scale(1.02)',
+                      }
+                    : undefined
+                }
                 className={`p-6 text-center rounded-xl border-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                   answers[currentQuestion] === true
-                    ? 'border-green-500 bg-green-50 shadow-sm scale-[1.02]'
-                    : 'border-gray-200 hover:border-green-300 hover:bg-green-50/50'
+                    ? ''
+                    : 'border-gray-200 text-gray-700 hover:border-[#6362f7]/50 hover:bg-[#6362f7]/5'
                 }`}
               >
-                <div className="flex flex-col items-center gap-3">
-                  <div className={`size-8 rounded-full border-2 flex items-center justify-center ${
-                    answers[currentQuestion] === true
-                      ? 'border-green-600 bg-green-600'
-                      : 'border-gray-400'
-                  }`}>
-                    {answers[currentQuestion] === true && (
-                      <div className="size-4 rounded-full bg-white" />
-                    )}
-                  </div>
-                  <span className={`text-xl font-medium ${
-                    answers[currentQuestion] === true ? 'text-green-700' : 'text-gray-700'
-                  }`}>
-                    Да
-                  </span>
-                  <p className="text-sm text-gray-600">Согласен с утверждением</p>
-                </div>
+                Да
               </button>
 
               <button
                 onClick={() => handleAnswer(false)}
                 disabled={isSubmitting}
+                style={
+                  answers[currentQuestion] === false
+                    ? {
+                        borderColor: '#6362f7',
+                        color: '#6362f7',
+                        backgroundColor: 'rgba(99, 98, 247, 0.1)',
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                        transform: 'scale(1.02)',
+                      }
+                    : undefined
+                }
                 className={`p-6 text-center rounded-xl border-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                   answers[currentQuestion] === false
-                    ? 'border-red-500 bg-red-50 shadow-sm scale-[1.02]'
-                    : 'border-gray-200 hover:border-red-300 hover:bg-red-50/50'
+                    ? ''
+                    : 'border-gray-200 text-gray-700 hover:border-[#6362f7]/50 hover:bg-[#6362f7]/5'
                 }`}
               >
-                <div className="flex flex-col items-center gap-3">
-                  <div className={`size-8 rounded-full border-2 flex items-center justify-center ${
-                    answers[currentQuestion] === false
-                      ? 'border-red-600 bg-red-600'
-                      : 'border-gray-400'
-                  }`}>
-                    {answers[currentQuestion] === false && (
-                      <div className="size-4 rounded-full bg-white" />
-                    )}
-                  </div>
-                  <span className={`text-xl font-medium ${
-                    answers[currentQuestion] === false ? 'text-red-700' : 'text-gray-700'
-                  }`}>
-                    Нет
-                  </span>
-                  <p className="text-sm text-gray-600">Не согласен с утверждением</p>
-                </div>
+                Нет
               </button>
             </div>
           </CardContent>

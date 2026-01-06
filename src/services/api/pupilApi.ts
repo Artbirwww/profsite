@@ -1,60 +1,16 @@
 import api from './authApi';
 import { AccountApiRegisterDTO } from '../../types/pupil/account';
-// Типы для запроса регистрации ученика
-export interface AccountRegisterRequestDTO {
-  email: string;
-  password: string;
-}
+import { PupilDTO } from '../../types/pupil/pupil';
 
-export interface PupilDTO {
-  name: string;
-  surname: string;
-  patronymic?: string;
-  birthday: string; // формат: YYYY-MM-DD
-  school: string;
-  healthCondition?: string;
-  nationality?: string;
-  extraActivities?: string;
-  gender: 'MALE' | 'FEMALE';
-  className: string;
-}
-
-// export interface AutoRegisterRequest {
-//   accountRegisterRequestDTO: AccountRegisterRequestDTO;
-//   pupilDTO: PupilDTO;
-// }
-
-// Тип для ответа после регистрации
-export interface PupilResponse {
+// Ответ сервера — ученик + связанный аккаунт (на основе твоей реализации и DTO)
+// Так как в pupil.ts нет PupilResponse, а в API-методах он нужен — определяем его локально,
+// но **только здесь**, так как используется исключительно в этом файле (пункт 3 из твоих требований)
+interface PupilResponse extends PupilDTO {
   id: number;
-  name: string;
-  surname: string;
-  patronymic?: string;
-  birthday: string;
-  school: string;
-  healthCondition?: string;
-  nationality?: string;
-  extraActivities?: string;
-  gender: 'MALE' | 'FEMALE';
-  className: string;
   accountId?: number;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: string;   // ISO 8601
+  updatedAt?: string;   // ISO 8601
 }
-
-// // Тип для обновления данных ученика
-// export interface UpdatePupilDTO {
-//   name?: string;
-//   surname?: string;
-//   patronymic?: string;
-//   birthday?: string;
-//   school?: string;
-//   healthCondition?: string;
-//   nationality?: string;
-//   extraActivities?: string;
-//   gender?: 'MALE' | 'FEMALE';
-//   className?: string;
-// }
 
 export const pupilService = {
   /**
@@ -62,20 +18,21 @@ export const pupilService = {
    */
   autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
     try {
-      const response = await api.post<PupilResponse>('/pupils/auto-register', data)
-      return response.data
-    } catch(err) {
-      console.error("Error registering pupils: ", err)
-      throw err
+      const response = await api.post<PupilResponse>('/pupils/auto-register', data);
+      return response.data;
+    } catch (err) {
+      console.error('Error registering pupil:', err);
+      throw err;
     }
-    
   },
-  autoRegisterAll: async (data: AccountApiRegisterDTO []) : Promise<any> => {
+
+  autoRegisterAll: async (data: AccountApiRegisterDTO[]): Promise<any> => {
     try {
-      const response = await api.post('/pupils/auto-register-all', data)
-      return response.data
-    } catch(err) {
-      throw err
+      const response = await api.post('/pupils/auto-register-all', data);
+      return response.data;
+    } catch (err) {
+      console.error('Error registering pupils batch:', err);
+      throw err;
     }
   },
 
@@ -96,29 +53,6 @@ export const pupilService = {
   },
 
   /**
-   * Обновить данные ученика
-   */
-  updatePupil: async (id: number, data: PupilDTO): Promise<PupilResponse> => {
-    const response = await api.put<PupilResponse>(`/pupils/${id}`, data);
-    return response.data;
-  },
-
-  /**
-   * Обновить данные текущего ученика
-   */
-  updateCurrentPupil: async (data: PupilDTO): Promise<PupilResponse> => {
-    const response = await api.put<PupilResponse>('/pupils/me', data);
-    return response.data;
-  },
-
-  /**
-   * Удалить ученика
-   */
-  deletePupil: async (id: number): Promise<void> => {
-    await api.delete(`/pupils/${id}`);
-  },
-
-  /**
    * Получить список всех учеников (для админа)
    */
   getAllPupils: async (): Promise<PupilResponse[]> => {
@@ -127,8 +61,5 @@ export const pupilService = {
   },
 };
 
-
-
 // Экспорт для обратной совместимости
 export const autoRegister = pupilService.autoRegister;
-
