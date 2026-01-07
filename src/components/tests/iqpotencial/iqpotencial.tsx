@@ -565,7 +565,7 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <Card className="shadow-sm">
-          <CardHeader>
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Button 
@@ -756,93 +756,7 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
           </Button>
         </div>
 
-        {/* Question Navigation Dots */}
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-sm font-medium text-gray-700 mb-3">
-              Быстрая навигация по вопросам:
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {Array.from({ length: 30 }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentQuestion(idx)}
-                  disabled={isSubmitting}
-                  className={`size-8 md:size-9 rounded-lg flex items-center justify-center text-sm font-medium transition-all ${
-                    selectedAnswers[idx] !== -1
-                      ? selectedAnswers[idx] === questions[idx].correctAnswer
-                        ? idx === currentQuestion
-                          ? 'bg-green-500 text-white scale-110 ring-2 ring-offset-1 ring-green-300'
-                          : 'bg-green-100 text-green-700 hover:bg-green-200'
-                        : idx === currentQuestion
-                        ? 'bg-red-500 text-white scale-110 ring-2 ring-offset-1 ring-red-300'
-                        : 'bg-red-100 text-red-700 hover:bg-red-200'
-                      : idx === currentQuestion
-                      ? 'bg-blue-500 text-white scale-110 ring-2 ring-offset-1 ring-blue-300'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                  title={`Вопрос ${idx + 1}${selectedAnswers[idx] !== -1
-  ? ` (${selectedAnswers[idx] === questions[idx].correctAnswer ? 'верно' : 'неверно'})`
-  : ''}`}
-                >
-                  {idx + 1}
-                </button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Legend */}
-        <div className="flex flex-wrap gap-4 justify-center text-sm">
-          <div className="flex items-center gap-2">
-            <div className="size-3 rounded-full bg-green-100 border border-green-300"></div>
-            <span className="text-gray-600">Верный ответ</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="size-3 rounded-full bg-red-100 border border-red-300"></div>
-            <span className="text-gray-600">Неверный ответ</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="size-3 rounded-full bg-gray-100 border border-gray-300"></div>
-            <span className="text-gray-600">Не отвечено</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="size-3 rounded-full bg-blue-500"></div>
-            <span className="text-gray-600">Текущий</span>
-          </div>
-        </div>
-
-        {/* Difficulty Info */}
-        <Card className="bg-gradient-to-r from-blue-50 to-purple-50">
-          <CardContent className="pt-6">
-            <div className="text-sm text-gray-700">
-              <p className="font-medium mb-2">Уровни сложности вопросов:</p>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
-                    Легкий
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">Базовые задачи</p>
-                </div>
-                <div className="text-center">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm">
-                    Средний
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">Требуют анализа</p>
-                </div>
-                <div className="text-center">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">
-                    Сложный
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">Креативное решение</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Confirmation Dialog */}
+        {/* Confirmation Dialog */}
       {showConfirmDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
           <Card className="max-w-md w-full animate-scale-in">
@@ -886,6 +800,40 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
           </Card>
         </div>
       )}
+
+        {/* Question Navigation Dots */}
+<Card>
+  <CardContent className="pt-6">
+    <div className="text-sm font-medium text-gray-700 mb-3">
+      Быстрая навигация по вопросам:
+    </div>
+    <div className="flex flex-wrap gap-2">
+      {Array.from({ length: 30 }).map((_, idx) => (
+        <button
+          key={idx}
+          onClick={() => setCurrentQuestion(idx)}
+          disabled={isSubmitting}
+          className={`size-8 md:size-9 rounded-lg flex items-center justify-center text-sm font-medium transition-all ${
+            selectedAnswers[idx] !== -1
+              ? idx === currentQuestion
+                ? 'bg-green-500 text-white scale-110 ring-2 ring-offset-1 ring-green-300'
+                : 'bg-green-100 text-green-700 hover:bg-green-200'
+              : idx === currentQuestion
+              ? 'bg-purple-500 text-white scale-110 ring-2 ring-offset-1 ring-purple-300'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+          title={`Вопрос ${idx + 1}${
+            selectedAnswers[idx] !== -1 ? ' (отвечен)' : ''
+          }`}
+        >
+          {idx + 1}
+        </button>
+      ))}
+    </div>
+  </CardContent>
+</Card>
+
+      </div>
     </div>
   );
 }

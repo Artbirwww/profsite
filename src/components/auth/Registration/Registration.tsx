@@ -8,6 +8,7 @@ import { RealSelect } from '../../ui/inputs/SimpleSelect';
 import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
 // Импортируем изображение
 import unlimitedBg from '../../../res/img/unnamed.png';
+import { BubbleBackground } from '../BubbleBackground';
 
 type UserType = 'школьник' | 'студент' | 'специалист';
 
@@ -127,7 +128,7 @@ export function Registration() {
     if (!validateStep1()) return;
   }
 
-  // ✅ Формируем данные ДО вызова
+  // Формируем данные ДО вызова
   const emailVal = email.trim();
   const passwordVal = password;
   const firstNameVal = userType === 'школьник' ? firstName.trim() : '';
@@ -136,10 +137,10 @@ export function Registration() {
   try {
     setIsSubmitting(true);
 
-    // ✅ Передаём только строки — никаких undefined
+    // Передаём только строки — никаких undefined
     await register(emailVal, passwordVal, firstNameVal, lastNameVal);
 
-    // ✅ После успешной регистрации — редирект
+    // После успешной регистрации — редирект
     navigate('/dashboard', { replace: true });
 
   } catch (err) {
@@ -155,14 +156,16 @@ export function Registration() {
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-4"
+        
         style={{
-          backgroundImage: `url(${unlimitedBg})`,
+          // backgroundImage: `url(${unlimitedBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundAttachment: 'fixed',
         }}
       >
+        <BubbleBackground />
         <div className="absolute inset-0 bg-black/30" />
         
         <div className="relative z-10 w-full max-w-2xl">
@@ -215,13 +218,14 @@ export function Registration() {
     <div 
       className="min-h-screen flex items-center justify-center p-4 py-8"
       style={{
-        backgroundImage: `url(${unlimitedBg})`,
+        // backgroundImage: `url(${unlimitedBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
       }}
     >
+      <BubbleBackground />
       <div className="absolute inset-0 bg-black/30" />
       
       <div className="relative z-10 w-full max-w-2xl">

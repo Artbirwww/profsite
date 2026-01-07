@@ -273,7 +273,7 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <Card className="shadow-sm">
-          <CardHeader>
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Button 
@@ -365,19 +365,31 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
                 {currentQ.q}
               </h3>
             </div>
-
+            <p>
+              <br></br>
+            </p>
             {/* Плейсхолдер для картинки */}
             <div className="mb-8 p-6 md:p-8 bg-gradient-to-br from-gray-50 to-white rounded-xl border-2 border-gray-200 text-center">
               <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
                 <div className="text-center">
+                              <p>
+              <br></br>
+            </p>
                   <div className="text-4xl mb-2">🔧</div>
+
                   <div className="text-gray-600">Схема к вопросу {currentQuestion + 1}</div>
                   <div className="text-sm text-gray-400 mt-2">
                     На реальном тесте здесь была бы схематическая иллюстрация
                   </div>
+                              <p>
+              <br></br>
+            </p>
                 </div>
               </div>
             </div>
+                        <p>
+              <br></br>
+            </p>
 
             {/* Ошибка */}
             {error && (
@@ -467,6 +479,48 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
           </Button>
         </div>
 
+        {/* Подтверждение */}
+      {showConfirmDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <Card className="max-w-md w-full animate-scale-in">
+            <CardHeader>
+              <CardTitle className="text-red-600 flex items-center gap-2">
+                <AlertCircle className="size-5" />
+                Завершить тест досрочно?
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-gray-600">
+                Вы ответили на {answeredCount} из 70 вопросов. 
+                {answeredCount < 70 && ' Неотвеченные вопросы будут засчитаны как неправильные.'}
+              </p>
+              <p className="text-sm text-gray-500">
+                Оставшееся время: {formatTime(remainingTime)}
+              </p>
+              <div className="flex gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowConfirmDialog(false)}
+                  className="flex-1"
+                >
+                  Продолжить тест
+                </Button>
+                <Button
+                  onClick={() => {
+                    setShowConfirmDialog(false);
+                    saveResultsToServer();
+                  }}
+                  className="flex-1 bg-red-600 hover:bg-red-700"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Сохранение...' : 'Завершить'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
         {/* Быстрая навигация по вопросам */}
         <Card>
           <CardContent className="pt-6">
@@ -514,47 +568,7 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
         </div>
       </div>
 
-      {/* Подтверждение */}
-      {showConfirmDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="max-w-md w-full animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-red-600 flex items-center gap-2">
-                <AlertCircle className="size-5" />
-                Завершить тест досрочно?
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600">
-                Вы ответили на {answeredCount} из 70 вопросов. 
-                {answeredCount < 70 && ' Неотвеченные вопросы будут засчитаны как неправильные.'}
-              </p>
-              <p className="text-sm text-gray-500">
-                Оставшееся время: {formatTime(remainingTime)}
-              </p>
-              <div className="flex gap-3 pt-2">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowConfirmDialog(false)}
-                  className="flex-1"
-                >
-                  Продолжить тест
-                </Button>
-                <Button
-                  onClick={() => {
-                    setShowConfirmDialog(false);
-                    saveResultsToServer();
-                  }}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Сохранение...' : 'Завершить'}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      
     </div>
   );
 }

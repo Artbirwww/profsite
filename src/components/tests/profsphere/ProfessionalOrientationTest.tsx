@@ -377,7 +377,7 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <Card className="shadow-sm">
-          <CardHeader>
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Button
@@ -475,6 +475,36 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
           </CardContent>
         </Card>
 
+
+
+        {/* Current Category Scores */}
+        {/* <Card>
+          <CardContent className="pt-6">
+            <div className="text-sm font-medium text-gray-700 mb-3">
+              Текущие баллы по сферам:
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              {Object.entries(categories).map(([key, category]) => (
+                <div
+                  key={key}
+                  className={`p-3 rounded-lg border text-center ${
+                    key === dominantCategory
+                      ? 'border-green-300 bg-green-50'
+                      : 'border-gray-200 bg-white'
+                  }`}
+                >
+                  <div className="text-xl mb-1">{category.icon}</div>
+                  <div className="text-xs text-gray-600 mb-1">{category.name}</div>
+                  <div className="text-lg font-bold text-gray-800">
+                    {counts[key as keyof typeof counts]}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card> */}
+
+        
         {/* Error message */}
         {error && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
@@ -534,7 +564,7 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
             onClick={() => handleAnswer(false)}
             disabled={isSubmitting}
           >
-            <CardHeader className="bg-gradient-to-r from-purple-50 to-white border-b">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-white border-b">
               <div className="flex items-center justify-between">
                 <div className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
                   Вариант Б
@@ -556,7 +586,7 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
                 </div>
                 <div className="pt-4">
                   <div className="flex items-center justify-center p-3 bg-purple-50 rounded-lg">
-                    <span className="text-purple-700 font-medium">Предпочитаю этот вариант</span>
+                    <span className="text-blue-700 font-medium">Предпочитаю этот вариант</span>
                   </div>
                 </div>
               </div>
@@ -605,6 +635,48 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
           </Button>
         </div>
 
+        {/* Confirmation Dialog */}
+      {showConfirmDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <Card className="max-w-md w-full animate-scale-in">
+            <CardHeader>
+              <CardTitle className="text-red-600 flex items-center gap-2">
+                <AlertCircle className="size-5" />
+                Завершить тест досрочно?
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-gray-600">
+                Вы ответили на {answeredCount} из 20 вопросов.
+                {answeredCount < 20 && ` Неотвеченные ${20 - answeredCount} вопросов будут автоматически распределены.`}
+              </p>
+              <p className="text-sm text-gray-500">
+                Оставшееся время: {formatTime(timer)}
+              </p>
+              <div className="flex gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowConfirmDialog(false)}
+                  className="flex-1"
+                >
+                  Продолжить тест
+                </Button>
+                <Button
+                  onClick={() => {
+                    setShowConfirmDialog(false);
+                    saveResultsToServer();
+                  }}
+                  className="flex-1 bg-red-600 hover:bg-red-700"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Сохранение...' : 'Завершить'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
         {/* Progress Indicators */}
         <Card>
           <CardContent className="pt-6">
@@ -635,86 +707,9 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
           </CardContent>
         </Card>
 
-        {/* Current Category Scores */}
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-sm font-medium text-gray-700 mb-3">
-              Текущие баллы по сферам:
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {Object.entries(categories).map(([key, category]) => (
-                <div
-                  key={key}
-                  className={`p-3 rounded-lg border text-center ${
-                    key === dominantCategory
-                      ? 'border-green-300 bg-green-50'
-                      : 'border-gray-200 bg-white'
-                  }`}
-                >
-                  <div className="text-xl mb-1">{category.icon}</div>
-                  <div className="text-xs text-gray-600 mb-1">{category.name}</div>
-                  <div className="text-lg font-bold text-gray-800">
-                    {counts[key as keyof typeof counts]}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
-      {/* Confirmation Dialog */}
-      {showConfirmDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="max-w-md w-full animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-red-600 flex items-center gap-2">
-                <AlertCircle className="size-5" />
-                Завершить тест досрочно?
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600">
-                Вы ответили на {answeredCount} из 20 вопросов.
-                {answeredCount < 20 && ` Неотвеченные ${20 - answeredCount} вопросов будут автоматически распределены.`}
-              </p>
-              <div className="bg-gray-50 p-3 rounded-lg">
-                <p className="text-sm text-gray-700 mb-2">Текущие результаты:</p>
-                <div className="space-y-1">
-                  {Object.entries(categories).map(([key, category]) => (
-                    <div key={key} className="flex justify-between text-sm">
-                      <span className="text-gray-600">{category.name}</span>
-                      <span className="font-medium">{counts[key as keyof typeof counts]} баллов</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <p className="text-sm text-gray-500">
-                Оставшееся время: {formatTime(timer)}
-              </p>
-              <div className="flex gap-3 pt-2">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowConfirmDialog(false)}
-                  className="flex-1"
-                >
-                  Продолжить тест
-                </Button>
-                <Button
-                  onClick={() => {
-                    setShowConfirmDialog(false);
-                    saveResultsToServer();
-                  }}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Сохранение...' : 'Завершить'}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      
     </div>
   );
 }

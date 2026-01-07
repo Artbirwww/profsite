@@ -27,35 +27,35 @@ const testGroups = [
     id: 'temperament' as TestGroup,
     title: 'Темперамент',
     description: 'Определение типа темперамента и личностных характеристик',
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-yellow-500 to-cyan-500',
     icon: '🎭',
   },
   {
     id: 'groupRoles' as TestGroup,
     title: 'Групповые роли',
     description: 'Выявление вашей роли в команде по методике Белбина',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-yellow-500 to-pink-500',
     icon: '👥',
-  },
-  {
-    id: 'professionalOrientation' as TestGroup,
-    title: 'Профессиональная направленность',
-    description: 'Определение профессиональных предпочтений по методике Климова',
-    color: 'from-green-500 to-emerald-500',
-    icon: '💼',
   },
   {
     id: 'engineeringThinking' as TestGroup,
     title: 'Инженерное мышление',
     description: 'Оценка технических и аналитических способностей',
-    color: 'from-orange-500 to-amber-500',
+    color: 'from-yellow-500 to-amber-500',
     icon: '⚙️',
+  },
+  {
+    id: 'professionalOrientation' as TestGroup,
+    title: 'Профессиональная направленность',
+    description: 'Профессиональные предпочтения',
+    color: 'from-yellow-500 to-emerald-500',
+    icon: '💼',
   },
   {
     id: 'intellectualPotential' as TestGroup,
     title: 'Интеллектуальный потенциал',
     description: 'Анализ когнитивных способностей и потенциала развития',
-    color: 'from-indigo-500 to-purple-600',
+    color: 'from-yellow-500 to-purple-600',
     icon: '🧠',
   },
 ];
@@ -78,11 +78,11 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
     <div className="min-h-screen p-4 py-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
-        <Card>
+        <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg">
+                <div className="p-3 bg-gradient-to-br from-yellow-500 to-purple-600 rounded-xl shadow-lg">
                   <GraduationCap className="size-8 text-white" />
                 </div>
                 <div>
@@ -115,6 +115,9 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                   style={{ width: `${progress}%` }}
                 />
               </div>
+              <p>
+                    <br></br>
+                  </p>
             </div>
 
             {allCompleted && (
@@ -161,6 +164,9 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                     После прохождения группы она станет недоступной, и вы вернётесь в личный кабинет.
                     Как только вы завершите все группы, вы автоматически перейдёте к результатам.
                   </p>
+                  <p>
+                    <br></br>
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -206,6 +212,9 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                     </Button>
                   )}
                 </CardContent>
+                <p>
+                    <br></br>
+                  </p>
               </Card>
             );
           })}

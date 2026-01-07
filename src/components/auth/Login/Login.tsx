@@ -1,14 +1,14 @@
 // src/components/auth/Login/Login.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext'; // Импортируем useAuth вместо useApp
+import { useAuth } from '../../../contexts/AuthContext';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
 import { GraduationCap } from '../../ui/display/SimpleIcons';
-import unlimitedBg from '../../../res/img/unnamed.png';
+import { BubbleBackground } from '../BubbleBackground'; // Импортируем компонент фона
 
 export function Login() {
-  const { login } = useAuth(); // Используем login из AuthContext
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => { // Делаем асинхронным
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -28,7 +28,7 @@ export function Login() {
     }
 
     try {
-      await login(email, password); // Теперь login - это асинхронная функция
+      await login(email, password);
       navigate('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Неверный email или пароль');
@@ -38,23 +38,19 @@ export function Login() {
   };
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{
-        backgroundImage: `url(${unlimitedBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-      }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4 relative">
+      {/* Bubble Background */}
+      <BubbleBackground />
+      
+      {/* Затемнение фона */}
       <div className="absolute inset-0 bg-black/30" />
       
+      {/* Контент поверх фона */}
       <div className="relative z-10 w-full max-w-md">
         <Card className="w-full bg-white/95 backdrop-blur-sm border-white/20 shadow-2xl">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="p-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
+              <div className="p-4 bg-gradient-to-br from-yellow-500 to-purple-600 rounded-2xl shadow-lg">
                 <GraduationCap className="size-10 text-white" />
               </div>
             </div>

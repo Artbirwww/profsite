@@ -38,6 +38,7 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [currentBlock, setCurrentBlock] = useState(0);
 
   // Таймер
   useEffect(() => {
@@ -250,9 +251,6 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
             <CardContent className="pt-6 space-y-6">
               <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg mt-0.5">
-                    <Brain className="size-5 text-blue-600" />
-                  </div>
                   <div>
                     <p className="text-blue-900 mb-3">
                       <strong>Инструкция:</strong> Вам предлагается ответить на 57 вопросов. Отвечайте только «Да» или «Нет». 
@@ -266,51 +264,20 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="border-2 border-blue-200 hover:border-blue-300 transition-colors">
-                  <CardContent className="pt-6">
-                    <div className="text-center">
-                      <div className="text-3xl mb-3">🧠</div>
-                      <h3 className="text-xl font-medium text-gray-900 mb-2">Что измеряется?</h3>
-                      <ul className="text-sm text-gray-600 text-left space-y-1">
-                        <li>• <strong>Экстраверсия/Интроверсия</strong> — направленность личности</li>
-                        <li>• <strong>Нейротизм</strong> — эмоциональная устойчивость</li>
-                        <li>• <strong>Шкала искренности</strong> — достоверность результатов</li>
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 border-green-200 hover:border-green-300 transition-colors">
-                  <CardContent className="pt-6">
-                    <div className="text-center">
-                      <div className="text-3xl mb-3">⏱️</div>
-                      <h3 className="text-xl font-medium text-gray-900 mb-2">Технические детали</h3>
-                      <div className="text-sm text-gray-600 space-y-1">
-                        <div><strong>Время:</strong> ~10-15 минут</div>
-                        <div><strong>Вопросов:</strong> 57 в каждом варианте</div>
-                        <div><strong>Тип:</strong> Личностный опросник</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Выберите вариант теста:</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Card 
-                    className={`cursor-pointer border-2 transition-all duration-200 hover:shadow-lg ${
-                      variant === 'A' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
+                    className={`cursor-pointer border-2 border-blue-200 hover:border-blue-300 transition-colors hover:shadow-lg ${
+                      variant === 'A' ? 'border-blue-500 bg-blue-50' : ''
                     }`}
                     onClick={() => handleVariantSelect('A')}
                   >
-                    <CardContent className="p-6">
+                    <CardContent className="pt-6">
                       <div className="text-center">
-                        <div className="text-4xl mb-3">🔵</div>
-                        <h4 className="text-xl font-medium text-gray-900 mb-1">Вариант А</h4>
+                        <h4 className="text-xl font-medium text-gray-900 mb-2">Вариант А</h4>
                         <p className="text-gray-600 mb-3">Классическая версия опросника</p>
-                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-medium">
                           57 вопросов
                         </div>
                       </div>
@@ -318,17 +285,16 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
                   </Card>
 
                   <Card 
-                    className={`cursor-pointer border-2 transition-all duration-200 hover:shadow-lg ${
-                      variant === 'B' ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-purple-300'
+                    className={`cursor-pointer border-2 border-green-200 hover:border-green-300 transition-colors hover:shadow-lg ${
+                      variant === 'B' ? 'border-green-500 bg-green-50' : ''
                     }`}
                     onClick={() => handleVariantSelect('B')}
                   >
-                    <CardContent className="p-6">
+                    <CardContent className="pt-6">
                       <div className="text-center">
-                        <div className="text-4xl mb-3">🟣</div>
-                        <h4 className="text-xl font-medium text-gray-900 mb-1">Вариант Б</h4>
+                        <h4 className="text-xl font-medium text-gray-900 mb-2">Вариант Б</h4>
                         <p className="text-gray-600 mb-3">Альтернативная формулировка вопросов</p>
-                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-sm">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-medium">
                           57 вопросов
                         </div>
                       </div>
@@ -498,7 +464,7 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <Card className="shadow-sm">
-          <CardHeader>
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b" >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Button 
@@ -691,6 +657,48 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
           </Button>
         </div>
 
+        {/* Confirmation Dialog */}
+              {showConfirmDialog && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+                  <Card className="max-w-md w-full animate-scale-in">
+                    <CardHeader>
+                      <CardTitle className="text-red-600 flex items-center gap-2">
+                        <AlertCircle className="size-5" />
+                        Завершить тест досрочно?
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-600">
+                        Вы ответили на {answeredCount} из 57 вопросов. 
+                        {answeredCount < 57 && ` Неотвеченные ${57 - answeredCount} вопросов будут обработаны как пропущенные.`}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Оставшееся время: {formatTime(time)}
+                      </p>
+                      <div className="flex gap-3 pt-2">
+                        <Button
+                          variant="outline"
+                          onClick={() => setShowConfirmDialog(false)}
+                          className="flex-1"
+                        >
+                          Продолжить тест
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            setShowConfirmDialog(false);
+                            saveResultsToServer();
+                          }}
+                          className="flex-1 bg-red-600 hover:bg-red-700"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? 'Сохранение...' : 'Завершить'}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
+        
         {/* Question Navigation Dots */}
         <Card>
           <CardContent className="pt-6">
@@ -722,51 +730,7 @@ export function TemperamentTest({ user, onComplete, onBack }: TemperamentTestPro
         </Card>
       </div>
 
-      {/* Confirmation Dialog */}
-      {showConfirmDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="max-w-md w-full animate-scale-in">
-            <CardHeader>
-              <CardTitle className="text-red-600 flex items-center gap-2">
-                <AlertCircle className="size-5" />
-                Завершить тест досрочно?
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600">
-                Вы ответили на {answeredCount} из 57 вопросов. 
-                {answeredCount < 57 && ` Неотвеченные ${57 - answeredCount} вопросов будут обработаны как пропущенные.`}
-              </p>
-              <p className="text-sm text-gray-500">
-                Текущие предварительные баллы: 
-                Экстраверсия {currentScores.extra}, Нейротизм {currentScores.neuro}
-              </p>
-              <p className="text-sm text-gray-500">
-                Оставшееся время: {formatTime(time)}
-              </p>
-              <div className="flex gap-3 pt-2">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowConfirmDialog(false)}
-                  className="flex-1"
-                >
-                  Продолжить тест
-                </Button>
-                <Button
-                  onClick={() => {
-                    setShowConfirmDialog(false);
-                    saveResultsToServer();
-                  }}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Сохранение...' : 'Завершить'}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      
     </div>
   );
 }

@@ -297,7 +297,7 @@ export function GroupRolesTest({ onBack }: GroupRolesTestProps) {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <Card className="shadow-sm">
-          <CardHeader>
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Button 
@@ -524,6 +524,44 @@ export function GroupRolesTest({ onBack }: GroupRolesTestProps) {
           </Button>
         </div>
 
+        {/* Confirm Dialog */}
+        {showConfirmDialog && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <Card className="max-w-md w-full animate-scale-in">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-amber-600">
+                  <AlertCircle className="size-5" />
+                  Внимание: Не все баллы распределены
+                </CardTitle>
+                <CardDescription>
+                  Вы собираетесь завершить блок с неравномерным распределением баллов
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-amber-800">
+                    В текущем блоке распределено <strong>{currentSum} из 10</strong> баллов.
+                    {currentSum < 10 && ` Не хватает ${10 - currentSum} баллов.`}
+                    {currentSum > 10 && ` Превышение на ${currentSum - 10} баллов.`}
+                  </p>
+                  <p className="text-sm text-amber-700 mt-2">
+                    Для точных результатов рекомендуется распределить ровно 10 баллов.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowConfirmDialog(false)}
+                    className="w-full h-12"
+                  >
+                    Вернуться к редактированию
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {/* Progress Indicators */}
         <Card>
           <CardContent className="pt-6">
@@ -564,52 +602,7 @@ export function GroupRolesTest({ onBack }: GroupRolesTestProps) {
           </CardContent>
         </Card>
 
-        {/* Confirm Dialog */}
-        {showConfirmDialog && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <Card className="max-w-md w-full animate-scale-in">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-amber-600">
-                  <AlertCircle className="size-5" />
-                  Внимание: Не все баллы распределены
-                </CardTitle>
-                <CardDescription>
-                  Вы собираетесь завершить блок с неравномерным распределением баллов
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-amber-800">
-                    В текущем блоке распределено <strong>{currentSum} из 10</strong> баллов.
-                    {currentSum < 10 && ` Не хватает ${10 - currentSum} баллов.`}
-                    {currentSum > 10 && ` Превышение на ${currentSum - 10} баллов.`}
-                  </p>
-                  <p className="text-sm text-amber-700 mt-2">
-                    Для точных результатов рекомендуется распределить ровно 10 баллов.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <Button
-                    onClick={() => {
-                      setShowConfirmDialog(false);
-                      handleNext();
-                    }}
-                    className="w-full bg-amber-600 hover:bg-amber-700 h-12"
-                  >
-                    Продолжить с текущим распределением
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => setShowConfirmDialog(false)}
-                    className="w-full h-12"
-                  >
-                    Вернуться к редактированию
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
+        
 
         {/* Admin Skip Button (hidden in production) */}
         {process.env.NODE_ENV === 'development' && currentBlock < 6 && (
