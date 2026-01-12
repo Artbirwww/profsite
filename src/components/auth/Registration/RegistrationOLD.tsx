@@ -15,7 +15,6 @@ type UserType = 'школьник' | 'студент' | 'специалист';
 interface User {
   email: string;
   password: string;
-  confirmPassword: string;
   type: UserType;
   lastName?: string;
   firstName?: string;
@@ -25,8 +24,8 @@ interface User {
   city?: string;
   schoolName?: string;
   address?: string;
-  age?: string;
-  grade?: string;
+  age?: number;
+  grade?: number;
   gradeLetter?: string;
 }
 
@@ -40,27 +39,26 @@ export function Registration() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [user, setUser] = useState<User>({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    type: 'школьник',
-    lastName: '',
-    firstName: '',
-    middleName: '',
-    gender: '',
-    region: '',
-    city: '',
-    schoolName: '',
-    address: '',
-    age: '',
-    grade: '',
-    gradeLetter: '',
-  });
+  // Общие поля
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Поля для школьника
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [gender, setGender] = useState('');
+  const [region, setRegion] = useState('');
+  const [city, setCity] = useState('');
+  const [schoolName, setSchoolName] = useState('');
+  const [address, setAddress] = useState('');
+  const [age, setAge] = useState('');
+  const [grade, setGrade] = useState('');
+  const [gradeLetter, setGradeLetter] = useState('');
 
   const handleTypeSelect = (type: UserType) => {
     setUserType(type);
-    setUser(prev => ({ ...prev, type }));
     setStep('form');
     setFormStep(1);
   };
@@ -86,43 +84,98 @@ export function Registration() {
 
   const validateStep1 = (): boolean => {
     const newErrors: { [key: string]: string } = {};
-    if (!user.email) newErrors.email = 'Email обязателен';
-    else if (!/\S+@\S+\.\S+/.test(user.email)) newErrors.email = 'Некорректный email';
-    if (!user.password) newErrors.password = 'Пароль обязателен';
-    else if (user.password.length < 6) newErrors.password = 'Минимум 6 символов';
-    if (user.password !== user.confirmPassword) newErrors.confirmPassword = 'Пароли не совпадают';
+    if (!email) newErrors.email = 'Email обязателен';
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Некорректный email';
+    if (!password) newErrors.password = 'Пароль обязателен';
+    else if (password.length < 6) newErrors.password = 'Минимум 6 символов';
+    if (password !== confirmPassword) newErrors.confirmPassword = 'Пароли не совпадают';
 
+    {/*
+
+    if (userType === 'школьник') {
+      if (!lastName) newErrors.lastName = 'Фамилия обязательна';
+      if (!firstName) newErrors.firstName = 'Имя обязательно';
+      if (!middleName) newErrors.middleName = 'Отчество обязательно';
+      if (!gender) newErrors.gender = 'Пол обязателен';
+    }
+
+    */}
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  {/*
+
+  const validateStep2 = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+    if (userType === 'школьник') {
+      if (!region) newErrors.region = 'Регион обязателен';
+      if (!city) newErrors.city = 'Город обязателен';
+      if (!address) newErrors.address = 'Адрес обязателен';
+      if (!schoolName) newErrors.schoolName = 'Школа обязательна';
+      if (!age) newErrors.age = 'Возраст обязателен';
+      if (!grade) newErrors.grade = 'Класс обязателен';
+      if (!gradeLetter) newErrors.gradeLetter = 'Буква обязательна';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  */}
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  {/*
+
+  if (userType === 'школьник') {
+    if (formStep === 1) {
+      if (validateStep1()) setFormStep(2);
+      return;
+    } else if (formStep === 2) {
+      if (!validateStep2()) return;
+    }
+  } else {
+  
+  */}
 
     if (!validateStep1()) return;
+  
+  {/*
 
-    try {
-      setIsSubmitting(true);
-      await register(user.email.trim(), user.password);
-      navigate('/dashboard', { replace: true });
-    } catch (err) {
-      console.error('Registration error:', err);
-      const msg = err instanceof Error ? err.message : 'Неизвестная ошибка регистрации';
-      setErrors({ submit: msg });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  }
 
-  const updateField = (field: keyof User, value: string) => {
-    setUser(prev => ({ ...prev, [field]: value }));
-  };
+  */}
+
+  // Формируем данные ДО вызова
+  const emailVal = email.trim();
+  const passwordVal = password;
+
+  try {
+    setIsSubmitting(true);
+
+    // Регистрация через API (только email и password)
+    await register(emailVal, passwordVal);
+
+    // После успешной регистрации — редирект
+    navigate('/dashboard', { replace: true });
+
+  } catch (err) {
+    console.error('Registration error:', err);
+    const msg = err instanceof Error ? err.message : 'Неизвестная ошибка регистрации';
+    setErrors({ submit: msg });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   if (step === 'type') {
     return (
       <div 
         className="min-h-screen flex items-center justify-center p-4"
+        
         style={{
+          // backgroundImage: `url(${unlimitedBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -182,6 +235,7 @@ export function Registration() {
     <div 
       className="min-h-screen flex items-center justify-center p-4 py-8"
       style={{
+        // backgroundImage: `url(${unlimitedBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -227,8 +281,8 @@ export function Registration() {
                       <Input
                         id="email"
                         type="email"
-                        value={user.email}
-                        onChange={e => updateField('email', e.target.value)}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         placeholder="example@mail.ru"
                         disabled={isSubmitting}
                         className="bg-white/80"
@@ -240,8 +294,8 @@ export function Registration() {
                         <Label>Пароль *</Label>
                         <Input
                           type="password"
-                          value={user.password}
-                          onChange={e => updateField('password', e.target.value)}
+                          value={password}
+                          onChange={e => setPassword(e.target.value)}
                           placeholder="••••••"
                           disabled={isSubmitting}
                           className="bg-white/80"
@@ -252,8 +306,8 @@ export function Registration() {
                         <Label>Подтвердите пароль *</Label>
                         <Input
                           type="password"
-                          value={user.confirmPassword}
-                          onChange={e => updateField('confirmPassword', e.target.value)}
+                          value={confirmPassword}
+                          onChange={e => setConfirmPassword(e.target.value)}
                           placeholder="••••••"
                           disabled={isSubmitting}
                           className="bg-white/80"
@@ -262,8 +316,168 @@ export function Registration() {
                       </div>
                     </div>
                   </div>
+                  {/*
+                  <div className="space-y-4">
+                    <div className="pb-2 border-b border-gray-100">
+                      <h4 className="text-sm text-indigo-600">Личная информация</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {(['lastName', 'firstName', 'middleName'] as const).map(field => (
+                        <div key={field} className="space-y-2">
+                          <Label>{field === 'lastName' ? 'Фамилия' : field === 'firstName' ? 'Имя' : 'Отчество'} *</Label>
+                          <Input
+                            value={field === 'lastName' ? lastName : field === 'firstName' ? firstName : middleName}
+                            onChange={e =>
+                              field === 'lastName'
+                                ? setLastName(e.target.value)
+                                : field === 'firstName'
+                                ? setFirstName(e.target.value)
+                                : setMiddleName(e.target.value)
+                            }
+                            placeholder={field === 'lastName' ? 'Иванов' : field === 'firstName' ? 'Иван' : 'Иванович'}
+                            disabled={isSubmitting}
+                            className="bg-white/80"
+                          />
+                          {errors[field] && <p className="text-sm text-red-600">{errors[field]}</p>}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Пол *</Label>
+                      <RealSelect
+                        value={gender}
+                        onValueChange={setGender}
+                        placeholder="Выберите пол"
+                        options={[
+                          { value: 'мужской', label: 'Мужской' },
+                          { value: 'женский', label: 'Женский' },
+                        ]}
+                        disabled={isSubmitting}
+                      />
+                      {errors.gender && <p className="text-sm text-red-600">{errors.gender}</p>}
+                    </div>
+                  </div>
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+                    <strong>Важно:</strong> Личная информация (ФИО, пол и т.д.) может быть заполнена позже в профиле после регистрации.
+                  </div>
+                  */}
                 </>
               )}
+                
+              
+              {/* 
+              {userType === 'школьник' && formStep === 2 && (
+                <>
+                  <div className="space-y-4">
+                    <div className="pb-2 border-b border-gray-100">
+                      <h4 className="text-sm text-indigo-600">Место проживания</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Регион *</Label>
+                        <RealSelect
+                          value={region}
+                          onValueChange={v => {
+                            setRegion(v);
+                            setCity('');
+                          }}
+                          placeholder="Выберите регион"
+                          options={regions}
+                          disabled={isSubmitting}
+                        />
+                        {errors.region && <p className="text-sm text-red-600">{errors.region}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Город *</Label>
+                        <RealSelect
+                          value={city}
+                          onValueChange={setCity}
+                          placeholder="Выберите город"
+                          options={getCitiesByRegion(region)}
+                          disabled={!region || isSubmitting}
+                        />
+                        {errors.city && <p className="text-sm text-red-600">{errors.city}</p>}
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Адрес *</Label>
+                      <Input
+                        value={address}
+                        onChange={e => setAddress(e.target.value)}
+                        placeholder="Улица, дом, квартира"
+                        disabled={isSubmitting}
+                        className="bg-white/80"
+                      />
+                      {errors.address && <p className="text-sm text-red-600">{errors.address}</p>}
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="pb-2 border-b border-gray-100">
+                      <h4 className="text-sm text-indigo-600">Образование</h4>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Школа *</Label>
+                      <Input
+                        value={schoolName}
+                        onChange={e => setSchoolName(e.target.value)}
+                        placeholder="МБОУ СОШ №1"
+                        disabled={isSubmitting}
+                        className="bg-white/80"
+                      />
+                      {errors.schoolName && <p className="text-sm text-red-600">{errors.schoolName}</p>}
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <Label>Возраст *</Label>
+                        <RealSelect
+                          value={age}
+                          onValueChange={setAge}
+                          placeholder="Возраст"
+                          options={Array.from({ length: 14 }, (_, i) => ({
+                            value: String(i + 6),
+                            label: `${i + 6}`,
+                          }))}
+                          disabled={isSubmitting}
+                        />
+                        {errors.age && <p className="text-sm text-red-600">{errors.age}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Класс *</Label>
+                        <RealSelect
+                          value={grade}
+                          onValueChange={setGrade}
+                          placeholder="Класс"
+                          options={Array.from({ length: 11 }, (_, i) => ({
+                            value: String(i + 1),
+                            label: `${i + 1}`,
+                          }))}
+                          disabled={isSubmitting}
+                        />
+                        {errors.grade && <p className="text-sm text-red-600">{errors.grade}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Буква *</Label>
+                        <RealSelect
+                          value={gradeLetter}
+                          onValueChange={setGradeLetter}
+                          placeholder="Буква"
+                          options={[
+                            { value: 'а', label: 'А' },
+                            { value: 'б', label: 'Б' },
+                            { value: 'в', label: 'В' },
+                          ]}
+                          disabled={isSubmitting}
+                        />
+                        {errors.gradeLetter && <p className="text-sm text-red-600">{errors.gradeLetter}</p>}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+                    <strong>Важно:</strong> Данные о месте проживания и образовании могут быть заполнены позже в профиле после регистрации.
+                  </div>
+                </>
+              )}
+              */}
 
               {(userType === 'студент' || userType === 'специалист') && (
                 <div className="space-y-4">
@@ -272,8 +486,8 @@ export function Registration() {
                     <Input
                       id="email"
                       type="email"
-                      value={user.email}
-                      onChange={e => updateField('email', e.target.value)}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                       placeholder="example@mail.ru"
                       disabled={isSubmitting}
                       className="bg-white/80"
@@ -285,8 +499,8 @@ export function Registration() {
                       <Label>Пароль *</Label>
                       <Input
                         type="password"
-                        value={user.password}
-                        onChange={e => updateField('password', e.target.value)}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         placeholder="••••••"
                         disabled={isSubmitting}
                         className="bg-white/80"
@@ -297,8 +511,8 @@ export function Registration() {
                       <Label>Подтвердите пароль *</Label>
                       <Input
                         type="password"
-                        value={user.confirmPassword}
-                        onChange={e => updateField('confirmPassword', e.target.value)}
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
                         placeholder="••••••"
                         disabled={isSubmitting}
                         className="bg-white/80"
