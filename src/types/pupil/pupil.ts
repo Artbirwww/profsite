@@ -9,7 +9,8 @@ export class PupilDTO {
     healthCondition?: string = "";
     nationality?: string = "";
     extraActivities?: string = "";
-    className?: string = "";
+    classNumber?: number = 0;
+    classLabel?: string = "";
     gender: Gender = Gender.FEMALE;
 
     constructor(data?: Partial<PupilDTO>) {
@@ -22,6 +23,6 @@ export class PupilDTO {
 
 export const PupilDataKeys = ["name", "surname", "patronymic", 
     "birthday", "school", "healthCondition", "nationality", 
-    "extraActivities", "className", "gender", "email", "password"]
+    "extraActivities", "classNumber", "classLabel", "gender", "email", "password"]
 
 export type PupilDTOKeys = keyof PupilDTO
