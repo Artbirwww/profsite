@@ -1,0 +1,36 @@
+
+.pupils-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pupils-list-wrapper > p {
+    font-size: 20px;
+    padding: 1rem 0px;
+}
+.pupils-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    
+}
+
+.pupil-item {
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+.pages {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 5px;
+    gap: 15px;
+}
+.pages button {
+    font-size: 20px;
+}
