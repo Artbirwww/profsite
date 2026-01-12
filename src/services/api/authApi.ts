@@ -2,9 +2,9 @@ import axios from 'axios';
 import { User, AuthResponse } from '../../types/User';
 import { LoginData, RegistrationData } from '../../types/AuthData';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const API_URL = import.meta.env.BASE_URL || 'http://localhost:3000/api';
 
-console.log('API URL:', import.meta.env.VITE_API_URL);
+console.log('API URL:', import.meta.env.BASE_URL);
 //console.log('App name:', import.meta.env.VITE_APP_NAME);
 
 const api = axios.create({

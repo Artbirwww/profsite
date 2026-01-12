@@ -51,6 +51,10 @@ export const PupilDataLoading = () => {
   }
 
   const sendPupils = async (data: AccountApiRegisterDTO[]) => {
+    if (rawData.length === 0) {
+      toast.error("Выберите файл", {style : {backgroundColor: "#FF7F7F"}})
+      return
+    }
     try {
       const response = await pupilService.autoRegisterAll(data)
       console.log(data)
