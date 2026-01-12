@@ -12,7 +12,7 @@ interface PupilResponse extends PupilDTO {
 export const pupilService = {
   autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
     try {
-      const response = await api.post<PupilResponse>('/pupils/auto-register', data);
+      const response = await api.post<PupilResponse>('/api/auth/auto-register', data);
       return response.data;
     } catch (err) {
       console.error('Error registering pupil:', err);
@@ -22,7 +22,7 @@ export const pupilService = {
 
   autoRegisterAll: async (data: AccountApiRegisterDTO[]): Promise<any> => {
     try {
-      const response = await api.post('/pupils/auto-register-all', data);
+      const response = await api.post('/api/auth/auto-register-all', data);
       return response.data;
     } catch (err) {
       console.error('Error registering pupils batch:', err);
