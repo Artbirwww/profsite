@@ -1,13 +1,6 @@
 import api from './authApi';
 import { AccountApiRegisterDTO } from '../../types/pupil/account';
-import { PupilDTO } from '../../types/pupil/pupil';
-
-interface PupilResponse extends PupilDTO {
-  id: number;
-  accountId?: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { PupilDTO, PupilListResponse, PupilResponse } from '../../types/pupil/pupil';
 
 export const pupilService = {
   autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
@@ -29,19 +22,21 @@ export const pupilService = {
       throw err;
     }
   },
-
+  //роут другой
   getPupil: async (id: number): Promise<PupilResponse> => {
     const response = await api.get<PupilResponse>(`/pupils/${id}`);
     return response.data;
   },
-
+  //Такого нет
   getCurrentPupil: async (): Promise<PupilResponse> => {
     const response = await api.get<PupilResponse>('/pupils/me');
     return response.data;
   },
 
-  getAllPupils: async (): Promise<PupilResponse[]> => {
-    const response = await api.get<PupilResponse[]>('/pupils');
+  getAllPupils: async (page: number, size: number, signal?: AbortSignal): Promise<PupilListResponse> => {
+    const response = await api.get<PupilListResponse>(
+      `/api/pupils?page=${page}&size=${size}`,
+      {signal});
     return response.data;
   },
 };
