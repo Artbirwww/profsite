@@ -20,6 +20,19 @@ export class PupilDTO {
         return Object.keys(new PupilDTO()) as (keyof PupilDTO)[]
     }
 }
+export interface PupilResponse {
+    pupilDTO?: PupilDTO;
+    email: string;
+}
+
+export interface PupilListResponse {
+    content: PupilResponse[];
+    numberOfElements: number;
+    size: number;
+    number: number; //number of the current page u in
+    totalElements: number;
+    totalPages: number;
+}
 
 export const PupilDataKeys = ["name", "surname", "patronymic", 
     "birthday", "school", "healthCondition", "nationality", 
