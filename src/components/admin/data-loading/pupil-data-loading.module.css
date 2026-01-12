@@ -1,0 +1,53 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-wrapper > p {
+    font-size: 20px;
+    padding: 1rem 0px;
+}
+.data-loading-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    gap: 15px;
+}
+.mapping-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+
+}
+.field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 0px 15px;
+    border-radius: 5px;
+    gap: 15px;
+    background-color: bisque;
+}
+.default {
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 5px;
+}
+.primary {
+    background-color: #90CAF9;
+}
+.success {
+    background-color: #86EDA8;
+}
+.options {
+    display: flex;
+}
+.options :first-child {
+    flex: 3;
+}
+.options :last-child {
+    flex: 1;
+}

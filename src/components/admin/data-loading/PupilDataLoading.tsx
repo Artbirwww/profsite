@@ -3,6 +3,9 @@ import { useExcelMapper } from "../../../hooks/useExcelMapper";
 import { PupilDataKeys, PupilDTO} from '../../../types/pupil/pupil'
 import {type AccountApiRegisterDTO} from '../../../types/pupil/account'
 import { pupilService } from "../../../services/api/pupilApi";
+import style from "./pupil-data-loading.module.css"
+import classNames from "classnames"
+import toast, {Toaster} from 'react-hot-toast'
 export const PupilDataLoading = () => {
     const {rawData, headers, setHeaders, processExcelFile} = useExcelMapper()
     const [pupilKeys, setPupilKeys] = useState(PupilDataKeys)
@@ -48,32 +51,46 @@ export const PupilDataLoading = () => {
   }
 
   const sendPupils = async (data: AccountApiRegisterDTO[]) => {
-    const response = await pupilService.autoRegisterAll(data)
-    console.log(response)
+    try {
+      const response = await pupilService.autoRegisterAll(data)
+      console.log(data)
+      toast.success("Данные успешно загружены")
+    } catch(err) {
+      console.log(err)
+      toast.error("Ошибка, не удалось загрузить данные", {style : {backgroundColor: "#FF7F7F"}})
+    }
+    
+    
   }
 
   return (
-    <>
-      <div>
-        <input type="file" onChange={pickupFileHander} />
+    <div className={style["form-wrapper"]}>
+      <p>Форма автоматической регистрации студентов</p>
+      <div className={style["data-loading-form"]}>
+
+        {headers && 
+          <div className={style['mapping-fields']}>
+            {headers.map(name => (
+              <div className={ classNames(style['field'])}>
+                <p>{name}</p>
+                <select className={style["default"]} onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    handlePupilKeys(name, e.target.value)
+                  }}>
+                    <option value={""}>Выберите поле</option>
+                  {pupilKeys.map(key => (
+                    <option value={key}>{key}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>}
+          <div className = {style["options"]}>
+              <input className={classNames(style["default"], style["primary"])} type="file" onChange={pickupFileHander} />
+              <button className={classNames(style["default"], style["success"])} onClick={applyMappings}>Отправить</button>
+          </div>
+          
       </div>
-      {headers && 
-        <div className='mapping-fields'>
-          {headers.map(name => (
-            <div className='field'>
-              <p>{name}</p>
-              <select onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  handlePupilKeys(name, e.target.value)
-                }}>
-                  <option value={""}>Выберите поле</option>
-                {pupilKeys.map(key => (
-                  <option value={key}>{key}</option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>}
-        <button onClick={applyMappings}>Отправить</button>
-    </>
+      <Toaster position="top-right" />
+    </div>
   )
 }
