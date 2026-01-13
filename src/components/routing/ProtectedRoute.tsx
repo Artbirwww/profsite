@@ -1,23 +1,17 @@
-// src/components/routing/ProtectedRoute.tsx
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface ProtectedRouteProps {
-  /**
-   * true — доступ только авторизованным (по умолчанию)
-   * false — доступ только НЕавторизованным (для /login, /register)
-   */
   requireAuth?: boolean;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
   requireAuth = true 
 }) => {
-  const { user, token, isLoading } = useAuth();
+  const { token, isLoading } = useAuth();
   const location = useLocation();
 
-  // Показываем лоадер при инициализации
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -31,18 +25,14 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     );
   }
 
-  // ✅ Случай 1: требуется авторизация, но пользователя или токена нет → на /login
-  if (requireAuth && (!user || !token)) {
+  if (requireAuth && !token) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // ✅ Случай 2: НЕ требуется авторизация (например, /login), но пользователь залогинен → на /dashboard
-  if (!requireAuth && user && token) {
-    // Сохраняем, куда пользователь пытался попасть (например, /register после логина)
+  if (!requireAuth && token) {
     const from = location.state?.from?.pathname || '/dashboard';
     return <Navigate to={from} replace />;
   }
 
-  // ✅ Всё ок — рендерим дочерние роуты
   return <Outlet />;
 };

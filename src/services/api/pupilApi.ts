@@ -1,5 +1,11 @@
 import { BASE_URL } from './baseUrl';
 import { PupilDTO, PupilResponse, PaginatedPupilResponse } from '../../types/pupil/pupil';
+import { useAuth } from '../../contexts/AuthContext';
+
+const getAuthHeader = () => {
+  const token = localStorage.getItem('authToken');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
 
@@ -15,22 +21,22 @@ export const pupilService = {
     return await res.json();
   },
 
-  getPupilData: async (token: string): Promise<PupilResponse> => {
+  getPupilData: async (): Promise<PupilResponse> => {
     const res = await fetch(`${PUPIL_ENDPOINT}/pupil-data`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        ...getAuthHeader(),
       },
     });
     if (!res.ok) throw new Error('Failed to fetch pupil data');
     return await res.json();
   },
 
-  updatePupilData: async (token: string, pupilDTO: Partial<PupilDTO>): Promise<PupilDTO> => {
+  updatePupilData: async (pupilDTO: Partial<PupilDTO>): Promise<PupilDTO> => {
     const res = await fetch(`${PUPIL_ENDPOINT}/update-pupil-data`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        ...getAuthHeader(),
       },
       body: JSON.stringify(pupilDTO),
     });

@@ -105,13 +105,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       <Routes>
-        {/* Public routes - не требуют авторизации */}
-        <Route element={<ProtectedRoute requireAuth={false} />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-        </Route>
-        
-        {/* Protected routes - требуют авторизации */}
+        {/* Public routes — доступны всегда */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+
+        {/* Protected routes — требуют авторизации */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             {/* Админские роуты */}
@@ -140,7 +138,7 @@ export default function App() {
           </Route>
         </Route>
         
-        {/* Fallback */}
+        {/* Fallback — перенаправление неизвестных путей */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </div>

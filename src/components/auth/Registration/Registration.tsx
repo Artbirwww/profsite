@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../SimpleUI';
-import { RealSelect } from '../../ui/inputs/SimpleSelect';
 import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
-// Импортируем изображение
-import unlimitedBg from '../../../res/img/unnamed.png';
 import { BubbleBackground } from '../BubbleBackground';
 
 type UserType = 'школьник' | 'студент' | 'специалист';
@@ -17,26 +14,14 @@ interface User {
   password: string;
   confirmPassword: string;
   type: UserType;
-  lastName?: string;
-  firstName?: string;
-  middleName?: string;
-  gender?: string;
-  region?: string;
-  city?: string;
-  schoolName?: string;
-  address?: string;
-  age?: string;
-  grade?: string;
-  gradeLetter?: string;
 }
 
 export function Registration() {
-  const { register } = useAuth();
+  const { register } = useAuth(); // Убран autoRegister
   const navigate = useNavigate();
 
   const [step, setStep] = useState<'type' | 'form'>('type');
   const [userType, setUserType] = useState<UserType | null>(null);
-  const [formStep, setFormStep] = useState(1);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,43 +30,12 @@ export function Registration() {
     password: '',
     confirmPassword: '',
     type: 'школьник',
-    lastName: '',
-    firstName: '',
-    middleName: '',
-    gender: '',
-    region: '',
-    city: '',
-    schoolName: '',
-    address: '',
-    age: '',
-    grade: '',
-    gradeLetter: '',
   });
 
   const handleTypeSelect = (type: UserType) => {
     setUserType(type);
     setUser(prev => ({ ...prev, type }));
     setStep('form');
-    setFormStep(1);
-  };
-
-  const regions = [
-    { value: 'тыва', label: 'Республика Тыва' },
-    { value: 'хакасия', label: 'Республика Хакасия' },
-    { value: 'красноярский край', label: 'Красноярский край' },
-    { value: 'новосибирская область', label: 'Новосибирская область' },
-    { value: 'томская область', label: 'Томская область' },
-  ];
-
-  const getCitiesByRegion = (regionValue: string) => {
-    const citiesMap: { [key: string]: { value: string; label: string }[] } = {
-      'тыва': [{ value: 'кызыл', label: 'Кызыл' }, { value: 'ак-довурак', label: 'Ак-Довурак' }, { value: 'туран', label: 'Туран' }, { value: 'чадан', label: 'Чадан' }],
-      'хакасия': [{ value: 'абакан', label: 'Абакан' }, { value: 'черногорск', label: 'Черногорск' }, { value: 'саяногорск', label: 'Саяногорск' }, { value: 'усть-абакан', label: 'Усть-Абакан' }, { value: 'абаза', label: 'Абаза' }],
-      'красноярский край': [{ value: 'красноярск', label: 'Красноярск' }, { value: 'норильск', label: 'Норильск' }, { value: 'ачинск', label: 'Ачинск' }, { value: 'минусинск', label: 'Минусинск' }, { value: 'канск', label: 'Канск' }, { value: 'железногорск', label: 'Железногорск' }, { value: 'лесосибирск', label: 'Лесосибирск' }],
-      'новосибирская область': [{ value: 'новосибирск', label: 'Новосибирск' }, { value: 'бердск', label: 'Бердск' }, { value: 'искитим', label: 'Искитим' }, { value: 'обь', label: 'Обь' }],
-      'томская область': [{ value: 'томск', label: 'Томск' }, { value: 'северск', label: 'Северск' }, { value: 'асино', label: 'Асино' }, { value: 'колпашево', label: 'Колпашево' }],
-    };
-    return citiesMap[regionValue] || [];
   };
 
   const validateStep1 = (): boolean => {
@@ -103,6 +57,7 @@ export function Registration() {
 
     try {
       setIsSubmitting(true);
+      // Регистрируем ВСЕХ через обычную регистрацию
       await register(user.email.trim(), user.password);
       navigate('/dashboard', { replace: true });
     } catch (err) {
@@ -201,9 +156,7 @@ export function Registration() {
               <div>
                 <CardTitle>Регистрация — {userType}</CardTitle>
                 <CardDescription>
-                  {userType === 'школьник'
-                    ? `Шаг ${formStep} из 2: ${formStep === 1 ? 'Учётные данные' : 'Место проживания'}`
-                    : 'Заполните email и пароль'}
+                  Заполните email и пароль
                 </CardDescription>
               </div>
             </div>
@@ -216,149 +169,67 @@ export function Registration() {
                 </div>
               )}
 
-              {userType === 'школьник' && formStep === 1 && (
-                <>
-                  <div className="space-y-4">
-                    <div className="pb-2 border-b border-gray-100">
-                      <h4 className="text-sm text-indigo-600">Учётные данные</h4>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={user.email}
-                        onChange={e => updateField('email', e.target.value)}
-                        placeholder="example@mail.ru"
-                        disabled={isSubmitting}
-                        className="bg-white/80"
-                      />
-                      {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Пароль *</Label>
-                        <Input
-                          type="password"
-                          value={user.password}
-                          onChange={e => updateField('password', e.target.value)}
-                          placeholder="••••••"
-                          disabled={isSubmitting}
-                          className="bg-white/80"
-                        />
-                        {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Подтвердите пароль *</Label>
-                        <Input
-                          type="password"
-                          value={user.confirmPassword}
-                          onChange={e => updateField('confirmPassword', e.target.value)}
-                          placeholder="••••••"
-                          disabled={isSubmitting}
-                          className="bg-white/80"
-                        />
-                        {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {(userType === 'студент' || userType === 'специалист') && (
-                <div className="space-y-4">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={user.email}
+                    onChange={e => updateField('email', e.target.value)}
+                    placeholder="example@mail.ru"
+                    disabled={isSubmitting}
+                    className="bg-white/80"
+                  />
+                  {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>Email *</Label>
+                    <Label>Пароль *</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      value={user.email}
-                      onChange={e => updateField('email', e.target.value)}
-                      placeholder="example@mail.ru"
+                      type="password"
+                      value={user.password}
+                      onChange={e => updateField('password', e.target.value)}
+                      placeholder="••••••"
                       disabled={isSubmitting}
                       className="bg-white/80"
                     />
-                    {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
+                    {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label>Пароль *</Label>
-                      <Input
-                        type="password"
-                        value={user.password}
-                        onChange={e => updateField('password', e.target.value)}
-                        placeholder="••••••"
-                        disabled={isSubmitting}
-                        className="bg-white/80"
-                      />
-                      {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Подтвердите пароль *</Label>
-                      <Input
-                        type="password"
-                        value={user.confirmPassword}
-                        onChange={e => updateField('confirmPassword', e.target.value)}
-                        placeholder="••••••"
-                        disabled={isSubmitting}
-                        className="bg-white/80"
-                      />
-                      {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
-                    </div>
-                  </div>
-                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800">
-                    Дополнительные поля для {userType === 'студент' ? 'студентов' : 'специалистов'} будут добавлены в будущем.
+                  <div className="space-y-2">
+                    <Label>Подтвердите пароль *</Label>
+                    <Input
+                      type="password"
+                      value={user.confirmPassword}
+                      onChange={e => updateField('confirmPassword', e.target.value)}
+                      placeholder="••••••"
+                      disabled={isSubmitting}
+                      className="bg-white/80"
+                    />
+                    {errors.confirmPassword && <p className="text-sm text-red-600">{errors.confirmPassword}</p>}
                   </div>
                 </div>
-              )}
+
+                {userType === 'школьник' && (
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+                    После регистрации вы сможете заполнить профиль (ФИО, школа, класс и т.д.) в личном кабинете.
+                  </div>
+                )}
+              </div>
             </CardContent>
             <CardFooter className="flex gap-3">
-              {userType === 'школьник' && formStep === 1 ? (
-                <>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setStep('type')}
-                    disabled={isSubmitting}
-                    className="border-white/30 bg-white/60 hover:bg-white/80"
-                  >
-                    <ArrowLeft className="size-4 mr-1" /> Назад
-                  </Button>
-                  <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                    {isSubmitting ? 'Регистрация...' : 'Далее'}
-                  </Button>
-                </>
-              ) : userType === 'школьник' && formStep === 2 ? (
-                <>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setFormStep(1)}
-                    disabled={isSubmitting}
-                    className="border-white/30 bg-white/60 hover:bg-white/80"
-                  >
-                    <ArrowLeft className="size-4 mr-1" /> Назад
-                  </Button>
-                  <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                    {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setStep('type')}
-                    disabled={isSubmitting}
-                    className="border-white/30 bg-white/60 hover:bg-white/80"
-                  >
-                    <ArrowLeft className="size-4 mr-1" /> Назад
-                  </Button>
-                  <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                    {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
-                  </Button>
-                </>
-              )}
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setStep('type')}
+                disabled={isSubmitting}
+                className="border-white/30 bg-white/60 hover:bg-white/80"
+              >
+                <ArrowLeft className="size-4 mr-1" /> Назад
+              </Button>
+              <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
+              </Button>
             </CardFooter>
           </form>
         </Card>

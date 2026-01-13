@@ -1,83 +1,110 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/layout/card';
 import { GraduationCap, LogOut, Check, BarChart3 } from '../../ui/display/SimpleIcons';
-import type { TestGroup } from '../../../contexts/AppContext';
-import type { User } from '../../../contexts/AuthContext';
-
-interface DashboardProps {
-  user: User;
-  completedGroups: TestGroup[];
-  onStartTest: (group: TestGroup) => void;
-  onLogout: () => void;
-  onViewResults: () => void;
-}
-
-// Маппинг TestGroup -> путь для навигации
-const testGroupToPath: Record<TestGroup, string> = {
-  temperament: '/tests/temperament',
-  groupRoles: '/tests/group-roles',
-  professionalOrientation: '/tests/professional-orientation',
-  engineeringThinking: '/tests/engineering-thinking',
-  intellectualPotential: '/tests/iq-potential',
-};
+import { useAuth } from '../../../contexts/AuthContext';
+import { pupilService } from '../../../services/api/pupilApi';
+import { PupilDTO } from '../../../types/pupil/pupil';
 
 const testGroups = [
   {
-    id: 'temperament' as TestGroup,
+    id: 'temperament',
     title: 'Темперамент',
     description: 'Определение типа темперамента и личностных характеристик',
     color: 'from-yellow-500 to-cyan-500',
     icon: '🎭',
+    path: '/tests/temperament'
   },
   {
-    id: 'groupRoles' as TestGroup,
+    id: 'groupRoles',
     title: 'Групповые роли',
     description: 'Выявление вашей роли в команде по методике Белбина',
     color: 'from-yellow-500 to-pink-500',
     icon: '👥',
+    path: '/tests/group-roles'
   },
   {
-    id: 'engineeringThinking' as TestGroup,
+    id: 'engineeringThinking',
     title: 'Инженерное мышление',
     description: 'Оценка технических и аналитических способностей',
     color: 'from-yellow-500 to-amber-500',
     icon: '⚙️',
+    path: '/tests/engineering-thinking'
   },
   {
-    id: 'professionalOrientation' as TestGroup,
+    id: 'professionalOrientation',
     title: 'Профессиональная направленность',
     description: 'Профессиональные предпочтения',
     color: 'from-yellow-500 to-emerald-500',
     icon: '💼',
+    path: '/tests/professional-orientation'
   },
   {
-    id: 'intellectualPotential' as TestGroup,
+    id: 'intellectualPotential',
     title: 'Интеллектуальный потенциал',
     description: 'Анализ когнитивных способностей и потенциала развития',
     color: 'from-yellow-500 to-purple-600',
     icon: '🧠',
+    path: '/tests/iq-potential'
   },
 ];
 
-export function Dashboard({ user, completedGroups, onStartTest, onLogout, onViewResults }: DashboardProps) {
+export function Dashboard() {
   const navigate = useNavigate();
-  const allCompleted = completedGroups.length === 5;
-  const progress = (completedGroups.length / 5) * 100;
+  const { user, logout } = useAuth();
+  const [pupilData, setPupilData] = useState<PupilDTO | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [completedTests, setCompletedTests] = useState<string[]>([]);
 
-  // Обработчик запуска теста: вызываем onStartTest и навигируем к тесту
-  const handleStartTest = (group: TestGroup) => {
-    onStartTest(group);
-    const path = testGroupToPath[group];
-    if (path) {
-      navigate(path);
-    }
+  useEffect(() => {
+    const loadData = async () => {
+      if (user) {
+        try {
+          // Загружаем данные ученика
+          const response = await pupilService.getPupilData();
+          setPupilData(response.pupilDTO);
+        } catch (error) {
+          console.error('Failed to load pupil data:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadData();
+  }, [user]);
+
+  const handleStartTest = (path: string) => {
+    navigate(path);
   };
+
+  const handleViewResults = () => {
+    navigate('/results');
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  const progress = (completedTests.length / testGroups.length) * 100;
+  const allCompleted = completedTests.length === testGroups.length;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Загрузка данных...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen p-4 py-8">
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
         <Card className="bg-gradient-to-r from-purple-50 to-pink-50 border-b">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -86,28 +113,26 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                   <GraduationCap className="size-8 text-white" />
                 </div>
                 <div>
-                  <CardTitle>
-                    Личный кабинет
-                  </CardTitle>
+                  <CardTitle>Личный кабинет</CardTitle>
                   <CardDescription>
-                    {user.firstName && user.lastName 
-                      ? `${user.firstName} ${user.lastName}`
-                      : user.email}
+                    {pupilData 
+                      ? `${pupilData.name} ${pupilData.surname}`
+                      : user?.email}
+                    {pupilData?.school && ` • ${pupilData.school}`}
                   </CardDescription>
                 </div>
               </div>
-              <Button variant="outline" onClick={onLogout}>
+              <Button variant="outline" onClick={handleLogout}>
                 <LogOut className="size-4 mr-2" />
                 Выйти
               </Button>
             </div>
           </CardHeader>
           <CardContent>
-            {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-600">Прогресс прохождения тестов</span>
-                <span className="text-indigo-600">{completedGroups.length} из 5</span>
+                <span className="text-indigo-600">{completedTests.length} из {testGroups.length}</span>
               </div>
               <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                 <div 
@@ -115,9 +140,6 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p>
-                    <br></br>
-                  </p>
             </div>
 
             {allCompleted && (
@@ -132,7 +154,7 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                       Вы успешно прошли все группы тестов. Теперь вы можете просмотреть результаты.
                     </p>
                     <Button
-                      onClick={onViewResults}
+                      onClick={handleViewResults}
                       className="bg-green-600 hover:bg-green-700"
                     >
                       <BarChart3 className="size-4 mr-2" />
@@ -145,7 +167,6 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
           </CardContent>
         </Card>
 
-        {/* Info Card */}
         {!allCompleted && (
           <Card>
             <CardContent className="pt-6">
@@ -158,14 +179,10 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                 <div>
                   <p className="mb-2">
                     Для получения полных результатов необходимо пройти все 5 групп тестирования.
-                    Каждая группа содержит 5 вопросов.
+                    Каждая группа содержит вопросы по соответствующей тематике.
                   </p>
                   <p>
-                    После прохождения группы она станет недоступной, и вы вернётесь в личный кабинет.
-                    Как только вы завершите все группы, вы автоматически перейдёте к результатам.
-                  </p>
-                  <p>
-                    <br></br>
+                    После прохождения группы вы можете просмотреть результаты в разделе "Результаты".
                   </p>
                 </div>
               </div>
@@ -173,10 +190,9 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
           </Card>
         )}
 
-        {/* Test Groups Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testGroups.map((group) => {
-            const isCompleted = completedGroups.includes(group.id);
+            const isCompleted = completedTests.includes(group.id);
             
             return (
               <Card 
@@ -205,21 +221,51 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                     </div>
                   ) : (
                     <Button
-                      onClick={() => handleStartTest(group.id)}
+                      onClick={() => handleStartTest(group.path)}
                       className="w-full"
                     >
                       Начать тест
                     </Button>
                   )}
                 </CardContent>
-                <p>
-                    <br></br>
-                  </p>
               </Card>
             );
           })}
         </div>
 
+        {/* Профиль ученика */}
+        {pupilData && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Профиль ученика</CardTitle>
+              <CardDescription>Ваши личные данные</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-600">Имя</p>
+                  <p className="font-medium">{pupilData.name} {pupilData.surname} {pupilData.patronymic}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Дата рождения</p>
+                  <p className="font-medium">{new Date(pupilData.birthday).toLocaleDateString('ru-RU')}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Школа</p>
+                  <p className="font-medium">{pupilData.school}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Класс</p>
+                  <p className="font-medium">{pupilData.classNumber}{pupilData.classLabel}</p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-sm text-gray-600">Дополнительные занятия</p>
+                  <p className="font-medium">{pupilData.extraActivities || 'Не указано'}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );

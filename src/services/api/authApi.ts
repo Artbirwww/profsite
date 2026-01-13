@@ -1,6 +1,8 @@
+// src/services/api/authApi.ts
 import { BASE_URL } from './baseUrl';
 
 const AUTH_ENDPOINT = `${BASE_URL}/api/auth`;
+const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
 
 export const authApi = {
   register: async (email: string, password: string) => {
@@ -10,17 +12,13 @@ export const authApi = {
       body: JSON.stringify({ email, password }),
     });
     if (!res.ok) throw new Error('Registration failed');
-    return;
   },
 
   login: async (email: string, password: string) => {
-    const formData = new URLSearchParams();
-    formData.append('email', email);
-    formData.append('password', password);
     const res = await fetch(`${AUTH_ENDPOINT}/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     });
     if (!res.ok) throw new Error('Login failed');
     const token = await res.text();
@@ -44,6 +42,23 @@ export const authApi = {
       body: JSON.stringify(registrations),
     });
     if (!res.ok) throw new Error('Bulk auto-registration failed');
+    return await res.json();
+  },
+
+  // НОВЫЙ МЕТОД: получение данных пользователя
+  getPupilData: async (token: string) => {
+    const res = await fetch(`${PUPIL_ENDPOINT}/pupil-data`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) {
+      if (res.status === 404) {
+        throw new Error('NO_PUPIL_DATA'); // специальный сигнал — профиль не создан
+      }
+      throw new Error('Failed to fetch pupil data');
+    }
     return await res.json();
   },
 };

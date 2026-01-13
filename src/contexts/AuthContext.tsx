@@ -1,3 +1,4 @@
+// src/contexts/AuthContext.tsx
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { authApi } from '../services/api/authApi';
 
@@ -37,49 +38,76 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    if (storedToken) {
-      setToken(storedToken);
-    }
-    setIsLoading(false);
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem('authToken');
+      if (storedToken) {
+        setToken(storedToken);
+        try {
+          const data = await authApi.getPupilData(storedToken);
+          const pupil = data.pupilDTO || data;
+          const userType: UserType = 'школьник';
+
+          const userData: User = {
+            id: String(pupil.id),
+            email: data.email || '',
+            type: userType,
+            firstName: pupil.name || '',
+            lastName: pupil.surname || '',
+            middleName: pupil.patronymic || '',
+            gender: pupil.gender?.toLowerCase() === 'male' ? 'мужской' : 'женский',
+            schoolName: pupil.school,
+            grade: pupil.classNumber,
+            gradeLetter: pupil.classLabel,
+          };
+          setUser(userData);
+        } catch (err) {
+          console.warn('No pupil data found, keeping session active');
+        }
+      }
+      setIsLoading(false);
+    };
+
+    initAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
+    const token = await authApi.login(email, password);
+    localStorage.setItem('authToken', token);
+    setToken(token);
+
     try {
-      const token = await authApi.login(email, password);
-      localStorage.setItem('authToken', token);
-      setToken(token);
-      
+      const data = await authApi.getPupilData(token);
+      const pupil = data.pupilDTO || data;
       const userData: User = {
-        id: 'temp-id',
-        email,
+        id: String(pupil.id),
+        email: data.email,
         type: 'школьник',
-        firstName: email.split('@')[0],
+        firstName: pupil.name,
+        lastName: pupil.surname,
+        middleName: pupil.patronymic,
+        gender: pupil.gender?.toLowerCase() === 'male' ? 'мужской' : 'женский',
+        schoolName: pupil.school,
+        grade: pupil.classNumber,
+        gradeLetter: pupil.classLabel,
       };
       setUser(userData);
-    } catch (error) {
-      console.error('Login failed:', error);
-      throw error;
+    } catch (err) {
+      if ((err as Error).message === 'NO_PUPIL_DATA') {
+        setUser({
+          id: 'unknown',
+          email,
+          type: 'школьник',
+          firstName: email.split('@')[0],
+        });
+      } else {
+        throw err;
+      }
     }
   };
 
   const register = async (email: string, password: string) => {
-    try {
-      const token = await authApi.register(email, password);
-      localStorage.setItem('authToken', token);
-      setToken(token);
-      
-      const userData: User = {
-        id: 'temp-id',
-        email,
-        type: 'школьник',
-        firstName: email.split('@')[0],
-      };
-      setUser(userData);
-    } catch (error) {
-      console.error('Registration failed:', error);
-      throw error;
-    }
+    await authApi.register(email, password);
+    await login(email, password);
   };
 
   const logout = () => {
