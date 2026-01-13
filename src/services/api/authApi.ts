@@ -1,52 +1,64 @@
-import axios from 'axios';
-import { User, AuthResponse } from '../../types/User';
-import { LoginData, RegistrationData } from '../../types/AuthData';
+// src/services/api/authApi.ts
+import { BASE_URL } from './baseUrl';
 
-const API_URL = import.meta.env.BASE_URL || 'http://localhost:3000/api';
+const AUTH_ENDPOINT = `${BASE_URL}/api/auth`;
+const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
 
-console.log('API URL:', import.meta.env.BASE_URL);
-//console.log('App name:', import.meta.env.VITE_APP_NAME);
-
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Добавляем токен к запросам
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-export const authService = {
-  login: async (email: string, password: string): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/auth/login', { email, password });
-    return response.data;
-  },
-
-  register: async (email: string, password: string, firstName?: string, lastName?: string): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/auth/register', {
-      email,
-      password,
-      firstName,
-      lastName,
+export const authApi = {
+  register: async (email: string, password: string) => {
+    const res = await fetch(`${AUTH_ENDPOINT}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     });
-    return response.data;
+    if (!res.ok) throw new Error('Registration failed');
   },
 
-  getCurrentUser: async (): Promise<User> => {
-    const response = await api.get<User>('/auth/me');
-    return response.data;
+  login: async (email: string, password: string) => {
+    const res = await fetch(`${AUTH_ENDPOINT}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!res.ok) throw new Error('Login failed');
+    const token = await res.text();
+    return token.trim();
   },
 
-  logout: async (): Promise<void> => {
-    await api.post('/auth/logout');
+  autoRegister: async (account: { email: string; password: string }, pupil: any) => {
+    const res = await fetch(`${AUTH_ENDPOINT}/auto-register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ accountRegisterRequestDTO: account, pupilDTO: pupil }),
+    });
+    if (!res.ok) throw new Error('Auto-registration failed');
+    return await res.json();
+  },
+
+  autoRegisterAll: async (registrations: Array<{ accountRegisterRequestDTO: any; pupilDTO: any }>) => {
+    const res = await fetch(`${AUTH_ENDPOINT}/auto-register-all`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(registrations),
+    });
+    if (!res.ok) throw new Error('Bulk auto-registration failed');
+    return await res.json();
+  },
+
+  
+  getPupilData: async (token: string) => {
+    const res = await fetch(`${PUPIL_ENDPOINT}/pupil-data`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) {
+      if (res.status === 404) {
+        throw new Error('NO_PUPIL_DATA');
+      }
+      throw new Error('Failed to fetch pupil data');
+    }
+    return await res.json();
   },
 };
-
-export default api;

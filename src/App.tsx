@@ -1,10 +1,6 @@
 // src/App.tsx
 import { Routes, Route, Navigate, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// ✅ УДАЛЕНО: BrowserRouter (теперь только в main.tsx)
-
-// Провайдеры — остаются, но ВНЕ роутера (в main.tsx)
-// ✅ AuthProvider, TestProvider, AppProvider — теперь в main.tsx
 
 // Auth components
 import { Login } from './components/auth/Login/Login';
@@ -15,6 +11,9 @@ import { Dashboard } from './components/tests/dashboard/Dashboard';
 import { TestPage } from './components/tests/dashboard/TestPage';
 import { TestPageNew } from './components/tests/dashboard/TestPageNew';
 import { ResultsPage } from './components/tests/resultspage/ResultsPage';
+
+// Профиль польователя
+import { UserProfile } from './components/profile/UserProfile';
 
 // Individual test components
 import EngineeringThinkingTest from './components/tests/engineer/EngineeringThinkingTest';
@@ -27,15 +26,17 @@ import TemperamentTest from './components/tests/temperament/TemperamentTest';
 import MainLayout from './components/layout/MainLayout';
 import { ProtectedRoute } from './components/routing/ProtectedRoute';
 
-// Хуки — обновлены: используем useAuth вместо useApp для пользователя
+// Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
-import { PupilDataLoading } from './components/admin/data-loading/PupilDataLoading';
+import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
+import { PupilsList } from './components/admin/pupils/PupilsList';
+import AutoRegisterForm from './components/admin/AutoRegisterForm';
 
 // Типы
 type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
 
-// ——— Хук для страниц с защитой (ОБНОВЛЁН: убран currentUser из useApp) ———
+// ——— Хук для страниц с защитой ———
 const LegacyProtectedRoute = ({ 
   children, 
   requireResult = false 
@@ -43,8 +44,8 @@ const LegacyProtectedRoute = ({
   children: React.ReactNode; 
   requireResult?: boolean 
 }) => {
-  const { user } = useAuth(); // ✅ из AuthContext
-  const { testResult } = useApp(); // ✅ из AppContext
+  const { user } = useAuth();
+  const { testResult } = useApp();
 
   if (!user) return <Navigate to="/login" replace />;
   if (requireResult && !testResult) return <Navigate to="/dashboard" replace />;
@@ -104,7 +105,7 @@ function ResultsPageWrapper() {
   return <ResultsPage result={testResult} user={user} />;
 }
 
-// ——— Корневой App (БЕЗ Router!) ———
+// ——— Главный компонент App ———
 export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
@@ -116,9 +117,9 @@ export default function App() {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
-            {/*В будущем добавить защищенные роуты + доступ по ролям, к примеру для админа, роли будут доступны при входе в систему от сервака */}
-            {/*Роуты по ролям временно просто в protected*/}
             <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
+            <Route path='admin/pupil-list' element={<PupilsList />} />
+
             {/* Legacy routes */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/test/:group" element={<TestPageWrapper />} />
@@ -138,6 +139,10 @@ export default function App() {
             {/* Results */}
             <Route path="/my-results" element={<ResultsPage />} />
             <Route path="/my-results/:testType" element={<ResultsPage />} />
+
+            {/*Личный Кабинет*/}
+            <Route path="/profile" element={<UserProfile />} />
+
           </Route>
         </Route>
         

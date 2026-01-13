@@ -135,9 +135,7 @@ const MainLayout: React.FC = () => {
 
   return (
     <div className="main-layout-container">
-      {/* Сайдбар с вашим дизайном */}
       <div className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
-        {/* Заголовок сайдбара с кнопкой сворачивания */}
         <div className="sidebar-header">
           {!isSidebarCollapsed && (
             <div className="sidebar-title">Меню</div>
@@ -184,12 +182,17 @@ const MainLayout: React.FC = () => {
               className="nav-item profile"
               style={{ '--item-index': menuItems.length } as React.CSSProperties}
             >
-              <div className="nav-link">
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => 
+                  `nav-link ${isActive ? 'active' : ''}`
+                }
+              >
                 <span className="nav-icon"><ProfileIcon /></span>
                 {!isSidebarCollapsed && (
-                  <span className="nav-text">{user.email}</span>
+                  <span className="nav-text">Личный кабинет</span>
                 )}
-              </div>
+              </NavLink>
             </li>
           )}
 

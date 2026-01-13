@@ -1,49 +1,46 @@
-import api from './authApi';
-import { AccountApiRegisterDTO } from '../../types/pupil/account';
-import { PupilDTO } from '../../types/pupil/pupil';
+import { BASE_URL } from './baseUrl';
+import { PupilDTO, PupilResponse, PaginatedPupilResponse } from '../../types/pupil/pupil';
+import { useAuth } from '../../contexts/AuthContext';
 
-interface PupilResponse extends PupilDTO {
-  id: number;
-  accountId?: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export const pupilService = {
-  autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
-    try {
-      const response = await api.post<PupilResponse>('/api/auth/auto-register', data);
-      return response.data;
-    } catch (err) {
-      console.error('Error registering pupil:', err);
-      throw err;
-    }
-  },
-
-  autoRegisterAll: async (data: AccountApiRegisterDTO[]): Promise<any> => {
-    try {
-      const response = await api.post('/api/auth/auto-register-all', data);
-      return response.data;
-    } catch (err) {
-      console.error('Error registering pupils batch:', err);
-      throw err;
-    }
-  },
-
-  getPupil: async (id: number): Promise<PupilResponse> => {
-    const response = await api.get<PupilResponse>(`/pupils/${id}`);
-    return response.data;
-  },
-
-  getCurrentPupil: async (): Promise<PupilResponse> => {
-    const response = await api.get<PupilResponse>('/pupils/me');
-    return response.data;
-  },
-
-  getAllPupils: async (): Promise<PupilResponse[]> => {
-    const response = await api.get<PupilResponse[]>('/pupils');
-    return response.data;
-  },
+const getAuthHeader = () => {
+  const token = localStorage.getItem('authToken');
+  return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-export const autoRegister = pupilService.autoRegister;
+const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
+
+export const pupilService = {
+  getPupils: async (page?: number, size?: number): Promise<PaginatedPupilResponse> => {
+    const params = new URLSearchParams();
+    if (page !== undefined) params.set('page', page.toString());
+    if (size !== undefined) params.set('size', size.toString());
+
+    const url = `${PUPIL_ENDPOINT}${params.size ? `?${params.toString()}` : ''}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Failed to fetch pupils');
+    return await res.json();
+  },
+
+  getPupilData: async (): Promise<PupilResponse> => {
+    const res = await fetch(`${PUPIL_ENDPOINT}/pupil-data`, {
+      headers: {
+        ...getAuthHeader(),
+      },
+    });
+    if (!res.ok) throw new Error('Failed to fetch pupil data');
+    return await res.json();
+  },
+
+  updatePupilData: async (pupilDTO: Partial<PupilDTO>): Promise<PupilDTO> => {
+    const res = await fetch(`${PUPIL_ENDPOINT}/update-pupil-data`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAuthHeader(),
+      },
+      body: JSON.stringify(pupilDTO),
+    });
+    if (!res.ok) throw new Error('Failed to update pupil data');
+    return await res.json();
+  },
+};

@@ -1,16 +1,17 @@
-import { ChangeEvent, Component, useEffect, useState } from "react";
-import { useExcelMapper } from "../../../hooks/useExcelMapper";
-import { PupilDataKeys, PupilDTO} from '../../../types/pupil/pupil'
-import {type AccountApiRegisterDTO} from '../../../types/pupil/account'
-import { pupilService } from "../../../services/api/pupilApi";
+import { ChangeEvent, Component, useEffect, useRef, useState } from "react";
+import { useExcelMapper } from "../../../../hooks/useExcelMapper";
+import { PupilDataKeys, PupilDTO} from '../../../../types/pupil/pupil'
+import {type AccountApiRegisterDTO} from '../../../../types/pupil/account'
+import { pupilService } from "../../../../services/api/pupilApi";
 import style from "./pupil-data-loading.module.css"
 import classNames from "classnames"
 import toast, {Toaster} from 'react-hot-toast'
 export const PupilDataLoading = () => {
-    const {rawData, headers, setHeaders, processExcelFile} = useExcelMapper()
+    const {rawData, headers, setHeaders, processExcelFile, resetData} = useExcelMapper()
     const [pupilKeys, setPupilKeys] = useState(PupilDataKeys)
     const [headerMappings, setHeaderMappings] = useState<Record<string, string>>({})
 
+    const fileRef = useRef<HTMLInputElement>(null)
     useEffect(() => {
         if (!headers) return
 
@@ -59,6 +60,10 @@ export const PupilDataLoading = () => {
       const response = await pupilService.autoRegisterAll(data)
       console.log(data)
       toast.success("Данные успешно загружены")
+      resetData()
+      if (fileRef.current) {
+        fileRef.current.value = ""
+      }
     } catch(err) {
       console.log(err)
       toast.error("Ошибка, не удалось загрузить данные", {style : {backgroundColor: "#FF7F7F"}})
@@ -89,7 +94,7 @@ export const PupilDataLoading = () => {
             ))}
           </div>}
           <div className = {style["options"]}>
-              <input className={classNames(style["default"], style["primary"])} type="file" onChange={pickupFileHander} />
+              <input ref={fileRef} className={classNames(style["default"], style["primary"])} type="file" onChange={pickupFileHander} />
               <button className={classNames(style["default"], style["success"])} onClick={applyMappings}>Отправить</button>
           </div>
           

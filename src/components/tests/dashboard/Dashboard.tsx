@@ -87,7 +87,7 @@ export function Dashboard({ user, completedGroups, onStartTest, onLogout, onView
                 </div>
                 <div>
                   <CardTitle>
-                    Личный кабинет
+                    Пройти тесты
                   </CardTitle>
                   <CardDescription>
                     {user.firstName && user.lastName 

@@ -1,11 +1,10 @@
-// src/components/auth/Login/Login.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
 import { GraduationCap } from '../../ui/display/SimpleIcons';
-import { BubbleBackground } from '../BubbleBackground'; // Импортируем компонент фона
+import { BubbleBackground } from '../BubbleBackground';
 
 export function Login() {
   const { login } = useAuth();
@@ -31,7 +30,8 @@ export function Login() {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Неверный email или пароль');
+      setError('Неверный email или пароль');
+      console.error('Login error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -39,13 +39,9 @@ export function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative">
-      {/* Bubble Background */}
       <BubbleBackground />
-      
-      {/* Затемнение фона */}
       <div className="absolute inset-0 bg-black/30" />
       
-      {/* Контент поверх фона */}
       <div className="relative z-10 w-full max-w-md">
         <Card className="w-full bg-white/95 backdrop-blur-sm border-white/20 shadow-2xl">
           <CardHeader className="text-center">

@@ -1,5 +1,6 @@
 // src/contexts/AuthContext.tsx
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { authApi } from '../services/api/authApi';
 
 export type UserType = 'школьник' | 'студент' | 'специалист';
 
@@ -22,110 +23,101 @@ export interface User {
 
 interface AuthContextType {
   user: User | null;
+  token: string | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName?: string, lastName?: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// 🎛️ РЕЖИМ РАЗРАБОТКИ: true = моки, false = API
-const USE_MOCK_AUTH = true;
-
-// ===== МОК-РЕАЛИЗАЦИЯ =====
-const mockLogin = async (email: string, password: string): Promise<User> => {
-  if (!email || password.length < 6) {
-    throw new Error('Неверный email или пароль');
-  }
-
-  // Пример: создаём пользователя, если его нет
-  const mockUser: User = {
-    id: `mock-${Date.now()}`,
-    email,
-    type: 'студент',
-    firstName: email.split('@')[0],
-    lastName: 'Тестовый',
-  };
-
-  localStorage.setItem('mock-user', JSON.stringify(mockUser));
-  return mockUser;
-};
-
-const mockRegister = async (
-  email: string,
-  password: string,
-  firstName?: string,
-  lastName?: string
-): Promise<User> => {
-  if (!email || password.length < 6) {
-    throw new Error('Email и пароль (минимум 6 символов) обязательны');
-  }
-
-  const mockUser: User = {
-    id: `mock-${Date.now()}`,
-    email,
-    type: 'студент',
-    firstName: firstName || email.split('@')[0],
-    lastName: lastName || 'Зарегистрированный',
-  };
-
-  localStorage.setItem('mock-user', JSON.stringify(mockUser));
-  return mockUser;
-};
-
-const mockGetCurrentUser = async (): Promise<User | null> => {
-  const saved = localStorage.getItem('mock-user');
-  return saved ? JSON.parse(saved) : null;
-};
-
-// =========================
-
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      try {
-        const userData = USE_MOCK_AUTH
-          ? await mockGetCurrentUser()
-          : null; // ← в будущем: await authService.getCurrentUser()
-        setUser(userData);
-      } catch (error) {
-        console.warn('Failed to restore session (mock mode)', error);
-        localStorage.removeItem('mock-user');
-      } finally {
-        setIsLoading(false);
+      const storedToken = localStorage.getItem('authToken');
+      if (storedToken) {
+        setToken(storedToken);
+        try {
+          const data = await authApi.getPupilData(storedToken);
+          const pupil = data.pupilDTO || data;
+          const userType: UserType = 'школьник';
+
+          const userData: User = {
+            id: String(pupil.id),
+            email: data.email || '',
+            type: userType,
+            firstName: pupil.name || '',
+            lastName: pupil.surname || '',
+            middleName: pupil.patronymic || '',
+            gender: pupil.gender?.toLowerCase() === 'male' ? 'мужской' : 'женский',
+            schoolName: pupil.school,
+            grade: pupil.classNumber,
+            gradeLetter: pupil.classLabel,
+          };
+          setUser(userData);
+        } catch (err) {
+          console.warn('No pupil data found, keeping session active');
+        }
       }
+      setIsLoading(false);
     };
 
     initAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
-    const userData = USE_MOCK_AUTH
-      ? await mockLogin(email, password)
-      : null; // ← в будущем: await authService.login(...)
-    setUser(userData);
-  };
+    const token = await authApi.login(email, password);
+    localStorage.setItem('authToken', token);
+    setToken(token);
 
-  const register = async (email: string, password: string, firstName?: string, lastName?: string) => {
-    const userData = USE_MOCK_AUTH
-      ? await mockRegister(email, password, firstName, lastName)
-      : null; // ← в будущем: await authService.register(...)
-    setUser(userData);
-  };
-
-  const logout = () => {
-    setUser(null);
-    if (USE_MOCK_AUTH) {
-      localStorage.removeItem('mock-user');
+    try {
+      const data = await authApi.getPupilData(token);
+      const pupil = data.pupilDTO || data;
+      const userData: User = {
+        id: String(pupil.id),
+        email: data.email,
+        type: 'школьник',
+        firstName: pupil.name,
+        lastName: pupil.surname,
+        middleName: pupil.patronymic,
+        gender: pupil.gender?.toLowerCase() === 'male' ? 'мужской' : 'женский',
+        schoolName: pupil.school,
+        grade: pupil.classNumber,
+        gradeLetter: pupil.classLabel,
+      };
+      setUser(userData);
+    } catch (err) {
+      if ((err as Error).message === 'NO_PUPIL_DATA') {
+        setUser({
+          id: 'unknown',
+          email,
+          type: 'школьник',
+          firstName: email.split('@')[0],
+        });
+      } else {
+        throw err;
+      }
     }
   };
 
+  const register = async (email: string, password: string) => {
+    await authApi.register(email, password);
+    await login(email, password);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('authToken');
+    setToken(null);
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, isLoading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

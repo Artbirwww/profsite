@@ -1,19 +1,29 @@
-import api from './authApi';
-import { TestResult, TestType } from '../../types/TestResult';
+import { BASE_URL } from './baseUrl';
+import { PsychTestRequest, PsychTestResponse } from '../../types/TestResult';
+
+const TEST_ENDPOINT = `${BASE_URL}/api/psych-tests`;
 
 export const testService = {
-  saveResult: async (result: Omit<TestResult, 'id' | 'userId' | 'completedAt'>): Promise<TestResult> => {
-    const response = await api.post<TestResult>('/tests/results', result);
-    return response.data;
+  createTest: async (token: string, testData: PsychTestRequest): Promise<PsychTestResponse> => {
+    const res = await fetch(`${TEST_ENDPOINT}/create-test`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(testData),
+    });
+    if (!res.ok) throw new Error('Failed to save test result');
+    return await res.json();
   },
 
-  getUserResults: async (): Promise<TestResult[]> => {
-    const response = await api.get<TestResult[]>('/tests/results');
-    return response.data;
-  },
-
-  getTestResultsByType: async (testType: TestType): Promise<TestResult[]> => {
-    const response = await api.get<TestResult[]>(`/tests/results/${testType}`);
-    return response.data;
+  getTestsByPupil: async (token: string): Promise<PsychTestResponse[]> => {
+    const res = await fetch(`${TEST_ENDPOINT}/by-pupil`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!res.ok) throw new Error('Failed to fetch test results');
+    return await res.json();
   },
 };
