@@ -1,71 +1,43 @@
 :root {
-    /* Light theme variables */
-    --primary-color: #4361ee;
-    --primary-dark: #3a56d4;
-    --secondary-color: #7209b7;
-    --accent-color: #f72585;
-    --success-color: #4cc9f0;
-    --warning-color: #f8961e;
-    --danger-color: #f94144;
-    --info-color: #4895ef;
-    
-    /* Light theme neutrals */
-    --bg-primary: #f8fafc;
-    --bg-secondary: #ffffff;
-    --bg-tertiary: #f1f5f9;
-    
-    /* Text colors */
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-tertiary: #94a3b8;
-    --text-light: #ffffff;
-    
-    /* Border colors */
-    --border-color: #e2e8f0;
-    --border-light: #f1f5f9;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    
-    /* Border radius */
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
-    
-    /* Spacing */
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-2xl: 3rem;
-    
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 300ms ease;
-    --transition-slow: 500ms ease;
-    
-    /* Font sizes */
-    --text-xs: 0.75rem;
-    --text-sm: 0.875rem;
-    --text-base: 1rem;
-    --text-lg: 1.125rem;
-    --text-xl: 1.25rem;
-    --text-2xl: 1.5rem;
-    --text-3xl: 1.875rem;
-    --text-4xl: 2.25rem;
-    
-    /* Sidebar width */
-    --sidebar-width: 250px;
-    --sidebar-collapsed-width: 70px;
-    
-    /* Header height */
-    --header-height: 70px;
+    --fs-xs: 0.75rem;   /* 12px */
+    --fs-sm: 0.875rem;  /* 14px */
+    --fs-base: 1rem;    /* 16px */
+    --fs-md: 1.125rem;  /* 18px */
+    --fs-lg: 1.25rem;   /* 20px */
+    --fs-xl: 1.5rem;    /* 24px */
+    --fs-2xl: 1.875rem; /* 30px */
+    --fs-3xl: 2.25rem;  /* 36px */
+    --fs-4xl: 3rem;     /* 48px */
+    --fs-5xl: 3.75rem;  /* 60px */
+    --fs-6xl: 4.5rem;   /* 72px */
+
+    --md-gray-50: #fafafa;
+    --md-gray-100: #f5f5f5;
+    --md-gray-200: #eeeeee;
+    --md-gray-300: #e0e0e0;
+    --md-gray-400: #bdbdbd;
+    --md-gray-500: #9e9e9e;
+    --md-gray-600: #757575;
+    --md-gray-700: #616161;
+    --md-gray-800: #424242;
+    --md-gray-900: #212121;
+
+    --no-results-gradient: linear-gradient(145deg, #ffffff, #ebebeb);
+    --default-hover-color: rgba(131, 112, 254, .2);
+    --default-color: rgb(131, 112, 254);
+    --red-hover-color: rgba(236, 63, 97, .2);
+    --red-color: rgb(221, 36, 73);
+
+    --transition-bezier: all .3s cubic-bezier(.4, 0, .2, 1);
+    --sidebar-expanded: 250px;
+    --sidebar-collapsed: 60px;
+    --sidebar-height: 100%;
+    --sidebar-border-radius: 10px;
+    --sidebar-border-color: var(--md-gray-400);
+    --sidebar-button-size: calc(var(--sidebar-collapsed) - 40px);
+    --sidebar-background-color: var(--no-results-gradient);
+    --sidebar-shadow: 4px 0 12px rgba(0, 0, 0, .1);
+    --sidebar-items-color: var(--md-gray-700);
 }
 
 /* Dark theme overrides */
