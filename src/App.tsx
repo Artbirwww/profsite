@@ -1,5 +1,3 @@
-
-
 // src/App.tsx
 import {
   Routes,
@@ -78,6 +76,8 @@ function DashboardPage() {
   const navigate = useNavigate();
 
   if (!user) return null;
+
+  console.log(user)
 
   const handleLogout = () => {
     logout();

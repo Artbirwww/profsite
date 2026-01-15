@@ -1,83 +1,140 @@
-import { FC, ReactNode, use, useState } from "react"
 import "./sidebar-style.css"
+import "./sidebar-media-style.css"
 
-import { Home, FileText, BarChart, User, Users, Upload, Apple, X, Menu, DoorOpen } from "lucide-react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { FC, ReactNode, useCallback, useMemo, useState } from "react"
+import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen } from "lucide-react"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useAuth } from "../../../contexts/AuthContext"
 
+// Иконки предоставлены библиотекой "lucide-react"
+
+// Интерфейс для элемента сайдбара (кнопки)
 interface SidebarItem {
-    id: string
-    label: string
-    icon: ReactNode
-    path: string
-    adminOnly?: boolean
+    id: string          // Id
+    label: string       // Текст кнопки
+    icon: ReactNode     // Иконка кнопки
+    path: string        // Путь куда отправит кнопка
+    dataItem?: string   // Для тестирования / селекторов
+    adminOnly?: boolean // Доступ только админам
 }
 
+// Интерфейс для данных пользователя
+interface UserData {
+    email?: string                                      // Почта (Не используется, но на всякий)
+    name?: string                                       // Имя (Не используется, но на всякий)
+    type?: "admin" | "pupil" | "specialist" | "default" // Тип / Роль
+}
+
+// Интерфейс для пропсов сайдбара
 interface SidebarProps {
-    collapsed?: boolean
-    onToggle?: () => void
-    user?: {
-        name: string
-        email: string
-        role: "admin" | "pupil" | "specialist" | "dev"
-    }
+    collapsed?: boolean         // Свернутость сайдбара
+    position?: "left" | "right" // Позиция сайдбара (Слева / Справа)
+    onToggle?: () => void       // Колбэк при переключении состояния
+    userData?: UserData | null  // Данные пользователя
 }
 
-export const Sidebar: FC<SidebarProps> = ({ collapsed = false, onToggle, user }) => {
+// Компонент для отдельного элемента сайдбара (Кнопки)
+const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollapsed: boolean, onClick: (path: string) => void }> = ({ item, isActive, isCollapsed, onClick }) => {
+
+    const handleClick = useCallback((e: React.MouseEvent) => {
+        e.preventDefault()
+        onClick(item.path)
+    }, [item.path, onClick])
+    
+    return (
+        <div key={item.id} className={`sidebar-item-container ${isActive ? "sidebar-item-active" : ""} ${item.adminOnly ? "sidebar-item-admin" : ""}`} data-item={item.dataItem} onClick={handleClick}>
+            <div className="sidebar-item-icon">{item.icon}</div>
+            {!isCollapsed && (<div className="sidebar-item-label">{item.label}</div>)}
+        </div>
+    )
+}
+
+// Основной компонент - Сайдбар
+export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle, userData }) => {
     const location = useLocation()
     const navigate = useNavigate()
+    const { logout } = useAuth()
 
+    // Локальное состояние для управления свернутостью
     const [isCollapsed, setIsCollapsed] = useState(collapsed)
-    const [expandedItems, setExpandedItems] = useState<string[]>([])
 
-    const currentUser = user || {
-        name: "Timofey",
-        email: "timofeyershovv@gmail.com",
-        role: "dev" as const,
-    }
+    // Мемоизация данных текущего пользователя
+    // Подгружается дефолтный пользователь (но можно и взять отсюда { user } = useAuth())
+    // TODO: Сделать подгрузку из текущей сессии !!!
+    const currentUser = useMemo(() => {
+        if (userData) {
+            return {
+                name: userData.name,
+                email: userData.email,
+                type: userData.type,
+            }
+        }
+        
+        // Значения по умолчанию
+        return {
+            name: "guest",
+            email: "guestGuestGuest@gmail.com",
+            type: "admin",
+        }
+    }, [userData])
 
-    const isAdmin = currentUser.role === "dev"
+    // Проверка является ли пользователь админом
+    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
+    const isAdmin = useMemo(() => 
+        currentUser.type === "admin",
+        [currentUser.type]
+    )
 
-    const mainItems: SidebarItem[] = [
+    //Основные элементы навигации (Доступные всем)
+    const mainItems = useMemo<SidebarItem[]>(() => [
         {
             id: "dashboard",
             label: "Домой",
             icon: <Home size={20}/>,
-            path: "/dashboard",
+            path: "/home",
+            dataItem: "dashboard",
         },
         {
             id: "testing",
             label: "Тестирование",
-            icon: <FileText size={20}/>,
-            path: "/testing",
+            icon: <FileCheck size={20}/>,
+            path: "/dashboard",
+            dataItem: "testing",
         },
         {
             id: "results",
             label: "Мои результаты",
-            icon: <BarChart size={20}/>,
-            path: "/results",
+            icon: <PieChart size={20}/>,
+            path: "/my-results",
+            dataItem: "results",
         },
         {
             id: "profile",
             label: "Личный кабинет",
             icon: <User size={20}/>,
             path: "/profile",
+            dataItem: "profile",
         },
-    ]
+    ], [])
 
-    const adminItems: SidebarItem[] = isAdmin ? [
+    // Элементы навигации (Доступные Админам)
+    // TODO: Перелопатать маршруты до нужных !!!
+    const adminItems = useMemo<SidebarItem[]>(() => isAdmin ? [
         {
             id: "admin-list",
             label: "Список",
             icon: <Users size={20}/>,
             path: "/admin-list",
             adminOnly: true,
+            dataItem: "admin",
         },
         {
             id: "admin-upload",
             label: "Загрузить",
-            icon: <Upload size={20}/>,
+            icon: <ArrowUpToLine size={20}/>,
             path: "/admin-upload",
             adminOnly: true,
+            dataItem: "admin",
         },
         {
             id: "admin-aboba",
@@ -85,93 +142,97 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, onToggle, user })
             icon: <Apple size={20}/>,
             path: "/admin-aboba",
             adminOnly: true,
+            dataItem: "admin",
         },
-    ] : []
+    ] : [], [isAdmin])
 
-    const toggleSidebar = () => {
-        setIsCollapsed(!isCollapsed)
-        onToggle?.()
-    }
+    // Переключение состояния сайдбара (свернут / развернут)
+    const toggleSidebar = useCallback(() => {
+        setIsCollapsed(prev => {
+            const newState = !prev
+            onToggle?.()
+            return newState
+        })
+    }, [onToggle])
 
-    const isActive = (path: string) => {
+    // Проверка на то какой сейчас активный path, и в зависимости от этого будет активна кнопка в сайдбаре
+    const isActive = useCallback((path: string) => {
         return location.pathname === path || location.pathname.startsWith(`${path}/`)
-    }
+    }, [location.pathname])
 
-    const renderSidebarItem = (item: SidebarItem, depth = 0) => {
+    // Обработчик клика по элементу навигации (по кнопке)
+    const handleItemClick = useCallback((path: string) => {
+        navigate(path)
+    }, [navigate])
+
+    // Обработчик выхода из системы
+    const handleLogout = useCallback(() => {
+        logout?.()
+        navigate("/login")
+    }, [logout])
+
+    // Функция рендеринга отдельного элемента сайдбара (кнопки)
+    const renderSidebarItem = useCallback((item: SidebarItem, index: number, depth = 0) => {
         const isItemActive = isActive(item.path)
-        const isAdminItem = item.adminOnly
+        return (<SidebarItemComponent item={item} isActive={isItemActive} isCollapsed={isCollapsed} onClick={handleItemClick}/>)
+    }, [isCollapsed, isActive, handleItemClick])
 
-        return (
-            <div key={item.id} className={`sidebar-item-container ${isItemActive ? "sidebar-item-active" : ""} ${isAdminItem ? "sidebar-item-admin" : ""}`}>
-                <div className="sidebar-item-content">
-                    <div className="sidebar-item-icon">{item.icon}</div>
+    // Функция рендеринга группы элементов (здесь рендерятся все кнопки)
+    const renderSidebarItems = useCallback((items: SidebarItem[]) => 
+        items.map((item, index) => renderSidebarItem(item, index)),
+        [renderSidebarItem]
+    )
 
-                    { !isCollapsed && ( <span className="sidebar-label">{item.label}</span> ) }
-                </div>
-            </div>
-        )
-    }
+    // Мемоизированный контент сайдбара (хранение дефолтных и админских отрендереных кнопок)
+    const sidebarContent = useMemo(() => ({
+        mainItems: renderSidebarItems(mainItems),
+        adminItems: renderSidebarItems(adminItems),
+    }), [mainItems, adminItems, renderSidebarItems])
 
     return (
-        <aside className={`sidebar-container ${isCollapsed ? "sidebar-collapsed" : ""}`}>
+        <aside className={`sidebar-container ${isCollapsed ? "sidebar-collapsed" : ""} ${position}`}>
             {/* Лого */}
             <div className="sidebar-header">
-                {!isCollapsed ? (
-                    <div className="sidebar-logo">
-                        <span className="sidebar-title">Меню</span>
-
-                        <div className="sidebar-control" onClick={toggleSidebar}>
-                            <X size={20}/>
-                        </div>
-                    </div>    
-                ) : (
-                    <div className="sidebar-control" onClick={toggleSidebar}>
-                        <Menu size={20}/>
-                    </div>
-                )}
+                {!isCollapsed && (<div className="sidebar-header-title">LOGO</div>)}
+                {!isCollapsed && (<div className="sidebar-header-control--close" onClick={toggleSidebar} data-item="sidebar-menu">
+                    <div className="sidebar-header-control-icon--close"><X size={20}/></div> 
+                </div>)}
+                {isCollapsed && (<div className="sidebar-header-control--open" onClick={toggleSidebar} data-item="sidebar-menu">
+                    <div className="sidebar-header-control-icon--open"><Menu size={20}/></div>
+                </div>)}
             </div>
 
             <div className="sidebar-separator"></div>
 
             {/* Главная навигация */}
             <nav className="sidebar-nav">
-                <div className="sidebar-nav-setion">
-                    <div className="sidebar-nav-items">
-                        {mainItems.map(item => renderSidebarItem(item))}
-                    </div>
+                <div className="sidebar-nav-section">
+                    {sidebarContent.mainItems}
                 </div>
             </nav>
 
             <div className="sidebar-separator"></div>
 
             {/* Админская навигация */}
-            {isAdmin && adminItems.length > 0 && (
+            {isAdmin && adminItems.length > 0 && (<>
                 <nav className="sidebar-nav">
                     <div className="sidebar-nav-section">
-                        <div className="sidebar-nav-items">
-                            {adminItems.map(item => renderSidebarItem(item))}
-                        </div>
+                        {sidebarContent.adminItems}
                     </div>
                 </nav>
-            )}
 
-            <div className="sidebar-separator"></div>
+                <div className="sidebar-separator"></div>
+            </>)}
 
             {/* Днище */}
             <div className="sidebar-footer">
-                {!isCollapsed ? (
-                    <div className="sidebar-bottom">    
-                        <span className="sidebar-title">{user?.role}</span>
-
-                        <div className="sidebar-control">
-                            <DoorOpen size={20}/>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="sidebar-control">
-                        <DoorOpen size={20}/>
-                    </div>
-                )}
+                {!isCollapsed && (<div className="sidebar-footer-info">{currentUser.type}</div>)}
+                {!isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                </div>)}
+                {isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                </div>)}
             </div>
         </aside>
     )
