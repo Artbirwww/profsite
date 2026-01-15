@@ -1,185 +1,178 @@
+import { FC, ReactNode, use, useState } from "react"
 import "./sidebar-style.css"
 
-import { FC, ReactNode, useEffect, useState } from "react"
-import { Home, FileText, ChartPie, User, Users, FileUp, X, Menu, DoorOpen } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { Home, FileText, BarChart, User, Users, Upload, Apple, X, Menu, DoorOpen } from "lucide-react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
-interface SidebarProps {
-    onClose?: () => void
-    user?: {
-        email: string
-        role: string
-    }
-    position?: "left" | "right"
-    defaultCollapsed?: boolean
-    onLogout?: () => void
-}
-
-interface MenuItem {
-    path: string
+interface SidebarItem {
+    id: string
     label: string
     icon: ReactNode
-    class: string
+    path: string
     adminOnly?: boolean
 }
 
-export const Sidebar: FC<SidebarProps> = ({ user, position = "left", defaultCollapsed = false, onLogout }) => {
+interface SidebarProps {
+    collapsed?: boolean
+    onToggle?: () => void
+    user?: {
+        name: string
+        email: string
+        role: "admin" | "pupil" | "specialist" | "dev"
+    }
+}
+
+export const Sidebar: FC<SidebarProps> = ({ collapsed = false, onToggle, user }) => {
+    const location = useLocation()
     const navigate = useNavigate()
 
-    const [isExpanded, setIsExpanded] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
+    const [isCollapsed, setIsCollapsed] = useState(collapsed)
+    const [expandedItems, setExpandedItems] = useState<string[]>([])
 
-    const menuItems: MenuItem[] = [
+    const currentUser = user || {
+        name: "Timofey",
+        email: "timofeyershovv@gmail.com",
+        role: "dev" as const,
+    }
+
+    const isAdmin = currentUser.role === "dev"
+
+    const mainItems: SidebarItem[] = [
         {
+            id: "dashboard",
+            label: "Домой",
+            icon: <Home size={20}/>,
             path: "/dashboard",
-            label: "На главную",
-            icon: <Home size={24}/>,
-            class: "sidebar-nav-home",
         },
         {
-            path: "/tests",
+            id: "testing",
             label: "Тестирование",
-            icon: <FileText size={24}/>,
-            class: "sidebar-nav-tests",
+            icon: <FileText size={20}/>,
+            path: "/testing",
         },
         {
-            path: "/my-results",
+            id: "results",
             label: "Мои результаты",
-            icon: <ChartPie size={24}/>,
-            class: "sidebar-nav-results",
+            icon: <BarChart size={20}/>,
+            path: "/results",
         },
         {
-            path: "/profile",
+            id: "profile",
             label: "Личный кабинет",
-            icon: <User size={24}/>,
-            class: "sidebar-nav-profile",
-        },
-    ]
-    
-    const adminMenuItem: MenuItem[] = [
-        {
-            path: "/dashboard",
-            label: "Список 1",
-            icon: <Users size={24}/>,
-            class: "sidebar-nav-admin",
-            adminOnly: true,
-        },
-        {
-            path: "/dashboard",
-            label: "Список 2",
-            icon: <FileUp size={24}/>,
-            class: "sidebar-nav-admin",
-            adminOnly: true,
+            icon: <User size={20}/>,
+            path: "/profile",
         },
     ]
 
-    const handleNavigate = (path: string) => {
-        navigate(path)
+    const adminItems: SidebarItem[] = isAdmin ? [
+        {
+            id: "admin-list",
+            label: "Список",
+            icon: <Users size={20}/>,
+            path: "/admin-list",
+            adminOnly: true,
+        },
+        {
+            id: "admin-upload",
+            label: "Загрузить",
+            icon: <Upload size={20}/>,
+            path: "/admin-upload",
+            adminOnly: true,
+        },
+        {
+            id: "admin-aboba",
+            label: "Тест",
+            icon: <Apple size={20}/>,
+            path: "/admin-aboba",
+            adminOnly: true,
+        },
+    ] : []
+
+    const toggleSidebar = () => {
+        setIsCollapsed(!isCollapsed)
+        onToggle?.()
     }
 
-    const handleToggleExpand = () => {
-        setIsExpanded(!isExpanded)
+    const isActive = (path: string) => {
+        return location.pathname === path || location.pathname.startsWith(`${path}/`)
     }
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-        
-        checkMobile()
-        window.addEventListener("resize", checkMobile)
-        
-        return () => window.removeEventListener("resize", checkMobile)
-    }, [])
+    const renderSidebarItem = (item: SidebarItem, depth = 0) => {
+        const isItemActive = isActive(item.path)
+        const isAdminItem = item.adminOnly
 
-    const sidebarClasses = [
-        "sidebar-container",
-        isExpanded ? "expanded" : "collapsed",
-        position,
-    ].filter(Boolean).join(" ")
+        return (
+            <div key={item.id} className={`sidebar-item-container ${isItemActive ? "sidebar-item-active" : ""} ${isAdminItem ? "sidebar-item-admin" : ""}`}>
+                <div className="sidebar-item-content">
+                    <div className="sidebar-item-icon">{item.icon}</div>
+
+                    { !isCollapsed && ( <span className="sidebar-label">{item.label}</span> ) }
+                </div>
+            </div>
+        )
+    }
 
     return (
-        <>
-            <div 
-                className={`sidebar-toggle-button ${position} ${isExpanded ? "hidden" : ""}`} 
-                onClick={handleToggleExpand}
-                aria-label={isExpanded ? "Свернуть меню" : "Развернуть меню"}
-            >
-                {isExpanded ? <X size={20}/> : <Menu size={20}/>}
+        <aside className={`sidebar-container ${isCollapsed ? "sidebar-collapsed" : ""}`}>
+            {/* Лого */}
+            <div className="sidebar-header">
+                {!isCollapsed ? (
+                    <div className="sidebar-logo">
+                        <span className="sidebar-title">Меню</span>
+
+                        <div className="sidebar-control" onClick={toggleSidebar}>
+                            <X size={20}/>
+                        </div>
+                    </div>    
+                ) : (
+                    <div className="sidebar-control" onClick={toggleSidebar}>
+                        <Menu size={20}/>
+                    </div>
+                )}
             </div>
 
-            <aside className={sidebarClasses}>
-                <div className="sidebar-content">
-                    <div className="sidebar-top">
-                        {isExpanded && (
-                            <div className="sidebar-title">
-                                <span>Меню</span>
-                            </div>
-                        )}
-                    </div>
+            <div className="sidebar-separator"></div>
 
-                    <div className="separator"></div>
-
-                    <div className="sidebar-nav">
-                        <div className="sidebar-nav-section">
-                            {menuItems.map((item, index) => (
-                                <div 
-                                    key={index}
-                                    className={`sidebar-nav-item ${item.class}`}
-                                    onClick={() => handleNavigate(item.path)}
-                                >
-                                    <span className="sidebar-nav-icon">{item.icon}</span>
-                                    {isExpanded && (
-                                        <span className="sidebar-nav-label">{item.label}</span>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="separator"></div>
-                    
-                    {user?.role === "admin" && (
-                        <>
-                            <div className="sidebar-nav">
-                                <div className="sidebar-nav-section">
-                                    {adminMenuItem.map((item, index) => (
-                                        <div 
-                                            key={index}
-                                            className={`sidebar-nav-item ${item.class}`}
-                                            onClick={() => handleNavigate(item.path)}
-                                        >
-                                            <span className="sidebar-nav-icon">{item.icon}</span>
-                                            {isExpanded && (
-                                                <span className="sidebar-nav-label">{item.label}</span>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="separator"></div>
-                        </>
-                    )}
-
-                    <div className="sidebar-bottom">
-                        <div 
-                            className="sidebar-user-info" 
-                            onClick={onLogout}
-                            title={isExpanded ? "Выйти" : "Выйти из системы"}
-                        >
-                            <span className="sidebar-user-icon">
-                                <DoorOpen size={24}/>
-                            </span>
-                            {isExpanded && (
-                                <div className="sidebar-user-details">
-                                    <span className="sidebar-user-email">{user?.email}</span>
-                                    <span className="sidebar-user-role">{user?.role}</span>
-                                </div>
-                            )}
-                        </div>
+            {/* Главная навигация */}
+            <nav className="sidebar-nav">
+                <div className="sidebar-nav-setion">
+                    <div className="sidebar-nav-items">
+                        {mainItems.map(item => renderSidebarItem(item))}
                     </div>
                 </div>
-            </aside>
-        </>
+            </nav>
+
+            <div className="sidebar-separator"></div>
+
+            {/* Админская навигация */}
+            {isAdmin && adminItems.length > 0 && (
+                <nav className="sidebar-nav">
+                    <div className="sidebar-nav-section">
+                        <div className="sidebar-nav-items">
+                            {adminItems.map(item => renderSidebarItem(item))}
+                        </div>
+                    </div>
+                </nav>
+            )}
+
+            <div className="sidebar-separator"></div>
+
+            {/* Днище */}
+            <div className="sidebar-footer">
+                {!isCollapsed ? (
+                    <div className="sidebar-bottom">    
+                        <span className="sidebar-title">{user?.role}</span>
+
+                        <div className="sidebar-control">
+                            <DoorOpen size={20}/>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="sidebar-control">
+                        <DoorOpen size={20}/>
+                    </div>
+                )}
+            </div>
+        </aside>
     )
 }

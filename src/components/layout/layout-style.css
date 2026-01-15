@@ -1,18 +1,19 @@
 .layout-base {
     display: flex;
-    min-height: 100vh;
+    flex-direction: row;
+    gap: 10px;
+    background-color: gray;
     overflow: hidden;
-}
-.layout-sidebar {
-    flex-shrink: 0;
-    max-width: 75px;
+    padding: 10px;
 }
 .layout-content {
     flex: 1;
-    overflow-y: auto;
-    max-height: calc(100vh - 20px);
-    margin: 10px;
+    overflow-x: auto;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
     background-color: var(--color-white);
-    border: 1px solid var(--color-gray-200);
+    height: calc(100vh - 20px);
     border-radius: 10px;
+}
+.layout-sidebar {
+    width: auto;
 }
