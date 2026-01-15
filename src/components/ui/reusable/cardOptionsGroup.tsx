@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-export const FieldOptions: FC = ({}) => {
+export const CardOptionsGroup: FC = ({}) => {
     return (
         <div>
 
