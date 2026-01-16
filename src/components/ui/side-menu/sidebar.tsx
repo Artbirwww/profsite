@@ -108,7 +108,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             id: "testing",
             label: "Тестирование",
             icon: <FileCheck size={20}/>,
-            path: "/dashboard",
+            path: "/tests",
             dataItem: "testing",
         },
         {

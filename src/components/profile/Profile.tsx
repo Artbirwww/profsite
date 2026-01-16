@@ -1,7 +1,17 @@
+import { Group } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
-export const UserProfile = () => {
-  const { user, logout } = useAuth();
+export const Profile = () => {
+  const { logout } = useAuth();
+
+  const user = {
+    name: "123",
+    email: "123",
+    role: "admin",
+    group: "edasd",
+    completedTests: [1, 2, 3],
+    lastTestDate: "28.10.2025",
+  }
 
   if (!user) return null;
 
