@@ -1,7 +1,7 @@
 // src/components/auth/Registration/Registration.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext';
+import { authApi } from '../../../services/api/authApi';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../SimpleUI';
 import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
@@ -17,7 +17,6 @@ interface User {
 }
 
 export function Registration() {
-  const { register } = useAuth(); // Убран autoRegister
   const navigate = useNavigate();
 
   const [step, setStep] = useState<'type' | 'form'>('type');
@@ -58,7 +57,7 @@ export function Registration() {
     try {
       setIsSubmitting(true);
       // Регистрируем ВСЕХ через обычную регистрацию
-      await register(user.email.trim(), user.password);
+      await authApi.register(user.email.trim(), user.password);
       navigate('/dashboard', { replace: true });
     } catch (err) {
       console.error('Registration error:', err);
