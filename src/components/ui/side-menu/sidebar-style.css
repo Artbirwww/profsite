@@ -191,17 +191,15 @@
     color: var(--default-color);
 }
 
-/* Админские пункты сайдбара */
-.sidebar-item-container[data-item="admin"]:hover::after,
-.sidebar-item-active[data-item="admin"]::after {
+/* Стили для других ролей сайдбара */
+.sidebar-item-container[data-item="role-based-item"]:hover::after,
+.sidebar-item-active[data-item="role-based-item"]::after {
     background-color: var(--red-hover-color);
 }
-.sidebar-item-container[data-item="admin"]:hover .sidebar-item-icon,
-.sidebar-item-active[data-item="admin"] .sidebar-item-icon {
-    color: var(--red-color);
-}
-.sidebar-item-container[data-item="admin"]:hover .sidebar-item-label,
-.sidebar-item-active[data-item="admin"] .sidebar-item-label {
+.sidebar-item-container[data-item="role-based-item"]:hover .sidebar-item-icon,
+.sidebar-item-active[data-item="role-based-item"] .sidebar-item-icon,
+.sidebar-item-container[data-item="role-based-item"]:hover .sidebar-item-label,
+.sidebar-item-active[data-item="role-based-item"] .sidebar-item-label {
     color: var(--red-color);
 }
 

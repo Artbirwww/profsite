@@ -135,7 +135,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <Users size={20}/>,
             path: "/admin/pupil-list",
             adminOnly: true,
-            dataItem: "admin",
+            dataItem: "role-based-item",
         },
         {
             id: "admin-upload",
@@ -143,7 +143,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <ArrowUpToLine size={20}/>,
             path: "/admin/pupil-loading",
             adminOnly: true,
-            dataItem: "admin",
+            dataItem: "role-based-item",
         },
     ] : [], [isAdmin])
 
@@ -155,7 +155,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <Apple size={20}/>,
             path: "/teacher-test-1",
             teacherOnly: true,
-            dataItem: "teacher",
+            dataItem: "role-based-item",
         },
         {
             id: "teacher-2",
@@ -163,7 +163,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <Apple size={20}/>,
             path: "/teacher-test-2",
             teacherOnly: true,
-            dataItem: "teacher",
+            dataItem: "role-based-item",
         },
     ] : [], [isTeacher])
 
@@ -175,7 +175,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <Apple size={20}/>,
             path: "/speacialist-test-1",
             specialistOnly: true,
-            dataItem: "speacialist",
+            dataItem: "role-based-item",
         },
         {
             id: "specialist-upload",
@@ -183,7 +183,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             icon: <Apple size={20}/>,
             path: "/speacialist-test-2",
             specialistOnly: true,
-            dataItem: "speacialist",
+            dataItem: "role-based-item",
         },
     ] : [], [isSpecialist])
 
