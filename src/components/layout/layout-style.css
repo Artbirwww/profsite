@@ -10,9 +10,9 @@
     flex: 1;
     overflow-x: auto;
     transition: all .3s cubic-bezier(.4, 0, .2, 1);
-    background-color: var(--color-white);
     height: calc(100vh - 20px);
     border-radius: 10px;
+    box-shadow: var(--section-shadow);
 }
 .layout-sidebar {
     width: auto;

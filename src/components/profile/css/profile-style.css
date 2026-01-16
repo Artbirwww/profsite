@@ -1,0 +1,13 @@
+.profile-base {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+}
+.profile-options {
+    flex: 0 0 250px;
+}
+.profile-content {
+    flex: 1;
+    min-width: 0;
+}
+
