@@ -1,8 +1,8 @@
 import { useAuth } from '../../contexts/AuthContext';
 
 export const UserProfile = () => {
-  const { user, logout } = useAuth();
-
+  const { logout } = useAuth();
+  const user = {"name": "Test", "email": "test@gmail.com", "role": "ADMIN", "group": "10A", "completedTests": [], "lastTestDate": "00.00.0000"}
   if (!user) return null;
 
   return (
