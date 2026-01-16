@@ -1,0 +1,247 @@
+/* Стили для сайдбара */
+.sidebar-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 10px;
+    width: var(--sidebar-expanded);
+    height: var(--sidebar-height);
+    padding: 10px 20px;
+    background: var(--sidebar-background-color);
+    border: 1px solid var(--sidebar-border-color);
+    border-radius: var(--sidebar-border-radius);
+    left: 0;
+    top: 0;
+    z-index: 10;
+    user-select: none;
+    transition: var(--transition-bezier);
+    overflow: hidden;
+    box-shadow: var(--sidebar-shadow);
+}
+.sidebar-collapsed {
+    width: var(--sidebar-collapsed);
+}
+
+
+
+/* Стили для разделителя */
+.sidebar-separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--sidebar-items-color);
+    opacity: .2;
+}
+
+
+
+/* Стили для сайдбар - Header, Footer */
+.sidebar-header,
+.sidebar-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--sidebar-button-size);
+    position: relative;
+    margin: 10px 0;
+    color: var(--md-neutral-70);
+    transition: var(--transition-bezier);
+}
+.sidebar-container.right .sidebar-header,
+.sidebar-container.right .sidebar-footer {
+    flex-direction: row-reverse;
+}
+.sidebar-header-title,
+.sidebar-footer-info {
+    font-size: var(--fs-base);
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+    transform: translateX(0);
+    transition: var(--transition-bezier);
+    transition-delay: 1s;
+}
+.sidebar-collapsed .sidebar-header-title,
+.sidebar-collapsed .sidebar-footer-info {
+    opacity: 0;
+    transform: translateX(-10px);
+    width: 0;
+    overflow: hidden;
+    transition-delay: 1s;
+}
+.sidebar-container.right .sidebar-collapsed .sidebar-header-title,
+.sidebar-container.right .sidebar-collapsed .sidebar-footer-info {
+    transform: translateX(10px);
+}
+.sidebar-header-control--close,
+.sidebar-header-control--open,
+.sidebar-footer-control--logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.sidebar-header-control--close::after,
+.sidebar-header-control--open::after,
+.sidebar-footer-control--logout::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: calc(var(--sidebar-border-radius) / 2);
+    opacity: 0;
+    transition: var(--transition-bezier);
+}
+.sidebar-header-control-icon--close,
+.sidebar-header-control-icon--open,
+.sidebar-footer-control-icon--logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition-bezier);
+}
+
+
+
+/* Стили для сайдбар - Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+}
+.sidebar-nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.sidebar-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: var(--sidebar-button-size);
+    position: relative;
+    cursor: pointer;
+    gap: 20px;
+    margin: 10px 0;
+    color: var(--sidebar-items-color);
+    transition: var(--transition-bezier);
+}
+.sidebar-item-container::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: calc(var(--sidebar-border-radius) / 2);
+    opacity: 0;
+    transition: var(--transition-bezier);
+}
+.sidebar-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition-bezier);
+}
+.sidebar-item-label {
+    font-size: var(--fs-base);
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+    transform: translateX(0);
+    transition: var(--transition-bezier);
+    transition-delay: .1s;
+}
+.sidebar-collapsed .sidebar-item-label {
+    opacity: 0;
+    transform: translateX(-10px);
+    width: 0;
+    overflow: hidden;
+    transition-delay: 0;
+}
+.sidebar-container.right .sidebar-collapsed .sidebar-item-label {
+    transform: translateX(10px);
+}
+
+
+/* Hover States */
+/* Дефолтные пункты сайдбара */
+.sidebar-item-container:hover::after,
+.sidebar-item-active::after {
+    width: calc(100% + var(--sidebar-button-size));
+    height: calc(100% + var(--sidebar-button-size));
+    opacity: 1;
+    background-color: var(--default-hover-color)
+}
+.sidebar-item-container:hover .sidebar-item-icon,
+.sidebar-item-active .sidebar-item-icon {
+    transform: scale(1.2);
+    color: var(--default-color);
+}
+.sidebar-item-container:hover .sidebar-item-label,
+.sidebar-item-active .sidebar-item-label {
+    color: var(--default-color);
+}
+
+/* Админские пункты сайдбара */
+.sidebar-item-container[data-item="admin"]:hover::after,
+.sidebar-item-active[data-item="admin"]::after {
+    background-color: var(--red-hover-color);
+}
+.sidebar-item-container[data-item="admin"]:hover .sidebar-item-icon,
+.sidebar-item-active[data-item="admin"] .sidebar-item-icon {
+    color: var(--red-color);
+}
+.sidebar-item-container[data-item="admin"]:hover .sidebar-item-label,
+.sidebar-item-active[data-item="admin"] .sidebar-item-label {
+    color: var(--red-color);
+}
+
+/* Дефолтные опции сайдбара (открыть, закрыть) */
+.sidebar-header-control--close:hover::after,
+.sidebar-header-control--open:hover::after,
+.sidebar-footer-control--logout:hover::after {
+    width: calc(100% + var(--sidebar-button-size));
+    height: calc(100% + var(--sidebar-button-size));
+    opacity: 1;
+    background-color: var(--default-hover-color);
+}
+.sidebar-header-control--close:hover .sidebar-header-control-icon--close,
+.sidebar-header-control--open:hover .sidebar-header-control-icon--open,
+.sidebar-footer-control--logout:hover .sidebar-footer-control-icon--logout {
+    transform: scale(1.2);
+    color: var(--default-color);
+}
+
+/*  Опции сайдбара (выйти) */
+.sidebar-footer-control--logout[data-item="sidebar-logout"]:hover::after {
+    background-color: var(--red-hover-color);
+}
+.sidebar-footer-control--logout[data-item="sidebar-logout"]:hover .sidebar-footer-control-icon--logout {
+    transform: scale(1.2);
+    color: var(--red-color);
+}
+
+/* Сдвиг пунктов меню при наведении */
+.sidebar-item-container:hover {
+    transform: translateX(3px);
+}
+.sidebar-item-active {
+    transform: translateX(3px);
+}
+
+/* Сдвиг пунктов меню при наведении (правая сторона) */
+.sidebar-container.right .sidebar-item-container:hover {
+    transform: translateX(-3px);
+}
+.sidebar-container.right .sidebar-item-active {
+    transform: translateX(-3px);
+}

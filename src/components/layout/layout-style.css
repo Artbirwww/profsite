@@ -1,0 +1,19 @@
+.layout-base {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    padding: 10px;
+}
+.layout-content {
+    flex: 1;
+    overflow-x: auto;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    background-color: var(--color-white);
+    height: calc(100vh - 20px);
+    border-radius: 10px;
+}
+.layout-sidebar {
+    width: auto;
+}

@@ -1,30 +1,42 @@
 // src/App.tsx
-import { Routes, Route, Navigate, useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
+import { useState, useEffect } from "react";
 
 // Auth components
-import { Login } from './components/auth/Login/Login';
-import { Registration } from './components/auth/Registration/Registration';
+import { Login } from "./components/auth/Login/Login";
+import { Registration } from "./components/auth/Registration/Registration";
 
 // Test components
-import { Dashboard } from './components/tests/dashboard/Dashboard';
-import { TestPage } from './components/tests/dashboard/TestPage';
-import { TestPageNew } from './components/tests/dashboard/TestPageNew';
-import { ResultsPage } from './components/tests/resultspage/ResultsPage';
+import { Dashboard } from "./components/tests/dashboard/Dashboard";
+import { TestPage } from "./components/tests/dashboard/TestPage";
+import { TestPageNew } from "./components/tests/dashboard/TestPageNew";
+import { ResultsPage } from "./components/tests/resultspage/ResultsPage";
 
 // Профиль польователя
-import { UserProfile } from './components/profile/UserProfile';
+import { UserProfile } from "./components/profile/UserProfile";
 
 // Individual test components
-import EngineeringThinkingTest from './components/tests/engineer/EngineeringThinkingTest';
-import GroupRolesTest from './components/tests/grouproles/GroupRolesTest';
-import IqPotentialTest from './components/tests/iqpotencial/iqpotencial';
-import ProfessionalOrientationTest from './components/tests/profsphere/ProfessionalOrientationTest';
-import TemperamentTest from './components/tests/temperament/TemperamentTest';
+import EngineeringThinkingTest from "./components/tests/engineer/EngineeringThinkingTest";
+import GroupRolesTest from "./components/tests/grouproles/GroupRolesTest";
+import IqPotentialTest from "./components/tests/iqpotencial/iqpotencial";
+import ProfessionalOrientationTest from "./components/tests/profsphere/ProfessionalOrientationTest";
+import TemperamentTest from "./components/tests/temperament/TemperamentTest";
 
 // Layout & routing
-import MainLayout from './components/layout/MainLayout';
-import { ProtectedRoute } from './components/routing/ProtectedRoute';
+import MainLayout from "./components/layout/MainLayout";
+import { ProtectedRoute } from "./components/routing/ProtectedRoute";
+
+
+
+
+
+import { Layout } from "./components/layout/Layout";
 
 // Хуки
 import { useAuth } from './contexts/AuthContext';
@@ -40,12 +52,11 @@ import { AuthRouter } from './components/routing/AuthRouter';
 // ——— Главный компонент App ———
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       <Routes>
         {/* Public routes */}
         
         <Route element={<AuthRouter/>} >
-          <Route element={<MainLayout />}>
+          <Route element={<Layout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
           </Route>
@@ -53,7 +64,7 @@ export default function App() {
         
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route element={<MainLayout />}>
+          <Route element={<Layout />}>
             <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
             <Route path='admin/pupil-list' element={<PupilsList />} />
             {/* Legacy routes */}
@@ -61,26 +72,30 @@ export default function App() {
             {/* New test routes */}
             <Route path="/" element={<Home/>} />
             <Route path="/tests">
-              <Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
+              <Route
+                path="engineering-thinking"
+                element={<EngineeringThinkingTest />}
+              />
               <Route path="group-roles" element={<GroupRolesTest />} />
               <Route path="iq-potential" element={<IqPotentialTest />} />
-              <Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
+              <Route
+                path="professional-orientation"
+                element={<ProfessionalOrientationTest />}
+              />
               <Route path="temperament" element={<TemperamentTest />} />
             </Route>
-            
+			
+
             {/* Results */}
             <Route path="/my-results" element={<ResultsPage />} />
             <Route path="/my-results/:testType" element={<ResultsPage />} />
 
             {/*Личный Кабинет*/}
             <Route path="/profile" element={<UserProfile />} />
-
           </Route>
         </Route>
-        
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </div>
   );
 }

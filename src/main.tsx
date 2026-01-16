@@ -6,6 +6,7 @@ import { TestProvider } from './contexts/TestContext';
 import { AppProvider } from './contexts/AppContext';
 import App from './App';
 import './index.css';
+import "./new_global.css"
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

@@ -1,0 +1,68 @@
+:root {
+    --fs-xs: 0.75rem;   /* 12px */
+    --fs-sm: 0.875rem;  /* 14px */
+    --fs-base: 1rem;    /* 16px */
+    --fs-md: 1.125rem;  /* 18px */
+    --fs-lg: 1.25rem;   /* 20px */
+    --fs-xl: 1.5rem;    /* 24px */
+    --fs-2xl: 1.875rem; /* 30px */
+    --fs-3xl: 2.25rem;  /* 36px */
+    --fs-4xl: 3rem;     /* 48px */
+    --fs-5xl: 3.75rem;  /* 60px */
+    --fs-6xl: 4.5rem;   /* 72px */
+
+    --md-gray-50: #fafafa;
+    --md-gray-100: #f5f5f5;
+    --md-gray-200: #eeeeee;
+    --md-gray-300: #e0e0e0;
+    --md-gray-400: #bdbdbd;
+    --md-gray-500: #9e9e9e;
+    --md-gray-600: #757575;
+    --md-gray-700: #616161;
+    --md-gray-800: #424242;
+    --md-gray-900: #212121;
+
+    --no-results-gradient: linear-gradient(145deg, #ffffff, #ebebeb);
+    --default-hover-color: rgba(131, 112, 254, .2);
+    --default-color: rgb(131, 112, 254);
+    --red-hover-color: rgba(236, 63, 97, .2);
+    --red-color: rgb(221, 36, 73);
+
+    --transition-bezier: all .3s cubic-bezier(.4, 0, .2, 1);
+    --sidebar-expanded: 250px;
+    --sidebar-collapsed: 60px;
+    --sidebar-height: 100%;
+    --sidebar-border-radius: 10px;
+    --sidebar-border-color: var(--md-gray-400);
+    --sidebar-button-size: calc(var(--sidebar-collapsed) - 40px);
+    --sidebar-background-color: var(--no-results-gradient);
+    --sidebar-shadow: 4px 0 12px rgba(0, 0, 0, .1);
+    --sidebar-items-color: var(--md-gray-700);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+    --primary-color: #5a78f0;
+    --primary-dark: #4361ee;
+    --secondary-color: #9d4edd;
+    --accent-color: #ff4da6;
+    --success-color: #56d4f5;
+    --warning-color: #f9a74e;
+    --danger-color: #fa575a;
+    --info-color: #5a9ef5;
+    
+    /* Dark theme neutrals */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    
+    /* Text colors */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --text-light: #ffffff;
+    
+    /* Border colors */
+    --border-color: #334155;
+    --border-light: #475569;
+}
