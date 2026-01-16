@@ -118,7 +118,7 @@
 .sidebar-nav-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
 }
 .sidebar-item-container {
