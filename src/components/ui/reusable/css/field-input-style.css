@@ -1,0 +1,142 @@
+/* Базовый сброс и нормализация */
+input {
+    /* Убирает системную обводку iOS (Safari) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Наследует шрифт от родителя (по умолчанию у input свой шрифт) */
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+
+    /* Убирает внутренние отступы и границы браузера */
+    margin: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    /* Чтобы ширина считалась с учетом border и padding */
+    box-sizing: border-box;
+    width: 100%;
+}
+/* Удаление иконки "очистить поле" в Edge и Chrome */
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+/* Удаление стрелок (spinner) у input type="number" */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+/* Автозаполнение (выбор стиля, когда браузер подставляет данные) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    /* Перезаписывает цвет текста при автозаполнении */
+    -webkit-text-fill-color: #000000 !important; 
+    /* Убирает стандартный желтый фон */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+/* Кастомные стили для input */
+.custom-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.custom-input-wrapper label {
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--md-gray-700);
+    padding-left: 10px;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+}
+.custom-input-container {
+    display: flex;
+    position: relative;
+}
+.custom-input-icon {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    color: var(--md-gray-400);
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+}
+.custom-input-password-visibility {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+    color: var(--md-gray-400);
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+}
+.custom-input-container input {
+    background: var(--md-gray-100);
+    padding: 10px;
+    min-height: 45px;
+    border-radius: 10px;
+    font-size: var(--fs-base);
+    color: var(--color-black) !important;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+}
+.custom-input-container input::placeholder {
+    color: var(--md-gray-400);
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    opacity: 1;
+}
+
+
+
+/* Стили при фокусе и валидации input */
+.custom-input-container input:focus,
+.custom-input-container input:valid {
+    color: var(--md-gray-400);
+    opacity: 1;
+    background: var(--default-hover-color);
+    box-shadow: 0px 0 15px rgba(143, 143, 143, 0.1);
+}
+.custom-input-container input:focus ~ .custom-input-icon,
+.custom-input-container input:valid ~ .custom-input-icon {
+    color: var(--default-color);
+    transform: scale(1.1);
+}
+.custom-input-container input:focus ~ .custom-input-password-visibility,
+.custom-input-container input:valid ~ .custom-input-password-visibility,
+.custom-input-container input:focus::placeholder {
+    color: var(--default-color);
+}
+
+
+
+/* Стили если был задет input но в него не чего не ввели и он важен для заполнения */
+.custom-input-label-dirty,
+.custom-input-dirty input:focus ~ .custom-input-password-visibility,
+.custom-input-dirty input:valid ~ .custom-input-password-visibility,
+.custom-input-dirty input:focus::placeholder {
+    color: var(--color-error-main) !important;
+}
+.custom-input-dirty input,
+.custom-input-dirty input:focus,
+.custom-input-dirty input:valid {
+    background: var(--color-error-background) !important;
+}
+.custom-input-dirty input:focus ~ .custom-input-icon,
+.custom-input-dirty input:valid ~ .custom-input-icon {
+    color: var(--color-error-main) !important;
+    transform: scale(1.1);
+}
