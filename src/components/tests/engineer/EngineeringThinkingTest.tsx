@@ -8,6 +8,89 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { Progress } from '../../ui/feedback/SimpleProgress';
 import { testData } from './EngineerQuestions';
 
+// Импорт всех картинок из папки Engineer-Imgs
+import image1 from '../../../res/test-imgs/Engineer-Imgs/image1.jpg';
+import image2 from '../../../res/test-imgs/Engineer-Imgs/image2.jpg';
+import image3 from '../../../res/test-imgs/Engineer-Imgs/image3.jpg';
+import image4 from '../../../res/test-imgs/Engineer-Imgs/image4.jpg';
+import image5 from '../../../res/test-imgs/Engineer-Imgs/image5.jpg';
+import image6 from '../../../res/test-imgs/Engineer-Imgs/image6.jpg';
+import image7 from '../../../res/test-imgs/Engineer-Imgs/image7.jpg';
+import image8 from '../../../res/test-imgs/Engineer-Imgs/image8.jpg';
+import image9 from '../../../res/test-imgs/Engineer-Imgs/image9.jpg';
+import image10 from '../../../res/test-imgs/Engineer-Imgs/image10.jpg';
+import image11 from '../../../res/test-imgs/Engineer-Imgs/image11.jpg';
+import image12 from '../../../res/test-imgs/Engineer-Imgs/image12.jpg';
+import image13 from '../../../res/test-imgs/Engineer-Imgs/image13.jpg';
+import image14 from '../../../res/test-imgs/Engineer-Imgs/image14.jpg';
+import image15 from '../../../res/test-imgs/Engineer-Imgs/image15.jpg';
+import image16 from '../../../res/test-imgs/Engineer-Imgs/image16.jpg';
+import image17 from '../../../res/test-imgs/Engineer-Imgs/image17.jpg';
+import image18 from '../../../res/test-imgs/Engineer-Imgs/image18.jpg';
+import image19 from '../../../res/test-imgs/Engineer-Imgs/image19.jpg';
+import image20 from '../../../res/test-imgs/Engineer-Imgs/image20.jpg';
+import image21 from '../../../res/test-imgs/Engineer-Imgs/image21.jpg';
+import image22 from '../../../res/test-imgs/Engineer-Imgs/image22.jpg';
+import image23 from '../../../res/test-imgs/Engineer-Imgs/image23.jpg';
+import image24 from '../../../res/test-imgs/Engineer-Imgs/image24.jpg';
+import image25 from '../../../res/test-imgs/Engineer-Imgs/image25.jpg';
+import image26 from '../../../res/test-imgs/Engineer-Imgs/image26.jpg';
+import image27 from '../../../res/test-imgs/Engineer-Imgs/image27.jpg';
+import image28 from '../../../res/test-imgs/Engineer-Imgs/image28.jpg';
+import image29 from '../../../res/test-imgs/Engineer-Imgs/image29.jpg';
+import image30 from '../../../res/test-imgs/Engineer-Imgs/image30.jpg';
+import image31 from '../../../res/test-imgs/Engineer-Imgs/image31.jpg';
+import image32 from '../../../res/test-imgs/Engineer-Imgs/image32.jpg';
+import image33 from '../../../res/test-imgs/Engineer-Imgs/image33.jpg';
+import image34 from '../../../res/test-imgs/Engineer-Imgs/image34.jpg';
+import image35 from '../../../res/test-imgs/Engineer-Imgs/image35.jpg';
+import image36 from '../../../res/test-imgs/Engineer-Imgs/image36.jpg';
+import image37 from '../../../res/test-imgs/Engineer-Imgs/image37.jpg';
+import image38 from '../../../res/test-imgs/Engineer-Imgs/image38.jpg';
+import image39 from '../../../res/test-imgs/Engineer-Imgs/image39.jpg';
+import image40 from '../../../res/test-imgs/Engineer-Imgs/image40.jpg';
+import image41 from '../../../res/test-imgs/Engineer-Imgs/image41.jpg';
+import image42 from '../../../res/test-imgs/Engineer-Imgs/image42.jpg';
+import image43 from '../../../res/test-imgs/Engineer-Imgs/image43.jpg';
+import image44 from '../../../res/test-imgs/Engineer-Imgs/image44.jpg';
+import image45 from '../../../res/test-imgs/Engineer-Imgs/image45.jpg';
+import image46 from '../../../res/test-imgs/Engineer-Imgs/image46.jpg';
+import image47 from '../../../res/test-imgs/Engineer-Imgs/image47.jpg';
+import image48 from '../../../res/test-imgs/Engineer-Imgs/image48.jpg';
+import image49 from '../../../res/test-imgs/Engineer-Imgs/image49.jpg';
+import image50 from '../../../res/test-imgs/Engineer-Imgs/image50.jpg';
+import image51 from '../../../res/test-imgs/Engineer-Imgs/image51.jpg';
+import image52 from '../../../res/test-imgs/Engineer-Imgs/image52.jpg';
+import image53 from '../../../res/test-imgs/Engineer-Imgs/image53.jpg';
+import image54 from '../../../res/test-imgs/Engineer-Imgs/image54.jpg';
+import image55 from '../../../res/test-imgs/Engineer-Imgs/image55.jpg';
+import image56 from '../../../res/test-imgs/Engineer-Imgs/image56.jpg';
+import image57 from '../../../res/test-imgs/Engineer-Imgs/image57.jpg';
+import image58 from '../../../res/test-imgs/Engineer-Imgs/image58.jpg';
+import image59 from '../../../res/test-imgs/Engineer-Imgs/image59.jpg';
+import image60 from '../../../res/test-imgs/Engineer-Imgs/image60.jpg';
+import image61 from '../../../res/test-imgs/Engineer-Imgs/image61.jpg';
+import image62 from '../../../res/test-imgs/Engineer-Imgs/image62.jpg';
+import image63 from '../../../res/test-imgs/Engineer-Imgs/image63.jpg';
+import image64 from '../../../res/test-imgs/Engineer-Imgs/image64.jpg';
+import image65 from '../../../res/test-imgs/Engineer-Imgs/image65.jpg';
+import image66 from '../../../res/test-imgs/Engineer-Imgs/image66.jpg';
+import image67 from '../../../res/test-imgs/Engineer-Imgs/image67.jpg';
+import image68 from '../../../res/test-imgs/Engineer-Imgs/image68.jpg';
+import image69 from '../../../res/test-imgs/Engineer-Imgs/image69.jpg';
+import image70 from '../../../res/test-imgs/Engineer-Imgs/image70.jpg';
+
+// Создаем массив всех картинок в правильном порядке
+const images = [
+  image1, image2, image3, image4, image5, image6, image7, image8, image9, image10,
+  image11, image12, image13, image14, image15, image16, image17, image18, image19, image20,
+  image21, image22, image23, image24, image25, image26, image27, image28, image29, image30,
+  image31, image32, image33, image34, image35, image36, image37, image38, image39, image40,
+  image41, image42, image43, image44, image45, image46, image47, image48, image49, image50,
+  image51, image52, image53, image54, image55, image56, image57, image58, image59, image60,
+  image61, image62, image63, image64, image65, image66, image67, image68, image69, image70
+];
+
 interface EngineeringThinkingTestProps {
   onBack?: () => void;
 }
@@ -267,6 +350,7 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
   }
 
   const currentQ = testData.questions[currentQuestion];
+  const currentImage = images[currentQuestion]; // Получаем картинку для текущего вопроса
 
   return (
     <div className="min-h-screen p-4 py-8 bg-gray-50">
@@ -321,18 +405,7 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
               </div>
             </CardContent>
           </Card>
-          
-          <Card className="bg-white">
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">
-                  {calculateResults().totalCorrect}
-                </div>
-                <div className="text-sm text-gray-600">Правильных ответов</div>
-              </div>
-            </CardContent>
-          </Card>
-          
+                    
           <Card className="bg-white">
             <CardContent className="pt-6">
               <div className="text-center">
@@ -365,31 +438,27 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
                 {currentQ.q}
               </h3>
             </div>
-            <p>
-              <br></br>
-            </p>
-            {/* Плейсхолдер для картинки */}
-            <div className="mb-8 p-6 md:p-8 bg-gradient-to-br from-gray-50 to-white rounded-xl border-2 border-gray-200 text-center">
-              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-                <div className="text-center">
-                              <p>
-              <br></br>
-            </p>
-                  <div className="text-4xl mb-2">🔧</div>
-
-                  <div className="text-gray-600">Схема к вопросу {currentQuestion + 1}</div>
-                  <div className="text-sm text-gray-400 mt-2">
-                    На реальном тесте здесь была бы схематическая иллюстрация
+            
+            {/* Картинка для вопроса с фиксированной высотой */}
+            <div className="mb-6">
+              <div className="text-sm text-gray-600 mb-2 text-center">
+                Иллюстрация к вопросу:
+              </div>
+              <div className="flex items-center justify-center rounded-lg border border-gray-300 bg-gray-50 p-2">
+                {currentImage ? (
+                  <img 
+                    src={currentImage} 
+                    alt={`Схема к вопросу ${currentQuestion + 1}`}
+                    className="max-h-48 object-contain"
+                  />
+                ) : (
+                  <div className="text-center p-3">
+                    <div className="text-2xl mb-1">🔧</div>
+                    <div className="text-sm text-gray-500">Схема {currentQuestion + 1}</div>
                   </div>
-                              <p>
-              <br></br>
-            </p>
-                </div>
+                )}
               </div>
             </div>
-                        <p>
-              <br></br>
-            </p>
 
             {/* Ошибка */}
             {error && (
@@ -567,8 +636,6 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import './MainLayout.css';
 
 const MainLayout: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -177,7 +177,7 @@ const MainLayout: React.FC = () => {
           {!isSidebarCollapsed && <div className="nav-separator"></div>}
 
           {/* Профиль пользователя */}
-          {user && (
+          {true && (
             <li 
               className="nav-item profile"
               style={{ '--item-index': menuItems.length } as React.CSSProperties}

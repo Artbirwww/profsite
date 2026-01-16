@@ -2,14 +2,8 @@ import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
-interface ProtectedRouteProps {
-  requireAuth?: boolean;
-}
-
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  requireAuth = true 
-}) => {
-  const { token, isLoading } = useAuth();
+export const ProtectedRoute: React.FC = () => {
+  const { token, getToken, isLoading } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -25,14 +19,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     );
   }
 
-  if (requireAuth && !token) {
+  if (!getToken()) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+  console.log(location.state?.from?.pathname)
+  return <Outlet/>
 
-  if (!requireAuth && token) {
-    const from = location.state?.from?.pathname || '/dashboard';
-    return <Navigate to={from} replace />;
-  }
-
-  return <Outlet />;
 };
