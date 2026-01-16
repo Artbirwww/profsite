@@ -3,6 +3,7 @@ import { useExcelMapper } from "../../../../hooks/useExcelMapper";
 import { PupilDataKeys, PupilDTO} from '../../../../types/pupil/pupil'
 import {type AccountApiRegisterDTO} from '../../../../types/pupil/account'
 import { pupilService } from "../../../../services/api/pupilApi";
+import { authApi } from "../../../../services/api/authApi";
 import style from "./pupil-data-loading.module.css"
 import classNames from "classnames"
 import toast, {Toaster} from 'react-hot-toast'
@@ -57,7 +58,7 @@ export const PupilDataLoading = () => {
       return
     }
     try {
-      const response = await pupilService.autoRegisterAll(data)
+      const response = await authApi.autoRegisterAll(data)
       console.log(data)
       toast.success("Данные успешно загружены")
       resetData()
@@ -68,8 +69,6 @@ export const PupilDataLoading = () => {
       console.log(err)
       toast.error("Ошибка, не удалось загрузить данные", {style : {backgroundColor: "#FF7F7F"}})
     }
-    
-    
   }
 
   return (
