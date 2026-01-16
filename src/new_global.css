@@ -22,9 +22,26 @@
     --md-gray-800: #424242;
     --md-gray-900: #212121;
 
-    --no-results-gradient: linear-gradient(145deg, #ffffff, #ebebeb);
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-done-background: #ECFDF5;
+    --color-done-main: #10B981;
+    --color-done-dark: #047857;
+
+    --color-warn-background: #FFFBEB;
+    --color-warn-main: #F59E0B;
+    --color-warn-dark: #D97706;
+
+    --color-error-background: #FEF2F2;
+    --color-error-main: #EF4444;
+    --color-error-dark: #DC2626;
+
     --default-hover-color: rgba(131, 112, 254, .2);
     --default-color: rgb(131, 112, 254);
+    --default-color-light: rgb(151, 135, 255);
+
+    --gray-to-gray-gradient: linear-gradient(145deg, #ffffff, #ebebeb);
     --red-hover-color: rgba(236, 63, 97, .2);
     --red-color: rgb(221, 36, 73);
 
@@ -35,9 +52,12 @@
     --sidebar-border-radius: 10px;
     --sidebar-border-color: var(--md-gray-400);
     --sidebar-button-size: calc(var(--sidebar-collapsed) - 40px);
-    --sidebar-background-color: var(--no-results-gradient);
+    --sidebar-background-color: var(--gray-to-gray-gradient);
     --sidebar-shadow: 4px 0 12px rgba(0, 0, 0, .1);
     --sidebar-items-color: var(--md-gray-700);
+
+    --section-border-color: var(--md-gray-400);
+    --section-background-color: var(--gray-to-gray-gradient);
 }
 
 /* Dark theme overrides */
@@ -65,4 +85,21 @@
     /* Border colors */
     --border-color: #334155;
     --border-light: #475569;
+}
+
+::-webkit-scrollbar {
+	background-color: transparent;
+	width: 13px;
+	height: 13px;
+	border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--md-gray-400);
+	border: 3px solid var(--color-white);
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+	margin-block: 3px;
 }
