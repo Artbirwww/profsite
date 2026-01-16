@@ -93,7 +93,7 @@
     height: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: calc(var(--sidebar-border-radius) / 2);
+    border-radius: var(--sidebar-border-radius);
     opacity: 0;
     transition: var(--transition-bezier);
 }
@@ -140,7 +140,7 @@
     height: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: calc(var(--sidebar-border-radius) / 2);
+    border-radius: var(--sidebar-border-radius);
     opacity: 0;
     transition: var(--transition-bezier);
 }
