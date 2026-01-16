@@ -29,82 +29,13 @@ import { ProtectedRoute } from './components/routing/ProtectedRoute';
 // Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
-import { PupilDataLoading } from './components/admin/pupils/pupils/data-loading/PupilDataLoading';
+import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
 import { PupilsList } from './components/admin/pupils/PupilsList';
 import AutoRegisterForm from './components/admin/AutoRegisterForm';
-import { PupilsList } from './components/admin/pupils/PupilsList';
+import { Home } from './components/Home';
+import { AuthRouter } from './components/routing/AuthRouter';
 
-// Типы
-type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
 
-// ——— Хук для страниц с защитой ———
-const LegacyProtectedRoute = ({ 
-  children, 
-  requireResult = false 
-}: { 
-  children: React.ReactNode; 
-  requireResult?: boolean 
-}) => {
-  const { user } = useAuth();
-  const { testResult } = useApp();
-
-  if (!user) return <Navigate to="/login" replace />;
-  if (requireResult && !testResult) return <Navigate to="/dashboard" replace />;
-  return <>{children}</>;
-};
-
-// ——— Страницы ———
-function DashboardPage() {
-  const { user, logout } = useAuth();
-  const { completedGroups, handleStartTest } = useApp();
-  const navigate = useNavigate();
-
-  if (!user) return null;
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login', { replace: true });
-  };
-
-  const handleViewResults = () => {
-    navigate('/my-results');
-  };
-
-  return (
-    <Dashboard
-      user={user}
-      completedGroups={completedGroups}
-      onStartTest={handleStartTest}
-      onLogout={handleLogout}
-      onViewResults={handleViewResults}
-    />
-  );
-}
-
-function TestPageWrapper() {
-  const { user } = useAuth();
-  const { handleTestGroupComplete } = useApp();
-  const { group } = useParams<{ group: TestGroup }>();
-
-  if (!user || !group) return <Navigate to="/dashboard" replace />;
-
-  return (
-    <TestPage
-      user={user}
-      testGroup={group}
-      onComplete={handleTestGroupComplete}
-      onBack={() => window.history.back()}
-    />
-  );
-}
-
-function ResultsPageWrapper() {
-  const { user } = useAuth();
-  const { testResult } = useApp();
-
-  if (!user || !testResult) return <Navigate to="/dashboard" replace />;
-  return <ResultsPage result={testResult} user={user} />;
-}
 
 // ——— Главный компонент App ———
 export default function App() {
@@ -112,27 +43,29 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
+        
+        <Route element={<AuthRouter/>} >
+          <Route element={<MainLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+          </Route>
+        </Route>
         
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
+            <Route path='admin/pupil-list' element={<PupilsList />} />
             {/* Legacy routes */}
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/test/:group" element={<TestPageWrapper />} />
-            <Route path="/results" element={<ResultsPageWrapper />} />
             
             {/* New test routes */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/tests">
               <Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
               <Route path="group-roles" element={<GroupRolesTest />} />
               <Route path="iq-potential" element={<IqPotentialTest />} />
               <Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
               <Route path="temperament" element={<TemperamentTest />} />
-              <Route path=":testType" element={<TestPageNew />} />
             </Route>
             
             {/* Results */}
@@ -146,7 +79,7 @@ export default function App() {
         </Route>
         
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </div>
   );
