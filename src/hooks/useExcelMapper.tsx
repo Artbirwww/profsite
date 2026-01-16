@@ -36,10 +36,15 @@ export const useExcelMapper = () => {
             reader.readAsBinaryString(file)
         })
     }, [])
+    const resetData = () => {
+        setRawData([])
+        setHeaders([])
+    }
     return {
         rawData,
         headers,
         setHeaders,
         processExcelFile,
+        resetData
     }
 }

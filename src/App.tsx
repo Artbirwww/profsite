@@ -29,9 +29,10 @@ import { ProtectedRoute } from './components/routing/ProtectedRoute';
 // Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
-import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
+import { PupilDataLoading } from './components/admin/pupils/pupils/data-loading/PupilDataLoading';
 import { PupilsList } from './components/admin/pupils/PupilsList';
 import AutoRegisterForm from './components/admin/AutoRegisterForm';
+import { PupilsList } from './components/admin/pupils/PupilsList';
 
 // Типы
 type TestGroup = 'temperament' | 'groupRoles' | 'professionalOrientation' | 'engineeringThinking' | 'intellectualPotential';
@@ -118,8 +119,6 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
-            <Route path='admin/pupil-list' element={<PupilsList />} />
-
             {/* Legacy routes */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/test/:group" element={<TestPageWrapper />} />
