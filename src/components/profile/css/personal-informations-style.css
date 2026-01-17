@@ -36,3 +36,16 @@
     flex: 1;
 }
 
+
+.profile-personal-inputs-row fieldset {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.profile-personal-inputs-row fieldset legend {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: var(--fs-base);
+    color: var(--md-gray-600);
+    font-weight: 500;
+}

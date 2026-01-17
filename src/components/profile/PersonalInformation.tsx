@@ -1,12 +1,14 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { FieldInput } from "../ui/reusable/fieldInput";
 import { UserPen, MailOpen, School, Hash, CaseUpper, ChevronsLeft, CheckCheck } from "lucide-react";
 import { Button } from "../ui/reusable/button";
+import { Radio } from "../ui/reusable/radio";
 
 export const PersonalInformation: FC = () => {
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
     const [patronymic, setPatronymic] = useState("")
+    const [gender, setGender] = useState<string>('')
     const [email, setEmail] = useState("")
     const [school, setSchool] = useState("")
     const [classNumber, setClassNumber] = useState("")
@@ -20,6 +22,10 @@ export const PersonalInformation: FC = () => {
         console.log("Back")
     }
 
+    const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setGender(e.target.value)
+    }
+
     return (
         <div className="profile-personal-container">
             <div className="profile-personal-title">Информация о Вас</div>
@@ -28,8 +34,21 @@ export const PersonalInformation: FC = () => {
 
             <div className="profile-personal-inputs-cols">
                 <div className="profile-personal-inputs-row">
-                    <div>Пол М</div>
-                    <div>Пол Ж</div>
+                    <fieldset>
+                        <legend>Укажите Ваш пол *</legend>
+
+                        <Radio radioLabel={"Мужской"}
+                               radioGroup={"profile-user-gender"}
+                               radioValue={"male"}
+                               radioChecked={gender === "male"}
+                               radioOnChange={handleRadioChange}/>
+
+                        <Radio radioLabel={"Женский"}
+                               radioGroup={"profile-user-gender"}
+                               radioValue={"female"}
+                               radioChecked={gender === "female"}
+                               radioOnChange={handleRadioChange}/>
+                    </fieldset>
                 </div>
 
                 <div className="profile-personal-inputs-row">
