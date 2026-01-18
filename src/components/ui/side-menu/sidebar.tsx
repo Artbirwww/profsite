@@ -100,28 +100,28 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "home",
             label: "Домой",
-            icon: <Home size={20}/>,
+            icon: <Home size={18}/>,
             path: "/",
             dataItem: "home",
         },
         {
             id: "testing",
             label: "Тестирование",
-            icon: <FileCheck size={20}/>,
+            icon: <FileCheck size={18}/>,
             path: "/tests",
             dataItem: "testing",
         },
         {
             id: "results",
             label: "Мои результаты",
-            icon: <PieChart size={20}/>,
+            icon: <PieChart size={18}/>,
             path: "/my-results",
             dataItem: "results",
         },
         {
             id: "profile",
             label: "Личный кабинет",
-            icon: <User size={20}/>,
+            icon: <User size={18}/>,
             path: "/profile",
             dataItem: "profile",
         },
@@ -132,7 +132,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "admin-list",
             label: "Список",
-            icon: <Users size={20}/>,
+            icon: <Users size={18}/>,
             path: "/admin/pupil-list",
             adminOnly: true,
             dataItem: "role-based-item",
@@ -140,7 +140,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "admin-upload",
             label: "Загрузить",
-            icon: <ArrowUpToLine size={20}/>,
+            icon: <ArrowUpToLine size={18}/>,
             path: "/admin/pupil-loading",
             adminOnly: true,
             dataItem: "role-based-item",
@@ -152,7 +152,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "teacher-1",
             label: "Учитель тест 1",
-            icon: <Apple size={20}/>,
+            icon: <Apple size={18}/>,
             path: "/teacher-test-1",
             teacherOnly: true,
             dataItem: "role-based-item",
@@ -160,7 +160,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "teacher-2",
             label: "Учитель тест 2",
-            icon: <Apple size={20}/>,
+            icon: <Apple size={18}/>,
             path: "/teacher-test-2",
             teacherOnly: true,
             dataItem: "role-based-item",
@@ -172,7 +172,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "specialist-list",
             label: "Специалист тест 1",
-            icon: <Apple size={20}/>,
+            icon: <Apple size={18}/>,
             path: "/speacialist-test-1",
             specialistOnly: true,
             dataItem: "role-based-item",
@@ -180,7 +180,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "specialist-upload",
             label: "Специалист тест 2",
-            icon: <Apple size={20}/>,
+            icon: <Apple size={18}/>,
             path: "/speacialist-test-2",
             specialistOnly: true,
             dataItem: "role-based-item",
@@ -238,10 +238,10 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             <div className="sidebar-header">
                 {!isCollapsed && (<div className="sidebar-header-title">LOGO</div>)}
                 {!isCollapsed && (<div className="sidebar-header-control--close" onClick={toggleSidebar} data-item="sidebar-menu">
-                    <div className="sidebar-header-control-icon--close"><X size={20}/></div> 
+                    <div className="sidebar-header-control-icon--close"><X size={18}/></div> 
                 </div>)}
                 {isCollapsed && (<div className="sidebar-header-control--open" onClick={toggleSidebar} data-item="sidebar-menu">
-                    <div className="sidebar-header-control-icon--open"><Menu size={20}/></div>
+                    <div className="sidebar-header-control-icon--open"><Menu size={18}/></div>
                 </div>)}
             </div>
 
@@ -252,51 +252,36 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
                 <div className="sidebar-nav-section">
                     {sidebarContent.mainItems}
                 </div>
-            </nav>
 
-            <div className="sidebar-separator"></div>
-
-            {/* Учительская навигация */}
-            {isTeacher && teacherItems.length > 0 && (<>
-                <nav className="sidebar-nav">
+                {isTeacher && teacherItems.length > 0 && (
                     <div className="sidebar-nav-section">
                         {sidebarContent.teacherItems}
                     </div>
-                </nav>
+                )}
 
-                <div className="sidebar-separator"></div>
-            </>)}
-
-            {/* Навигация для специалистов */}
-            {isSpecialist && specialistItems.length > 0 && (<>
-                <nav className="sidebar-nav">
+                {isSpecialist && specialistItems.length > 0 && (
                     <div className="sidebar-nav-section">
                         {sidebarContent.specialistItems}
                     </div>
-                </nav>
+                )}
 
-                <div className="sidebar-separator"></div>
-            </>)}
-
-            {/* Админская навигация */}
-            {isAdmin && adminItems.length > 0 && (<>
-                <nav className="sidebar-nav">
+                {isAdmin && adminItems.length > 0 && (
                     <div className="sidebar-nav-section">
                         {sidebarContent.adminItems}
                     </div>
-                </nav>
+                )}
+            </nav>
 
-                <div className="sidebar-separator"></div>
-            </>)}
+            <div className="sidebar-separator"></div>
 
             {/* Днище */}
             <div className="sidebar-footer">
                 {!isCollapsed && (<div className="sidebar-footer-info">{currentUser.role}</div>)}
                 {!isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
-                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={18}/></div>
                 </div>)}
                 {isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
-                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={18}/></div>
                 </div>)}
             </div>
         </aside>

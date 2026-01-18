@@ -9,7 +9,7 @@ interface ButtonProps {
     buttonLabel?: string                                        // Текст button
     buttonIcon?: ReactNode                                      // Иконка button
     iconPosition?: "left" | "right" | "center"                  // Расположение иконки
-    buttonType?: "default" | "outline" | "link"                 // Тип button
+    buttonType?: "default" | "link"                 // Тип button
     buttonFunction?: (e: MouseEvent<HTMLButtonElement>) => void // Функция для выполнения
     isDisabled?: boolean                                        // Заблокирована ли?
     name?: string                                               // Имя button

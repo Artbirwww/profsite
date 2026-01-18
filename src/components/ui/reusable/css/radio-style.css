@@ -11,6 +11,17 @@ input[type="radio"] {
     clip: rect(0 0 0 0);
     overflow: hidden;
 }
+fieldset {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+legend {
+    margin: 0 0 5px 10px;
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
+}
 
 
 
@@ -30,12 +41,12 @@ input[type="radio"] {
 .custom-radio-visual-box {
     width: 16px;
     height: 16px;
-    border: 2px solid var(--md-gray-300);
+    border: 2px solid var(--color-structure-200);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    transition: all .3s ease;
     background-color: transparent;
     flex-shrink: 0;
 }
@@ -43,10 +54,10 @@ input[type="radio"] {
     content: "";
     width: 8px;
     height: 8px;
-    background-color: var(--default-color);
+    background-color: var(--color-accent-primary);
     border-radius: 50px;
     transform: scale(0);
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    transition: all .3s ease;
 }
 .custom-radio-text {
     font-size: var(--fs-base);
@@ -57,13 +68,13 @@ input[type="radio"] {
 
 /* Состояние при checked */
 .custom-radio:checked + .custom-radio-label .custom-radio-visual-box {
-    border: 2px solid var(--default-color);
+    border: 2px solid var(--color-accent-primary);
 }
 .custom-radio:checked + .custom-radio-label .custom-radio-visual-box::after {
     transform: scale(1);
 }
 .custom-radio:focus-visible + .custom-radio-label .custom-radio-visual-box {
-    outline: 2px solid var(--default-color);
+    outline: 2px solid var(--color-accent-primary);
     outline-offset: 2px;
 }
 
@@ -75,13 +86,13 @@ input[type="radio"] {
     opacity: 0.6;
 }
 .custom-radio:disabled + .custom-radio-label .custom-radio-visual-box {
-    color: var(--md-gray-600);
-    background-color: var(--md-gray-300);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
 }
 
 
 
 /* Состояние ошибки для контейнера и текста */
 .custom-radio-label-dirty {
-    color: var(--color-error-main) !important;
+    color: var(--color-accent-danger) !important;
 }

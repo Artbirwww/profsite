@@ -61,11 +61,11 @@ input:-webkit-autofill:focus {
     gap: 5px;
 }
 .custom-input-wrapper label {
-    font-size: var(--fs-base);
-    font-weight: 500;
-    color: var(--md-gray-600);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
     padding-left: 10px;
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    transition: all .3s ease;
 }
 .custom-input-container {
     display: flex;
@@ -75,28 +75,28 @@ input:-webkit-autofill:focus {
     position: absolute;
     top: 12px;
     left: 15px;
-    color: var(--md-gray-500);
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    color: var(--color-text-tertiary);
+    transition: all .3s ease;
 }
 .custom-input-password-visibility {
     position: absolute;
     top: 13px;
     right: 15px;
-    color: var(--md-gray-500);
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    color: var(--color-text-tertiary);
+    transition: all .3s ease;
 }
 .custom-input-container input {
-    background: var(--md-gray-100);
+    background: var(--color-structure-300);
     padding: 10px;
     min-height: 45px;
-    border-radius: 10px;
-    font-size: var(--fs-base);
-    color: var(--color-black) !important;
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    border-radius: 15px;
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary) !important;
+    transition: all .3s ease;
 }
 .custom-input-container input::placeholder {
-    color: var(--md-gray-500);
-    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    color: var(--color-text-tertiary);
+    transition: all .3s ease;
     opacity: 1;
 }
 
@@ -105,19 +105,19 @@ input:-webkit-autofill:focus {
 /* Стили при фокусе и валидации input */
 .custom-input-container input:focus,
 .custom-input-container input:valid {
-    color: var(--md-gray-400);
     opacity: 1;
-    background: var(--default-hover-color);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-hover);
 }
 .custom-input-container input:focus ~ .custom-input-icon,
 .custom-input-container input:valid ~ .custom-input-icon {
-    color: var(--default-color);
     transform: scale(1.1);
+    color: var(--color-accent-primary);
 }
 .custom-input-container input:focus ~ .custom-input-password-visibility,
 .custom-input-container input:valid ~ .custom-input-password-visibility,
 .custom-input-container input:focus::placeholder {
-    color: var(--default-color);
+    color: var(--color-accent-primary);
 }
 
 
@@ -127,15 +127,15 @@ input:-webkit-autofill:focus {
 .custom-input-dirty input:focus ~ .custom-input-password-visibility,
 .custom-input-dirty input:valid ~ .custom-input-password-visibility,
 .custom-input-dirty input:focus::placeholder {
-    color: var(--color-error-main) !important;
+    color: var(--color-accent-danger) !important;
 }
 .custom-input-dirty input,
 .custom-input-dirty input:focus,
 .custom-input-dirty input:valid {
-    background: var(--color-error-background) !important;
+    background: var(--color-accent-danger-hover) !important;
 }
 .custom-input-dirty input:focus ~ .custom-input-icon,
 .custom-input-dirty input:valid ~ .custom-input-icon {
-    color: var(--color-error-main) !important;
     transform: scale(1.1);
+    color: var(--color-accent-danger) !important;
 }

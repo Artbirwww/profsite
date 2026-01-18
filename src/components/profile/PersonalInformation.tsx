@@ -28,7 +28,7 @@ export const PersonalInformation: FC = () => {
 
     return (
         <div className="profile-personal-container">
-            <div className="profile-personal-title">Информация о Вас</div>
+            <h3 className="profile-personal-title">Персональная информация</h3>
 
             <div className="profile-separator"></div>
 
@@ -121,16 +121,11 @@ export const PersonalInformation: FC = () => {
                 </div>
 
                 <div className="profile-personal-inputs-row">
-                    <div>
-                        <Button buttonLabel={"Назад"}
-                                buttonIcon={<ChevronsLeft size={20}/>}
-                                buttonType={"outline"}
-                                buttonFunction={handleBackClick}/>
-                    </div>
 
                     <div>
                         <Button buttonLabel={"Сохранить"}
                                 buttonIcon={<CheckCheck size={20}/>}
+                                isDisabled={false}
                                 buttonFunction={handleSaveClick}/>
                     </div>
                 </div>
