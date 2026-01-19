@@ -73,23 +73,26 @@ input:-webkit-autofill:focus {
 }
 .custom-input-icon {
     position: absolute;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 15px;
     color: var(--color-text-tertiary);
     transition: all .3s ease;
 }
 .custom-input-password-visibility {
     position: absolute;
-    top: 13px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 15px;
     color: var(--color-text-tertiary);
     transition: all .3s ease;
 }
 .custom-input-container input {
-    background: var(--color-structure-300);
     padding: 10px;
     min-height: 45px;
+    height: 45px;
     border-radius: 15px;
+    border: 2px solid var(--color-structure-100);
     font-size: var(--font-size-base);
     color: var(--color-text-primary) !important;
     transition: all .3s ease;
@@ -107,11 +110,11 @@ input:-webkit-autofill:focus {
 .custom-input-container input:valid {
     opacity: 1;
     color: var(--color-accent-primary);
-    background: var(--color-accent-primary-hover);
+    border: 2px solid var(--color-accent-primary);
 }
 .custom-input-container input:focus ~ .custom-input-icon,
 .custom-input-container input:valid ~ .custom-input-icon {
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1); 
     color: var(--color-accent-primary);
 }
 .custom-input-container input:focus ~ .custom-input-password-visibility,
@@ -123,19 +126,6 @@ input:-webkit-autofill:focus {
 
 
 /* Стили если был задет input но в него не чего не ввели и он важен для заполнения */
-.custom-input-label-dirty,
-.custom-input-dirty input:focus ~ .custom-input-password-visibility,
-.custom-input-dirty input:valid ~ .custom-input-password-visibility,
-.custom-input-dirty input:focus::placeholder {
-    color: var(--color-accent-danger) !important;
-}
-.custom-input-dirty input,
-.custom-input-dirty input:focus,
-.custom-input-dirty input:valid {
-    background: var(--color-accent-danger-hover) !important;
-}
-.custom-input-dirty input:focus ~ .custom-input-icon,
-.custom-input-dirty input:valid ~ .custom-input-icon {
-    transform: scale(1.1);
+.custom-input-label-dirty {
     color: var(--color-accent-danger) !important;
 }

@@ -3,6 +3,7 @@ import { FieldInput } from "../ui/reusable/fieldInput";
 import { UserPen, MailOpen, School, Hash, CaseUpper, ChevronsLeft, CheckCheck } from "lucide-react";
 import { Button } from "../ui/reusable/button";
 import { Radio } from "../ui/reusable/radio";
+import { Dropdown } from "../ui/reusable/dropdown";
 
 export const PersonalInformation: FC = () => {
     const [name, setName] = useState("")
@@ -11,8 +12,19 @@ export const PersonalInformation: FC = () => {
     const [gender, setGender] = useState<string>('')
     const [email, setEmail] = useState("")
     const [school, setSchool] = useState("")
-    const [classNumber, setClassNumber] = useState("")
+    const [classNumber, setClassNumber] = useState<string | number>()
     const [classLetter, setClassLetter] = useState("")
+
+
+    const classNumberOptions = [
+        { value: 5, label: "5" },
+        { value: 6, label: "6" },
+        { value: 7, label: "7" },
+        { value: 8, label: "8" },
+        { value: 9, label: "9" },
+        { value: 10, label: "10" },
+        { value: 11, label: "11" },
+    ]
 
     const handleSaveClick = () => {
         console.log("Data saved")
@@ -90,8 +102,13 @@ export const PersonalInformation: FC = () => {
                 </div>
 
                 <div className="profile-personal-inputs-row">
-                    <div>Национальность</div>
-                    <div>День рождения</div>
+                    <div>
+                        
+                    </div>
+
+                    <div>
+                        День рождения
+                    </div>
                 </div>
 
                 <div className="profile-personal-inputs-row">
@@ -104,11 +121,11 @@ export const PersonalInformation: FC = () => {
                     </div>
 
                     <div>
-                        <FieldInput inputLabel={"Номер класса"}
-                                    inputIcon={<Hash size={20}/>}
-                                    inputPlaceholder={"1...11"}
-                                    inputValue={classNumber}
-                                    inputOnChange={setClassNumber}/>
+                        <Dropdown dropdownLabel={"Номер класса"}
+                                  dropdownOptions={classNumberOptions}
+                                  dropdownSelected={classNumber}
+                                  dropdownIcon={<Hash size={20}/>}
+                                  optionOnSelect={(opt) => setClassNumber(opt.value)}/>
                     </div>
 
                     <div>
