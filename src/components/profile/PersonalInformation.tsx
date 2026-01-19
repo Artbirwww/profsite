@@ -4,6 +4,8 @@ import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck 
 import { Button } from "../ui/reusable/button";
 import { Radio } from "../ui/reusable/radio";
 import { Dropdown } from "../ui/reusable/dropdown";
+import { DatePicker } from "../ui/reusable/datePicker";
+import { Temporal } from "@js-temporal/polyfill";
 
 export const PersonalInformation: FC = () => {
     const [name, setName] = useState<string>("")
@@ -12,6 +14,7 @@ export const PersonalInformation: FC = () => {
     const [gender, setGender] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [nationality, setNationality] = useState<string | number>("")
+    const [birthDate, setBirthDate] = useState<Temporal.PlainDate>()
     const [school, setSchool] = useState<string>("")
     const [classNumber, setClassNumber] = useState<string | number>("")
     const [classLetter, setClassLetter] = useState<string>("")
@@ -47,6 +50,10 @@ export const PersonalInformation: FC = () => {
 
     const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
         setGender(e.target.value)
+    }
+
+    const handleDateSelect = (date: Temporal.PlainDate) => {
+        setBirthDate(date)
     }
 
     return (
@@ -122,7 +129,10 @@ export const PersonalInformation: FC = () => {
                     </div>
 
                     <div>
-                        День рождения
+                        <DatePicker datePickerLabel={"Дата рождения"}
+                                    datePickerSelected={birthDate}
+                                    onDateSelect={handleDateSelect}
+                                    datePickerPlaceholder={"Нажмите, чтобы выбрать"}/>
                     </div>
                 </div>
 
