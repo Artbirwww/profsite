@@ -63,6 +63,7 @@
     margin: 0;
     list-style: none;
     z-index: 100;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
 }
 .custom-dropdown-item {
     display: flex;

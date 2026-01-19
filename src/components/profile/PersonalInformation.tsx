@@ -1,19 +1,20 @@
 import { ChangeEvent, FC, useState } from "react";
 import { FieldInput } from "../ui/reusable/fieldInput";
-import { UserPen, MailOpen, School, Hash, CaseUpper, ChevronsLeft, CheckCheck } from "lucide-react";
+import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react";
 import { Button } from "../ui/reusable/button";
 import { Radio } from "../ui/reusable/radio";
 import { Dropdown } from "../ui/reusable/dropdown";
 
 export const PersonalInformation: FC = () => {
-    const [name, setName] = useState("")
-    const [surname, setSurname] = useState("")
-    const [patronymic, setPatronymic] = useState("")
-    const [gender, setGender] = useState<string>('')
-    const [email, setEmail] = useState("")
-    const [school, setSchool] = useState("")
-    const [classNumber, setClassNumber] = useState<string | number>()
-    const [classLetter, setClassLetter] = useState("")
+    const [name, setName] = useState<string>("")
+    const [surname, setSurname] = useState<string>("")
+    const [patronymic, setPatronymic] = useState<string>("")
+    const [gender, setGender] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
+    const [nationality, setNationality] = useState<string>("")
+    const [school, setSchool] = useState<string>("")
+    const [classNumber, setClassNumber] = useState<string>("")
+    const [classLetter, setClassLetter] = useState<string>("")
 
 
     const classNumberOptions = [
@@ -24,6 +25,16 @@ export const PersonalInformation: FC = () => {
         { value: 9, label: "9" },
         { value: 10, label: "10" },
         { value: 11, label: "11" },
+    ]
+
+    const nationalityOptions = [
+        { value: "aboba", label: "aboba" },
+        { value: "aboba1", label: "aboba1" },
+        { value: "aboba2", label: "aboba2" },
+        { value: "aboba3", label: "aboba3" },
+        { value: "aboba4", label: "aboba4" },
+        { value: "aboba5", label: "aboba5" },
+        { value: "aboba6", label: "aboba6" },
     ]
 
     const handleSaveClick = () => {
@@ -103,7 +114,11 @@ export const PersonalInformation: FC = () => {
 
                 <div className="profile-personal-inputs-row">
                     <div>
-                        
+                        <Dropdown dropdownLabel={"Национальность"}
+                                  dropdownOptions={nationalityOptions}
+                                  dropdownSelected={nationality}
+                                  dropdownIcon={<PersonStanding size={20}/>}
+                                  optionOnSelect={(opt) => setNationality(opt.value)}/>
                     </div>
 
                     <div>
