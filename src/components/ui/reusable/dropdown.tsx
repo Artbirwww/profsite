@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react"
 
 // Интерфейс для элемента dropdown
 export interface DropdownOption {
-    value: string
+    value: string | number
     label: string
 }
 

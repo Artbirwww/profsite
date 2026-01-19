@@ -11,9 +11,9 @@ export const PersonalInformation: FC = () => {
     const [patronymic, setPatronymic] = useState<string>("")
     const [gender, setGender] = useState<string>("")
     const [email, setEmail] = useState<string>("")
-    const [nationality, setNationality] = useState<string>("")
+    const [nationality, setNationality] = useState<string | number>("")
     const [school, setSchool] = useState<string>("")
-    const [classNumber, setClassNumber] = useState<string>("")
+    const [classNumber, setClassNumber] = useState<string | number>("")
     const [classLetter, setClassLetter] = useState<string>("")
 
 
