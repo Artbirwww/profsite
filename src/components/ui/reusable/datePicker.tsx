@@ -3,7 +3,7 @@ import "./css/date-picker-style.css"
 import "@js-temporal/polyfill" // npm install @js-temporal/polyfill
 import { Temporal } from "@js-temporal/polyfill"
 import { ChevronLeft, ChevronRight, CalendarRange } from "lucide-react"
-import { FC, useRef, useState, FocusEvent, MouseEvent, ReactNode, ChangeEvent } from "react"
+import { FC, useRef, useState, FocusEvent, MouseEvent, ReactNode, ChangeEvent, useEffect } from "react"
 
 interface DatePickerProps {
     datePickerLabel?: string
@@ -22,12 +22,26 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
     const [viewDate, setViewDate] = useState<Temporal.PlainDate>((datePickerSelected || Temporal.Now.plainDateTimeISO()) as Temporal.PlainDate)
     
     const currentYear = Temporal.Now.plainDateTimeISO().year
-    const years = Array.from({ length: 101 }, (_, i) => currentYear - i)
+    const years = Array.from({ length: 99 }, (_, i) => currentYear - i)
     
     const containerRef = useRef<HTMLDivElement>(null)
 
     const hasValue = !!datePickerSelected
     
+    useEffect(() => {
+        const handleClickOutside = (e: Event) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node))
+                setIsOpen(false)
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        document.addEventListener("touchstart", handleClickOutside)
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+            document.removeEventListener("touchstart", handleClickOutside)
+        }
+    }, [])
 
     const toggleDatePicker = () => {
         if (!isDisabled)
@@ -79,7 +93,7 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
             days.push(
                 <div key={d}
                      onClick={() => handleDateClick(d)}
-                     className={`calendaer-day ${isSelected ? "calendar-day-selected" : ""}`}>
+                     className={`calendar-day ${isSelected ? "calendar-day-selected" : ""}`}>
                     
                     {d}
                 </div>
@@ -104,10 +118,10 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
                      style={{paddingLeft: `${datePickerIcon ? "45px" : "20px"}`}}>
 
                     <span className="custom-date-picker-text">
-                        {datePickerSelected ? datePickerSelected.toLocaleString("ru-RU") : datePickerPlaceholder}
+                        {datePickerSelected ? datePickerSelected.toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" }) : datePickerPlaceholder}
                     </span>
 
-                    {datePickerIcon && <div className="date-picker-icon">{datePickerIcon}</div>}
+                    {datePickerIcon && <div className="custom-date-picker-icon">{datePickerIcon}</div>}
                 </div>
             </div>
 
@@ -140,7 +154,7 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
                         { ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(d => <div key={d}>{d}</div>) }
                     </div>
 
-                    <div className="calendar-grind">
+                    <div className="calendar-grid">
                         {renderDays()}
                     </div>
                 </div>

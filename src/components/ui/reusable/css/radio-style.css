@@ -38,6 +38,11 @@ legend {
     font-family: inherit;
     gap: 10px;
 }
+.custom-radio-text {
+    font-size: var(--font-size-base) !important;
+    color: var(--color-text-primary) !important;
+    font-weight: var(--font-weight-semibold) !important;
+}
 .custom-radio-visual-box {
     width: 16px;
     height: 16px;

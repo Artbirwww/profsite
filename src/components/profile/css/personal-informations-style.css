@@ -19,12 +19,12 @@
 .profile-personal-inputs-cols {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
 }
 .profile-personal-inputs-row {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 40px;
     width: 100%;
 }
 .profile-personal-inputs-row > div {

@@ -38,6 +38,10 @@ export const PersonalInformation: FC = () => {
         { value: "aboba4", label: "aboba4" },
         { value: "aboba5", label: "aboba5" },
         { value: "aboba6", label: "aboba6" },
+        { value: "aboba6", label: "aboba6" },
+        { value: "aboba6", label: "aboba6" },
+        { value: "aboba6", label: "aboba6" },
+        { value: "aboba6", label: "aboba6" },
     ]
 
     const handleSaveClick = () => {
@@ -131,8 +135,7 @@ export const PersonalInformation: FC = () => {
                     <div>
                         <DatePicker datePickerLabel={"Дата рождения"}
                                     datePickerSelected={birthDate}
-                                    onDateSelect={handleDateSelect}
-                                    datePickerPlaceholder={"Нажмите, чтобы выбрать"}/>
+                                    onDateSelect={handleDateSelect}/>
                     </div>
                 </div>
 

@@ -94,6 +94,7 @@ input:-webkit-autofill:focus {
     border-radius: 15px;
     border: 2px solid var(--color-structure-100);
     font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary) !important;
     transition: all .3s ease;
 }
@@ -110,7 +111,7 @@ input:-webkit-autofill:focus {
 .custom-input-container input:valid {
     opacity: 1;
     color: var(--color-accent-primary);
-    border: 2px solid var(--color-accent-primary);
+    border: 2px solid var(--color-accent-primary-active);
 }
 .custom-input-container input:focus ~ .custom-input-icon,
 .custom-input-container input:valid ~ .custom-input-icon {

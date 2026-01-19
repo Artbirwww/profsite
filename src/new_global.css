@@ -31,7 +31,7 @@
     --color-accent-primary-lighter: rgba(139, 92, 246, 0.05);
     --color-accent-primary-dark: #7C3AED;
     --color-accent-primary-hover: rgba(124, 58, 237, .3);
-    --color-accent-primary-active: #6D28D9;
+    --color-accent-primary-active: rgba(109, 40, 217, .5);
 
     /* Вторичный акцент - бирюзовый/синий */
     --color-accent-secondary: #06A77D;
@@ -152,7 +152,7 @@
     /* Дополнительный (синий) */
 
     /* Тени (Светлая тема) */
-    --shadow-card: 0 2px 8px rgba(43, 45, 66, 0.08);
+    --shadow-card: 0 2px 10px rgba(43, 45, 66, 0.1);
     --shadow-card-hover: 0 4px 16px rgba(43, 45, 66, 0.12);
     --shadow-header: 0 1px 3px rgba(43, 45, 66, 0.1);
     --shadow-modal: 0 10px 40px rgba(43, 45, 66, 0.15);
