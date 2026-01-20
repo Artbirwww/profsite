@@ -32,10 +32,6 @@ import TemperamentTest from "./components/tests/temperament/TemperamentTest";
 import MainLayout from "./components/layout/MainLayout";
 import { ProtectedRoute } from "./components/routing/ProtectedRoute";
 
-
-
-
-
 import { Layout } from "./components/layout/Layout";
 
 // Хуки
@@ -48,8 +44,6 @@ import { Home } from './components/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
-
-
 
 // ——— Главный компонент App ———
 export default function App() {
