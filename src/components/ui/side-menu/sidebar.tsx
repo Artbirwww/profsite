@@ -53,7 +53,7 @@ const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollaps
 export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle, userData }) => {
     const location = useLocation()
     const navigate = useNavigate()
-    const { logout } = useAuth()
+    const { logout, getRoles } = useAuth()
 
     // Локальное состояние для управления свернутостью
     const [isCollapsed, setIsCollapsed] = useState(collapsed)
