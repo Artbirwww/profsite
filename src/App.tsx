@@ -80,8 +80,6 @@ export default function App() {
             <Route path="/my-results" element={<ResultsPage />} />
             <Route path="/my-results/:testType" element={<ResultsPage />} />
 
-            {/*Личный Кабинет*/}
-            <Route path="/profile" element={<UserProfile />} />
           </Route>
         </Route>
         {/* Fallback */}
