@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 @layer properties {
     @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
@@ -197,16 +201,6 @@
     abbr:where([title]) {
         -webkit-text-decoration: underline dotted;
         text-decoration: underline dotted;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-size: inherit;
-        font-weight: inherit;
     }
 
     a {
@@ -449,49 +443,6 @@
     body {
         background-color: var(--background);
         color: var(--foreground);
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h1 {
-        font-size: var(--text-2xl);
-        font-weight: var(--font-weight-medium);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h2 {
-        font-size: var(--text-xl);
-        font-weight: var(--font-weight-medium);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h3 {
-        font-size: var(--text-lg);
-        font-weight: var(--font-weight-medium);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h4 {
-        font-size: var(--text-base);
-        font-weight: var(--font-weight-medium);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) p {
-        font-size: var(--text-base);
-        font-weight: var(--font-weight-normal);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label,
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
-        font-size: var(--text-base);
-        font-weight: var(--font-weight-medium);
-        line-height: 1.5;
-    }
-
-    :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) input {
-        font-size: var(--text-base);
-        font-weight: var(--font-weight-normal);
-        line-height: 1.5;
     }
 }
 

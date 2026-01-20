@@ -1,0 +1,17 @@
+.profile-base {
+    display: flex;
+    height: 100%;
+    position: relative;
+
+    border-radius: 20px;
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-structure-100);
+}
+.profile-options {
+    flex: 0 0 250px;
+}
+.profile-content {
+    flex: 1;
+    min-width: 0;
+}
+

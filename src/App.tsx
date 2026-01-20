@@ -1,36 +1,27 @@
-// src/App.tsx
-import {
-  Routes,
-  Route,
-  Navigate,
-  useParams,
-  useNavigate,
-} from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom"
 
 // Auth components
-import { Login } from "./components/auth/Login/Login";
-import { Registration } from "./components/auth/Registration/Registration";
+import { Login } from "./components/auth/Login/Login"
+import { Registration } from "./components/auth/Registration/Registration"
 
 // Test components
-import { Dashboard } from "./components/tests/dashboard/Dashboard";
-import { TestPage } from "./components/tests/dashboard/TestPage";
-import { TestPageNew } from "./components/tests/dashboard/TestPageNew";
-import { ResultsPage } from "./components/tests/resultspage/ResultsPage";
+import { Dashboard } from "./components/tests/dashboard/Dashboard"
+import { TestPage } from "./components/tests/dashboard/TestPage"
+import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
+import { ResultsPage } from "./components/tests/resultspage/ResultsPage"
 
 // Профиль польователя
-import { UserProfile } from "./components/profile/UserProfile";
+import { Profile } from "./components/profile/Profile"
 
 // Individual test components
-import EngineeringThinkingTest from "./components/tests/engineer/EngineeringThinkingTest";
-import GroupRolesTest from "./components/tests/grouproles/GroupRolesTest";
-import IqPotentialTest from "./components/tests/iqpotencial/iqpotencial";
-import ProfessionalOrientationTest from "./components/tests/profsphere/ProfessionalOrientationTest";
-import TemperamentTest from "./components/tests/temperament/TemperamentTest";
+import EngineeringThinkingTest from "./components/tests/engineer/EngineeringThinkingTest"
+import GroupRolesTest from "./components/tests/grouproles/GroupRolesTest"
+import IqPotentialTest from "./components/tests/iqpotencial/iqpotencial"
+import ProfessionalOrientationTest from "./components/tests/profsphere/ProfessionalOrientationTest"
+import TemperamentTest from "./components/tests/temperament/TemperamentTest"
 
 // Layout & routing
-import MainLayout from "./components/layout/MainLayout";
-import { ProtectedRoute } from "./components/routing/ProtectedRoute";
+import { ProtectedRoute } from "./components/routing/ProtectedRoute"
 
 import { Layout } from "./components/layout/Layout";
 
@@ -40,7 +31,7 @@ import { useApp } from './contexts/AppContext';
 import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
 import { PupilsList } from './components/admin/pupils/PupilsList';
 import AutoRegisterForm from './components/admin/AutoRegisterForm';
-import { Home } from './components/Home';
+import { Home } from './components/home/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";

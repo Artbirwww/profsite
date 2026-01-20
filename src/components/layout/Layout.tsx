@@ -6,15 +6,15 @@ import { Sidebar } from "../ui/side-menu/sidebar"
 import { useAuth } from "../../contexts/AuthContext"
 
 export const Layout: FC = () => {
-    const {getToken} = useAuth()
-    
+    const { getToken } = useAuth()
+
     return (
         <div className="layout-base min-h-screen">
-            {getToken() &&
+            {getToken() && (
                 <div className="layout-sidebar">
                     <Sidebar/>
                 </div>
-            }
+            )}
 
             <div className="layout-content">
                 <Outlet/>

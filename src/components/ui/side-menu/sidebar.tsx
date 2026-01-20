@@ -10,19 +10,19 @@ import { useAuth } from "../../../contexts/AuthContext"
 
 // Интерфейс для элемента сайдбара (кнопки)
 interface SidebarItem {
-    id: string          // Id
-    label: string       // Текст кнопки
-    icon: ReactNode     // Иконка кнопки
-    path: string        // Путь куда отправит кнопка
-    dataItem?: string   // Для тестирования / селекторов
-    adminOnly?: boolean // Доступ только админам
+    id: string               // Id
+    label: string            // Текст кнопки
+    icon: ReactNode          // Иконка кнопки
+    path: string             // Путь куда отправит кнопка
+    dataItem?: string        // Для тестирования / селекторов
+    adminOnly?: boolean      // Доступ только админам
+    teacherOnly?: boolean    // Доступ только учителям
+    specialistOnly?: boolean // Доступ только спициалистов
 }
 
 // Интерфейс для данных пользователя
 interface UserData {
-    email?: string                                      // Почта (Не используется, но на всякий)
-    name?: string                                       // Имя (Не используется, но на всякий)
-    type?: "admin" | "pupil" | "specialist" | "default" // Тип / Роль
+    role?: "admin" | "student" | "specialist" | "teacher" // Тип / Роль
 }
 
 // Интерфейс для пропсов сайдбара
@@ -64,87 +64,128 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
     const currentUser = useMemo(() => {
         if (userData) {
             return {
-                name: userData.name,
-                email: userData.email,
-                type: userData.type,
+                role: userData.role,
             }
         }
         
         // Значения по умолчанию
         return {
-            name: "guest",
-            email: "guestGuestGuest@gmail.com",
-            type: "admin",
+            role: "admin",
         }
     }, [userData])
 
     // Проверка является ли пользователь админом
     // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
     const isAdmin = useMemo(() => 
-        currentUser.type === "admin",
-        [currentUser.type]
+        currentUser.role === "admin",
+        [currentUser.role]
+    )
+
+    // Проверка является ли пользователь учителем
+    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
+    const isTeacher = useMemo(() =>
+        currentUser.role === "teacher",
+        [currentUser.role]
+    )
+
+    // Проверка является ли пользователь специалистом
+    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
+    const isSpecialist = useMemo(() =>
+        currentUser.role === "specialist",
+        [currentUser.role]
     )
 
     //Основные элементы навигации (Доступные всем)
     const mainItems = useMemo<SidebarItem[]>(() => [
         {
-            id: "dashboard",
+            id: "home",
             label: "Домой",
-            icon: <Home size={20}/>,
-            path: "/home",
-            dataItem: "dashboard",
+            icon: <Home size={18}/>,
+            path: "/",
+            dataItem: "home",
         },
         {
             id: "testing",
             label: "Тестирование",
-            icon: <FileCheck size={20}/>,
-            path: "/dashboard",
+            icon: <FileCheck size={18}/>,
+            path: "/tests",
             dataItem: "testing",
         },
         {
             id: "results",
             label: "Мои результаты",
-            icon: <PieChart size={20}/>,
+            icon: <PieChart size={18}/>,
             path: "/my-results",
             dataItem: "results",
         },
         {
             id: "profile",
             label: "Личный кабинет",
-            icon: <User size={20}/>,
+            icon: <User size={18}/>,
             path: "/profile",
             dataItem: "profile",
         },
     ], [])
 
     // Элементы навигации (Доступные Админам)
-    // TODO: Перелопатать маршруты до нужных !!!
     const adminItems = useMemo<SidebarItem[]>(() => isAdmin ? [
         {
             id: "admin-list",
             label: "Список",
-            icon: <Users size={20}/>,
+            icon: <Users size={18}/>,
             path: "/admin/pupil-list",
             adminOnly: true,
-            dataItem: "admin",
+            dataItem: "role-based-item",
         },
         {
             id: "admin-upload",
             label: "Загрузить",
-            icon: <ArrowUpToLine size={20}/>,
+            icon: <ArrowUpToLine size={18}/>,
             path: "/admin/pupil-loading",
             adminOnly: true,
-            dataItem: "admin",
-        },
-        {
-            id: "admin-aboba",
-            label: "Тест",
-            icon: <Apple size={20}/>,
-            path: "/admin-aboba",
-            adminOnly: true,
-            dataItem: "admin",
+            dataItem: "role-based-item",
         },
     ] : [], [isAdmin])
+
+    // Элементы навигации (Доступные учителям)
+    const teacherItems = useMemo<SidebarItem[]>(() => isTeacher ? [
+        {
+            id: "teacher-1",
+            label: "Учитель тест 1",
+            icon: <Apple size={18}/>,
+            path: "/teacher-test-1",
+            teacherOnly: true,
+            dataItem: "role-based-item",
+        },
+        {
+            id: "teacher-2",
+            label: "Учитель тест 2",
+            icon: <Apple size={18}/>,
+            path: "/teacher-test-2",
+            teacherOnly: true,
+            dataItem: "role-based-item",
+        },
+    ] : [], [isTeacher])
+
+    // Элементы навигации (Доступные специалистам)
+    const specialistItems = useMemo<SidebarItem[]>(() => isSpecialist ? [
+        {
+            id: "specialist-list",
+            label: "Специалист тест 1",
+            icon: <Apple size={18}/>,
+            path: "/speacialist-test-1",
+            specialistOnly: true,
+            dataItem: "role-based-item",
+        },
+        {
+            id: "specialist-upload",
+            label: "Специалист тест 2",
+            icon: <Apple size={18}/>,
+            path: "/speacialist-test-2",
+            specialistOnly: true,
+            dataItem: "role-based-item",
+        },
+    ] : [], [isSpecialist])
 
     // Переключение состояния сайдбара (свернут / развернут)
     const toggleSidebar = useCallback(() => {
@@ -183,11 +224,13 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         [renderSidebarItem]
     )
 
-    // Мемоизированный контент сайдбара (хранение дефолтных и админских отрендереных кнопок)
+    // Мемоизированный контент сайдбара (хранение дефолтных, админских, учительских и для специалистов отрендереных кнопок)
     const sidebarContent = useMemo(() => ({
         mainItems: renderSidebarItems(mainItems),
         adminItems: renderSidebarItems(adminItems),
-    }), [mainItems, adminItems, renderSidebarItems])
+        teacherItems: renderSidebarItems(teacherItems),
+        specialistItems: renderSidebarItems(specialistItems),
+    }), [mainItems, adminItems, teacherItems, specialistItems, renderSidebarItems])
 
     return (
         <aside className={`sidebar-container ${isCollapsed ? "sidebar-collapsed" : ""} ${position}`}>
@@ -195,10 +238,10 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             <div className="sidebar-header">
                 {!isCollapsed && (<div className="sidebar-header-title">LOGO</div>)}
                 {!isCollapsed && (<div className="sidebar-header-control--close" onClick={toggleSidebar} data-item="sidebar-menu">
-                    <div className="sidebar-header-control-icon--close"><X size={20}/></div> 
+                    <div className="sidebar-header-control-icon--close"><X size={18}/></div> 
                 </div>)}
                 {isCollapsed && (<div className="sidebar-header-control--open" onClick={toggleSidebar} data-item="sidebar-menu">
-                    <div className="sidebar-header-control-icon--open"><Menu size={20}/></div>
+                    <div className="sidebar-header-control-icon--open"><Menu size={18}/></div>
                 </div>)}
             </div>
 
@@ -209,29 +252,36 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
                 <div className="sidebar-nav-section">
                     {sidebarContent.mainItems}
                 </div>
+
+                {isTeacher && teacherItems.length > 0 && (
+                    <div className="sidebar-nav-section">
+                        {sidebarContent.teacherItems}
+                    </div>
+                )}
+
+                {isSpecialist && specialistItems.length > 0 && (
+                    <div className="sidebar-nav-section">
+                        {sidebarContent.specialistItems}
+                    </div>
+                )}
+
+                {isAdmin && adminItems.length > 0 && (
+                    <div className="sidebar-nav-section">
+                        {sidebarContent.adminItems}
+                    </div>
+                )}
             </nav>
 
             <div className="sidebar-separator"></div>
 
-            {/* Админская навигация */}
-            {isAdmin && adminItems.length > 0 && (<>
-                <nav className="sidebar-nav">
-                    <div className="sidebar-nav-section">
-                        {sidebarContent.adminItems}
-                    </div>
-                </nav>
-
-                <div className="sidebar-separator"></div>
-            </>)}
-
             {/* Днище */}
             <div className="sidebar-footer">
-                {!isCollapsed && (<div className="sidebar-footer-info">{currentUser.type}</div>)}
+                {!isCollapsed && (<div className="sidebar-footer-info">{currentUser.role}</div>)}
                 {!isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
-                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={18}/></div>
                 </div>)}
                 {isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
-                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={20}/></div>
+                    <div className="sidebar-footer-control-icon--logout"><DoorOpen size={18}/></div>
                 </div>)}
             </div>
         </aside>

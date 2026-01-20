@@ -1,0 +1,133 @@
+/* Кастомные стили для dropdown */
+.custom-dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+}
+.custom-dropdown-wrapper label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    padding-left: 10px;
+    transition: all .3s ease;
+}
+.custom-dropdown-container {
+    position: relative;
+    width: 100%;
+}
+.custom-dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px 10px 20px;
+    min-height: 45px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid var(--color-structure-100);
+    color: var(--color-text-primary);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .3s ease;
+    user-select: none;
+}
+.custom-dropdown-text {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+.custom-dropdown-selected-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.custom-dropdown-chevron {
+    transition: transform .3s ease;
+}
+.custom-dropdown-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    color: var(--color-text-tertiary);
+    transition: all .3s ease;
+}
+
+
+
+/* Стили для элементов dropdown */
+.custom-dropdown-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 5px;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-structure-100);
+    border-radius: 15px;
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    z-index: 100;
+    box-shadow: var(--shadow-card);
+    max-height: 280px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+}
+.custom-dropdown-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px 20px;
+    transition: background .3s ease;
+}
+.custom-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-dropdown-list::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 20px;
+}
+
+
+
+/* Стили для disabled dropdown */
+.custom-dropdown-wrapper.dropdown-disabled {
+    pointer-events: none;
+    border-color: var(--color-structure-100);
+    color: var(--color-text-secondary);
+}
+
+
+
+/* Стили при фокусе и валиадции dropdown */
+.custom-dropdown-header.dropdown-active,
+.custom-dropdown-header.dropdown-has-value {
+    border-color: var(--color-accent-primary-active);
+}
+.custom-dropdown-header.dropdown-active .custom-dropdown-icon,
+.custom-dropdown-header.dropdown-has-value .custom-dropdown-icon {
+    transform: translateY(-50%) scale(1.1);
+    color: var(--color-accent-primary);
+}
+.custom-dropdown-chevron.chevron-rotated {
+    transform: rotate(180deg);
+    color: var(--color-accent-primary);
+}
+.custom-dropdown-item:hover {
+    background: var(--color-accent-primary-hover);
+}
+.custom-dropdown-item.item-selected {
+    background: var(--color-accent-primary-hover);
+}
+
+
+
+/* Стили если был задет dropdown но в нем ничего не выбрали и он важен для заполнения */
+.custom-dropdown-label-dirty {
+    color: var(--color-accent-danger) !important;
+}
