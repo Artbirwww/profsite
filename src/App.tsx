@@ -46,6 +46,8 @@ import { PupilsList } from './components/admin/pupils/PupilsList';
 import AutoRegisterForm from './components/admin/AutoRegisterForm';
 import { Home } from './components/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
+import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
+import { ROLES } from "./types/account/role";
 
 
 
@@ -65,8 +67,11 @@ export default function App() {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
-            <Route path='admin/pupil-list' element={<PupilsList />} />
+            <Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
+              <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
+              <Route path='admin/pupil-list' element={<PupilsList />} />
+            </Route>
+            
             {/* Legacy routes */}
             
             {/* New test routes */}
