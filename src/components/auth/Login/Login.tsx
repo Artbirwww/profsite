@@ -9,7 +9,7 @@ import { BubbleBackground } from '../BubbleBackground';
 import toast, { Toaster } from 'react-hot-toast';
 
 export function Login() {
-  const { login, token } = useAuth();
+  const { login, token, setRoles } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -29,8 +29,12 @@ export function Login() {
     }
 
     try {
-      const response = await authApi.login(email, password)
-      login(response)
+      const freshToken = await authApi.login(email, password)
+      const roles = await authApi.getRoles(freshToken)
+
+      login(freshToken)
+      setRoles(roles)
+      
       navigate('/dashboard');
     } catch (err) {
       toast.error("Возникла ошибка при входе!")
