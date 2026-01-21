@@ -48,10 +48,6 @@ export interface PaginatedPupilResponse {
   totalElements: number;
   totalPages: number;
 }
-export interface PupilResponse {
-    pupilDTO?: PupilDTO;
-    email: string;
-}
 
 export interface PupilListResponse {
     content: PupilResponse[];
