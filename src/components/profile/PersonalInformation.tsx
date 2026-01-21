@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useMemo, useState } from "react"
+import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from "react"
 import { FieldInput } from "../ui/reusable/fieldInput"
 import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
 import { Button } from "../ui/reusable/button"
@@ -6,35 +6,57 @@ import { Radio } from "../ui/reusable/radio"
 import { Dropdown } from "../ui/reusable/dropdown"
 import { DatePicker } from "../ui/reusable/datePicker"
 import { Temporal } from "@js-temporal/polyfill"
-
-interface PersonalData {
-    gender?: string
-    surname?: string
-    name?: string
-    patronymic?: string
-    email?: string
-    nationality?: string | number
-    birthDate?: Temporal.PlainDate
-    school?: string
-    classNumber?: string | number
-    classLetter?: string
-}
-
-
+import { PupilDTO, PupilResponse } from "../../types/pupil/pupil"
+import { Gender } from "../../types/pupil/gender"
+import { useAuth } from "../../contexts/AuthContext"
+import { pupilApi } from "../../services/api/pupilApi"
+import toast, { Toaster } from "react-hot-toast"
+/**
+ * 
+ * Обновить вместо pupilResponse просто pupilDTO T_T
+ * Почту не менять, ее если и менять то отдельно, после исправление использовать уе api
+ */
 export const PersonalInformation: FC = () => {
-    const [formData, setFormData] = useState<PersonalData>({
-        gender: "",
-        surname: "",
-        name: "",
-        patronymic: "",
-        email: "",
-        nationality: "",
-        school: "",
-        classNumber: "",
-        classLetter: "",
-    })
+    const {getToken} = useAuth()
+    const [formData, setFormData] = useState<PupilDTO>(
+        {
+            name: "",
+            surname: "",
+            patronymic: "",
+            birthday: Temporal.Now.plainDateISO().toString(),// as a default current date in format YYYY-MM-DD
+            school: "",
+            healthCondition: "",
+            nationality: "",
+            extraActivities: "",
+            classNumber: 0,
+            classLabel: "",
+            gender: Gender.MALE
+         })
+    const [email, setEmail] = useState<string>("")
 
-
+    useEffect(()=> {
+        const getPupilData = async () => {
+            try {
+                const token = getToken()
+                if (!token) {
+                    return 
+                }
+                const pupilData = await pupilApi.getPupilData(token)
+                console.log(pupilData)
+                if (!pupilData.pupilDTO.id) {
+                    setEmail(pupilData.email)
+                    return 
+                }
+                setEmail(pupilData.email)
+                setFormData(pupilData.pupilDTO)
+                
+            } catch(err) {
+                console.error(err)
+                return
+            }
+        }
+        getPupilData()
+    }, [])
     const classNumberOptions = useMemo(() => [
         { value: 5, label: "5" },
         { value: 6, label: "6" },
@@ -51,20 +73,42 @@ export const PersonalInformation: FC = () => {
         { value: "aboba2", label: "aboba2" },
     ], [])
 
-    const updateField = useCallback((field: keyof PersonalData) => (value: string | number) => {
+    const updateField = useCallback((field: keyof PupilDTO) => (value: string | number | Gender | {value: string}) => {
+        const extractedValue = (value && typeof value === 'object' && 'value' in value)
+            ? value.value
+            : value
         setFormData(prev => ({ ...prev, [field]: value }))
     }, [])
-
+    /*
+    const updatePupilDTO = useCallback((field: keyof PupilDTO) => (value: string | number | Gender | {value: string}) => {
+        //Эта штука необходима что бы работать с данными из дроп списка, поскольку там инфа хранится в отдельных обьектах
+        //Он типо смотрит если это обьект и в нем есть ключ value то просто берет из него это значение (совпало название value.value)
+        const extractedValue = (value && typeof value === 'object' && 'value' in value)
+            ? value.value
+            : value
+        setFormData(prev => ({...prev, pupilDTO: {...prev.pupilDTO, [field]: extractedValue}}))
+    }, [])
+    */
     const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({ ...prev, gender: e.target.value }))
+        setFormData(prev => ({ ...prev, gender: e.target.value as Gender}))
     }
 
     const handleDateSelect = useCallback((date: Temporal.PlainDate) => {
-        setFormData(prev => ({ ...prev, birthDate: date }))
+        setFormData(prev => ({ ...prev,  birthday: date.toString() })) // check format
     }, [])
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
         console.log("Saving data: ", formData)
+        try {
+            const token = getToken()
+            if (!token) throw new Error("Empty token")
+            //Реализовать валидацию чувствительных данных
+            await pupilApi.updatePupilData(formData, token)
+            toast.success("Ваши данные успешно обновлены")
+        } catch(err) {
+            console.error(err)
+            toast.error("Не получилось обновить данные")
+        }
     }
 
     return (
@@ -79,11 +123,11 @@ export const PersonalInformation: FC = () => {
                         <legend>Укажите Ваш пол *</legend>
 
                         <div className="radio-group">
-                            <Radio radioLabel="Мужской" radioGroup="gender" radioValue="male"
-                                   radioChecked={formData.gender === "male"} radioOnChange={handleRadioChange} />
+                            <Radio radioLabel="Мужской" radioGroup="gender" radioValue="MALE"
+                                   radioChecked={formData.gender === "MALE"} radioOnChange={handleRadioChange} />
 
-                            <Radio radioLabel="Женский" radioGroup="gender" radioValue="female"
-                                   radioChecked={formData.gender === "female"} radioOnChange={handleRadioChange} />
+                            <Radio radioLabel="Женский" radioGroup="gender" radioValue="FEMALE"
+                                   radioChecked={formData.gender === "FEMALE"} radioOnChange={handleRadioChange} />
                         </div>
                     </fieldset>
                 </div>
@@ -104,7 +148,7 @@ export const PersonalInformation: FC = () => {
                 <div className="profile-personal-inputs-row">
                     <FieldInput inputLabel="Электронная почта" inputIcon={<MailOpen size={20} />}
                                 inputPlaceholder="example@gmail.com" isImportant
-                                inputValue={formData.email} inputOnChange={updateField("email")} />
+                                inputValue={email} inputOnChange={undefined} />
                 </div>
 
                 {/* Национальность и Дата */}
@@ -113,7 +157,7 @@ export const PersonalInformation: FC = () => {
                               dropdownOptions={nationalityOptions} dropdownSelected={formData.nationality}
                               optionOnSelect={(opt) => updateField("nationality")(opt.value)} />
 
-                    <DatePicker datePickerLabel="Дата рождения" datePickerSelected={formData.birthDate}
+                    <DatePicker datePickerLabel="Дата рождения" datePickerSelected={Temporal.PlainDate.from(formData.birthday)}
                                 onDateSelect={handleDateSelect} />
                 </div>
 
@@ -128,8 +172,8 @@ export const PersonalInformation: FC = () => {
                               optionOnSelect={(opt) => updateField("classNumber")(opt.value)} />
 
                     <FieldInput inputLabel="Буква класса" inputIcon={<CaseUpper size={20} />}
-                                inputPlaceholder="а-я" inputValue={formData.classLetter}
-                                inputOnChange={updateField("classLetter")} />
+                                inputPlaceholder="а-я" inputValue={formData.classLabel}
+                                inputOnChange={updateField("classLabel")} />
                 </div>
 
                 {/* Кнопка сохранения */}
@@ -138,6 +182,7 @@ export const PersonalInformation: FC = () => {
                             buttonFunction={handleSaveClick} />
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 }
