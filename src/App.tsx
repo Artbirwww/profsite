@@ -79,6 +79,8 @@ export default function App() {
             {/* Results */}
             <Route path="/my-results" element={<ResultsPage />} />
             <Route path="/my-results/:testType" element={<ResultsPage />} />
+            
+            <Route path="/profile" element={<Profile />} />
 
           </Route>
         </Route>
