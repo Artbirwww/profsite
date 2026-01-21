@@ -1,8 +1,9 @@
 import api from './api';
 import { AccountApiRegisterDTO } from '../../types/pupil/account';
 import { PupilDTO, PupilListResponse, PupilResponse } from '../../types/pupil/pupil';
+import axios from 'axios';
 
-export const pupilService = {
+export const pupilApi = {
   
   getAllPupils: async (page: number, size: number, signal?: AbortSignal): Promise<PupilListResponse> => {
     const response = await api.get<PupilListResponse>(
@@ -10,20 +11,16 @@ export const pupilService = {
       {signal});
     return response.data;
   },
-  updatePupilData: async (pupilDTO: Partial<PupilDTO>): Promise<PupilDTO> => {
-    const res = await fetch(`/api/pupils/update-pupil-data`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(pupilDTO),
-    });
-    if (!res.ok) throw new Error('Failed to update pupil data');
-    return await res.json();
+  updatePupilData: async (pupilDTO: Partial<PupilDTO>, token: string): Promise<PupilDTO> => {
+    const res = await api.post("/api/pupils/update-pupil-data", pupilDTO, {
+      headers: {Authorization: token}
+    })
+
+    return res.data
   },
   getPupilData: async (token: string) => {
     try {
-      const response = await api.get('api/pupils/pupil-data', {
+      const response = await api.get<PupilResponse>('api/pupils/pupil-data', {
         headers: {
           Authorization: `Bearer ${token}`
         }
