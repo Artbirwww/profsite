@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { PupilListResponse, PupilResponse } from "../../../types/pupil/pupil"
 import toast, { Toaster } from "react-hot-toast"
-import { pupilService } from "../../../services/api/pupilApi"
+import { pupilApi } from "../../../services/api/pupilApi"
 import style from "./pupils-list.module.css"
 export const PupilsList = () => {
     const [pupilListResponse, setPupilListResponse] = useState<PupilListResponse | undefined>(undefined)
@@ -11,7 +11,7 @@ export const PupilsList = () => {
     const fetchPupils = useCallback(async (signal: AbortSignal) => {
         
         try {
-            const response = await pupilService.getAllPupils(currentPage, size, signal);
+            const response = await pupilApi.getAllPupils(currentPage, size, signal);
             setPupilListResponse(response)
         } catch(err: any) {
             if (err.name === "AbortError" || err.name === "CanceledError"){
