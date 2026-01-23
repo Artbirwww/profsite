@@ -1,64 +1,60 @@
 // src/services/api/authApi.ts
 import { BASE_URL } from './baseUrl';
-
+import { AccountApiRegisterDTO } from '../../types/pupil/account';
+import { PupilResponse } from '../../types/pupil/pupil';
+import api from './api';
+import { Role } from '../../types/account/role';
 const AUTH_ENDPOINT = `${BASE_URL}/api/auth`;
 const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
 
 export const authApi = {
+  autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
+      try {
+        const response = await api.post<PupilResponse>('/api/auth/auto-register', data);
+        return response.data;
+      } catch (err) {
+        console.error('Error registering pupil:', err);
+        throw err;
+      }
+    },
+  
+  autoRegisterAll: async (data: AccountApiRegisterDTO[]): Promise<any> => {
+    try {
+      const response = await api.post('/api/auth/auto-register-all', data);
+      return response.data;
+    } catch (err) {
+      console.error('Error registering pupils batch:', err);
+      throw err;
+    }
+  },
   register: async (email: string, password: string) => {
-    const res = await fetch(`${AUTH_ENDPOINT}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) throw new Error('Registration failed');
+    try {
+      const response = await api.post('/api/auth/register', {"email": email, "password": password})
+      return response.data
+    } catch(err) {
+      console.error(err)
+      throw err
+    }
+
   },
 
   login: async (email: string, password: string) => {
-    const res = await fetch(`${AUTH_ENDPOINT}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) throw new Error('Login failed');
-    const token = await res.text();
-    return token.trim();
-  },
-
-  autoRegister: async (account: { email: string; password: string }, pupil: any) => {
-    const res = await fetch(`${AUTH_ENDPOINT}/auto-register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ accountRegisterRequestDTO: account, pupilDTO: pupil }),
-    });
-    if (!res.ok) throw new Error('Auto-registration failed');
-    return await res.json();
-  },
-
-  autoRegisterAll: async (registrations: Array<{ accountRegisterRequestDTO: any; pupilDTO: any }>) => {
-    const res = await fetch(`${AUTH_ENDPOINT}/auto-register-all`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(registrations),
-    });
-    if (!res.ok) throw new Error('Bulk auto-registration failed');
-    return await res.json();
-  },
-
-  
-  getPupilData: async (token: string) => {
-    const res = await fetch(`${PUPIL_ENDPOINT}/pupil-data`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!res.ok) {
-      if (res.status === 404) {
-        throw new Error('NO_PUPIL_DATA');
-      }
-      throw new Error('Failed to fetch pupil data');
+    try {
+      const response = await api.post('/api/auth/login', {"email": email, "password": password})
+      console.log(response.data)
+      return response.data
+    } catch(err) {
+      console.error(err)
+      throw err
     }
-    return await res.json();
   },
-};
+  getRoles: async (token: string) => {
+    try {
+      const response = await api.get<Role[]>('/api/auth/account-roles', {headers: {Authorization: token}})
+      return response.data
+    } catch(err) {
+      console.log(err)
+      throw err
+    }
+  }
+}

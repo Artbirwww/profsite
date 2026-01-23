@@ -49,6 +49,15 @@ export interface PaginatedPupilResponse {
   totalPages: number;
 }
 
+export interface PupilListResponse {
+    content: PupilResponse[];
+    numberOfElements: number;
+    size: number;
+    number: number; //number of the current page u in
+    totalElements: number;
+    totalPages: number;
+}
+
 export const PupilDataKeys = ["name", "surname", "patronymic", 
     "birthday", "school", "healthCondition", "nationality", 
     "extraActivities", "classNumber", "classLabel", "gender"];

@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import {authApi} from "../../../services/api/authApi"
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
 import { GraduationCap } from '../../ui/display/SimpleIcons';
 import { BubbleBackground } from '../BubbleBackground';
+import toast, { Toaster } from 'react-hot-toast';
 
 export function Login() {
-  const { login } = useAuth();
+  const { login, token, setRoles } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -21,16 +23,21 @@ export function Login() {
     setIsLoading(true);
 
     if (!email || !password) {
-      setError('Пожалуйста, заполните все поля');
+      toast.error("Заполните все поля")
       setIsLoading(false);
       return;
     }
 
     try {
-      await login(email, password);
+      const freshToken = await authApi.login(email, password)
+      const roles = await authApi.getRoles(freshToken)
+
+      login(freshToken)
+      setRoles(roles)
+      
       navigate('/dashboard');
     } catch (err) {
-      setError('Неверный email или пароль');
+      toast.error("Возникла ошибка при входе!")
       console.error('Login error:', err);
     } finally {
       setIsLoading(false);
@@ -105,7 +112,9 @@ export function Login() {
             </CardFooter>
           </form>
         </Card>
+
       </div>
+      <Toaster />
     </div>
   );
 }

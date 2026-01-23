@@ -1,0 +1,128 @@
+button {
+    /* Сброс системного дизайна (особенно важно для iOS Safari) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Наследование шрифтов (кнопки по умолчанию их не наследуют) */
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.15;
+    color: inherit;
+
+    /* Сброс стандартных рамок и фона */
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    /* Управление размером */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    /* Текстовые свойства */
+    text-transform: none; /* Убирает авто-апперкейс в некоторых браузерах */
+    text-align: center;
+}
+/* Убирает пунктирную линию вокруг текста в Firefox при фокусе */
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+/* Убирает стандартный синий контур в Chrome, но важно заменить его на свой для доступности */
+button:focus {
+    outline: none;
+}
+/* Состояние Disabled */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none; /* Гарантирует отсутствие кликов */
+}
+
+
+
+
+/* Кастомные стили для button */
+.custom-button-wrapper {
+    display: flex;
+}
+.custom-button-wrapper button {
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    background-color: var(--color-accent-primary);
+    color: var(--color-text-on-accent);
+    font-weight: 500;
+    font-size: var(--font-size-base);
+    width: 100%;
+    border-radius: 15px;
+    transition: all .3s ease;
+}
+.custom-button-icon {
+    transition: all .3s ease;
+}
+
+
+
+/* Cтили для button disabled */
+.custom-button-wrapper button.disabled {
+    background-color: var(--color-structure-100);
+    border: none;
+    color: var(--color-text-secondary);
+}
+
+
+
+/* Cтили для button link */
+.custom-button-wrapper button.link {
+    background-color: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    width: auto;
+    position: relative;
+}
+.custom-button-wrapper button.link .custom-button-text::after {
+    content: "";
+    width: calc(100% + 6px);
+    height: 2px;
+    position: absolute;
+    background-color: transparent;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all .3s ease;
+}
+
+
+
+/* Состояние при наведении */
+.custom-button-wrapper button:hover {
+    background-color: var(--color-accent-primary-dark);
+}
+.custom-button-wrapper button:hover .custom-button-icon {
+    transform: scale(1.1);
+}
+
+
+
+/* Состояние при наведении на button link */
+.custom-button-wrapper button:hover.link {
+    background-color: transparent;
+    color: var(--color-accent-primary);
+
+}
+.custom-button-wrapper button:hover.link .custom-button-text::after {
+    background-color: var(--color-accent-primary);
+}
+
+
+

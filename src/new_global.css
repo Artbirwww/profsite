@@ -1,0 +1,406 @@
+/* ============================================
+   ЦВЕТОВЫЕ ТЕМЫ ДАШБОРДА - ПРАВИЛО 60-30-10
+   Светлая тема: 60% Белый, 30% Серый, 10% Акценты
+   Тёмная тема: 60% Тёмный, 30% Средний, 10% Акценты
+   Шрифт: Mulish (200-1000)
+============================================ */
+
+/* ===== ПОДКЛЮЧЕНИЕ ШРИФТА MULISH ===== */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+
+/* ===== СВЕТЛАЯ ТЕМА (ПО УМОЛЧАНИЮ) ===== */
+:root {
+    /* Основной шрифт */
+    --font-family-primary: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* 60% - Основной фон и поверхности */
+    --color-bg-primary: #F8F9FA;
+    --color-bg-secondary: #FFFFFF;
+    --color-bg-tertiary: #FFFFFF;
+
+    /* 30% - Структура: Границы, разделители, неактивные элементы */
+    --color-structure-100: #DDDDDD;
+    --color-structure-200: #CCCCCC;
+    --color-structure-300: #EEEEEE;
+
+    /* 10% - Акцентные цвета с семантическим значением */
+    /* Основной акцент - фиолетовый (вместо зелёного) */
+    --color-accent-primary: #8B5CF6;
+    /* Основной акцент, успех, главное действие */
+    --color-accent-primary-light: rgba(139, 92, 246, 0.1);
+    --color-accent-primary-lighter: rgba(139, 92, 246, 0.05);
+    --color-accent-primary-dark: #7C3AED;
+    --color-accent-primary-hover: rgba(124, 58, 237, .3);
+    --color-accent-primary-active: rgba(109, 40, 217, .5);
+
+    /* Вторичный акцент - бирюзовый/синий */
+    --color-accent-secondary: #06A77D;
+    /* Информация, второстепенное действие, нейтральное */
+    --color-accent-secondary-light: rgba(6, 167, 125, 0.1);
+    --color-accent-secondary-lighter: rgba(6, 167, 125, 0.05);
+    --color-accent-secondary-dark: #058C68;
+    --color-accent-secondary-hover: rgba(5, 140, 104, .3);
+    --color-accent-secondary-active: #047A5B;
+
+    /* Третичный акцент - лавандовый */
+    --color-accent-tertiary: #7F96FF;
+    /* Дополнительный акцент */
+    --color-accent-tertiary-light: rgba(127, 150, 255, 0.1);
+    --color-accent-tertiary-lighter: rgba(127, 150, 255, 0.05);
+    --color-accent-tertiary-dark: #6B85FF;
+    --color-accent-tertiary-hover: rgba(107, 133, 255, .3);
+    --color-accent-tertiary-active: #5A72E8;
+
+    /* Опасность/ошибка - красный */
+    --color-accent-danger: #FC6471;
+    /* Ошибка, опасность, негатив */
+    --color-accent-danger-light: rgba(252, 100, 113, 0.1);
+    --color-accent-danger-lighter: rgba(252, 100, 113, 0.05);
+    --color-accent-danger-dark: #FB4A59;
+    --color-accent-danger-hover: rgba(251, 74, 89, .3);
+    --color-accent-danger-active: #EA3444;
+
+    /* Предупреждение - жёлтый/оранжевый */
+    --color-accent-warning: #F59E0B;
+    /* Предупреждение, внимание */
+    --color-accent-warning-light: rgba(245, 158, 11, 0.1);
+    --color-accent-warning-lighter: rgba(245, 158, 11, 0.05);
+    --color-accent-warning-dark: #D97706;
+    --color-accent-warning-hover: rgba(217, 119, 6, .3);
+    --color-accent-warning-active: #B45309;
+
+    /* Цвета текста - Тёмный на светлом */
+    --color-text-primary: #2B2D42;
+    /* Основной текст, заголовки */
+    --color-text-secondary: #5A5D70;
+    /* Вторичный текст */
+    --color-text-tertiary: #8C8FA3;
+    /* Плейсхолдеры, неактивные элементы */
+    --color-text-on-accent: #FFFFFF;
+    /* Текст на цветном фоне */
+
+    /* Hover цвета для интерактивных элементов */
+    --color-hover-primary: rgba(43, 45, 66, 0.04);
+    --color-hover-secondary: rgba(43, 45, 66, 0.08);
+    --color-hover-tertiary: rgba(43, 45, 66, 0.12);
+
+    /* Active цвета для интерактивных элементов */
+    --color-active-primary: rgba(43, 45, 66, 0.08);
+    --color-active-secondary: rgba(43, 45, 66, 0.12);
+    --color-active-tertiary: rgba(43, 45, 66, 0.16);
+
+    /* Focus состояния */
+    --color-focus-ring-primary: rgba(139, 92, 246, 0.4);
+    --color-focus-ring-secondary: rgba(6, 167, 125, 0.4);
+    --color-focus-ring-danger: rgba(252, 100, 113, 0.4);
+
+    /* Типографика - Размеры шрифта (Модульная шкала: 1.25) */
+    --font-size-xs: 0.75rem;
+    /* 12px - Подписи, метки */
+    --font-size-sm: 0.875rem;
+    /* 14px - Мелкий текст, ячейки таблиц */
+    --font-size-base: 1rem;
+    /* 16px - Основной текст */
+    --font-size-md: 1.125rem;
+    /* 18px - Подзаголовки */
+    --font-size-lg: 1.375rem;
+    /* 22px - Заголовки карточек */
+    --font-size-xl: 1.75rem;
+    /* 28px - Заголовки разделов */
+    --font-size-2xl: 2.25rem;
+    /* 36px - Основные заголовки */
+    --font-size-3xl: 2.75rem;
+    /* 44px - Крупные заголовки */
+    --font-size-4xl: 3.5rem;
+    /* 56px - Очень крупные заголовки, KPI */
+
+    /* Типографика - Насыщенность шрифта (Mulish) */
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    --font-weight-extrablack: 1000;
+
+    /* Типографика - Межстрочные интервалы */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* Типографика - Межбуквенные интервалы */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+
+    /* Цвета для графиков и визуализации данных (расширенная палитра) */
+    --color-data-1: #8B5CF6;
+    /* Основной ряд данных (фиолетовый) */
+    --color-data-2: #06A77D;
+    /* Второстепенный ряд данных (бирюзовый) */
+    --color-data-3: #7F96FF;
+    /* Дополнительный (лавандовый) */
+    --color-data-4: #F59E0B;
+    /* Дополнительный (оранжевый/жёлтый) */
+    --color-data-5: #EC4899;
+    /* Дополнительный (розовый) */
+    --color-data-6: #10B981;
+    /* Дополнительный (зелёный) */
+    --color-data-7: #3B82F6;
+    /* Дополнительный (синий) */
+
+    /* Тени (Светлая тема) */
+    --shadow-card: 0 2px 10px rgba(43, 45, 66, 0.1);
+    --shadow-card-hover: 0 4px 16px rgba(43, 45, 66, 0.12);
+    --shadow-header: 0 1px 3px rgba(43, 45, 66, 0.1);
+    --shadow-modal: 0 10px 40px rgba(43, 45, 66, 0.15);
+
+    /* Скругления углов */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+}
+
+/* ===== ТЁМНАЯ ТЕМА ===== */
+[data-theme="dark"] {
+    /* 60% - Основной фон и поверхности */
+    --color-bg-primary: #0F1018;
+    --color-bg-secondary: #1A1B26;
+    --color-bg-tertiary: #242736;
+
+    /* 30% - Структура: Границы, разделители, неактивные элементы */
+    --color-structure-100: #2B2D42;
+    /* Ваш исходный тёмный цвет теперь как структура */
+    --color-structure-200: #3A3E5A;
+    --color-structure-300: #454969;
+
+    /* 10% - Акцентные цвета (те же оттенки, яркость адаптирована) */
+    /* Основной акцент - фиолетовый (ярче для тёмной темы) */
+    --color-accent-primary: #A78BFA;
+    --color-accent-primary-light: rgba(167, 139, 250, 0.15);
+    --color-accent-primary-lighter: rgba(167, 139, 250, 0.08);
+    --color-accent-primary-dark: #8B5CF6;
+    --color-accent-primary-hover: #8B5CF6;
+    --color-accent-primary-active: #7C3AED;
+
+    /* Вторичный акцент - бирюзовый/синий */
+    --color-accent-secondary: #10B981;
+    --color-accent-secondary-light: rgba(16, 185, 129, 0.15);
+    --color-accent-secondary-lighter: rgba(16, 185, 129, 0.08);
+    --color-accent-secondary-dark: #06A77D;
+    --color-accent-secondary-hover: #06A77D;
+    --color-accent-secondary-active: #059669;
+
+    /* Третичный акцент - лавандовый */
+    --color-accent-tertiary: #8FA3FF;
+    --color-accent-tertiary-light: rgba(143, 163, 255, 0.15);
+    --color-accent-tertiary-lighter: rgba(143, 163, 255, 0.08);
+    --color-accent-tertiary-dark: #7F96FF;
+    --color-accent-tertiary-hover: #7F96FF;
+    --color-accent-tertiary-active: #6B85FF;
+
+    /* Опасность/ошибка - красный */
+    --color-accent-danger: #FF7582;
+    --color-accent-danger-light: rgba(255, 117, 130, 0.15);
+    --color-accent-danger-lighter: rgba(255, 117, 130, 0.08);
+    --color-accent-danger-dark: #FC6471;
+    --color-accent-danger-hover: #FC6471;
+    --color-accent-danger-active: #FB4A59;
+
+    /* Предупреждение - жёлтый/оранжевый */
+    --color-accent-warning: #FBBF24;
+    --color-accent-warning-light: rgba(251, 191, 36, 0.15);
+    --color-accent-warning-lighter: rgba(251, 191, 36, 0.08);
+    --color-accent-warning-dark: #F59E0B;
+    --color-accent-warning-hover: #F59E0B;
+    --color-accent-warning-active: #D97706;
+
+    /* Цвета текста - Светлый на тёмном */
+    --color-text-primary: #F0F1F5;
+    --color-text-secondary: #C5C7D0;
+    --color-text-tertiary: #8C8FA3;
+    --color-text-on-accent: #FFFFFF;
+
+    /* Hover цвета для интерактивных элементов */
+    --color-hover-primary: rgba(240, 241, 245, 0.08);
+    --color-hover-secondary: rgba(240, 241, 245, 0.12);
+    --color-hover-tertiary: rgba(240, 241, 245, 0.16);
+
+    /* Active цвета для интерактивных элементов */
+    --color-active-primary: rgba(240, 241, 245, 0.12);
+    --color-active-secondary: rgba(240, 241, 245, 0.16);
+    --color-active-tertiary: rgba(240, 241, 245, 0.20);
+
+    /* Focus состояния */
+    --color-focus-ring-primary: rgba(167, 139, 250, 0.4);
+    --color-focus-ring-secondary: rgba(16, 185, 129, 0.4);
+    --color-focus-ring-danger: rgba(255, 117, 130, 0.4);
+
+    /* Цвета для графиков и визуализации данных (ярче для тёмной темы) */
+    --color-data-1: #A78BFA;
+    --color-data-2: #10B981;
+    --color-data-3: #8FA3FF;
+    --color-data-4: #FBBF24;
+    --color-data-5: #F472B6;
+    --color-data-6: #34D399;
+    --color-data-7: #60A5FA;
+
+    /* Тени (Тёмная тема - более мягкие) */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --shadow-header: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== ПЕРЕХОДЫ МЕЖДУ ТЕМАМИ ===== */
+:root {
+    --transition-theme: background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* ===== ГЛОБАЛЬНОЕ ПРИМЕНЕНИЕ ШРИФТА ===== */
+* {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-normal);
+}
+
+body {
+    transition: var(--transition-theme);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Заголовки */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: var(--font-size-2xl);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+}
+
+h4 {
+    font-size: var(--font-size-md);
+}
+
+h5 {
+    font-size: var(--font-size-base);
+}
+
+h6 {
+    font-size: var(--font-size-sm);
+}
+
+/* Параграфы */
+p {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    margin: 0;
+    padding: 0;
+}
+
+/* Ссылки */
+a {
+    font-family: var(--font-family-primary);
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-accent-primary);
+}
+
+/* Списки */
+ul,
+ol,
+li {
+    font-family: var(--font-family-primary);
+}
+
+/* Элементы форм */
+input,
+textarea,
+select,
+button {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+}
+
+/* Элементы таблиц */
+table,
+th,
+td,
+caption {
+    font-family: var(--font-family-primary);
+}
+
+/* Код и предформатированный текст */
+code,
+pre {
+    font-family: var(--font-family-primary);
+}
+
+/* Цитаты */
+blockquote {
+    font-family: var(--font-family-primary);
+}
+
+/* ===== КАСТОМНЫЙ СКРОЛЛБАР ===== */
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 13px;
+    height: 13px;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-structure-200);
+    border: 3px solid var(--color-bg-primary);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-structure-300);
+}
+
+::-webkit-scrollbar-track {
+    margin-block: 3px;
+}
+
+/* Тёмная тема для скроллбара */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: var(--color-structure-300);
+    border-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-structure-200);
+}
