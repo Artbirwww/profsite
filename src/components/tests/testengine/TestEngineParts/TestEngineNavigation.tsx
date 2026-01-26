@@ -1,8 +1,8 @@
-import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
-import { Card, CardContent } from '../../SimpleUI';
-import { TestConfig } from '../types/test-types';
+import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
+import { Card, CardContent } from '../../../SimpleUI';
+import { TestConfig } from '../../types/test-types';
 import { isAnswerValid } from './utils';
-import './TestEngine.css';
+import '../TestEngineStyle/TestEngine.css';
 
 interface TestEngineNavigationProps {
   testConfig: TestConfig;

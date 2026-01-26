@@ -1,9 +1,9 @@
-import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
-import { Card, CardContent, CardHeader, CardTitle } from '../../SimpleUI';
-import { AlertCircle } from '../../ui/display/SimpleIcons';
-import { TestConfig } from '../types/test-types';
+import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../SimpleUI';
+import { AlertCircle } from '../../../ui/display/SimpleIcons';
+import { TestConfig } from '../../types/test-types';
 import { formatTime } from './utils';
-import './TestEngine.css';
+import '../TestEngineStyle/TestEngine.css';
 
 interface TestEngineConfirmDialogProps {
   testConfig: TestConfig;

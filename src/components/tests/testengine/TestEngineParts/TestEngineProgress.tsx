@@ -1,5 +1,5 @@
-import { Card, CardContent } from '../../SimpleUI';
-import './TestEngine.css';
+import { Card, CardContent } from '../../../SimpleUI';
+import '../TestEngineStyle/TestEngine.css';
 
 interface TestEngineProgressProps {
   answeredCount: number;

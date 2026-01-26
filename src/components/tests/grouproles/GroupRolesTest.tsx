@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
-import { TestEngine } from '../testengine/TestEngine';
+import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
 import { groupRolesConfig } from '../testConfigs';
 
 interface GroupRolesTestProps {

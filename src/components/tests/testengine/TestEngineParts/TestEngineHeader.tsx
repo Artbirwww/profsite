@@ -1,9 +1,9 @@
-import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
-import { CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
-import { ArrowLeft, Clock } from '../../ui/display/SimpleIcons';
-import { TestConfig, TestQuestion } from '../types/test-types';
+import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
+import { CardHeader, CardTitle, CardDescription } from '../../../SimpleUI';
+import { ArrowLeft, Clock } from '../../../ui/display/SimpleIcons';
+import { TestConfig, TestQuestion } from '../../types/test-types';
 import { formatTime } from './utils';
-import './TestEngine.css';
+import '../TestEngineStyle/TestEngine.css';
 
 interface TestEngineHeaderProps {
   testConfig: TestConfig;

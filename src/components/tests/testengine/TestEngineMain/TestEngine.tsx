@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../../SimpleUI';
-import { AlertCircle } from '../../ui/display/SimpleIcons';
-import { useTestEngine } from '../hooks/useTestEngine';
-import { TestEngineProps } from '../types/test-types';
-import { TestEngineHeader } from './TestEngineHeader';
-import { TestEngineProgress } from './TestEngineProgress';
-import { TestEngineCompleted } from './TestEngineCompleted';
-import { TestEngineNavigation } from './TestEngineNavigation';
-import { TestEngineConfirmDialog } from './TestEngineConfirmDialog';
-import { TestEngineControls } from './TestEngineControls';
-import { QuestionRenderer } from './QuestionRenderer';
-//import './TestEngine.css';
+import { Card } from '../../../SimpleUI';
+import { AlertCircle } from '../../../ui/display/SimpleIcons';
+import { useTestEngine } from '../../hooks/useTestEngine';
+import { TestEngineProps } from '../../types/test-types';
+import { TestEngineHeader } from '../TestEngineParts/TestEngineHeader';
+import { TestEngineProgress } from '../TestEngineParts/TestEngineProgress';
+import { TestEngineCompleted } from '../TestEngineParts/TestEngineCompleted';
+import { TestEngineNavigation } from '../TestEngineParts/TestEngineNavigation';
+import { TestEngineConfirmDialog } from '../TestEngineParts/TestEngineConfirmDialog';
+import { TestEngineControls } from '../TestEngineParts/TestEngineControls';
+import { QuestionRenderer } from '../TestEngineParts/QuestionRenderer';
+import '../TestEngineStyle/TestEngine.css';
 
 export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) {
   const navigate = useNavigate();

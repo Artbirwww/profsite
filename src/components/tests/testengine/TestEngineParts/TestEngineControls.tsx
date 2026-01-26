@@ -1,5 +1,5 @@
-import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
-import { TestConfig } from '../types/test-types';
+import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
+import { TestConfig } from '../../types/test-types';
 //import './TestEngine.css';
 
 interface TestEngineControlsProps {

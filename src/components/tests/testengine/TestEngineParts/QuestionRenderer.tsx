@@ -1,8 +1,8 @@
-import { TestQuestion } from '../types/test-types';
-import { SingleChoiceCard } from '../components/SingleChoiceCard';
-import { DistributionCard } from '../components/DistributionCard';
-import { PairChoiceCard } from '../components/PairChoiceCard';
-import { YesNoCard } from '../components/YesNoCard';
+import { TestQuestion } from '../../types/test-types';
+import { SingleChoiceCard } from '../../components/SingleChoiceCard';
+import { DistributionCard } from '../../components/DistributionCard';
+import { PairChoiceCard } from '../../components/PairChoiceCard';
+import { YesNoCard } from '../../components/YesNoCard';
 
 interface QuestionRendererProps {
   question: TestQuestion;
