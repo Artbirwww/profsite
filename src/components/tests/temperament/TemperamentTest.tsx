@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
-import { TestEngine } from '../TestEngine';
+import { TestEngine } from '../testengine/TestEngine';
 import { temperamentConfig } from '../testConfigs';
 import { questionsA, questionsB } from './TempQuestions';
 

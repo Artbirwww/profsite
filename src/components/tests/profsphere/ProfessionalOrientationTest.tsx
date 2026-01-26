@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
-import { TestEngine } from '../TestEngine';
+import { TestEngine } from '../testengine/TestEngine';
 import { professionalOrientationConfig } from '../testConfigs';
 
 interface ProfessionalOrientationTestProps {
