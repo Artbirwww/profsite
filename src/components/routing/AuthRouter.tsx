@@ -8,7 +8,6 @@ export const AuthRouter: React.FC = () => {
         <>
             <p>Загрузка...</p>
         </>)
-    console.log(getToken())
     if (getToken()) {
         return <Navigate to={'/'} />
     }

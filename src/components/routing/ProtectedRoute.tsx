@@ -22,7 +22,6 @@ export const ProtectedRoute: React.FC = () => {
   if (!getToken()) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  console.log(location.state?.from?.pathname)
   return <Outlet/>
 
 };

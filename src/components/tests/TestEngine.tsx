@@ -10,12 +10,10 @@ import { SingleChoiceCard } from './components/SingleChoiceCard';
 import { DistributionCard } from './components/DistributionCard';
 import { PairChoiceCard } from './components/PairChoiceCard';
 import { YesNoCard } from './components/YesNoCard';
-import { useAuth } from '../../contexts/AuthContext';
 import styles from './styles.module.css';
 
 export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) {
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const {
     currentQuestion,
@@ -45,12 +43,6 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
       }, 2000);
     },
   });
-
-  React.useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

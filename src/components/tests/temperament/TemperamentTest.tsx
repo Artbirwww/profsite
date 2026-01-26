@@ -4,7 +4,6 @@ import { useTest } from '../../../contexts/TestContext';
 import { TestEngine } from '../TestEngine';
 import { temperamentConfig } from '../testConfigs';
 import { questionsA, questionsB } from './TempQuestions';
-import { useAuth } from '../../../contexts/AuthContext';
 
 interface TemperamentTestProps {
   onBack?: () => void;
@@ -13,7 +12,6 @@ interface TemperamentTestProps {
 export function TemperamentTest({ onBack }: TemperamentTestProps) {
   const navigate = useNavigate();
   const { saveTestResult } = useTest();
-  const { user } = useAuth();
   const [variant, setVariant] = useState<'A' | 'B' | null>(null);
 
   const handleComplete = async (results: any) => {
@@ -24,8 +22,6 @@ export function TemperamentTest({ onBack }: TemperamentTestProps) {
         answers: results.answers,
         metadata: {
           ...results.metadata,
-          userEmail: user?.email,
-          userName: `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
           variant: variant || 'A',
           extraversion: results.details.extraversion,
           neuroticism: results.details.neuroticism,

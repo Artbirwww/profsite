@@ -62,6 +62,7 @@ export default function App() {
             {/* New test routes */}
             <Route path="/" element={<Home/>} />
             <Route path="/tests">
+              <Route index element={<Dashboard />} />
               <Route
                 path="engineering-thinking"
                 element={<EngineeringThinkingTest />}

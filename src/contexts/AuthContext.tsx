@@ -24,12 +24,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(null);
   };
   const login = (token: string) => {
-    Cookies.set("token", token, {
+    // Убираем префикс "Bearer " если он есть
+    const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+    Cookies.set("token", cleanToken, {
       expires: 1,
       secure: false,
       sameSite: "strict"
     })
-    setToken(token)
+    setToken(cleanToken)
   }
   const getToken = (): string | undefined => {
     return Cookies.get("token")

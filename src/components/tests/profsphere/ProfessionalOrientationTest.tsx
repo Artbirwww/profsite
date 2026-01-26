@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
 import { TestEngine } from '../TestEngine';
 import { professionalOrientationConfig } from '../testConfigs';
-import { useAuth } from '../../../contexts/AuthContext';
 
 interface ProfessionalOrientationTestProps {
   onBack?: () => void;
@@ -11,7 +10,6 @@ interface ProfessionalOrientationTestProps {
 export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationTestProps) {
   const navigate = useNavigate();
   const { saveTestResult } = useTest();
-  const { user } = useAuth();
 
   const handleComplete = async (results: any) => {
     try {
@@ -21,8 +19,6 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
         answers: results.answers,
         metadata: {
           ...results.metadata,
-          userEmail: user?.email,
-          userName: `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
           categoryScores: results.details.categoryScores,
           dominantCategory: results.details.dominantCategory,
           professionRecommendations: results.details.professionRecommendations,

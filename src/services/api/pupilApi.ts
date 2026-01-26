@@ -12,17 +12,21 @@ export const pupilApi = {
     return response.data;
   },
   updatePupilData: async (pupilDTO: Partial<PupilDTO>, token: string): Promise<PupilDTO> => {
+    // Убираем префикс "Bearer " если он уже есть в токене
+    const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
     const res = await api.post("/api/pupils/update-pupil-data", pupilDTO, {
-      headers: {Authorization: token}
+      headers: {Authorization: `Bearer ${cleanToken}`}
     })
 
     return res.data
   },
   getPupilData: async (token: string) => {
     try {
+      // Убираем префикс "Bearer " если он уже есть в токене
+      const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
       const response = await api.get<PupilResponse>('api/pupils/pupil-data', {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${cleanToken}`
         }
       })
       return response.data

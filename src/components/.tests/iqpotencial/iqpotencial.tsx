@@ -4,6 +4,7 @@ import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../SimpleUI';
 import { ArrowLeft, Clock, CheckCircle, AlertCircle, Brain } from '../../ui/display/SimpleIcons';
 import { useTest } from '../../../contexts/TestContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { Progress } from '../../ui/feedback/SimpleProgress';
 
 interface IntellectualPotentialTestProps {
@@ -286,6 +287,7 @@ const questions = [
 
 export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestProps) {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { saveTestResult, isLoading: isSaving } = useTest();
   
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -429,6 +431,8 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
           percentage,
           iqEstimate,
           categoryStats,
+          userEmail: user?.email,
+          userName: `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
           totalQuestions: 30,
           answeredQuestions: selectedAnswers.filter(a => a !== -1).length,
           timeLimit: 1800,

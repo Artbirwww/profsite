@@ -1,4 +1,3 @@
-// src/components/auth/Registration/Registration.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../../services/api/authApi';
@@ -56,7 +55,6 @@ export function Registration() {
 
     try {
       setIsSubmitting(true);
-      // Регистрируем ВСЕХ через обычную регистрацию
       await authApi.register(user.email.trim(), user.password);
       navigate('/dashboard', { replace: true });
     } catch (err) {

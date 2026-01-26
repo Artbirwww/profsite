@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
 import { TestEngine } from '../TestEngine';
 import { engineeringThinkingConfig } from '../testConfigs';
-import { useAuth } from '../../../contexts/AuthContext';
 
 interface EngineeringThinkingTestProps {
   onBack?: () => void;
@@ -11,7 +10,6 @@ interface EngineeringThinkingTestProps {
 export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps) {
   const navigate = useNavigate();
   const { saveTestResult } = useTest();
-  const { user } = useAuth();
 
   const handleComplete = async (results: any) => {
     try {
@@ -21,8 +19,6 @@ export function EngineeringThinkingTest({ onBack }: EngineeringThinkingTestProps
         answers: results.answers,
         metadata: {
           ...results.metadata,
-          userEmail: user?.email,
-          userName: `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
         },
       });
     } catch (error) {

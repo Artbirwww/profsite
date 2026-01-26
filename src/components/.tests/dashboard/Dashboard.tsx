@@ -1,13 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/layout/card';
 import { GraduationCap, LogOut, Check, BarChart3 } from '../../ui/display/SimpleIcons';
 import type { TestGroup } from '../../../contexts/AppContext';
-import { useApp } from '../../../contexts/AppContext';
-import { useAuth } from '../../../contexts/AuthContext';
-import { pupilApi } from '../../../services/api/pupilApi';
-import type { User } from '../../../types/User';
+import type { User } from '../../../contexts/AuthContext';
+
+interface DashboardProps {
+  user: User;
+  completedGroups: TestGroup[];
+  onStartTest: (group: TestGroup) => void;
+  onLogout: () => void;
+  onViewResults: () => void;
+}
 
 // Маппинг TestGroup -> путь для навигации
 const testGroupToPath: Record<TestGroup, string> = {
@@ -56,92 +60,19 @@ const testGroups = [
   },
 ];
 
-export function Dashboard() {
+export function Dashboard({ user, completedGroups, onStartTest, onLogout, onViewResults }: DashboardProps) {
   const navigate = useNavigate();
-  const { logout, getToken } = useAuth();
-  const { completedGroups, handleStartTest } = useApp();
-  const [user, setUser] = useState<User | null>(null);
-
-  // Получаем данные пользователя
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = getToken();
-        if (!token) {
-          // Если нет токена, создаем минимальный объект User
-          setUser({
-            id: 'current-user',
-            email: 'user@example.com',
-            firstName: undefined,
-            lastName: undefined,
-            role: undefined,
-            createdAt: new Date(),
-          });
-          return;
-        }
-
-        try {
-          const pupilData = await pupilApi.getPupilData(token);
-          setUser({
-            id: pupilData.pupilDTO.id?.toString() || 'current-user',
-            email: pupilData.email,
-            firstName: pupilData.pupilDTO.name,
-            lastName: pupilData.pupilDTO.surname,
-            role: undefined,
-            createdAt: new Date(),
-          });
-        } catch (err) {
-          // Если не удалось получить данные, используем только email из токена
-          // В реальном приложении можно декодировать JWT токен для получения email
-          setUser({
-            id: 'current-user',
-            email: 'user@example.com',
-            firstName: undefined,
-            lastName: undefined,
-            role: undefined,
-            createdAt: new Date(),
-          });
-        }
-      } catch (err) {
-        console.error('Error getting user data:', err);
-        setUser({
-          id: 'current-user',
-          email: 'user@example.com',
-          firstName: undefined,
-          lastName: undefined,
-          role: undefined,
-          createdAt: new Date(),
-        });
-      }
-    };
-
-    getUserData();
-  }, [getToken]);
-
   const allCompleted = completedGroups.length === 5;
   const progress = (completedGroups.length / 5) * 100;
 
   // Обработчик запуска теста: вызываем onStartTest и навигируем к тесту
-  const handleStartTestClick = (group: TestGroup) => {
-    handleStartTest(group);
+  const handleStartTest = (group: TestGroup) => {
+    onStartTest(group);
     const path = testGroupToPath[group];
     if (path) {
       navigate(path);
     }
   };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
-  const handleViewResults = () => {
-    navigate('/my-results');
-  };
-
-  if (!user) {
-    return <div>Загрузка...</div>;
-  }
 
   return (
     <div className="min-h-screen p-4 py-8">
@@ -165,7 +96,7 @@ export function Dashboard() {
                   </CardDescription>
                 </div>
               </div>
-              <Button variant="outline" onClick={handleLogout}>
+              <Button variant="outline" onClick={onLogout}>
                 <LogOut className="size-4 mr-2" />
                 Выйти
               </Button>
@@ -201,7 +132,7 @@ export function Dashboard() {
                       Вы успешно прошли все группы тестов. Теперь вы можете просмотреть результаты.
                     </p>
                     <Button
-                      onClick={handleViewResults}
+                      onClick={onViewResults}
                       className="bg-green-600 hover:bg-green-700"
                     >
                       <BarChart3 className="size-4 mr-2" />
@@ -274,7 +205,7 @@ export function Dashboard() {
                     </div>
                   ) : (
                     <Button
-                      onClick={() => handleStartTestClick(group.id)}
+                      onClick={() => handleStartTest(group.id)}
                       className="w-full"
                     >
                       Начать тест

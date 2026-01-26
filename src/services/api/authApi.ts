@@ -50,7 +50,9 @@ export const authApi = {
   },
   getRoles: async (token: string) => {
     try {
-      const response = await api.get<Role[]>('/api/auth/account-roles', {headers: {Authorization: token}})
+      // Убираем префикс "Bearer " если он уже есть в токене
+      const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+      const response = await api.get<Role[]>('/api/auth/account-roles', {headers: {Authorization: `Bearer ${cleanToken}`}})
       return response.data
     } catch(err) {
       console.log(err)
