@@ -1,36 +1,27 @@
 import "./sidebar-style.css"
 import "./sidebar-media-style.css"
 
-import { FC, ReactNode, useCallback, useMemo, useState } from "react"
-import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen } from "lucide-react"
+import { FC, useCallback, useMemo, useState } from "react"
+import { X, Menu, DoorOpen } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
-
-// Иконки предоставлены библиотекой "lucide-react"
-
-// Интерфейс для элемента сайдбара (кнопки)
-interface SidebarItem {
-    id: string               // Id
-    label: string            // Текст кнопки
-    icon: ReactNode          // Иконка кнопки
-    path: string             // Путь куда отправит кнопка
-    dataItem?: string        // Для тестирования / селекторов
-    adminOnly?: boolean      // Доступ только админам
-    teacherOnly?: boolean    // Доступ только учителям
-    specialistOnly?: boolean // Доступ только спициалистов
-}
-
-// Интерфейс для данных пользователя
-interface UserData {
-    role?: "admin" | "student" | "specialist" | "teacher" // Тип / Роль
-}
+import { ROLES } from "../../../types/account/role"
+import { SidebarItem, sidebarButtons } from "./sidebarData"
 
 // Интерфейс для пропсов сайдбара
 interface SidebarProps {
     collapsed?: boolean         // Свернутость сайдбара
     position?: "left" | "right" // Позиция сайдбара (Слева / Справа)
     onToggle?: () => void       // Колбэк при переключении состояния
-    userData?: UserData | null  // Данные пользователя
+}
+
+// Словарь имен с переводом ролей на русский
+const ROLE_NAMES: Record<string, string> = {
+    [ROLES.ADMIN]: "Администратор",
+    [ROLES.DIRECTOR]: "Директор",
+    [ROLES.TEACHER]: "Учитель",
+    [ROLES.SPECIALIST]: "Специалист",
+    [ROLES.PUPIL]: "Ученик",
 }
 
 // Компонент для отдельного элемента сайдбара (Кнопки)
@@ -42,7 +33,7 @@ const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollaps
     }, [item.path, onClick])
     
     return (
-        <div key={item.id} className={`sidebar-item-container ${isActive ? "sidebar-item-active" : ""} ${item.adminOnly ? "sidebar-item-admin" : ""}`} data-item={item.dataItem} onClick={handleClick}>
+        <div key={item.id} className={`sidebar-item-container ${isActive ? "sidebar-item-active" : ""}`} data-item={item.dataItem} onClick={handleClick}>
             <div className="sidebar-item-icon">{item.icon}</div>
             {!isCollapsed && (<div className="sidebar-item-label">{item.label}</div>)}
         </div>
@@ -50,7 +41,7 @@ const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollaps
 }
 
 // Основной компонент - Сайдбар
-export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle, userData }) => {
+export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle }) => {
     const location = useLocation()
     const navigate = useNavigate()
     const { logout, getRoles } = useAuth()
@@ -58,140 +49,36 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
     // Локальное состояние для управления свернутостью
     const [isCollapsed, setIsCollapsed] = useState(collapsed)
 
-    // Мемоизация данных текущего пользователя
-    // Подгружается дефолтный пользователь (но можно и взять отсюда { user } = useAuth())
-    // TODO: Сделать подгрузку из текущей сессии !!!
-    const currentUser = useMemo(() => {
-        if (userData) {
-            return {
-                role: userData.role,
-            }
-        }
-        
-        // Значения по умолчанию
-        return {
-            role: "admin",
-        }
-    }, [userData])
+    // Получаем массив ролей пользователя
+    const userRoles = useMemo(() => getRoles() || [], [getRoles])
 
-    // Проверка является ли пользователь админом
-    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
-    const isAdmin = useMemo(() => 
-        currentUser.role === "admin",
-        [currentUser.role]
-    )
+    // Функция для выбора отображаемой роли
+    const getDisplayName = (roles: { name: string }[]) => {
+        if (roles.length === 0) return "Гость"
+        const nonPupilRole = roles.find(r => r.name !== ROLES.PUPIL)
+        const roleToDisplay = nonPupilRole ? nonPupilRole.name : ROLES.PUPIL
 
-    // Проверка является ли пользователь учителем
-    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
-    const isTeacher = useMemo(() =>
-        currentUser.role === "teacher",
-        [currentUser.role]
-    )
+        return ROLE_NAMES[roleToDisplay] || roleToDisplay
+    }
 
-    // Проверка является ли пользователь специалистом
-    // TODO: Сейчас это просто для теста, но надо будет сделать нормально !!!
-    const isSpecialist = useMemo(() =>
-        currentUser.role === "specialist",
-        [currentUser.role]
-    )
+    // Фильтруем кнопки на основе ролей
+    const filteredButtons = useMemo(() => {
+        const userRoles = getRoles() || []
+        const userRoleNames = userRoles.map(r => r.name)
 
-    //Основные элементы навигации (Доступные всем)
-    const mainItems = useMemo<SidebarItem[]>(() => [
-        {
-            id: "home",
-            label: "Домой",
-            icon: <Home size={18}/>,
-            path: "/",
-            dataItem: "home",
-        },
-        {
-            id: "testing",
-            label: "Тестирование",
-            icon: <FileCheck size={18}/>,
-            path: "/tests",
-            dataItem: "testing",
-        },
-        {
-            id: "results",
-            label: "Мои результаты",
-            icon: <PieChart size={18}/>,
-            path: "/my-results",
-            dataItem: "results",
-        },
-        {
-            id: "profile",
-            label: "Личный кабинет",
-            icon: <User size={18}/>,
-            path: "/profile",
-            dataItem: "profile",
-        },
-    ], [])
+        return sidebarButtons.filter(item => {
+            if (!item.allowedRoles || item.allowedRoles.length === 0) return true
 
-    // Элементы навигации (Доступные Админам)
-    const adminItems = useMemo<SidebarItem[]>(() => isAdmin ? [
-        {
-            id: "admin-list",
-            label: "Список",
-            icon: <Users size={18}/>,
-            path: "/admin/pupil-list",
-            adminOnly: true,
-            dataItem: "role-based-item",
-        },
-        {
-            id: "admin-upload",
-            label: "Загрузить",
-            icon: <ArrowUpToLine size={18}/>,
-            path: "/admin/pupil-loading",
-            adminOnly: true,
-            dataItem: "role-based-item",
-        },
-    ] : [], [isAdmin])
-
-    // Элементы навигации (Доступные учителям)
-    const teacherItems = useMemo<SidebarItem[]>(() => isTeacher ? [
-        {
-            id: "teacher-1",
-            label: "Учитель тест 1",
-            icon: <Apple size={18}/>,
-            path: "/teacher-test-1",
-            teacherOnly: true,
-            dataItem: "role-based-item",
-        },
-        {
-            id: "teacher-2",
-            label: "Учитель тест 2",
-            icon: <Apple size={18}/>,
-            path: "/teacher-test-2",
-            teacherOnly: true,
-            dataItem: "role-based-item",
-        },
-    ] : [], [isTeacher])
-
-    // Элементы навигации (Доступные специалистам)
-    const specialistItems = useMemo<SidebarItem[]>(() => isSpecialist ? [
-        {
-            id: "specialist-list",
-            label: "Специалист тест 1",
-            icon: <Apple size={18}/>,
-            path: "/speacialist-test-1",
-            specialistOnly: true,
-            dataItem: "role-based-item",
-        },
-        {
-            id: "specialist-upload",
-            label: "Специалист тест 2",
-            icon: <Apple size={18}/>,
-            path: "/speacialist-test-2",
-            specialistOnly: true,
-            dataItem: "role-based-item",
-        },
-    ] : [], [isSpecialist])
+            return item.allowedRoles.some(allowedRole => userRoleNames.includes(allowedRole))
+        })
+    }, [getRoles])
 
     // Переключение состояния сайдбара (свернут / развернут)
     const toggleSidebar = useCallback(() => {
         setIsCollapsed(prev => {
             const newState = !prev
             onToggle?.()
+            
             return newState
         })
     }, [onToggle])
@@ -212,26 +99,6 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         navigate("/login")
     }, [logout])
 
-    // Функция рендеринга отдельного элемента сайдбара (кнопки)
-    const renderSidebarItem = useCallback((item: SidebarItem, index: number, depth = 0) => {
-        const isItemActive = isActive(item.path)
-        return (<SidebarItemComponent item={item} isActive={isItemActive} isCollapsed={isCollapsed} onClick={handleItemClick}/>)
-    }, [isCollapsed, isActive, handleItemClick])
-
-    // Функция рендеринга группы элементов (здесь рендерятся все кнопки)
-    const renderSidebarItems = useCallback((items: SidebarItem[]) => 
-        items.map((item, index) => renderSidebarItem(item, index)),
-        [renderSidebarItem]
-    )
-
-    // Мемоизированный контент сайдбара (хранение дефолтных, админских, учительских и для специалистов отрендереных кнопок)
-    const sidebarContent = useMemo(() => ({
-        mainItems: renderSidebarItems(mainItems),
-        adminItems: renderSidebarItems(adminItems),
-        teacherItems: renderSidebarItems(teacherItems),
-        specialistItems: renderSidebarItems(specialistItems),
-    }), [mainItems, adminItems, teacherItems, specialistItems, renderSidebarItems])
-
     return (
         <aside className={`sidebar-container ${isCollapsed ? "sidebar-collapsed" : ""} ${position}`}>
             {/* Лого */}
@@ -250,33 +117,17 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             {/* Главная навигация */}
             <nav className="sidebar-nav">
                 <div className="sidebar-nav-section">
-                    {sidebarContent.mainItems}
+                    {filteredButtons.map((item) => (
+                        <SidebarItemComponent key={item.id} item={item} isActive={isActive(item.path)} isCollapsed={isCollapsed} onClick={handleItemClick}/>
+                    ))}
                 </div>
-
-                {isTeacher && teacherItems.length > 0 && (
-                    <div className="sidebar-nav-section">
-                        {sidebarContent.teacherItems}
-                    </div>
-                )}
-
-                {isSpecialist && specialistItems.length > 0 && (
-                    <div className="sidebar-nav-section">
-                        {sidebarContent.specialistItems}
-                    </div>
-                )}
-
-                {isAdmin && adminItems.length > 0 && (
-                    <div className="sidebar-nav-section">
-                        {sidebarContent.adminItems}
-                    </div>
-                )}
             </nav>
 
             <div className="sidebar-separator"></div>
 
             {/* Днище */}
             <div className="sidebar-footer">
-                {!isCollapsed && (<div className="sidebar-footer-info">{currentUser.role}</div>)}
+                {!isCollapsed && (<div className="sidebar-footer-info">{getDisplayName(userRoles)}</div>)}
                 {!isCollapsed && (<div className="sidebar-footer-control--logout" data-item="sidebar-logout" onClick={handleLogout}>
                     <div className="sidebar-footer-control-icon--logout"><DoorOpen size={18}/></div>
                 </div>)}
