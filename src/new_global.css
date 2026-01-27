@@ -69,6 +69,15 @@
     --color-accent-warning-hover: rgba(217, 119, 6, .3);
     --color-accent-warning-active: #B45309;
 
+    --color-gradient-start: #fffcf4;
+    --color-gradient-white-to-lightpink: linear-gradient(165deg, #FFFFFF 25%, #FFDCE5 100%);
+    --color-gradient-yellow-to-skyblue: linear-gradient(135deg, var(--color-gradient-start) 0%, #D1E9FF 100%);
+    --color-gradient-yellow-to-lightpink: linear-gradient(135deg, var(--color-gradient-start) 0%, #FFDCE5 100%);
+    --color-gradient-yellow-to-amber: linear-gradient(135deg, var(--color-gradient-start) 0%, #FFE8B3 100%);
+    --color-gradient-yellow-to-mint: linear-gradient(135deg, var(--color-gradient-start) 0%, #D4F0D1 100%);
+    --color-gradient-yellow-to-lavanda: linear-gradient(135deg, var(--color-gradient-start) 0%, #E3D7FF 100%);
+    --color-gradient-yellow-to-coral: linear-gradient(135deg, var(--color-gradient-start) 0%, #FFD1D1 100%);
+
     /* Цвета текста - Тёмный на светлом */
     --color-text-primary: #2B2D42;
     /* Основной текст, заголовки */
@@ -248,6 +257,14 @@
     --color-data-5: #F472B6;
     --color-data-6: #34D399;
     --color-data-7: #60A5FA;
+
+    --color-gradient-start: #1A1A15;
+    --color-gradient-yellow-to-skyblue: linear-gradient(135deg, var(--color-gradient-start) 0%, #1E2D3D 100%);
+    --color-gradient-yellow-to-lightpink: linear-gradient(135deg, var(--color-gradient-start) 0%, #3D262C 100%);
+    --color-gradient-yellow-to-amber: linear-gradient(135deg, var(--color-gradient-start) 0%, #3D321E 100%);
+    --color-gradient-yellow-to-mint: linear-gradient(135deg, var(--color-gradient-start) 0%, #1E3322 100%);
+    --color-gradient-yellow-to-lavanda: linear-gradient(135deg, var(--color-gradient-start) 0%, #2A213D 100%);
+    --color-gradient-yellow-to-coral: linear-gradient(135deg, var(--color-gradient-start) 0%, #3D1E1E 100%);
 
     /* Тени (Тёмная тема - более мягкие) */
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);

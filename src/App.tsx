@@ -35,58 +35,53 @@ import { Home } from './components/home/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
+import { Tests } from "./components/tests/testsMain/Tests"
 
 // ——— Главный компонент App ———
 export default function App() {
-  return (
-      <Routes>
-        {/* Public routes */}
-        
-        <Route element={<AuthRouter/>} >
-          <Route element={<Layout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
-          </Route>
-        </Route>
-        
-        {/* Protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
-              <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
-              <Route path='admin/pupil-list' element={<PupilsList />} />
-            </Route>
-            
-            {/* Legacy routes */}
-            
-            {/* New test routes */}
-            <Route path="/" element={<Home/>} />
-            <Route path="/tests">
-              <Route index element={<Dashboard />} />
-              <Route
-                path="engineering-thinking"
-                element={<EngineeringThinkingTest />}
-              />
-              <Route path="group-roles" element={<GroupRolesTest />} />
-              <Route path="iq-potential" element={<IqPotentialTest />} />
-              <Route
-                path="professional-orientation"
-                element={<ProfessionalOrientationTest />}
-              />
-              <Route path="temperament" element={<TemperamentTest />} />
-            </Route>
-			
+	return (
+		<Routes>
+			{/* Public routes */}
 
-            {/* Results */}
-            <Route path="/my-results" element={<ResultsPage />} />
-            <Route path="/my-results/:testType" element={<ResultsPage />} />
-            
-            <Route path="/profile" element={<Profile />} />
+			<Route element={<AuthRouter />} >
+				<Route element={<Layout />}>
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Registration />} />
+				</Route>
+			</Route>
 
-          </Route>
-        </Route>
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-  );
+			{/* Protected routes */}
+			<Route element={<ProtectedRoute />}>
+				<Route element={<Layout />}>
+					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
+						<Route path='admin/pupil-loading' element={<PupilDataLoading />} />
+						<Route path='admin/pupil-list' element={<PupilsList />} />
+					</Route>
+
+					{/* Legacy routes */}
+
+					{/* New test routes */}
+					<Route path="/" element={<Home />} />
+					<Route path="/tests">
+						<Route index element={<Tests />} />
+						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
+						<Route path="group-roles" element={<GroupRolesTest />} />
+						<Route path="iq-potential" element={<IqPotentialTest />} />
+						<Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
+						<Route path="temperament" element={<TemperamentTest />} />
+					</Route>
+
+
+					{/* Results */}
+					<Route path="/my-results" element={<ResultsPage />} />
+					<Route path="/my-results/:testType" element={<ResultsPage />} />
+
+					<Route path="/profile" element={<Profile />} />
+
+				</Route>
+			</Route>
+			{/* Fallback */}
+			<Route path="*" element={<Navigate to="/login" replace />} />
+		</Routes>
+	);
 }
