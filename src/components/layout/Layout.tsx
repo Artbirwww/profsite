@@ -2,7 +2,7 @@ import "./layout-style.css"
 
 import { createContext, FC, useContext, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
-import { Sidebar } from "../ui/side-menu/sidebar"
+import { Sidebar } from "../ui/sidebar/sidebar"
 import { useAuth } from "../../contexts/AuthContext"
 
 export const Layout: FC = () => {

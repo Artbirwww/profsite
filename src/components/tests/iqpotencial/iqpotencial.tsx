@@ -4,7 +4,7 @@ import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../SimpleUI';
 import { ArrowLeft, Clock, CheckCircle, AlertCircle, Brain } from '../../ui/display/SimpleIcons';
 import { useTest } from '../../../contexts/TestContext';
-import { Progress } from '../../ui/feedback/SimpleProgress';
+import { ProgressBar } from '../../ui/reusable/progressBar';
 
 interface IntellectualPotentialTestProps {
   onBack?: () => void;
@@ -526,7 +526,7 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
                       {stats.correct} из {stats.total}
                     </span>
                   </div>
-                  <Progress value={(stats.correct / stats.total) * 100} className="h-2" />
+                  <ProgressBar value={(stats.correct / stats.total) * 100} max={100} />
                 </div>
               ))}
             </div>
@@ -605,7 +605,7 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{answeredCount}</div>
                 <div className="text-sm text-gray-600">Отвечено вопросов</div>
-                <Progress value={completionPercentage} className="mt-2 h-2" />
+                <ProgressBar value={completionPercentage} max={100} />
               </div>
             </CardContent>
           </Card>
@@ -615,7 +615,7 @@ export function IntellectualPotentialTest({ onBack }: IntellectualPotentialTestP
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{score}</div>
                 <div className="text-sm text-gray-600">Правильных ответов</div>
-                <Progress value={(score / 30) * 100} className="mt-2 h-2" />
+                <ProgressBar value={(score / 30) * 100} max={100} />
               </div>
             </CardContent>
           </Card>

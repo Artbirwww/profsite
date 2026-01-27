@@ -99,7 +99,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Директор тест 1",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/director-test-1",
-        allowedRoles: [ROLES.DIRECTOR],
+        allowedRoles: [ROLES.DIRECTOR, ROLES.ADMIN],
         dataItem: "role-based-item",
     },
     {

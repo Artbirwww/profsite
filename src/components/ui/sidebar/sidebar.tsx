@@ -1,7 +1,7 @@
-import "./sidebar-style.css"
-import "./sidebar-media-style.css"
+import "./css/sidebar-style.css"
+import "./css/sidebar-media-style.css"
 
-import { FC, useCallback, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { X, Menu, DoorOpen } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
@@ -46,11 +46,17 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
     const navigate = useNavigate()
     const { logout, getRoles } = useAuth()
 
-    // Локальное состояние для управления свернутостью
-    const [isCollapsed, setIsCollapsed] = useState(collapsed)
-
     // Получаем массив ролей пользователя
     const userRoles = useMemo(() => getRoles() || [], [getRoles])
+
+    // Локальное состояние для управления свернутостью (Инициализируем состояние с учетом ширины экрана)
+    const [isCollapsed, setIsCollapsed] = useState(() => {
+        if (typeof window !== "undefined") {
+            return window.innerWidth <= 768 ? true : collapsed
+        }
+
+        return collapsed
+    })
 
     // Функция для выбора отображаемой роли
     const getDisplayName = (roles: { name: string }[]) => {
@@ -73,12 +79,24 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         })
     }, [getRoles])
 
+    // Слушатель изменения размера экрана (чтобы сайдбар схлопывался при ресайзе)
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768)
+                setIsCollapsed(true)
+        }
+        handleResize()
+        window.addEventListener("resize", handleResize)
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
     // Переключение состояния сайдбара (свернут / развернут)
     const toggleSidebar = useCallback(() => {
         setIsCollapsed(prev => {
             const newState = !prev
             onToggle?.()
-            
+
             return newState
         })
     }, [onToggle])

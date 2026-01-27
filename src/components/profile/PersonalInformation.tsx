@@ -18,21 +18,22 @@ import toast, { Toaster } from "react-hot-toast"
  */
 export const PersonalInformation: FC = () => {
     const {getToken} = useAuth()
-    const [formData, setFormData] = useState<PupilDTO>(
-        {
-            name: "",
-            surname: "",
-            patronymic: "",
-            birthday: Temporal.Now.plainDateISO().toString(),// as a default current date in format YYYY-MM-DD
-            school: "",
-            healthCondition: "",
-            nationality: "",
-            extraActivities: "",
-            classNumber: 0,
-            classLabel: "",
-            gender: Gender.MALE
-         })
+
     const [email, setEmail] = useState<string>("")
+    const [formData, setFormData] = useState<PupilDTO>(
+    {
+        name: "",
+        surname: "",
+        patronymic: "",
+        birthday: Temporal.Now.plainDateISO().toString(), // YYYY-MM-DD
+        school: "",
+        healthCondition: "",
+        nationality: "",
+        extraActivities: "",
+        classNumber: 0,
+        classLabel: "",
+        gender: Gender.MALE
+    })
 
     useEffect(()=> {
         const getPupilData = async () => {
@@ -41,12 +42,14 @@ export const PersonalInformation: FC = () => {
                 if (!token) {
                     return 
                 }
+
                 const pupilData = await pupilApi.getPupilData(token)
-                console.log(pupilData)
+
                 if (!pupilData.pupilDTO.id) {
                     setEmail(pupilData.email)
                     return 
                 }
+
                 setEmail(pupilData.email)
                 setFormData(pupilData.pupilDTO)
                 
@@ -57,6 +60,7 @@ export const PersonalInformation: FC = () => {
         }
         getPupilData()
     }, [])
+
     const classNumberOptions = useMemo(() => [
         { value: 5, label: "5" },
         { value: 6, label: "6" },
@@ -79,6 +83,7 @@ export const PersonalInformation: FC = () => {
             : value
         setFormData(prev => ({ ...prev, [field]: value }))
     }, [])
+
     /*
     const updatePupilDTO = useCallback((field: keyof PupilDTO) => (value: string | number | Gender | {value: string}) => {
         //Эта штука необходима что бы работать с данными из дроп списка, поскольку там инфа хранится в отдельных обьектах
@@ -89,6 +94,7 @@ export const PersonalInformation: FC = () => {
         setFormData(prev => ({...prev, pupilDTO: {...prev.pupilDTO, [field]: extractedValue}}))
     }, [])
     */
+
     const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({ ...prev, gender: e.target.value as Gender}))
     }
@@ -99,12 +105,14 @@ export const PersonalInformation: FC = () => {
 
     const handleSaveClick = async () => {
         console.log("Saving data: ", formData)
+
         try {
             const token = getToken()
             if (!token) throw new Error("Empty token")
             //Реализовать валидацию чувствительных данных
             await pupilApi.updatePupilData(formData, token)
             toast.success("Ваши данные успешно обновлены")
+            
         } catch(err) {
             console.error(err)
             toast.error("Не получилось обновить данные")
