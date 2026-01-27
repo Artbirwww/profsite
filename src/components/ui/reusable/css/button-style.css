@@ -49,6 +49,8 @@ button:disabled {
 /* Кастомные стили для button */
 .custom-button-wrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .custom-button-wrapper button {
     outline: none;
@@ -93,7 +95,7 @@ button:disabled {
 .custom-button-wrapper button.link .custom-button-text::after {
     content: "";
     width: calc(100% + 6px);
-    height: 2px;
+    height: 1px;
     position: absolute;
     background-color: transparent;
     bottom: 5px;

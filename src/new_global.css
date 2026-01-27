@@ -392,15 +392,14 @@ blockquote {
 /* ===== КАСТОМНЫЙ СКРОЛЛБАР ===== */
 ::-webkit-scrollbar {
     background-color: transparent;
-    width: 13px;
-    height: 13px;
+    width: 5px;
+    height: 5px;
     border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--color-structure-200);
-    border: 3px solid var(--color-bg-primary);
-    border-radius: 8px;
+    border-radius: 50px;
     transition: background-color 0.3s ease;
 }
 
@@ -409,7 +408,7 @@ blockquote {
 }
 
 ::-webkit-scrollbar-track {
-    margin-block: 3px;
+    margin-block: 12px;
 }
 
 /* Тёмная тема для скроллбара */

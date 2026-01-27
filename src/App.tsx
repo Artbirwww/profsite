@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 
 // Auth components
-import { Login } from "./components/auth/Login/Login"
-import { Registration } from "./components/auth/Registration/Registration"
+import { Login } from "./components/authorization/Login"
+import { Registration } from "./components/authorization/Registration"
 
 // Test components
 import { Dashboard } from "./components/tests/dashboard/Dashboard"

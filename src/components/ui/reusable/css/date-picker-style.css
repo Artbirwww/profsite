@@ -23,7 +23,7 @@
     padding: 10px 15px 10px 20px;
     min-height: 45px;
     background: transparent;
-    border: 2px solid var(--color-structure-100);
+    border: 1px solid var(--color-structure-100);
     color: var(--color-text-tertiary);
     cursor: pointer;
     border-radius: 15px;

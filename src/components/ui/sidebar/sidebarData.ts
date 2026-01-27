@@ -63,7 +63,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Учитель тест 1",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/teacher-test-1",
-        allowedRoles: [ROLES.TEACHER, ROLES.ADMIN],
+        allowedRoles: [ROLES.TEACHER],
         dataItem: "role-based-item",
     },
     {
@@ -71,7 +71,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Учитель тест 2",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/teacher-test-2",
-        allowedRoles: [ROLES.TEACHER, ROLES.ADMIN],
+        allowedRoles: [ROLES.TEACHER],
         dataItem: "role-based-item",
     },
     
@@ -81,7 +81,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Специалист тест 1",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/speacialist-test-1",
-        allowedRoles: [ROLES.SPECIALIST, ROLES.ADMIN],
+        allowedRoles: [ROLES.SPECIALIST],
         dataItem: "role-based-item",
     },
     {
@@ -89,7 +89,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Специалист тест 2",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/speacialist-test-2",
-        allowedRoles: [ROLES.SPECIALIST, ROLES.ADMIN],
+        allowedRoles: [ROLES.SPECIALIST],
         dataItem: "role-based-item",
     },
     
@@ -99,7 +99,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Директор тест 1",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/director-test-1",
-        allowedRoles: [ROLES.DIRECTOR, ROLES.ADMIN],
+        allowedRoles: [ROLES.DIRECTOR],
         dataItem: "role-based-item",
     },
     {
@@ -107,7 +107,7 @@ export const sidebarButtons: SidebarItem[] = [
         label: "Директор тест 2",
         icon: React.createElement(Apple, { size: 20 }),
         path: "/director-test-2",
-        allowedRoles: [ROLES.DIRECTOR, ROLES.ADMIN],
+        allowedRoles: [ROLES.DIRECTOR],
         dataItem: "role-based-item",
     },
 ]

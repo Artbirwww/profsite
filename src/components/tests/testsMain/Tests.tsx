@@ -67,11 +67,13 @@ export const Tests = () => {
             <div className="tests-header-container">
                 <div className="tests-header-info">
                     <div className="tests-header-icon"><GraduationCap size={24}/></div>
+                    
                     <div className="tests-header-title">
                         <div className="tests-header-label">Пройти тесты</div>
                         <div className="tests-header-user-name">{userName}</div>
                     </div>
                 </div>
+
                 <div className="tests-header-progressbar">
                     <div className="tests-progressbar-label">Ваш прогресс прохождения тестов</div>
                     <div className="tests-progressbar-count"><span>{completedCount}</span> из <span>{totalCount}</span></div>

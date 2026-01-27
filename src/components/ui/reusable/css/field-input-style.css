@@ -39,9 +39,6 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-input[type=number] {
-    -moz-appearance: textfield;
-}
 /* Автозаполнение (выбор стиля, когда браузер подставляет данные) */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -92,7 +89,7 @@ input:-webkit-autofill:focus {
     min-height: 45px;
     height: 45px;
     border-radius: 15px;
-    border: 2px solid var(--color-structure-100);
+    border: 1px solid var(--color-structure-100);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary) !important;
@@ -111,7 +108,7 @@ input:-webkit-autofill:focus {
 .custom-input-container input:valid {
     opacity: 1;
     color: var(--color-accent-primary);
-    border: 2px solid var(--color-accent-primary-active);
+    border: 1px solid var(--color-accent-primary-active);
 }
 .custom-input-container input:focus ~ .custom-input-icon,
 .custom-input-container input:valid ~ .custom-input-icon {
