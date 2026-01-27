@@ -2,25 +2,22 @@ import "./css/radio-style.css"
 
 import { ChangeEvent, FC, useState } from "react";
 
+// Интерфейс для пропсов radio button
 interface RadioProps {
-    radioLabel?: string
-    radioGroup?: string
-    radioValue?: string
-    radioOnChange?: (e: ChangeEvent<HTMLInputElement>) => void
-    radioChecked?: boolean
-    isDisabled?: boolean
-    isImportant?: boolean
-    name?: string
+    radioLabel?: string                                        // Тескст radio button
+    radioGroup?: string                                        // Группа в которой находится radio button
+    radioValue?: string                                        // Значение radio button
+    radioOnChange?: (e: ChangeEvent<HTMLInputElement>) => void // Функция при нажатии на radio button
+    radioChecked?: boolean                                     // Нажат ли radio button
+    isDisabled?: boolean                                       // Заблокирован ли?
+    isImportant?: boolean                                      // Важно ли?
+    name?: string                                              // Имя radio button
 }
 
 export const Radio: FC<RadioProps> = ({ radioLabel, radioGroup, radioValue, radioOnChange, radioChecked, isDisabled, isImportant, name }) => {
     const [isDirty, setIsDirty] = useState(false)
     
     const uniqueId = name || `radio-${Math.random().toString(36).substring(2, 9)}`
-
-    const handleBlur = () => {
-        setIsDirty(true)
-    }
 
     const hasDirty = isImportant && isDirty && !radioChecked
 

@@ -3,8 +3,6 @@ import "./css/dropdown-style.css"
 import { FC, ReactNode, useEffect, useRef, useState, FocusEvent } from "react"
 import { ChevronDown } from "lucide-react"
 
-// Иконки предоставлены библиотекой "lucide-react"
-
 // Интерфейс для элемента dropdown
 export interface DropdownOption {
     value: string | number

@@ -3,8 +3,6 @@ import "./css/field-input-style.css"
 import { ChangeEvent, FC, KeyboardEvent, ReactNode, useState } from "react"
 import { Eye, EyeClosed } from "lucide-react"
 
-// Иконки предоставлены библиотекой "lucide-react"
-
 // Интерфейс для пропсов input
 interface FieldInputProps {
     inputLabel?: string                                       // Текст input

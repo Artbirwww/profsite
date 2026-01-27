@@ -5,15 +5,16 @@ import { Temporal } from "@js-temporal/polyfill"
 import { ChevronLeft, ChevronRight, CalendarRange } from "lucide-react"
 import { FC, useRef, useState, FocusEvent, MouseEvent, ReactNode, ChangeEvent, useEffect } from "react"
 
+// Интерфейс для пропсов date picker
 interface DatePickerProps {
-    datePickerLabel?: string
-    datePickerIcon?: ReactNode
-    datePickerSelected?: Temporal.PlainDate
-    onDateSelect: (date: Temporal.PlainDate) => void
-    datePickerPlaceholder?: string
-    isDisabled?: boolean
-    isImportant?: boolean
-    name?: string
+    datePickerLabel?: string                         // Текст date picker
+    datePickerIcon?: ReactNode                       // Иконка date picker
+    datePickerSelected?: Temporal.PlainDate          // Выбранная дата
+    onDateSelect: (date: Temporal.PlainDate) => void // Функция для выбора даты
+    datePickerPlaceholder?: string                   // Placeholder для date picker
+    isDisabled?: boolean                             // Заблокирован ли?
+    isImportant?: boolean                            // Важно ли?
+    name?: string                                    // Имя date picker
 }
 
 export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIcon = <CalendarRange size={20}/>, datePickerSelected, onDateSelect, datePickerPlaceholder = "Выберите дату...", isDisabled = false, isImportant, name = "custom-date-picker" }) => {
