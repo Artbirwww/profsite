@@ -2,6 +2,7 @@
 export interface BelbinRoleInfoProps {
     name: string,        // Название роли
     description: string, // Описание роли
+    dataItem: string,    // Для стилей
 }
 
 // Ключи ролей для типизации и связи с данными
@@ -20,34 +21,42 @@ export const belbinRoles: Record<BelbinRoleKey, BelbinRoleInfoProps> = {
     implementer: {
         name: "Исполнитель",
         description: "Практичен, дисциплинирован, надежен. Претворяет идеи в практические действия.",
+        dataItem: "item-implementer",
     },
     coordinator: {
         name: "Координатор",
         description: "Зрелый, уверенный, хороший организатор. Устанавливает цели, распределяет роли.",
+        dataItem: "item-coordinator",
     },
     shaper: {
         name: "Формирователь",
         description: "Динамичен, общителен, работает на результат. Бросает вызов, оказывает давление.",
+        dataItem: "item-shaper",
     },
     plant: {
         name: "Генератор идей",
         description: "Креативен, нестандартно мыслит. Генерирует новые идеи и подходы.",
+        dataItem: "item-plant",
     },
     monitor: {
         name: "Аналитик-стратег",
         description: "Рассудителен, стратегичен. Анализирует варианты, видит все `за` и `против`.",
+        dataItem: "item-monitor",
     },
     investigator: {
         name: "Исследователь ресурсов",
         description: "Общителен, энтузиаст. Исследует возможности, устанавливает контакты.",
+        dataItem: "item-investigator",
     },
     teamworker: {
         name: "Командный работник",
         description: "Сотрудничающий, мягкий, дипломатичный. Слушает, предотвращает конфликты.",
+        dataItem: "item-teamworker",
     },
     completer: {
         name: "Завершитель",
         description: "Добросовестный, тщательный. Ищет ошибки, упущения, соблюдает сроки.",
+        dataItem: "item-completer",
     },
 }
 
