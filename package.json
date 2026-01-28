@@ -70,6 +70,7 @@
             "dev": "vite",
             "build": "vite build",
             "start": "vite",
-            "deploy": "gh-pages -d dist"
+            "deploy": "gh-pages -d dist",
+            "test": "jest"
       }
 }

@@ -9,8 +9,17 @@ export type DetailedCategory =
     | "Покладистость" | "Конфликтность" | "Упрямство" | "Рефлексия" | "Чувство юмора" | "Чувствительность" | "Ответственность" | "Планирование"
     | "Здоровье" | "Прокрастинация" | "Оптимизм" | "Конкуренция"
 
+// Интерфейс для пропсов вопросов
+export interface QuestionProps {
+    id: number,                 // Id
+    text: string,               // Текст вопроса
+    scale: EPIScale,            // Шкала EPI
+    category: DetailedCategory, // Детальная категория
+    pointsForYes: boolean,      // true - баллы за ДА, false - баллы за НЕТ
+}
+
 // Описания типов темпераментов
-export const TemperamentTypes = {
+export const temperamentTypes = {
     choleric: {
         name: "Холерик",
         description: "Энергичный, активный, эмоциональный, импульсивынй",
@@ -43,15 +52,6 @@ export const TemperamentTypes = {
         color: "blue",
         dataItem: "item-melancholic",
     },
-}
-
-// Интерфейс для пропсов вопросов
-export interface QuestionProps {
-    id: number,                 // Id
-    text: string,               // Текст вопроса
-    scale: EPIScale,            // Шкала EPI
-    category: DetailedCategory, // Детальная категория
-    pointsForYes: boolean,      // true - баллы за ДА, false - баллы за НЕТ
 }
 
 // Вопросы по Айзенку (форма A)
