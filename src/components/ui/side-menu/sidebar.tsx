@@ -2,7 +2,7 @@ import "./sidebar-style.css"
 import "./sidebar-media-style.css"
 
 import { FC, ReactNode, useCallback, useMemo, useState } from "react"
-import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen } from "lucide-react"
+import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen, BookOpen } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 
@@ -128,6 +128,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         {
             id: "grades",
             label: "Мои оценки",
+            icon: <BookOpen size={18}/>,
             path: "/my-grades",
             dataItem: "grades"
         }
