@@ -7,6 +7,10 @@ import { CheckCheck } from "lucide-react"
 import { pupilSubjectsApi } from "../../services/api/pupilSubjectsApi"
 import { useAuth } from "../../contexts/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
+/**
+ * TODO если пользователь не заполнил данные аккаунта, попросить его это сделать
+ * перед внесеинем оценок, поскольку его профиль еще не создан
+ */
 interface SubjectProps {
     pupilSubjects: PupilSubject []
     setPupilSubjects: Dispatch<SetStateAction<PupilSubject[]>>
