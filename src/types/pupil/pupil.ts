@@ -58,6 +58,6 @@ export interface PupilListResponse {
     totalPages: number;
 }
 
-export const PupilDataKeys = ["name", "surname", "patronymic", 
+export const PupilDataKeys = ["email", "password", "name", "surname", "patronymic", 
     "birthday", "school", "healthCondition", "nationality", 
     "extraActivities", "classNumber", "classLabel", "gender"];
