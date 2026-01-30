@@ -2,7 +2,6 @@ import { ChangeEvent, Component, useEffect, useRef, useState } from "react";
 import { useExcelMapper } from "../../../../hooks/useExcelMapper";
 import { PupilDataKeys, PupilDTO} from '../../../../types/pupil/pupil'
 import {type AccountApiRegisterDTO} from '../../../../types/pupil/account'
-import { pupilService } from "../../../../services/api/pupilApi";
 import { authApi } from "../../../../services/api/authApi";
 import style from "./pupil-data-loading.module.css"
 import classNames from "classnames"
