@@ -35,6 +35,7 @@ import { Home } from './components/home/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
+import { PupilSubjects } from "./components/grades/PupilSubjects"
 
 // ——— Главный компонент App ———
 export default function App() {
@@ -82,6 +83,8 @@ export default function App() {
             <Route path="/my-results/:testType" element={<ResultsPage />} />
             
             <Route path="/profile" element={<Profile />} />
+
+            <Route path="/my-grades" element={<PupilSubjects />} />
 
           </Route>
         </Route>

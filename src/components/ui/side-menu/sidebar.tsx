@@ -12,7 +12,7 @@ import { useAuth } from "../../../contexts/AuthContext"
 interface SidebarItem {
     id: string               // Id
     label: string            // Текст кнопки
-    icon: ReactNode          // Иконка кнопки
+    icon?: ReactNode          // Иконка кнопки
     path: string             // Путь куда отправит кнопка
     dataItem?: string        // Для тестирования / селекторов
     adminOnly?: boolean      // Доступ только админам
@@ -125,6 +125,12 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
             path: "/profile",
             dataItem: "profile",
         },
+        {
+            id: "grades",
+            label: "Мои оценки",
+            path: "/my-grades",
+            dataItem: "grades"
+        }
     ], [])
 
     // Элементы навигации (Доступные Админам)
