@@ -23,6 +23,7 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
     handleNext,
     handlePrevious,
     completeTest,
+    getQuestionInfo,
   } = useTestEngine({
     testConfig,
     onComplete: async (results) => {
@@ -65,6 +66,7 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
       error={error}
       showConfirmDialog={showConfirmDialog}
       completeTest={completeTest}
+      getQuestionInfo={getQuestionInfo}
     />
   );
 }

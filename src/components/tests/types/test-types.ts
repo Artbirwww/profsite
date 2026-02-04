@@ -68,8 +68,33 @@ export interface TestConfig {
   };
 }
 
+export interface QuestionInfo {
+  blockIndex: number;
+  questionInBlockIndex: number;
+  totalInBlock: number;
+}
+
 export interface TestEngineProps {
   testConfig: TestConfig;
   onComplete?: (results: any) => void;
   onBack?: () => void;
+}
+
+export interface ActiveTestViewExtendedProps extends TestEngineProps {
+  currentQuestion: number;
+  answers: any[];
+  remainingTime: number;
+  isSubmitting: boolean;
+  answeredCount: number;
+  completionPercentage: number;
+  handleAnswer: (questionIndex: number, answer: any) => void;
+  handleNext: () => void;
+  handlePrevious: () => void;
+  setShowConfirmDialog: (show: boolean) => void;
+  setCurrentQuestion: (index: number) => void;
+  onBack?: () => void;
+  error: string | null;
+  showConfirmDialog: boolean;
+  completeTest: () => void;
+  getQuestionInfo?: (questionIndex: number) => QuestionInfo;
 }

@@ -5,11 +5,14 @@ import { PairChoiceCard } from '../../components/PairChoiceCard';
 import { YesNoCard } from '../../components/YesNoCard';
 import { ImageChoiceCard } from '../../components/ImageChoiceCard';
 
+import { QuestionInfo, TestQuestion } from '../../types/test-types';
+
 interface QuestionRendererProps {
   question: TestQuestion;
   answer: any;
   onAnswer: (answer: any) => void;
   disabled?: boolean;
+  questionInfo?: QuestionInfo;
 }
 
 export function QuestionRenderer({
@@ -17,6 +20,7 @@ export function QuestionRenderer({
   answer,
   onAnswer,
   disabled,
+  questionInfo,
 }: QuestionRendererProps) {
   switch (question.type) {
     case 'single-choice':
@@ -36,6 +40,7 @@ export function QuestionRenderer({
           values={answer || []}
           onChange={onAnswer}
           disabled={disabled}
+          questionInfo={questionInfo}
         />
       );
 

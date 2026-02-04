@@ -1,6 +1,11 @@
 import { TestConfig } from './types/test-types';
 import { answerKey, questions as engineerQuestions } from './engineer/EngineerQuestions';
-import { balbinAnswer, roleNames, questionBlocks } from './grouproles/GroupQuestions';
+import { 
+  groupQuestions, 
+  belbinAnswerMapping, 
+  belbinRoleNames, 
+  belbinRoleDescriptions 
+} from './grouproles/GroupQuestions';
 import { questionsA, questionsB, HumanNature, HumanTech, HumanHuman, HumanSys, HumanArt, categories } from './profsphere/ProfQuestions';
 import { ExtraIntrMap, NeiroMap, LieMap, temperamentTypes } from './temperament/TempQuestions';
 import {
@@ -31,22 +36,40 @@ export const engineeringThinkingConfig: TestConfig = {
 };
 
 // Групповые роли (Белбин)
+// Создаем блоки вопросов для теста Белбина (по 8 вопросов в каждом блоке)
+const createBelbinQuestionBlocks = () => {
+  const blocks = [];
+  for (let i = 0; i < 7; i++) {
+    const startIndex = i * 8;
+    const endIndex = startIndex + 8;
+    const blockQuestions = groupQuestions.slice(startIndex, endIndex);
+    
+    blocks.push({
+      category: `Блок ${i + 1}`,
+      questions: blockQuestions
+    });
+  }
+  return blocks;
+};
+
 export const groupRolesConfig: TestConfig = {
   id: 'group-roles',
   name: 'Тест групповых ролей',
   description: 'Методика Белбина',
   showCategory: true,
-  questions: questionBlocks.flatMap((block, blockIndex) =>
-    block.questions.map((q, qIndex) => ({
+  questions: createBelbinQuestionBlocks().flatMap((block, blockIndex) =>
+    block.questions.map((q, questionIndex) => ({
       id: q.id,
       text: q.text,
       category: block.category,
       type: 'distribution' as const,
-      options: block.questions.map(q => q.text),
+      options: block.questions.map(qq => qq.text), // Все вопросы из текущего блока
       maxPoints: 10,
+      blockIndex: blockIndex,
+      questionIndex: questionIndex
     }))
   ),
-  calculateScore: createGroupRolesCalculator(balbinAnswer, roleNames),
+  calculateScore: createGroupRolesCalculator(belbinAnswerMapping, belbinRoleNames),
 };
 
 // Профессиональная направленность

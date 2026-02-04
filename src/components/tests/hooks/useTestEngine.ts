@@ -158,28 +158,72 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
     }
   }, [currentQuestion, testConfig.questions.length]);
 
-  const answeredCount = answers.filter(a => 
+  const answeredCount = answers.filter(a =>
     a !== null && (Array.isArray(a) ? a.some(val => val > 0) : true)
   ).length;
 
   const completionPercentage = Math.round((answeredCount / testConfig.questions.length) * 100);
 
-return {
-  currentQuestion,
-  setCurrentQuestion,
-  answers,
-  remainingTime,
-  isCompleted,
-  isSubmitting,
-  error,
-  showConfirmDialog,
-  setShowConfirmDialog,
-  answeredCount,
-  completionPercentage,
-  handleAnswer,
-  handleNext,
-  handlePrevious,
-  handleSkip,
-  completeTest,
-};
+  // Функция для получения информации о текущем вопросе в блоке
+  const getQuestionInfo = useCallback((questionIndex: number) => {
+    if (!testConfig.questions || testConfig.questions.length === 0) {
+      return { blockIndex: 0, questionInBlockIndex: 0, totalInBlock: 0 };
+    }
+
+    const currentCategory = testConfig.questions[questionIndex].category;
+
+    // Найти первый вопрос с такой же категорией
+    let blockStartIndex = questionIndex;
+    while (blockStartIndex > 0 && testConfig.questions[blockStartIndex - 1].category === currentCategory) {
+      blockStartIndex--;
+    }
+
+    // Найти последний вопрос с такой же категорией
+    let blockEndIndex = questionIndex;
+    while (blockEndIndex < testConfig.questions.length - 1 && testConfig.questions[blockEndIndex + 1].category === currentCategory) {
+      blockEndIndex++;
+    }
+
+    const questionInBlockIndex = questionIndex - blockStartIndex + 1; // 1-based
+    const totalInBlock = blockEndIndex - blockStartIndex + 1;
+
+    // Определить индекс блока среди уникальных категорий
+    let uniqueCategoriesEncountered = 0;
+    let currentCat = '';
+    for (let i = 0; i <= blockStartIndex; i++) {
+      if (testConfig.questions[i].category !== currentCat) {
+        currentCat = testConfig.questions[i].category;
+        if (i === blockStartIndex) {
+          break;
+        }
+        uniqueCategoriesEncountered++;
+      }
+    }
+
+    return {
+      blockIndex: uniqueCategoriesEncountered + 1, // 1-based
+      questionInBlockIndex,
+      totalInBlock
+    };
+  }, [testConfig.questions]);
+
+  return {
+    currentQuestion,
+    setCurrentQuestion,
+    answers,
+    remainingTime,
+    isCompleted,
+    isSubmitting,
+    error,
+    showConfirmDialog,
+    setShowConfirmDialog,
+    answeredCount,
+    completionPercentage,
+    handleAnswer,
+    handleNext,
+    handlePrevious,
+    handleSkip,
+    completeTest,
+    getQuestionInfo,
+  };
 }

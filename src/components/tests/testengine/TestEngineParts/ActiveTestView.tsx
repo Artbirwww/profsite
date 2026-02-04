@@ -11,23 +11,10 @@ import {
   QuestionRenderer
 } from '../TestEngineParts';
 
-interface ActiveTestViewProps {
+import { ActiveTestViewExtendedProps, QuestionInfo } from '../../types/test-types';
+
+interface ActiveTestViewProps extends Omit<ActiveTestViewExtendedProps, 'testConfig'> {
   testConfig: TestConfig;
-  currentQuestion: number;
-  answers: any[];
-  remainingTime: number;
-  isSubmitting: boolean;
-  answeredCount: number;
-  completionPercentage: number;
-  handleAnswer: (questionIndex: number, answer: any) => void;
-  handleNext: () => void;
-  handlePrevious: () => void;
-  setShowConfirmDialog: (show: boolean) => void;
-  setCurrentQuestion: (index: number) => void;
-  onBack?: () => void;
-  error: string | null;
-  showConfirmDialog: boolean;
-  completeTest: () => void;
 }
 
 export const ActiveTestView = ({
@@ -46,7 +33,8 @@ export const ActiveTestView = ({
   onBack,
   error,
   showConfirmDialog,
-  completeTest
+  completeTest,
+  getQuestionInfo
 }: ActiveTestViewProps) => {
   const navigate = useNavigate();
   const currentQ = testConfig.questions[currentQuestion];
@@ -93,6 +81,7 @@ export const ActiveTestView = ({
           answer={currentAnswer}
           onAnswer={(answer) => handleAnswer(currentQuestion, answer)}
           disabled={isSubmitting}
+          questionInfo={getQuestionInfo ? getQuestionInfo(currentQuestion) : undefined}
         />
 
         <TestEngineControls
