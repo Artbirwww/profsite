@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../SimpleUI';
 import { AlertCircle } from '../../../ui/display/SimpleIcons';
 import { TestConfig } from '../../types/test-types';
 import { formatTime } from './utils';
-import '../TestEngineStyle/TestEngine.css';
+//import '../TestEngineStyle/TestEngineConfirmDialog.css';
 
 interface TestEngineConfirmDialogProps {
   testConfig: TestConfig;
@@ -34,7 +34,7 @@ export function TestEngineConfirmDialog({
         <CardContent className="test-engine-modal-content">
           <p className="test-engine-modal-text">
             Вы ответили на {answeredCount} из {testConfig.questions.length} вопросов.
-            {answeredCount < testConfig.questions.length && 
+            {answeredCount < testConfig.questions.length &&
               ' Неотвеченные вопросы будут засчитаны как неправильные.'}
           </p>
           {testConfig.timeLimit && (

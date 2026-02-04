@@ -3,7 +3,7 @@ import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../SimpleUI';
 import { CheckCircle } from '../../../ui/display/SimpleIcons';
 import { TestConfig } from '../../types/test-types';
-import '../TestEngineStyle/TestEngine.css';
+//import '../TestEngineStyle/TestEngineCompleted.css';
 
 interface TestEngineCompletedProps {
   testConfig: TestConfig;
@@ -44,15 +44,15 @@ export function TestEngineCompleted({
               Вопросов отвечено: {answeredCount} из {testConfig.questions.length}
             </div>
           </div>
-          
+
           <div className="test-engine-completed-actions">
-            <Button 
+            <Button
               onClick={() => navigate(`/my-results?test=${testConfig.id}`)}
               className="test-engine-button-primary"
             >
               Перейти к детальным результатам
             </Button>
-            <Button 
+            <Button
               variant="outline"
               onClick={onBack || (() => navigate('/dashboard'))}
               className="test-engine-button-secondary"

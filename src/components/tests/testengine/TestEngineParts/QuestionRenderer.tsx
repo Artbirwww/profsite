@@ -3,6 +3,7 @@ import { SingleChoiceCard } from '../../components/SingleChoiceCard';
 import { DistributionCard } from '../../components/DistributionCard';
 import { PairChoiceCard } from '../../components/PairChoiceCard';
 import { YesNoCard } from '../../components/YesNoCard';
+import { ImageChoiceCard } from '../../components/ImageChoiceCard';
 
 interface QuestionRendererProps {
   question: TestQuestion;
@@ -27,7 +28,7 @@ export function QuestionRenderer({
           disabled={disabled}
         />
       );
-    
+
     case 'distribution':
       return (
         <DistributionCard
@@ -37,7 +38,7 @@ export function QuestionRenderer({
           disabled={disabled}
         />
       );
-    
+
     case 'pair-choice':
       return (
         <PairChoiceCard
@@ -47,7 +48,7 @@ export function QuestionRenderer({
           disabled={disabled}
         />
       );
-    
+
     case 'yes-no':
       return (
         <YesNoCard
@@ -57,7 +58,17 @@ export function QuestionRenderer({
           disabled={disabled}
         />
       );
-    
+
+    case 'image-choice':
+      return (
+        <ImageChoiceCard
+          question={question}
+          selectedAnswer={answer}
+          onSelect={onAnswer}
+          disabled={disabled}
+        />
+      );
+
     default:
       return <div>Тип вопроса не поддерживается</div>;
   }

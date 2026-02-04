@@ -15,11 +15,11 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
   const [error, setError] = useState<string | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  // Vассив ответов
+  // Инициализация ответов
   useEffect(() => {
-    const initialAnswers = testConfig.questions.map(() => {
-      if (testConfig.questions[0]?.type === 'distribution') {
-        return Array(testConfig.questions[0].options?.length || 0).fill(0);
+    const initialAnswers = testConfig.questions.map((question) => {
+      if (question.type === 'distribution') {
+        return Array(question.options?.length || 0).fill(0);
       }
       return null;
     });
@@ -68,6 +68,9 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
       return;
     }
 
+    // Убираем проверку распределения баллов при переходе к следующему вопросу
+    // Проверка будет происходить только при завершении теста
+    /*
     if (currentQ.type === 'distribution') {
       const sum = (currentAnswer as number[]).reduce((a, b) => a + b, 0);
       const maxPoints = (currentQ as any).maxPoints || 10;
@@ -76,6 +79,7 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
         return;
       }
     }
+    */
 
     if (currentQuestion < testConfig.questions.length - 1) {
       setCurrentQuestion(prev => prev + 1);
@@ -97,8 +101,27 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
     setError(null);
 
     try {
+      // Проверяем, что все вопросы типа 'distribution' имеют корректное распределение баллов
+      for (let i = 0; i < testConfig.questions.length; i++) {
+        const question = testConfig.questions[i];
+        const answer = answers[i];
+
+        if (question.type === 'distribution') {
+          // Если ответа нет, инициализируем массив нулей
+          const values = answer || Array(question.options?.length || 0).fill(0);
+          const sum = values.reduce((a: number, b: number) => a + b, 0);
+          const maxPoints = (question as any).maxPoints || 10;
+
+          if (sum !== maxPoints) {
+            setError(`Вопрос ${i + 1}: Распределите ровно ${maxPoints} баллов. Сейчас: ${sum} баллов`);
+            setIsSubmitting(false);
+            return;
+          }
+        }
+      }
+
       const results = testConfig.calculateScore(answers, testConfig.questions);
-      
+
       const finalResults = {
         testId: testConfig.id,
         score: results.score,
@@ -112,7 +135,7 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
           completedAt: new Date().toISOString(),
           timeSpent: testConfig.timeLimit ? testConfig.timeLimit - remainingTime : 0,
           totalQuestions: testConfig.questions.length,
-          answeredQuestions: answers.filter(a => a !== null && 
+          answeredQuestions: answers.filter(a => a !== null &&
             (Array.isArray(a) ? a.some(val => val > 0) : true)).length,
           ...results.details,
         },

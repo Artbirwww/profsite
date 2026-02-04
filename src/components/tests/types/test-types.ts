@@ -1,4 +1,4 @@
-export type QuestionType = 'single-choice' | 'multiple-choice' | 'distribution' | 'pair-choice' | 'yes-no';
+export type QuestionType = 'single-choice' | 'multiple-choice' | 'distribution' | 'pair-choice' | 'yes-no' | 'image-choice';
 
 export interface BaseQuestion {
   id: string;
@@ -40,12 +40,19 @@ export interface YesNoQuestion extends BaseQuestion {
   correctAnswer?: boolean;
 }
 
-export type TestQuestion = 
-  | SingleChoiceQuestion 
-  | MultipleChoiceQuestion 
-  | DistributionQuestion 
-  | PairChoiceQuestion 
-  | YesNoQuestion;
+export interface ImageChoiceQuestion extends BaseQuestion {
+  type: 'image-choice';
+  options: string[];
+  correctAnswer?: number;
+}
+
+export type TestQuestion =
+  | SingleChoiceQuestion
+  | MultipleChoiceQuestion
+  | DistributionQuestion
+  | PairChoiceQuestion
+  | YesNoQuestion
+  | ImageChoiceQuestion;
 
 export interface TestConfig {
   id: string;

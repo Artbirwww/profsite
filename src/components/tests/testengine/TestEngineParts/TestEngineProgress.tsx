@@ -1,5 +1,5 @@
 import { Card, CardContent } from '../../../SimpleUI';
-import '../TestEngineStyle/TestEngine.css';
+//import '../TestEngineStyle/TestEngineProgress.css';
 
 interface TestEngineProgressProps {
   answeredCount: number;
@@ -20,15 +20,15 @@ export function TestEngineProgress({
             <div className="test-engine-progress-number">{answeredCount}</div>
             <div className="test-engine-progress-label">Отвечено вопросов</div>
             <div className="test-engine-progress-bar">
-              <div 
+              <div
                 className="test-engine-progress-fill"
-                style={{ width: `${completionPercentage}%` }}
+                style={{ '--progress-width': `${completionPercentage}%` } as React.CSSProperties}
               />
             </div>
           </div>
         </CardContent>
       </Card>
-      
+
       <Card className="test-engine-progress-card">
         <CardContent className="test-engine-progress-content">
           <div className="test-engine-progress-stat">

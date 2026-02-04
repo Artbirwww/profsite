@@ -38,12 +38,6 @@ export function YesNoCard({
       </CardHeader>
       
       <CardContent className="pt-6">
-        <div className="mb-8">
-          <h3 className={`text-lg md:text-xl font-medium ${styles.textGray800} ${styles.leadingRelaxed}`}>
-            {question.text}
-          </h3>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
             onClick={() => onSelect(true)}

@@ -1,6 +1,6 @@
 import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { TestConfig } from '../../types/test-types';
-//import './TestEngine.css';
+//import '../TestEngineStyle/TestEngineControls.css';
 
 interface TestEngineControlsProps {
   testConfig: TestConfig;
@@ -32,22 +32,22 @@ export function TestEngineControls({
         >
           Назад
         </Button>
-        
+
         <Button
           onClick={onNext}
           disabled={isSubmitting}
           className={`test-engine-control-button ${
-            isLastQuestion 
-              ? 'test-engine-control-button-complete' 
+            isLastQuestion
+              ? 'test-engine-control-button-complete'
               : 'test-engine-control-button-next'
           }`}
         >
-          {isLastQuestion 
+          {isLastQuestion
             ? (isSubmitting ? 'Сохранение...' : 'Завершить тест')
             : 'Далее'}
         </Button>
       </div>
-      
+
       <Button
         variant="outline"
         onClick={onCompleteEarly}
