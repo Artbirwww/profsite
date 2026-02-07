@@ -1,133 +1,222 @@
 // src/components/tests/profsphere/professionalOrientationData.ts
 
+export type ScoringCategory = 'humanNature' | 'humanTech' | 'humanHuman' | 'humanSys' | 'humanArt';
+
+export interface ScoringRule {
+  category: ScoringCategory;
+  addWhenChoice: 'A' | 'B';
+}
+
 export interface Question {
   id: string;
   text: string;
   description: string;
   answer: boolean;
+  /** Правила подсчёта: какой выбор (A/B) добавляет балл в какую категорию (для пары вопросов) */
+  scoringRules?: ScoringRule[];
 }
 
-// Вопросы варианта А с ID и категориями
+// Вопросы варианта А с ID, категориями и правилами подсчёта (из методики Климова)
 export const questionsA: Question[] = [
   {
     id: 'a-1',
     text: 'Ухаживать за животными.',
     description: 'Работа с живыми существами',
-    answer: true // Question 1: HumanNature[1] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanTech', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-2',
     text: 'Помогать больным людям, лечить их.',
     description: 'Медицинская помощь',
-    answer: true // Question 2: HumanHuman[2] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanHuman', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-3',
     text: 'Следить за качеством иллюстраций, картинок, плакатов и другого художественного контента.',
     description: 'Художественная оценка',
-    answer: false // Question 3: HumanNature[3] = false
+    answer: false,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'B' },
+      { category: 'humanArt', addWhenChoice: 'A' }
+    ]
   },
   {
     id: 'a-4',
     text: 'Обрабатывать материалы (дерево, ткань, пластик и т.д.).',
     description: 'Материальная обработка',
-    answer: true // Question 4: HumanTech[4] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'A' },
+      { category: 'humanHuman', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-5',
     text: 'Обсуждать научно-популярные книги, статьи.',
     description: 'Научная дискуссия',
-    answer: true // Question 5: HumanSys[5] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanSys', addWhenChoice: 'A' },
+      { category: 'humanArt', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-6',
     text: 'Выращивать животных.',
     description: 'Животноводство',
-    answer: true // Question 6: HumanNature[6] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanHuman', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-7',
     text: 'Копировать рисунки, изображения, настраивать музыкальные инструменты.',
     description: 'Творческое воспроизведение',
-    answer: false // Question 7: HumanTech[7] = false
+    answer: false,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'B' },
+      { category: 'humanArt', addWhenChoice: 'A' }
+    ]
   },
   {
     id: 'a-8',
     text: 'Сообщать, разъяснять людям нужные для них сведения в службе поддержки, во время экскурсии и т.д.',
     description: 'Информационная помощь',
-    answer: true // Question 8: HumanHuman[8] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanHuman', addWhenChoice: 'A' },
+      { category: 'humanArt', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-9',
     text: 'Ремонтировать и настраивать вещи и технику.',
     description: 'Техническое обслуживание',
-    answer: true // Question 9: HumanTech[9] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-10',
     text: 'Лечить животных.',
     description: 'Ветеринария',
-    answer: true // Question 10: HumanNature[10] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-11',
     text: 'Выводить новые сорта растений.',
     description: 'Селекция растений',
-    answer: true // Question 11: HumanNature[11] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanTech', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-12',
     text: 'Разбирать споры, ссоры между людьми, убеждать, разъяснять, поощрять, наказывать.',
     description: 'Конфликтология',
-    answer: true // Question 12: HumanHuman[12] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanHuman', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-13',
     text: 'Наблюдать, изучать работу творческих коллективов.',
     description: 'Творческий анализ',
-    answer: false // Question 13: HumanNature[13] = false
+    answer: false,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'B' },
+      { category: 'humanArt', addWhenChoice: 'A' }
+    ]
   },
   {
     id: 'a-14',
     text: 'Обслуживать, налаживать медицинские приборы и технику.',
     description: 'Медицинская техника',
-    answer: true // Question 14: HumanTech[14] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'A' },
+      { category: 'humanHuman', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-15',
     text: 'Составлять точные описания, отчёты о наблюдаемых явлениях, событиях, измеряемых объектах и др.',
     description: 'Аналитическая документация',
-    answer: true // Question 15: HumanSys[15] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanSys', addWhenChoice: 'A' },
+      { category: 'humanArt', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-16',
     text: 'Делать лабораторные аналисы в больнице.',
     description: 'Медицинская диагностика',
-    answer: true // Question 16: HumanNature[16] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanHuman', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-17',
     text: 'Расписывать стены помещений, делать иллюстрации.',
     description: 'Художественное оформление',
-    answer: false // Question 17: HumanTech[17] = false
+    answer: false,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'B' },
+      { category: 'humanArt', addWhenChoice: 'A' }
+    ]
   },
   {
     id: 'a-18',
     text: 'Организовывать выходы людей в театры, музеи, на экскурсии, в туристические путешествия и т.п.',
     description: 'Культурная организация',
-    answer: true // Question 18: HumanHuman[18] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanHuman', addWhenChoice: 'A' },
+      { category: 'humanArt', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-19',
     text: 'Изготавливать что-либо по чертежам.',
     description: 'Техническое производство',
-    answer: true // Question 19: HumanTech[19] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanTech', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   },
   {
     id: 'a-20',
     text: 'Бороться с болезнями растений, с вредителями леса и сада.',
     description: 'Защита растений',
-    answer: true // Question 20: HumanNature[20] = true
+    answer: true,
+    scoringRules: [
+      { category: 'humanNature', addWhenChoice: 'A' },
+      { category: 'humanSys', addWhenChoice: 'B' }
+    ]
   }
 ];
 
@@ -288,27 +377,6 @@ export const categories = {
     professions: 'Художник, дизайнер, музыкант, актер',
     icon: '🎨'
   }
-};
-
-// Словари для подсчета (true = вариант А, false = вариант Б)
-export const HumanNature: { [key: number]: boolean } = {
-  1: true, 3: false, 6: true, 10: true, 11: true, 13: false, 16: true, 20: true
-};
-
-export const HumanTech: { [key: number]: boolean } = {
-  1: false, 4: true, 7: false, 9: true, 11: false, 14: true, 17: false, 19: true
-};
-
-export const HumanHuman: { [key: number]: boolean } = {
-  2: true, 4: false, 6: false, 8: true, 12: true, 14: false, 16: false, 18: true
-};
-
-export const HumanSys: { [key: number]: boolean } = {
-  2: false, 5: true, 9: false, 10: false, 12: false, 15: true, 19: false, 20: false
-};
-
-export const HumanArt: { [key: number]: boolean } = {
-  3: true, 5: false, 7: true, 8: false, 13: true, 15: false, 17: true, 18: false
 };
 
 export interface CategoryCounts {

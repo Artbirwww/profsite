@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
 import { professionalOrientationConfig } from '../testConfigs';
 
@@ -10,9 +11,15 @@ interface ProfessionalOrientationTestProps {
 export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationTestProps) {
   const navigate = useNavigate();
   const { saveTestResult } = useTest();
+  const { getToken } = useAuth();
 
   const handleComplete = async (results: any) => {
     try {
+      const token = getToken();
+      if (!token) {
+        throw new Error('Authentication token not found');
+      }
+      
       await saveTestResult({
         testType: 'professional-orientation',
         score: results.score,
@@ -23,7 +30,7 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
           dominantCategory: results.details.dominantCategory,
           professionRecommendations: results.details.professionRecommendations,
         },
-      });
+      }, token);
     } catch (error) {
       console.error('Failed to save test results:', error);
       throw error;

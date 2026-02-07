@@ -26,6 +26,11 @@ export interface DistributionQuestion extends BaseQuestion {
   maxPoints: number;
 }
 
+export interface PairChoiceScoringRule {
+  category: string;
+  addWhenChoice: 'A' | 'B';
+}
+
 export interface PairChoiceQuestion extends BaseQuestion {
   type: 'pair-choice';
   optionA: string;
@@ -33,11 +38,15 @@ export interface PairChoiceQuestion extends BaseQuestion {
   descriptionA?: string;
   descriptionB?: string;
   correctChoice?: 'A' | 'B';
+  /** Правила подсчёта баллов по категориям (профориентация Климова) */
+  scoringRules?: PairChoiceScoringRule[];
 }
 
 export interface YesNoQuestion extends BaseQuestion {
   type: 'yes-no';
   correctAnswer?: boolean;
+  /** Ключ для подсчёта шкал темперамента: 'extra_true' | 'extra_false' | 'neiro_true' | 'neiro_false' | 'lie_true' | 'lie_false' */
+  answer?: string;
 }
 
 export interface ImageChoiceQuestion extends BaseQuestion {

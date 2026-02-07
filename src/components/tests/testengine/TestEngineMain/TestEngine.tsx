@@ -2,10 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { useTestEngine } from '../../hooks/useTestEngine';
 import { TestEngineProps } from '../../types/test-types';
 import { TestEngineCompleted, ActiveTestView } from '../TestEngineParts';
+import { useTest } from '@/contexts/TestContext';
+import { useAuth } from '@/contexts/AuthContext';
 //import '../TestEngineStyle/TestEngineGeneral.css';
 
 export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) {
   const navigate = useNavigate();
+  const { saveTestResult } = useTest();
+  const { getToken } = useAuth();
 
   const {
     currentQuestion,
@@ -30,6 +34,44 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
       if (onComplete) {
         await onComplete(results);
       }
+
+      // Submit test results to server
+      const token = getToken();
+      if (token) {
+        try {
+          const timeSpent = testConfig.timeLimit ? testConfig.timeLimit - remainingTime : 0;
+
+          // Prepare test result data
+          const testResult = {
+            testType: testConfig.id as any,
+            score: results.score,
+            answers: answers.map((answer, index) => ({
+              questionId: testConfig.questions[index].id,
+              question: testConfig.questions[index].text,
+              answer,
+              category: testConfig.questions[index].category,
+            })),
+            metadata: {
+              completedAt: new Date().toISOString(),
+              timeSpent,
+              totalQuestions: testConfig.questions.length,
+              answeredQuestions: answers.filter(a => a !== null &&
+                (Array.isArray(a) ? a.some(val => val > 0) : true)).length,
+              // Передаем исходные ответы и вопросы для пересчета в случае необходимости
+              rawAnswers: answers,
+              rawQuestions: testConfig.questions,
+              ...results.details,
+            },
+          };
+
+          // Save test result to server
+          await saveTestResult(testResult, token);
+        } catch (err) {
+          console.error('Failed to save test result:', err);
+          // Still navigate to results even if saving failed
+        }
+      }
+
       setTimeout(() => {
         navigate(`/my-results?test=${testConfig.id}&new=true`);
       }, 2000);

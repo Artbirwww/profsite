@@ -127,26 +127,6 @@ export const questionsB: Question[] = [
   { id: 'temp-b-57', text: 'Бывает ли у вас чувство волнения перед важным событием?', category: 'Тревожность', answer: 'neiro_true' }
 ];
 
-// Подсчёт баллов
-export const ExtraIntrMap: { [key: number]: boolean } = {
-  1: true, 3: true, 8: true, 10: true, 13: true, 17: true, 22: true,
-  25: true, 27: true, 39: true, 44: true, 46: true, 49: true, 53: true, 56: true,
-  5: false, 15: false, 20: false, 29: false, 32: false, 34: false,
-  37: false, 41: false, 51: false
-};
-
-export const NeiroMap: { [key: number]: boolean } = {
-  2: true, 4: true, 7: true, 9: true, 11: true, 14: true, 16: true,
-  19: true, 21: true, 23: true, 26: true, 28: true, 31: true, 33: true,
-  35: true, 38: true, 40: true, 43: true, 45: true, 47: true, 50: true,
-  52: true, 55: true, 57: true
-};
-
-export const LieMap: { [key: number]: boolean } = {
-  6: true, 24: true, 36: true,
-  12: false, 18: false, 30: false, 42: false, 48: false, 54: false
-};
-
 // Описания типов
 export const temperamentTypes = {
   choleric: {

@@ -17,12 +17,6 @@ function getImagePath(form: 'form1' | 'form2', imageName: string): string {
   }
 }
 
-// Правильные ответы для формы A (индексы с 1 по 29, индексы в массиве 0-28)
-const formAAnswers = [4, 4, 6, 5, 2, 4, 3, 5, 4, 2, 6, 2, 4, 2, 3, 5, 4, 2, 3, 3, 3, 1, 2, 6, 3, 1, 4, 5, 2];
-
-// Правильные ответы для формы B (индексы с 1 по 29, индексы в массиве 0-28)
-const formBAnswers = [2, 3, 2, 6, 3, 5, 6, 2, 3, 3, 5, 2, 6, 5, 4, 1, 3, 5, 6, 2, 5, 6, 1, 4, 2, 3, 1, 6, 5];
-
 // Таблица перевода баллов в IQ по возрасту
 export const iqTable: Record<number, Record<number, number>> = {
   7: {
@@ -645,12 +639,6 @@ export function getMaxIQForAge(age: number): number {
   return maxIqByAge[age] || 137;
 }
 
-// Ключи правильных ответов по формам
-export const formAnswerKeys = {
-  A: formAAnswers,
-  B: formBAnswers
-};
-
 // Конфигурация теста
 export const testConfig = {
   totalQuestions: 29,
@@ -666,7 +654,6 @@ export function getQuestionsForForm(form: 'A' | 'B'): Question[] {
 
 export const testData = {
   questions,
-  formAnswerKeys,
   testConfig,
   iqTable,
   maxIqByAge,

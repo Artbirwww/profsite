@@ -111,15 +111,10 @@ export const calculateGroupRolesScore = (
   };
 };
 
-// Функция подсчета баллов для теста профессиональной направленности
+// Функция подсчета баллов для теста профессиональной направленности (правила берутся из question.scoringRules)
 export const calculateProfessionalOrientationScore = (
   answers: ('A' | 'B')[],
   questions: TestQuestion[],
-  HumanNature?: Record<number, boolean>,
-  HumanTech?: Record<number, boolean>,
-  HumanHuman?: Record<number, boolean>,
-  HumanSys?: Record<number, boolean>,
-  HumanArt?: Record<number, boolean>,
   categoriesObj?: Record<string, any>
 ): ScoreResult => {
   const counts = {
@@ -131,23 +126,14 @@ export const calculateProfessionalOrientationScore = (
   };
 
   answers.forEach((answer, index) => {
-    const questionNumber = index + 1;
-    const isVariantA = answer === 'A';
-
-    if (HumanNature && HumanNature[questionNumber] !== undefined && HumanNature[questionNumber] === isVariantA) {
-      counts.humanNature++;
-    }
-    if (HumanTech && HumanTech[questionNumber] !== undefined && HumanTech[questionNumber] === isVariantA) {
-      counts.humanTech++;
-    }
-    if (HumanHuman && HumanHuman[questionNumber] !== undefined && HumanHuman[questionNumber] === isVariantA) {
-      counts.humanHuman++;
-    }
-    if (HumanSys && HumanSys[questionNumber] !== undefined && HumanSys[questionNumber] === isVariantA) {
-      counts.humanSys++;
-    }
-    if (HumanArt && HumanArt[questionNumber] !== undefined && HumanArt[questionNumber] === isVariantA) {
-      counts.humanArt++;
+    const question = questions[index] as TestQuestion & { scoringRules?: { category: string; addWhenChoice: 'A' | 'B' }[] };
+    const rules = question?.scoringRules;
+    if (rules) {
+      rules.forEach((rule) => {
+        if (rule.addWhenChoice === answer && counts.hasOwnProperty(rule.category)) {
+          (counts as Record<string, number>)[rule.category]++;
+        }
+      });
     }
   });
 
@@ -167,33 +153,37 @@ export const calculateProfessionalOrientationScore = (
   };
 };
 
-// Функция подсчета баллов для теста темперамента
+// Функция подсчета баллов для теста темперамента (ответы Да=true, Нет=false; ключ в вопросе: 'extra_true' | 'extra_false' | 'neiro_true' | 'neiro_false' | 'lie_true' | 'lie_false')
 export const calculateTemperamentScore = (
-  answers: number[],
+  answers: (boolean | number)[],
   questions: TestQuestion[],
-  ExtraIntrMap?: Record<number, number>,
-  NeiroMap?: Record<number, number>,
-  LieMap?: Record<number, number>,
   temperamentTypesObj?: any
 ): ScoreResult => {
   let countExtraIntr = 0;
   let countNeiro = 0;
   let countLie = 0;
 
-  answers.forEach((answer, index) => {
-    const questionNumber = index + 1;
-
-    if (ExtraIntrMap && ExtraIntrMap[questionNumber] !== undefined && ExtraIntrMap[questionNumber] === answer) {
-      countExtraIntr++;
-    }
-
-    if (NeiroMap && NeiroMap[questionNumber] !== undefined && NeiroMap[questionNumber] === answer) {
-      countNeiro++;
-    }
-
-    if (LieMap && LieMap[questionNumber] !== undefined && LieMap[questionNumber] === answer) {
-      countLie++;
-    }
+  answers.forEach((userAnswer, index) => {
+    const question = questions[index] as TestQuestion & { answer?: string };
+    const key = question?.answer;
+    if (!key) return;
+    
+    // Пропускаем null/undefined ответы
+    if (userAnswer == null) return;
+    
+    // Проверяем, является ли ответ истинным (true, 1, 'true', 'yes', 'да')
+    const isYes = userAnswer === true || 
+                  userAnswer === 1 || 
+                  userAnswer === 'true' || 
+                  userAnswer === 'yes' || 
+                  userAnswer === 'да' ||
+                  (typeof userAnswer === 'string' && userAnswer.toLowerCase() === 'true');
+                  
+    const expectYes = key.endsWith('_true');
+    if (isYes !== expectYes) return;
+    if (key.startsWith('extra_')) countExtraIntr++;
+    else if (key.startsWith('neiro_')) countNeiro++;
+    else if (key.startsWith('lie_')) countLie++;
   });
 
   // Определение типа темперамента
@@ -254,23 +244,13 @@ export const createEngineeringThinkingCalculator = () => (answers: number[], que
 export const createGroupRolesCalculator = (balbinAnswer: Record<number, number[]>, roleNames: string[]) => (answers: number[][], questions: TestQuestion[]): ScoreResult => 
   calculateGroupRolesScore(answers, questions, balbinAnswer, roleNames);
 
-export const createProfessionalOrientationCalculator = (
-  HumanNature: Record<number, boolean>,
-  HumanTech: Record<number, boolean>,
-  HumanHuman: Record<number, boolean>,
-  HumanSys: Record<number, boolean>,
-  HumanArt: Record<number, boolean>,
-  categories: Record<string, any>
-) => (answers: ('A' | 'B')[], questions: TestQuestion[]): ScoreResult => 
-  calculateProfessionalOrientationScore(answers, questions, HumanNature, HumanTech, HumanHuman, HumanSys, HumanArt, categories);
+export const createProfessionalOrientationCalculator = (categories: Record<string, any>) =>
+  (answers: ('A' | 'B')[], questions: TestQuestion[]): ScoreResult =>
+    calculateProfessionalOrientationScore(answers, questions, categories);
 
-export const createTemperamentCalculator = (
-  ExtraIntrMap: Record<number, number>,
-  NeiroMap: Record<number, number>,
-  LieMap: Record<number, number>,
-  temperamentTypes: any
-) => (answers: number[], questions: TestQuestion[]): ScoreResult => 
-  calculateTemperamentScore(answers, questions, ExtraIntrMap, NeiroMap, LieMap, temperamentTypes);
+export const createTemperamentCalculator = (temperamentTypes: any) =>
+  (answers: (boolean | number)[], questions: TestQuestion[]): ScoreResult =>
+    calculateTemperamentScore(answers, questions, temperamentTypes);
 
 // Словарь всех функций подсчета баллов
 export const scoreCalculators: Record<string, ScoreCalculator> = {
