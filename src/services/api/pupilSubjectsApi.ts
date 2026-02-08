@@ -4,7 +4,7 @@ import api from "./api";
 export const pupilSubjectsApi = {
     addGradesToPupil: async (data: PupilSubject[], token: string): Promise<any> => {
         try {
-            const response = await api.post("/api/pupil-subjects/add-grades", data, {
+            const response = await api.post("/api/pupil-subjects/add-subjects-info", data, {
                 headers: {Authorization: token}
             })
             return response.data
