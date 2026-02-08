@@ -16,10 +16,16 @@ export const PupilSubjects = () => {
     const [pupilSubject, setPupilSubjects] = useState<PupilSubject[]>(
         subjects.map(subject => ({
             name: subject,
-            grades:  Array.from({length: 11}, (_, i) => ({
+            grades:  Array.from({length: 6}, (_, i) => ({
                 grade: '' as Grade,
-                classNumber: i + 1
-            }))
+                classNumber: i + 5
+            })),
+            pupilSubjectProfileDTO: {
+                interestLevel: "Не занимаюсь дополнительно",
+                projectParticipationLevel: "Не участвовал",
+                contestParticipationLevel: "Не участвовал",
+                selectionProbabilityLevel: "Точно нет"
+            }
         }))
     )
     useEffect(()=>{
@@ -38,7 +44,7 @@ export const PupilSubjects = () => {
         loadPupilSubjects()
     }, [])
 const mergePupilSubjects = (serverData: PupilSubject[], template: PupilSubject[]): PupilSubject[] => {
-    return template.map(templateItem => {
+    return template.map((templateItem:PupilSubject) => {
         // Find corresponding server data for this subject
         const serverItem = serverData.find(item => item.name === templateItem.name);
         
@@ -50,10 +56,12 @@ const mergePupilSubjects = (serverData: PupilSubject[], template: PupilSubject[]
                 );
                 return serverGrade || templateGrade;
             });
+            const profile = serverItem.pupilSubjectProfileDTO ? serverItem.pupilSubjectProfileDTO : templateItem.pupilSubjectProfileDTO
             
             return {
                 name: templateItem.name, // Keep template name (should be same)
-                grades: mergedGrades 
+                grades: mergedGrades ,
+                pupilSubjectProfileDTO: profile
             };
         }
         
