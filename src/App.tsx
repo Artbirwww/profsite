@@ -36,6 +36,7 @@ import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
 import { PupilSubjects } from "./components/grades/PupilSubjects"
+import { PupilGradeLoading } from "./components/admin/pupils/grade-loading/PupilGradeLoading"
 
 // ——— Главный компонент App ———
 export default function App() {
@@ -56,6 +57,7 @@ export default function App() {
             <Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
               <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
               <Route path='admin/pupil-list' element={<PupilsList />} />
+              <Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
             </Route>
             
             {/* Legacy routes */}
