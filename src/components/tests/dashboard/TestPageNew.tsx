@@ -39,7 +39,7 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
   const handleComplete = () => {
     // Подсчет результатов
     const results: { [key: string]: number } = {};
-    
+
     questions.forEach((question) => {
       const answer = answers[question.id];
       if (answer) {
@@ -52,7 +52,7 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
 
     // Формируем результат для этой группы
     const groupResult: Partial<TestResult> = {};
-    
+
     switch (testGroup) {
       case 'temperament':
         groupResult.temperament = results;
@@ -79,26 +79,26 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
   const allAnswered = questions.every(q => answers[q.id]);
 
   return (
-    <div className="min-h-screen p-4 py-8">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div>
+      <div>
         {/* Header */}
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-4xl">{groupData.icon}</div>
-              <div className="flex-1">
+            <div>
+              <div>{groupData.icon}</div>
+              <div>
                 <CardTitle>{groupData.title}</CardTitle>
                 <CardDescription>{groupData.description}</CardDescription>
               </div>
               <Button variant="outline" onClick={onBack}>
-                <ArrowLeft className="size-4 mr-2" />
+                <ArrowLeft />
                 Назад
               </Button>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">Вопрос {currentQuestion + 1} из {questions.length}</span>
-                <span className="text-indigo-600">{Math.round(progress)}%</span>
+            <div>
+              <div>
+                <span>Вопрос {currentQuestion + 1} из {questions.length}</span>
+                <span>{Math.round(progress)}%</span>
               </div>
               <Progress value={progress} />
             </div>
@@ -108,30 +108,21 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
         {/* Question Card */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">{currentQ.question}</CardTitle>
+            <CardTitle>{currentQ.question}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent>
             {currentQ.options.map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleAnswer(currentQ.id, option.value)}
-                className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
-                  answers[currentQ.id] === option.value
-                    ? 'border-indigo-500 bg-indigo-50'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`size-5 rounded-full border-2 flex items-center justify-center ${
-                    answers[currentQ.id] === option.value
-                      ? 'border-indigo-500 bg-indigo-500'
-                      : 'border-gray-300'
-                  }`}>
+                <div>
+                  <div>
                     {answers[currentQ.id] === option.value && (
-                      <div className="size-2 rounded-full bg-white" />
+                      <div />
                     )}
                   </div>
-                  <span className={answers[currentQ.id] === option.value ? 'text-indigo-700' : ''}>
+                  <span>
                     {option.label}
                   </span>
                 </div>
@@ -142,8 +133,8 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
 
         {/* Navigation */}
         <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+          <CardContent>
+            <div>
               <Button
                 variant="outline"
                 onClick={handlePrevious}
@@ -163,7 +154,6 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
                 <Button
                   onClick={handleComplete}
                   disabled={!allAnswered}
-                  className="bg-green-600 hover:bg-green-700"
                 >
                   Завершить
                 </Button>
@@ -171,17 +161,10 @@ export function TestPageNew({ user, testGroup, onComplete, onBack }: TestPagePro
             </div>
 
             {/* Progress dots */}
-            <div className="flex items-center justify-center gap-2 mt-6">
+            <div>
               {questions.map((q, idx) => (
                 <div
                   key={q.id}
-                  className={`size-2 rounded-full transition-all ${
-                    answers[q.id]
-                      ? 'bg-green-500'
-                      : idx === currentQuestion
-                      ? 'bg-indigo-500 scale-125'
-                      : 'bg-gray-300'
-                  }`}
                 />
               ))}
             </div>

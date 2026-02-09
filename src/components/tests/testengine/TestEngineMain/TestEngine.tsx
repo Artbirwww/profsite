@@ -4,7 +4,6 @@ import { TestEngineProps } from '../../types/test-types';
 import { TestEngineCompleted, ActiveTestView } from '../TestEngineParts';
 import { useTest } from '@/contexts/TestContext';
 import { useAuth } from '@/contexts/AuthContext';
-//import '../TestEngineStyle/TestEngineGeneral.css';
 
 export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) {
   const navigate = useNavigate();
@@ -35,13 +34,13 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
         await onComplete(results);
       }
 
-      // Submit test results to server
+      // Подтверждение отправки тестов на сервер
       const token = getToken();
       if (token) {
         try {
           const timeSpent = testConfig.timeLimit ? testConfig.timeLimit - remainingTime : 0;
 
-          // Prepare test result data
+          // Подготовка резульатов тестов
           const testResult = {
             testType: testConfig.id as any,
             score: results.score,
@@ -64,17 +63,12 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
             },
           };
 
-          // Save test result to server
+          // Сохранение результатов на сервер
           await saveTestResult(testResult, token);
         } catch (err) {
           console.error('Failed to save test result:', err);
-          // Still navigate to results even if saving failed
         }
       }
-
-      setTimeout(() => {
-        navigate(`/my-results?test=${testConfig.id}&new=true`);
-      }, 2000);
     },
   });
 

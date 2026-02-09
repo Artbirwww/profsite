@@ -30,7 +30,7 @@ export function IntellectFormSelection({ onFormSelected, onBack }: IntellectForm
           </div>
 
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
               <div onClick={() => handleSelectForm('A')}>
                 <div>
                   <h4>Форма A</h4>

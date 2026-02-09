@@ -97,12 +97,8 @@ export const belbinRoleDescriptions: string[] = [
   "Контролирует сроки, обращает внимание на детали, доводит задачи до совершенства."
 ];
 
-// Добавьте в конец файла GroupQuestions.ts:
-
-// Альтернативное название для совместимости
 export const roleNames = belbinRoleNames;
 
-// Блоки вопросов для теста Белбина
 export const questionBlocks = (() => {
   const blocks = [];
   for (let i = 0; i < 7; i++) {
@@ -118,5 +114,4 @@ export const questionBlocks = (() => {
   return blocks;
 })();
 
-// Для обратной совместимости (если где-то используется старое название)
 export const balbinAnswer = belbinAnswerMapping;

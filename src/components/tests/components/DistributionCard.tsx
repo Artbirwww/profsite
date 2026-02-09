@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../SimpleUI';
 import { Minus, Plus } from '../../ui/display/SimpleIcons';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { DistributionQuestion, QuestionInfo } from '../types/test-types';
-import styles from '../styles.module.css';
 
 interface DistributionCardProps {
   question: DistributionQuestion;
@@ -29,59 +28,49 @@ export function DistributionCard({
   const currentSum = values.reduce((sum, val) => sum + val, 0);
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader className={styles.cardHeaderPurple}>
-        <div className="flex flex-col gap-2">
+    <Card>
+      <CardHeader>
+        <div>
           {question.category && (
-            <div className="text-sm font-medium text-purple-200 uppercase tracking-wide">
-              {question.category} • Вопрос {questionInfo?.questionInBlockIndex} из {questionInfo?.totalInBlock}
+            <div>
+              {question.category} • Вопрос {questionInfo?.questionInBlockIndex} из{' '}
+              {questionInfo?.totalInBlock}
             </div>
           )}
-          <div className="flex items-center justify-between">
-            <CardTitle className={styles.titleLarge}>
-              {question.text}
-            </CardTitle>
-            <div className={`text-lg font-mono ${
-              currentSum > question.maxPoints ? 'text-red-600 font-bold' :
-              currentSum === question.maxPoints ? 'text-green-600 font-bold' :
-              styles.textGray600
-            }`}>
+          <div>
+            <CardTitle>{question.text}</CardTitle>
+            <div>
               {currentSum}/{question.maxPoints}
             </div>
           </div>
         </div>
       </CardHeader>
-
-      <CardContent className="pt-6">
-        <div className={styles.spaceY8}>
+      
+      <CardContent>
+        <div>
           {question.options.map((option, index) => (
-            <div key={index} className={styles.spaceY4}>
-              <div className="flex items-start justify-between gap-4">
-                <div className={styles.flex1}>
-                  <p className={`${styles.textGray800} ${styles.leadingRelaxed}`}>
-                    {option}
-                  </p>
+            <div key={index}>
+              <div>
+                <div>
+                  <p>{option}</p>
                 </div>
-                <div className="w-16 text-center">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {values[index] || 0}
-                  </div>
-                  <div className="text-xs text-gray-500">баллов</div>
+                <div>
+                  <div>{values[index] || 0}</div>
+                  <div>баллов</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => handleSliderChange(index, (values[index] || 0) - 1)}
                   disabled={(values[index] || 0) === 0 || disabled}
-                  className={styles.flexShrink0}
                 >
-                  <Minus className="size-4" />
+                  <Minus />
                 </Button>
 
-                <div className={styles.flex1}>
+                <div>
                   <input
                     type="range"
                     min="0"
@@ -89,9 +78,8 @@ export function DistributionCard({
                     value={values[index] || 0}
                     onChange={(e) => handleSliderChange(index, parseInt(e.target.value) || 0)}
                     disabled={disabled}
-                    className={styles.slider}
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div>
                     <span>0</span>
                     <span>{question.maxPoints}</span>
                   </div>
@@ -102,9 +90,8 @@ export function DistributionCard({
                   size="sm"
                   onClick={() => handleSliderChange(index, (values[index] || 0) + 1)}
                   disabled={(values[index] || 0) === question.maxPoints || disabled}
-                  className={styles.flexShrink0}
                 >
-                  <Plus className="size-4" />
+                  <Plus />
                 </Button>
               </div>
             </div>

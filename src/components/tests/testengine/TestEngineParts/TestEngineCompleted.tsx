@@ -21,41 +21,43 @@ export function TestEngineCompleted({
   const navigate = useNavigate();
 
   return (
-    <div className="test-engine-completed-container">
-      <Card className="test-engine-completed-card">
+    <div>
+      <Card>
         <CardHeader>
-          <div className="test-engine-completed-header">
-            <div className="test-engine-completed-icon">
-              <CheckCircle className="size-8 text-green-600" />
+          <div>
+            <div>
+              <CheckCircle />
             </div>
-            <CardTitle className="test-engine-completed-title">
+            <CardTitle>
               Тест успешно завершен!
             </CardTitle>
-            <CardDescription className="test-engine-completed-description">
+            <CardDescription>
               Результаты сохранены на сервере
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="test-engine-completed-content">
-          <div className="test-engine-result-card">
-            <div className="test-engine-result-score">{results.score}</div>
-            <div className="test-engine-result-label">баллов</div>
-            <div className="test-engine-result-info">
+        <CardContent>
+          <div>
+            <div>
+              {results.score}
+            </div>
+            <div>
+              баллов
+            </div>
+            <div>
               Вопросов отвечено: {answeredCount} из {testConfig.questions.length}
             </div>
           </div>
 
-          <div className="test-engine-completed-actions">
+          <div>
             <Button
               onClick={() => navigate(`/my-results?test=${testConfig.id}`)}
-              className="test-engine-button-primary"
             >
               Перейти к детальным результатам
             </Button>
             <Button
               variant="outline"
               onClick={onBack || (() => navigate('/dashboard'))}
-              className="test-engine-button-secondary"
             >
               Вернуться в личный кабинет
             </Button>
