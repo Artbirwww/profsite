@@ -11,6 +11,7 @@ interface AuthContextType {
   getToken: () => string | undefined;
   setRoles: (roles: Role[]) => void;
   getRoles: () => Role[] | undefined;
+  checkRole: (role: Role) => boolean | undefined
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -47,15 +48,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const rolesCookie = Cookies.get("roles")
     if (!rolesCookie) return [{name: ROLES.PUPIL}]
     try {
-      JSON.parse(rolesCookie)
+      return JSON.parse(rolesCookie)
     } catch (err) {
       console.log(err)
       return [{name: ROLES.PUPIL}]
     }
   }
+  const checkRole = (role:Role) : boolean => {
+    const roles = getRoles()
+    return !!roles?.some(r => r.name === role.name)
+  }
 
   return (
-    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles}}>
+    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole}}>
       {children}
     </AuthContext.Provider>
   );
