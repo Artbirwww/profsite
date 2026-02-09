@@ -7,6 +7,7 @@ import { Registration } from "./components/authorization/Registration"
 // Test components
 import { Dashboard } from "./components/tests/dashboard/Dashboard"
 import { TestPage } from "./components/tests/dashboard/TestPage"
+import { Tests } from "./components/tests/testsMain/Tests"
 import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
 import { ResultsPage } from "./components/tests/resultspage/ResultsPage"
 
