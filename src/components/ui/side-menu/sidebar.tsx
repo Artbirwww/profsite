@@ -2,7 +2,7 @@ import "./sidebar-style.css"
 import "./sidebar-media-style.css"
 
 import { FC, ReactNode, useCallback, useMemo, useState } from "react"
-import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen, BookOpen } from "lucide-react"
+import { Home, FileCheck, PieChart, User, Users, ArrowUpToLine, Apple, X, Menu, DoorOpen, BookOpen, ClipboardList } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 
@@ -53,7 +53,7 @@ const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollaps
 export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle, userData }) => {
     const location = useLocation()
     const navigate = useNavigate()
-    const { logout, getRoles } = useAuth()
+    const { logout, getRoles, checkRole } = useAuth()
 
     // Локальное состояние для управления свернутостью
     const [isCollapsed, setIsCollapsed] = useState(collapsed)
@@ -146,12 +146,20 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
         },
         {
             id: "admin-upload",
-            label: "Загрузить",
+            label: "Загрузить студентов",
             icon: <ArrowUpToLine size={18}/>,
             path: "/admin/pupil-loading",
             adminOnly: true,
             dataItem: "role-based-item",
         },
+        {
+            id: "admin-grade-upload",
+            label: "Загрузить оценки",
+            icon: <ClipboardList />,
+            path: "/admin/pupil-grades-loading",
+            adminOnly: true,
+            dataItem: "role-based-item"
+        }
     ] : [], [isAdmin])
 
     // Элементы навигации (Доступные учителям)
@@ -272,7 +280,7 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
                     </div>
                 )}
 
-                {isAdmin && adminItems.length > 0 && (
+                {checkRole({name: "ADMIN"}) && adminItems.length > 0 && (
                     <div className="sidebar-nav-section">
                         {sidebarContent.adminItems}
                     </div>

@@ -7,6 +7,40 @@ import { CheckCheck } from "lucide-react"
 import { pupilSubjectsApi } from "../../services/api/pupilSubjectsApi"
 import { useAuth } from "../../contexts/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
+import { InterestLevelType, ParticipationLevelType, ProbabilityLevelType, PupilSubjectProfile } from "../../types/pupil/pupilSubjectProfile"
+/**
+ * TODO если пользователь не заполнил данные аккаунта, попросить его это сделать
+ * перед внесеинем оценок, поскольку его профиль еще не создан
+ */
+const ALL_INTEREST_LEVELS: InterestLevelType[] = [
+  "Не занимаюсь дополнительно",
+  "Занимаюсь редко",
+  "Занимаюсь регулярно, но немного",
+  "Занимаюсь регулярно",
+  "Занимаюсь очень активно"
+];
+
+const ALL_PARTICIPATION_LEVELS: ParticipationLevelType[] = [
+  "Не участвовал",
+  "Школьный",
+  "Муниципальный",
+  "Региональный",
+  "Федеральный"
+];
+
+const ALL_PROBABILITY_LEVELS: ProbabilityLevelType[] = [
+  "Точно нет",
+  "Мало вероятно",
+  "Возможно",
+  "Скорее да",
+  "Однозначно да"
+];
+const PUPIL_SUBJECT_PROFILE_TOPICS: string[] = [
+    "Вероятность выбора экзамена по предмету",
+    "Опыт участия в олимпиадах по предмету",
+    "Участие в проектах/конкурсах/конференциях по предмету",
+    "Интенсивность доп. занятий по предмету"
+]
 interface SubjectProps {
     pupilSubjects: PupilSubject []
     setPupilSubjects: Dispatch<SetStateAction<PupilSubject[]>>
@@ -51,6 +85,19 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
         */
         
     }
+    const updateProfileForSubject = (subjectIndex: number, field: keyof PupilSubjectProfile, value: InterestLevelType | ParticipationLevelType | ProbabilityLevelType) => {
+        setPupilSubjects(prev  => {
+            const updated = [...prev]
+            updated[subjectIndex] = {
+                ...updated[subjectIndex],
+                pupilSubjectProfileDTO: {
+                    ...updated[subjectIndex].pupilSubjectProfileDTO,
+                    [field]: value
+                }
+            }
+            return updated
+        })
+    }
     const addGradesToPupil = async () => {
         const data = pupilSubjects
             .map(subject => {
@@ -59,7 +106,7 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
                 
                 return {... subject, 
                     grades: filteredGrades
-            }}).filter(subject => subject.grades.length > 0)
+            }})//.filter(subject => subject.grades.length > 0)
         console.log(data)
         try {
             const token = getToken()
@@ -80,14 +127,17 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
                 <thead>
                     <tr>
                         <th>Предмет</th>
-                        {Array.from({length: 11}, (_, classNumber) => (
-                            <th key={classNumber}>{classNumber + 1}</th>
+                        {Array.from({length: 6}, (_, classNumber) => (
+                            <th key={classNumber}>{classNumber + 5}</th>
+                        ))}
+                        {PUPIL_SUBJECT_PROFILE_TOPICS.map(topic => (
+                            <th>{topic}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
                     
-                    {pupilSubjects.map((pupilSubject) => (
+                    {pupilSubjects.map((pupilSubject, subjectIndex) => (
                         <tr key={pupilSubject.name}>
                             <td><strong>{pupilSubject.name}</strong></td>
                             {pupilSubject.grades.map((pupilGrade, index) => (
@@ -101,6 +151,34 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
                                     </select>
                                 </td>
                             ))}
+                            <td>
+                                <select value={pupilSubject.pupilSubjectProfileDTO.selectionProbabilityLevel} className={style["select-option"]} onChange={ e => updateProfileForSubject(subjectIndex, "selectionProbabilityLevel", e.target.value as ProbabilityLevelType)}>
+                                    {ALL_PROBABILITY_LEVELS.map((level, index) => (
+                                        <option key={index} value={level}>{level}</option>
+                                    ))}
+                                </select>
+                            </td>
+                            <td>
+                                <select value={pupilSubject.pupilSubjectProfileDTO.contestParticipationLevel} className={style["select-option"]} onChange={ e => updateProfileForSubject(subjectIndex, "contestParticipationLevel", e.target.value as ParticipationLevelType)}>
+                                    {ALL_PARTICIPATION_LEVELS.map((level, index) => (
+                                        <option key={index} value={level}>{level}</option>
+                                    ))}
+                                </select>
+                            </td>
+                            <td>
+                                <select value={pupilSubject.pupilSubjectProfileDTO.projectParticipationLevel} className={style["select-option"]} onChange={ e => updateProfileForSubject(subjectIndex, "projectParticipationLevel", e.target.value as ParticipationLevelType)}>
+                                    {ALL_PARTICIPATION_LEVELS.map((level, index) => (
+                                        <option key={index} value={level}>{level}</option>
+                                    ))}
+                                </select>
+                            </td>
+                            <td>
+                                <select value={pupilSubject.pupilSubjectProfileDTO.interestLevel} className={style["select-option"]} onChange={ e => updateProfileForSubject(subjectIndex, "interestLevel", e.target.value as InterestLevelType)}>
+                                    {ALL_INTEREST_LEVELS.map((level, index) => (
+                                        <option key={index} value={level}>{level}</option>
+                                    ))}
+                                </select>
+                            </td>
                         </tr>
                     ))}
                     

@@ -1,7 +1,10 @@
+import { PupilSubjectProfile } from "./pupilSubjectProfile"
+
 //Common subject for all years 
 export interface PupilSubject {
     name: Subject
     grades: PupilGrade []
+    pupilSubjectProfileDTO: PupilSubjectProfile
 }
 //unit grade for subject (11 in total)
 export interface PupilGrade {

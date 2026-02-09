@@ -12,7 +12,7 @@ interface AuthContextType {
   getToken: () => string | undefined;
   setRoles: (roles: Role[]) => void;
   getRoles: () => Role[] | undefined;
-  updateUser: (userData: Partial<User>) => void;
+  checkRole: (role: Role) => boolean | undefined
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -76,38 +76,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const rolesCookie = Cookies.get("roles");
     if (!rolesCookie) return [{name: ROLES.PUPIL}];
     try {
-      return JSON.parse(rolesCookie);
+      return JSON.parse(rolesCookie)
     } catch (err) {
       console.log(err);
       return [{name: ROLES.PUPIL}];
     }
-  };
-
-  const updateUser = (userData: Partial<User>) => {
-    if (user) {
-      const updatedUser = { ...user, ...userData };
-      setUser(updatedUser);
-      Cookies.set("user", JSON.stringify(updatedUser), {
-        expires: 1,
-        secure: false,
-        sameSite: "strict"
-      });
-    }
-  };
-
-  // Initialize user from cookies on mount
-  useEffect(() => {
-    const storedToken = Cookies.get("token");
-    const storedUser = getUser();
-    
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(storedUser);
-    }
-  }, []);
+  }
+  const checkRole = (role:Role) : boolean => {
+    const roles = getRoles()
+    return !!roles?.some(r => r.name === role.name)
+  }
 
   return (
-    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles}}>
+    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole}}>
       {children}
     </AuthContext.Provider>
   );
