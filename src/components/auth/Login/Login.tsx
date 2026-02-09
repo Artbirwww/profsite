@@ -31,10 +31,10 @@ export function Login() {
     try {
       const loginResponse = await authApi.login(email, password);
       // Assuming loginResponse is an object with user and token properties
-      const { user: userData, token: freshToken } = loginResponse;
+      const { token: freshToken } = loginResponse;
       const roles = await authApi.getRoles(freshToken)
 
-      login(userData, freshToken)
+      login(freshToken)
       setRoles(roles)
 
       navigate('/dashboard');

@@ -5,7 +5,6 @@ import { Login } from "./components/authorization/Login"
 import { Registration } from "./components/authorization/Registration"
 
 // Test components
-import { Dashboard } from "./components/tests/dashboard/Dashboard"
 import { TestPage } from "./components/tests/dashboard/TestPage"
 import { Tests } from "./components/tests/testsMain/Tests"
 import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
@@ -66,7 +65,7 @@ export default function App() {
             {/* New test routes */}
             <Route path="/" element={<Home/>} />
             <Route path="/tests">
-              <Route index element={<Dashboard />} />
+              <Route index element={<Tests />} />
               <Route
                 path="engineering-thinking"
                 element={<EngineeringThinkingTest />}

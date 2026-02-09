@@ -1,4 +1,4 @@
-import { Apple, ArrowUpToLine, FileCheck, Home, PieChart, User, Users } from "lucide-react"
+import { Apple, ArrowUpToLine, FileCheck, Home, PieChart, User, Users, Clipboard } from "lucide-react"
 import React, { ReactNode } from "react"
 import { ROLES } from "../../../types/account/role"
 
@@ -38,7 +38,7 @@ export const sidebarButtons: SidebarItem[] = [
         icon: React.createElement(User, { size: 20 }),
         path: "/profile",
     },
-    
+
     // Админ
     {
         id: "admin-list",
@@ -56,7 +56,15 @@ export const sidebarButtons: SidebarItem[] = [
         allowedRoles: [ROLES.ADMIN],
         dataItem: "role-based-item",
     },
-    
+    {
+        id: "grades",
+        label: "Мои оценки",
+        icon: React.createElement(ArrowUpToLine, { size: 20 }),
+        path: "/my-grades",
+        allowedRoles: [ROLES.ADMIN],
+        dataItem: "grades"
+    },
+
     // Учитель
     {
         id: "teacher-1",
@@ -74,7 +82,7 @@ export const sidebarButtons: SidebarItem[] = [
         allowedRoles: [ROLES.TEACHER],
         dataItem: "role-based-item",
     },
-    
+
     // Специалист
     {
         id: "specialist-list",
@@ -92,7 +100,7 @@ export const sidebarButtons: SidebarItem[] = [
         allowedRoles: [ROLES.SPECIALIST],
         dataItem: "role-based-item",
     },
-    
+
     // Директор
     {
         id: "director-list",
@@ -110,4 +118,12 @@ export const sidebarButtons: SidebarItem[] = [
         allowedRoles: [ROLES.DIRECTOR],
         dataItem: "role-based-item",
     },
+    {
+        id: "admin-grade-upload",
+        label: "Загрузить оценки",
+        icon: React.createElement(Apple, { size: 20 }),
+        path: "/admin/pupil-grades-loading",
+        allowedRoles: [ROLES.ADMIN],
+        dataItem: "role-based-item"
+    }
 ]

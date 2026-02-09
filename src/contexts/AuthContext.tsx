@@ -4,10 +4,9 @@ import { authApi } from '../services/api/authApi'
 import Cookies from "js-cookie"
 import { Role, ROLES } from '../types/account/role';
 interface AuthContextType {
-  user: User | null;
   token: string | null;
   isLoading: boolean;
-  login: (userData: User, token: string) => void;
+  login: (token: string) => void;
   logout: () => void;
   getToken: () => string | undefined;
   setRoles: (roles: Role[]) => void;
@@ -18,18 +17,15 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const logout = () => {
     Cookies.remove("token");
-    Cookies.remove("user");
-    setUser(null);
     setToken(null);
   };
 
-  const login = (userData: User, token: string) => {
+  const login = (token: string) => {
     // Убираем префикс "Bearer " если он есть
     const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
     Cookies.set("token", cleanToken, {
@@ -37,31 +33,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       secure: false,
       sameSite: "strict"
     });
-    
-    // Сохраняем информацию о пользователе
-    Cookies.set("user", JSON.stringify(userData), {
-      expires: 1,
-      secure: false,
-      sameSite: "strict"
-    });
-    
-    setUser(userData);
+        
     setToken(cleanToken);
   };
 
   const getToken = (): string | undefined => {
     return Cookies.get("token");
-  };
-
-  const getUser = (): User | undefined => {
-    const userCookie = Cookies.get("user");
-    if (!userCookie) return undefined;
-    try {
-      return JSON.parse(userCookie);
-    } catch (err) {
-      console.error("Error parsing user cookie:", err);
-      return undefined;
-    }
   };
 
   const setRoles = (roles: Role[]) => {
