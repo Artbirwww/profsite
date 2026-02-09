@@ -42,7 +42,7 @@ export function ResultsPage() {
     };
 
     loadResults();
-  }, [getTestsByPupil, token]);
+  }, [getTestsByPupil]);
 
   const filteredResults = selectedTestType === 'all' 
     ? testResults 
