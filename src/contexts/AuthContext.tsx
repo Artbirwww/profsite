@@ -2,74 +2,116 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { authApi } from '../services/api/authApi'
 import Cookies from "js-cookie"
-import { Role, ROLES } from '../types/account/role'
+import { Role, ROLES } from '../types/account/role';
 interface AuthContextType {
-	token: string | null
-	isLoading: boolean
-	login: (token: string) => void
-	logout: () => void
-	getToken: () => string | undefined
-	setRoles: (roles: Role[]) => void
-	getRoles: () => Role[] | undefined
+  user: User | null;
+  token: string | null;
+  isLoading: boolean;
+  login: (userData: User, token: string) => void;
+  logout: () => void;
+  getToken: () => string | undefined;
+  setRoles: (roles: Role[]) => void;
+  getRoles: () => Role[] | undefined;
+  updateUser: (userData: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [token, setToken] = useState<string | null>(() => Cookies.get("token") || null)
-	const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-	const logout = () => {
-		Cookies.remove("token")
-		Cookies.remove("roles")
-		setToken(null)
-	}
+  const logout = () => {
+    Cookies.remove("token");
+    Cookies.remove("user");
+    setUser(null);
+    setToken(null);
+  };
 
+  const login = (userData: User, token: string) => {
+    // Убираем префикс "Bearer " если он есть
+    const cleanToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+    Cookies.set("token", cleanToken, {
+      expires: 1,
+      secure: false,
+      sameSite: "strict"
+    });
+    
+    // Сохраняем информацию о пользователе
+    Cookies.set("user", JSON.stringify(userData), {
+      expires: 1,
+      secure: false,
+      sameSite: "strict"
+    });
+    
+    setUser(userData);
+    setToken(cleanToken);
+  };
 
-	const login = (newToken: string) => {
-		const cleanToken = newToken.startsWith('Bearer ') ? newToken.substring(7) : newToken
-		Cookies.set("token", cleanToken, {
-			expires: 1,
-			secure: false,
-			sameSite: "strict",
-		})
+  const getToken = (): string | undefined => {
+    return Cookies.get("token");
+  };
 
-		setToken(cleanToken)
-	}
+  const getUser = (): User | undefined => {
+    const userCookie = Cookies.get("user");
+    if (!userCookie) return undefined;
+    try {
+      return JSON.parse(userCookie);
+    } catch (err) {
+      console.error("Error parsing user cookie:", err);
+      return undefined;
+    }
+  };
 
+  const setRoles = (roles: Role[]) => {
+    Cookies.set("roles", JSON.stringify(roles), {
+      expires: 12,
+      secure: false,
+      sameSite: "strict"
+    });
+  };
 
-	const getToken = (): string | undefined => {
-		return Cookies.get("token")
-	}
+  const getRoles = (): Role[] | undefined => {
+    const rolesCookie = Cookies.get("roles");
+    if (!rolesCookie) return [{name: ROLES.PUPIL}];
+    try {
+      return JSON.parse(rolesCookie);
+    } catch (err) {
+      console.log(err);
+      return [{name: ROLES.PUPIL}];
+    }
+  };
 
-	const setRoles = (roles: Role[]) => {
-		Cookies.set("roles", JSON.stringify(roles), {
-			expires: 12,
-			secure: false,
-			sameSite: "strict",
-		})
-	}
+  const updateUser = (userData: Partial<User>) => {
+    if (user) {
+      const updatedUser = { ...user, ...userData };
+      setUser(updatedUser);
+      Cookies.set("user", JSON.stringify(updatedUser), {
+        expires: 1,
+        secure: false,
+        sameSite: "strict"
+      });
+    }
+  };
 
-	const getRoles = (): Role[] => {
-		const rolesCookie = Cookies.get("roles")
-		if (!rolesCookie) 
-			return [{ name: ROLES.PUPIL }]
+  // Initialize user from cookies on mount
+  useEffect(() => {
+    const storedToken = Cookies.get("token");
+    const storedUser = getUser();
+    
+    if (storedToken && storedUser) {
+      setToken(storedToken);
+      setUser(storedUser);
+    }
+  }, []);
 
-		try {
-			return JSON.parse(rolesCookie)
-
-		} catch (error) {
-			console.log("Failed to parse user roles:", error)
-			return [{ name: ROLES.PUPIL }]
-		}
-	}
-
-	return (
-		<AuthContext.Provider value={{ token, isLoading, login, logout, getToken, getRoles, setRoles }}>
-			{children}
-		</AuthContext.Provider>
-	)
-}
+  return (
+    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles}}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 export const useAuth = () => {
 	const context = useContext(AuthContext)

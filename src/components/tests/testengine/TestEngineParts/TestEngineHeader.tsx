@@ -3,7 +3,7 @@ import { CardHeader, CardTitle, CardDescription } from '../../../SimpleUI';
 import { ArrowLeft, Clock } from '../../../ui/display/SimpleIcons';
 import { TestConfig, TestQuestion } from '../../types/test-types';
 import { formatTime } from './utils';
-import '../TestEngineStyle/TestEngine.css';
+//import '../TestEngineStyle/TestEngineHeader.css';
 
 interface TestEngineHeaderProps {
   testConfig: TestConfig;
@@ -26,8 +26,8 @@ export function TestEngineHeader({
     <CardHeader className="test-engine-header">
       <div className="test-engine-header-content">
         <div className="test-engine-header-left">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             onClick={onBack}
             disabled={isSubmitting}
@@ -46,7 +46,7 @@ export function TestEngineHeader({
             </CardDescription>
           </div>
         </div>
-        
+
         {testConfig.timeLimit && (
           <div className="test-engine-timer">
             <div className="test-engine-timer-display">

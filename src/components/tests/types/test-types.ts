@@ -1,4 +1,4 @@
-export type QuestionType = 'single-choice' | 'multiple-choice' | 'distribution' | 'pair-choice' | 'yes-no';
+export type QuestionType = 'single-choice' | 'multiple-choice' | 'distribution' | 'pair-choice' | 'yes-no' | 'image-choice';
 
 export interface BaseQuestion {
   id: string;
@@ -26,6 +26,11 @@ export interface DistributionQuestion extends BaseQuestion {
   maxPoints: number;
 }
 
+export interface PairChoiceScoringRule {
+  category: string;
+  addWhenChoice: 'A' | 'B';
+}
+
 export interface PairChoiceQuestion extends BaseQuestion {
   type: 'pair-choice';
   optionA: string;
@@ -33,19 +38,30 @@ export interface PairChoiceQuestion extends BaseQuestion {
   descriptionA?: string;
   descriptionB?: string;
   correctChoice?: 'A' | 'B';
+  /** Правила подсчёта баллов по категориям (профориентация Климова) */
+  scoringRules?: PairChoiceScoringRule[];
 }
 
 export interface YesNoQuestion extends BaseQuestion {
   type: 'yes-no';
   correctAnswer?: boolean;
+  /** Ключ для подсчёта шкал темперамента: 'extra_true' | 'extra_false' | 'neiro_true' | 'neiro_false' | 'lie_true' | 'lie_false' */
+  answer?: string;
 }
 
-export type TestQuestion = 
-  | SingleChoiceQuestion 
-  | MultipleChoiceQuestion 
-  | DistributionQuestion 
-  | PairChoiceQuestion 
-  | YesNoQuestion;
+export interface ImageChoiceQuestion extends BaseQuestion {
+  type: 'image-choice';
+  options: string[];
+  correctAnswer?: number;
+}
+
+export type TestQuestion =
+  | SingleChoiceQuestion
+  | MultipleChoiceQuestion
+  | DistributionQuestion
+  | PairChoiceQuestion
+  | YesNoQuestion
+  | ImageChoiceQuestion;
 
 export interface TestConfig {
   id: string;
@@ -61,8 +77,33 @@ export interface TestConfig {
   };
 }
 
+export interface QuestionInfo {
+  blockIndex: number;
+  questionInBlockIndex: number;
+  totalInBlock: number;
+}
+
 export interface TestEngineProps {
   testConfig: TestConfig;
   onComplete?: (results: any) => void;
   onBack?: () => void;
+}
+
+export interface ActiveTestViewExtendedProps extends TestEngineProps {
+  currentQuestion: number;
+  answers: any[];
+  remainingTime: number;
+  isSubmitting: boolean;
+  answeredCount: number;
+  completionPercentage: number;
+  handleAnswer: (questionIndex: number, answer: any) => void;
+  handleNext: () => void;
+  handlePrevious: () => void;
+  setShowConfirmDialog: (show: boolean) => void;
+  setCurrentQuestion: (index: number) => void;
+  onBack?: () => void;
+  error: string | null;
+  showConfirmDialog: boolean;
+  completeTest: () => void;
+  getQuestionInfo?: (questionIndex: number) => QuestionInfo;
 }

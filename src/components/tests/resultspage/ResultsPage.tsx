@@ -26,21 +26,23 @@ const TestTypeDescriptions: Record<string, string> = {
 
 export function ResultsPage() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const { testResults, getTestsByPupil, isLoading } = useTest();
   const [selectedTestType, setSelectedTestType] = useState<string>('all');
 
   useEffect(() => {
     const loadResults = async () => {
       try {
-        await getTestsByPupil();
+        if (token) {
+          await getTestsByPupil(token);
+        }
       } catch (error) {
         console.error('Failed to load results:', error);
       }
     };
-    
+
     loadResults();
-  }, [getTestsByPupil]);
+  }, [getTestsByPupil, token]);
 
   const filteredResults = selectedTestType === 'all' 
     ? testResults 
@@ -164,25 +166,25 @@ export function ResultsPage() {
                   <div className="space-y-4">
                     {/* Параметры теста */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {result.psychParams.map((param, idx) => (
-                        <div 
-                          key={idx} 
+                      {result.psychParams?.map((param, idx) => (
+                        <div
+                          key={idx}
                           className="p-4 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg"
                         >
                           <div className="text-sm text-gray-600 mb-1 capitalize">
-                            {param.name.replace(/_/g, ' ')}
+                            {param.name?.replace(/_/g, ' ')}
                           </div>
                           <div className="text-2xl font-bold text-indigo-600">
                             {param.param}
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                            <div 
+                            <div
                               className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
                               style={{ width: `${Math.min(param.param * 10, 100)}%` }}
                             />
                           </div>
                         </div>
-                      ))}
+                      )) || <div className="col-span-full text-center py-4 text-gray-500">Нет данных о параметрах теста</div>}
                     </div>
 
                     {/* Интерпретация результатов */}
@@ -190,17 +192,17 @@ export function ResultsPage() {
                       <h4 className="font-medium text-blue-800 mb-2">Интерпретация результатов:</h4>
                       {result.testTypeName === 'Temperament' && (
                         <p className="text-sm text-blue-700">
-                          {getTemperamentInterpretation(result.psychParams)}
+                          {getTemperamentInterpretation(result.psychParams || [])}
                         </p>
                       )}
                       {result.testTypeName === 'Group Roles' && (
                         <p className="text-sm text-blue-700">
-                          {getGroupRolesInterpretation(result.psychParams)}
+                          {getGroupRolesInterpretation(result.psychParams || [])}
                         </p>
                       )}
                       {result.testTypeName === 'Professional Orientation' && (
                         <p className="text-sm text-blue-700">
-                          {getProfessionalOrientationInterpretation(result.psychParams)}
+                          {getProfessionalOrientationInterpretation(result.psychParams || [])}
                         </p>
                       )}
                     </div>
@@ -235,6 +237,10 @@ export function ResultsPage() {
 
 // Функции интерпретации
 function getTemperamentInterpretation(params: { param: number; name: string }[]): string {
+  if (!params || !Array.isArray(params)) {
+    return 'Недостаточно данных для интерпретации';
+  }
+  
   const extraversion = params.find(p => p.name === 'extrav_introver_score')?.param || 0;
   const neuroticism = params.find(p => p.name === 'neirotizm_score')?.param || 0;
   const sincerity = params.find(p => p.name === 'sincerity_score')?.param || 0;
@@ -246,35 +252,43 @@ function getTemperamentInterpretation(params: { param: number; name: string }[])
   else type = 'Меланхолик';
 
   return `Ваш тип темперамента: ${type}. ${
-    sincerity <= 4 
-      ? 'Результаты достоверны.' 
+    sincerity <= 4
+      ? 'Результаты достоверны.'
       : 'Внимание: результаты могут быть искажены из-за высокой шкалы искренности.'
   }`;
 }
 
 function getGroupRolesInterpretation(params: { param: number; name: string }[]): string {
+  if (!params || !Array.isArray(params)) {
+    return 'Недостаточно данных для интерпретации';
+  }
+  
   const roles = params
-    .filter(p => p.name.includes('_score') && !p.name.includes('completion_time'))
-    .sort((a, b) => b.param - a.param);
+    .filter(p => p.name && p.name.includes('_score') && !p.name.includes('completion_time'))
+    .sort((a, b) => (b?.param || 0) - (a?.param || 0));
 
   if (roles.length === 0) return 'Не удалось определить доминирующую роль';
 
   const dominantRole = roles[0];
-  const roleName = dominantRole.name.replace('_score', '').replace(/_/g, ' ');
-  
-  return `Ваша доминирующая роль в команде: ${roleName}. Вы набрали ${dominantRole.param} баллов.`;
+  const roleName = dominantRole?.name?.replace('_score', '')?.replace(/_/g, ' ') || 'неизвестная роль';
+
+  return `Ваша доминирующая роль в команде: ${roleName}. Вы набрали ${dominantRole?.param || 0} баллов.`;
 }
 
 function getProfessionalOrientationInterpretation(params: { param: number; name: string }[]): string {
+  if (!params || !Array.isArray(params)) {
+    return 'Недостаточно данных для интерпретации';
+  }
+  
   const orientations = params
-    .filter(p => p.name.includes('_score') && !p.name.includes('completion_time'))
-    .sort((a, b) => b.param - a.param);
+    .filter(p => p.name && p.name.includes('_score') && !p.name.includes('completion_time'))
+    .sort((a, b) => (b?.param || 0) - (a?.param || 0));
 
   if (orientations.length === 0) return 'Не удалось определить профессиональную направленность';
 
   const dominantOrientation = orientations[0];
-  const orientationName = dominantOrientation.name.replace('_score', '');
-  
+  const orientationName = dominantOrientation?.name?.replace('_score', '') || '';
+
   const professions: Record<string, string> = {
     'human': 'Работа с людьми: психолог, педагог, врач, менеджер',
     'tech': 'Техническая работа: инженер, программист, механик',
@@ -284,6 +298,6 @@ function getProfessionalOrientationInterpretation(params: { param: number; name:
   };
 
   const profession = professions[orientationName] || 'разнообразная деятельность';
-  
+
   return `Ваша профессиональная направленность: ${orientationName.replace(/_/g, ' ')}. Рекомендуемые профессии: ${profession}.`;
 }

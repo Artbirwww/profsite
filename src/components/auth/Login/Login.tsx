@@ -29,12 +29,14 @@ export function Login() {
     }
 
     try {
-      const freshToken = await authApi.login(email, password)
+      const loginResponse = await authApi.login(email, password);
+      // Assuming loginResponse is an object with user and token properties
+      const { user: userData, token: freshToken } = loginResponse;
       const roles = await authApi.getRoles(freshToken)
 
-      login(freshToken)
+      login(userData, freshToken)
       setRoles(roles)
-      
+
       navigate('/dashboard');
     } catch (err) {
       toast.error("Возникла ошибка при входе!")

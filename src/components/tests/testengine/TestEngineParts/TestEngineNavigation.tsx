@@ -2,7 +2,7 @@ import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { Card, CardContent } from '../../../SimpleUI';
 import { TestConfig } from '../../types/test-types';
 import { isAnswerValid } from './utils';
-import '../TestEngineStyle/TestEngine.css';
+//import '../TestEngineStyle/TestEngineNavigation.css';
 
 interface TestEngineNavigationProps {
   testConfig: TestConfig;
@@ -29,7 +29,7 @@ export function TestEngineNavigation({
           {testConfig.questions.map((_, idx) => {
             const isAnswered = isAnswerValid(answers[idx]);
             const isCurrent = idx === currentQuestion;
-            
+
             let buttonClass = 'test-engine-nav-button';
             if (isAnswered) {
               buttonClass += ' test-engine-nav-button-answered';

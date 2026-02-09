@@ -35,7 +35,7 @@ import { Home } from './components/home/Home';
 import { AuthRouter } from './components/routing/AuthRouter';
 import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
-import { Tests } from "./components/tests/testsMain/Tests"
+import { PupilSubjects } from "./components/grades/PupilSubjects"
 
 // ——— Главный компонент App ———
 export default function App() {
@@ -78,10 +78,12 @@ export default function App() {
 
 					<Route path="/profile" element={<Profile />} />
 
-				</Route>
-			</Route>
-			{/* Fallback */}
-			<Route path="*" element={<Navigate to="/login" replace />} />
-		</Routes>
-	);
+            <Route path="/my-grades" element={<PupilSubjects />} />
+
+          </Route>
+        </Route>
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+  );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../SimpleUI';
 import { Minus, Plus } from '../../ui/display/SimpleIcons';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
-import { DistributionQuestion } from '../types/test-types';
+import { DistributionQuestion, QuestionInfo } from '../types/test-types';
 import styles from '../styles.module.css';
 
 interface DistributionCardProps {
@@ -10,13 +10,15 @@ interface DistributionCardProps {
   values: number[];
   onChange: (values: number[]) => void;
   disabled?: boolean;
+  questionInfo?: QuestionInfo;
 }
 
-export function DistributionCard({ 
-  question, 
-  values, 
-  onChange, 
-  disabled 
+export function DistributionCard({
+  question,
+  values,
+  onChange,
+  disabled,
+  questionInfo
 }: DistributionCardProps) {
   const handleSliderChange = (index: number, newValue: number) => {
     const newValues = [...values];
@@ -29,20 +31,27 @@ export function DistributionCard({
   return (
     <Card className="shadow-lg">
       <CardHeader className={styles.cardHeaderPurple}>
-        <div className="flex items-center justify-between">
-          <CardTitle className={styles.titleLarge}>
-            {question.text}
-          </CardTitle>
-          <div className={`text-lg font-mono ${
-            currentSum > question.maxPoints ? 'text-red-600 font-bold' :
-            currentSum === question.maxPoints ? 'text-green-600 font-bold' :
-            styles.textGray600
-          }`}>
-            {currentSum}/{question.maxPoints}
+        <div className="flex flex-col gap-2">
+          {question.category && (
+            <div className="text-sm font-medium text-purple-200 uppercase tracking-wide">
+              {question.category} • Вопрос {questionInfo?.questionInBlockIndex} из {questionInfo?.totalInBlock}
+            </div>
+          )}
+          <div className="flex items-center justify-between">
+            <CardTitle className={styles.titleLarge}>
+              {question.text}
+            </CardTitle>
+            <div className={`text-lg font-mono ${
+              currentSum > question.maxPoints ? 'text-red-600 font-bold' :
+              currentSum === question.maxPoints ? 'text-green-600 font-bold' :
+              styles.textGray600
+            }`}>
+              {currentSum}/{question.maxPoints}
+            </div>
           </div>
         </div>
       </CardHeader>
-      
+
       <CardContent className="pt-6">
         <div className={styles.spaceY8}>
           {question.options.map((option, index) => (
@@ -60,7 +69,7 @@ export function DistributionCard({
                   <div className="text-xs text-gray-500">баллов</div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4">
                 <Button
                   variant="outline"
@@ -71,7 +80,7 @@ export function DistributionCard({
                 >
                   <Minus className="size-4" />
                 </Button>
-                
+
                 <div className={styles.flex1}>
                   <input
                     type="range"
@@ -87,7 +96,7 @@ export function DistributionCard({
                     <span>{question.maxPoints}</span>
                   </div>
                 </div>
-                
+
                 <Button
                   variant="outline"
                   size="sm"

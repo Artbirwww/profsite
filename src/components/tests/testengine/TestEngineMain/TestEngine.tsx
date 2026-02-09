@@ -1,19 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../../../SimpleUI';
-import { AlertCircle } from '../../../ui/display/SimpleIcons';
 import { useTestEngine } from '../../hooks/useTestEngine';
 import { TestEngineProps } from '../../types/test-types';
-import { TestEngineHeader } from '../TestEngineParts/TestEngineHeader';
-import { TestEngineProgress } from '../TestEngineParts/TestEngineProgress';
-import { TestEngineCompleted } from '../TestEngineParts/TestEngineCompleted';
-import { TestEngineNavigation } from '../TestEngineParts/TestEngineNavigation';
-import { TestEngineConfirmDialog } from '../TestEngineParts/TestEngineConfirmDialog';
-import { TestEngineControls } from '../TestEngineParts/TestEngineControls';
-import { QuestionRenderer } from '../TestEngineParts/QuestionRenderer';
-import '../TestEngineStyle/TestEngine.css';
+import { TestEngineCompleted, ActiveTestView } from '../TestEngineParts';
+import { useTest } from '@/contexts/TestContext';
+import { useAuth } from '@/contexts/AuthContext';
+//import '../TestEngineStyle/TestEngineGeneral.css';
 
 export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) {
   const navigate = useNavigate();
+  const { saveTestResult } = useTest();
+  const { getToken } = useAuth();
 
   const {
     currentQuestion,
@@ -31,20 +27,56 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
     handleNext,
     handlePrevious,
     completeTest,
+    getQuestionInfo,
   } = useTestEngine({
     testConfig,
     onComplete: async (results) => {
       if (onComplete) {
         await onComplete(results);
       }
+
+      // Submit test results to server
+      const token = getToken();
+      if (token) {
+        try {
+          const timeSpent = testConfig.timeLimit ? testConfig.timeLimit - remainingTime : 0;
+
+          // Prepare test result data
+          const testResult = {
+            testType: testConfig.id as any,
+            score: results.score,
+            answers: answers.map((answer, index) => ({
+              questionId: testConfig.questions[index].id,
+              question: testConfig.questions[index].text,
+              answer,
+              category: testConfig.questions[index].category,
+            })),
+            metadata: {
+              completedAt: new Date().toISOString(),
+              timeSpent,
+              totalQuestions: testConfig.questions.length,
+              answeredQuestions: answers.filter(a => a !== null &&
+                (Array.isArray(a) ? a.some(val => val > 0) : true)).length,
+              // Передаем исходные ответы и вопросы для пересчета в случае необходимости
+              rawAnswers: answers,
+              rawQuestions: testConfig.questions,
+              ...results.details,
+            },
+          };
+
+          // Save test result to server
+          await saveTestResult(testResult, token);
+        } catch (err) {
+          console.error('Failed to save test result:', err);
+          // Still navigate to results even if saving failed
+        }
+      }
+
       setTimeout(() => {
         navigate(`/my-results?test=${testConfig.id}&new=true`);
       }, 2000);
     },
   });
-
-  const currentQ = testConfig.questions[currentQuestion];
-  const currentAnswer = answers[currentQuestion];
 
   if (isCompleted) {
     const results = testConfig.calculateScore(answers, testConfig.questions);
@@ -58,79 +90,26 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
     );
   }
 
-  const handleBack = onBack || (() => navigate('/dashboard'));
-
   return (
-    <div className="test-engine-container">
-      <div className="test-engine-wrapper">
-        <Card className="test-engine-header-card">
-          <TestEngineHeader
-            testConfig={testConfig}
-            currentQuestion={currentQ}
-            remainingTime={remainingTime}
-            isSubmitting={isSubmitting}
-            onBack={handleBack}
-          />
-        </Card>
-
-        <TestEngineProgress
-          answeredCount={answeredCount}
-          currentQuestion={currentQuestion}
-          completionPercentage={completionPercentage}
-        />
-
-        {testConfig.instructions && (
-          <Card className="test-engine-instructions">
-            <div className="test-engine-instructions-content">
-              <h4 className="test-engine-instructions-title">Инструкция:</h4>
-              <p className="test-engine-instructions-text">{testConfig.instructions}</p>
-            </div>
-          </Card>
-        )}
-
-        {error && (
-          <div className="test-engine-error">
-            <AlertCircle className="test-engine-error-icon" />
-            <span className="test-engine-error-text">{error}</span>
-          </div>
-        )}
-
-        <QuestionRenderer
-          question={currentQ}
-          answer={currentAnswer}
-          onAnswer={(answer) => handleAnswer(currentQuestion, answer)}
-          disabled={isSubmitting}
-        />
-
-        <TestEngineControls
-          testConfig={testConfig}
-          currentQuestion={currentQuestion}
-          isSubmitting={isSubmitting}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-          onCompleteEarly={() => setShowConfirmDialog(true)}
-        />
-
-        {showConfirmDialog && (
-          <TestEngineConfirmDialog
-            testConfig={testConfig}
-            answeredCount={answeredCount}
-            remainingTime={remainingTime}
-            isSubmitting={isSubmitting}
-            onConfirm={completeTest}
-            onCancel={() => setShowConfirmDialog(false)}
-          />
-        )}
-
-        <TestEngineNavigation
-          testConfig={testConfig}
-          currentQuestion={currentQuestion}
-          answers={answers}
-          isSubmitting={isSubmitting}
-          onQuestionSelect={setCurrentQuestion}
-        />
-      </div>
-    </div>
+    <ActiveTestView
+      testConfig={testConfig}
+      currentQuestion={currentQuestion}
+      answers={answers}
+      remainingTime={remainingTime}
+      isSubmitting={isSubmitting}
+      answeredCount={answeredCount}
+      completionPercentage={completionPercentage}
+      handleAnswer={handleAnswer}
+      handleNext={handleNext}
+      handlePrevious={handlePrevious}
+      setShowConfirmDialog={setShowConfirmDialog}
+      setCurrentQuestion={setCurrentQuestion}
+      onBack={onBack}
+      error={error}
+      showConfirmDialog={showConfirmDialog}
+      completeTest={completeTest}
+      getQuestionInfo={getQuestionInfo}
+    />
   );
 }
 
