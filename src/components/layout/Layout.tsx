@@ -14,6 +14,7 @@ export const Layout: FC = () => {
 
 
             <div className="layout-content">
+                <p style={{ textTransform: "uppercase" }}>*** Интерефейс все еще в разработке, это не финальная версия (stay calm)</p>
                 <Outlet />
             </div>
 

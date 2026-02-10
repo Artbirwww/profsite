@@ -9,7 +9,6 @@ interface TestItemProps {
 
 export const TestComponent: FC<TestItemProps> = ({ item, onClick }) => {
     const Icon = item.icon
-    const orderNumber = item.orderNumber
     const label = item.label
     const author = item.author
     const descritpion = item.description
@@ -24,7 +23,7 @@ export const TestComponent: FC<TestItemProps> = ({ item, onClick }) => {
             onClick={handleClick}>
 
             <div className="test-item-order">
-                {orderNumber}
+                
             </div>
 
             <div className="test-item-content">

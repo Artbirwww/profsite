@@ -4,7 +4,6 @@ import { Drama, UsersRound, Cog, BriefcaseBusiness, Brain, Compass, Search, Targ
 // Интерфейс для элмента выбора теста (карточки тестов)
 export interface TestsItem {
     id: string              // Id
-    orderNumber?: string    // Цифра теста
     label: string           // Название теста
     author?: string         // Автор теста
     description: string     // Описание теста
@@ -17,7 +16,6 @@ export interface TestsItem {
 export const testsList: TestsItem[] = [
     {
         id: "test-temperament",
-        orderNumber: "01",
         label: "Темперамент",
         author: "Ганс Юрген Айзенк",
         description: "Определение типа темперамента и личностных характеристик",
@@ -27,7 +25,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-group-roles",
-        orderNumber: "02",
         label: "Роли в команде",
         author: "Реймонд Мередит Белбин",
         description: "Выявление вашей роли в команде по методике Белбина",
@@ -37,7 +34,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-engineering-thinking",
-        orderNumber: "03",
         label: "Инженерное мышление",
         author: "Джордж Кеттнер Беннет",
         description: "Оценка технических и аналитических способностей",
@@ -47,7 +43,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-intellectual-potential",
-        orderNumber: "04",
         label: "Интеллектуальный потенциал",
         description: "Анализ когнитивных способностей и потенциала развития",
         icon: Brain,
@@ -56,7 +51,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-professional-orientation-klimov",
-        orderNumber: "05",
         label: "Профориентация",
         author: "Евгений Александрович Климов",
         description: "Профессиональные предпочтения",
@@ -66,7 +60,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-professional-orientation-holland",
-        orderNumber: "06",
         label: "Профориентация",
         author: "Джон Льюис Холланд",
         description: "Описание",
@@ -76,7 +69,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-professional-orientation-glomshtok",
-        orderNumber: "07",
         label: "Карта интересов",
         author: "Александр Ефимович Гломшток",
         description: "Описание",
@@ -86,7 +78,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-professional-orientation-yovayshi",
-        orderNumber: "08",
         label: "Профориентация",
         author: "Леонардас Адамович Йовайша",
         description: "Описание",
@@ -96,7 +87,6 @@ export const testsList: TestsItem[] = [
     },
     {
         id: "test-professional-orientation-sheyn",
-        orderNumber: "09",
         label: "Якоря карьеры",
         author: "Эдгар Генри Шейн",
         description: "Описание",
