@@ -42,9 +42,9 @@ export const ActiveTestView = ({
   const handleBack = onBack || (() => navigate('/dashboard'));
 
   return (
-    <div className="test-engine-container">
-      <div className="test-engine-wrapper">
-        <Card className="test-engine-header-card">
+    <div>
+      <div>
+        <Card>
           <TestEngineHeader
             testConfig={testConfig}
             currentQuestion={currentQ}
@@ -61,18 +61,18 @@ export const ActiveTestView = ({
         />
 
         {testConfig.instructions && (
-          <Card className="test-engine-instructions">
-            <div className="test-engine-instructions-content">
-              <h4 className="test-engine-instructions-title">Инструкция:</h4>
-              <p className="test-engine-instructions-text">{testConfig.instructions}</p>
+          <Card>
+            <div>
+              <h4>Инструкция:</h4>
+              <p>{testConfig.instructions}</p>
             </div>
           </Card>
         )}
 
         {error && (
-          <div className="test-engine-error">
-            <AlertCircle className="test-engine-error-icon" />
-            <span className="test-engine-error-text">{error}</span>
+          <div>
+            <AlertCircle />
+            <span>{error}</span>
           </div>
         )}
 

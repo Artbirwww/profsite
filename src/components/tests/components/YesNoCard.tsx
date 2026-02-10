@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../SimpleUI';
 import { YesNoQuestion } from '../types/test-types';
-import styles from '../styles.module.css';
 
 interface YesNoCardProps {
   question: YesNoQuestion;
@@ -10,35 +9,33 @@ interface YesNoCardProps {
   disabled?: boolean;
 }
 
-export function YesNoCard({ 
-  question, 
-  selectedAnswer, 
-  onSelect, 
-  disabled 
+export function YesNoCard({
+  question,
+  selectedAnswer,
+  onSelect,
+  disabled
 }: YesNoCardProps) {
   const getButtonClass = (isSelected: boolean) => {
-    return `${styles.choiceButton} ${
-      isSelected ? styles.choiceButtonSelected : ''
-    } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
+    return '';
   };
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader className={styles.cardHeaderPurple}>
-        <div className="flex items-center justify-between">
-          <CardTitle className={styles.titleLarge}>
+    <Card>
+      <CardHeader>
+        <div>
+          <CardTitle>
             {question.text}
           </CardTitle>
           {question.category && (
-            <span className={styles.badgePurple}>
+            <span>
               {question.category}
             </span>
           )}
         </div>
       </CardHeader>
-      
-      <CardContent className="pt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <CardContent>
+        <div>
           <button
             onClick={() => onSelect(true)}
             disabled={disabled}

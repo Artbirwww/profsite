@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader } from '../../SimpleUI';
 import { PairChoiceQuestion } from '../types/test-types';
-import styles from '../styles.module.css';
 
 interface PairChoiceCardProps {
   question: PairChoiceQuestion;
@@ -10,48 +9,43 @@ interface PairChoiceCardProps {
   disabled?: boolean;
 }
 
-export function PairChoiceCard({ 
-  question, 
-  selectedChoice, 
-  onSelect, 
-  disabled 
+export function PairChoiceCard({
+  question,
+  selectedChoice,
+  onSelect,
+  disabled
 }: PairChoiceCardProps) {
   const getCardClass = (choice: 'A' | 'B') => {
-    const baseClass = `${styles.choiceCard} transition-all duration-200`;
-    const selectedClass = selectedChoice === choice ? styles.choiceCardSelected : '';
-    const colorClass = choice === 'A' ? styles.choiceCardBlue : styles.choiceCardPurple;
-    const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : '';
-    
-    return `${baseClass} ${selectedClass} ${colorClass} ${disabledClass}`;
+    return '';
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div>
       {/* Вариант А */}
       <Card
         className={getCardClass('A')}
         onClick={() => onSelect('A')}
         disabled={disabled}
       >
-        <CardHeader className={styles.cardHeaderBlue}>
-          <div className="flex items-center justify-between">
-            <div className={styles.badgeBlue}>
+        <CardHeader>
+          <div>
+            <div>
               Вариант А
             </div>
             {selectedChoice === 'A' && (
-              <div className={styles.badgeGreen}>
+              <div>
                 Выбрано
               </div>
             )}
           </div>
         </CardHeader>
-        <CardContent className="pt-6">
-          <div className={styles.spaceY4}>
-            <div className={`text-lg font-medium ${styles.textGray800} ${styles.leadingRelaxed}`}>
+        <CardContent>
+          <div>
+            <div>
               {question.optionA}
             </div>
             {question.descriptionA && (
-              <div className="text-sm text-gray-600 italic">
+              <div>
                 {question.descriptionA}
               </div>
             )}
@@ -65,25 +59,25 @@ export function PairChoiceCard({
         onClick={() => onSelect('B')}
         disabled={disabled}
       >
-        <CardHeader className={styles.cardHeaderPurple}>
-          <div className="flex items-center justify-between">
-            <div className={styles.badgePurple}>
+        <CardHeader>
+          <div>
+            <div>
               Вариант Б
             </div>
             {selectedChoice === 'B' && (
-              <div className={styles.badgeGreen}>
+              <div>
                 Выбрано
               </div>
             )}
           </div>
         </CardHeader>
-        <CardContent className="pt-6">
-          <div className={styles.spaceY4}>
-            <div className={`text-lg font-medium ${styles.textGray800} ${styles.leadingRelaxed}`}>
+        <CardContent>
+          <div>
+            <div>
               {question.optionB}
             </div>
             {question.descriptionB && (
-              <div className="text-sm text-gray-600 italic">
+              <div>
                 {question.descriptionB}
               </div>
             )}

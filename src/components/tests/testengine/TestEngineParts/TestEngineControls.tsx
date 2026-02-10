@@ -1,6 +1,5 @@
 import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { TestConfig } from '../../types/test-types';
-//import '../TestEngineStyle/TestEngineControls.css';
 
 interface TestEngineControlsProps {
   testConfig: TestConfig;
@@ -22,13 +21,12 @@ export function TestEngineControls({
   const isLastQuestion = currentQuestion >= testConfig.questions.length - 1;
 
   return (
-    <div className="test-engine-controls">
-      <div className="test-engine-controls-main">
+    <div>
+      <div>
         <Button
           variant="outline"
           onClick={onPrevious}
           disabled={currentQuestion === 0 || isSubmitting}
-          className="test-engine-control-button"
         >
           Назад
         </Button>
@@ -36,11 +34,6 @@ export function TestEngineControls({
         <Button
           onClick={onNext}
           disabled={isSubmitting}
-          className={`test-engine-control-button ${
-            isLastQuestion
-              ? 'test-engine-control-button-complete'
-              : 'test-engine-control-button-next'
-          }`}
         >
           {isLastQuestion
             ? (isSubmitting ? 'Сохранение...' : 'Завершить тест')
@@ -52,7 +45,6 @@ export function TestEngineControls({
         variant="outline"
         onClick={onCompleteEarly}
         disabled={isSubmitting}
-        className="test-engine-control-button-early"
       >
         Завершить досрочно
       </Button>

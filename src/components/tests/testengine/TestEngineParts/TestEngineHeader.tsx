@@ -3,7 +3,6 @@ import { CardHeader, CardTitle, CardDescription } from '../../../SimpleUI';
 import { ArrowLeft, Clock } from '../../../ui/display/SimpleIcons';
 import { TestConfig, TestQuestion } from '../../types/test-types';
 import { formatTime } from './utils';
-//import '../TestEngineStyle/TestEngineHeader.css';
 
 interface TestEngineHeaderProps {
   testConfig: TestConfig;
@@ -23,22 +22,22 @@ export function TestEngineHeader({
   const timeWarning = remainingTime < 300;
 
   return (
-    <CardHeader className="test-engine-header">
-      <div className="test-engine-header-content">
-        <div className="test-engine-header-left">
+    <CardHeader>
+      <div>
+        <div>
           <Button
             variant="outline"
             size="sm"
             onClick={onBack}
             disabled={isSubmitting}
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeft />
           </Button>
           <div>
-            <CardTitle className="test-engine-title">{testConfig.name}</CardTitle>
-            <CardDescription className="test-engine-description">
+            <CardTitle>{testConfig.name}</CardTitle>
+            <CardDescription>
               {currentQuestion.category && (
-                <span className="test-engine-badge">
+                <span>
                   {currentQuestion.category}
                 </span>
               )}
@@ -48,14 +47,14 @@ export function TestEngineHeader({
         </div>
 
         {testConfig.timeLimit && (
-          <div className="test-engine-timer">
-            <div className="test-engine-timer-display">
-              <Clock className={`test-engine-timer-icon ${timeWarning ? 'timer-warning' : ''}`} />
-              <span className={`test-engine-timer-text ${timeWarning ? 'timer-warning' : ''}`}>
+          <div>
+            <div>
+              <Clock />
+              <span>
                 {formatTime(remainingTime)}
               </span>
             </div>
-            <div className="test-engine-timer-label">
+            <div>
               {timeWarning ? 'Осталось менее 5 минут!' : 'До завершения теста'}
             </div>
           </div>

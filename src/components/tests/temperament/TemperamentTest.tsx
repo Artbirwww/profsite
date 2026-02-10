@@ -22,7 +22,7 @@ export function TemperamentTest({ onBack }: TemperamentTestProps) {
       if (!token) {
         throw new Error('Authentication token not found');
       }
-      
+
       await saveTestResult({
         testType: 'temperament',
         score: results.score,
@@ -46,21 +46,19 @@ export function TemperamentTest({ onBack }: TemperamentTestProps) {
   // Если вариант не выбран, показываем выбор варианта
   if (!variant) {
     return (
-      <div className="min-h-screen p-4 py-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
+      <div>
+        <div>
           {/* Компонент выбора варианта */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Выберите вариант теста</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h1>Выберите вариант теста</h1>
+            <div>
               <button
                 onClick={() => setVariant('A')}
-                className="p-6 border-2 border-blue-200 rounded-lg hover:border-blue-400"
               >
                 Вариант А
               </button>
               <button
                 onClick={() => setVariant('B')}
-                className="p-6 border-2 border-green-200 rounded-lg hover:border-green-400"
               >
                 Вариант Б
               </button>

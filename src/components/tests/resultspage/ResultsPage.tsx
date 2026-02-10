@@ -44,8 +44,8 @@ export function ResultsPage() {
     loadResults();
   }, [getTestsByPupil, token]);
 
-  const filteredResults = selectedTestType === 'all' 
-    ? testResults 
+  const filteredResults = selectedTestType === 'all'
+    ? testResults
     : testResults.filter(r => r.testTypeName === selectedTestType);
 
   const formatTime = (seconds: number) => {
@@ -68,46 +68,44 @@ export function ResultsPage() {
   };
 
   const handleLogout = () => {
-    // TODO: Добавить logout из AuthContext
+    // Добавить logout из AuthContext
     navigate('/login');
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Загрузка результатов...</p>
+      <div>
+        <div>
+          <div></div>
+          <p>Загрузка результатов...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-4 py-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <div>
+      <div>
         {/* Заголовок */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8">
+        <div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Результаты тестирования</h1>
-            <p className="text-gray-600">
+            <h1>Результаты тестирования</h1>
+            <p>
               {user?.email}
               {testResults.length > 0 && ` • ${testResults.length} тестов пройдено`}
             </p>
           </div>
-          
-          <div className="flex flex-wrap gap-3">
-            <Button 
-              variant="outline" 
+
+          <div>
+            <Button
+              variant="outline"
               onClick={handleRetakeTest}
-              className="flex items-center gap-2"
             >
               Пройти ещё тесты
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={handleLogout}
-              className="flex items-center gap-2 border-red-200 text-red-600 hover:bg-red-50"
             >
               Выйти
             </Button>
@@ -115,8 +113,8 @@ export function ResultsPage() {
         </div>
 
         {/* Фильтр тестов */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div>
+          <div>
             <Button
               variant={selectedTestType === 'all' ? "default" : "outline"}
               onClick={() => setSelectedTestType('all')}
@@ -128,7 +126,6 @@ export function ResultsPage() {
                 key={type}
                 variant={selectedTestType === type ? "default" : "outline"}
                 onClick={() => setSelectedTestType(type)}
-                className="flex items-center gap-2"
               >
                 <span>{TestTypeIcons[type]}</span>
                 {type}
@@ -139,13 +136,13 @@ export function ResultsPage() {
 
         {/* Результаты */}
         {filteredResults.length > 0 ? (
-          <div className="space-y-6">
+          <div>
             {filteredResults.map((result, index) => (
-              <Card key={index} className="shadow-lg">
-                <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="text-3xl">
+              <Card key={index}>
+                <CardHeader>
+                  <div>
+                    <div>
+                      <div>
                         {TestTypeIcons[result.testTypeName] || '📊'}
                       </div>
                       <div>
@@ -156,52 +153,50 @@ export function ResultsPage() {
                         </CardDescription>
                       </div>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div>
                       Время: {formatTime(result.completionTimeSeconds)}
                     </div>
                   </div>
                 </CardHeader>
-                
-                <CardContent className="pt-6">
-                  <div className="space-y-4">
+
+                <CardContent>
+                  <div>
                     {/* Параметры теста */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
                       {result.psychParams?.map((param, idx) => (
                         <div
                           key={idx}
-                          className="p-4 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg"
                         >
-                          <div className="text-sm text-gray-600 mb-1 capitalize">
+                          <div>
                             {param.name?.replace(/_/g, ' ')}
                           </div>
-                          <div className="text-2xl font-bold text-indigo-600">
+                          <div>
                             {param.param}
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                          <div>
                             <div
-                              className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
                               style={{ width: `${Math.min(param.param * 10, 100)}%` }}
                             />
                           </div>
                         </div>
-                      )) || <div className="col-span-full text-center py-4 text-gray-500">Нет данных о параметрах теста</div>}
+                      )) || <div>Нет данных о параметрах теста</div>}
                     </div>
 
                     {/* Интерпретация результатов */}
-                    <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-                      <h4 className="font-medium text-blue-800 mb-2">Интерпретация результатов:</h4>
+                    <div>
+                      <h4>Интерпретация результатов:</h4>
                       {result.testTypeName === 'Temperament' && (
-                        <p className="text-sm text-blue-700">
+                        <p>
                           {getTemperamentInterpretation(result.psychParams || [])}
                         </p>
                       )}
                       {result.testTypeName === 'Group Roles' && (
-                        <p className="text-sm text-blue-700">
+                        <p>
                           {getGroupRolesInterpretation(result.psychParams || [])}
                         </p>
                       )}
                       {result.testTypeName === 'Professional Orientation' && (
-                        <p className="text-sm text-blue-700">
+                        <p>
                           {getProfessionalOrientationInterpretation(result.psychParams || [])}
                         </p>
                       )}
@@ -212,14 +207,14 @@ export function ResultsPage() {
             ))}
           </div>
         ) : (
-          <Card className="text-center py-12">
+          <Card>
             <CardContent>
-              <div className="text-5xl mb-4">📊</div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">
+              <div>📊</div>
+              <h3>
                 {testResults.length === 0 ? 'Результатов пока нет' : 'Нет результатов по выбранному фильтру'}
               </h3>
-              <p className="text-gray-600 mb-6">
-                {testResults.length === 0 
+              <p>
+                {testResults.length === 0
                   ? 'Пройдите тесты, чтобы увидеть здесь свои результаты'
                   : 'Измените фильтр или пройдите новые тесты'
                 }
@@ -240,7 +235,7 @@ function getTemperamentInterpretation(params: { param: number; name: string }[])
   if (!params || !Array.isArray(params)) {
     return 'Недостаточно данных для интерпретации';
   }
-  
+
   const extraversion = params.find(p => p.name === 'extrav_introver_score')?.param || 0;
   const neuroticism = params.find(p => p.name === 'neirotizm_score')?.param || 0;
   const sincerity = params.find(p => p.name === 'sincerity_score')?.param || 0;
@@ -262,7 +257,7 @@ function getGroupRolesInterpretation(params: { param: number; name: string }[]):
   if (!params || !Array.isArray(params)) {
     return 'Недостаточно данных для интерпретации';
   }
-  
+
   const roles = params
     .filter(p => p.name && p.name.includes('_score') && !p.name.includes('completion_time'))
     .sort((a, b) => (b?.param || 0) - (a?.param || 0));
@@ -279,7 +274,7 @@ function getProfessionalOrientationInterpretation(params: { param: number; name:
   if (!params || !Array.isArray(params)) {
     return 'Недостаточно данных для интерпретации';
   }
-  
+
   const orientations = params
     .filter(p => p.name && p.name.includes('_score') && !p.name.includes('completion_time'))
     .sort((a, b) => (b?.param || 0) - (a?.param || 0));

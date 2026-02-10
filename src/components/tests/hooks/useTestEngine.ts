@@ -62,13 +62,11 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
     const currentAnswer = answers[currentQuestion];
     const currentQ = testConfig.questions[currentQuestion];
 
-    // Проверка на обязательный ответ для некоторых типов вопросов
     if (currentQ.type === 'single-choice' && currentAnswer === null) {
       setError('Пожалуйста, выберите ответ');
       return;
     }
 
-    // Убираем проверку распределения баллов при переходе к следующему вопросу
     // Проверка будет происходить только при завершении теста
     /*
     if (currentQ.type === 'distribution') {
@@ -184,7 +182,7 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
       blockEndIndex++;
     }
 
-    const questionInBlockIndex = questionIndex - blockStartIndex + 1; // 1-based
+    const questionInBlockIndex = questionIndex - blockStartIndex + 1;
     const totalInBlock = blockEndIndex - blockStartIndex + 1;
 
     // Определить индекс блока среди уникальных категорий
@@ -201,7 +199,7 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
     }
 
     return {
-      blockIndex: uniqueCategoriesEncountered + 1, // 1-based
+      blockIndex: uniqueCategoriesEncountered + 1,
       questionInBlockIndex,
       totalInBlock
     };
