@@ -1,17 +1,22 @@
 .layout-base {
+    box-sizing: border-box;
+    position: relative;
+    height: 100vh;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    background-color: var(--color-bg-primary);
     overflow: hidden;
-    padding: 10px;
 }
 .layout-content {
     flex: 1;
-    overflow-x: auto;
-    transition: all .3s ease;
-    height: calc(100vh - 20px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
-.layout-sidebar {
-    width: auto;
+.layout-menu {
+    position: fixed;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    bottom: 0;
 }

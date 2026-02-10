@@ -6,7 +6,7 @@ import { X, Menu, DoorOpen } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 import { ROLES } from "../../../types/account/role"
-import { SidebarItem, sidebarButtons } from "./sidebarData"
+import { MenuItem, menuButtons } from "./menuData"
 
 // Интерфейс для пропсов сайдбара
 interface SidebarProps {
@@ -25,7 +25,7 @@ const ROLE_NAMES: Record<string, string> = {
 }
 
 // Компонент для отдельного элемента сайдбара (Кнопки)
-const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollapsed: boolean, onClick: (path: string) => void }> = ({ item, isActive, isCollapsed, onClick }) => {
+const SidebarItemComponent: FC<{ item: MenuItem, isActive: boolean, isCollapsed: boolean, onClick: (path: string) => void }> = ({ item, isActive, isCollapsed, onClick }) => {
 
     const handleClick = useCallback((e: React.MouseEvent) => {
         e.preventDefault()
@@ -44,7 +44,7 @@ const SidebarItemComponent: FC<{ item: SidebarItem, isActive: boolean, isCollaps
 export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left", onToggle }) => {
     const location = useLocation()
     const navigate = useNavigate()
-    const { logout, getRoles } = useAuth()
+    const { logout, getRoles, checkRole } = useAuth()
 
     // Получаем массив ролей пользователя
     const userRoles = useMemo(() => getRoles() || [], [getRoles])
@@ -69,15 +69,12 @@ export const Sidebar: FC<SidebarProps> = ({ collapsed = false, position = "left"
 
     // Фильтруем кнопки на основе ролей
     const filteredButtons = useMemo(() => {
-        const userRoles = getRoles() || []
-        const userRoleNames = userRoles.map(r => r.name)
-
-        return sidebarButtons.filter(item => {
+        return menuButtons.filter(item => {
             if (!item.allowedRoles || item.allowedRoles.length === 0) return true
 
-            return item.allowedRoles.some(allowedRole => userRoleNames.includes(allowedRole))
+            return item.allowedRoles.some(roleName => checkRole({ name: roleName }))
         })
-    }, [getRoles])
+    }, [checkRole])
 
     // Слушатель изменения размера экрана (чтобы сайдбар схлопывался при ресайзе)
     useEffect(() => {
