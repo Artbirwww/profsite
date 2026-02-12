@@ -7,43 +7,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-}
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    /* Кроссбраузерное сглаживание шрифтов */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-ul,
-ol {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-    font: inherit;
 }
 
 :root {
@@ -54,7 +20,7 @@ select {
     --accent-hover-color: rgba(4, 100, 226, 0.2);
     --border-color: #c53838;
 
-
+    /* Стеклянный эффект */
     --menu-bg: rgba(255, 255, 255, .4);
     --menu-shadow:
         0 8px 32px rgba(0, 0, 0, .1),
@@ -63,15 +29,12 @@ select {
         inset 0 0 10px 5px rgba(255, 255, 255, .5);
     --menu-blur: blur(10px);
     --menu-border: 1px solid rgba(255, 255, 255, .3);
-    --menu-bg-before: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, .8),
-            transparent) --menu-bg-after: linear-gradient(180deg,
-            rgba(255, 255, 255, .8),
-            transparent,
-            rgba(255, 255, 255, .3));
 
+    /* Исправленные градиенты */
+    --menu-bg-before: linear-gradient(90deg, transparent, rgba(255, 255, 255, .8), transparent);
+    --menu-bg-after: linear-gradient(180deg, rgba(255, 255, 255, .8), transparent, rgba(255, 255, 255, .3));
 
+    /* Типографика */
     --font-size-xs: .75rem;
     --font-size-sm: .875rem;
     --font-size-base: 1rem;
@@ -81,7 +44,6 @@ select {
     --font-size-2xl: 2.25rem;
     --font-size-3xl: 2.75rem;
     --font-size-4xl: 3.5rem;
-
 
     --font-weight-extralight: 200;
     --font-weight-light: 300;
@@ -102,8 +64,84 @@ select {
     --border-color: #333333;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+    /* Защита от авто-изменения размера текста в iOS Safari */
+    -webkit-text-size-adjust: 100%;
+    /* Плавная прокрутка */
+    scroll-behavior: smooth;
+}
+
 body {
+    height: 100%;
+    width: 100%;
     background-color: var(--bg-color);
     color: var(--text-color);
+    /* Основной шрифт с системным фолбеком */
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    /* Оптимизация переходов */
+    -webkit-transition: background-color .3s ease, color .3s ease;
     transition: background-color .3s ease, color .3s ease;
+}
+
+/* Списки */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Ссылки */
+a {
+    text-decoration: none;
+    color: inherit;
+    /* Быстрый тап на мобильных */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Медиа-контент */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Элементы форм */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+    /* Убирает стандартный стиль кнопок в iOS */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Отключение анимаций для пользователей с чувствительностью */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
