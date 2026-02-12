@@ -59,5 +59,4 @@ export interface PupilListResponse {
 }
 
 export const PupilDataKeys = ["email", "password", "name", "surname", "patronymic", 
-    "birthday", "school", "healthCondition", "nationality", 
-    "extraActivities", "classNumber", "classLabel", "gender"];
+    "birthday", "school", "classNumber", "classLabel", "gender"];

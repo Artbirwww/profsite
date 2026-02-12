@@ -5,6 +5,8 @@ import { FC, FormEvent, useCallback, useState } from "react"
 import { FieldInput } from "../ui/reusable/fieldInput"
 import { Button } from "../ui/reusable/button"
 import { useNavigate } from "react-router-dom"
+import { authApi } from "../../services/api/authApi"
+import toast, { Toaster } from "react-hot-toast"
 
 type UserType = "Школьник" | "Студент" | "Специалист"
 
@@ -55,6 +57,15 @@ export const Registration: FC = () => {
 
     const handleBackToLogin = () => {
         navigate("/login")
+    }
+    const handleRegistration = async () => {
+        try {
+            await authApi.register(formData.email, formData.password)
+            toast.success("Регистрация успешна!")
+            handleBack()
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -121,7 +132,7 @@ export const Registration: FC = () => {
                         </div>
 
                         <div className="registration-form-row">
-                            <Button buttonLabel={"Зарегистрироваться"}/>
+                            <Button buttonLabel={"Зарегистрироваться"} buttonFunction={handleRegistration}/>
                         </div>
 
                         <div className="registration-form-row">
@@ -138,6 +149,7 @@ export const Registration: FC = () => {
             <Button buttonLabel={"У меня уже есть аккаунт"}
                     buttonType={"link"}
                     buttonFunction={handleBackToLogin}/>
+        <Toaster />
         </div>
     )
 }
