@@ -9,7 +9,7 @@ import {
   TestEngineConfirmDialog,
   TestEngineControls,
   QuestionRenderer
-} from '../TestEngineParts';
+} from '.';
 
 import { ActiveTestViewExtendedProps, QuestionInfo } from '../../types/test-types';
 

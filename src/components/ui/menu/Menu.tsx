@@ -55,8 +55,8 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
                     onClick={handleAction} />
             </nav>
 
-            <nav className="menu-nav">
-                {Object.entries(roleGroups).map(([role, items]) => (
+            {Object.entries(roleGroups).map(([role, items]) => (
+                <nav className="menu-nav">
                     <MenuComponentDropdown
                         key={role}
                         roleKey={role}
@@ -71,8 +71,8 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
                         ))}
 
                     </MenuComponentDropdown>
-                ))}
-            </nav>
+                </nav>
+            ))}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { useTest } from '../../../contexts/TestContext';
 import { useAuth } from '../../../contexts/AuthContext';
-import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
+import { TestEngine } from '../testEngine/TestEngine';
 import { groupRolesConfig } from '../testConfigs';
 
 interface GroupRolesTestProps {

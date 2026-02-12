@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
+import { TestEngine } from '../testEngine/TestEngine';
 import { getIntellectualPotentialConfig } from '../testConfigs';
 import { IntellectFormSelection } from './IntellectFormSelection';
 

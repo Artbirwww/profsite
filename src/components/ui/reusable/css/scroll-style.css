@@ -1,0 +1,26 @@
+.scroll-wrapper {
+    flex: 1 1 0%;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.scroll-item {
+    --total-gaps: calc((var(--visible-count) - 1) * var(--items-gap));
+    --item-height: calc((100% - var(--total-gaps)) / var(--visible-count));
+    flex: 0 0 var(--item-height);
+    height: var(--item-height);
+    width: 100%;
+    box-sizing: border-box;
+}

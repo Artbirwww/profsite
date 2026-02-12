@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
 import { useAuth } from '../../../contexts/AuthContext';
-import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
+import { TestEngine } from '../testEngine/TestEngine';
 import { engineeringThinkingConfig } from '../testConfigs';
 
 interface EngineeringThinkingTestProps {

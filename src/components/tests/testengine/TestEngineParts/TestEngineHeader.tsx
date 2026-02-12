@@ -49,7 +49,6 @@ export function TestEngineHeader({
         {testConfig.timeLimit && (
           <div>
             <div>
-              <Clock />
               <span>
                 {formatTime(remainingTime)}
               </span>

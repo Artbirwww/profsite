@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTest } from '../../../contexts/TestContext';
 import { useAuth } from '../../../contexts/AuthContext';
-import { TestEngine } from '../testengine/TestEngineMain/TestEngine';
+import { TestEngine } from '../testEngine/TestEngine';
 import { temperamentConfig } from '../testConfigs';
 import { questionsA, questionsB } from './TempQuestions';
+import { FormSelection } from './formSelection';
 
 interface TemperamentTestProps {
   onBack?: () => void;
@@ -46,27 +47,10 @@ export function TemperamentTest({ onBack }: TemperamentTestProps) {
   // Если вариант не выбран, показываем выбор варианта
   if (!variant) {
     return (
-      <div>
-        <div>
-          {/* Компонент выбора варианта */}
-          <div>
-            <h1>Выберите вариант теста</h1>
-            <div>
-              <button
-                onClick={() => setVariant('A')}
-              >
-                Вариант А
-              </button>
-              <button
-                onClick={() => setVariant('B')}
-              >
-                Вариант Б
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+      <FormSelection
+        title="Выберите форму тестирования"
+        onSelect={(form) => setVariant(form)} />
+    )
   }
 
   // Создаем конфигурацию для выбранного варианта

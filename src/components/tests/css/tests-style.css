@@ -1,6 +1,6 @@
-.tests-base {
+.tests-base,
+.form-selection {
     --base-padding: 0px;
-    --items-gap: 0px;
     width: 100%;
     height: 100vh;
     padding: var(--base-padding) 0;
@@ -9,32 +9,14 @@
     flex-direction: column;
     overflow: hidden;
 }
-.tests-scroll-wrapper {
-    flex: 1 1 0%; 
-    width: 100%;
-    min-height: 0; 
-    position: relative;
-    overflow: hidden;
-}
-.tests-options {
+.form-items-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
     height: 100%;
-    gap: var(--items-gap);
-    box-sizing: border-box;
-    margin: 0 !important;
-    padding: 0 !important;
 }
-
-
-
-
-.test-item-component {
-    --total-gaps: calc((var(--visible-count) - 1) * var(--items-gap));
-    --item-height: calc((100% - var(--total-gaps)) / var(--visible-count));
-    flex: 0 0 var(--item-height);
-    height: var(--item-height);
+.test-item-component,
+.form-item-component {
+    height: 100%;
     width: 100%;
     background-color: var(--bg-color);
     box-sizing: border-box;
@@ -49,7 +31,8 @@
     transition: box-shadow .8s cubic-bezier(.25, 1, .25, 1);
     will-change: box-shadow;
 }
-.test-item-component::before {
+.test-item-component::before,
+.form-item-component::before {
     content: "";
     position: absolute;
     top: 0;
@@ -64,7 +47,9 @@
     z-index: -1;
 }
 .test-item-order,
-.test-item-button {
+.form-item-order,
+.test-item-button,
+.form-item-button {
     width: 100px;
     min-width: 100px;
     height: 100%;
@@ -73,7 +58,8 @@
     padding: 40px 0;
     font-size: var(--font-size-2xl);
 }
-.test-item-content {
+.test-item-content,
+.form-item-content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -88,7 +74,8 @@
     flex-direction: column;
     margin-bottom: 50px;
 }
-.test-item-label {
+.test-item-label,
+.form-item-label {
     text-transform: uppercase;
     font-size: var(--font-size-2xl);
 }
@@ -109,11 +96,13 @@
 
 
 
-.test-item-component:hover {
+.test-item-component:hover,
+.form-item-component:hover {
     z-index: 10;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .15),
                 0 -10px 30px rgba(0, 0, 0, .1);
 }
-.test-item-component:hover::before {
+.test-item-component:hover::before,
+.form-item-component:hover::before {
     transform: scaleX(1);
 }

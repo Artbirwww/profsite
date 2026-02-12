@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useTestEngine } from '../../hooks/useTestEngine';
-import { TestEngineProps } from '../../types/test-types';
-import { TestEngineCompleted, ActiveTestView } from '../TestEngineParts';
+import { useTestEngine } from '../hooks/useTestEngine';
+import { TestEngineProps } from '../types/test-types';
+import { TestEngineCompleted, ActiveTestView } from './TestEngineParts';
 import { useTest } from '@/contexts/TestContext';
 import { useAuth } from '@/contexts/AuthContext';
 
