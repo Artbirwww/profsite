@@ -5,6 +5,7 @@ import { FieldInput } from "../ui/reusable/fieldInput";
 import { Button } from "../ui/reusable/button";
 import { authApi } from "../../services/api/authApi";
 import { useAuth } from "../../contexts/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Login: FC = () => {
     const navigate = useNavigate()
@@ -32,6 +33,7 @@ export const Login: FC = () => {
 
         } catch (error) {
             console.error("Login failed:", error)
+            toast.error("Возникла ошибка при входе")
         }
     }
 
@@ -78,6 +80,7 @@ export const Login: FC = () => {
             <Button buttonLabel={"У меня нет аккаунта"}
                     buttonType={"link"}
                     buttonFunction={handleBackToRegistration}/>
+            <Toaster />
         </div>
     )
 }
