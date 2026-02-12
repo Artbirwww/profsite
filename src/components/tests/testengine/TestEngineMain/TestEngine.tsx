@@ -30,13 +30,21 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
   } = useTestEngine({
     testConfig,
     onComplete: async (results) => {
+      let externalHandled = false;
       if (onComplete) {
-        await onComplete(results);
+        // Проверяем, обрабатывает ли внешний onComplete сохранение
+        // Если да, то не будем делать дополнительное сохранение
+        try {
+          await onComplete(results);
+          externalHandled = true;
+        } catch (error) {
+          console.error('External onComplete failed:', error);
+        }
       }
 
-      // Подтверждение отправки тестов на сервер
+      // Подтверждение отправки тестов на сервер только если внешний обработчик не справился
       const token = getToken();
-      if (token) {
+      if (token && !externalHandled) {
         try {
           const timeSpent = testConfig.timeLimit ? testConfig.timeLimit - remainingTime : 0;
 
@@ -59,7 +67,7 @@ export function TestEngine({ testConfig, onComplete, onBack }: TestEngineProps) 
               // Передаем исходные ответы и вопросы для пересчета в случае необходимости
               rawAnswers: answers,
               rawQuestions: testConfig.questions,
-              ...results.details,
+              ...((results.details && typeof results.details === 'object') ? results.details : {}),
             },
           };
 

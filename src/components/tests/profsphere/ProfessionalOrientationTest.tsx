@@ -26,9 +26,9 @@ export function ProfessionalOrientationTest({ onBack }: ProfessionalOrientationT
         answers: results.answers,
         metadata: {
           ...results.metadata,
-          categoryScores: results.details.categoryScores,
-          dominantCategory: results.details.dominantCategory,
-          professionRecommendations: results.details.professionRecommendations,
+          categoryScores: results.details?.categoryScores || {},
+          dominantCategory: results.details?.dominantCategory || '',
+          professionRecommendations: results.details?.professionRecommendations || [],
         },
       }, token);
     } catch (error) {

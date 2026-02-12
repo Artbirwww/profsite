@@ -135,7 +135,7 @@ export function useTestEngine({ testConfig, onComplete }: UseTestEngineProps) {
           totalQuestions: testConfig.questions.length,
           answeredQuestions: answers.filter(a => a !== null &&
             (Array.isArray(a) ? a.some(val => val > 0) : true)).length,
-          ...results.details,
+          ...(results.details || {}),
         },
       };
 
