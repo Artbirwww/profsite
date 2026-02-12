@@ -8,6 +8,7 @@ import { pupilSubjectsApi } from "../../services/api/pupilSubjectsApi"
 import { useAuth } from "../../contexts/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
 import { InterestLevelType, ParticipationLevelType, ProbabilityLevelType, PupilSubjectProfile } from "../../types/pupil/pupilSubjectProfile"
+import { pupilApi } from "../../services/api/pupilApi"
 /**
  * TODO если пользователь не заполнил данные аккаунта, попросить его это сделать
  * перед внесеинем оценок, поскольку его профиль еще не создан
@@ -17,7 +18,8 @@ const ALL_INTEREST_LEVELS: InterestLevelType[] = [
   "Занимаюсь редко",
   "Занимаюсь регулярно, но немного",
   "Занимаюсь регулярно",
-  "Занимаюсь очень активно"
+  "Занимаюсь очень активно",
+  "-"
 ];
 
 const ALL_PARTICIPATION_LEVELS: ParticipationLevelType[] = [
@@ -25,7 +27,8 @@ const ALL_PARTICIPATION_LEVELS: ParticipationLevelType[] = [
   "Школьный",
   "Муниципальный",
   "Региональный",
-  "Федеральный"
+  "Федеральный",
+  "-"
 ];
 
 const ALL_PROBABILITY_LEVELS: ProbabilityLevelType[] = [
@@ -33,7 +36,8 @@ const ALL_PROBABILITY_LEVELS: ProbabilityLevelType[] = [
   "Мало вероятно",
   "Возможно",
   "Скорее да",
-  "Однозначно да"
+  "Однозначно да",
+  "-"
 ];
 const PUPIL_SUBJECT_PROFILE_TOPICS: string[] = [
     "Вероятность выбора экзамена по предмету",
@@ -112,6 +116,10 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
             const token = getToken()
             if (!token)
                 throw new Error("empty token")
+            if (!await isProfileDataValid()) {
+                toast.error("Перед выставлением оценок заполните профиль")
+                return
+            }
             const response = await pupilSubjectsApi.addGradesToPupil(data, token)
             toast.success("Оценки успешно добавлены")
         } catch(err) {
@@ -119,6 +127,12 @@ export const SubjectsPanel : FC<SubjectProps> = ({pupilSubjects, setPupilSubject
             toast.error("Не удалось сохранить оценки")
         }
 
+    }
+    const isProfileDataValid = async () => {
+        const token = getToken()
+        if (!token) return false
+        const pupilData = await pupilApi.getPupilData(token)
+        return pupilData.pupilDTO.id !== null
     }
     return (
         <div className={style["subject-content"]}>

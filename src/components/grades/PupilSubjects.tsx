@@ -21,10 +21,10 @@ export const PupilSubjects = () => {
                 classNumber: i + 5
             })),
             pupilSubjectProfileDTO: {
-                interestLevel: "Не занимаюсь дополнительно",
-                projectParticipationLevel: "Не участвовал",
-                contestParticipationLevel: "Не участвовал",
-                selectionProbabilityLevel: "Точно нет"
+                interestLevel: "-",
+                projectParticipationLevel: "-",
+                contestParticipationLevel: "-",
+                selectionProbabilityLevel: "-"
             }
         }))
     )
