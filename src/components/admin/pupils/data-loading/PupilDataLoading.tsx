@@ -72,7 +72,7 @@ export const PupilDataLoading = () => {
 
   return (
     <div className={style["form-wrapper"]}>
-      <p>Форма автоматической регистрации студентов</p>
+      <p>Форма автоматической регистрации учеников</p>
       <div className={style["data-loading-form"]}>
 
         {headers && 
