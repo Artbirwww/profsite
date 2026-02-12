@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../../services/api/authApi';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../SimpleUI';
-import { GraduationCap, ArrowLeft } from '../../ui/display/SimpleIcons';
 import { BubbleBackground } from '../BubbleBackground';
 
 type UserType = 'школьник' | 'студент' | 'специалист';
@@ -89,7 +88,6 @@ export function Registration() {
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
                 <div className="p-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
-                  <GraduationCap className="size-10 text-white" />
                 </div>
               </div>
               <CardTitle>Добро пожаловать!</CardTitle>
@@ -121,7 +119,6 @@ export function Registration() {
             </CardContent>
             <CardFooter>
               <Button variant="ghost" className="w-full border-white/30 bg-white/60 hover:bg-white/80" onClick={() => navigate('/login')} disabled={isSubmitting}>
-                <ArrowLeft className="size-4 mr-2" /> Назад к входу
               </Button>
             </CardFooter>
           </Card>
@@ -148,7 +145,6 @@ export function Registration() {
           <CardHeader>
             <div className="flex items-center gap-3">
               <div className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-md">
-                <GraduationCap className="size-6 text-white" />
               </div>
               <div>
                 <CardTitle>Регистрация — {userType}</CardTitle>
@@ -222,7 +218,6 @@ export function Registration() {
                 disabled={isSubmitting}
                 className="border-white/30 bg-white/60 hover:bg-white/80"
               >
-                <ArrowLeft className="size-4 mr-1" /> Назад
               </Button>
               <Button type="submit" className="flex-1" disabled={isSubmitting}>
                 {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}

@@ -4,7 +4,6 @@ import { useAuth } from '../../../contexts/AuthContext';
 import {authApi} from "../../../services/api/authApi"
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { Input, Label, Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../../SimpleUI';
-import { GraduationCap } from '../../ui/display/SimpleIcons';
 import { BubbleBackground } from '../BubbleBackground';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -56,7 +55,6 @@ export function Login() {
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <div className="p-4 bg-gradient-to-br from-yellow-500 to-purple-600 rounded-2xl shadow-lg">
-                <GraduationCap className="size-10 text-white" />
               </div>
             </div>
             <CardTitle>Вход в систему</CardTitle>

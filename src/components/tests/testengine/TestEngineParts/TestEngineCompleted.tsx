@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../SimpleUI';
-import { CheckCircle } from '../../../ui/display/SimpleIcons';
 import { TestConfig } from '../../types/test-types';
 //import '../TestEngineStyle/TestEngineCompleted.css';
 
@@ -26,7 +25,6 @@ export function TestEngineCompleted({
         <CardHeader>
           <div>
             <div>
-              <CheckCircle />
             </div>
             <CardTitle>
               Тест успешно завершен!

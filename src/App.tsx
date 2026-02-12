@@ -1,17 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 
-// Auth components
-import { Login } from "./components/authorization/Login"
-import { Registration } from "./components/authorization/Registration"
-
-// Test components
-import { TestPage } from "./components/tests/dashboard/TestPage"
-import { Tests } from "./components/tests/testsMain/Tests"
-import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
-import { ResultsPage } from "./components/tests/resultspage/ResultsPage"
-
-// Профиль польователя
-import { Profile } from "./components/profile/Profile"
+// OLD импорты
+//import { TestPage } from "./components/tests/dashboard/TestPage"
+//import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
+//import { ResultsPage } from "./components/tests/resultspage/ResultsPage"
+//import { Profile } from "./components/profilePageComponents/Profile"
+//import { PupilSubjects } from "./components/studyPageComponents/OLD_PupilSubjects"
 
 // Individual test components
 import EngineeringThinkingTest from "./components/tests/engineer/EngineeringThinkingTest"
@@ -20,78 +14,85 @@ import IqPotentialTest from "./components/tests/iqpotencial/iqpotencial"
 import ProfessionalOrientationTest from "./components/tests/profsphere/ProfessionalOrientationTest"
 import TemperamentTest from "./components/tests/temperament/TemperamentTest"
 
-// Layout & routing
-import { ProtectedRoute } from "./components/routing/ProtectedRoute"
-
-import { Layout } from "./components/layout/Layout";
-
 // Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
 import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
 import { PupilsList } from './components/admin/pupils/PupilsList';
 import AutoRegisterForm from './components/admin/AutoRegisterForm';
-import { Home } from './components/home/Home';
-import { AuthRouter } from './components/routing/AuthRouter';
-import { RolesProtectedRoute } from "./components/routing/RolesProtectedRoute";
 import { ROLES } from "./types/account/role";
-import { PupilSubjects } from "./components/grades/PupilSubjects"
+
 import { PupilGradeLoading } from "./components/admin/pupils/grade-loading/PupilGradeLoading"
 
-// ——— Главный компонент App ———
-export default function App() {
-  return (
-      <Routes>
-        {/* Public routes */}
-        
-        <Route element={<AuthRouter/>} >
-          <Route element={<Layout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
-          </Route>
-        </Route>
-        
-        {/* Protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
-              <Route path='admin/pupil-loading' element={<PupilDataLoading />} />
-              <Route path='admin/pupil-list' element={<PupilsList />} />
-              <Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
-            </Route>
-            
-            {/* Legacy routes */}
-            
-            {/* New test routes */}
-            <Route path="/" element={<Home/>} />
-            <Route path="/tests">
-              <Route index element={<Tests />} />
-              <Route
-                path="engineering-thinking"
-                element={<EngineeringThinkingTest />}
-              />
-              <Route path="group-roles" element={<GroupRolesTest />} />
-              <Route path="iq-potential" element={<IqPotentialTest />} />
-              <Route
-                path="professional-orientation"
-                element={<ProfessionalOrientationTest />}
-              />
-              <Route path="temperament" element={<TemperamentTest />} />
-            </Route>
-			
 
-					{/* Results */}
+
+
+
+
+// Новые импорты
+// Роутинг
+import { AuthRouter } from './routing/AuthRouter'
+import { ProtectedRoute } from "./routing/ProtectedRoute"
+import { RolesProtectedRoute } from "./routing/RolesProtectedRoute"
+
+// Общий layout для страниц
+import { Layout } from "./layout/Layout"
+
+// Страницы
+import { LoginPage } from "./pages/authorizationPages/LoginPage"
+import { RegistrationPage } from "./pages/authorizationPages/RegistrationPage"
+import { HomePage } from "./pages/HomePage"
+import { TestsPage } from "./pages/TestsPage"
+import { ResultsPage } from "./pages/ResultsPage"
+import { StudyPage } from "./pages/StudyPage"
+import { ProfilePage } from "./pages/ProfilePage"
+import { SettingsPage } from "./pages/SettingsPage"
+
+export default function App() {
+	return (
+		<Routes>
+			{/* Public routes */}
+			<Route element={<AuthRouter />} >
+				<Route element={<Layout />}>
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegistrationPage />} />
+				</Route>
+			</Route>
+
+			{/* Protected routes */}
+			<Route element={<ProtectedRoute />}>
+				<Route element={<Layout />}>
+					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />} >
+						<Route path='admin/pupil-loading' element={<PupilDataLoading />} />
+						<Route path='admin/pupil-list' element={<PupilsList />} />
+						<Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
+					</Route>
+
+					{/* Tests routes */}
+					<Route path="/" element={<HomePage />} />
+					<Route path="/tests">
+						<Route index element={<TestsPage />} />
+						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
+						<Route path="group-roles" element={<GroupRolesTest />} />
+						<Route path="iq-potential" element={<IqPotentialTest />} />
+						<Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
+						<Route path="temperament" element={<TemperamentTest />} />
+					</Route>
+
+
+					{/* Results routes */}
 					<Route path="/my-results" element={<ResultsPage />} />
 					<Route path="/my-results/:testType" element={<ResultsPage />} />
 
-					<Route path="/profile" element={<Profile />} />
+					{/* Rest routes */}
+					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="/my-grades" element={<StudyPage />} />
+					<Route path="/settings" element={<SettingsPage />} />
+				</Route>
+			</Route>
 
-            <Route path="/my-grades" element={<PupilSubjects />} />
-
-          </Route>
-        </Route>
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-  );
+			{/* Fallback routes */}
+			<Route path="*" element={<Navigate to="/login" replace />} />
+		</Routes>
+	);
 }

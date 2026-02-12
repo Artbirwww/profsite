@@ -1,11 +1,11 @@
-import "./css/menu-style.css"
+import "./css/menuStyle.css"
 
 import { FC, useCallback, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
-import { logoutButton, menuButtons, MenuItem } from "./menuData";
-import { MenuComponent } from "./menuComponent";
-import { MenuComponentDropdown } from "./menuComponentDropdown";
+import { logoutButton, menuButtons, MenuItemProps } from "./menuData";
+import { MenuItem } from "./MenuItem";
+import { MenuItemDropdown } from "./MenuItemDropdown";
 
 export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" }) => {
     const { pathname } = useLocation()
@@ -15,14 +15,14 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
     const isActive = useCallback((path: string) =>
         pathname === path || pathname.startsWith(`${path}/`), [pathname])
 
-    const handleAction = useCallback((item: MenuItem) => {
+    const handleAction = useCallback((item: MenuItemProps) => {
         if (item.isExit) logout?.()
         navigate(item.path)
     }, [logout, navigate])
 
     const { commonButtons, roleGroups } = useMemo(() => {
-        const common: MenuItem[] = []
-        const groups: Record<string, MenuItem[]> = {}
+        const common: MenuItemProps[] = []
+        const groups: Record<string, MenuItemProps[]> = {}
 
         menuButtons.forEach(btn => {
             const role = btn.allowedRoles?.find(r => checkRole({ name: r }))
@@ -42,14 +42,14 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
 
             <nav className="menu-nav">
                 {commonButtons.map(item => (
-                    <MenuComponent
+                    <MenuItem
                         key={item.id}
                         item={item}
                         isActive={isActive(item.path)}
                         onClick={handleAction} />
                 ))}
 
-                <MenuComponent
+                <MenuItem
                     item={logoutButton}
                     isActive={false}
                     onClick={handleAction} />
@@ -57,20 +57,20 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
 
             {Object.entries(roleGroups).map(([role, items]) => (
                 <nav className="menu-nav">
-                    <MenuComponentDropdown
+                    <MenuItemDropdown
                         key={role}
                         roleKey={role}
                         isGroupActive={items.some(item => isActive(item.path))}>
 
                         {items.map(item => (
-                            <MenuComponent
+                            <MenuItem
                                 key={item.id}
                                 item={item}
                                 isActive={isActive(item.path)}
                                 onClick={handleAction} />
                         ))}
 
-                    </MenuComponentDropdown>
+                    </MenuItemDropdown>
                 </nav>
             ))}
         </div>

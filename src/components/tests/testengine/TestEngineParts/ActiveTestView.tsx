@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../../../SimpleUI';
-import { AlertCircle } from '../../../ui/display/SimpleIcons';
 import { TestEngineProps, TestConfig } from '../../types/test-types';
 import {
   TestEngineHeader,
@@ -71,7 +70,6 @@ export const ActiveTestView = ({
 
         {error && (
           <div>
-            <AlertCircle />
             <span>{error}</span>
           </div>
         )}

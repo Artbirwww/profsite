@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../SimpleUI';
-import { Minus, Plus } from '../../ui/display/SimpleIcons';
 import { SimpleButton as Button } from '../../ui/buttons/SimpleButton';
 import { DistributionQuestion, QuestionInfo } from '../types/test-types';
 
@@ -67,7 +66,6 @@ export function DistributionCard({
                   onClick={() => handleSliderChange(index, (values[index] || 0) - 1)}
                   disabled={(values[index] || 0) === 0 || disabled}
                 >
-                  <Minus />
                 </Button>
 
                 <div>
@@ -91,7 +89,6 @@ export function DistributionCard({
                   onClick={() => handleSliderChange(index, (values[index] || 0) + 1)}
                   disabled={(values[index] || 0) === question.maxPoints || disabled}
                 >
-                  <Plus />
                 </Button>
               </div>
             </div>

@@ -3,7 +3,7 @@ import React, { ReactNode } from "react"
 import { ROLES } from "../../../types/account/role"
 
 // Интерфейс для элемента сайдбара
-export interface MenuItem {
+export interface MenuItemProps {
     id: string              // Id
     label: string           // Текст кнопки
     icon: React.ElementType // Иконка кнопки
@@ -13,7 +13,7 @@ export interface MenuItem {
     isExit?: boolean        // Флаг для кнопки выхода
 }
 
-export const menuButtons: MenuItem[] = [
+export const menuButtons: MenuItemProps[] = [
     // Общие кнопки
     {
         id: "home",
@@ -110,7 +110,7 @@ export const menuButtons: MenuItem[] = [
 ]
 
 // Отдельная константа для кнопки выхода (чтобы не путать с ролевыми кнопками)
-export const logoutButton: MenuItem = {
+export const logoutButton: MenuItemProps = {
     id: "logout",
     label: "Выход",
     icon: DoorOpen,

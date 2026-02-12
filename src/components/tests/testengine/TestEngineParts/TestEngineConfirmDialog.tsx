@@ -1,6 +1,5 @@
 import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../SimpleUI';
-import { AlertCircle } from '../../../ui/display/SimpleIcons';
 import { TestConfig } from '../../types/test-types';
 import { formatTime } from './utils';
 
@@ -26,7 +25,6 @@ export function TestEngineConfirmDialog({
       <Card>
         <CardHeader>
           <CardTitle>
-            <AlertCircle />
             Завершить тест досрочно?
           </CardTitle>
         </CardHeader>

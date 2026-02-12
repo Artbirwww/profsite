@@ -1,6 +1,5 @@
 import { SimpleButton as Button } from '../../../ui/buttons/SimpleButton';
 import { CardHeader, CardTitle, CardDescription } from '../../../SimpleUI';
-import { ArrowLeft, Clock } from '../../../ui/display/SimpleIcons';
 import { TestConfig, TestQuestion } from '../../types/test-types';
 import { formatTime } from './utils';
 
@@ -31,7 +30,6 @@ export function TestEngineHeader({
             onClick={onBack}
             disabled={isSubmitting}
           >
-            <ArrowLeft />
           </Button>
           <div>
             <CardTitle>{testConfig.name}</CardTitle>
