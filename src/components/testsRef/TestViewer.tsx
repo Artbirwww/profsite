@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 
-const TestViewer = () => {
+export const TestViewer = () => {
 
     return (
         <>
