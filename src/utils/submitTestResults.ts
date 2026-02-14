@@ -1,4 +1,4 @@
-import { testService } from '../services/api/testApi';
+import { testApi } from '../services/api/testApi';
 import { PsychTestRequest } from '../types/TestResult';
 
 // Example function that would be called when the "Finish Test" button is clicked
@@ -17,7 +17,7 @@ export const finishTestAndSubmit = async (
     };
 
     // Send the test data to the server
-    const result = await testService.createTest(token, testData);
+    const result = await testApi.createTest(token, testData);
 
     console.log('Test submitted successfully:', result);
     // Handle successful submission (e.g., show success message, navigate to results page)

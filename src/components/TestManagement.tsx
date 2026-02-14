@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { testService } from '../services/api/testApi';
+import { testApi } from '../services/api/testApi';
 import { PsychTestResponse } from '../types/TestResult';
 import { TEST_TYPES, PSYCH_PARAM_NAMES } from '../constants/testConstants';
 
@@ -36,7 +36,7 @@ const TestManagementComponent: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      await testService.createTest(token, testData);
+      await testApi.createTest(token, testData);
       alert('Test saved successfully!');
     } catch (err: any) {
       setError(err.message || 'Error saving test');
@@ -56,7 +56,7 @@ const TestManagementComponent: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      const fetchedTests = await testService.getTestsByPupil(token);
+      const fetchedTests = await testApi.getTestsByPupil(token);
       setTests(fetchedTests);
     } catch (err: any) {
       setError(err.message || 'Error fetching tests');

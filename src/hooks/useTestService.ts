@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { testService } from '../services/api/testApi';
+import { testApi } from '../services/api/testApi';
 import { PsychTestResponse, PsychTestRequest } from '../types/TestResult';
 
-export const useTestService = () => {
+export const usetestApi = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tests, setTests] = useState<PsychTestResponse[]>([]);
@@ -15,7 +15,7 @@ export const useTestService = () => {
     setError(null);
 
     try {
-      const result = await testService.createTest(token, testData);
+      const result = await testApi.createTest(token, testData);
       setTests(prevTests => [...prevTests, result]);
 
       return result;
@@ -36,7 +36,7 @@ export const useTestService = () => {
     setError(null);
 
     try {
-      const fetchedTests = await testService.getTestsByPupil(token);
+      const fetchedTests = await testApi.getTestsByPupil(token);
       setTests(fetchedTests);
       return fetchedTests;
     } catch (err: any) {
