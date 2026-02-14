@@ -13,7 +13,7 @@ export interface TestResultRequest {
 
 export interface TestResultResponse {
   completionTimeSeconds: number;
-  testTypeName: string;
+  testTypeName: TestTypeName;
   psychParams: PsychParam[];
 }
 
