@@ -1,23 +1,33 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-interface PositiveNegativeOption {
+export interface PositiveNegativeOption {
+    id: number
     text: string
-    answer: string
+    answer: boolean
 }
-interface PositiveNegativeProps {
-    options: PositiveNegativeOption[]
-    setOptions: Dispatch<SetStateAction<PositiveNegativeOption[]>>
+
+interface PositiveNegativeProps<T extends PositiveNegativeOption = PositiveNegativeOption> {
+    options: T[]
+    setOptions: Dispatch<SetStateAction<T[]>>
+    navigateToResults: () => void;
 }
 /**
  * TODO
  * 0. Перевести ответы пользователя в нужный формат для отправки на сервер (посчитать результаты)
  * 1. Сделать итоговый компонент для отображения результатов или их отправки
  */
-const PositiveNegative = ({options, setOptions} : PositiveNegativeProps) => {
+export const PositiveNegative = ({options, setOptions, navigateToResults} : PositiveNegativeProps) => {
     const [currentOption, setCurrentOption] = useState<PositiveNegativeOption|null>(null)
     const [currentOptionNumber, setCurrentOptionNumber] = useState<number>(0)
     //Первый вопрос
     useEffect(() => {
+
+        if (options.length === currentOptionNumber){
+            navigateToResults()
+            return
+        }
+            
         if (options.length > 0)
             setCurrentOption(options[currentOptionNumber])
     },[options])
@@ -26,14 +36,13 @@ const PositiveNegative = ({options, setOptions} : PositiveNegativeProps) => {
         setCurrentOption(options[currentOptionNumber])
     },[currentOptionNumber])
     //Ответ на вопрос пользователя, сохранить и показать новый
-    const handleAnswer = (answer: string) => {
+    const handleAnswer = (userAnswer: boolean) => {
         const optionsTemp = options.map(option => {
-            if (option.answer === answer) 
-                return {...option, answer: answer}
+            if (option.text === currentOption?.text) 
+                return {...option, answer: userAnswer}
             return option
         })
         setOptions(optionsTemp)
-
         setCurrentOptionNumber(currentOptionNumber+1)
     }
     return (
@@ -41,8 +50,8 @@ const PositiveNegative = ({options, setOptions} : PositiveNegativeProps) => {
         <div className="positive-negative-card">
             <p>{currentOption?.text}</p>
             <div>
-                <button>YES</button>
-                <button>NO</button>
+                <button onClick={() => {handleAnswer(true)}}>YES</button>
+                <button onClick={() => {handleAnswer(false)}}>NO</button>
             </div>
         </div>
         </>
