@@ -4,7 +4,7 @@ import { PsychTestRequest, PsychTestResponse } from '../../types/TestResult';
 
 const TEST_ENDPOINT = `${BASE_URL}/api/psych-tests`;
 
-export const testService = {
+export const testApi = {
   createTest: async (token: string, testData: PsychTestRequest): Promise<PsychTestResponse> => {
     try {
       const response = await axios.post<PsychTestResponse>(`${TEST_ENDPOINT}/create-test`, testData, {
