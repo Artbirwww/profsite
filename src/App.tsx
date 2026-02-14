@@ -47,6 +47,9 @@ import { ResultsPage } from "./pages/ResultsPage"
 import { StudyPage } from "./pages/StudyPage"
 import { ProfilePage } from "./pages/ProfilePage"
 import { SettingsPage } from "./pages/SettingsPage"
+import { TestViewer } from "./components/testsRef/TestViewer"
+import { TemperamentFormSelection } from "./components/testsRef/temperament/TemperamentFormSelection"
+import { TemperamentResults } from "./components/testsRef/temperament/TemperamentResults"
 
 export default function App() {
 	return (
@@ -72,6 +75,11 @@ export default function App() {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
+            <Route element={<TestViewer/>}>
+              <Route path="temperament-ref" element={<TemperamentFormSelection />} />
+              <Route path="temperament-results" element={<TemperamentResults/>} />
+            </Route>
+            
 						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
 						<Route path="group-roles" element={<GroupRolesTest />} />
 						<Route path="iq-potential" element={<IqPotentialTest />} />
