@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react"
-import { Grade, PupilSubject, Subject } from "../types/pupil/pupilSubject"
-import { useAuth } from "../contexts/AuthContext"
-import { pupilSubjectsApi } from "../services/api/pupilSubjectsApi"
-import { SubjectsPanel } from "../components/studyPageComponents/SubjectsPanel"
+import { Grade, PupilSubject, Subject } from "../../types/pupil/pupilSubject"
+import { useAuth } from "../../contexts/AuthContext"
+import { pupilSubjectsApi } from "../../services/api/pupilSubjectsApi"
+import { SubjectsPanel } from "./SubjectsPanel"
 
 export const SUBJECTS: Subject[] = [
     'Математика',

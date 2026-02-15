@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { TestConfig } from '../components/tests/testEngine/testsTypes'
+import { TestConfig } from '../components/OLD_tests/testEngine/testsTypes'
 import { stat } from 'fs'
 
 export const useTestsEngine = (testConfig: TestConfig, onComplete: (results: any) => void) => {

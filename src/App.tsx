@@ -8,21 +8,21 @@ import { Routes, Route, Navigate } from "react-router-dom"
 //import { PupilSubjects } from "./components/studyPageComponents/OLD_PupilSubjects"
 
 // Individual test components
-import EngineeringThinkingTest from "./components/tests/engineer/EngineeringThinkingTest"
-import GroupRolesTest from "./components/tests/grouproles/GroupRolesTest"
-import IqPotentialTest from "./components/tests/iqpotencial/iqpotencial"
-import ProfessionalOrientationTest from "./components/tests/profsphere/ProfessionalOrientationTest"
-import TemperamentTest from "./components/tests/temperament/TemperamentTest"
+import EngineeringThinkingTest from "./components/OLD_tests/engineer/EngineeringThinkingTest"
+import GroupRolesTest from "./components/OLD_tests/grouproles/GroupRolesTest"
+import IqPotentialTest from "./components/OLD_tests/iqpotencial/iqpotencial"
+import ProfessionalOrientationTest from "./components/OLD_tests/profsphere/ProfessionalOrientationTest"
+import TemperamentTest from "./components/OLD_tests/temperament/TemperamentTest"
 
 // Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
-import { PupilDataLoading } from './components/admin/pupils/data-loading/PupilDataLoading';
-import { PupilsList } from './components/admin/pupils/PupilsList';
-import AutoRegisterForm from './components/admin/AutoRegisterForm';
+import { PupilDataLoading } from './components/adminPages/pupils/data-loading/PupilDataLoading';
+import { PupilsList } from './components/adminPages/pupils/PupilsList';
+import AutoRegisterForm from './components/adminPages/AutoRegisterForm';
 import { ROLES } from "./types/account/role";
 
-import { PupilGradeLoading } from "./components/admin/pupils/grade-loading/PupilGradeLoading"
+import { PupilGradeLoading } from "./components/adminPages/pupils/grade-loading/PupilGradeLoading"
 
 
 
@@ -39,17 +39,17 @@ import { RolesProtectedRoute } from "./routing/RolesProtectedRoute"
 import { Layout } from "./layout/Layout"
 
 // Страницы
-import { LoginPage } from "./pages/authorizationPages/LoginPage"
-import { RegistrationPage } from "./pages/authorizationPages/RegistrationPage"
-import { HomePage } from "./pages/HomePage"
-import { TestsPage } from "./components/testsRef/TestsPage"
-import { ResultsPage } from "./pages/ResultsPage"
-import { StudyPage } from "./pages/StudyPage"
-import { ProfilePage } from "./pages/ProfilePage"
-import { SettingsPage } from "./pages/SettingsPage"
-import { TestViewer } from "./components/testsRef/TestViewer"
-import { TemperamentFormSelection } from "./components/testsRef/temperament/TemperamentFormSelection"
-import { TemperamentResults } from "./components/testsRef/temperament/TemperamentResults"
+import { LoginPage } from "./components/authorizationPages/LoginPage"
+import { RegistrationPage } from "./components/authorizationPages/RegistrationPage"
+import { HomePage } from "./components/homePage/HomePage"
+import { TestsPage } from "./components/testsPage/TestsPage"
+import { ResultsPage } from "./components/resultsPage/ResultsPage"
+import { StudyPage } from "./components/studyPage/StudyPage"
+import { ProfilePage } from "./components/profilePage/ProfilePage"
+import { SettingsPage } from "./components/settingsPage/SettingsPage"
+import { TestViewer } from "./components/testsPage/TestViewer"
+import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelection"
+import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 
 export default function App() {
 	return (

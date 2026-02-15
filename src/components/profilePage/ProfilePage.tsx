@@ -1,5 +1,6 @@
+import "./css/profilePageStyle.css"
 import { FC } from "react";
-import { PersonalInformation } from "../components/profilePageComponents/PersonalInformation";
+import { PersonalInformation } from "./PersonalInformation";
 
 export const ProfilePage: FC = ({ }) => {
     return (
