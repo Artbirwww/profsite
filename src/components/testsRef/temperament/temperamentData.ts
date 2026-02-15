@@ -2,14 +2,44 @@ import { PositiveNegativeOption } from "../PositiveNegative/PositiveNegative"
 
 // Основные шкалы EPI
 export type TemperamentParam =
-    | "extrav_introver_score" | "neirotizm_score" | "sincerity_score"
+    | "extrav_introver_score"
+    | "neirotizm_score"
+    | "sincerity_score"
 
 // Специфические категории для детального анализа
 export type Category =
-    | "Активность" | "Социальность" | "Тревожность" | "Гибкость" | "Обдуманность" | "Надежность" | "Эмоциональность" | "Импульсивность"
-    | "Открытость" | "Энергичность" | "Мечтательность" | "Реактивность" | "Перфекционизм" | "Внимательность" | "Решительность" | "Коммуникация"
-    | "Покладистость" | "Конфликтность" | "Упрямство" | "Рефлексия" | "Чувство юмора" | "Чувствительность" | "Ответственность" | "Планирование"
-    | "Здоровье" | "Прокрастинация" | "Оптимизм" | "Конкуренция"
+    | "Активность"
+    | "Социальность"
+    | "Тревожность"
+    | "Гибкость"
+    | "Обдуманность"
+    | "Надежность"
+    | "Эмоциональность"
+    | "Импульсивность"
+    | "Открытость"
+    | "Мечтательность"
+    | "Реактивность"
+    | "Перфекционизм"
+    | "Внимательность"
+    | "Решительность"
+    | "Коммуникация"
+    | "Покладистость"
+    | "Конфликтность"
+    | "Упрямство"
+    | "Рефлексия"
+    | "Чувство юмора"
+    | "Чувствительность"
+    | "Ответственность"
+    | "Планирование"
+    | "Здоровье"
+    | "Прокрастинация"
+    | "Оптимизм"
+    | "Конкуренция"
+    | "Энергия"
+    | "Уверенность"
+    | "Осторожность"
+    | "Пунктуальность"
+    | "Самостоятельность"
 
 export interface TemperamentOption extends PositiveNegativeOption {
     category: Category
@@ -57,238 +87,238 @@ export const temperamentTypes = {
 export const TemperamentFormA: TemperamentOption[] = [
     {
         id: 1,
-        text: "Часто ли вы тяготеете к новым впечатлениям, к тому, чтобы испытать сильные ощущения?",
+        text: "Часто ли вам хочется попробовать что-то новое или сделать что-то захватывающее?",
         param: "extrav_introver_score",
-        category: "Открытость",
-        answer: true
+        category: "Активность",
+        answer: true,
     },
     {
         id: 2,
-        text: "Часто ли вы чувствуете, что нуждаетесь в друзьях, которые могут вас понять, ободрить, посочувствовать?",
-        param: "neirotizm_score",
+        text: "Нужны ли вам друзья, которые могут вас поддержать или понять, когда вам грустно?",
+        param: "extrav_introver_score",
         category: "Социальность",
-        answer: true
+        answer: false
     },
     {
         id: 3,
-        text: "Считаете ли вы себя беззаботным человеком?",
-        param: "extrav_introver_score",
-        category: "Оптимизм",
-        answer: true
+        text: "Считаете ли вы себя человеком, который не переживает и не волнуется?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: false
     },
     {
         id: 4,
-        text: "Очень ли вам трудно отказываться от своих намерений?",
+        text: "Легко ли вам изменить свои планы, если вы что-то задумали?",
         param: "neirotizm_score",
-        category: "Упрямство",
-        answer: true
+        category: "Гибкость",
+        answer: true,
     },
     {
         id: 5,
-        text: "Вы обдумываете свои дела не спеша и предпочитаете подождать, прежде чем действовать?",
+        text: "Предпочитаете ли вы сначала подумать, прежде чем делать что-то?",
         param: "extrav_introver_score",
         category: "Обдуманность",
         answer: false
     },
     {
         id: 6,
-        text: "Всегда ли вы сдерживаете свои обещания, даже если это вам невыгодно?",
+        text: "Всегда ли вы выполняете обещания, даже если это сложно для вас?",
         param: "sincerity_score",
         category: "Надежность",
-        answer: true
+        answer: true,
     },
     {
         id: 7,
-        text: "Часто ли у вас бывают спады и подъемы настроения?",
+        text: "Бывают ли у вас дни, когда вы чувствуете себя очень хорошо, а потом вдруг плохо?",
         param: "neirotizm_score",
         category: "Эмоциональность",
-        answer: true
+        answer: true,
     },
     {
         id: 8,
-        text: "Обычно вы действуете и говорите быстро, не раздумывая?",
+        text: "Обычно вы быстро принимаете решения и говорите, не задумываясь долго?",
         param: "extrav_introver_score",
         category: "Импульсивность",
-        answer: true
+        answer: true,
     },
     {
         id: 9,
-        text: "Часто ли вы чувствуете себя несчастным без какой-либо серьезной причины?",
+        text: "Чувствовали ли вы когда-нибудь грусть, даже не зная, почему?",
         param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 10,
-        text: "Сделали бы вы почти все что угодно на спор?",
+        text: "Верно ли, что вы готовы рискнуть ради спора?",
         param: "extrav_introver_score",
-        category: "Конкуренция",
-        answer: true
+        category: "Активность",
+        answer: true,
     },
     {
         id: 11,
-        text: "Возникает ли у вас чувство робости и смущения, когда вы хотите заговорить с симпатичным незнакомым человеком?",
-        param: "neirotizm_score",
-        category: "Коммуникация",
-        answer: true
-    },
-    {
-        id: 12,
-        text: "Выходите ли вы иногда из себя, злитесь?",
-        param: "sincerity_score",
-        category: "Конфликтность",
+        text: "Смущаетесь ли вы, когда хотите познакомиться с человеком противоположного пола, который вам симпатичен?",
+        param: "extrav_introver_score",
+        category: "Социальность",
         answer: false
     },
     {
+        id: 12,
+        text: "Бывает ли так, что вы сильно сердитесь и теряете контроль?",
+        param: "neirotizm_score",
+        category: "Эмоциональность",
+        answer: true,
+    },
+    {
         id: 13,
-        text: "Часто ли вы действуете под влиянием минутного настроения?",
+        text: "Часто ли вы делаете что-то, не подумав заранее, в критический момент?",
         param: "extrav_introver_score",
         category: "Импульсивность",
-        answer: true
+        answer: true,
     },
     {
         id: 14,
-        text: "Часто ли вы беспокоитесь о том, что вы что-то не так сделали или сказали?",
+        text: "Часто ли вас беспокоят мысли о том, что вы сказали или сделали что-то не так?",
         param: "neirotizm_score",
         category: "Тревожность",
-        answer: true
+        answer: true,
     },
     {
         id: 15,
-        text: "Предпочитаете ли вы обычно чтение книг встречам с людьми?",
+        text: "Вам больше нравится читать книги, чем встречаться с людьми?",
         param: "extrav_introver_score",
-        category: "Мечтательность",
+        category: "Социальность",
         answer: false
     },
     {
         id: 16,
         text: "Легко ли вас обидеть?",
         param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 17,
-        text: "Любите ли вы часто бывать в компаниях?",
+        text: "Нравится ли вам проводить время с друзьями?",
         param: "extrav_introver_score",
         category: "Социальность",
-        answer: true
+        answer: true,
     },
     {
         id: 18,
-        text: "Бывают ли у вас иногда мысли, которыми вам не хотелось бы делиться с другими?",
+        text: "Бывают ли у вас мысли, которые вы не хотите рассказывать другим?",
         param: "sincerity_score",
-        category: "Рефлексия",
+        category: "Открытость",
         answer: false
     },
     {
         id: 19,
-        text: "Бывает ли у вас иногда так много энергии, что все в руках горит, а иногда вы чувствуете сильную вялость?",
+        text: "Верно ли, что иногда вы полны энергии и готовы ко всему, а иногда чувствуете себя очень уставшим?",
         param: "neirotizm_score",
-        category: "Энергичность",
-        answer: true
+        category: "Энергия",
+        answer: true,
     },
     {
         id: 20,
-        text: "Предпочитаете ли вы иметь поменьше друзей, но зато особенно близких вам?",
+        text: "Вы стараетесь дружить только с маленьким кругом самых близких друзей?",
         param: "extrav_introver_score",
-        category: "Коммуникация",
-        answer: false
-    },
-    {
-        id: 21,
-        text: "Часто ли вы мечтаете?",
-        param: "neirotizm_score",
-        category: "Мечтательность",
-        answer: true
-    },
-    {
-        id: 22,
-        text: "Когда на вас кричат, вы отвечаете тем же?",
-        param: "extrav_introver_score",
-        category: "Реактивность",
-        answer: true
-    },
-    {
-        id: 23,
-        text: "Часто ли вас беспокоит чувство вины?",
-        param: "neirotizm_score",
-        category: "Ответственность",
-        answer: true
-    },
-    {
-        id: 24,
-        text: "Все ли ваши привычки хороши и желательны?",
-        param: "sincerity_score",
-        category: "Перфекционизм",
-        answer: true
-    },
-    {
-        id: 25,
-        text: "Способны ли вы дать волю своим чувствам и вовсю повеселиться в шумной компании?",
-        param: "extrav_introver_score",
-        category: "Активность",
-        answer: true
-    },
-    {
-        id: 26,
-        text: "Считаете ли вы себя человеком возбудимым и чувствительным?",
-        param: "neirotizm_score",
-        category: "Эмоциональность",
-        answer: true
-    },
-    {
-        id: 27,
-        text: "Считают ли вас человеком живым и веселым?",
-        param: "extrav_introver_score",
-        category: "Оптимизм",
-        answer: true
-    },
-    {
-        id: 28,
-        text: "Часто ли, сделав какое-нибудь важное дело, вы чувствуете, что могли бы сделать его лучше?",
-        param: "neirotizm_score",
-        category: "Перфекционизм",
-        answer: true
-    },
-    {
-        id: 29,
-        text: "Вы больше молчите, когда находитесь в обществе других людей?",
-        param: "extrav_introver_score",
-        category: "Коммуникация",
-        answer: false
-    },
-    {
-        id: 30,
-        text: "Вы иногда сплетничаете?",
-        param: "sincerity_score",
         category: "Социальность",
         answer: false
     },
     {
-        id: 31,
-        text: "Бывает ли, что вам не спится из-за того, что в голову лезут разные мысли?",
+        id: 21,
+        text: "Часто ли вы мечтаете о чем-то?",
         param: "neirotizm_score",
-        category: "Прокрастинация",
-        answer: true
+        category: "Мечтательность",
+        answer: true,
+    },
+    {
+        id: 22,
+        text: "Когда на вас кричат, отвечаете ли вы тем же?",
+        param: "extrav_introver_score",
+        category: "Реактивность",
+        answer: true,
+    },
+    {
+        id: 23,
+        text: "Думаете ли вы, что все ваши привычки хорошие?",
+        param: "neirotizm_score",
+        category: "Уверенность",
+        answer: false
+    },
+    {
+        id: 24,
+        text: "Часто ли вы чувствуете, что виноваты в чем-то?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true,
+    },
+    {
+        id: 25,
+        text: "Можете ли вы иногда расслабиться и повеселиться с друзьями?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: true,
+    },
+    {
+        id: 26,
+        text: "Часто ли вы чувствуете себя очень напряженным?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true,
+    },
+    {
+        id: 27,
+        text: "Вам нравится общаться с веселыми и жизнерадостными людьми?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: true,
+    },
+    {
+        id: 28,
+        text: "После того как что-то сделаете, часто ли вы думаете, что могли бы сделать это лучше?",
+        param: "neirotizm_score",
+        category: "Перфекционизм",
+        answer: false
+    },
+    {
+        id: 29,
+        text: "Чувствуете ли вы себя некомфортно в большой компании?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: false
+    },
+    {
+        id: 30,
+        text: "Передаете ли вы слухи о других?",
+        param: "sincerity_score",
+        category: "Открытость",
+        answer: false
+    },
+    {
+        id: 31,
+        text: "Бывает ли так, что вам не спится из-за разных мыслей?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 32,
-        text: "Если вы хотите что-то узнать, вы скорее прочитаете об этом в книге, чем спросите у людей?",
+        text: "Как вам удобнее узнать что-то: прочитать в книге или спросить у друзей?",
         param: "extrav_introver_score",
-        category: "Внимательность",
+        category: "Социальность",
         answer: false
     },
     {
         id: 33,
-        text: "Бывает ли у вас сильное сердцебиение?",
+        text: "Бывают ли у вас сильные удары сердца?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 34,
-        text: "Нравится ли вам работа, требующая пристального внимания?",
+        text: "Нравится ли вам работа, которая требует много внимания?",
         param: "extrav_introver_score",
         category: "Внимательность",
         answer: false
@@ -297,162 +327,162 @@ export const TemperamentFormA: TemperamentOption[] = [
         id: 35,
         text: "Бывают ли у вас приступы дрожи?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 36,
-        text: "Всегда ли вы говорите правду?",
+        text: "Всегда ли вы говорите только правду?",
         param: "sincerity_score",
-        category: "Ответственность",
-        answer: true
+        category: "Открытость",
+        answer: true,
     },
     {
         id: 37,
-        text: "Вам неприятно бывать в компании, где подшучивают друг над другом?",
+        text: "Вам неприятно, когда все шутят друг над другом?",
         param: "extrav_introver_score",
-        category: "Чувство юмора",
+        category: "Социальность",
         answer: false
     },
     {
         id: 38,
-        text: "Вы раздражительны?",
+        text: "Часто ли вы раздражаетесь?",
         param: "neirotizm_score",
-        category: "Конфликтность",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 39,
-        text: "Нравится ли вам работа, требующая быстроты действий?",
+        text: "Нравится ли вам работа, где нужно быстро принимать решения?",
         param: "extrav_introver_score",
         category: "Решительность",
-        answer: true
+        answer: true,
     },
     {
         id: 40,
-        text: "Волнуетесь ли вы по поводу каких-то ужасных событий, которые могли бы произойти?",
+        text: "Думаете ли вы часто о разных неприятностях, которые могли бы случиться, даже если все закончилось хорошо?",
         param: "neirotizm_score",
         category: "Тревожность",
-        answer: true
+        answer: true,
     },
     {
         id: 41,
-        text: "Вы ходите медленно и неторопливо?",
+        text: "Верно ли, что вы двигаетесь медленно и осторожно?",
         param: "extrav_introver_score",
-        category: "Гибкость",
+        category: "Осторожность",
         answer: false
     },
     {
         id: 42,
-        text: "Вы когда-нибудь опаздывали на свидание или на работу?",
+        text: "Опаздывали ли вы когда-нибудь на занятия или встречи?",
         param: "sincerity_score",
-        category: "Планирование",
+        category: "Пунктуальность",
         answer: false
     },
     {
         id: 43,
-        text: "Часто ли вам снятся кошмары?",
+        text: "Часто ли вам снятся плохие сны?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 44,
-        text: "Вы так любите поговорить, что не упускаете любого случая пообщаться с незнакомым человеком?",
+        text: "Вы так любите говорить, что всегда ищете возможность познакомиться с новыми людьми?",
         param: "extrav_introver_score",
-        category: "Коммуникация",
-        answer: true
+        category: "Социальность",
+        answer: true,
     },
     {
         id: 45,
-        text: "Беспокоят ли вас какие-нибудь боли?",
+        text: "Бывают ли у вас какие-нибудь боли, которые вас беспокоят?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 46,
-        text: "Вы бы чувствовали себя очень несчастным, если бы долго не могли видеться с людьми?",
+        text: "Огорчились бы вы, если бы долго не могли увидеться с друзьями?",
         param: "extrav_introver_score",
         category: "Социальность",
-        answer: true
+        answer: true,
     },
     {
         id: 47,
-        text: "Вы считаете себя нервным человеком?",
+        text: "Считаете ли вы себя нервным человеком?",
         param: "neirotizm_score",
-        category: "Эмоциональность",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 48,
-        text: "Среди ваших знакомых есть люди, которые вам явно не нравятся?",
-        param: "sincerity_score",
-        category: "Покладистость",
+        text: "Есть ли среди ваших знакомых те, кто вам не нравится?",
+        param: "extrav_introver_score",
+        category: "Социальность",
         answer: false
     },
     {
         id: 49,
-        text: "Вы уверенный в себе человек?",
+        text: "Можете ли вы сказать, что вы верите в себя?",
         param: "extrav_introver_score",
-        category: "Решительность",
-        answer: true
+        category: "Уверенность",
+        answer: true,
     },
     {
         id: 50,
-        text: "Легко ли вы обижаетесь на критику ваших недостатков или вашей работы?",
+        text: "Легко ли вам обижаться, когда кто-то критикует вас или вашу работу?",
         param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
+        category: "Эмоциональность",
+        answer: true,
     },
     {
         id: 51,
-        text: "Трудно ли вам получить истинное удовольствие от вечеринки?",
+        text: "Трудно ли вам наслаждаться мероприятиями, где много людей?",
         param: "extrav_introver_score",
-        category: "Активность",
+        category: "Социальность",
         answer: false
     },
     {
         id: 52,
-        text: "Беспокоит ли вас чувство, что вы чем-то хуже других?",
+        text: "Чувствуете ли вы себя хуже других?",
         param: "neirotizm_score",
-        category: "Рефлексия",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 53,
-        text: "Вам легко внести оживление в скучную компанию?",
+        text: "Можете ли вы сделать скучную компанию более веселой?",
         param: "extrav_introver_score",
-        category: "Энергичность",
-        answer: true
+        category: "Социальность",
+        answer: true,
     },
     {
         id: 54,
-        text: "Вы иногда говорите о вещах, в которых совсем не разбираетесь?",
+        text: "Бывает ли так, что вы говорите о вещах, в которых не разбираетесь?",
         param: "sincerity_score",
         category: "Открытость",
         answer: false
     },
     {
         id: 55,
-        text: "Беспокоитесь ли вы о своем здоровье?",
+        text: "Беспокоитесь ли вы о том, как себя чувствуете?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
     {
         id: 56,
-        text: "Любите ли вы подшутить над другими?",
+        text: "Любите ли вы подшутить над другими людьми?",
         param: "extrav_introver_score",
-        category: "Чувство юмора",
-        answer: true
+        category: "Социальность",
+        answer: true,
     },
     {
         id: 57,
-        text: "Страдаете ли вы от бессонницы?",
+        text: "Бывает ли, что вам трудно заснуть?",
         param: "neirotizm_score",
-        category: "Здоровье",
-        answer: true
+        category: "Тревожность",
+        answer: true,
     },
 ]
 
@@ -460,401 +490,401 @@ export const TemperamentFormA: TemperamentOption[] = [
 export const TemperamentFormB: TemperamentOption[] = [
     {
         id: 1,
-        text: "Часто ли вы жаждете возбуждения?",
+        text: "Вам нравится, когда вокруг много людей и веселья?",
         param: "extrav_introver_score",
-        category: "Энергичность",
-        answer: true
-    },
-    {
-        id: 2,
-        text: "Часто ли вы нуждаетесь в друзьях, которые вас понимают и могут утешить?",
-        param: "neirotizm_score",
         category: "Социальность",
         answer: true
     },
     {
+        id: 2,
+        text: "Бывает ли у вас чувство, что вам чего-то не хватает, но вы не знаете чего?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true
+    },
+    {
         id: 3,
-        text: "Вы обычно беззаботны?",
+        text: "Вы умеете быстро находить слова, когда хотите что-то сказать?",
         param: "extrav_introver_score",
-        category: "Оптимизм",
+        category: "Коммуникация",
         answer: true
     },
     {
         id: 4,
-        text: "Вам очень трудно принимать возражения?",
+        text: "Иногда вы чувствуете себя радостным, а иногда грустным без причины?",
         param: "neirotizm_score",
-        category: "Упрямство",
+        category: "Эмоциональность",
         answer: true
     },
     {
         id: 5,
-        text: "Вы обдумываете свои дела прежде, чем что-то предпринять?",
+        text: "Вы обычно тихо сидите на вечеринках или в компании?",
         param: "extrav_introver_score",
-        category: "Планирование",
+        category: "Социальность",
         answer: false
     },
     {
         id: 6,
-        text: "Вы всегда держите свои обещания, несмотря ни на что?",
+        text: "В детстве вы всегда делали то, что вам говорили, без вопросов?",
         param: "sincerity_score",
-        category: "Надежность",
+        category: "Покладистость",
         answer: true
     },
     {
         id: 7,
-        text: "Ваше настроение часто меняется?",
+        text: "Иногда у вас бывает плохое настроение?",
         param: "neirotizm_score",
         category: "Эмоциональность",
         answer: true
     },
     {
         id: 8,
-        text: "Вы обычно быстро действуете и говорите?",
+        text: "Если кто-то ссорится, вы предпочитаете молчать и надеяться, что всё уладится?",
         param: "extrav_introver_score",
-        category: "Импульсивность",
-        answer: true
-    },
-    {
-        id: 9,
-        text: "Чувствуете ли вы себя порой несчастным без причины?",
-        param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
-    },
-    {
-        id: 10,
-        text: "Сделали бы вы почти все на спор?",
-        param: "extrav_introver_score",
-        category: "Конкуренция",
-        answer: true
-    },
-    {
-        id: 11,
-        text: "Вы чувствуете робость при общении с незнакомыми людьми?",
-        param: "neirotizm_score",
-        category: "Коммуникация",
-        answer: true
-    },
-    {
-        id: 12,
-        text: "Вы иногда сердитесь?",
-        param: "sincerity_score",
         category: "Конфликтность",
         answer: false
     },
     {
-        id: 13,
-        text: "Часто ли вы действуете по первому побуждению?",
-        param: "extrav_introver_score",
-        category: "Импульсивность",
-        answer: true
-    },
-    {
-        id: 14,
-        text: "Часто ли вы беспокоитесь о том, что сделали не так?",
-        param: "neirotizm_score",
-        category: "Тревожность",
-        answer: true
-    },
-    {
-        id: 15,
-        text: "Вы предпочитаете книги общению с людьми?",
-        param: "extrav_introver_score",
-        category: "Мечтательность",
-        answer: false
-    },
-    {
-        id: 16,
-        text: "Вас легко задеть?",
-        param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
-    },
-    {
-        id: 17,
-        text: "Вам нравится проводить время в компаниях?",
-        param: "extrav_introver_score",
-        category: "Социальность",
-        answer: true
-    },
-    {
-        id: 18,
-        text: "У вас бывают мысли, о которых вы не хотели бы рассказывать?",
-        param: "sincerity_score",
-        category: "Рефлексия",
-        answer: false
-    },
-    {
-        id: 19,
-        text: "Ваш уровень энергии часто колеблется?",
-        param: "neirotizm_score",
-        category: "Энергичность",
-        answer: true
-    },
-    {
-        id: 20,
-        text: "Вам достаточно иметь несколько близких друзей?",
-        param: "extrav_introver_score",
-        category: "Коммуникация",
-        answer: false
-    },
-    {
-        id: 21,
-        text: "Вы часто погружаетесь в мечты?",
-        param: "neirotizm_score",
-        category: "Мечтательность",
-        answer: true
-    },
-    {
-        id: 22,
-        text: "Вы повышаете голос в ответ на крик?",
-        param: "extrav_introver_score",
-        category: "Реактивность",
-        answer: true
-    },
-    {
-        id: 23,
-        text: "Вас часто мучает чувство вины?",
-        param: "neirotizm_score",
-        category: "Ответственность",
-        answer: true
-    },
-    {
-        id: 24,
-        text: "Все ли ваши поступки безупречны?",
-        param: "sincerity_score",
-        category: "Перфекционизм",
-        answer: true
-    },
-    {
-        id: 25,
-        text: "Вы умеете по-настоящему расслабиться в компании?",
-        param: "extrav_introver_score",
-        category: "Активность",
-        answer: true
-    },
-    {
-        id: 26,
-        text: "Вы считаете себя эмоционально чувствительным?",
+        id: 9,
+        text: "У вас легко меняется настроение?",
         param: "neirotizm_score",
         category: "Эмоциональность",
         answer: true
     },
     {
-        id: 27,
-        text: "Другие считают вас жизнерадостным?",
+        id: 10,
+        text: "Вам нравится быть среди людей?",
         param: "extrav_introver_score",
-        category: "Оптимизм",
+        category: "Социальность",
         answer: true
     },
     {
-        id: 28,
-        text: "Вы склонны перепроверять уже сделанное дело?",
+        id: 11,
+        text: "Часто ли вы не можете уснуть из-за своих переживаний?",
         param: "neirotizm_score",
-        category: "Перфекционизм",
+        category: "Тревожность",
         answer: true
     },
     {
-        id: 29,
-        text: "Вам комфортнее молчать в присутствии других?",
-        param: "extrav_introver_score",
-        category: "Коммуникация",
+        id: 12,
+        text: "Бывает, что вы упрямитесь?",
+        param: "sincerity_score",
+        category: "Упрямство",
         answer: false
     },
     {
-        id: 30,
-        text: "Вы когда-нибудь рассказывали слухи?",
+        id: 13,
+        text: "Вы считаете себя честным человеком?",
         param: "sincerity_score",
+        category: "Открытость",
+        answer: true
+    },
+    {
+        id: 14,
+        text: "Часто ли вам приходят отличные идеи слишком поздно?",
+        param: "neirotizm_score",
+        category: "Рефлексия",
+        answer: false
+    },
+    {
+        id: 15,
+        text: "Вам больше нравится работать одному?",
+        param: "extrav_introver_score",
         category: "Социальность",
         answer: false
     },
     {
-        id: 31,
-        text: "Вам трудно заснуть из-за лишних мыслей?",
+        id: 16,
+        text: "Бывает ли, что вы чувствуете себя уставшим и без сил без видимой причины?",
         param: "neirotizm_score",
-        category: "Прокрастинация",
+        category: "Энергия",
+        answer: true
+    },
+    {
+        id: 17,
+        text: "Вы по натуре энергичный человек?",
+        param: "neirotizm_score",
+        category: "Энергия",
+        answer: false
+    },
+    {
+        id: 18,
+        text: "Вам смешно, когда кто-то шутит неприлично?",
+        param: "extrav_introver_score",
+        category: "Чувство юмора",
+        answer: false
+    },
+    {
+        id: 19,
+        text: "Часто ли что-то вас так утомляет, что вы хотите отдохнуть?",
+        param: "neirotizm_score",
+        category: "Энергия",
+        answer: true
+    },
+    {
+        id: 20,
+        text: "Вы чувствуете себя некомфортно в определенной одежде?",
+        param: "neirotizm_score",
+        category: "Чувствительность",
+        answer: true
+    },
+    {
+        id: 21,
+        text: "Часто ли ваши мысли блуждают, когда вы пытаетесь сосредоточиться?",
+        param: "neirotizm_score",
+        category: "Внимательность",
+        answer: true
+    },
+    {
+        id: 22,
+        text: "Вы можете быстро сказать, что думаете?",
+        param: "extrav_introver_score",
+        category: "Коммуникация",
+        answer: true
+    },
+    {
+        id: 23,
+        text: "Бывает, что вы задумаетесь и не слышите, что говорят вокруг?",
+        param: "neirotizm_score",
+        category: "Внимательность",
+        answer: true
+    },
+    {
+        id: 24,
+        text: "Вы свободны от предвзятых мнений?",
+        param: "sincerity_score",
+        category: "Открытость",
+        answer: true
+    },
+    {
+        id: 25,
+        text: "Вам нравятся шутки на 1 апреля?",
+        param: "extrav_introver_score",
+        category: "Чувство юмора",
+        answer: false
+    },
+    {
+        id: 26,
+        text: "Часто ли вы думаете о том, что делаете на работе?",
+        param: "neirotizm_score",
+        category: "Ответственность",
+        answer: false
+    },
+    {
+        id: 27,
+        text: "Вы очень любите пробовать вкусную еду?",
+        param: "extrav_introver_score",
+        category: "Чувствительность",
+        answer: false
+    },
+    {
+        id: 28,
+        text: "Вам нужен друг, с которым можно поговорить, когда вы злы?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: true
+    },
+    {
+        id: 29,
+        text: "Вам неприятно занимать деньги или что-то продавать, когда вам это нужно?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: false
+    },
+    {
+        id: 30,
+        text: "Вы иногда хвастаетесь своими успехами?",
+        param: "sincerity_score",
+        category: "Открытость",
+        answer: false
+    },
+    {
+        id: 31,
+        text: "Вы очень чувствительны к некоторым вещам?",
+        param: "neirotizm_score",
+        category: "Чувствительность",
         answer: true
     },
     {
         id: 32,
-        text: "Вам проще найти ответ в книге, чем у человека?",
+        text: "Вам бы хотелось остаться дома, чем идти на скучную вечеринку?",
         param: "extrav_introver_score",
-        category: "Внимательность",
+        category: "Социальность",
         answer: false
     },
     {
         id: 33,
-        text: "Замечали ли вы у себя учащенное сердцебиение?",
+        text: "Бывает, что вы не можете усидеть на месте от волнения?",
         param: "neirotizm_score",
-        category: "Здоровье",
+        category: "Тревожность",
         answer: true
     },
     {
         id: 34,
-        text: "Вам нравится кропотливая работа?",
+        text: "Вы любите заранее планировать свои дела?",
         param: "extrav_introver_score",
-        category: "Внимательность",
+        category: "Планирование",
         answer: false
     },
     {
         id: 35,
-        text: "Бывает ли у вас внутренняя дрожь?",
+        text: "Бывают ли у вас головокружения?",
         param: "neirotizm_score",
         category: "Здоровье",
         answer: true
     },
     {
         id: 36,
-        text: "Вы всегда честны перед собой и другими?",
+        text: "Вы всегда сразу отвечаете на письма после прочтения?",
         param: "sincerity_score",
         category: "Ответственность",
         answer: true
     },
     {
         id: 37,
-        text: "Вас раздражают компании с шутками?",
+        text: "Вам легче решить задачу, если вы сначала подумаете об этом сами?",
         param: "extrav_introver_score",
-        category: "Чувство юмора",
+        category: "Самостоятельность",
         answer: false
     },
     {
         id: 38,
-        text: "Вы легко выходите из себя?",
+        text: "Бывает ли у вас одышка, даже если вы не делали ничего тяжелого?",
         param: "neirotizm_score",
-        category: "Конфликтность",
+        category: "Здоровье",
         answer: true
     },
     {
         id: 39,
-        text: "Вы любите задачи, где нужно спешить?",
-        param: "extrav_introver_score",
-        category: "Решительность",
-        answer: true
+        text: "Вы не переживаете, если что-то идет не так?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: false
     },
     {
         id: 40,
-        text: "Вы часто думаете о плохом, что может случиться?",
+        text: "Вас беспокоят ваши нервы?",
         param: "neirotizm_score",
         category: "Тревожность",
         answer: true
     },
     {
         id: 41,
-        text: "Ваши движения обычно неторопливы?",
+        text: "Вам больше нравится планировать, чем делать что-то на самом деле?",
         param: "extrav_introver_score",
-        category: "Гибкость",
-        answer: false
-    },
-    {
-        id: 42,
-        text: "Вы когда-либо обманывали ожидания людей по времени?",
-        param: "sincerity_score",
         category: "Планирование",
         answer: false
     },
     {
+        id: 42,
+        text: "Вы иногда откладываете дела на завтра?",
+        param: "sincerity_score",
+        category: "Прокрастинация",
+        answer: false
+    },
+    {
         id: 43,
-        text: "Вам часто снятся страшные сны?",
+        text: "Вам страшно в лифтах или метро?",
         param: "neirotizm_score",
-        category: "Здоровье",
+        category: "Тревожность",
         answer: true
     },
     {
         id: 44,
-        text: "Вы готовы заговорить с кем угодно первым?",
+        text: "Вы часто первым подходите к новым людям?",
         param: "extrav_introver_score",
-        category: "Коммуникация",
+        category: "Социальность",
         answer: true
     },
     {
         id: 45,
-        text: "Вас часто беспокоят недомогания?",
+        text: "Бывают ли у вас сильные головные боли?",
         param: "neirotizm_score",
         category: "Здоровье",
         answer: true
     },
     {
         id: 46,
-        text: "Вам плохо без постоянного общения?",
-        param: "extrav_introver_score",
-        category: "Социальность",
-        answer: true
+        text: "Вы обычно верите, что всё само собой решится?",
+        param: "neirotizm_score",
+        category: "Оптимизм",
+        answer: false
     },
     {
         id: 47,
-        text: "Вы бы назвали себя тревожным человеком?",
+        text: "Вам трудно заснуть ночью?",
         param: "neirotizm_score",
-        category: "Эмоциональность",
+        category: "Тревожность",
         answer: true
     },
     {
         id: 48,
-        text: "Есть ли люди, которых вы терпеть не можете?",
-        param: "sincerity_score",
-        category: "Покладистость",
-        answer: false
-    },
-    {
-        id: 49,
-        text: "Вы чувствуете себя уверенно в большинстве ситуаций?",
-        param: "extrav_introver_score",
-        category: "Решительность",
-        answer: true
-    },
-    {
-        id: 50,
-        text: "Вас легко задеть замечанием?",
-        param: "neirotizm_score",
-        category: "Чувствительность",
-        answer: true
-    },
-    {
-        id: 51,
-        text: "Вы редко чувствуете драйв на вечеринках?",
-        param: "extrav_introver_score",
-        category: "Активность",
-        answer: false
-    },
-    {
-        id: 52,
-        text: "Вы сравниваете себя с другими не в свою пользу?",
-        param: "neirotizm_score",
-        category: "Рефлексия",
-        answer: true
-    },
-    {
-        id: 53,
-        text: "Вы умеете «зажечь» скучающую толпу?",
-        param: "extrav_introver_score",
-        category: "Энергичность",
-        answer: true
-    },
-    {
-        id: 54,
-        text: "Вы когда-нибудь притворялись экспертом?",
+        text: "Вы когда-нибудь обманывали других?",
         param: "sincerity_score",
         category: "Открытость",
         answer: false
     },
     {
-        id: 55,
-        text: "Вы мнительны в отношении болезней?",
-        param: "neirotizm_score",
-        category: "Здоровье",
+        id: 49,
+        text: "Вы иногда говорите первое, что приходит в голову?",
+        param: "extrav_introver_score",
+        category: "Импульсивность",
         answer: true
+    },
+    {
+        id: 50,
+        text: "Долго ли вы переживаете после неловкой ситуации?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true
+    },
+    {
+        id: 51,
+        text: "Вы обычно закрыты с людьми, кроме своих близких друзей?",
+        param: "extrav_introver_score", category: "Социальность",
+
+        answer: false
+    },
+    {
+        id: 52,
+        text: "Часто ли у вас происходят неприятности?",
+        param: "neirotizm_score",
+        category: "Тревожность",
+        answer: true
+    },
+    {
+        id: 53,
+        text: "Вам нравится рассказывать истории своим друзьям?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: true
+    },
+    {
+        id: 54,
+        text: "Вам больше нравится выигрывать, чем проигрывать?",
+        param: "sincerity_score",
+        category: "Конкуренция",
+        answer: false
+    },
+    {
+        id: 55,
+        text: "Вы чувствуете себя неловко рядом с людьми, которые выше вас по статусу?",
+        param: "extrav_introver_score",
+        category: "Социальность",
+        answer: false
     },
     {
         id: 56,
-        text: "Вам нравится разыгрывать друзей?",
-        param: "extrav_introver_score",
-        category: "Чувство юмора",
-        answer: true
+        text: "Когда все идет не так, вы все равно думаете, что стоит попробовать что-то сделать?",
+        param: "neirotizm_score",
+        category: "Оптимизм",
+        answer: false
     },
     {
         id: 57,
-        text: "У вас часто прерывистый сон?",
+        text: "Бывает ли у вас чувство волнения перед важным событием?",
         param: "neirotizm_score",
-        category: "Здоровье",
+        category: "Тревожность",
         answer: true
-    },
+    }
 ]

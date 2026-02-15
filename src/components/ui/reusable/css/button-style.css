@@ -57,6 +57,7 @@ button:disabled {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    min-width: 200px;
     align-items: center;
     justify-content: center;
     min-height: 45px;

@@ -1,9 +1,9 @@
 import "./css/testsPageStyle.css"
 
 import { FC, useCallback } from "react"
-import { Scroll } from "../components/ui/reusable/scroll"
-import { testsList } from "../types/tests/TestsData"
-import { Test } from "../components/ui/reusable/test"
+import { Scroll } from "../ui/reusable/scroll"
+import { testsList } from "../../types/tests/TestsData"
+import { Test } from "../ui/reusable/test"
 import { useNavigate } from "react-router-dom"
 
 export const TestsPage: FC = ({ }) => {
@@ -14,7 +14,7 @@ export const TestsPage: FC = ({ }) => {
     }, [navigate])
 
     return (
-        <div className="quiz-selector-wrapper">
+        <div className="test-selector-wrapper">
             <Scroll
                 items={testsList}
                 visibleCount={3}

@@ -42,7 +42,7 @@ import { Layout } from "./layout/Layout"
 import { LoginPage } from "./pages/authorizationPages/LoginPage"
 import { RegistrationPage } from "./pages/authorizationPages/RegistrationPage"
 import { HomePage } from "./pages/HomePage"
-import { TestsPage } from "./pages/TestsPage"
+import { TestsPage } from "./components/testsRef/TestsPage"
 import { ResultsPage } from "./pages/ResultsPage"
 import { StudyPage } from "./pages/StudyPage"
 import { ProfilePage } from "./pages/ProfilePage"
@@ -75,16 +75,16 @@ export default function App() {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
-            <Route element={<TestViewer/>}>
-              <Route path="temperament-ref" element={<TemperamentFormSelection />} />
-              <Route path="temperament-results" element={<TemperamentResults/>} />
-            </Route>
-            
+						<Route element={<TestViewer />}>
+							<Route path="temperament" element={<TemperamentFormSelection />} />
+							<Route path="temperament-results" element={<TemperamentResults />} />
+						</Route>
+
 						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
 						<Route path="group-roles" element={<GroupRolesTest />} />
 						<Route path="iq-potential" element={<IqPotentialTest />} />
 						<Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
-						<Route path="temperament" element={<TemperamentTest />} />
+						{/*<Route path="temperament" element={<TemperamentTest />} />*/}
 					</Route>
 
 

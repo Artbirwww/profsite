@@ -1,0 +1,13 @@
+.positive-negative-card {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    gap: 40px;
+    width: 100%;
+}
+.positive-negative-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 60%;
+}
