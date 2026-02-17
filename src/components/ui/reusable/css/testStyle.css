@@ -25,7 +25,6 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-bottom: 1px solid #BCBCBC;
     z-index: 1;
     /* Добавлена поддержка префиксов для transition */
     -webkit-transition: -webkit-box-shadow .8s cubic-bezier(.25, 1, .25, 1);
@@ -44,7 +43,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: gray;
     -webkit-transform: scaleX(0);
     -ms-transform: scaleX(0);
     transform: scaleX(0);
@@ -84,4 +82,24 @@
     -webkit-transform: scaleX(1);
     -ms-transform: scaleX(1);
     transform: scaleX(1);
+}
+
+.test-item-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+.test-item-background .backgroundSVG {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+.test-item-background .backgroundSVG path, 
+.test-item-background .backgroundSVG circle, 
+.test-item-background .backgroundSVG rect {
+    filter: drop-shadow(10px 0px 6px rgba(0, 50, 100, 0.5));
 }

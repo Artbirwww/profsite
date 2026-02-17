@@ -12,7 +12,7 @@ interface ScrollContainerProps<Items> {
     itemsGap?: string
 }
 
-export const Scroll = <Items extends { id: string | number }>({ items, renderItem, className = "", visibleCount = 3, step = 3, scrollDelay = 300, itemsGap = "0px" }: ScrollContainerProps<Items>) => {
+export const Scroll = <Items extends { id: string | number }>({ items, renderItem, className = "", visibleCount = 3, step = 3, scrollDelay = 300, itemsGap = "2px" }: ScrollContainerProps<Items>) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const scrollRef = useRef<HTMLDivElement>(null)
     const isScrolling = useRef(false)

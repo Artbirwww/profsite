@@ -10,6 +10,7 @@ interface TestItemProps {
 
 export const Test: FC<TestItemProps> = ({ item, onClick }) => {
     const Icon = item.icon
+    const BackgroundSVG = item.background
     const label = item.label
     const author = item.author
     const description = item.description
@@ -34,6 +35,11 @@ export const Test: FC<TestItemProps> = ({ item, onClick }) => {
                     <div>
                         <span>{description}</span>
                     </div>
+                </div>
+                <div className="test-item-background">
+                    {BackgroundSVG && <BackgroundSVG
+                        className="backgroundSVG"
+                        preserveAspectRatio="xMaxYMid slice"/>}
                 </div>
             </div>
         </div>
