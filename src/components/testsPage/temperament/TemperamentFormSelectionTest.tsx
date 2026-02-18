@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react"
-import { PositiveNegative, PositiveNegativeOption } from "../positiveNegative/PositiveNegative"
+import { PositiveNegative, PositiveNegativeOption } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
 import { useNavigate } from "react-router-dom"
 
