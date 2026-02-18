@@ -1,5 +1,5 @@
-import { Button } from "../../ui/reusable/button"
-import "../css/positiveNegativeStyle.css"
+import { Button } from "../../../ui/reusable/button"
+import "../../css/positiveNegativeStyle.css"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
