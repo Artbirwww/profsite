@@ -25,10 +25,6 @@ import { ROLES } from "./types/account/role";
 import { PupilGradeLoading } from "./components/adminPages/pupils/grade-loading/PupilGradeLoading"
 
 
-
-
-
-
 // Новые импорты
 // Роутинг
 import { AuthRouter } from './routing/AuthRouter'
@@ -48,8 +44,10 @@ import { StudyPage } from "./components/studyPage/StudyPage"
 import { ProfilePage } from "./components/profilePage/ProfilePage"
 import { SettingsPage } from "./components/settingsPage/SettingsPage"
 import { TestViewer } from "./components/testsPage/TestViewer"
-import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelection"
+import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
+import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
+import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
 
 export default function App() {
 	return (
@@ -78,10 +76,13 @@ export default function App() {
 						<Route element={<TestViewer />}>
 							<Route path="temperament" element={<TemperamentFormSelection />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
+
+              <Route path="group-roles" element={<BelbinTest/>} />
+              <Route path="belbin-results" element={<BelbinResults/>} />
 						</Route>
 
 						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
-						<Route path="group-roles" element={<GroupRolesTest />} />
+						{/*<Route path="group-roles" element={<GroupRolesTest />} />*/}
 						<Route path="iq-potential" element={<IqPotentialTest />} />
 						<Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
 						{/*<Route path="temperament" element={<TemperamentTest />} />*/}
