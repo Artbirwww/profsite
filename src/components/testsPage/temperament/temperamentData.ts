@@ -1,4 +1,4 @@
-import { PositiveNegativeOption } from "../positiveNegative/PositiveNegative"
+import { PositiveNegativeOption } from "../generalTemplates/positiveNegative/PositiveNegative"
 
 // Основные шкалы EPI
 export type TemperamentParam =
