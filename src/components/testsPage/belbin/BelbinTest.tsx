@@ -33,7 +33,6 @@ export const BelbinTest = () => {
         setCurrentGroupNumber(prev => prev + 1)
     }
     return (<>
-        <p>Вопрос номер {currentGroupNumber + 1}</p>
         <ConstantSumSlider sliders={currentQuestions} setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>} nextPage={nextQuestionsGroup} maxValue={maxValue} />
     </>)
 }

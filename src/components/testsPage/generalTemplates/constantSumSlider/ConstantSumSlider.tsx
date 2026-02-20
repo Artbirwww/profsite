@@ -1,7 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
 import { WheelEvent } from "react"
 import toast, { Toaster } from "react-hot-toast"
-import "./constantSumSlider.css"
+import { Button } from "../../../ui/reusable/button"
+
 export interface SliderData {
     id: number
     text: string
@@ -62,7 +63,7 @@ export const ConstantSumSlider = ({sliders, setSliders, maxValue, nextPage} : Co
                     </div>
                 ))}
             </div>
-        <button onClick={nextPageHandler}>Далее</button>
+        <Button buttonLabel={"Далее"} buttonFunction={nextPageHandler}/>
         </div>
         <Toaster />
     </>)
