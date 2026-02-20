@@ -37,7 +37,7 @@ export const BelbinResults = () => {
                 console.error(err)
                 toast.error("Не получилось сохранить данные теста")
             }
-            //sendBalbinResults()
+            sendBalbinResults()
         }
     }, [balbinResults])
     if (!groupQuestionsResult || !balbinResults) return <p>Загрузка...</p>
