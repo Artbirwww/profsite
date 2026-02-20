@@ -1,22 +1,22 @@
 import { TestResultRequest } from "../../../types/testTypes";
-import { BelbinQuestion } from "./belbinData";
+import { BelbinQuestion, BelbinRole, BelbinRoleEN, belbinRoleMapping } from "./belbinData";
 
 export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]): TestResultRequest => {
     const rolesOccurs = {
-        исполнитель: 0,
-        кординатор: 0,
-        формирователь: 0,
-        мыслитель: 0,
-        разведчик: 0,
-        оценщик: 0,
-        коллективист: 0,
-        доводчик: 0
+        company_worker: 0,
+        chairman: 0,
+        shaper: 0,
+        plant: 0,
+        resource_investigator: 0,
+        monitor_evaluation: 0,
+        team_worker: 0,
+        completer_finisher: 0
     };
-    
+    //Берем значение из маппинга (загоняем ру -> анг, затем получаем нужное совпадение)
     groupQuestionsResult.forEach(questions => {
         questions.forEach(question => {
             if (question.value > 0)
-                rolesOccurs[question.belbinRole] += question.value
+                rolesOccurs[belbinRoleMapping[question.belbinRole]] += question.value
         })
     })
     const testResultRequest: TestResultRequest = {

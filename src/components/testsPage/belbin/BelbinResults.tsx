@@ -22,6 +22,7 @@ export const BelbinResults = () => {
     useEffect(() => {
         const sendBalbinResults = async () => {
             try {
+                console.log("Отправка теста")
                 const token = getToken()
                 if (!token) {
                     console.error("Authentification error")
@@ -31,14 +32,14 @@ export const BelbinResults = () => {
                     console.error("Balbin tests data is null")
                     return
                 }
-                const response = await testApi.createTest(token, balbinResults)
+                const data = await testApi.createTest(token, balbinResults)
                 toast.success("Тест успешно пройден")
             } catch(err) {
                 console.error(err)
                 toast.error("Не получилось сохранить данные теста")
             }
-            sendBalbinResults()
         }
+        sendBalbinResults()
     }, [balbinResults])
     if (!groupQuestionsResult || !balbinResults) return <p>Загрузка...</p>
     return(<>
