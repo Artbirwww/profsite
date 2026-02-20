@@ -6,6 +6,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { logoutButton, menuButtons, MenuItemProps } from "./menuData";
 import { MenuItem } from "./MenuItem";
 import { MenuItemDropdown } from "./MenuItemDropdown";
+import { DisplacementFilter } from "../../../DisplacementFilter";
 
 export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" }) => {
     const { pathname } = useLocation()
@@ -40,7 +41,10 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
     return (
         <div className={`menu-container ${position}`}>
 
-            <nav className="menu-nav">
+            <nav className="menu-nav liquid-glass-component">
+
+                <DisplacementFilter />
+
                 {commonButtons.map(item => (
                     <MenuItem
                         key={item.id}
@@ -56,7 +60,10 @@ export const Menu: FC<{ position?: "top" | "bottom" }> = ({ position = "bottom" 
             </nav>
 
             {Object.entries(roleGroups).map(([role, items]) => (
-                <nav className="menu-nav">
+                <nav className="menu-nav liquid-glass-component">
+                    
+                    <DisplacementFilter/>
+
                     <MenuItemDropdown
                         key={role}
                         roleKey={role}

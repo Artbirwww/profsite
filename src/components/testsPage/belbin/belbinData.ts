@@ -12,6 +12,7 @@ export type BelbinRole =
   | 'IMP' // Implementer (Worker)
   | 'CF' // Completer Finisher (Checker)
   | 'SP'; // Specialist (Expert)
+  
 export interface BelbinQuestion extends SliderData {
     belbinRole: BelbinRole
 }

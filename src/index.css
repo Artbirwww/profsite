@@ -14,25 +14,45 @@
 
 :root {
     --bg-color: #FFFFFF;
-    --text-color: #1a1a1a;
     --sidebar-bg: #f4f4f4;
     --accent-color: #0464E2;
     --accent-hover-color: rgba(4, 100, 226, 0.2);
-    --border-color: #c53838;
+    --border-color: #b6b6b6;
 
     /* Стеклянный эффект */
-    --menu-bg: rgba(255, 255, 255, .4);
-    --menu-shadow:
+    --liquid-glass-shadow:
         0 8px 32px rgba(0, 0, 0, .1),
         inset 0 1px 0 rgba(255, 255, 255, .5),
         inset 0 -1px 0 rgba(255, 255, 255, .1),
         inset 0 0 10px 5px rgba(255, 255, 255, .5);
-    --menu-blur: blur(10px);
-    --menu-border: 1px solid rgba(255, 255, 255, .3);
+    --liquid-glass-border: 1px solid rgba(255, 255, 255, .3);
 
     /* Исправленные градиенты */
     --menu-bg-before: linear-gradient(90deg, transparent, rgba(255, 255, 255, .8), transparent);
     --menu-bg-after: linear-gradient(180deg, rgba(255, 255, 255, .8), transparent, rgba(255, 255, 255, .3));
+
+    /* Цвета текста - Тёмный на светлом */
+    --text-primary-color: #2B2D42;
+    /* Основной текст, заголовки */
+    --text-secondary-color: #5A5D70;
+    /* Вторичный текст */
+    --text-tertiary-color: #8C8FA3;
+    /* Плейсхолдеры, неактивные элементы */
+    --text-on-accent-color: #FFFFFF;
+    /* Текст на цветном фоне */
+
+    --muted-gray-lightest-color: #f5f5f7;
+    --muted-gray-soft-color: #e2e2e6;
+    --muted-gray-medium-color: #8e8e93;
+    --muted-gray-state-color: #636366;
+    --muted-gray-dark-color: #3a3a3c;
+    --muted-gray-characoal-color: #1c1c1e;
+
+    --blue-lightest-color: #ffffff;
+    --blue-soft-color: #64b1FD;
+    --blue-medium-color: #5490DD;
+    --blue-state-color: #436DBF;
+    --blue-dark-color: #314B9F;
 
     /* Типографика */
     --font-size-xs: .75rem;
@@ -67,9 +87,7 @@
 html {
     height: 100%;
     width: 100%;
-    /* Защита от авто-изменения размера текста в iOS Safari */
     -webkit-text-size-adjust: 100%;
-    /* Плавная прокрутка */
     scroll-behavior: smooth;
 }
 
@@ -78,10 +96,8 @@ body {
     width: 100%;
     background-color: var(--bg-color);
     color: var(--text-color);
-    /* Основной шрифт с системным фолбеком */
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
-    /* Оптимизация переходов */
     -webkit-transition: background-color .3s ease, color .3s ease;
     transition: background-color .3s ease, color .3s ease;
 }
@@ -128,6 +144,12 @@ select {
 
 button {
     cursor: pointer;
+}
+
+.liquid-glass-component {
+    border: var(--liquid-glass-border);
+    box-shadow: var(--liquid-glass-shadow);
+    backdrop-filter: brightness(1.1) blur(2px) url(#displacementFilter)
 }
 
 /* Отключение анимаций для пользователей с чувствительностью */
