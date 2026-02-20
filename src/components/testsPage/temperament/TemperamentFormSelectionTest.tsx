@@ -26,26 +26,17 @@ export const TemperamentFormSelection = () => {
     if (!pickedForm)
         return (
             <>
-                <div className="test-selector-wrapper" onClick={() => handleSelect("A", TemperamentFormA)}>
-                    <div className="test-item-wrapper">
-                        <div className="test-item-content">
-                            <div className="test-item-container">
-                                <div>
-                                    <h1>Форма A</h1>
-                                </div>
-                            </div>
+                <div className="test-form-selector-wrapper">
+
+                    <div className="test-form-item-wrapper" onClick={() => handleSelect("A", TemperamentFormA)}>
+                        <div className="test-form-item-content">
+                            <h1>Форма A</h1>
                         </div>
                     </div>
-                </div>
 
-                <div className="test-selector-wrapper" onClick={() => handleSelect("B", TemperamentFormB)}>
-                    <div className="test-item-wrapper">
-                        <div className="test-item-content">
-                            <div className="test-item-container">
-                                <div>
-                                    <h1>Форма B</h1>
-                                </div>
-                            </div>
+                    <div className="test-form-item-wrapper" onClick={() => handleSelect("B", TemperamentFormB)}>
+                        <div className="test-form-item-content">
+                            <h1>Форма B</h1>
                         </div>
                     </div>
                 </div>
