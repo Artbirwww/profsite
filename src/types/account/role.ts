@@ -1,7 +1,7 @@
 export interface Role {
     name: string
 }
-export const ROLES =  {
+export const ROLES = {
     PUPIL: "PUPIL",
     DIRECTOR: "DIRECTOR",
     TEACHER: "TEACHER",

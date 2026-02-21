@@ -1,0 +1,46 @@
+.scroll-wrapper {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 0%;
+    flex: 1 1 0%;
+    width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: var(--items-gap);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.scroll-item {
+    /* Переменные поддерживаются всеми современными браузерами, 
+       но для безопасности добавим fallback для flex-basis */
+    --total-gaps: calc((var(--visible-count) - 1) * var(--items-gap));
+    --item-height: calc((100% - var(--total-gaps)) / var(--visible-count));
+
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 var(--item-height);
+    flex: 0 0 var(--item-height);
+
+    height: var(--item-height);
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* Исправление бага Safari: предотвращение сжатия элемента */
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}

@@ -6,12 +6,9 @@
 ============================================ */
 
 /* ===== ПОДКЛЮЧЕНИЕ ШРИФТА MULISH ===== */
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap');
 
 /* ===== СВЕТЛАЯ ТЕМА (ПО УМОЛЧАНИЮ) ===== */
 :root {
-    /* Основной шрифт */
-    --font-family-primary: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
     /* 60% - Основной фон и поверхности */
     --color-bg-primary: #F8F9FA;
@@ -280,11 +277,11 @@
         color 0.3s ease;
 }
 
-/* ===== ГЛОБАЛЬНОЕ ПРИМЕНЕНИЕ ШРИФТА ===== */
-* {
-    font-family: var(--font-family-primary);
-    font-weight: var(--font-weight-normal);
+html, body {
+    margin: 0;
+    padding: 0;
 }
+
 
 body {
     transition: var(--transition-theme);

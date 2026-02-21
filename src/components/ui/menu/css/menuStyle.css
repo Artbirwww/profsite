@@ -1,0 +1,110 @@
+.menu-container {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    height: max-content;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 50px;
+    user-select: none;
+}
+.menu-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 5px;
+    border-radius: 50px;
+}
+
+.menu-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.menu-item-icon,
+.menu-item-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-wrap: nowrap;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.menu-dropdown-container {
+    position: relative;
+    display: flex;
+}
+.menu-item-content {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    bottom: 100%;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    left: 100%;
+    transform: translateX(-100%);
+    padding: 5px 5px;
+}
+
+.menu-nav,
+.menu-item-content {
+    background-color: var(--menu-bg);
+    backdrop-filter: var(--menu-blur);
+    -webkit-backdrop-filter: var(--menu-blur);
+    border: var(--menu-border);
+    box-shadow: var(--menu-shadow);
+}
+.menu-nav::before,
+.menu-item-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--menu-bg-before);
+}
+.menu-nav::after,
+.menu-item-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--menu-bg-after);
+}
+
+
+
+.menu-item-container:hover {
+    background-color: var(--accent-hover-color);
+    color: var(--accent-color);
+}
+.menu-item-arrow {
+    transform: rotate(180deg);
+    transition: all .3s ease;
+}
+.menu-item-arrow-rotated {
+    transform: rotate(0deg);
+}
+.menu-item-active,
+.menu-item-open,
+.menu-item-group-active {
+    background-color: var(--accent-hover-color);
+    color: var(--accent-color);
+}

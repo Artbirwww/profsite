@@ -1,0 +1,15 @@
+.test-wrapper {
+    width: 500px;
+    align-self: center;
+}
+.question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.input-slider {
+    background-color: lightgray;
+    border-radius: 5px;
+}

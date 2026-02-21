@@ -1,0 +1,7 @@
+.test-result-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    gap: 40px;
+    width: 100%;
+}

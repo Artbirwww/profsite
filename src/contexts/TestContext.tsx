@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { TestResult, TestType, PsychTestResponse, PsychTestRequest, PsychParam } from '../types/TestResult';
-import { testService } from '../services/api/testApi';
+import { testApi } from '../services/api/testApi';
 
 // Маппинг ролей Белбина (индекс) на имена параметров API (строго по документации)
 const BELBIN_ROLE_TO_API_PARAM: (string | null)[] = [
@@ -205,7 +205,7 @@ export const TestProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       // Convert TestResult to PsychTestRequest
       const testData = convertToPsychTestRequest(result);
-      const savedResult = await testService.createTest(token, testData);
+      const savedResult = await testApi.createTest(token, testData);
       setTestResults(prev => [...prev, savedResult]);
       return savedResult;
     } catch (err) {
@@ -219,7 +219,7 @@ export const TestProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const getTestsByPupil = async (token: string) => {
     setIsLoading(true);
     try {
-      const results = await testService.getTestsByPupil(token);
+      const results = await testApi.getTestsByPupil(token);
       setTestResults(results);
       return results;
     } catch (err) {
