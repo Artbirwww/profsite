@@ -27,7 +27,7 @@ export default defineConfig({
         // прокси для API-запросов
         proxy: {
             '/api': {
-                target: 'http://176.119.16.111:8082',
+                target: 'https://evcg.ru:8082',
                 changeOrigin: true,
                 secure: false,
                 configure: (proxy, _options) => {

@@ -41,6 +41,7 @@ import { TemperamentFormSelection } from "./components/testsPage/temperament/Tem
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
 import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
+import VacanciesPage from "./components/vacanciesPage/VacanciesPage"
 
 export default function App() {
 	return (
@@ -85,6 +86,10 @@ export default function App() {
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/my-grades" element={<StudyPage />} />
 					<Route path="/settings" element={<SettingsPage />} />
+
+					{/* Роут для отобрадения вакансий*/}
+					<Route path="/vacancies" element={<VacanciesPage />} />
+
 				</Route>
 			</Route>
 
