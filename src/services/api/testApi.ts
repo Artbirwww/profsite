@@ -1,14 +1,11 @@
 import axios, { AxiosError } from 'axios';
 import api from './api';
-import { BASE_URL } from './baseUrl';
-import { PsychTestRequest, PsychTestResponse } from '../../types/TestResult';
-
-const TEST_ENDPOINT = `${BASE_URL}/api/psych-tests`;
+import { TestResultRequest, TestResultResponse } from '../../types/testTypes';
 
 export const testApi = {
-  createTest: async (token: string, testData: PsychTestRequest): Promise<PsychTestResponse> => {
+  createTest: async (token: string, testData: TestResultRequest): Promise<TestResultResponse> => {
     try {
-      const response = await api.post<PsychTestResponse>(`api/psych-tests/create-test`, testData, {
+      const response = await api.post<TestResultResponse>(`api/psych-tests/create-test`, testData, {
         headers: {
           Authorization: token,
         },
@@ -24,9 +21,9 @@ export const testApi = {
     }
   },
 
-  getTestsByPupil: async (token: string): Promise<PsychTestResponse[]> => {
+  getTestsByPupil: async (token: string): Promise<TestResultRequest[]> => {
     try {
-      const response = await axios.get<PsychTestResponse[]>(`${TEST_ENDPOINT}/by-pupil`, {
+      const response = await api.get<TestResultResponse[]>(`api/psych-tests/my-tests`, {
         headers: {
           Authorization: token,
         },
@@ -41,4 +38,15 @@ export const testApi = {
       }
     }
   },
+  getTestByType: async (token: string, testType: string) => {
+    try {
+      const response = await api.get<TestResultResponse[]>(`api/psych-tests/my-tests/type/${testType}`, {
+        headers: {Authorization: token}
+      })
+      return response.data
+    } catch(err) {
+      console.error(err)
+      throw err
+    }
+  } 
 };
