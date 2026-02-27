@@ -12,6 +12,7 @@ export interface TestItem {
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
     dataItem: string        // Для тестирования / селекторов
+    name?: string
 }
 
 // Список доступных тестов для прохождения
@@ -24,6 +25,7 @@ export const testsList: TestItem[] = [
         icon: Drama,
         path: "/tests/temperament",
         dataItem: "test-item-1",
+        name: "Temperament"
     },
     {
         id: "test-group-roles",
@@ -33,6 +35,7 @@ export const testsList: TestItem[] = [
         icon: UsersRound,
         path: "/tests/group-roles",
         dataItem: "test-item-2",
+        name: "Group-Roles"
     },
     {
         id: "test-engineering-thinking",
@@ -42,6 +45,7 @@ export const testsList: TestItem[] = [
         icon: Cog,
         path: "/tests/engineering-thinking",
         dataItem: "test-item-3",
+        name: "Engineering-Thinking"
     },
     {
         id: "test-intellectual-potential",
@@ -50,6 +54,7 @@ export const testsList: TestItem[] = [
         icon: Brain,
         path: "/tests/iq-potential",
         dataItem: "test-item-4",
+        name: "Intellectual-Potential"
     },
     {
         id: "test-professional-orientation-klimov",
@@ -58,7 +63,7 @@ export const testsList: TestItem[] = [
         description: "Профессиональные предпочтения",
         icon: BriefcaseBusiness,
         path: "/tests/professional-orientation",
-        dataItem: "test-item-5",
+        dataItem: "test-item-5"
     },
     {
         id: "test-professional-orientation-holland",

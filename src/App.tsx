@@ -71,9 +71,8 @@ export default function App() {
 							<Route path="temperament-results" element={<TemperamentResults />} />
 
 							<Route path="group-roles" element={<BelbinTest/>} />
-							<Route path="belbin-results" element={<BelbinResults/>} />
+							<Route path="group-roles-results" element={<BelbinResults/>} />
 						</Route>
-
 					</Route>
 
 

@@ -21,7 +21,7 @@ export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]):
     })
     const testResultRequest: TestResultRequest = {
         completionTimeSeconds: 0,
-        testTypeName: "Group Roles", 
+        testTypeName: "Group-Roles", 
         psychParams: Object.entries(rolesOccurs).map(([name, param]) => ({name, param}))
     }
     //convert mapped calculated occures to list of objects for the server

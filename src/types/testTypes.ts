@@ -15,6 +15,7 @@ export interface TestResultResponse {
   completionTimeSeconds: number;
   testTypeName: TestTypeName;
   psychParams: PsychParam[];
+  createdAt?: string
 }
 
 export interface SaveTestResponse {
@@ -23,7 +24,7 @@ export interface SaveTestResponse {
   testId?: string;
 }
 
-export type TestTypeName = 'Temperament' | 'Group Roles' | 'Professional Orientation' | 'Engineering Thinking' | 'Intellectual Potential';
+export type TestTypeName = 'Temperament' | 'Group-Roles' | 'Professional-Orientation' | 'Engineering-Thinking' | 'Intellectual-Potential';
 
 export type PsychParamName = 
   | 'working_bee_score'

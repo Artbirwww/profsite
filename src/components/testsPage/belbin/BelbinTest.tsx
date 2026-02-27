@@ -22,7 +22,7 @@ export const BelbinTest = () => {
         const updatedResults = [...groupQuestionsResult, currentQuestions]
         if (currentGroupNumber === groupQuestions.length-1) {
             console.log(groupQuestionsResult)
-            navigate("/tests/belbin-results", {
+            navigate("/tests/group-roles-results", {
                 state: {
                     groupQuestionsResult: updatedResults
                 }
