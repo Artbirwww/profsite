@@ -7,13 +7,6 @@ import { Routes, Route, Navigate } from "react-router-dom"
 //import { Profile } from "./components/profilePageComponents/Profile"
 //import { PupilSubjects } from "./components/studyPageComponents/OLD_PupilSubjects"
 
-// Individual test components
-import EngineeringThinkingTest from "./components/OLD_tests/engineer/EngineeringThinkingTest"
-import GroupRolesTest from "./components/OLD_tests/grouproles/GroupRolesTest"
-import IqPotentialTest from "./components/OLD_tests/iqpotencial/iqpotencial"
-import ProfessionalOrientationTest from "./components/OLD_tests/profsphere/ProfessionalOrientationTest"
-import TemperamentTest from "./components/OLD_tests/temperament/TemperamentTest"
-
 // Хуки
 import { useAuth } from './contexts/AuthContext';
 import { useApp } from './contexts/AppContext';
@@ -77,15 +70,9 @@ export default function App() {
 							<Route path="temperament" element={<TemperamentFormSelection />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
 
-              <Route path="group-roles" element={<BelbinTest/>} />
-              <Route path="belbin-results" element={<BelbinResults/>} />
+							<Route path="group-roles" element={<BelbinTest/>} />
+							<Route path="group-roles-results" element={<BelbinResults/>} />
 						</Route>
-
-						<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
-						{/*<Route path="group-roles" element={<GroupRolesTest />} />*/}
-						<Route path="iq-potential" element={<IqPotentialTest />} />
-						<Route path="professional-orientation" element={<ProfessionalOrientationTest />} />
-						{/*<Route path="temperament" element={<TemperamentTest />} />*/}
 					</Route>
 
 
