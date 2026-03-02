@@ -1,5 +1,5 @@
 import { TestResultResponse } from "../../../types/testTypes";
-import { TemperamentOption } from "./temperamentData";
+import { TemperamentOption, TemperamentType, temperamentTypes } from "./temperamentData";
 
 export const calculateParams = (options: TemperamentOption[], completeTime: number, temperamentFormData: TemperamentOption[]) => {
     const results: TestResultResponse = {
@@ -29,6 +29,15 @@ export const calculateParams = (options: TemperamentOption[], completeTime: numb
     return results;
 }
 
-export const calculateTemperament = (data: TestResultResponse) => {
-
+export const calculateTemperament = (test: TestResultResponse): TemperamentType => {
+    const extraversion = test.psychParams.find(param => param.name === "extrav_introver_score")?.param || 0
+    const neurotizm = test.psychParams.find(param => param.name === "neirotizm_score")?.param || 0
+    const sincerity = test.psychParams.find(param => param.name === "sincerity_score")?.param || 0
+    if (sincerity > 4) return temperamentTypes.unreliable as TemperamentType
+    let result
+    if (extraversion > 5)
+        result =  neurotizm > 5 ? temperamentTypes.choleric : temperamentTypes.sanguine
+    if (extraversion < 5)
+        result = neurotizm > 5 ? temperamentTypes.melancholic : temperamentTypes.phlegmatic
+    return result as TemperamentType
 }
