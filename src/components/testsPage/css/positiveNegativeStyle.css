@@ -1,13 +1,22 @@
 .positive-negative-card {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     padding: 50px;
     gap: 40px;
-    width: 100%;
+    box-shadow: 0 10px 20px rgba(90, 90, 90, 0.2);
+    border-radius: 15px;
+    width: 1440px;
+    max-width: 1440px;
+    height: 250px;
+    max-height: 250px;
+}
+.positive-negative-card h3 {
+    text-align: center;
 }
 .positive-negative-buttons {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    width: 60%;
 }

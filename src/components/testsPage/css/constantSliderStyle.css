@@ -1,6 +1,9 @@
-.test-wrapper {
-    width: 500px;
-    align-self: center;
+.constant-sum-slider-card{
+    width: 1440px;
+    max-width: 1440px;
+}
+.constant-sum-slider-item {
+    
 }
 .question-container {
     display: flex;

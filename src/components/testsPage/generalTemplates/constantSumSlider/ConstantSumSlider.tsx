@@ -16,7 +16,7 @@ interface ConstantSumSliderProps {
     maxValue: number // max value that can be exceed abouve when use slider 
     nextPage: () => void
 }
-export const ConstantSumSlider = ({sliders, setSliders, maxValue, nextPage} : ConstantSumSliderProps) => {
+export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
     const handleWheel = (e: WheelEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export const ConstantSumSlider = ({sliders, setSliders, maxValue, nextPage} : Co
             setIsLocked(false)
         }
     }
-    const handleSliderScroll = (value:number, sliderScrolled:SliderData ) => {
+    const handleSliderScroll = (value: number, sliderScrolled: SliderData) => {
         const totalValueCurrent = sliders.reduce((total, slider) => total + slider.value, 0)
         const totalValueNew = totalValueCurrent + value - sliderScrolled.value
         console.log(totalValueNew)
@@ -36,34 +36,39 @@ export const ConstantSumSlider = ({sliders, setSliders, maxValue, nextPage} : Co
         }
         const slidersTemp = sliders.map(slider => {
             if (slider.id === sliderScrolled.id) {
-                return {...sliderScrolled, value: value}
+                return { ...sliderScrolled, value: value }
             }
             return slider
         })
         setTotalValue(totalValueNew)
         setSliders(slidersTemp)
         setIsLocked(false)
-        
+
     }
     const nextPageHandler = () => {
         setTotalValue(0)
         nextPage()
     }
     return (<>
-    <div className="test-wrapper">
-        <p>Распределено баллов: {totalValue}</p>
-            <div className="questions-container">   
+        <div className="constant-sum-slider-card">
+            <p>Распределено баллов: {totalValue} / 10</p>
+
+            <div className="constant-sum-slider-item">
                 {sliders.map(slider => (
                     <div key={slider.id}>
-                        <p>{slider.text}</p>
-                        <p>{slider.value}</p>
+
+                        <div className="constant-sum-slider-text">
+                            <p>{slider.text}</p> <p>{slider.value}</p>
+                        </div>
+
                         <input className="input-slider" type="range" min={slider.min} max={slider.max} value={slider.value}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => {handleSliderScroll( parseInt(e.target.value), slider)}} 
-                        onWheel={handleWheel}/>
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
+                            onWheel={handleWheel} />
                     </div>
                 ))}
             </div>
-        <Button buttonLabel={"Далее"} buttonFunction={nextPageHandler}/>
+
+            <Button buttonLabel={"Далее"} buttonFunction={nextPageHandler} />
         </div>
         <Toaster />
     </>)
