@@ -8,7 +8,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (token: string) => void;
   logout: () => void;
-  getToken: () => string | undefined;
+  getToken: () => string;
   setRoles: (roles: Role[]) => void;
   getRoles: () => Role[] | undefined;
   checkRole: (role: Role) => boolean | undefined
@@ -37,8 +37,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setToken(cleanToken);
   };
 
-  const getToken = (): string | undefined => {
-    return Cookies.get("token");
+  const getToken = (): string => {
+    try {
+      const token = Cookies.get("token")
+      if (!token) throw new Error("Auth token is empty")
+      return token;
+    } catch(err) {
+      console.error(err)
+      return ""
+    }
+    
   };
 
   const setRoles = (roles: Role[]) => {
