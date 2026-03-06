@@ -38,7 +38,7 @@ export const testApi = {
       }
     }
   },
-  getTestByType: async (token: string, testType: string) => {
+  getTestsByType: async (token: string, testType: string) => {
     try {
       const response = await api.get<TestResultResponse[]>(`api/psych-tests/my-tests/type/${testType}`, {
         headers: {Authorization: token}
