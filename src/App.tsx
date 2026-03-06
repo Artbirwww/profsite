@@ -1,12 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-// OLD импорты
-//import { TestPage } from "./components/tests/dashboard/TestPage"
-//import { TestPageNew } from "./components/tests/dashboard/TestPageNew"
-//import { ResultsPage } from "./components/tests/resultspage/ResultsPage"
-//import { Profile } from "./components/profilePageComponents/Profile"
-//import { PupilSubjects } from "./components/studyPageComponents/OLD_PupilSubjects"
-
 // Хуки
 import { useAuth } from "./contexts/AuthContext";
 import { useApp } from "./contexts/AppContext";
@@ -37,7 +30,7 @@ import { ProfilePage } from "./components/profilePage/ProfilePage"
 import { SettingsPage } from "./components/settingsPage/SettingsPage"
 import { TestViewer } from "./components/testsPage/TestViewer"
 import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
-import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
+import { TemperamentResults } from "./components/testsPage/temperament/results/TemperamentResults"
 import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
 import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
 import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
@@ -73,22 +66,16 @@ export default function App() {
           <Route path="/tests">
             <Route index element={<TestsPage />} />
             <Route element={<TestViewer />}>
-              <Route
-                path="temperament"
-                element={<TemperamentFormSelection />}
-              />
-              <Route
-                path="temperament-results"
-                element={<TemperamentResults />}
-              />
+              <Route path="temperament" element={<TemperamentFormSelection />}/>
+              <Route path="temperament-results"element={<TemperamentResults />}/>
 
-							<Route path="group-roles" element={<BelbinTest/>} />
-							<Route path="group-roles-results" element={<BelbinResults/>} />
+				<Route path="group-roles" element={<BelbinTest/>} />
+				<Route path="group-roles-results" element={<BelbinResults/>} />
 
-							<Route path="engineering-thinking" element={<EngineeringThinkingTest/>} />
-							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults/>} />
-						</Route>
-					</Route>
+				<Route path="engineering-thinking" element={<EngineeringThinkingTest/>} />
+				<Route path="engineering-thinking-results" element={<EngineeringThinkingResults/>} />
+			</Route>
+		</Route>
 
 
           {/* Results routes */}
