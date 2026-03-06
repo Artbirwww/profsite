@@ -11,8 +11,6 @@ import { Outlet } from "react-router-dom"
 export const TestViewer = () => {
 
     return (
-        <>
-            <Outlet />
-        </>
+        <Outlet />
     )
 }

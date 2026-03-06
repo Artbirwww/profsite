@@ -45,12 +45,6 @@ export const menuButtons: MenuItemProps[] = [
         icon: UserRound,
         path: "/profile",
     },
-    {
-        id: "profile",
-        label: "Настройки",
-        icon: Settings2,
-        path: "/settings",
-    },
 
     // Админ
     {
