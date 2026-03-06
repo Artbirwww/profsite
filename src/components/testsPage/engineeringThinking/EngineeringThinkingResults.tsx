@@ -17,10 +17,10 @@ export const EngineeringThinkingResults = () => {
 
     useEffect(()=>{
         if (!isViewMode) return
-        const testTemp = location.state?.engineeringTest
+        const testTemp = location.state?.psychTest
         console.log(testTemp)
         if (!testTemp) return
-        setResult(calculateResults(testTemp))
+        setResult(testTemp)
     }, [])
     useEffect(() => {
         if (isViewMode) return
@@ -33,13 +33,14 @@ export const EngineeringThinkingResults = () => {
                  *     - Сохранить тест и проверить используемые параметр 
                  *     - Протестировать на результаты
                  */
-                //const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
+                const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
                 setResult(engineerThinkingTestResult)
             } catch(err) {
                 console.error(err)
                 toast.error("Возникла ошибка при сохранения результатов")
             }
         }
+        createTest()
         
     }, [])
     
@@ -48,7 +49,7 @@ export const EngineeringThinkingResults = () => {
     </>)
     return (<>
         <div className="test-result-wrapper">
-            <p>Вы набрали {result.psychParams[0].param} баллов</p>
+            <p>Ваш уровень инженерного мышления:  {result.psychParams[0].param}</p>
         </div>
     </>)
 }
