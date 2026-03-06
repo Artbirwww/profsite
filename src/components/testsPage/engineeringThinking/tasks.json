@@ -1,0 +1,844 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "taskNumber": 1,
+      "text": "Если левая шестерня поворачивается в указанном стрелкой направлении, то в каком направлении будет поворачиваться правая шестерня?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "Не знаю", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 2,
+      "taskNumber": 2,
+      "text": "Какая гусеница должна двигаться быстрее, чтобы трактор поворачивался в указанном стрелкой направлении?",
+      "options": [
+        { "id": 1, "text": "Гусеница А.", "isPicked": false },
+        { "id": 2, "text": "Гусеница В.", "isPicked": false },
+        { "id": 3, "text": "Не знаю.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 3,
+      "taskNumber": 3,
+      "text": "Если верхнее колесо вращается в направлении, указанном стрелкой, то в каком направлении вращается нижнее колесо?",
+      "options": [
+        { "id": 1, "text": "В направлении А.", "isPicked": false },
+        { "id": 2, "text": "В обоих направлениях.", "isPicked": false },
+        { "id": 3, "text": "В направлении В.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 4,
+      "taskNumber": 4,
+      "text": "В каком направлении будет двигаться зубчатое колесо, если ручку слева двигать вниз и вверх в направлении пунктирных стрелок?",
+      "options": [
+        { "id": 1, "text": "Вперед-назад по стрелкам А-В.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 5,
+      "taskNumber": 5,
+      "text": "Если на круглый диск, указанный на рисунке, действуют одновременно две одинаковые силы 1 и 2, то в каком направлении будет двигаться диск?",
+      "options": [
+        { "id": 1, "text": "В направлении, указанном стрелкой А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "В направлении стрелки С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 6,
+      "taskNumber": 6,
+      "text": "Нужны ли обе цепи, изображенные на рисунке, для поддержки груза, или достаточно только одной? Какой?",
+      "options": [
+        { "id": 1, "text": "Достаточно цепи А.", "isPicked": false },
+        { "id": 2, "text": "Достаточно цепи В.", "isPicked": false },
+        { "id": 3, "text": "Нужны обе цепи.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 7,
+      "taskNumber": 7,
+      "text": "В речке, где вода течет в направлении, указанном стрелкой, установлены три турбины. Из труб над ними падает вода. Какая из турбин будет вращаться быстрее?",
+      "options": [
+        { "id": 1, "text": "Турбина А.", "isPicked": false },
+        { "id": 2, "text": "Турбина В.", "isPicked": false },
+        { "id": 3, "text": "Турбина С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 8,
+      "taskNumber": 8,
+      "text": "Какое из колес, А или В, будет вращаться в том же направлении, что и колесо X?",
+      "options": [
+        { "id": 1, "text": "Колесо А.", "isPicked": false },
+        { "id": 2, "text": "Колесо В.", "isPicked": false },
+        { "id": 3, "text": "Оба колеса.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 9,
+      "taskNumber": 9,
+      "text": "Какая цепь нужна для поддержки груза?",
+      "options": [
+        { "id": 1, "text": "Цепь А.", "isPicked": false },
+        { "id": 2, "text": "Цепь В.", "isPicked": false },
+        { "id": 3, "text": "Цепь С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 10,
+      "taskNumber": 10,
+      "text": "Какая из шестерен вращается в том же направлении, что и ведущая шестерня? А может быть, в этом направлении не вращается ни одна из шестерен?",
+      "options": [
+        { "id": 1, "text": "Шестерня А.", "isPicked": false },
+        { "id": 2, "text": "Шестерня В.", "isPicked": false },
+        { "id": 3, "text": "Не вращается ни одна.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 11,
+      "taskNumber": 11,
+      "text": "Какая из осей, А или В, вращается быстрее или обе оси вращаются с одинаковой скоростью?",
+      "options": [
+        { "id": 1, "text": "Ось А вращается быстрее.", "isPicked": false },
+        { "id": 2, "text": "Ось В вращается быстрее.", "isPicked": false },
+        { "id": 3, "text": "Обе оси вращаются с одинаковой скоростью.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 12,
+      "taskNumber": 12,
+      "text": "Если нижнее колесо вращается в направлении, указанном стрелкой, то в каком направлении будет вращаться ось X?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 13,
+      "taskNumber": 13,
+      "text": "Какая из машин с жидкостью в бочке тормозит?",
+      "options": [
+        { "id": 1, "text": "Машина А.", "isPicked": false },
+        { "id": 2, "text": "Машина B.", "isPicked": false },
+        { "id": 3, "text": "Машина C.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 14,
+      "taskNumber": 14,
+      "text": "В каком направлении будет вращаться вертушка, приспособленная для полива, если в нее пустить воду под напором?",
+      "options": [
+        { "id": 1, "text": "В обе стороны.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 15,
+      "taskNumber": 15,
+      "text": "Какая из рукояток будет держаться под напряжением пружины?",
+      "options": [
+        { "id": 1, "text": "Не будут держаться обе.", "isPicked": false },
+        { "id": 2, "text": "Будет держаться рукоятка А.", "isPicked": false },
+        { "id": 3, "text": "Будет держаться рукоятка В.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 16,
+      "taskNumber": 16,
+      "text": "В каком направлении передвигали кровать в последний раз?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "Не знаю.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 17,
+      "taskNumber": 17,
+      "text": "Колесо и тормозная колодка изготовлены из одного и того же материала. Что быстрее износится: колесо или колодка?",
+      "options": [
+        { "id": 1, "text": "Колесо износится быстрее.", "isPicked": false },
+        { "id": 2, "text": "Колодка износится быстрее.", "isPicked": false },
+        { "id": 3, "text": "И колесо, и колодка износятся одинаково.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 18,
+      "taskNumber": 18,
+      "text": "Одинаковой ли плотности жидкостями заполнены емкости или одна из жидкостей более плотная, чем другая (шары одинаковые)?",
+      "options": [
+        { "id": 1, "text": "Обе жидкости одинаковые по плотности.", "isPicked": false },
+        { "id": 2, "text": "Жидкость А плотнее.", "isPicked": false },
+        { "id": 3, "text": "Жидкость В плотнее.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 19,
+      "taskNumber": 19,
+      "text": "В каком направлении будет вращаться вентилятор под напором воздуха?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 20,
+      "taskNumber": 20,
+      "text": "В каком положении остановится диск после свободного движения по указанной линии?",
+      "options": [
+        { "id": 1, "text": "В каком угодно.", "isPicked": false },
+        { "id": 2, "text": "В положении А.", "isPicked": false },
+        { "id": 3, "text": "В положении В.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 21,
+      "taskNumber": 21,
+      "text": "Какими ножницами легче резать лист железа?",
+      "options": [
+        { "id": 1, "text": "Ножницами А.", "isPicked": false },
+        { "id": 2, "text": "Ножницами В.", "isPicked": false },
+        { "id": 3, "text": "Ножницами С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 22,
+      "taskNumber": 22,
+      "text": "Какое колесо кресла-коляски вращается быстрее при движении коляски?",
+      "options": [
+        { "id": 1, "text": "Колесо А вращается быстрее.", "isPicked": false },
+        { "id": 2, "text": "Оба колеса вращаются с одинаковой скоростью.", "isPicked": false },
+        { "id": 3, "text": "Колесо В вращается быстрее.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 23,
+      "taskNumber": 23,
+      "text": "Как будет изменяться форма запаянной тонкостенной жестяной банки, если ее нагревать?",
+      "options": [
+        { "id": 1, "text": "Как показано на рисунке А.", "isPicked": false },
+        { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
+        { "id": 3, "text": "Как показано на рисунке С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 24,
+      "taskNumber": 24,
+      "text": "Какая из шестерен вращается быстрее?",
+      "options": [
+        { "id": 1, "text": "Шестерня А.", "isPicked": false },
+        { "id": 2, "text": "Шестерня В.", "isPicked": false },
+        { "id": 3, "text": "Шестерня С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 25,
+      "taskNumber": 25,
+      "text": "С каким шариком столкнется шарик X, если его ударить о преграду в направлении, указанном сплошной стрелкой?",
+      "options": [
+        { "id": 1, "text": "С шариком А.", "isPicked": false },
+        { "id": 2, "text": "С шариком В.", "isPicked": false },
+        { "id": 3, "text": "С шариком С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 26,
+      "taskNumber": 26,
+      "text": "Допустим, что нарисованные колеса изготовлены из резины. В каком направлении нужно вращать ведущее колесо (левое), чтобы колесо Х вращалось в направлении, указанном пунктирной стрелкой?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "Направление не имеет значения.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 27,
+      "taskNumber": 27,
+      "text": "Если первая шестерня вращается в направлении, указанном стрелкой, то в каком направлении вращается верхняя шестерня?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
+        { "id": 3, "text": "Не знаю.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 28,
+      "taskNumber": 28,
+      "text": "Вес фигур А, В и С одинаковый. Какую из них труднее опрокинуть?",
+      "options": [
+        { "id": 1, "text": "Фигуру А.", "isPicked": false },
+        { "id": 2, "text": "Фигуру В.", "isPicked": false },
+        { "id": 3, "text": "Фигуру С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 29,
+      "taskNumber": 29,
+      "text": "Какими кусочками льда можно быстрее охладить стакан воды?",
+      "options": [
+        { "id": 1, "text": "Куском на картинке А.", "isPicked": false },
+        { "id": 2, "text": "Кусочками на картинке В.", "isPicked": false },
+        { "id": 3, "text": "Куском на картинке С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 30,
+      "taskNumber": 30,
+      "text": "На какой картинке правильно изображено падение бомбы из самолета?",
+      "options": [
+        { "id": 1, "text": "На картинке А.", "isPicked": false },
+        { "id": 2, "text": "На картинке В.", "isPicked": false },
+        { "id": 3, "text": "На картинке С.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 31,
+      "taskNumber": 31,
+      "text": "В какую сторону занесет эту машину, движущуюся по стрелке, на повороте?",
+      "options": [
+        { "id": 1, "text": "В любую сторону.", "isPicked": false },
+        { "id": 2, "text": "В сторону А.", "isPicked": false },
+        { "id": 3, "text": "В сторону В.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 32,
+      "taskNumber": 32,
+      "text": "В емкости находится лед. Как изменится уровень воды по сравнению с уровнем льда после его таяния?",
+      "options": [
+        { "id": 1, "text": "Уровень повысится.", "isPicked": false },
+        { "id": 2, "text": "Уровень понизится.", "isPicked": false },
+        { "id": 3, "text": "Уровень не изменится.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 33,
+      "taskNumber": 33,
+      "text": "Какой из камней, А или В, легче двигать?",
+      "options": [
+        { "id": 1, "text": "Камень А.", "isPicked": false },
+        { "id": 2, "text": "Усилия должны быть одинаковыми.", "isPicked": false },
+        { "id": 3, "text": "Камень В.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 34,
+      "taskNumber": 34,
+      "text": "Какая из осей вращается медленнее?",
+      "options": [
+        { "id": 1, "text": "Ось А.", "isPicked": false },
+        { "id": 2, "text": "Ось В.", "isPicked": false },
+        { "id": 3, "text": "Ось С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 35,
+      "taskNumber": 35,
+      "text": "Одинаков ли вес обоих ящиков или один из них легче?",
+      "options": [
+        { "id": 1, "text": "Ящик А легче.", "isPicked": false },
+        { "id": 2, "text": "Ящик В легче.", "isPicked": false },
+        { "id": 3, "text": "Ящики одинакового веса.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 36,
+      "taskNumber": 36,
+      "text": "Бруски А и В имеют одинаковые сечения и изготовлены из одного и того же материала. Какой из брусков может выдержать больший вес?",
+      "options": [
+        { "id": 1, "text": "Оба выдержат одинаковую нагрузку.", "isPicked": false },
+        { "id": 2, "text": "Брусок А.", "isPicked": false },
+        { "id": 3, "text": "Брусок В.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 37,
+      "taskNumber": 37,
+      "text": "На какую высоту поднимется вода из шланга, если ее выпустить из резервуаров А и В, заполненных доверху?",
+      "options": [
+        { "id": 1, "text": "Как показано на рисунке А.", "isPicked": false },
+        { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
+        { "id": 3, "text": "До высоты резервуаров.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 38,
+      "taskNumber": 38,
+      "text": "Какой из этих цельнометаллических предметов охладится быстрее, если их вынести горячими на воздух?",
+      "options": [
+        { "id": 1, "text": "Предмет А.", "isPicked": false },
+        { "id": 2, "text": "Предмет В.", "isPicked": false },
+        { "id": 3, "text": "Предмет С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 39,
+      "taskNumber": 39,
+      "text": "В каком положении остановится деревянный диск со вставленным в него металлическим кружком, если диск катнуть?",
+      "options": [
+        { "id": 1, "text": "В положении А.", "isPicked": false },
+        { "id": 2, "text": "В положении В.", "isPicked": false },
+        { "id": 3, "text": "В любом положении.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 40,
+      "taskNumber": 40,
+      "text": "В каком месте переломится палка, если резко нажать на ее конец слева?",
+      "options": [
+        { "id": 1, "text": "В месте А.", "isPicked": false },
+        { "id": 2, "text": "В месте В.", "isPicked": false },
+        { "id": 3, "text": "В месте С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 41,
+      "taskNumber": 41,
+      "text": "На какой емкости правильно нанесены риски, обозначающие равные объемы?",
+      "options": [
+        { "id": 1, "text": "На емкости А.", "isPicked": false },
+        { "id": 2, "text": "На емкости В.", "isPicked": false },
+        { "id": 3, "text": "На емкости С.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 42,
+      "taskNumber": 42,
+      "text": "На каком из рисунков правильно изображена вода, выливающаяся из отверстий сосуда?",
+      "options": [
+        { "id": 1, "text": "На рисунке А.", "isPicked": false },
+        { "id": 2, "text": "На рисунке В.", "isPicked": false },
+        { "id": 3, "text": "На рисунке С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 43,
+      "taskNumber": 43,
+      "text": "В каком пакете мороженое растает быстрее?",
+      "options": [
+        { "id": 1, "text": "В пакете А.", "isPicked": false },
+        { "id": 2, "text": "В пакете В.", "isPicked": false },
+        { "id": 3, "text": "Одинаково.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 44,
+      "taskNumber": 44,
+      "text": "Как будет двигаться подвешенный груз, если верхнее колесо вращается в направлении стрелки?",
+      "options": [
+        { "id": 1, "text": "Прерывисто вниз.", "isPicked": false },
+        { "id": 2, "text": "Прерывисто вверх.", "isPicked": false },
+        { "id": 3, "text": "Непрерывно вверх.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 45,
+      "taskNumber": 45,
+      "text": "Какое из колес, изготовленных из одинакового материала, будет вращаться дольше, если их раскрутить до одинаковой скорости?",
+      "options": [
+        { "id": 1, "text": "Колесо А.", "isPicked": false },
+        { "id": 2, "text": "Колесо В.", "isPicked": false },
+        { "id": 3, "text": "Колесо С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 46,
+      "taskNumber": 46,
+      "text": "Каким способом легче везти камень по гладкой дороге?",
+      "options": [
+        { "id": 1, "text": "Способом А.", "isPicked": false },
+        { "id": 2, "text": "Способом В.", "isPicked": false },
+        { "id": 3, "text": "Способом С.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 47,
+      "taskNumber": 47,
+      "text": "В каком направлении будет двигаться вода в системе шестерёнчатого насоса, если его шестерня вращается в направлении стрелок?",
+      "options": [
+        { "id": 1, "text": "В сторону А.", "isPicked": false },
+        { "id": 2, "text": "В сторону В.", "isPicked": false },
+        { "id": 3, "text": "В обе стороны.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 48,
+      "taskNumber": 48,
+      "text": "При каком виде передачи подъем в гору на велосипеде тяжелее?",
+      "options": [
+        { "id": 1, "text": "При передаче типа А.", "isPicked": false },
+        { "id": 2, "text": "При передаче типа В.", "isPicked": false },
+        { "id": 3, "text": "При передаче типа С.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 49,
+      "taskNumber": 49,
+      "text": "На дне емкости находится песок. Поверх него — галька (камешки). Как изменится уровень насыпки в емкости, если гальку и песок перемешать?",
+      "options": [
+        { "id": 1, "text": "Уровень повысится.", "isPicked": false },
+        { "id": 2, "text": "Уровень понизится.", "isPicked": false },
+        { "id": 3, "text": "Уровень останется прежним.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 50,
+      "taskNumber": 50,
+      "text": "Зубчатая рейка Х двигается полметра в указанном стрелкой направлении. На какое расстояние при этом переместится центр шестерни?",
+      "options": [
+        { "id": 1, "text": "На 0,16м.", "isPicked": false },
+        { "id": 2, "text": "На 0,25м.", "isPicked": false },
+        { "id": 3, "text": "На 0,5 м.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 51,
+      "taskNumber": 51,
+      "text": "Какая из шестерен, А или В, вращается медленнее, или они вращаются с одинаковой скоростью?",
+      "options": [
+        { "id": 1, "text": "Шестерня А вращается медленнее.", "isPicked": false },
+        { "id": 2, "text": "Обе шестерни вращаются с одинаковой скоростью.", "isPicked": false },
+        { "id": 3, "text": "Шестерня В вращается медленнее.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 52,
+      "taskNumber": 52,
+      "text": "Какая из лошадок должна бежать на повороте быстрее для того, чтобы ее не обогнала другая?",
+      "options": [
+        { "id": 1, "text": "Лошадка А.", "isPicked": false },
+        { "id": 2, "text": "Обе должны бежать с одинаковой скоростью.", "isPicked": false },
+        { "id": 3, "text": "Лошадка В.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 53,
+      "taskNumber": 53,
+      "text": "Из какого крана сильнее должна бить струя воды, если их открыть одновременно?",
+      "options": [
+        { "id": 1, "text": "Из крана А.", "isPicked": false },
+        { "id": 2, "text": "Из крана В.", "isPicked": false },
+        { "id": 3, "text": "Из обоих одинаково.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 54,
+      "taskNumber": 54,
+      "text": "В каком случае легче поднять одинаковый по весу груз?",
+      "options": [
+        { "id": 1, "text": "В случае А.", "isPicked": false },
+        { "id": 2, "text": "В случае В.", "isPicked": false },
+        { "id": 3, "text": "В обоих случаях одинаково.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 55,
+      "taskNumber": 55,
+      "text": "Эти тела сделаны из одного и того же материала. Какое из них имеет меньший вес?",
+      "options": [
+        { "id": 1, "text": "Тело А.", "isPicked": false },
+        { "id": 2, "text": "Тело В.", "isPicked": false },
+        { "id": 3, "text": "Оба тела одинаковы по весу.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 56,
+      "taskNumber": 56,
+      "text": "В какой точке шарик двигается быстрее?",
+      "options": [
+        { "id": 1, "text": "В обоих точках, А и В, скорость одинаковая.", "isPicked": false },
+        { "id": 2, "text": "В точке А скорость больше.", "isPicked": false },
+        { "id": 3, "text": "В точке В скорость больше.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 57,
+      "taskNumber": 57,
+      "text": "Какой из двух рельсов должен быть выше на повороте?",
+      "options": [
+        { "id": 1, "text": "Рельс А.", "isPicked": false },
+        { "id": 2, "text": "Рельс В.", "isPicked": false },
+        { "id": 3, "text": "Оба рельса должны быть одинаковыми по высоте.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 58,
+      "taskNumber": 58,
+      "text": "Как распределяется вес между крюками А и В?",
+      "options": [
+        { "id": 1, "text": "Сила тяжести на обоих крюках одинаковая.", "isPicked": false },
+        { "id": 2, "text": "На крюке А сила тяжести больше.", "isPicked": false },
+        { "id": 3, "text": "На крюке В сила тяжести больше.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 59,
+      "taskNumber": 59,
+      "text": "Клапаны какого насоса находятся в правильном положении?",
+      "options": [
+        { "id": 1, "text": "Насоса А.", "isPicked": false },
+        { "id": 2, "text": "Насоса В.", "isPicked": false },
+        { "id": 3, "text": "Насоса С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 60,
+      "taskNumber": 60,
+      "text": "Какая из осей вращается медленнее?",
+      "options": [
+        { "id": 1, "text": "Ось А.", "isPicked": false },
+        { "id": 2, "text": "Ось В.", "isPicked": false },
+        { "id": 3, "text": "Ось С.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 61,
+      "taskNumber": 61,
+      "text": "Материал и сечения тросов А и В одинаковые. Какой из них выдержит большую нагрузку?",
+      "options": [
+        { "id": 1, "text": "Трос А.", "isPicked": false },
+        { "id": 2, "text": "Трос В.", "isPicked": false },
+        { "id": 3, "text": "Оба троса выдержат одинаковую нагрузку.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 62,
+      "taskNumber": 62,
+      "text": "Какой из тракторов должен отъехать дальше для того, чтобы лодки остановились у берега?",
+      "options": [
+        { "id": 1, "text": "Трактор А.", "isPicked": false },
+        { "id": 2, "text": "Трактор В.", "isPicked": false },
+        { "id": 3, "text": "Оба трактора должны отъехать на одинаковое расстояние.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 63,
+      "taskNumber": 63,
+      "text": "У какой из калиток трос поддержки закреплен лучше?",
+      "options": [
+        { "id": 1, "text": "У обоих калиток закреплен одинаково хорошо.", "isPicked": false },
+        { "id": 2, "text": "У калитки А закреплен лучше.", "isPicked": false },
+        { "id": 3, "text": "У калитки В закреплен лучше.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 64,
+      "taskNumber": 64,
+      "text": "Какой талью легче поднять груз?",
+      "options": [
+        { "id": 1, "text": "Талью А.", "isPicked": false },
+        { "id": 2, "text": "Талью В.", "isPicked": false },
+        { "id": 3, "text": "Обеими талями одинаково.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 65,
+      "taskNumber": 65,
+      "text": "На оси Х находится ведущее колесо, вращающее конусы. Какой из них будет вращаться быстрее?",
+      "options": [
+        { "id": 1, "text": "Конус А.", "isPicked": false },
+        { "id": 2, "text": "Оба конуса будут вращаться одинаково.", "isPicked": false },
+        { "id": 3, "text": "Конус В.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 66,
+      "taskNumber": 66,
+      "text": "Если маленькое колесо будет вращаться в направлении, указанном стрелкой, то как будет вращаться большое колесо?",
+      "options": [
+        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
+        { "id": 2, "text": "В обе стороны.", "isPicked": false },
+        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 67,
+      "taskNumber": 67,
+      "text": "Какой из тросов удерживает столб надежнее?",
+      "options": [
+        { "id": 1, "text": "Трос А.", "isPicked": false },
+        { "id": 2, "text": "Трос В.", "isPicked": false },
+        { "id": 3, "text": "Трос С.", "isPicked": false }
+      ],
+      "answer": 3,
+      "userAnswer": 0
+    },
+    {
+      "id": 68,
+      "taskNumber": 68,
+      "text": "Какой из лебедок труднее поднимать груз?",
+      "options": [
+        { "id": 1, "text": "Лебедкой А.", "isPicked": false },
+        { "id": 2, "text": "Обеими лебедками одинаково.", "isPicked": false },
+        { "id": 3, "text": "Лебедкой В.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    },
+    {
+      "id": 69,
+      "taskNumber": 69,
+      "text": "Если необходимо поддержать стальным тросом построенный через реку мост, то как целесообразнее закрепить трос?",
+      "options": [
+        { "id": 1, "text": "Как показано на рис. А.", "isPicked": false },
+        { "id": 2, "text": "Как показано на рис. В.", "isPicked": false },
+        { "id": 3, "text": "Как показано на рис. С.", "isPicked": false }
+      ],
+      "answer": 2,
+      "userAnswer": 0
+    },
+    {
+      "id": 70,
+      "taskNumber": 70,
+      "text": "Какая из цепей менее напряжена?",
+      "options": [
+        { "id": 1, "text": "Цепь А.", "isPicked": false },
+        { "id": 2, "text": "Цепь В.", "isPicked": false },
+        { "id": 3, "text": "Обе цепи напряжены одинаково.", "isPicked": false }
+      ],
+      "answer": 1,
+      "userAnswer": 0
+    }
+  ]
+}
