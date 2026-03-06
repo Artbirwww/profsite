@@ -17,10 +17,10 @@ export const EngineeringThinkingResults = () => {
 
     useEffect(()=>{
         if (!isViewMode) return
-        const tasksTemp = location.state?.tasks
-        console.log(tasksTemp)
-        if (!tasksTemp) return
-        setResult(calculateResults(tasksTemp))
+        const testTemp = location.state?.engineeringTest
+        console.log(testTemp)
+        if (!testTemp) return
+        setResult(calculateResults(testTemp))
     }, [])
     useEffect(() => {
         if (isViewMode) return
@@ -33,14 +33,13 @@ export const EngineeringThinkingResults = () => {
                  *     - Сохранить тест и проверить используемые параметр 
                  *     - Протестировать на результаты
                  */
-                const createdTest = await testApi.createTest("", engineerThinkingTestResult)
-                setResult(createdTest)
+                //const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
+                setResult(engineerThinkingTestResult)
             } catch(err) {
                 console.error(err)
                 toast.error("Возникла ошибка при сохранения результатов")
             }
         }
-        
         
     }, [])
     
