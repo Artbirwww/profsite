@@ -53,17 +53,25 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
         <div className="constant-sum-slider-card">
             <p>Распределено баллов: {totalValue} / 10</p>
 
-            <div className="constant-sum-slider-item">
+            <div className="constant-sum-slider-wrapper">
                 {sliders.map(slider => (
-                    <div key={slider.id}>
+                    <div key={slider.id} className="constant-sum-slider-item">
 
-                        <div className="constant-sum-slider-text">
-                            <p>{slider.text}</p> <p>{slider.value}</p>
+                        <p>{slider.text}</p>
+
+                        <div className="constant-sum-slider-input-container">
+                            <input
+                                className="input-slider"
+                                type="range"
+                                min={slider.min}
+                                max={slider.max}
+                                value={slider.value}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
+                                onWheel={handleWheel} />
+
+                            <p>{slider.value}</p>
                         </div>
 
-                        <input className="input-slider" type="range" min={slider.min} max={slider.max} value={slider.value}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
-                            onWheel={handleWheel} />
                     </div>
                 ))}
             </div>

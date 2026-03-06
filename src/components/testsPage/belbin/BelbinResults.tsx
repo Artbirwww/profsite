@@ -14,8 +14,8 @@ interface BelbinResultsProps {
 }
 export const BelbinResults = () => {
     const location = useLocation()
-    const {getToken} = useAuth()
-    const groupQuestionsResult:BelbinQuestion[][] = location.state?.groupQuestionsResult
+    const { getToken } = useAuth()
+    const groupQuestionsResult: BelbinQuestion[][] = location.state?.groupQuestionsResult
     const [balbinResults, setBalbinResults] = useState<TestResultResponse | null>(null)
     //if proprs not null then get result by this props 
     const isViewMode = location.state?.isViewMode ? location.state?.isViewMode : false
@@ -25,7 +25,7 @@ export const BelbinResults = () => {
         if (!psychTestTemp) return
         setBalbinResults(psychTestTemp)
     }, [])
-    
+
     //when data is calculated send it to the server
     useEffect(() => {
         if (isViewMode) return
@@ -46,7 +46,7 @@ export const BelbinResults = () => {
                 const createdTest = await testApi.createTest(token, calculatedResults)
                 setBalbinResults(createdTest)
                 toast.success("Тест успешно пройден")
-            } catch(err) {
+            } catch (err) {
                 console.error(err)
                 toast.error("Не получилось сохранить данные теста")
             }
@@ -56,12 +56,20 @@ export const BelbinResults = () => {
         sendBalbinResults()
     }, [])
     if (!balbinResults) return <p>Загрузка...</p>
-    return(<>
-        <p>Belbin Results</p>
-        {balbinResults.psychParams.map(result => (
-            <p>{result.name}: {result.param}/20</p>
-        ))}
-        <p>Дата прохождения {formatDateRU(balbinResults?.createdAt)}</p>
-        <Toaster/>
+    return (<>
+
+
+        <div className="test-result-wrapper">
+            <p>Роли в команде. Ваши результаты:</p>
+
+            {balbinResults.psychParams.map(result => (
+                <p>{result.name}: {result.param} / 20</p>
+            ))}
+
+            <p>Дата прохождения {formatDateRU(balbinResults?.createdAt)}</p>
+        </div>
+
+
+        <Toaster />
     </>)
 }
