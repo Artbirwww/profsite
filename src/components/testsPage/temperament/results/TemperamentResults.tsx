@@ -41,14 +41,9 @@ export const TemperamentResults = () => {
   const [psychTest, setPsychTest] = useState<TestResultResponse | null>(null);
   const [temperamentType, setTemperamentType] = useState<TemperamentType>();
   const navigationOptions: TemperamentOption[] = location.state?.options || [];
-  const temperamentFormData: TemperamentOption[] =
-    location.state?.temperamentForm === "A"
-      ? TemperamentFormA
-      : TemperamentFormB;
+  const temperamentFormData: TemperamentOption[] = location.state?.temperamentForm === "A" ? TemperamentFormA : TemperamentFormB;
 
-  const isViewMode = location.state?.isViewMode
-    ? location.state?.isViewMode
-    : false;
+  const isViewMode = location.state?.isViewMode ? location.state?.isViewMode : false;
 
   useEffect(() => {
     if (!isViewMode) return;
@@ -61,11 +56,7 @@ export const TemperamentResults = () => {
     if (isViewMode) return;
     if (!navigationOptions || navigationOptions.length <= 0) return;
     const createTest = async () => {
-      const psychTestTemp = calculateParams(
-        navigationOptions,
-        0,
-        temperamentFormData,
-      );
+      const psychTestTemp = calculateParams(navigationOptions, 0, temperamentFormData,);
       try {
         const token = getToken();
         if (!token || !psychTestTemp) return;
