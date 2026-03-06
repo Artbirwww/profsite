@@ -41,6 +41,8 @@ import { TemperamentFormSelection } from "./components/testsPage/temperament/Tem
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
 import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
+import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
+import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults";
 
 export default function App() {
 	return (
@@ -72,6 +74,9 @@ export default function App() {
 
 							<Route path="group-roles" element={<BelbinTest/>} />
 							<Route path="group-roles-results" element={<BelbinResults/>} />
+
+							<Route path="engineering-thinking" element={<EngineeringThinkingTest/>} />
+							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults/>} />
 						</Route>
 					</Route>
 
