@@ -18,6 +18,21 @@ export const ResultsPage: FC = () => {
   //const [psychTest, setPsychTest] = useState<TestResultResponse | null>(null)
   const { getToken } = useAuth();
   const navigate = useNavigate();
+  const [completedTests, settCompletedTests] = useState<TestItem []>([])
+  useEffect(()=>{
+    const getAvailableTests = async () => {
+      try {
+        const token = getToken()
+        console.log(token)
+        const completedTestsByUser = await testApi.getTestsByPupil(token)
+        settCompletedTests(testsList
+          .filter((test) =>  completedTestsByUser.some(completedTest => completedTest.testTypeName === test.name)))
+      } catch(err) {
+        toast.error("Не удалось загрузить пройденные тесты")
+      }
+    }
+    getAvailableTests()
+  }, [])
   const handleSelectTest = async (selectedTest: TestItem) => {
     const TestResultComponent = testsResultPages[selectedTest.name as testType];
     try {
@@ -38,12 +53,17 @@ export const ResultsPage: FC = () => {
       toast.error("Возникла ошибка при загрузке теста");
     }
   };
+  if (!completedTests) return (
+    <>
+      <p>Загрузка...</p>
+    </>
+  )
 
   return (
     <div className="results-wrapper">
       <h1>Results</h1>
       <div className="tests-container">
-        {testsList.map((test) => (
+        {completedTests.map((test) => (
           <div
             className="test-result-card"
             onClick={() => handleSelectTest(test)}
