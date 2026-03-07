@@ -1,8 +1,8 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { WheelEvent } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
-
+import "./constantSumSlider.css"
 export interface SliderData {
     id: number
     text: string
@@ -14,11 +14,20 @@ interface ConstantSumSliderProps {
     sliders: SliderData[] // data for each slider
     setSliders: Dispatch<SetStateAction<SliderData[]>>
     maxValue: number // max value that can be exceed abouve when use slider 
-    nextPage: () => void
+    nextPage: (step: number) => void
 }
 export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
+    //При переходе назад помогает показать заполненные очки (в новых 0)
+    useEffect(() => {
+        console.log(sliders.reduce((value, slider) => {
+            return value + slider.value
+        }, 0))
+        setTotalValue(sliders.reduce((value, slider) => {
+            return value + slider.value
+        }, 0))
+    }, [sliders])
     const handleWheel = (e: WheelEvent<HTMLInputElement>) => {
         if (isLocked) {
             e.preventDefault()
@@ -29,7 +38,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
     const handleSliderScroll = (value: number, sliderScrolled: SliderData) => {
         const totalValueCurrent = sliders.reduce((total, slider) => total + slider.value, 0)
         const totalValueNew = totalValueCurrent + value - sliderScrolled.value
-        console.log(totalValueNew)
         if (totalValueNew > maxValue) {
             setIsLocked(true)
             return
@@ -40,14 +48,18 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
             }
             return slider
         })
-        setTotalValue(totalValueNew)
+        //setTotalValue(totalValueNew)
         setSliders(slidersTemp)
         setIsLocked(false)
 
     }
     const nextPageHandler = () => {
+        if (totalValue !== maxValue) {
+            toast(`Пожалуйста наберите ${maxValue} баллов`)
+            return
+        }
         setTotalValue(0)
-        nextPage()
+        nextPage(1)
     }
     return (<>
         <div className="constant-sum-slider-card">
@@ -75,8 +87,11 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
                     </div>
                 ))}
             </div>
-
-            <Button buttonLabel={"Далее"} buttonFunction={nextPageHandler} />
+            <div className="buttons-options">
+                <Button buttonLabel={"Назад"} buttonFunction={() => {nextPage(-1)}} />
+                <Button buttonLabel={"Далее"} buttonFunction={nextPageHandler} />
+            </div>
+            
         </div>
         <Toaster />
     </>)
