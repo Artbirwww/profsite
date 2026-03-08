@@ -1,6 +1,8 @@
-import { Toaster } from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import "./singleOptionsPicker.css"
 import { Button } from "../../../ui/reusable/button"
+import { useEffect, useState } from "react"
+import { TaskComponent } from "./Task"
 export interface Task {
     id: number
     taskNumber: number
@@ -10,7 +12,7 @@ export interface Task {
     answer: number
     userAnswer: number
 }
-interface Option {
+export interface Option {
     id: number
     text: string
     isPicked: boolean
@@ -21,40 +23,50 @@ interface SingleOptionPickerProps {
     navigateToResults: () => void
 }
 export const SingleOptionsPicker = ({tasks, setTasks, navigateToResults}: SingleOptionPickerProps) => {
+    const [currentTask, setCurrentTask] = useState<Task>()
+    const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
+    useEffect(() => {
+        if (!tasks) return
+        setCurrentTask(tasks[currentTaskNumber])
+    }, [currentTaskNumber])
     const handleUserAnswer = (task: Task, option: Option) => {
+        const changedTask = changeOption(task, option)
         const tasksTemp = tasks.map(currentTask => 
-            task.id === currentTask.id ? changeOption(task, option) : currentTask
+            task.id === currentTask.id ? changedTask : currentTask
         )
         setTasks(tasksTemp)
+        setCurrentTask(changedTask)
     }
     const changeOption = (task: Task, option: Option): Task => ({
         ...task, 
         options: task.options.map(op => ({...op, isPicked: op.id === option.id})),
         userAnswer: option.id
     })
+    const changeTask = (step: number) => {
+        const newNumber = currentTaskNumber + step
+        //Условия не дают уйти ниже 1ого и последнего вопроса теста
+        if (newNumber < 0 || newNumber >= tasks.length){
+            toast("Дальше некуда идти")
+            return
+        }
+        setCurrentTaskNumber(currentTaskNumber + step)
+    }
+    if (!currentTask) return (<>
+            <p>Загрузка...</p>
+        </>)
+
     return(
     <div className="single-options-picker">
         <div className="tasks">
-            {tasks.map(task => (
-                <div className="task" key={task.id}>
-                    <p><b>Задача номер {task.taskNumber}</b></p>
-                    <p>{task.text}</p>
-                    <img src={task.imageUrl} />
-                    <ol>
-                        {task.options.map(option => (
-                            <li className={`option ${option.isPicked ? "picked" : ""}`}
-                                onClick={() => handleUserAnswer(task, option)}>
-                                    {option.text}
-                            </li>
-                        ))}
-                    </ol>
-                    
-                </div>
-            ))}
+            <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
         </div>
-        <Button 
-            buttonLabel={"Завершить тест"}
-            buttonFunction={navigateToResults} />
+        <div className="buttons-options">
+            <Button buttonLabel={"Назад"} buttonFunction={() => changeTask(-1)} />
+            {currentTaskNumber < tasks.length - 1 && (
+                <Button buttonLabel={"Далее"} buttonFunction={() => changeTask(1)} />)}
+            <Button buttonLabel={"Завершить тест"} buttonFunction={navigateToResults} />
+        </div>
+        
         <Toaster />
     </div>)
 }

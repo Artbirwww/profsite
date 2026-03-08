@@ -28,4 +28,9 @@
     font-weight: 700;
     color: lightblue;
 }
+.buttons-options {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
 
