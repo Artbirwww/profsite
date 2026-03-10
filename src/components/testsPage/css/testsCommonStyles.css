@@ -1,0 +1,93 @@
+/*Обертка для всех элментов отображаемых в test viewer outlet*/
+.test-viewer-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 100px 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+
+/*Стили для выбора формы теста*/
+/*Пока применимо только к тесту темперамента*/
+.test-viewer-selection-grid-container {
+    display: grid;
+    width: 100%;
+    height: 300px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.test-viewer-selection-item {
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+        opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.test-viewer-selection-item.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.test-viewer-selection-item:nth-child(2n + 1) {
+    transition-delay: .1s;
+}
+
+.test-viewer-selection-item:nth-child(2n + 2) {
+    transition-delay: .2s;
+}
+
+.test-item-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 40px;
+    position: relative;
+}
+
+.test-item-content-wrapper h1 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+    color: var(--text-primary-color);
+}
+
+.test-item-option-container {
+    display: flex;
+    width: 100%;
+    align-items: end;
+    justify-content: end;
+}
+
+.test-item-option-container button {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+.test-item-option-container button .test-item-icon {
+    color: var(--bg-color)
+}
+
+
+
+/*Обертка отображения вопросов тестов*/
+.test-viewer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-.positive-negative-card {
+.single-options-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,14 +9,4 @@
     border-radius: 15px;
     width: 1440px;
     max-width: 1440px;
-    height: 250px;
-    max-height: 250px;
-}
-.positive-negative-card h3 {
-    text-align: center;
-}
-.positive-negative-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
 }

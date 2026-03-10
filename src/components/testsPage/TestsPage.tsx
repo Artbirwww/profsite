@@ -1,33 +1,16 @@
 import "./css/testsPageStyle.css"
 
-import React, { FC, useCallback, useEffect, useMemo, useRef } from "react"
+import { FC, useCallback, useEffect, useRef, useState } from "react"
 import { testsList } from "./TestsData"
 import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
-import { DisplacementFilter } from "../../DisplacementFilter"
-
-import bg1 from "../../res/test-imgs/testsBackgrounds/1.svg"
-import bg2 from "../../res/test-imgs/testsBackgrounds/2.svg"
-import bg3 from "../../res/test-imgs/testsBackgrounds/3.svg"
-import bg4 from "../../res/test-imgs/testsBackgrounds/4.svg"
-import bg5 from "../../res/test-imgs/testsBackgrounds/5.svg"
-import bg6 from "../../res/test-imgs/testsBackgrounds/6.svg"
-import bg7 from "../../res/test-imgs/testsBackgrounds/7.svg"
-import bg8 from "../../res/test-imgs/testsBackgrounds/8.svg"
-import bg9 from "../../res/test-imgs/testsBackgrounds/9.svg"
-
-const bgsSVG = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9]
-
-const PAGE_CONFIG = {
-    visibleItemsCount: 3,
-    itemsGap: 10,
-    padding: 10,
-}
+import { CheckCheck } from "lucide-react"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
     const testContainerRef = useRef<HTMLDivElement>(null)
-    const [visibleIds, setVisibleIds] = React.useState<Set<string | number>>(new Set())
+
+    const [visibleIds, setVisibleIds] = useState<number[]>([])
 
     useEffect(() => {
         const container = testContainerRef.current
@@ -35,84 +18,91 @@ export const TestsPage: FC = ({ }) => {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                setVisibleIds(prev => {
-                    const newSet = new Set(prev)
-                    entries.forEach((entry) => {
-                        const id = entry.target.getAttribute("data-id")
-                        if (!id) return
+                entries.forEach((entry) => {
 
-                        if (entry.isIntersecting) {
-                            newSet.add(id)
-                            entry.target.classList.add("show")
-                        } else {
-                            newSet.delete(id)
-                            entry.target.classList.remove("show")
-                        }
-                    })
-                    return newSet
+                    const index = Number(entry.target.getAttribute("data-id"))
+
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show")
+                        setVisibleIds(prev => (prev.includes(index) ? prev : [...prev, index]))
+
+                    } else {
+                        entry.target.classList.remove("show")
+                        setVisibleIds(prev => prev.filter(i => i !== index))
+                    }
                 })
             },
             {
-                threshold: .25,
                 root: container,
+                threshold: .2,
             }
         )
 
-        const items = container.querySelectorAll(".test-item-wrapper")
+        const items = container.querySelectorAll(".test-selection-item-wrapper")
         items.forEach((el) => observer.observe(el))
+
         return () => observer.disconnect()
     }, [testsList.length])
-
-    const scrollToTest = useCallback((id: string | number) => {
-        const elememt = testContainerRef.current?.querySelector(`[data-id="${id}"]`)
-        if (elememt) {
-            elememt.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-                inline: "center",
-            })
-        }
-    }, [])
 
     const handleClick = useCallback((path: string) => {
         navigate(path)
     }, [navigate])
 
-    const containerStyle = useMemo(() => ({
-        "--visible-items-count": PAGE_CONFIG.visibleItemsCount,
-        "--items-gap": `${PAGE_CONFIG.itemsGap}px`,
-        "--padding": `${PAGE_CONFIG.padding}px`,
-    } as React.CSSProperties), [])
-
     return (
-        <div ref={testContainerRef} className="test-selector-wrapper" style={containerStyle}>
+        <div
+            className="test-selection-wrapper">
 
-            {testsList.map((item, index) => {
-                return (
-                    <TestComponent
-                        key={item.id || index}
-                        dataId={item.id}
-                        item={item}
-                        background={bgsSVG[index % bgsSVG.length]}
-                        onClick={handleClick} />
-                )
-            })}
+            <div
+                className="test-selection-header-container">
 
-            <div className="test-nav-dots liquid-glass-component">
+                <h3>Тестирование</h3>
 
-                <DisplacementFilter />
+                <div
+                    className="test-completness-count-container">
 
-                {testsList.map((item, index) => {
-                    const isActive = visibleIds.has(String(item.id))
+                    <span>3 / {testsList.length}</span>
+                    <CheckCheck size={20} strokeWidth={2} className="test-item-icon" />
+                </div>
 
-                    return (
-                        <div key={item.id} className="nav-dots-wrapper" onClick={() => scrollToTest(item.id)}>
+                <div
+                    className="test-completness-progress-bar-container">
 
-                            <div className={`dot ${isActive ? "active" : ""}`} />
-                        </div>
-                    )
-                })}
+                    <div
+                        className="progress-bar-line"
+                        style={{ width: "30%" }} />
+                </div>
+            </div>
+
+            <div
+                ref={testContainerRef}
+                className="test-selection-grid-container">
+
+                {testsList.map((item, index) => (
+
+                    <div
+                        key={index}
+                        data-id={index}
+                        className="test-selection-item-wrapper">
+
+                        <TestComponent
+                            dataId={item.id}
+                            item={item}
+                            onClick={handleClick} />
+                    </div>
+                ))}
+            </div>
+
+            <div
+                className="test-selection-scroll-indicator-container">
+
+                {testsList.map((_, index) => (
+
+                    <div
+                        key={index}
+                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
+                ))}
             </div>
         </div>
+
     )
 }

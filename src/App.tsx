@@ -30,67 +30,67 @@ import { ProfilePage } from "./components/profilePage/ProfilePage"
 import { SettingsPage } from "./components/settingsPage/SettingsPage"
 import { TestViewer } from "./components/testsPage/TestViewer"
 import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
-import { TemperamentResults } from "./components/testsPage/temperament/results/TemperamentResults"
+import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
 import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
 import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
 import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults";
 
 export default function App() {
-  return (
-    <Routes>
-      {/* Public routes */}
-      <Route element={<AuthRouter />}>
-        <Route element={<Layout />}>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-        </Route>
-      </Route>
-
-      {/* Protected routes */}
-      <Route element={<ProtectedRoute />}>
-        <Route element={<Layout />}>
-          <Route
-            element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}
-          >
-            <Route path="admin/pupil-loading" element={<PupilDataLoading />} />
-            <Route path="admin/pupil-list" element={<PupilsList />} />
-            <Route
-              path="admin/pupil-grades-loading"
-              element={<PupilGradeLoading />}
-            />
-          </Route>
-
-          {/* Tests routes */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/tests">
-            <Route index element={<TestsPage />} />
-            <Route element={<TestViewer />}>
-              <Route path="temperament" element={<TemperamentFormSelection />}/>
-              <Route path="temperament-results"element={<TemperamentResults />}/>
-
-				<Route path="group-roles" element={<BelbinTest/>} />
-				<Route path="group-roles-results" element={<BelbinResults/>} />
-
-				<Route path="engineering-thinking" element={<EngineeringThinkingTest/>} />
-				<Route path="engineering-thinking-results" element={<EngineeringThinkingResults/>} />
+	return (
+		<Routes>
+			{/* Public routes */}
+			<Route element={<AuthRouter />}>
+				<Route element={<Layout />}>
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegistrationPage />} />
+				</Route>
 			</Route>
-		</Route>
+
+			{/* Protected routes */}
+			<Route element={<ProtectedRoute />}>
+				<Route element={<Layout />}>
+					<Route
+						element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}
+					>
+						<Route path="admin/pupil-loading" element={<PupilDataLoading />} />
+						<Route path="admin/pupil-list" element={<PupilsList />} />
+						<Route
+							path="admin/pupil-grades-loading"
+							element={<PupilGradeLoading />}
+						/>
+					</Route>
+
+					{/* Tests routes */}
+					<Route path="/" element={<HomePage />} />
+					<Route path="/tests">
+						<Route index element={<TestsPage />} />
+						<Route element={<TestViewer />}>
+							<Route path="temperament" element={<TemperamentFormSelection />} />
+							<Route path="temperament-results" element={<TemperamentResults />} />
+
+							<Route path="group-roles" element={<BelbinTest />} />
+							<Route path="group-roles-results" element={<BelbinResults />} />
+
+							<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
+							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults />} />
+						</Route>
+					</Route>
 
 
-          {/* Results routes */}
-          <Route path="/my-results" element={<ResultsPage />} />
-          <Route path="/my-results/:testType" element={<ResultsPage />} />
+					{/* Results routes */}
+					<Route path="/my-results" element={<ResultsPage />} />
+					<Route path="/my-results/:testType" element={<ResultsPage />} />
 
-          {/* Rest routes */}
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/my-grades" element={<StudyPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-        </Route>
-      </Route>
+					{/* Rest routes */}
+					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="/my-grades" element={<StudyPage />} />
+					<Route path="/settings" element={<SettingsPage />} />
+				</Route>
+			</Route>
 
-      {/* Fallback routes */}
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
-  );
+			{/* Fallback routes */}
+			<Route path="*" element={<Navigate to="/login" replace />} />
+		</Routes>
+	);
 }
