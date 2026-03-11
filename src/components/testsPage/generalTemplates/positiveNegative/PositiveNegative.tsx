@@ -1,5 +1,4 @@
 import { Button } from "../../../ui/reusable/button"
-import "./positiveNegativeStyles.css"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
@@ -48,29 +47,24 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
 
     return (
         <div
-            className="positive-negative-card">
+            className="test-card test-card-height-200">
 
             <div
-                className="positive-negative-card-content-wrapper">
+                className="test-card-text">
 
-                <div
-                    className="positive-negative-text-container">
+                {currentOption?.text}
+            </div>
 
-                    <span>{currentOption?.text}</span>
-                </div>
+            <div
+                className="test-card-options">
 
+                <Button
+                    buttonLabel={"Да"}
+                    buttonFunction={() => handleAnswer(true)} />
 
-                <div
-                    className="positive-negative-options-container">
-
-                    <Button
-                        buttonLabel={"Да"}
-                        buttonFunction={() => handleAnswer(true)} />
-
-                    <Button
-                        buttonLabel={"Нет"}
-                        buttonFunction={() => handleAnswer(false)} />
-                </div>
+                <Button
+                    buttonLabel={"Нет"}
+                    buttonFunction={() => handleAnswer(false)} />
             </div>
         </div>
     )

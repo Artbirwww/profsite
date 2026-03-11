@@ -1,10 +1,9 @@
-import "./singleOptionsPicker.css"
-
 import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
-import { TaskComponent } from "./Task"
 import { ProgressBar } from "../progressBar/ProgressBar"
+import { Option } from "lucide-react"
+
 export interface Task {
     id: number
     taskNumber: number
@@ -69,35 +68,54 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
     if (currentTask)
         return (
             <div
-                className="single-options-card">
-
-                <span>Задача номер {currentTask.taskNumber}</span>
+                className="test-card test-card-height-600">
 
                 <div className="tasks">
-                    <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length}/>
-            <p>Задача {currentTaskNumber+1}/{tasks.length}</p>
-            <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
+                    {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
+                    <p>Задача {currentTaskNumber + 1}/{tasks.length}</p>
                 </div>
 
                 <div
-                    className="single-options-card-content-wrapper">
+                    className="test-card-text">
 
-                    <div
-                        className="single-options-text-container">
-
-                        <span>{currentTask?.text}</span>
-                    </div>
-
-                    <div className="">
-
-                    </div>
+                    {currentTask?.text}
                 </div>
 
-                <div className="buttons-options">
-                    <Button buttonLabel={"Назад"} buttonFunction={() => changeTask(-1)} />
+                <div
+                    className="test-card-img">
+
+                    <img src={currentTask.imageUrl} alt="" />
+                </div>
+
+                <div
+                    className="test-card-list">
+
+                    {currentTask.options.map(option => (
+
+                        <div
+                            onClick={() => handleUserAnswer(currentTask, option)}
+                            className="test-card-selectable">
+
+                            {option.text}
+                        </div>
+                    ))}
+                </div>
+
+                <div
+                    className="test-card-options">
+
+                    <Button
+                        buttonLabel={"Назад"}
+                        buttonFunction={() => changeTask(-1)} />
+
                     {currentTaskNumber < tasks.length - 1 && (
-                        <Button buttonLabel={"Далее"} buttonFunction={() => changeTask(1)} />)}
-                    <Button buttonLabel={"Завершить тест"} buttonFunction={navigateToResults} />
+                        <Button
+                            buttonLabel={"Далее"}
+                            buttonFunction={() => changeTask(1)} />)}
+
+                    <Button
+                        buttonLabel={"Завершить тест"}
+                        buttonFunction={navigateToResults} />
                 </div>
 
                 <Toaster />

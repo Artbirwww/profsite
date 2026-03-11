@@ -1,7 +1,3 @@
-
-
-
-
 import "./css/testsCommonStyles.css"
 
 import { Outlet } from "react-router-dom"

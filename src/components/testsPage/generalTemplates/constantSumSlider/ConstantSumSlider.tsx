@@ -1,5 +1,3 @@
-import "./constantSumSlider.css"
-
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { WheelEvent } from "react"
 import toast, { Toaster } from "react-hot-toast"
@@ -78,17 +76,17 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     return (<>
         <span>Распределено баллов: {totalValue} / 10</span>
         <div>
-        <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
-        <div
-            className="constant-sum-slider-grid-container">
-            {sliders.map(slider => (
+            <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
-                <div
-                    key={slider.id}
-                    className="constant-sum-slider-grid-item">
+
+
+            <div
+                className="test-grid-template-1">
+                {sliders.map(slider => (
 
                     <div
-                        className="constant-sum-slider-item-content-wrapper">
+                        key={slider.id}
+                        className="test-card test-card-height-155">
 
                         <span>{slider.text}</span>
 
@@ -107,13 +105,12 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                             <span>{slider.value}</span>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
         </div>
 
         <div
-            className="constant-sum-slider-options-container">
+            className="test-card-options">
 
             <Button
                 buttonLabel={"Назад"}
