@@ -9,6 +9,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "Не знаю", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/1.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -21,6 +22,7 @@
         { "id": 2, "text": "Гусеница В.", "isPicked": false },
         { "id": 3, "text": "Не знаю.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/2.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -33,6 +35,7 @@
         { "id": 2, "text": "В обоих направлениях.", "isPicked": false },
         { "id": 3, "text": "В направлении В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/3.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -45,6 +48,7 @@
         { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
         { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/4.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -57,6 +61,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "В направлении стрелки С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/5.png",
       "answer": 2,
       "userAnswer": 0
     },

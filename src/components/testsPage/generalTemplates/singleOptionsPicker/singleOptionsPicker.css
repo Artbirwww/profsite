@@ -12,6 +12,10 @@
     display: flex;
     flex-direction: column;
 }
+.task img {
+    width: 150px;
+    height: 100px;
+}
 .tasks {
     display: flex;
     flex-direction: column;
