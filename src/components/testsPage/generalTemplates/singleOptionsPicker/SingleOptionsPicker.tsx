@@ -94,7 +94,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
 
                         <div
                             onClick={() => handleUserAnswer(currentTask, option)}
-                            className="test-card-selectable">
+                            className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
 
                             {option.text}
                         </div>

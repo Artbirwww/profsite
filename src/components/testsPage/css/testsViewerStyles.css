@@ -80,6 +80,13 @@
     gap: 10px;
 }
 
+.test-card-selectable {
+    cursor: pointer;
+}
+.test-card-selectable.active {
+    color: violet;
+}
+
 .test-card-options {
     display: flex;
     flex-direction: row;
