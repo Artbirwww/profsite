@@ -78,8 +78,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
         <div>
             <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
-
-
             <div
                 className="test-grid-template-1">
                 {sliders.map(slider => (

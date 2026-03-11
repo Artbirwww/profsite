@@ -86,11 +86,6 @@ export const TemperamentFormSelection = () => {
         return (
             <div
                 className="test-viewer-container">
-
-                <div>
-                    <h4>Здесь должен быть номер вопроса</h4>
-                </div>
-
                 <PositiveNegative
                     options={options}
                     setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
