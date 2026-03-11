@@ -81,14 +81,10 @@ export const TemperamentFormSelection = () => {
 
     if (pickedForm && options)
         return (
-            <div
-                className="test-viewer-container">
-                <PositiveNegative
-                    options={options}
-                    setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
-                    navigateToResults={navigateToResult} />
-            </div>
-
+            <PositiveNegative
+                options={options}
+                setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
+                navigateToResults={navigateToResult} />
         )
 
     return (

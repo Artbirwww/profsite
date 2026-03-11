@@ -1,4 +1,4 @@
-import "./css/testsPageStyle.css"
+import "./css/testsPageStyles.css"
 
 import { FC, useCallback, useEffect, useRef, useState } from "react"
 import { testsList } from "./TestsData"

@@ -1,4 +1,4 @@
-import "./css/testsCommonStyles.css"
+import "./css/testsViewerStyles.css"
 
 import { Outlet } from "react-router-dom"
 
@@ -6,7 +6,7 @@ export const TestViewer = () => {
 
     return (
         <div
-            className="test-wrapper">
+            className="test-viewer-wrapper">
 
             <div
                 className="test-header">
@@ -21,6 +21,12 @@ export const TestViewer = () => {
                     className="test-additional-text">
 
                     вопрос 1 из 50
+                </div>
+
+                <div
+                    className="test-additional-text">
+
+                    Здесь прогресс бар
                 </div>
             </div>
 

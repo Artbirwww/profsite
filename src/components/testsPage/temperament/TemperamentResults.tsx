@@ -1,4 +1,4 @@
-import "../css/testsCommonResultsStyles.css"
+import "../css/testsResultStyles.css"
 
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
