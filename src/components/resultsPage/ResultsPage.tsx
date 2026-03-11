@@ -2,7 +2,7 @@ import { FC, useEffect, useState, ComponentType } from "react";
 import { TestItem, testsList } from "../testsPage/TestsData";
 import { useAuth } from "../../contexts/AuthContext";
 import "./resultPage.css";
-import { TemperamentResults } from "../testsPage/temperament/results/TemperamentResults";
+import { TemperamentResults } from "../testsPage/temperament/TemperamentResults";
 import { BelbinResults } from "../testsPage/belbin/BelbinResults";
 import { TestResultResponse, TestTypeName } from "../../types/testTypes";
 import { testApi } from "../../services/api/testApi";

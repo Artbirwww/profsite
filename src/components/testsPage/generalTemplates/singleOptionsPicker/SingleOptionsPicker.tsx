@@ -56,7 +56,7 @@ export const SingleOptionsPicker = ({tasks, setTasks, navigateToResults}: Single
         </>)
 
     return(
-    <div className="single-options-picker">
+    <div className="single-options-card">
         <div className="tasks">
             <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
         </div>

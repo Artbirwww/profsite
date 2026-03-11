@@ -1,5 +1,5 @@
 import { Button } from "../../../ui/reusable/button"
-import "../../css/positiveNegativeStyle.css"
+import "./positiveNegativeStyles.css"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
@@ -14,11 +14,7 @@ interface PositiveNegativeProps<T extends PositiveNegativeOption = PositiveNegat
     setOptions: Dispatch<SetStateAction<T[]>>
     navigateToResults: () => void;
 }
-/**
- * TODO
- * 0. Перевести ответы пользователя в нужный формат для отправки на сервер (посчитать результаты)
- * 1. Сделать итоговый компонент для отображения результатов или их отправки
- */
+
 export const PositiveNegative = ({ options, setOptions, navigateToResults }: PositiveNegativeProps) => {
     const [currentOption, setCurrentOption] = useState<PositiveNegativeOption | null>(null)
     const [currentOptionNumber, setCurrentOptionNumber] = useState<number>(0)
@@ -51,17 +47,30 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
     }
 
     return (
-        <div className="positive-negative-card">
-            <h3>{currentOption?.text}</h3>
+        <div
+            className="positive-negative-card">
 
-            <div className="positive-negative-buttons">
-                <Button
-                    buttonLabel={"Да"}
-                    buttonFunction={() => handleAnswer(true)} />
+            <div
+                className="positive-negative-card-content-wrapper">
 
-                <Button
-                    buttonLabel={"Нет"}
-                    buttonFunction={() => handleAnswer(false)} />
+                <div
+                    className="positive-negative-text-container">
+
+                    <span>{currentOption?.text}</span>
+                </div>
+
+
+                <div
+                    className="positive-negative-options-container">
+
+                    <Button
+                        buttonLabel={"Да"}
+                        buttonFunction={() => handleAnswer(true)} />
+
+                    <Button
+                        buttonLabel={"Нет"}
+                        buttonFunction={() => handleAnswer(false)} />
+                </div>
             </div>
         </div>
     )

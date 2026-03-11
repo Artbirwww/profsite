@@ -1,7 +1,5 @@
 import React from "react"
-import { Drama, UsersRound, Cog, BriefcaseBusiness, Brain, Compass, Search, Target, Anchor } from "lucide-react"
-
-
+import { Palette, UsersRound, Settings, BriefcaseBusiness, Brain, Compass, Map, Target, Anchor } from "lucide-react"
 
 // Интерфейс для элмента выбора теста (карточки тестов)
 export interface TestItem {
@@ -9,6 +7,8 @@ export interface TestItem {
     label: string           // Название теста
     author?: string         // Автор теста
     description: string     // Описание теста
+    time?: number           // Примерное затраченое время на тест
+    questionscount?: number // Количсетво вопросов в тесте
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
     dataItem: string        // Для тестирования / селекторов
@@ -22,7 +22,9 @@ export const testsList: TestItem[] = [
         label: "Темперамент",
         author: "Ганс Юрген Айзенк",
         description: "Определение типа темперамента и личностных характеристик",
-        icon: Drama,
+        time: 10,
+        questionscount: 57,
+        icon: Palette,
         path: "/tests/temperament",
         dataItem: "test-item-1",
         name: "Temperament"
@@ -32,6 +34,8 @@ export const testsList: TestItem[] = [
         label: "Роли в команде",
         author: "Реймонд Мередит Белбин",
         description: "Выявление вашей роли в команде по методике Белбина",
+        time: 10,
+        questionscount: 7,
         icon: UsersRound,
         path: "/tests/group-roles",
         dataItem: "test-item-2",
@@ -42,7 +46,9 @@ export const testsList: TestItem[] = [
         label: "Инженерное мышление",
         author: "Джордж Кеттнер Беннет",
         description: "Оценка технических и аналитических способностей",
-        icon: Cog,
+        time: 25,
+        questionscount: 70,
+        icon: Settings,
         path: "/tests/engineering-thinking",
         dataItem: "test-item-3",
         name: "Engineering-Thinking"
@@ -51,6 +57,8 @@ export const testsList: TestItem[] = [
         id: "test-intellectual-potential",
         label: "Интеллектуальный потенциал",
         description: "Анализ когнитивных способностей и потенциала развития",
+        time: 12,
+        questionscount: 29,
         icon: Brain,
         path: "/tests/iq-potential",
         dataItem: "test-item-4",
@@ -61,6 +69,8 @@ export const testsList: TestItem[] = [
         label: "Профориентация",
         author: "Евгений Александрович Климов",
         description: "Профессиональные предпочтения",
+        time: 999,
+        questionscount: 999,
         icon: BriefcaseBusiness,
         path: "/tests/professional-orientation",
         dataItem: "test-item-5"
@@ -70,6 +80,8 @@ export const testsList: TestItem[] = [
         label: "Профориентация",
         author: "Джон Льюис Холланд",
         description: "Описание",
+        time: 999,
+        questionscount: 999,
         icon: Compass,
         path: "/tests/iq-potential",
         dataItem: "test-item-6",
@@ -79,7 +91,9 @@ export const testsList: TestItem[] = [
         label: "Карта интересов",
         author: "Александр Ефимович Гломшток",
         description: "Описание",
-        icon: Search,
+        time: 999,
+        questionscount: 999,
+        icon: Map,
         path: "/tests/iq-potential",
         dataItem: "test-item-7",
     },
@@ -88,6 +102,8 @@ export const testsList: TestItem[] = [
         label: "Профориентация",
         author: "Леонардас Адамович Йовайша",
         description: "Описание",
+        time: 999,
+        questionscount: 999,
         icon: Target,
         path: "/tests/iq-potential",
         dataItem: "test-item-8",
@@ -97,6 +113,8 @@ export const testsList: TestItem[] = [
         label: "Якоря карьеры",
         author: "Эдгар Генри Шейн",
         description: "Описание",
+        time: 999,
+        questionscount: 999,
         icon: Anchor,
         path: "/tests/iq-potential",
         dataItem: "test-item-9",

@@ -1,11 +1,8 @@
-import "./css/temepramentStyle.css"
 
 
 
 
-import "./css/positiveNegativeStyle.css"
-import "./css/constantSliderStyle.css"
-import "./css/commonTestsStyles.css"
+import "./css/testsCommonStyles.css"
 
 import { Outlet } from "react-router-dom"
 

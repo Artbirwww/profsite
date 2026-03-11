@@ -13,11 +13,11 @@ export interface TemperamentType {
     name: string,
     shortDescription: string,
     description: string,
-    traits: string [], 
+    traits: string[],
     professions: string[]
 }
 // Описания типов темпераментов
-export const temperamentTypes= {
+export const temperamentTypes = {
     choleric: {
         name: "Холерик",
         shortDescription: "Энергичный, активный, эмоциональный, импульсивный",
