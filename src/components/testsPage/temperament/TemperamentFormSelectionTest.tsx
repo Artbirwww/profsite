@@ -14,11 +14,6 @@ export const TemperamentFormSelection = () => {
 
     const [pickedForm, setPickedForm] = useState<string | null>(null)
     const [options, setOptions] = useState<TemperamentOption[] | null>(null)
-    const [isVisible, setIsVisible] = useState<boolean>(false)
-
-    useEffect(() => {
-        setIsVisible(true)
-    }, [])
 
     const handleSelect = (testForm: string, temperamentData: TemperamentOption[]) => {
         if (temperamentData === null) return
@@ -38,45 +33,47 @@ export const TemperamentFormSelection = () => {
     if (!pickedForm)
         return (
             <div
-                className="test-viewer-selection-grid-container">
+                className="test-grid-template-1">
 
                 <div
-                    className={`test-viewer-selection-item ${isVisible ? "fade-in" : ""}`} onClick={() => handleSelect("A", TemperamentFormA)}>
+                    className="test-card test-card-height-250" onClick={() => handleSelect("A", TemperamentFormA)}>
+
 
                     <div
-                        className="test-item-content-wrapper">
+                        className="test-card-header">
 
-                        <h1>Форма A</h1>
-
-                        <div
-                            className="test-item-option-container">
-
-                            <button
-                                onClick={() => handleSelect("A", TemperamentFormA)}>
-
-                                <ArrowRight size={24} strokeWidth={1.5} className="test-item-icon" />
-                            </button>
-                        </div>
+                        Форма A
                     </div>
+
+                    <div
+                        className="test-card-options">
+
+                        <button
+                            onClick={() => handleSelect("A", TemperamentFormA)}>
+
+                            <ArrowRight size={24} strokeWidth={1.5} className="test-item-icon" />
+                        </button>
+                    </div>
+
                 </div>
 
                 <div
-                    className={`test-viewer-selection-item ${isVisible ? "fade-in" : ""}`} onClick={() => handleSelect("B", TemperamentFormB)}>
+                    className="test-card test-card-height-250" onClick={() => handleSelect("B", TemperamentFormB)}>
 
                     <div
-                        className="test-item-content-wrapper">
+                        className="test-card-header">
 
-                        <h1>Форма B</h1>
+                        Форма B
+                    </div>
 
-                        <div
-                            className="test-item-option-container">
+                    <div
+                        className="test-card-options">
 
-                            <button
-                                onClick={() => handleSelect("B", TemperamentFormB)}>
+                        <button
+                            onClick={() => handleSelect("B", TemperamentFormB)}>
 
-                                <ArrowRight size={24} strokeWidth={1.5} className="test-item-icon" />
-                            </button>
-                        </div>
+                            <ArrowRight size={24} strokeWidth={1.5} className="test-item-icon" />
+                        </button>
                     </div>
                 </div>
             </div>

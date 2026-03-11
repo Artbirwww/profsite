@@ -38,7 +38,7 @@ export const TestsPage: FC = ({ }) => {
             }
         )
 
-        const items = container.querySelectorAll(".test-selection-item-wrapper")
+        const items = container.querySelectorAll(".test-grid-item")
         items.forEach((el) => observer.observe(el))
 
         return () => observer.disconnect()
@@ -50,17 +50,22 @@ export const TestsPage: FC = ({ }) => {
 
     return (
         <div
-            className="test-selection-wrapper">
+            className="test-wrapper">
 
             <div
-                className="test-selection-header-container">
-
-                <h3>Тестирование</h3>
+                className="test-header">
 
                 <div
-                    className="test-completness-count-container">
+                    className="test-header-text">
 
-                    <span>3 / {testsList.length}</span>
+                    Тестирование
+                </div>
+
+
+                <div
+                    className="test-additional-text">
+
+                    3 / {testsList.length}
                     <CheckCheck size={20} strokeWidth={2} className="test-item-icon" />
                 </div>
 
@@ -75,14 +80,14 @@ export const TestsPage: FC = ({ }) => {
 
             <div
                 ref={testContainerRef}
-                className="test-selection-grid-container">
+                className="test-grid">
 
                 {testsList.map((item, index) => (
 
                     <div
                         key={index}
                         data-id={index}
-                        className="test-selection-item-wrapper">
+                        className="test-grid-item">
 
                         <TestComponent
                             dataId={item.id}
@@ -93,7 +98,7 @@ export const TestsPage: FC = ({ }) => {
             </div>
 
             <div
-                className="test-selection-scroll-indicator-container">
+                className="test-indicator">
 
                 {testsList.map((_, index) => (
 
