@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { TaskComponent } from "./Task"
-
+import { ProgressBar } from "../progressBar/ProgressBar"
 export interface Task {
     id: number
     taskNumber: number
@@ -74,7 +74,9 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
                 <span>Задача номер {currentTask.taskNumber}</span>
 
                 <div className="tasks">
-                    <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
+                    <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length}/>
+            <p>Задача {currentTaskNumber+1}/{tasks.length}</p>
+            <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
                 </div>
 
                 <div

@@ -1,7 +1,7 @@
-.single-options-picker {
+.single-options-card {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 1200px;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
