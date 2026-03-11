@@ -74,6 +74,7 @@
         { "id": 2, "text": "Достаточно цепи В.", "isPicked": false },
         { "id": 3, "text": "Нужны обе цепи.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/6.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -86,6 +87,7 @@
         { "id": 2, "text": "Турбина В.", "isPicked": false },
         { "id": 3, "text": "Турбина С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/7.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -98,6 +100,7 @@
         { "id": 2, "text": "Колесо В.", "isPicked": false },
         { "id": 3, "text": "Оба колеса.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/8.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -110,6 +113,7 @@
         { "id": 2, "text": "Цепь В.", "isPicked": false },
         { "id": 3, "text": "Цепь С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/9.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -122,6 +126,7 @@
         { "id": 2, "text": "Шестерня В.", "isPicked": false },
         { "id": 3, "text": "Не вращается ни одна.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/10.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -134,6 +139,7 @@
         { "id": 2, "text": "Ось В вращается быстрее.", "isPicked": false },
         { "id": 3, "text": "Обе оси вращаются с одинаковой скоростью.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/11.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -146,6 +152,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/12.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -158,6 +165,7 @@
         { "id": 2, "text": "Машина B.", "isPicked": false },
         { "id": 3, "text": "Машина C.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/13.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -170,6 +178,7 @@
         { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
         { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/14.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -182,6 +191,7 @@
         { "id": 2, "text": "Будет держаться рукоятка А.", "isPicked": false },
         { "id": 3, "text": "Будет держаться рукоятка В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/15.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -194,6 +204,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "Не знаю.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/16.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -206,6 +217,7 @@
         { "id": 2, "text": "Колодка износится быстрее.", "isPicked": false },
         { "id": 3, "text": "И колесо, и колодка износятся одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/17.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -218,6 +230,7 @@
         { "id": 2, "text": "Жидкость А плотнее.", "isPicked": false },
         { "id": 3, "text": "Жидкость В плотнее.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/18.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -230,6 +243,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/19.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -242,6 +256,7 @@
         { "id": 2, "text": "В положении А.", "isPicked": false },
         { "id": 3, "text": "В положении В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/20.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -254,6 +269,7 @@
         { "id": 2, "text": "Ножницами В.", "isPicked": false },
         { "id": 3, "text": "Ножницами С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/21.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -266,6 +282,7 @@
         { "id": 2, "text": "Оба колеса вращаются с одинаковой скоростью.", "isPicked": false },
         { "id": 3, "text": "Колесо В вращается быстрее.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/22.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -278,6 +295,7 @@
         { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
         { "id": 3, "text": "Как показано на рисунке С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/23.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -290,6 +308,7 @@
         { "id": 2, "text": "Шестерня В.", "isPicked": false },
         { "id": 3, "text": "Шестерня С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/24.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -302,6 +321,7 @@
         { "id": 2, "text": "С шариком В.", "isPicked": false },
         { "id": 3, "text": "С шариком С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/25.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -314,6 +334,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "Направление не имеет значения.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/26.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -326,6 +347,7 @@
         { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
         { "id": 3, "text": "Не знаю.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/27.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -338,6 +360,7 @@
         { "id": 2, "text": "Фигуру В.", "isPicked": false },
         { "id": 3, "text": "Фигуру С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/28.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -350,6 +373,7 @@
         { "id": 2, "text": "Кусочками на картинке В.", "isPicked": false },
         { "id": 3, "text": "Куском на картинке С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/29.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -362,6 +386,7 @@
         { "id": 2, "text": "На картинке В.", "isPicked": false },
         { "id": 3, "text": "На картинке С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/30.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -374,6 +399,7 @@
         { "id": 2, "text": "В сторону А.", "isPicked": false },
         { "id": 3, "text": "В сторону В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/31.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -386,6 +412,7 @@
         { "id": 2, "text": "Уровень понизится.", "isPicked": false },
         { "id": 3, "text": "Уровень не изменится.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/32.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -398,6 +425,7 @@
         { "id": 2, "text": "Усилия должны быть одинаковыми.", "isPicked": false },
         { "id": 3, "text": "Камень В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/33.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -410,6 +438,7 @@
         { "id": 2, "text": "Ось В.", "isPicked": false },
         { "id": 3, "text": "Ось С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/34.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -422,6 +451,7 @@
         { "id": 2, "text": "Ящик В легче.", "isPicked": false },
         { "id": 3, "text": "Ящики одинакового веса.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/35.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -434,6 +464,7 @@
         { "id": 2, "text": "Брусок А.", "isPicked": false },
         { "id": 3, "text": "Брусок В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/36.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -446,6 +477,7 @@
         { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
         { "id": 3, "text": "До высоты резервуаров.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/37.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -458,6 +490,7 @@
         { "id": 2, "text": "Предмет В.", "isPicked": false },
         { "id": 3, "text": "Предмет С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/38.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -470,6 +503,7 @@
         { "id": 2, "text": "В положении В.", "isPicked": false },
         { "id": 3, "text": "В любом положении.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/39.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -482,6 +516,7 @@
         { "id": 2, "text": "В месте В.", "isPicked": false },
         { "id": 3, "text": "В месте С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/40.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -494,6 +529,7 @@
         { "id": 2, "text": "На емкости В.", "isPicked": false },
         { "id": 3, "text": "На емкости С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/41.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -506,6 +542,7 @@
         { "id": 2, "text": "На рисунке В.", "isPicked": false },
         { "id": 3, "text": "На рисунке С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/42.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -518,6 +555,7 @@
         { "id": 2, "text": "В пакете В.", "isPicked": false },
         { "id": 3, "text": "Одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/43.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -530,6 +568,7 @@
         { "id": 2, "text": "Прерывисто вверх.", "isPicked": false },
         { "id": 3, "text": "Непрерывно вверх.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/44.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -542,6 +581,7 @@
         { "id": 2, "text": "Колесо В.", "isPicked": false },
         { "id": 3, "text": "Колесо С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/45.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -554,6 +594,7 @@
         { "id": 2, "text": "Способом В.", "isPicked": false },
         { "id": 3, "text": "Способом С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/46.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -566,6 +607,7 @@
         { "id": 2, "text": "В сторону В.", "isPicked": false },
         { "id": 3, "text": "В обе стороны.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/47.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -578,6 +620,7 @@
         { "id": 2, "text": "При передаче типа В.", "isPicked": false },
         { "id": 3, "text": "При передаче типа С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/48.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -590,6 +633,7 @@
         { "id": 2, "text": "Уровень понизится.", "isPicked": false },
         { "id": 3, "text": "Уровень останется прежним.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/49.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -602,6 +646,7 @@
         { "id": 2, "text": "На 0,25м.", "isPicked": false },
         { "id": 3, "text": "На 0,5 м.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/50.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -614,6 +659,7 @@
         { "id": 2, "text": "Обе шестерни вращаются с одинаковой скоростью.", "isPicked": false },
         { "id": 3, "text": "Шестерня В вращается медленнее.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/51.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -626,6 +672,7 @@
         { "id": 2, "text": "Обе должны бежать с одинаковой скоростью.", "isPicked": false },
         { "id": 3, "text": "Лошадка В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/52.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -638,6 +685,7 @@
         { "id": 2, "text": "Из крана В.", "isPicked": false },
         { "id": 3, "text": "Из обоих одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/53.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -650,6 +698,7 @@
         { "id": 2, "text": "В случае В.", "isPicked": false },
         { "id": 3, "text": "В обоих случаях одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/54.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -662,6 +711,7 @@
         { "id": 2, "text": "Тело В.", "isPicked": false },
         { "id": 3, "text": "Оба тела одинаковы по весу.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/55.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -674,6 +724,7 @@
         { "id": 2, "text": "В точке А скорость больше.", "isPicked": false },
         { "id": 3, "text": "В точке В скорость больше.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/56.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -686,6 +737,7 @@
         { "id": 2, "text": "Рельс В.", "isPicked": false },
         { "id": 3, "text": "Оба рельса должны быть одинаковыми по высоте.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/57.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -698,6 +750,7 @@
         { "id": 2, "text": "На крюке А сила тяжести больше.", "isPicked": false },
         { "id": 3, "text": "На крюке В сила тяжести больше.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/58.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -710,6 +763,7 @@
         { "id": 2, "text": "Насоса В.", "isPicked": false },
         { "id": 3, "text": "Насоса С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/59.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -722,6 +776,7 @@
         { "id": 2, "text": "Ось В.", "isPicked": false },
         { "id": 3, "text": "Ось С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/60.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -734,6 +789,7 @@
         { "id": 2, "text": "Трос В.", "isPicked": false },
         { "id": 3, "text": "Оба троса выдержат одинаковую нагрузку.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/61.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -746,6 +802,7 @@
         { "id": 2, "text": "Трактор В.", "isPicked": false },
         { "id": 3, "text": "Оба трактора должны отъехать на одинаковое расстояние.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/62.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -758,6 +815,7 @@
         { "id": 2, "text": "У калитки А закреплен лучше.", "isPicked": false },
         { "id": 3, "text": "У калитки В закреплен лучше.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/63.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -770,6 +828,7 @@
         { "id": 2, "text": "Талью В.", "isPicked": false },
         { "id": 3, "text": "Обеими талями одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/64.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -782,6 +841,7 @@
         { "id": 2, "text": "Оба конуса будут вращаться одинаково.", "isPicked": false },
         { "id": 3, "text": "Конус В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/65.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -794,6 +854,7 @@
         { "id": 2, "text": "В обе стороны.", "isPicked": false },
         { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/66.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -806,6 +867,7 @@
         { "id": 2, "text": "Трос В.", "isPicked": false },
         { "id": 3, "text": "Трос С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/67.png",
       "answer": 3,
       "userAnswer": 0
     },
@@ -818,6 +880,7 @@
         { "id": 2, "text": "Обеими лебедками одинаково.", "isPicked": false },
         { "id": 3, "text": "Лебедкой В.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/68.png",
       "answer": 1,
       "userAnswer": 0
     },
@@ -830,6 +893,7 @@
         { "id": 2, "text": "Как показано на рис. В.", "isPicked": false },
         { "id": 3, "text": "Как показано на рис. С.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/69.png",
       "answer": 2,
       "userAnswer": 0
     },
@@ -842,6 +906,7 @@
         { "id": 2, "text": "Цепь В.", "isPicked": false },
         { "id": 3, "text": "Обе цепи напряжены одинаково.", "isPicked": false }
       ],
+      "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/70.png",
       "answer": 1,
       "userAnswer": 0
     }
