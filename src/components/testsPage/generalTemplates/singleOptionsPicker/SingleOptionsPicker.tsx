@@ -3,6 +3,7 @@ import "./singleOptionsPicker.css"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { TaskComponent } from "./Task"
+import { ProgressBar } from "../progressBar/ProgressBar"
 export interface Task {
     id: number
     taskNumber: number
@@ -58,6 +59,8 @@ export const SingleOptionsPicker = ({tasks, setTasks, navigateToResults}: Single
     return(
     <div className="single-options-card">
         <div className="tasks">
+            <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length}/>
+            <p>Задача {currentTaskNumber+1}/{tasks.length}</p>
             <TaskComponent task={currentTask} handleUserAnswer={handleUserAnswer} />
         </div>
         <div className="buttons-options">
