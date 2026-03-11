@@ -4,6 +4,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import { WheelEvent } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
+import { ProgressBar } from "../progressBar/ProgressBar"
 
 export interface SliderData {
     id: number
@@ -16,11 +17,12 @@ export interface SliderData {
 interface ConstantSumSliderProps {
     sliders: SliderData[]
     setSliders: Dispatch<SetStateAction<SliderData[]>>
+    currentGroupNumber: number
     maxValue: number
     nextPage: (step: number) => void
 }
 
-export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: ConstantSumSliderProps) => {
+export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, maxValue, nextPage }: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
 
@@ -75,10 +77,10 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
 
     return (<>
         <span>Распределено баллов: {totalValue} / 10</span>
-
+        <div>
+        <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
         <div
             className="constant-sum-slider-grid-container">
-
             {sliders.map(slider => (
 
                 <div
@@ -107,6 +109,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, maxValue, nextPage }: C
                     </div>
                 </div>
             ))}
+        </div>
         </div>
 
         <div
