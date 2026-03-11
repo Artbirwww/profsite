@@ -1,6 +1,8 @@
+import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { ProgressBar } from "../progressBar/ProgressBar"
 
 export interface PositiveNegativeOption {
     id: number
@@ -42,13 +44,25 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
             return option
         })
         setOptions(optionsTemp)
+        changeOption(1)
         setCurrentOptionNumber(currentOptionNumber + 1)
     }
-
-    return (
+    const changeOption = (step: number) => {
+        const newNumber = currentOptionNumber + step
+        if (newNumber < 0 || newNumber >= options.length){
+            toast("Дальше некуда идти")
+            return
+        }
+        setCurrentOptionNumber(newNumber)
+    }
+    return ( <>
+        <div>
+            <h4>Вопрос номер: {currentOptionNumber + 1}</h4>
+        </div>
+        <ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} /> 
         <div
             className="test-card test-card-height-200">
-
+            
             <div
                 className="test-card-text">
 
@@ -57,15 +71,18 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
 
             <div
                 className="test-card-options">
-
+                <Button 
+                    buttonLabel={"Назад"} 
+                    buttonFunction={() => changeOption(-1)} />
                 <Button
                     buttonLabel={"Да"}
                     buttonFunction={() => handleAnswer(true)} />
-
                 <Button
                     buttonLabel={"Нет"}
                     buttonFunction={() => handleAnswer(false)} />
             </div>
+            <Toaster/>
         </div>
+        </>
     )
 }
