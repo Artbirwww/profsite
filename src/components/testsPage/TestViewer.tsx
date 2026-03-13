@@ -1,8 +1,19 @@
 import "./css/testsViewerStyles.css"
 
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
+import { useTestStore } from "./TestStore"
+import { useEffect } from "react"
 
 export const TestViewer = () => {
+    const { pathname } = useLocation()
+
+    const currentNumber = useTestStore((state) => state.currentNumber)
+    const totalNumber = useTestStore((state) => state.totalNumber)
+    const reset = useTestStore((store) => store.reset)
+
+    useEffect(() => {
+        reset()
+    }, [pathname, reset])
 
     return (
         <div
@@ -20,7 +31,7 @@ export const TestViewer = () => {
                 <div
                     className="test-additional-text">
 
-                    вопрос 1 из 50
+                    вопрос {currentNumber} из {totalNumber}
                 </div>
 
                 <div

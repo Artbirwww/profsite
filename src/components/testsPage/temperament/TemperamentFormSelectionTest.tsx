@@ -3,6 +3,7 @@ import { PositiveNegative, PositiveNegativeOption } from "../generalTemplates/po
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
 import { useNavigate } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
+import { useTestStore } from "../TestStore"
 
 /** TODO
  * 0. Показывать пользователю текщий прогресс по тесту (вопрос 4 из 57)
@@ -15,10 +16,14 @@ export const TemperamentFormSelection = () => {
     const [pickedForm, setPickedForm] = useState<string | null>(null)
     const [options, setOptions] = useState<TemperamentOption[] | null>(null)
 
+    const setTotalNumber = useTestStore((store) => store.setTotalNumber)
+
     const handleSelect = (testForm: string, temperamentData: TemperamentOption[]) => {
         if (temperamentData === null) return
         setPickedForm(testForm)
         setOptions(temperamentData)
+
+        setTotalNumber(temperamentData.length)
     }
 
     const navigateToResult = () => {
@@ -37,7 +42,6 @@ export const TemperamentFormSelection = () => {
 
                 <div
                     className="test-card test-card-height-250" onClick={() => handleSelect("A", TemperamentFormA)}>
-
 
                     <div
                         className="test-card-header">
@@ -79,6 +83,11 @@ export const TemperamentFormSelection = () => {
             </div>
         )
 
+    if (!pickedForm && !options) 
+        return (
+            <p>Загрузка...</p>
+        )
+
     if (pickedForm && options)
         return (
             <PositiveNegative
@@ -86,8 +95,4 @@ export const TemperamentFormSelection = () => {
                 setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
                 navigateToResults={navigateToResult} />
         )
-
-    return (
-        <p>Загрузка...</p>
-    )
 }

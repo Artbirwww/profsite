@@ -52,7 +52,8 @@
             "sonner": "^2.0.3",
             "tailwind-merge": "*",
             "vaul": "^1.1.2",
-            "xlsx": "^0.18.5"
+            "xlsx": "^0.18.5",
+            "zustand": "^5.0.11"
       },
       "devDependencies": {
             "@types/jest": "^30.0.0",

@@ -68,7 +68,8 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             toast(`Пожалуйста наберите ${maxValue} баллов`)
             return
         }
-
+        //setTotal(sliders.length)
+        //setCurrentNumber(currentGroupNumber + 1)
         setTotalValue(0)
         nextPage(1)
     }

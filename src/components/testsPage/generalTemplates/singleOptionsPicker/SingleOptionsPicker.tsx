@@ -3,6 +3,7 @@ import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
 import { Option } from "lucide-react"
+import { useTestStore } from "../../TestStore"
 
 export interface Task {
     id: number
@@ -30,11 +31,14 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
+    const setCurrentNumber = useTestStore((store) => store.setCurrentNumber)
+
     useEffect(() => {
         if (!tasks)
             return
 
         setCurrentTask(tasks[currentTaskNumber])
+        setCurrentNumber(currentTaskNumber + 1)
     }, [currentTaskNumber])
 
     const handleUserAnswer = (task: Task, option: Option) => {
