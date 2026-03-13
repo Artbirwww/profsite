@@ -1,20 +1,8 @@
 import "./css/testsViewerStyles.css"
 
-import { Outlet, useLocation } from "react-router-dom"
-import { useTestStore } from "./TestStore"
-import { useEffect } from "react"
+import { Outlet } from "react-router-dom"
 
 export const TestViewer = () => {
-    const { pathname } = useLocation()
-
-    const currentNumber = useTestStore((state) => state.currentNumber)
-    const totalNumber = useTestStore((state) => state.totalNumber)
-    const reset = useTestStore((store) => store.reset)
-
-    useEffect(() => {
-        reset()
-    }, [pathname, reset])
-
     return (
         <div
             className="test-viewer-wrapper">

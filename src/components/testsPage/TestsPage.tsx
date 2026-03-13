@@ -14,7 +14,8 @@ export const TestsPage: FC = ({ }) => {
     const [visibleIds, setVisibleIds] = useState<number[]>([])
 
     const calculateProgress = (current: number, total: number) => {
-        if (total <= 0) return 0
+        if (total <= 0)
+            return 0
 
         const rawPercent = (current / total) * 100
 
@@ -33,7 +34,8 @@ export const TestsPage: FC = ({ }) => {
 
     useEffect(() => {
         const container = testContainerRef.current
-        if (!container) return
+        if (!container)
+            return
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -117,8 +119,6 @@ export const TestsPage: FC = ({ }) => {
                     ))}
                 </div>
             </div>
-
-
 
             <div
                 className="test-indicator">
