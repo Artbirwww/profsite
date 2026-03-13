@@ -8,6 +8,7 @@ import { Check } from "lucide-react"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
+
     const testContainerRef = useRef<HTMLDivElement>(null)
 
     const [displayHeight, setDisplayHeight] = useState(0)
@@ -22,7 +23,8 @@ export const TestsPage: FC = ({ }) => {
         return Math.min(Math.max(rawPercent, 0), 95)
     }
 
-    const targetValue = calculateProgress(5, testsList.length)
+    //TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо 0
+    const targetValue = calculateProgress(0, testsList.length)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -82,6 +84,7 @@ export const TestsPage: FC = ({ }) => {
                     <div
                         className="test-count">
 
+                        {/*TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо N*/}
                         <span><Check size={18} strokeWidth={1.5} />N</span>
                         <div className="divider"></div>
                         <span>{testsList.length}</span>
