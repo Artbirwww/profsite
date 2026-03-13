@@ -1,13 +1,14 @@
 import { useLocation } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 import { useEffect, useState } from "react"
-import { BelbinQuestion } from "./belbinData"
-import { calculateBelbinParams } from "./BelbinResultsCalc"
+import { BelbinQuestion, BelbinRoleEN, belbinRoleMapping, belbinRoles } from "./belbinData"
+import { calculateBelbinDominantRoles, calculateBelbinParams } from "./BelbinResultsCalc"
 import { TestResultRequest, TestResultResponse } from "../../../types/testTypes"
 import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { TestItem } from "../TestsData"
 import { formatDateRU } from "../../../services/dates/formatDate"
+import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
 
 interface BelbinResultsProps {
     testInfo?: TestItem
@@ -71,34 +72,44 @@ export const BelbinResults = () => {
         //component can be used at the and of test itself and for showing result 
         sendBalbinResults()
     }, [])
+    const getReadableParamName = (paramName: string, paramsMap: Record<string, BelbinRoleEN>) => {
+        return Object.keys(paramsMap).find(key => paramsMap[key] === paramName)
+    }
+    
+    if (!balbinResults)
+        return (<p>Загрузка...</p>)
 
-
-    if (balbinResults)
-        return (
-            <div
-                className="test-result-item">
-
-                <div
-                    className="test-result-item-content-wrapper">
-
-                    <div>
-                        <h1>Роли в команде. Ваши результаты:</h1>
-                    </div>
-
-                    <div>
-                        {balbinResults.psychParams.map(result => (
-                            <span>{result.name}: {result.param} / 20</span>
-                        ))}
-                    </div>
-
-                    <span>Дата прохождения {formatDateRU(balbinResults?.createdAt)}</span>
-
-                </div>
-            </div>
-        )
-
+    
     return (
-        <p>Загрузка...</p>
+        <div
+            className="test-result-item">
+
+            <div
+                className="test-result-item-content-wrapper">
+
+                <div>
+                    <h1>Роли в команде. Ваши результаты:</h1>
+                </div>
+
+                <div>
+                    <h4>Доминантные роли: </h4>
+                    {calculateBelbinDominantRoles(balbinResults).map(param => (<>
+                            <p>{getReadableParamName(param.name, belbinRoleMapping)} : {param.param}, {belbinRoles.find(role => role.name === param.name)?.description}</p>
+                            <p></p>
+                        </>
+                    ))}
+                </div>
+                    <h4>Все результаты</h4>
+                <div>
+                    {balbinResults.psychParams.map(result => (
+                        <span>{getReadableParamName(result.name, belbinRoleMapping)}: {result.param} / 20</span>
+                    ))}
+                </div>
+
+                <span>Дата прохождения {formatDateRU(balbinResults?.createdAt)}</span>
+
+            </div>
+        </div>
     )
 
 }

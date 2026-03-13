@@ -30,6 +30,16 @@ export const belbinRoleMapping: Record<BelbinRole, BelbinRoleEN> = {
 	'коллективист': 'team_worker',
 	'доводчик': 'completer_finisher'
 };
+export const belbinRoles = [
+	{ id: 1, name: 'company_worker', description: 'Надежный, организованный, превращает идеи в задачи' },
+	{ id: 2, name: 'chairman', description: 'Уверенный лидер, ставит цели, помогает принимать решения' },
+	{ id: 3, name: 'shaper', description: 'Динамичный, бросает вызов команде, работает под давлением' },
+	{ id: 4, name: 'plant', description: 'Креативный, генерирует оригинальные идеи' },
+	{ id: 5, name: 'resource_investigator', description: 'Общительный, ищет возможности, налаживает связи' },
+	{ id: 6, name: 'monitor_evaluation', description: 'Объективный судья, оценивает все варианты' },
+	{ id: 7, name: 'team_worker', description: 'Дипломатичный, слушает, создает гармонию в команде' },
+	{ id: 8, name: 'completer_finisher', description: 'Добросовестный, доводит до конца, проверяет детали' }
+] as const;
 export interface BelbinQuestion extends SliderData {
 	belbinRole: BelbinRole
 	symbol: string

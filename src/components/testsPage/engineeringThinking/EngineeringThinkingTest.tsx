@@ -31,8 +31,7 @@ export const EngineeringThinkingTest = () => {
             }
         })
     }
-
-    if (!tasks)
+    if(!tasks)
         return (
             <p>Загрузка...</p>
         )
@@ -49,5 +48,5 @@ export const EngineeringThinkingTest = () => {
 
     )
 
-
+    
 }
