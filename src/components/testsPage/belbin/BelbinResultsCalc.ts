@@ -1,4 +1,4 @@
-import { TestResultRequest } from "../../../types/testTypes"
+import { PsychParam, TestResultRequest, TestResultResponse } from "../../../types/testTypes"
 import { BelbinQuestion, BelbinRole, BelbinRoleEN, belbinRoleMapping } from "./belbinData"
 
 export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]): TestResultRequest => {
@@ -28,4 +28,8 @@ export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]):
     }
     //convert mapped calculated occures to list of objects for the server
     return testResultRequest
+}
+export const calculateBelbinDominantRoles = (results: TestResultResponse) : PsychParam[] => {
+    const maxParam = Math.max(...results.psychParams.map(param => param.param))
+    return results.psychParams.filter(param => param.param === maxParam)
 }
