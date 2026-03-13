@@ -1,17 +1,16 @@
 /*Обертка для всех элментов отображаемых в test viewer outlet*/
 .test-viewer-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 100px 0;
     overflow: hidden;
     box-sizing: border-box;
 }
 
-
-
+/*Общие стили для карточек тестов*/
 .test-card {
     border-radius: 30px;
     background-color: var(--primary-color);
@@ -26,6 +25,7 @@
 
 .test-grid-template-1 {
     display: grid;
+    align-items: center;
     width: 100%;
     height: 100%;
     grid-template-columns: repeat(2, 1fr);
@@ -42,9 +42,21 @@
     min-height: 200px;
 }
 
+.test-card-height-250 {
+    height: 250px;
+    min-height: 250px;
+}
+
 .test-card-height-600 {
     height: 600px;
     min-height: 600px;
+}
+
+.test-card-header {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+    color: var(--text-primary-color);
 }
 
 .test-card-text {
@@ -56,10 +68,23 @@
     object-fit: cover;
 }
 
+.test-card-input {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .test-card-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.test-card-selectable {
+    cursor: pointer;
+}
+.test-card-selectable.active {
+    color: violet;
 }
 
 .test-card-options {

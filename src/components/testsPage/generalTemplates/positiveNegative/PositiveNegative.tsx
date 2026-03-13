@@ -47,22 +47,26 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
         changeOption(1)
         setCurrentOptionNumber(currentOptionNumber + 1)
     }
+
     const changeOption = (step: number) => {
         const newNumber = currentOptionNumber + step
-        if (newNumber < 0 || newNumber >= options.length){
+        if (newNumber < 0 || newNumber >= options.length) {
             toast("Дальше некуда идти")
             return
         }
         setCurrentOptionNumber(newNumber)
     }
-    return ( <>
-        <div>
-            <h4>Вопрос номер: {currentOptionNumber + 1}</h4>
-        </div>
-        <ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} /> 
+
+    return (<>
+
+        {/*ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />*/}
         <div
             className="test-card test-card-height-200">
-            
+
+            <div>
+                <h4>Вопрос номер: {currentOptionNumber + 1}</h4>
+            </div>
+
             <div
                 className="test-card-text">
 
@@ -71,18 +75,21 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
 
             <div
                 className="test-card-options">
-                <Button 
-                    buttonLabel={"Назад"} 
+                <Button
+                    buttonLabel={"Назад"}
                     buttonFunction={() => changeOption(-1)} />
+
                 <Button
                     buttonLabel={"Да"}
                     buttonFunction={() => handleAnswer(true)} />
+
                 <Button
                     buttonLabel={"Нет"}
                     buttonFunction={() => handleAnswer(false)} />
             </div>
-            <Toaster/>
+
+            <Toaster />
         </div>
-        </>
+    </>
     )
 }

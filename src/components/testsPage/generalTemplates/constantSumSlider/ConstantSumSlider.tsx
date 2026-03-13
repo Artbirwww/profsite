@@ -89,7 +89,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                         <span>{slider.text}</span>
 
                         <div
-                            className="constant-sum-slider-input-container">
+                            className="test-card-input">
 
                             <input
                                 className="input-slider"
