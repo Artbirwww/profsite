@@ -7,7 +7,8 @@ import { TestResultResponse } from "../../../types/testTypes"
 import toast from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { useAuth } from "../../../contexts/AuthContext"
-
+import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
+import './css/results.css'
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
     const { getToken } = useAuth()
@@ -59,7 +60,26 @@ export const EngineeringThinkingResults = () => {
 
     return (<>
         <div className="test-result-wrapper">
-            <p>Ваш уровень инженерного мышления:  {result.psychParams[0].param}</p>
+            <p>Ваш уровень инженерного мышления:  {result.psychParams[0].param} / 70</p>
+            <ProgressBar currentTaskNumber={result.psychParams[0].param} total={70} />
+            <div className="gender-results-wrapper">
+                <div className="results">
+                    <h4>Юноши</h4>
+                    <div className="gender-card">Меньше 26 Очень низкий</div>
+                    <div className="gender-card">27 - 32 Низкий</div>
+                    <div className="gender-card">33 - 38 Средний</div>
+                    <div className="gender-card">39 - 47 Высокий</div>
+                    <div className="gender-card">Больше 48 Очень высокий</div>
+                </div>
+                <div className="results">
+                    <h4>Девушки</h4>
+                        <div className="gender-card">Меньше 17 Очень низкий</div>
+                        <div className="gender-card">18 - 22 Низкий</div>
+                        <div className="gender-card">23 - 27 Средний</div>
+                        <div className="gender-card">28 - 34 Высокий</div>
+                        <div className="gender-card">Больше 35 Очень высокий</div>
+                </div>
+            </div>
         </div>
     </>)
 }

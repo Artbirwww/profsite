@@ -27,21 +27,22 @@ export const EngineeringThinkingTest = () => {
             }
         })
     }
-
-    if (tasks)
+    if(!tasks)
         return (
-            <div
-                className="test-viewer-container">
-
-                <SingleOptionsPicker
-                    tasks={tasks}
-                    setTasks={handleTasksUpdate}
-                    navigateToResults={navigateToResults} />
-            </div>
-
+            <p>Загрузка...</p>
         )
 
     return (
-        <p>Загрузка...</p>
+        <div
+            className="test-viewer-container">
+
+            <SingleOptionsPicker
+                tasks={tasks}
+                setTasks={handleTasksUpdate}
+                navigateToResults={navigateToResults} />
+        </div>
+
     )
+
+    
 }
