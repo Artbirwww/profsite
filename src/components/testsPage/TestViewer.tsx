@@ -20,28 +20,6 @@ export const TestViewer = () => {
             className="test-viewer-wrapper">
 
             <div
-                className="test-header">
-
-                <div
-                    className="test-header-text">
-
-                    Название теста
-                </div>
-
-                <div
-                    className="test-additional-text">
-
-                    вопрос {currentNumber} из {totalNumber}
-                </div>
-
-                <div
-                    className="test-additional-text">
-
-                    Здесь прогресс бар
-                </div>
-            </div>
-
-            <div
                 className="test-outlet">
 
                 <Outlet />
