@@ -100,7 +100,7 @@ export const testsList: TestItem[] = [
     {
         id: "test-professional-orientation-yovayshi",
         label: "Профориентация",
-        author: "Леонардас Адамович Йовайша",
+        author: "Леонардас Адамович Йовайши",
         description: "Описание",
         time: 999,
         questionscount: 999,

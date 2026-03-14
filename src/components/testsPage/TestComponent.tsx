@@ -5,10 +5,12 @@ import { Timer, FileQuestion, ArrowRight } from "lucide-react"
 interface TestItemProps {
     item: TestItem
     dataId: string
+    isAvailable?: boolean
+    isComplete?: boolean
     onClick: (path: string) => void
 }
 
-export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, onClick }) => {
+export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick }) => {
     const Icon = item.icon
 
     const handleClick = () => {

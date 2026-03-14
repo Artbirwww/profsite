@@ -4,17 +4,40 @@ import { FC, useCallback, useEffect, useRef, useState } from "react"
 import { testsList } from "./TestsData"
 import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
-import { CheckCheck } from "lucide-react"
+import { Check } from "lucide-react"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
+
     const testContainerRef = useRef<HTMLDivElement>(null)
 
+    const [displayHeight, setDisplayHeight] = useState(0)
     const [visibleIds, setVisibleIds] = useState<number[]>([])
+
+    const calculateProgress = (current: number, total: number) => {
+        if (total <= 0)
+            return 0
+
+        const rawPercent = (current / total) * 100
+
+        return Math.min(Math.max(rawPercent, 0), 95)
+    }
+
+    //TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо 0
+    const targetValue = calculateProgress(0, testsList.length)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDisplayHeight(targetValue)
+        }, 100)
+
+        return () => clearTimeout(timer)
+    }, [])
 
     useEffect(() => {
         const container = testContainerRef.current
-        if (!container) return
+        if (!container)
+            return
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -53,48 +76,51 @@ export const TestsPage: FC = ({ }) => {
             className="test-wrapper">
 
             <div
-                className="test-header">
+                className="test-container">
 
                 <div
-                    className="test-header-text">
-
-                    Тестирование
-                </div>
-
-
-                <div
-                    className="test-additional-text">
-
-                    3 / {testsList.length}
-                    <CheckCheck size={20} strokeWidth={2} className="test-item-icon" />
-                </div>
-
-                <div
-                    className="test-completness-progress-bar-container">
+                    className="test-completness">
 
                     <div
-                        className="progress-bar-line"
-                        style={{ width: "30%" }} />
-                </div>
-            </div>
+                        className="test-count">
 
-            <div
-                ref={testContainerRef}
-                className="test-grid">
-
-                {testsList.map((item, index) => (
-
-                    <div
-                        key={index}
-                        data-id={index}
-                        className="test-grid-item">
-
-                        <TestComponent
-                            dataId={item.id}
-                            item={item}
-                            onClick={handleClick} />
+                        {/*TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо N*/}
+                        <span><Check size={18} strokeWidth={1.5} />N</span>
+                        <div className="divider"></div>
+                        <span>{testsList.length}</span>
                     </div>
-                ))}
+
+                    <div
+                        className="progress-container">
+
+                        <div
+                            className="progress-fill"
+                            style={{ height: `${displayHeight}%` }}>
+
+                            <div className="wave-element wave-front"></div>
+                            <div className="wave-element wave-back"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    ref={testContainerRef}
+                    className="test-grid">
+
+                    {testsList.map((item, index) => (
+
+                        <div
+                            key={index}
+                            data-id={index}
+                            className="test-grid-item">
+
+                            <TestComponent
+                                dataId={item.id}
+                                item={item}
+                                onClick={handleClick} />
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div

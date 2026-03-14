@@ -4,7 +4,7 @@ interface ProgressBarProps {
     currentTaskNumber: number
     total: number, 
 }
-
+//TODO only progress in props
 export const ProgressBar = ({currentTaskNumber, total} : ProgressBarProps) => {
     const progress = Math.round((currentTaskNumber / total) * 100)
     const progressColor = (progress: number) => {
