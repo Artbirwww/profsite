@@ -64,7 +64,7 @@ export const EngineeringThinkingResults = () => {
             <ProgressBar currentTaskNumber={result.psychParams[0].param} total={70} />
             <div className="gender-results-wrapper">
                 <div className="results">
-                    <h4>Юноши</h4>
+                    <h4>Юноши (старше 18 лет)</h4>
                     <div className="gender-card">Меньше 26 Очень низкий</div>
                     <div className="gender-card">27 - 32 Низкий</div>
                     <div className="gender-card">33 - 38 Средний</div>
@@ -72,7 +72,7 @@ export const EngineeringThinkingResults = () => {
                     <div className="gender-card">Больше 48 Очень высокий</div>
                 </div>
                 <div className="results">
-                    <h4>Девушки</h4>
+                    <h4>Девушки (старше 18 лет)</h4>
                         <div className="gender-card">Меньше 17 Очень низкий</div>
                         <div className="gender-card">18 - 22 Низкий</div>
                         <div className="gender-card">23 - 27 Средний</div>
