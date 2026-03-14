@@ -8,10 +8,10 @@ import { useTestStore } from "../../TestStore"
 export interface Task {
     id: number
     taskNumber: number
-    text: string
+    text?: string
     options: Option[]
     imageUrl?: string
-    answer: number
+    answer?: number
     userAnswer: number
 }
 
@@ -36,14 +36,12 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
     useEffect(() => {
         if (!tasks)
             return
-
         setCurrentTask(tasks[currentTaskNumber])
         setCurrentNumber(currentTaskNumber + 1)
     }, [currentTaskNumber])
-
     const handleUserAnswer = (task: Task, option: Option) => {
         const changedTask = changeOption(task, option)
-
+        console.log(changedTask)
         const tasksTemp = tasks.map(currentTask =>
             task.id === currentTask.id ? changedTask : currentTask
         )
@@ -84,18 +82,20 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
                     {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
                     <p>Задача {currentTaskNumber + 1}/{tasks.length}</p>
                 </div>
+                {currentTask.text && 
+                    <div
+                        className="test-card-text">
 
-                <div
-                    className="test-card-text">
+                        {currentTask?.text}
+                    </div>
+                }
+                {currentTask.imageUrl && 
+                    <div
+                        className="test-card-img">
 
-                    {currentTask?.text}
-                </div>
-
-                <div
-                    className="test-card-img">
-
-                    <img src={currentTask.imageUrl} alt="" />
-                </div>
+                        <img src={currentTask?.imageUrl} alt="" />
+                    </div>
+                }
 
                 <div
                     className="test-card-list">

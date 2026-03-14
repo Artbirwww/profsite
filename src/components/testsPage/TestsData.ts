@@ -66,13 +66,13 @@ export const testsList: TestItem[] = [
     },
     {
         id: "test-professional-orientation-klimov",
-        label: "Профориентация",
+        label: "Профориентация Климов",
         author: "Евгений Александрович Климов",
         description: "Профессиональные предпочтения",
         time: 999,
-        questionscount: 999,
+        questionscount: 20,
         icon: BriefcaseBusiness,
-        path: "/tests/professional-orientation",
+        path: "/tests/professional-orientation-klimov",
         dataItem: "test-item-5"
     },
     {
