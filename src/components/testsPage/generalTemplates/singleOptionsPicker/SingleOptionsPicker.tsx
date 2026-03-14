@@ -45,7 +45,13 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
         )
 
         setTasks(tasksTemp)
-        setCurrentTask(changedTask)
+        if (currentTaskNumber >= tasks.length-1) {
+            setCurrentTask(changedTask)
+            return
+        }
+        //После выбора опции, идем дальше
+        changeTask(1)
+        //
     }
 
     const changeOption = (task: Task, option: Option): Task => ({
