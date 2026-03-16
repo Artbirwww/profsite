@@ -166,7 +166,8 @@ export const PersonalInformation: FC = () => {
                         dropdownOptions={nationalityOptions} dropdownSelected={formData.nationality}
                         optionOnSelect={(opt) => updateField("nationality")(opt.value)} />
 
-                    <DatePicker datePickerLabel="Дата рождения" datePickerSelected={Temporal.PlainDate.from(formData.birthday)}
+                    <DatePicker datePickerLabel="Дата рождения" 
+                        datePickerSelected={Temporal.PlainDate.from(formData.birthday ? formData.birthday : Temporal.Now.plainDateISO().toString())}
                         onDateSelect={handleDateSelect} />
                 </div>
 
