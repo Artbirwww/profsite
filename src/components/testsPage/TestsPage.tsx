@@ -88,6 +88,7 @@ export const TestsPage: FC = ({ }) => {
                         <span><Check size={18} strokeWidth={1.5} />N</span>
                         <div className="divider"></div>
                         <span>{testsList.length}</span>
+
                     </div>
 
                     <div
@@ -99,7 +100,9 @@ export const TestsPage: FC = ({ }) => {
 
                             <div className="wave-element wave-front"></div>
                             <div className="wave-element wave-back"></div>
+
                         </div>
+
                     </div>
                 </div>
 
@@ -107,20 +110,29 @@ export const TestsPage: FC = ({ }) => {
                     ref={testContainerRef}
                     className="test-grid">
 
-                    {testsList.map((item, index) => (
+                    {testsList.map((item, index) => {
 
-                        <div
-                            key={index}
-                            data-id={index}
-                            className="test-grid-item">
+                        const lockedIndices = [4, 5, 6, 7, 8]
+                        const isAvailable = !lockedIndices.includes(index)
 
-                            <TestComponent
-                                dataId={item.id}
-                                item={item}
-                                onClick={handleClick} />
-                        </div>
-                    ))}
+                        return (
+                            <div
+                                key={index}
+                                data-id={index}
+                                className="test-grid-item">
+
+                                <TestComponent
+                                    dataId={item.id}
+                                    index={index}
+                                    isAvailable={isAvailable}
+                                    item={item}
+                                    onClick={handleClick} />
+
+                            </div>)
+                    })}
+
                 </div>
+
             </div>
 
             <div
@@ -130,10 +142,10 @@ export const TestsPage: FC = ({ }) => {
 
                     <div
                         key={index}
-                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
-                ))}
-            </div>
-        </div>
+                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />))}
 
+            </div>
+
+        </div>
     )
 }
