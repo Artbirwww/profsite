@@ -14,7 +14,7 @@ const testsResultPages: Record<TestTypeName, string> = {
   "Temperament": "/tests/temperament-results",
   "Group-Roles": "/tests/group-roles-results",
   "Engineering-Thinking" : "/tests/engineering-thinking-results", 
-  "Professional-Orientation-Klimov": "/tests/professional-orientation-results",
+  "Professional-Orientation-Klimov": "/tests/professional-orientation-klimov-results",
   "Intellectual-Potential": "",
   "Professional-Orientation": ""
 };
