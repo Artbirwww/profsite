@@ -17,6 +17,11 @@ export const KlimovTest = () => {
         setTasks(tasks)
     }
     const navigateToResults = () => {
+        navigate("/tests/professional-orientation-klimov-results", {
+            state: {
+                klimovTasks: tasks
+            }
+        })
         return
     }
     if (!tasks) return (
