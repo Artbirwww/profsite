@@ -24,7 +24,9 @@ export interface SaveTestResponse {
   testId?: string;
 }
 
-export type TestTypeName = 'Temperament' | 'Group-Roles' | 'Professional-Orientation' | 'Engineering-Thinking' | 'Intellectual-Potential';
+export type TestTypeName = 'Temperament' | 'Group-Roles' | 
+                          'Professional-Orientation' | 'Engineering-Thinking' | 
+                          'Intellectual-Potential' | 'Professional-Orientation-Klimov';
 
 export type PsychParamName = 
   | 'working_bee_score'

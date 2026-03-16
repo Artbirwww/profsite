@@ -10,23 +10,27 @@ import { getActualTestByDate } from "./services/testSort";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 type testType = "Temperament" | "Group-Roles" | "Engineering-Thinking";
-const testsResultPages: Record<testType, string> = {
-  Temperament: "/tests/temperament-results",
+const testsResultPages: Record<TestTypeName, string> = {
+  "Temperament": "/tests/temperament-results",
   "Group-Roles": "/tests/group-roles-results",
-  "Engineering-Thinking" : "/tests/engineering-thinking-results"
+  "Engineering-Thinking" : "/tests/engineering-thinking-results", 
+  "Professional-Orientation-Klimov": "/tests/professional-orientation-results",
+  "Intellectual-Potential": "",
+  "Professional-Orientation": ""
 };
 export const ResultsPage: FC = () => {
   //const [psychTest, setPsychTest] = useState<TestResultResponse | null>(null)
   const { getToken } = useAuth();
   const navigate = useNavigate();
   const [completedTests, setCompletedTests] = useState<TestItem []>([])
+  useEffect(() => {
+    console.log(completedTests)
+  }, [completedTests])
   useEffect(()=>{
     const getAvailableTests = async () => {
       try {
         const token = getToken()
-        console.log(token)
         const completedTestsByUser = await testApi.getTestsByPupil(token)
-
         setCompletedTests(testsList
           .filter((test) =>  test !== null && completedTestsByUser.some(completedTest => completedTest.testTypeName === test.name)))
       } catch(err) {

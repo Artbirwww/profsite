@@ -36,6 +36,7 @@ import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
 import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
 import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults";
 import { KlimovTest } from "./components/testsPage/klimov/KlimovTest";
+import { KlimovResults } from "./components/testsPage/klimov/KlimovResults";
 
 export default function App() {
 	return (
@@ -77,6 +78,7 @@ export default function App() {
 							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults />} />
 
 							<Route path="professional-orientation-klimov" element = {<KlimovTest />} />
+							<Route path="professional-orientation-klimov-results" element = {<KlimovResults/>} />
 						</Route>
 					</Route>
 
