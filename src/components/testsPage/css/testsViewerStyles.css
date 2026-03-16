@@ -18,9 +18,95 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    gap: 30px;
     width: 100%;
-    padding: 40px;
+    padding: 30px;
+    user-select: none;
+}
+
+.test-card.type-1 {
+    min-height: 630px;
+}
+
+.test-card.type-2 {
+    min-height: 290px;
+}
+
+.test-card-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.test-card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.test-card-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-text-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: 2px solid var(--border-color);
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 15px;
+}
+
+.test-card-count p {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.test-card-count p span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+}
+
+.test-card-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.test-card-text span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    color: var(--primary-text-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border-radius: 15px;
+    height: 40px;
+    min-height: 40px;
+    width: 40px;
+    min-width: 40px;
+}
+
+.test-card-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .test-grid-template-1 {
@@ -29,43 +115,18 @@
     width: 100%;
     height: 100%;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    column-gap: 60px;
+    row-gap: 30px;
 }
 
-.test-card-height-155 {
-    height: 155px;
-    min-height: 155px;
-}
-
-.test-card-height-200 {
-    height: 200px;
-    min-height: 200px;
-}
-
-.test-card-height-250 {
-    height: 250px;
-    min-height: 250px;
-}
-
-.test-card-height-600 {
-    height: 600px;
-    min-height: 600px;
-}
-
-.test-card-header {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 20px;
-    color: var(--text-primary-color);
-}
-
-.test-card-text {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-normal);
-}
-
-.test-card-img {
-    object-fit: cover;
+.test-grid-item {
+    border-radius: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
 }
 
 .test-card-input {
@@ -74,32 +135,39 @@
     gap: 10px;
 }
 
+.test-card-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+}
+
 .test-card-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
 }
 
 .test-card-selectable {
-    cursor: pointer;
-}
-.test-card-selectable.active {
-    color: violet;
-}
-
-.test-card-options {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    justify-content: end;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
+.test-card-selectable.active {
+    border-color: var(--accent-color);
+}
 
-
-
-
-
+.test-card-selectable:hover {
+    border-color: var(--accent-color);
+}
 
 
 

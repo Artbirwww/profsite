@@ -2,7 +2,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { Option } from "lucide-react"
+import { ArrowLeft, Option } from "lucide-react"
 import { useTestStore } from "../../TestStore"
 
 export interface Task {
@@ -25,9 +25,10 @@ interface SingleOptionPickerProps {
     tasks: Task[]
     setTasks: (tasks: Task[]) => void
     navigateToResults: () => void
+    classType?: string
 }
 
-export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: SingleOptionPickerProps) => {
+export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classType }: SingleOptionPickerProps) => {
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
@@ -47,7 +48,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
         )
 
         setTasks(tasksTemp)
-        if (currentTaskNumber >= tasks.length-1) {
+        if (currentTaskNumber >= tasks.length - 1) {
             setCurrentTask(changedTask)
             return
         }
@@ -73,65 +74,86 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults }: Sing
         setCurrentTaskNumber(currentTaskNumber + step)
     }
 
-    if (currentTask)
-        return (
+    return (<>
+
+        {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
+
+        <div
+            className={`test-card ${classType}`}>
+
             <div
-                className="test-card test-card-height-600">
-
-                <div className="tasks">
-                    {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
-                    <p>Задача {currentTaskNumber + 1}/{tasks.length}</p>
-                </div>
-                {currentTask.text && 
-                    <div
-                        className="test-card-text">
-
-                        {currentTask?.text}
-                    </div>
-                }
-                {currentTask.imageUrl && 
-                    <div
-                        className="test-card-img">
-
-                        <img src={currentTask?.imageUrl} alt="" />
-                    </div>
-                }
+                className="test-card-info">
 
                 <div
-                    className="test-card-list">
+                    className="test-card-back"
+                    onClick={() => { changeTask(-1) }}>
 
-                    {currentTask.options.map(option => (
+                    <ArrowLeft size={20} color="#fff" />
+
+                </div>
+
+                <div
+                    className="test-card-count">
+
+                    <p>Вопрос <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
+
+                </div>
+
+            </div>
+
+            {currentTask?.text &&
+                <div
+                    className="test-card-text">
+
+                    {currentTask?.text}
+
+                </div>}
+
+            {currentTask?.imageUrl &&
+                <div
+                    className="test-card-img"
+                    style={{ maxHeight: "180px", minHeight: "180px" }}>
+
+                    <img src={currentTask?.imageUrl} alt="" />
+
+                </div>}
+
+            <div
+                className="test-card-list">
+
+                {currentTask?.options.map(option => (
+
+                    <div
+                        onClick={() => handleUserAnswer(currentTask, option)}
+                        className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
 
                         <div
-                            onClick={() => handleUserAnswer(currentTask, option)}
-                            className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
+                            className="test-card-text">
 
-                            {option.text}
+                            {option?.text}
+
                         </div>
-                    ))}
-                </div>
 
-                <div
-                    className="test-card-options">
 
+                    </div>))}
+
+            </div>
+
+            <div
+                className="test-card-options">
+
+                {currentTaskNumber < tasks.length - 1 && (
                     <Button
-                        buttonLabel={"Назад"}
-                        buttonFunction={() => changeTask(-1)} />
+                        buttonLabel={"Пропустить"}
+                        buttonFunction={() => changeTask(1)} />)}
 
-                    {currentTaskNumber < tasks.length - 1 && (
-                        <Button
-                            buttonLabel={"Далее"}
-                            buttonFunction={() => changeTask(1)} />)}
+                <Button
+                    buttonLabel={"Завершить тест"}
+                    buttonFunction={navigateToResults} />
 
-                    <Button
-                        buttonLabel={"Завершить тест"}
-                        buttonFunction={navigateToResults} />
-                </div>
+            </div>
 
-                <Toaster />
-            </div>)
-
-    return (
-        <p>Загрузка...</p>
-    )
+            <Toaster />
+        </div>
+    </>)
 }

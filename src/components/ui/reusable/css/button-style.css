@@ -60,7 +60,7 @@ button:disabled {
     min-width: 200px;
     align-items: center;
     justify-content: center;
-    min-height: 45px;
+    min-height: 40px;
     background-color: var(--color-accent-primary);
     color: var(--color-text-on-accent);
     font-weight: 500;

@@ -50,10 +50,6 @@ export const BelbinTest = () => {
             <div
                 className="test-viewer-container">
 
-                <div>
-                    <h4>Вопрос номер {currentGroupNumber + 1}</h4>
-                </div>
-
                 <ConstantSumSlider
                     sliders={currentQuestions}
                     setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}

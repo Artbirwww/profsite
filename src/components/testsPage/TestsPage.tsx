@@ -24,7 +24,7 @@ export const TestsPage: FC = ({ }) => {
     }
 
     //TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо 0
-    const targetValue = calculateProgress(0, testsList.length)
+    const targetValue = calculateProgress(4, testsList.length)
 
     useEffect(() => {
         const timer = setTimeout(() => {
