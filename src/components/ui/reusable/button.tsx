@@ -20,18 +20,33 @@ export const Button: FC<ButtonProps> = ({ buttonLabel, buttonIcon, iconPosition 
     }
 
     return (
-        <div className="custom-button-wrapper">
-            <button id={name}
-                    disabled={isDisabled}
-                    onClick={handleClick}
-                    className={`custom-button ${buttonType} ${isDisabled ? "disabled" : ""} ${iconPosition}`}>
-                    
-                {buttonIcon && (iconPosition === "left" || iconPosition === "center") && (<div className="custom-button-icon">{buttonIcon}</div>)}
+        <button id={name} disabled={isDisabled} onClick={handleClick} className={`custom-button ${buttonType} ${isDisabled ? "disabled" : ""} ${iconPosition}`}>
 
-                {buttonLabel && iconPosition !== "center" && (<span className="custom-button-text">{buttonLabel}</span>)}
-                
-                {buttonIcon && iconPosition === "right" && (<div className="custom-button-icon">{buttonIcon}</div>)}
-            </button>
-        </div>
+            {buttonIcon && (iconPosition === "left" || iconPosition === "center") && (
+
+                <div className="button-icon">
+
+                    {buttonIcon}
+
+                </div>
+
+            )}
+
+            {buttonLabel && iconPosition !== "center" && (
+
+                <span className="custom-button-text">{buttonLabel}</span>
+
+            )}
+
+            {buttonIcon && iconPosition === "right" && (
+                <div className="custom-button-icon">
+
+                    {buttonIcon}
+
+                </div>
+
+            )}
+
+        </button>
     )
 }
