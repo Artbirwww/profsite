@@ -54,6 +54,18 @@ export const testsList: TestItem[] = [
         name: "Engineering-Thinking"
     },
     {
+        id: "test-professional-orientation-klimov",
+        label: "Профориентация Климов",
+        author: "Евгений Александрович Климов",
+        description: "Профессиональные предпочтения",
+        time: 20,
+        questionscount: 20,
+        icon: BriefcaseBusiness,
+        path: "/tests/professional-orientation-klimov",
+        dataItem: "test-item-5",
+        name: "Professional-Orientation-Klimov"
+    },
+    {
         id: "test-intellectual-potential",
         label: "Интеллектуальный потенциал",
         description: "Анализ когнитивных способностей и потенциала развития",
@@ -63,17 +75,6 @@ export const testsList: TestItem[] = [
         path: "/tests/iq-potential",
         dataItem: "test-item-4",
         name: "Intellectual-Potential"
-    },
-    {
-        id: "test-professional-orientation-klimov",
-        label: "Профориентация Климов",
-        author: "Евгений Александрович Климов",
-        description: "Профессиональные предпочтения",
-        time: 999,
-        questionscount: 20,
-        icon: BriefcaseBusiness,
-        path: "/tests/professional-orientation-klimov",
-        dataItem: "test-item-5"
     },
     {
         id: "test-professional-orientation-holland",

@@ -8,7 +8,6 @@ import toast from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { useAuth } from "../../../contexts/AuthContext"
 import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
-import './css/results.css'
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
     const { getToken } = useAuth()

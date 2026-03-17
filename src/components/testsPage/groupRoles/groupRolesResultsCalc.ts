@@ -1,7 +1,7 @@
 import { PsychParam, TestResultRequest, TestResultResponse } from "../../../types/testTypes"
-import { BelbinQuestion, BelbinRole, BelbinRoleEN, belbinRoleMapping } from "./belbinData"
+import { GroupRolesQuestion, groupRolesDataRoleMapping } from "./groupRolesData"
 
-export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]): TestResultRequest => {
+export const calculateGroupRolesParams = (groupQuestionsResult: GroupRolesQuestion[][]): TestResultRequest => {
     const rolesOccurs = {
         company_worker: 0,
         chairman: 0,
@@ -17,7 +17,7 @@ export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]):
     groupQuestionsResult.forEach(questions => {
         questions.forEach(question => {
             if (question.value > 0)
-                rolesOccurs[belbinRoleMapping[question.belbinRole]] += question.value
+                rolesOccurs[groupRolesDataRoleMapping[question.groupRole]] += question.value
         })
     })
 
@@ -26,10 +26,11 @@ export const calculateBelbinParams = (groupQuestionsResult: BelbinQuestion[][]):
         testTypeName: "Group-Roles",
         psychParams: Object.entries(rolesOccurs).map(([name, param]) => ({ name, param }))
     }
-    //convert mapped calculated occures to list of objects for the server
+
     return testResultRequest
 }
-export const calculateBelbinDominantRoles = (results: TestResultResponse) : PsychParam[] => {
+export const calculateGroupRolesDominantRoles = (results: TestResultResponse): PsychParam[] => {
     const maxParam = Math.max(...results.psychParams.map(param => param.param))
+
     return results.psychParams.filter(param => param.param === maxParam)
 }

@@ -3,6 +3,7 @@ import { Button } from "../../../ui/reusable/button"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
+import { ArrowLeft } from "lucide-react"
 
 export interface PositiveNegativeOption {
     id: number
@@ -60,24 +61,39 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
     return (<>
 
         {/*ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />*/}
-        <div
-            className="test-card test-card-height-200">
 
-            <div>
-                <h4>Вопрос номер: {currentOptionNumber + 1}</h4>
+        <div
+            className="test-card"
+            style={{ minHeight: "230px" }}>
+
+            <div
+                className="test-card-info">
+
+                <div
+                    className="test-card-back"
+                    onClick={() => { changeOption(-1) }}>
+
+                    <ArrowLeft size={20} color="#fff" />
+
+                </div>
+
+                <div
+                    className="test-card-count">
+
+                    <p>Вопрос <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(options.length).toString().padStart(2, "0")}</span></p>
+
+                </div>
             </div>
 
             <div
                 className="test-card-text">
 
                 {currentOption?.text}
+
             </div>
 
             <div
                 className="test-card-options">
-                <Button
-                    buttonLabel={"Назад"}
-                    buttonFunction={() => changeOption(-1)} />
 
                 <Button
                     buttonLabel={"Да"}
@@ -86,10 +102,10 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
                 <Button
                     buttonLabel={"Нет"}
                     buttonFunction={() => handleAnswer(false)} />
+
             </div>
 
             <Toaster />
         </div>
-    </>
-    )
+    </>)
 }

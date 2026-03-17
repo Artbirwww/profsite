@@ -5,9 +5,21 @@
       "taskNumber": 1,
       "text": "Если левая шестерня поворачивается в указанном стрелкой направлении, то в каком направлении будет поворачиваться правая шестерня?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "Не знаю", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Не знаю",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/1.png",
       "answer": 2,
@@ -18,9 +30,21 @@
       "taskNumber": 2,
       "text": "Какая гусеница должна двигаться быстрее, чтобы трактор поворачивался в указанном стрелкой направлении?",
       "options": [
-        { "id": 1, "text": "Гусеница А.", "isPicked": false },
-        { "id": 2, "text": "Гусеница В.", "isPicked": false },
-        { "id": 3, "text": "Не знаю.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Гусеница А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Гусеница В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Не знаю.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/2.png",
       "answer": 2,
@@ -31,9 +55,21 @@
       "taskNumber": 3,
       "text": "Если верхнее колесо вращается в направлении, указанном стрелкой, то в каком направлении вращается нижнее колесо?",
       "options": [
-        { "id": 1, "text": "В направлении А.", "isPicked": false },
-        { "id": 2, "text": "В обоих направлениях.", "isPicked": false },
-        { "id": 3, "text": "В направлении В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В обоих направлениях.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В направлении В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/3.png",
       "answer": 1,
@@ -44,9 +80,21 @@
       "taskNumber": 4,
       "text": "В каком направлении будет двигаться зубчатое колесо, если ручку слева двигать вниз и вверх в направлении пунктирных стрелок?",
       "options": [
-        { "id": 1, "text": "Вперед-назад по стрелкам А-В.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Вперед-назад по стрелкам А-В.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/4.png",
       "answer": 3,
@@ -57,9 +105,21 @@
       "taskNumber": 5,
       "text": "Если на круглый диск, указанный на рисунке, действуют одновременно две одинаковые силы 1 и 2, то в каком направлении будет двигаться диск?",
       "options": [
-        { "id": 1, "text": "В направлении, указанном стрелкой А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "В направлении стрелки С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении, указанном стрелкой А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В направлении стрелки С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/5.png",
       "answer": 2,
@@ -70,9 +130,21 @@
       "taskNumber": 6,
       "text": "Нужны ли обе цепи, изображенные на рисунке, для поддержки груза, или достаточно только одной? Какой?",
       "options": [
-        { "id": 1, "text": "Достаточно цепи А.", "isPicked": false },
-        { "id": 2, "text": "Достаточно цепи В.", "isPicked": false },
-        { "id": 3, "text": "Нужны обе цепи.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Достаточно цепи А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Достаточно цепи В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Нужны обе цепи.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/6.png",
       "answer": 2,
@@ -83,9 +155,21 @@
       "taskNumber": 7,
       "text": "В речке, где вода течет в направлении, указанном стрелкой, установлены три турбины. Из труб над ними падает вода. Какая из турбин будет вращаться быстрее?",
       "options": [
-        { "id": 1, "text": "Турбина А.", "isPicked": false },
-        { "id": 2, "text": "Турбина В.", "isPicked": false },
-        { "id": 3, "text": "Турбина С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Турбина А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Турбина В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Турбина С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/7.png",
       "answer": 3,
@@ -96,9 +180,21 @@
       "taskNumber": 8,
       "text": "Какое из колес, А или В, будет вращаться в том же направлении, что и колесо X?",
       "options": [
-        { "id": 1, "text": "Колесо А.", "isPicked": false },
-        { "id": 2, "text": "Колесо В.", "isPicked": false },
-        { "id": 3, "text": "Оба колеса.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Колесо А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Колесо В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Оба колеса.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/8.png",
       "answer": 3,
@@ -109,9 +205,21 @@
       "taskNumber": 9,
       "text": "Какая цепь нужна для поддержки груза?",
       "options": [
-        { "id": 1, "text": "Цепь А.", "isPicked": false },
-        { "id": 2, "text": "Цепь В.", "isPicked": false },
-        { "id": 3, "text": "Цепь С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Цепь А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Цепь В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Цепь С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/9.png",
       "answer": 2,
@@ -122,9 +230,21 @@
       "taskNumber": 10,
       "text": "Какая из шестерен вращается в том же направлении, что и ведущая шестерня? А может быть, в этом направлении не вращается ни одна из шестерен?",
       "options": [
-        { "id": 1, "text": "Шестерня А.", "isPicked": false },
-        { "id": 2, "text": "Шестерня В.", "isPicked": false },
-        { "id": 3, "text": "Не вращается ни одна.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Шестерня А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Шестерня В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Не вращается ни одна.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/10.png",
       "answer": 3,
@@ -135,9 +255,21 @@
       "taskNumber": 11,
       "text": "Какая из осей, А или В, вращается быстрее или обе оси вращаются с одинаковой скоростью?",
       "options": [
-        { "id": 1, "text": "Ось А вращается быстрее.", "isPicked": false },
-        { "id": 2, "text": "Ось В вращается быстрее.", "isPicked": false },
-        { "id": 3, "text": "Обе оси вращаются с одинаковой скоростью.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Ось А вращается быстрее.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Ось В вращается быстрее.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Обе оси вращаются с одинаковой скоростью.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/11.png",
       "answer": 2,
@@ -148,9 +280,21 @@
       "taskNumber": 12,
       "text": "Если нижнее колесо вращается в направлении, указанном стрелкой, то в каком направлении будет вращаться ось X?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В том и другом направлениях.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/12.png",
       "answer": 2,
@@ -161,9 +305,21 @@
       "taskNumber": 13,
       "text": "Какая из машин с жидкостью в бочке тормозит?",
       "options": [
-        { "id": 1, "text": "Машина А.", "isPicked": false },
-        { "id": 2, "text": "Машина B.", "isPicked": false },
-        { "id": 3, "text": "Машина C.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Машина А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Машина B.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Машина C.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/13.png",
       "answer": 3,
@@ -174,9 +330,21 @@
       "taskNumber": 14,
       "text": "В каком направлении будет вращаться вертушка, приспособленная для полива, если в нее пустить воду под напором?",
       "options": [
-        { "id": 1, "text": "В обе стороны.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В обе стороны.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/14.png",
       "answer": 3,
@@ -187,9 +355,21 @@
       "taskNumber": 15,
       "text": "Какая из рукояток будет держаться под напряжением пружины?",
       "options": [
-        { "id": 1, "text": "Не будут держаться обе.", "isPicked": false },
-        { "id": 2, "text": "Будет держаться рукоятка А.", "isPicked": false },
-        { "id": 3, "text": "Будет держаться рукоятка В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Не будут держаться обе.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Будет держаться рукоятка А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Будет держаться рукоятка В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/15.png",
       "answer": 2,
@@ -200,9 +380,21 @@
       "taskNumber": 16,
       "text": "В каком направлении передвигали кровать в последний раз?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "Не знаю.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Не знаю.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/16.png",
       "answer": 2,
@@ -213,9 +405,21 @@
       "taskNumber": 17,
       "text": "Колесо и тормозная колодка изготовлены из одного и того же материала. Что быстрее износится: колесо или колодка?",
       "options": [
-        { "id": 1, "text": "Колесо износится быстрее.", "isPicked": false },
-        { "id": 2, "text": "Колодка износится быстрее.", "isPicked": false },
-        { "id": 3, "text": "И колесо, и колодка износятся одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Колесо износится быстрее.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Колодка износится быстрее.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "И колесо, и колодка износятся одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/17.png",
       "answer": 2,
@@ -226,9 +430,21 @@
       "taskNumber": 18,
       "text": "Одинаковой ли плотности жидкостями заполнены емкости или одна из жидкостей более плотная, чем другая (шары одинаковые)?",
       "options": [
-        { "id": 1, "text": "Обе жидкости одинаковые по плотности.", "isPicked": false },
-        { "id": 2, "text": "Жидкость А плотнее.", "isPicked": false },
-        { "id": 3, "text": "Жидкость В плотнее.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Обе жидкости одинаковые по плотности.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Жидкость А плотнее.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Жидкость В плотнее.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/18.png",
       "answer": 3,
@@ -239,9 +455,21 @@
       "taskNumber": 19,
       "text": "В каком направлении будет вращаться вентилятор под напором воздуха?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "В том и другом направлениях.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В том и другом направлениях.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/19.png",
       "answer": 2,
@@ -252,9 +480,21 @@
       "taskNumber": 20,
       "text": "В каком положении остановится диск после свободного движения по указанной линии?",
       "options": [
-        { "id": 1, "text": "В каком угодно.", "isPicked": false },
-        { "id": 2, "text": "В положении А.", "isPicked": false },
-        { "id": 3, "text": "В положении В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В каком угодно.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В положении А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В положении В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/20.png",
       "answer": 3,
@@ -265,9 +505,21 @@
       "taskNumber": 21,
       "text": "Какими ножницами легче резать лист железа?",
       "options": [
-        { "id": 1, "text": "Ножницами А.", "isPicked": false },
-        { "id": 2, "text": "Ножницами В.", "isPicked": false },
-        { "id": 3, "text": "Ножницами С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Ножницами А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Ножницами В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Ножницами С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/21.png",
       "answer": 2,
@@ -278,9 +530,21 @@
       "taskNumber": 22,
       "text": "Какое колесо кресла-коляски вращается быстрее при движении коляски?",
       "options": [
-        { "id": 1, "text": "Колесо А вращается быстрее.", "isPicked": false },
-        { "id": 2, "text": "Оба колеса вращаются с одинаковой скоростью.", "isPicked": false },
-        { "id": 3, "text": "Колесо В вращается быстрее.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Колесо А вращается быстрее.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Оба колеса вращаются с одинаковой скоростью.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Колесо В вращается быстрее.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/22.png",
       "answer": 1,
@@ -291,9 +555,21 @@
       "taskNumber": 23,
       "text": "Как будет изменяться форма запаянной тонкостенной жестяной банки, если ее нагревать?",
       "options": [
-        { "id": 1, "text": "Как показано на рисунке А.", "isPicked": false },
-        { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
-        { "id": 3, "text": "Как показано на рисунке С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Как показано на рисунке А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Как показано на рисунке В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Как показано на рисунке С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/23.png",
       "answer": 3,
@@ -304,9 +580,21 @@
       "taskNumber": 24,
       "text": "Какая из шестерен вращается быстрее?",
       "options": [
-        { "id": 1, "text": "Шестерня А.", "isPicked": false },
-        { "id": 2, "text": "Шестерня В.", "isPicked": false },
-        { "id": 3, "text": "Шестерня С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Шестерня А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Шестерня В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Шестерня С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/24.png",
       "answer": 3,
@@ -317,9 +605,21 @@
       "taskNumber": 25,
       "text": "С каким шариком столкнется шарик X, если его ударить о преграду в направлении, указанном сплошной стрелкой?",
       "options": [
-        { "id": 1, "text": "С шариком А.", "isPicked": false },
-        { "id": 2, "text": "С шариком В.", "isPicked": false },
-        { "id": 3, "text": "С шариком С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "С шариком А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "С шариком В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "С шариком С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/25.png",
       "answer": 2,
@@ -330,9 +630,21 @@
       "taskNumber": 26,
       "text": "Допустим, что нарисованные колеса изготовлены из резины. В каком направлении нужно вращать ведущее колесо (левое), чтобы колесо Х вращалось в направлении, указанном пунктирной стрелкой?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "Направление не имеет значения.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Направление не имеет значения.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/26.png",
       "answer": 2,
@@ -343,9 +655,21 @@
       "taskNumber": 27,
       "text": "Если первая шестерня вращается в направлении, указанном стрелкой, то в каком направлении вращается верхняя шестерня?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В направлении стрелки В.", "isPicked": false },
-        { "id": 3, "text": "Не знаю.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Не знаю.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/27.png",
       "answer": 1,
@@ -356,9 +680,21 @@
       "taskNumber": 28,
       "text": "Вес фигур А, В и С одинаковый. Какую из них труднее опрокинуть?",
       "options": [
-        { "id": 1, "text": "Фигуру А.", "isPicked": false },
-        { "id": 2, "text": "Фигуру В.", "isPicked": false },
-        { "id": 3, "text": "Фигуру С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Фигуру А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Фигуру В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Фигуру С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/28.png",
       "answer": 3,
@@ -369,9 +705,21 @@
       "taskNumber": 29,
       "text": "Какими кусочками льда можно быстрее охладить стакан воды?",
       "options": [
-        { "id": 1, "text": "Куском на картинке А.", "isPicked": false },
-        { "id": 2, "text": "Кусочками на картинке В.", "isPicked": false },
-        { "id": 3, "text": "Куском на картинке С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Куском на картинке А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Кусочками на картинке В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Куском на картинке С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/29.png",
       "answer": 2,
@@ -382,9 +730,21 @@
       "taskNumber": 30,
       "text": "На какой картинке правильно изображено падение бомбы из самолета?",
       "options": [
-        { "id": 1, "text": "На картинке А.", "isPicked": false },
-        { "id": 2, "text": "На картинке В.", "isPicked": false },
-        { "id": 3, "text": "На картинке С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "На картинке А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "На картинке В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "На картинке С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/30.png",
       "answer": 1,
@@ -395,9 +755,21 @@
       "taskNumber": 31,
       "text": "В какую сторону занесет эту машину, движущуюся по стрелке, на повороте?",
       "options": [
-        { "id": 1, "text": "В любую сторону.", "isPicked": false },
-        { "id": 2, "text": "В сторону А.", "isPicked": false },
-        { "id": 3, "text": "В сторону В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В любую сторону.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В сторону А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В сторону В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/31.png",
       "answer": 3,
@@ -408,9 +780,21 @@
       "taskNumber": 32,
       "text": "В емкости находится лед. Как изменится уровень воды по сравнению с уровнем льда после его таяния?",
       "options": [
-        { "id": 1, "text": "Уровень повысится.", "isPicked": false },
-        { "id": 2, "text": "Уровень понизится.", "isPicked": false },
-        { "id": 3, "text": "Уровень не изменится.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Уровень повысится.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Уровень понизится.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Уровень не изменится.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/32.png",
       "answer": 2,
@@ -421,9 +805,21 @@
       "taskNumber": 33,
       "text": "Какой из камней, А или В, легче двигать?",
       "options": [
-        { "id": 1, "text": "Камень А.", "isPicked": false },
-        { "id": 2, "text": "Усилия должны быть одинаковыми.", "isPicked": false },
-        { "id": 3, "text": "Камень В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Камень А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Усилия должны быть одинаковыми.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Камень В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/33.png",
       "answer": 1,
@@ -434,9 +830,21 @@
       "taskNumber": 34,
       "text": "Какая из осей вращается медленнее?",
       "options": [
-        { "id": 1, "text": "Ось А.", "isPicked": false },
-        { "id": 2, "text": "Ось В.", "isPicked": false },
-        { "id": 3, "text": "Ось С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Ось А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Ось В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Ось С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/34.png",
       "answer": 3,
@@ -447,9 +855,21 @@
       "taskNumber": 35,
       "text": "Одинаков ли вес обоих ящиков или один из них легче?",
       "options": [
-        { "id": 1, "text": "Ящик А легче.", "isPicked": false },
-        { "id": 2, "text": "Ящик В легче.", "isPicked": false },
-        { "id": 3, "text": "Ящики одинакового веса.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Ящик А легче.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Ящик В легче.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Ящики одинакового веса.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/35.png",
       "answer": 1,
@@ -460,9 +880,21 @@
       "taskNumber": 36,
       "text": "Бруски А и В имеют одинаковые сечения и изготовлены из одного и того же материала. Какой из брусков может выдержать больший вес?",
       "options": [
-        { "id": 1, "text": "Оба выдержат одинаковую нагрузку.", "isPicked": false },
-        { "id": 2, "text": "Брусок А.", "isPicked": false },
-        { "id": 3, "text": "Брусок В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Оба выдержат одинаковую нагрузку.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Брусок А.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Брусок В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/36.png",
       "answer": 3,
@@ -473,9 +905,21 @@
       "taskNumber": 37,
       "text": "На какую высоту поднимется вода из шланга, если ее выпустить из резервуаров А и В, заполненных доверху?",
       "options": [
-        { "id": 1, "text": "Как показано на рисунке А.", "isPicked": false },
-        { "id": 2, "text": "Как показано на рисунке В.", "isPicked": false },
-        { "id": 3, "text": "До высоты резервуаров.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Как показано на рисунке А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Как показано на рисунке В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "До высоты резервуаров.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/37.png",
       "answer": 2,
@@ -486,9 +930,21 @@
       "taskNumber": 38,
       "text": "Какой из этих цельнометаллических предметов охладится быстрее, если их вынести горячими на воздух?",
       "options": [
-        { "id": 1, "text": "Предмет А.", "isPicked": false },
-        { "id": 2, "text": "Предмет В.", "isPicked": false },
-        { "id": 3, "text": "Предмет С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Предмет А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Предмет В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Предмет С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/38.png",
       "answer": 3,
@@ -499,9 +955,21 @@
       "taskNumber": 39,
       "text": "В каком положении остановится деревянный диск со вставленным в него металлическим кружком, если диск катнуть?",
       "options": [
-        { "id": 1, "text": "В положении А.", "isPicked": false },
-        { "id": 2, "text": "В положении В.", "isPicked": false },
-        { "id": 3, "text": "В любом положении.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В положении А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В положении В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В любом положении.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/39.png",
       "answer": 1,
@@ -512,9 +980,21 @@
       "taskNumber": 40,
       "text": "В каком месте переломится палка, если резко нажать на ее конец слева?",
       "options": [
-        { "id": 1, "text": "В месте А.", "isPicked": false },
-        { "id": 2, "text": "В месте В.", "isPicked": false },
-        { "id": 3, "text": "В месте С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В месте А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В месте В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В месте С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/40.png",
       "answer": 2,
@@ -525,9 +1005,21 @@
       "taskNumber": 41,
       "text": "На какой емкости правильно нанесены риски, обозначающие равные объемы?",
       "options": [
-        { "id": 1, "text": "На емкости А.", "isPicked": false },
-        { "id": 2, "text": "На емкости В.", "isPicked": false },
-        { "id": 3, "text": "На емкости С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "На емкости А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "На емкости В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "На емкости С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/41.png",
       "answer": 1,
@@ -538,9 +1030,21 @@
       "taskNumber": 42,
       "text": "На каком из рисунков правильно изображена вода, выливающаяся из отверстий сосуда?",
       "options": [
-        { "id": 1, "text": "На рисунке А.", "isPicked": false },
-        { "id": 2, "text": "На рисунке В.", "isPicked": false },
-        { "id": 3, "text": "На рисунке С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "На рисунке А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "На рисунке В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "На рисунке С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/42.png",
       "answer": 2,
@@ -551,9 +1055,21 @@
       "taskNumber": 43,
       "text": "В каком пакете мороженое растает быстрее?",
       "options": [
-        { "id": 1, "text": "В пакете А.", "isPicked": false },
-        { "id": 2, "text": "В пакете В.", "isPicked": false },
-        { "id": 3, "text": "Одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В пакете А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В пакете В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/43.png",
       "answer": 3,
@@ -564,9 +1080,21 @@
       "taskNumber": 44,
       "text": "Как будет двигаться подвешенный груз, если верхнее колесо вращается в направлении стрелки?",
       "options": [
-        { "id": 1, "text": "Прерывисто вниз.", "isPicked": false },
-        { "id": 2, "text": "Прерывисто вверх.", "isPicked": false },
-        { "id": 3, "text": "Непрерывно вверх.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Прерывисто вниз.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Прерывисто вверх.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Непрерывно вверх.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/44.png",
       "answer": 1,
@@ -577,9 +1105,21 @@
       "taskNumber": 45,
       "text": "Какое из колес, изготовленных из одинакового материала, будет вращаться дольше, если их раскрутить до одинаковой скорости?",
       "options": [
-        { "id": 1, "text": "Колесо А.", "isPicked": false },
-        { "id": 2, "text": "Колесо В.", "isPicked": false },
-        { "id": 3, "text": "Колесо С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Колесо А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Колесо В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Колесо С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/45.png",
       "answer": 3,
@@ -590,9 +1130,21 @@
       "taskNumber": 46,
       "text": "Каким способом легче везти камень по гладкой дороге?",
       "options": [
-        { "id": 1, "text": "Способом А.", "isPicked": false },
-        { "id": 2, "text": "Способом В.", "isPicked": false },
-        { "id": 3, "text": "Способом С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Способом А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Способом В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Способом С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/46.png",
       "answer": 1,
@@ -603,9 +1155,21 @@
       "taskNumber": 47,
       "text": "В каком направлении будет двигаться вода в системе шестерёнчатого насоса, если его шестерня вращается в направлении стрелок?",
       "options": [
-        { "id": 1, "text": "В сторону А.", "isPicked": false },
-        { "id": 2, "text": "В сторону В.", "isPicked": false },
-        { "id": 3, "text": "В обе стороны.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В сторону А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В сторону В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В обе стороны.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/47.png",
       "answer": 1,
@@ -616,9 +1180,21 @@
       "taskNumber": 48,
       "text": "При каком виде передачи подъем в гору на велосипеде тяжелее?",
       "options": [
-        { "id": 1, "text": "При передаче типа А.", "isPicked": false },
-        { "id": 2, "text": "При передаче типа В.", "isPicked": false },
-        { "id": 3, "text": "При передаче типа С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "При передаче типа А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "При передаче типа В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "При передаче типа С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/48.png",
       "answer": 1,
@@ -629,9 +1205,21 @@
       "taskNumber": 49,
       "text": "На дне емкости находится песок. Поверх него — галька (камешки). Как изменится уровень насыпки в емкости, если гальку и песок перемешать?",
       "options": [
-        { "id": 1, "text": "Уровень повысится.", "isPicked": false },
-        { "id": 2, "text": "Уровень понизится.", "isPicked": false },
-        { "id": 3, "text": "Уровень останется прежним.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Уровень повысится.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Уровень понизится.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Уровень останется прежним.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/49.png",
       "answer": 2,
@@ -642,9 +1230,21 @@
       "taskNumber": 50,
       "text": "Зубчатая рейка Х двигается полметра в указанном стрелкой направлении. На какое расстояние при этом переместится центр шестерни?",
       "options": [
-        { "id": 1, "text": "На 0,16м.", "isPicked": false },
-        { "id": 2, "text": "На 0,25м.", "isPicked": false },
-        { "id": 3, "text": "На 0,5 м.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "На 0,16м.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "На 0,25м.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "На 0,5 м.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/50.png",
       "answer": 3,
@@ -655,9 +1255,21 @@
       "taskNumber": 51,
       "text": "Какая из шестерен, А или В, вращается медленнее, или они вращаются с одинаковой скоростью?",
       "options": [
-        { "id": 1, "text": "Шестерня А вращается медленнее.", "isPicked": false },
-        { "id": 2, "text": "Обе шестерни вращаются с одинаковой скоростью.", "isPicked": false },
-        { "id": 3, "text": "Шестерня В вращается медленнее.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Шестерня А вращается медленнее.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Обе шестерни вращаются с одинаковой скоростью.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Шестерня В вращается медленнее.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/51.png",
       "answer": 2,
@@ -668,9 +1280,21 @@
       "taskNumber": 52,
       "text": "Какая из лошадок должна бежать на повороте быстрее для того, чтобы ее не обогнала другая?",
       "options": [
-        { "id": 1, "text": "Лошадка А.", "isPicked": false },
-        { "id": 2, "text": "Обе должны бежать с одинаковой скоростью.", "isPicked": false },
-        { "id": 3, "text": "Лошадка В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Лошадка А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Обе должны бежать с одинаковой скоростью.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Лошадка В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/52.png",
       "answer": 1,
@@ -681,9 +1305,21 @@
       "taskNumber": 53,
       "text": "Из какого крана сильнее должна бить струя воды, если их открыть одновременно?",
       "options": [
-        { "id": 1, "text": "Из крана А.", "isPicked": false },
-        { "id": 2, "text": "Из крана В.", "isPicked": false },
-        { "id": 3, "text": "Из обоих одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Из крана А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Из крана В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Из обоих одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/53.png",
       "answer": 2,
@@ -694,9 +1330,21 @@
       "taskNumber": 54,
       "text": "В каком случае легче поднять одинаковый по весу груз?",
       "options": [
-        { "id": 1, "text": "В случае А.", "isPicked": false },
-        { "id": 2, "text": "В случае В.", "isPicked": false },
-        { "id": 3, "text": "В обоих случаях одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В случае А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В случае В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В обоих случаях одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/54.png",
       "answer": 1,
@@ -707,9 +1355,21 @@
       "taskNumber": 55,
       "text": "Эти тела сделаны из одного и того же материала. Какое из них имеет меньший вес?",
       "options": [
-        { "id": 1, "text": "Тело А.", "isPicked": false },
-        { "id": 2, "text": "Тело В.", "isPicked": false },
-        { "id": 3, "text": "Оба тела одинаковы по весу.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Тело А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Тело В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Оба тела одинаковы по весу.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/55.png",
       "answer": 1,
@@ -720,9 +1380,21 @@
       "taskNumber": 56,
       "text": "В какой точке шарик двигается быстрее?",
       "options": [
-        { "id": 1, "text": "В обоих точках, А и В, скорость одинаковая.", "isPicked": false },
-        { "id": 2, "text": "В точке А скорость больше.", "isPicked": false },
-        { "id": 3, "text": "В точке В скорость больше.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В обоих точках, А и В, скорость одинаковая.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В точке А скорость больше.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В точке В скорость больше.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/56.png",
       "answer": 2,
@@ -733,9 +1405,21 @@
       "taskNumber": 57,
       "text": "Какой из двух рельсов должен быть выше на повороте?",
       "options": [
-        { "id": 1, "text": "Рельс А.", "isPicked": false },
-        { "id": 2, "text": "Рельс В.", "isPicked": false },
-        { "id": 3, "text": "Оба рельса должны быть одинаковыми по высоте.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Рельс А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Рельс В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Оба рельса должны быть одинаковыми по высоте.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/57.png",
       "answer": 1,
@@ -746,9 +1430,21 @@
       "taskNumber": 58,
       "text": "Как распределяется вес между крюками А и В?",
       "options": [
-        { "id": 1, "text": "Сила тяжести на обоих крюках одинаковая.", "isPicked": false },
-        { "id": 2, "text": "На крюке А сила тяжести больше.", "isPicked": false },
-        { "id": 3, "text": "На крюке В сила тяжести больше.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Сила тяжести на обоих крюках одинаковая.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "На крюке А сила тяжести больше.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "На крюке В сила тяжести больше.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/58.png",
       "answer": 1,
@@ -759,9 +1455,21 @@
       "taskNumber": 59,
       "text": "Клапаны какого насоса находятся в правильном положении?",
       "options": [
-        { "id": 1, "text": "Насоса А.", "isPicked": false },
-        { "id": 2, "text": "Насоса В.", "isPicked": false },
-        { "id": 3, "text": "Насоса С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Насоса А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Насоса В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Насоса С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/59.png",
       "answer": 2,
@@ -772,9 +1480,21 @@
       "taskNumber": 60,
       "text": "Какая из осей вращается медленнее?",
       "options": [
-        { "id": 1, "text": "Ось А.", "isPicked": false },
-        { "id": 2, "text": "Ось В.", "isPicked": false },
-        { "id": 3, "text": "Ось С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Ось А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Ось В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Ось С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/60.png",
       "answer": 1,
@@ -785,9 +1505,21 @@
       "taskNumber": 61,
       "text": "Материал и сечения тросов А и В одинаковые. Какой из них выдержит большую нагрузку?",
       "options": [
-        { "id": 1, "text": "Трос А.", "isPicked": false },
-        { "id": 2, "text": "Трос В.", "isPicked": false },
-        { "id": 3, "text": "Оба троса выдержат одинаковую нагрузку.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Трос А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Трос В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Оба троса выдержат одинаковую нагрузку.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/61.png",
       "answer": 2,
@@ -798,9 +1530,21 @@
       "taskNumber": 62,
       "text": "Какой из тракторов должен отъехать дальше для того, чтобы лодки остановились у берега?",
       "options": [
-        { "id": 1, "text": "Трактор А.", "isPicked": false },
-        { "id": 2, "text": "Трактор В.", "isPicked": false },
-        { "id": 3, "text": "Оба трактора должны отъехать на одинаковое расстояние.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Трактор А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Трактор В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Оба трактора должны отъехать на одинаковое расстояние.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/62.png",
       "answer": 1,
@@ -811,9 +1555,21 @@
       "taskNumber": 63,
       "text": "У какой из калиток трос поддержки закреплен лучше?",
       "options": [
-        { "id": 1, "text": "У обоих калиток закреплен одинаково хорошо.", "isPicked": false },
-        { "id": 2, "text": "У калитки А закреплен лучше.", "isPicked": false },
-        { "id": 3, "text": "У калитки В закреплен лучше.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "У обоих калиток закреплен одинаково хорошо.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "У калитки А закреплен лучше.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "У калитки В закреплен лучше.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/63.png",
       "answer": 3,
@@ -824,9 +1580,21 @@
       "taskNumber": 64,
       "text": "Какой талью легче поднять груз?",
       "options": [
-        { "id": 1, "text": "Талью А.", "isPicked": false },
-        { "id": 2, "text": "Талью В.", "isPicked": false },
-        { "id": 3, "text": "Обеими талями одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Талью А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Талью В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Обеими талями одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/64.png",
       "answer": 2,
@@ -837,9 +1605,21 @@
       "taskNumber": 65,
       "text": "На оси Х находится ведущее колесо, вращающее конусы. Какой из них будет вращаться быстрее?",
       "options": [
-        { "id": 1, "text": "Конус А.", "isPicked": false },
-        { "id": 2, "text": "Оба конуса будут вращаться одинаково.", "isPicked": false },
-        { "id": 3, "text": "Конус В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Конус А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Оба конуса будут вращаться одинаково.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Конус В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/65.png",
       "answer": 1,
@@ -850,9 +1630,21 @@
       "taskNumber": 66,
       "text": "Если маленькое колесо будет вращаться в направлении, указанном стрелкой, то как будет вращаться большое колесо?",
       "options": [
-        { "id": 1, "text": "В направлении стрелки А.", "isPicked": false },
-        { "id": 2, "text": "В обе стороны.", "isPicked": false },
-        { "id": 3, "text": "В направлении стрелки В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "В направлении стрелки А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "В обе стороны.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "В направлении стрелки В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/66.png",
       "answer": 2,
@@ -863,9 +1655,21 @@
       "taskNumber": 67,
       "text": "Какой из тросов удерживает столб надежнее?",
       "options": [
-        { "id": 1, "text": "Трос А.", "isPicked": false },
-        { "id": 2, "text": "Трос В.", "isPicked": false },
-        { "id": 3, "text": "Трос С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Трос А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Трос В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Трос С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/67.png",
       "answer": 3,
@@ -876,9 +1680,21 @@
       "taskNumber": 68,
       "text": "Какой из лебедок труднее поднимать груз?",
       "options": [
-        { "id": 1, "text": "Лебедкой А.", "isPicked": false },
-        { "id": 2, "text": "Обеими лебедками одинаково.", "isPicked": false },
-        { "id": 3, "text": "Лебедкой В.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Лебедкой А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Обеими лебедками одинаково.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Лебедкой В.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/68.png",
       "answer": 1,
@@ -889,9 +1705,21 @@
       "taskNumber": 69,
       "text": "Если необходимо поддержать стальным тросом построенный через реку мост, то как целесообразнее закрепить трос?",
       "options": [
-        { "id": 1, "text": "Как показано на рис. А.", "isPicked": false },
-        { "id": 2, "text": "Как показано на рис. В.", "isPicked": false },
-        { "id": 3, "text": "Как показано на рис. С.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Как показано на рис. А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Как показано на рис. В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Как показано на рис. С.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/69.png",
       "answer": 2,
@@ -902,9 +1730,21 @@
       "taskNumber": 70,
       "text": "Какая из цепей менее напряжена?",
       "options": [
-        { "id": 1, "text": "Цепь А.", "isPicked": false },
-        { "id": 2, "text": "Цепь В.", "isPicked": false },
-        { "id": 3, "text": "Обе цепи напряжены одинаково.", "isPicked": false }
+        {
+          "id": 1,
+          "text": "Цепь А.",
+          "isPicked": false
+        },
+        {
+          "id": 2,
+          "text": "Цепь В.",
+          "isPicked": false
+        },
+        {
+          "id": 3,
+          "text": "Обе цепи напряжены одинаково.",
+          "isPicked": false
+        }
       ],
       "imageUrl": "https://evcg.ru:8082/public/engineering_thinking/70.png",
       "answer": 1,

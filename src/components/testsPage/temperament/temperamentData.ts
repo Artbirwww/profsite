@@ -16,6 +16,13 @@ export interface TemperamentType {
     traits: string[],
     professions: string[]
 }
+
+export const temeperamentParamLabels: Record<TemperamentParam, string> = {
+    extrav_introver_score: "Экстраверсия / Интроверсия",
+    neirotizm_score: "Нейротизм",
+    sincerity_score: "Искренность",
+}
+
 // Описания типов темпераментов
 export const temperamentTypes = {
     choleric: {

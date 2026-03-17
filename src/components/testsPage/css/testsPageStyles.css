@@ -32,13 +32,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2px;
     width: 60px;
     min-width: 60px;
     height: 60px;
     min-height: 60px;
     background-color: var(--primary-color);
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .test-count span:first-child {
@@ -58,7 +57,7 @@
 }
 
 .test-count .divider {
-    width: 68%;
+    width: 70%;
     height: 2px;
     background-color: var(--border-color);
     z-index: 3;
@@ -169,6 +168,11 @@
     position: relative;
 }
 
+
+
+
+
+
 /*Стили для карточки теста*/
 .test-selection-item {
     position: absolute;
@@ -180,6 +184,14 @@
     background-color: var(--primary-color);
     box-sizing: border-box;
     cursor: pointer;
+    user-select: none;
+}
+
+.test-selection-item.locked {
+    cursor: not-allowed;
+    filter: grayscale(1);
+    opacity: .6;
+    pointer-events: none;
 }
 
 .test-item-content-wrapper {
@@ -203,24 +215,48 @@
     justify-content: center;
 }
 
-.test-item-label-container {
+.test-item-label-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
-.test-item-label-container h1 {
+.test-item-label-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.test-item-label-order {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 3px);
+    max-width: 15px;
+    direction: rtl;
+    gap: 3px;
+    flex-shrink: 0;
+    justify-content: start;
+}
+
+.order-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 100px;
+    background-color: var(--text-primary-color);
+}
+
+.test-item-label-wrapper h1 {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
     line-height: 20px;
     white-space: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    width: 300px;
+    width: 280px;
     color: var(--text-primary-color);
 }
 
-.test-item-label-container span {
+.test-item-label-wrapper span {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
     line-height: 15px;

@@ -1,14 +1,14 @@
-import { Dispatch, SetStateAction, useEffect, useReducer, useRef, useState } from "react"
-import { BelbinQuestion, groupQuestions } from "./belbinData"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import { GroupRolesQuestion, groupQuestions } from "./groupRolesData"
 import { ConstantSumSlider, SliderData } from "../generalTemplates/constantSumSlider/ConstantSumSlider"
 import { useNavigate } from "react-router-dom"
 
-export const BelbinTest = () => {
+export const GroupRolesTest = () => {
     const navigate = useNavigate()
 
     const [currentGroupNumber, setCurrentGroupNumber] = useState<number>(0)
-    const groupQuestionsResult = useRef<BelbinQuestion[][]>([...groupQuestions])
-    const [currentQuestions, setCurrentQuestions] = useState<BelbinQuestion[]>(groupQuestionsResult.current[currentGroupNumber])
+    const groupQuestionsResult = useRef<GroupRolesQuestion[][]>([...groupQuestions])
+    const [currentQuestions, setCurrentQuestions] = useState<GroupRolesQuestion[]>(groupQuestionsResult.current[currentGroupNumber])
     const maxValue: number = 10
 
     //waterfall changes, next page -> save array of cerrent qs -> next group of qs
@@ -45,24 +45,15 @@ export const BelbinTest = () => {
         setCurrentGroupNumber(prev => prev + step)
     }
 
-    if (currentQuestions)
-        return (
-            <div
-                className="test-viewer-container">
-
-                <div>
-                    <h4>Вопрос номер {currentGroupNumber + 1}</h4>
-                </div>
-
-                <ConstantSumSlider
-                    sliders={currentQuestions}
-                    setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
-                    currentGroupNumber={currentGroupNumber}
-                    nextPage={nextQuestionsGroup}
-                    maxValue={maxValue} />
-            </div>)
+    if (!currentQuestions)
+        return (<p>загрузка...</p>)
 
     return (
-        <p>Загрузка теста...</p>
+        <ConstantSumSlider
+            sliders={currentQuestions}
+            setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
+            currentGroupNumber={currentGroupNumber}
+            nextPage={nextQuestionsGroup}
+            maxValue={maxValue} />
     )
 }
