@@ -15,26 +15,38 @@ import { ProtectedRoute } from "./routing/ProtectedRoute";
 import { RolesProtectedRoute } from "./routing/RolesProtectedRoute";
 
 // Общий layout для страниц
-import { Layout } from "./layout/Layout";
+import { Layout } from "./components/layout/Layout"
 
 // Страницы
+// Авторизация / Регистрация
 import { LoginPage } from "./components/authorizationPages/LoginPage"
 import { RegistrationPage } from "./components/authorizationPages/RegistrationPage"
+
+// Главные страницы
 import { HomePage } from "./components/homePage/HomePage"
 import { TestsPage } from "./components/testsPage/TestsPage"
 import { ResultsPage } from "./components/resultsPage/ResultsPage"
 import { StudyPage } from "./components/studyPage/StudyPage"
 import { ProfilePage } from "./components/profilePage/ProfilePage"
-import { SettingsPage } from "./components/settingsPage/SettingsPage"
+
+// Outlet для тестов
 import { TestViewer } from "./components/testsPage/TestViewer"
+
+// Тест темперамента
 import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
+
+// Тест грпповых ролей
 import { GroupRolesTest } from "./components/testsPage/groupRoles/GroupRolesTest"
 import { GroupRolesResults } from "./components/testsPage/groupRoles/GroupRolesResults"
-import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
-import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults";
-import { KlimovTest } from "./components/testsPage/klimov/KlimovTest";
-import { KlimovResults } from "./components/testsPage/klimov/KlimovResults";
+
+// Тест инженерного мышления
+import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest"
+import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults"
+
+// Тест Климова
+import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
+import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 
 export default function App() {
 	return (
@@ -82,7 +94,6 @@ export default function App() {
 					{/* Rest routes */}
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/my-grades" element={<StudyPage />} />
-					<Route path="/settings" element={<SettingsPage />} />
 				</Route>
 			</Route>
 
