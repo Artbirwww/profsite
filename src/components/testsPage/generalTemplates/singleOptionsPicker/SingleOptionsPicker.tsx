@@ -3,7 +3,6 @@ import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
 import { ArrowLeft, Option } from "lucide-react"
-import { useTestStore } from "../../TestStore"
 
 export interface Task {
     id: number
@@ -32,29 +31,28 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
-    const setCurrentNumber = useTestStore((store) => store.setCurrentNumber)
-
     useEffect(() => {
         if (!tasks)
             return
+
         setCurrentTask(tasks[currentTaskNumber])
-        setCurrentNumber(currentTaskNumber + 1)
     }, [currentTaskNumber])
+
     const handleUserAnswer = (task: Task, option: Option) => {
         const changedTask = changeOption(task, option)
-        console.log(changedTask)
+
         const tasksTemp = tasks.map(currentTask =>
             task.id === currentTask.id ? changedTask : currentTask
         )
 
         setTasks(tasksTemp)
+
         if (currentTaskNumber >= tasks.length - 1) {
             setCurrentTask(changedTask)
             return
         }
-        //После выбора опции, идем дальше
+
         changeTask(1)
-        //
     }
 
     const changeOption = (task: Task, option: Option): Task => ({
@@ -65,7 +63,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
 
     const changeTask = (step: number) => {
         const newNumber = currentTaskNumber + step
-        //Условия не дают уйти ниже 1ого и последнего вопроса теста
+
         if (newNumber < 0 || newNumber >= tasks.length) {
             toast("Дальше некуда идти")
             return
@@ -74,26 +72,20 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
         setCurrentTaskNumber(currentTaskNumber + step)
     }
 
-    return (<>
+    return (
+        <div className={`test-card ${classType}`}>
 
-        {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
+            {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
 
-        <div
-            className={`test-card ${classType}`}>
+            <div className="test-card-info">
 
-            <div
-                className="test-card-info">
+                <div className="test-card-back" onClick={() => { changeTask(-1) }}>
 
-                <div
-                    className="test-card-back"
-                    onClick={() => { changeTask(-1) }}>
-
-                    <ArrowLeft size={20} color="#fff" />
+                    <ArrowLeft size={20} />
 
                 </div>
 
-                <div
-                    className="test-card-count">
+                <div className="test-card-count">
 
                     <p>Вопрос <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
 
@@ -102,50 +94,53 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
             </div>
 
             {currentTask?.text &&
-                <div
-                    className="test-card-text">
+
+                <div className="test-card-text">
 
                     {currentTask?.text}
 
-                </div>}
+                </div>
+
+            }
 
             {currentTask?.imageUrl &&
-                <div
-                    className="test-card-img"
-                    style={{ maxHeight: "180px", minHeight: "180px" }}>
+
+                <div className="test-card-img" style={{ maxHeight: "180px", minHeight: "180px" }}>
 
                     <img src={currentTask?.imageUrl} alt="" />
 
-                </div>}
+                </div>
 
-            <div
-                className="test-card-list">
+            }
+
+            <div className="test-card-list">
 
                 {currentTask?.options.map(option => (
 
-                    <div
-                        onClick={() => handleUserAnswer(currentTask, option)}
-                        className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
+                    <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
 
-                        <div
-                            className="test-card-text">
+                        <div className="test-card-text">
 
                             {option?.text}
 
                         </div>
 
 
-                    </div>))}
+                    </div>
+
+                ))}
 
             </div>
 
-            <div
-                className="test-card-options">
+            <div className="test-card-options">
 
                 {currentTaskNumber < tasks.length - 1 && (
+
                     <Button
                         buttonLabel={"Пропустить"}
-                        buttonFunction={() => changeTask(1)} />)}
+                        buttonFunction={() => changeTask(1)} />
+
+                )}
 
                 <Button
                     buttonLabel={"Завершить тест"}
@@ -154,6 +149,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
             </div>
 
             <Toaster />
+
         </div>
-    </>)
+    )
 }

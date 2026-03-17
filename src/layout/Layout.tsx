@@ -9,16 +9,26 @@ export const Layout: FC = () => {
     const { getToken } = useAuth()
 
     return (
-        <div className="layout-base-wrapper">
-            <div className="layout-background">
-                <div className="layout-content-wrapper">
+        <div
+            className="layout-base-wrapper">
+
+            <div
+                className="layout-background">
+
+                <div
+                    className="layout-content-wrapper">
+
                     <Outlet />
+
                 </div>
             </div>
 
             {getToken() &&
-                <div className="layout-menu">
+                <div
+                    className="layout-menu">
+
                     <Menu />
+
                 </div>}
         </div>
     )

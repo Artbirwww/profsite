@@ -24,7 +24,7 @@ export const TestsPage: FC = ({ }) => {
     }
 
     //TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо 0
-    const targetValue = calculateProgress(4, testsList.length)
+    const targetValue = calculateProgress(0, testsList.length)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -72,17 +72,29 @@ export const TestsPage: FC = ({ }) => {
     }, [navigate])
 
     return (
-        <div
-            className="test-wrapper">
+        <div className="test-wrapper">
 
-            <div
-                className="test-container">
+            <div className="test-header">
 
-                <div
-                    className="test-completness">
+                <h1>Тестирование</h1>
 
-                    <div
-                        className="test-count">
+                <div className="test-indicator">
+
+                    {testsList.map((_, index) => (
+
+                        <div key={index} className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
+
+                    ))}
+
+                </div>
+
+            </div>
+
+            <div className="test-container">
+
+                <div className="test-completness">
+
+                    <div className="test-count">
 
                         {/*TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо N*/}
                         <span><Check size={18} strokeWidth={1.5} />N</span>
@@ -91,35 +103,27 @@ export const TestsPage: FC = ({ }) => {
 
                     </div>
 
-                    <div
-                        className="progress-container">
+                    <div className="progress-container">
 
-                        <div
-                            className="progress-fill"
-                            style={{ height: `${displayHeight}%` }}>
+                        <div className="progress-fill" style={{ height: `${displayHeight}%` }}>
 
-                            <div className="wave-element wave-front"></div>
-                            <div className="wave-element wave-back"></div>
+                            <div className="wave-element wave-front" />
+                            <div className="wave-element wave-back" />
 
                         </div>
 
                     </div>
+
                 </div>
 
-                <div
-                    ref={testContainerRef}
-                    className="test-grid">
+                <div ref={testContainerRef} className="test-grid">
 
                     {testsList.map((item, index) => {
-
                         const lockedIndices = [4, 5, 6, 7, 8]
                         const isAvailable = !lockedIndices.includes(index)
 
                         return (
-                            <div
-                                key={index}
-                                data-id={index}
-                                className="test-grid-item">
+                            <div key={index} data-id={index} className="test-grid-item">
 
                                 <TestComponent
                                     dataId={item.id}
@@ -133,17 +137,6 @@ export const TestsPage: FC = ({ }) => {
                     })}
 
                 </div>
-
-            </div>
-
-            <div
-                className="test-indicator">
-
-                {testsList.map((_, index) => (
-
-                    <div
-                        key={index}
-                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />))}
 
             </div>
 

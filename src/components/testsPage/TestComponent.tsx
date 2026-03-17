@@ -22,75 +22,62 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
     }
 
     return (
-        <div
-            className={`test-selection-item ${!isAvailable ? "locked" : ""}`}
-            data-id={dataId}
-            onClick={handleClick}>
+        <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
 
-            <div
-                className="test-item-content-wrapper">
+            <div className="test-selection-item-icon">
 
-                <div
-                    className="test-item-icon-container">
+                <Icon size={30} strokeWidth={1.5} />
 
-                    <Icon size={30} strokeWidth={1.5} className="test-item-icon" />
-
-                </div>
-
-                <div
-                    className="test-item-label-wrapper">
-
-                    <div
-                        className="test-item-label-container">
-
-                        <div
-                            className="test-item-label-order">
-
-                            {Array.from({ length: (index ?? 0) + 1 }).map((_, i) => (
-                                <div
-                                    key={i}
-                                    className="order-dot" />
-                            ))}
-
-                        </div>
-
-                        <h1>{item.label}</h1>
-
-                    </div>
-
-                    <span>{item.author}</span>
-
-                </div>
-
-                <div
-                    className="test-item-additions-container">
-
-                    <div>
-
-                        <div>
-
-                            <Timer size={20} strokeWidth={1.5} className="test-item-icon" />
-                            <span>{item.time} мин.</span>
-
-                        </div>
-
-                        <div>
-
-                            <FileQuestion size={20} strokeWidth={1.5} className="test-item-icon" />
-                            <span>{item.questionscount} вопросов</span>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        onClick={handleClick}>
-
-                        <ArrowRight size={24} strokeWidth={1.5} className="test-item-icon" />
-                    </button>
-
-                </div>
             </div>
-        </div>
+
+            <div className="test-selection-item-label">
+
+                <div className="test-selection-item-name">
+
+                    <div className="test-selection-item-order">
+
+                        {Array.from({ length: (index ?? 0) + 1 }).map((_, i) => (
+
+                            <div key={i} className="order-dot" />
+
+                        ))}
+
+                    </div>
+
+                    <h4>{item.label}</h4>
+
+                </div>
+
+                <span>{item.author}</span>
+
+            </div>
+
+            <div className="test-selection-item-info">
+
+                <div className="test-selection-item-options">
+
+                    <Timer size={20} strokeWidth={1.5} />
+
+                    <span>{item.time} минут</span>
+
+                </div>
+
+                <div className="test-selection-item-options">
+
+                    <FileQuestion size={20} strokeWidth={1.5} />
+
+                    <span>{item.questionscount} вопросов</span>
+
+                </div>
+
+                <div className="test-selection-item-icon icon-2">
+
+                    <ArrowRight size={20} />
+
+                </div>
+
+            </div>
+
+        </div >
     )
 })
