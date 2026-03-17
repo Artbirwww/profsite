@@ -52,3 +52,7 @@ export const calculateTemperament = (test: TestResultResponse): TemperamentType 
 
     return result as TemperamentType
 }
+
+export const getScorebyName = (results: TestResultResponse, name: string) => {
+    return results.psychParams.find(p => p.name === name)?.param || 0
+}

@@ -1,0 +1,135 @@
+/* стили для круга Айзенка */
+.eysenck-circle-wrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+.eysenck-circle-wrapper svg .inside-circle {
+    fill: none;
+    stroke: #f3f4f6;
+    stroke-width: 1px;
+}
+
+.eysenck-circle-wrapper svg .main-line {
+    stroke: var(--border-color);
+}
+
+.eysenck-circle-wrapper svg text {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    fill: var(--text-secondary-color);
+    text-transform: uppercase;
+}
+
+.eysenck-circle-wrapper svg .projection-line {
+    stroke: var(--accent-color);
+    opacity: .8;
+}
+
+.eysenck-circle-wrapper svg .result-dot {
+    fill: var(--accent-color);
+}
+
+.eysenck-circle-wrapper svg rect {
+    fill: var(--border-color);
+}
+
+
+
+/* стили для шкал Айзенка */
+.eysenck-scales-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.eysenck-scales-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.scale-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: 2px solid var(--border-color);
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 15px;
+}
+
+.scale-status p {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.scale-status p span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 22px;
+}
+
+.eysenck-scales-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.scales-status-label {
+    color: var(--text-primary-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.scales-status-label p {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.eysenck-scales-progress-bar-container {
+    display: flex;
+    width: 100%;
+    height: 8px;
+    border-radius: 100px;
+    background-color: var(--border-color);
+}
+
+.eysenck-scales-progress-bar {
+    display: flex;
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 100px;
+    transition: width 1s ease-in-out;
+}
+
+.status-ok {
+    color: var(--ok-color);
+}
+
+.status-warn {
+    color: var(--warn-color);
+}
+
+.status-critical {
+    color: var(--critical-color);
+}
+
+.eysenck-scales-progress-bar.status-ok {
+    background-color: var(--ok-color);
+}
+
+.eysenck-scales-progress-bar.status-warn {
+    background-color: var(--warn-color);
+}
+
+.eysenck-scales-progress-bar.status-critical {
+    background-color: var(--critical-color);
+}
