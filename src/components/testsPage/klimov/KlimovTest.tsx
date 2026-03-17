@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { tasks as tasksData } from "./tasks.json"
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
+
 export const KlimovTest = () => {
     const navigate = useNavigate()
     const [tasks, setTasks] = useState<Task[]>()
@@ -23,19 +24,16 @@ export const KlimovTest = () => {
         })
         return
     }
-    if (!tasks) return (
-        <p>Загрузка...</p>
-    )
+
+    if (!tasks)
+        return (<p>загрузка...</p>)
+
     return (
-        <div
-            className="test-viewer-container">
+        <SingleOptionsPicker
+            tasks={tasks}
+            setTasks={handleTasksUpdate}
+            navigateToResults={navigateToResults}
+            classType={"type-2"} />
 
-            <SingleOptionsPicker
-                tasks={tasks}
-                setTasks={handleTasksUpdate}
-                navigateToResults={navigateToResults}
-                classType={"type-2"} />
-
-        </div>
     )
 }

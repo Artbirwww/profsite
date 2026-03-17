@@ -4,21 +4,22 @@ import { useLocation } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 import toast from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
-import { calculateResults } from "./KlimovResultsCalc"
+import { calculateResults } from "./klimovResultsCalc"
 import { klimovTypeTranslate } from "./klimovTypes"
 
 export const KlimovResults = () => {
     const location = useLocation()
-    const {getToken} = useAuth()
+    const { getToken } = useAuth()
     const [result, setResult] = useState<TestResultResponse>()
 
-    const isViewMode = location.state?.isViewMode ? location.state?.isViewMode: false
+    const isViewMode = location.state?.isViewMode ? location.state?.isViewMode : false
     useEffect(() => {
         if (!isViewMode) return
         const testDataTemp = location.state?.psychTest
         if (!testDataTemp) return
         setResult(testDataTemp)
     }, [])
+
     useEffect(() => {
         if (isViewMode) return
         const createTest = async () => {
@@ -26,14 +27,17 @@ export const KlimovResults = () => {
             try {
                 const createdTest = await testApi.createTest(getToken(), klimovResult)
                 setResult(createdTest)
-            } catch(err) {
+            } catch (err) {
                 console.error(err)
                 toast.error("Возникла ошибка при сохранении результатов")
             }
         }
         createTest()
     }, [])
-    if (!result) return <p>Загрузка...</p>
+
+    if (!result)
+        return (<p>загрузка...</p>)
+
     return (<>
         <div>
             {result.psychParams.map(param => (

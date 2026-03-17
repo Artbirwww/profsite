@@ -14,7 +14,7 @@ export const TemperamentFormSelection = () => {
     const navigate = useNavigate()
 
     const [pickedForm, setPickedForm] = useState<string | null>(null)
-    const [options, setOptions] = useState<TemperamentOption[] | null>(null)
+    const [options, setOptions] = useState<TemperamentOption[]>([])
 
     const setTotalNumber = useTestStore((store) => store.setTotalNumber)
 
@@ -83,16 +83,13 @@ export const TemperamentFormSelection = () => {
             </div>
         )
 
-    if (!pickedForm && !options) 
-        return (
-            <p>Загрузка...</p>
-        )
+    if (!pickedForm && !options)
+        return (<p>загрузка...</p>)
 
-    if (pickedForm && options)
-        return (
-            <PositiveNegative
-                options={options}
-                setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
-                navigateToResults={navigateToResult} />
-        )
+    return (
+        <PositiveNegative
+            options={options}
+            setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
+            navigateToResults={navigateToResult} />
+    )
 }

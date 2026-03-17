@@ -128,7 +128,8 @@ export const TestsPage: FC = ({ }) => {
                                     item={item}
                                     onClick={handleClick} />
 
-                            </div>)
+                            </div>
+                        )
                     })}
 
                 </div>

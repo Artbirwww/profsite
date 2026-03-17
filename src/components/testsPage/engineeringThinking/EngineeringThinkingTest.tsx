@@ -31,23 +31,14 @@ export const EngineeringThinkingTest = () => {
             }
         })
     }
-    if(!tasks)
-        return (
-            <p>Загрузка...</p>
-        )
+    if (!tasks)
+        return (<p>pагрузка...</p>)
 
     return (
-        <div
-            className="test-viewer-container">
-
-            <SingleOptionsPicker
-                tasks={tasks}
-                setTasks={handleTasksUpdate}
-                navigateToResults={navigateToResults} 
-                classType={"type-1"}/>
-        </div>
-
+        <SingleOptionsPicker
+            tasks={tasks}
+            setTasks={handleTasksUpdate}
+            navigateToResults={navigateToResults}
+            classType={"type-1"} />
     )
-
-    
 }

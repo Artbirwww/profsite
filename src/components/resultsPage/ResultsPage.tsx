@@ -3,7 +3,7 @@ import { TestItem, testsList } from "../testsPage/TestsData";
 import { useAuth } from "../../contexts/AuthContext";
 import "./resultPage.css";
 import { TemperamentResults } from "../testsPage/temperament/TemperamentResults";
-import { BelbinResults } from "../testsPage/belbin/BelbinResults";
+import { BelbinResults } from "../testsPage/groupRoles/GroupRolesResults";
 import { TestResultResponse, TestTypeName } from "../../types/testTypes";
 import { testApi } from "../../services/api/testApi";
 import { getActualTestByDate } from "./services/testSort";
