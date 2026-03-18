@@ -1,7 +1,7 @@
 import toast, { Toaster } from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 import "./css/testsViewerStyles.css"
-import "./css/generaltemplatesStyles.css"
+import "./css/generalTemplatesStyles.css"
 import "./css/temperamentResultStyles.css"
 
 import { Outlet } from "react-router-dom"
