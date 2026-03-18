@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Dropdown } from "../ui/reusable/dropdown"
+import { Dropdown } from "../ui/reusable/Dropdown"
 import { SubjectsPanel } from "./SubjectsPanel"
 import { Grade, PupilSubject, Subject } from "../../types/pupil/pupilSubject"
 import toast, { Toaster } from "react-hot-toast"

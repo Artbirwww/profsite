@@ -1,43 +1,79 @@
-/*Стили для результатов тестов*/
-.test-result-grid-container {
+/* Общие стили для результатов тестов */
+.test-result-grid {
     display: grid;
-    width: 100%;
-    height: 100%;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "left-top right-tall"
+        "left-bottom right-tall";
     gap: 10px;
 }
 
-.test-result-item {
-    border-radius: 30px;
-    background-color: var(--primary-color);
-    box-sizing: border-box;
+.result-grid-item-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: left-top;
 }
 
-.test-result-item-content-wrapper {
+.result-grid-item-2 {
+    grid-area: left-bottom;
+}
+
+.result-grid-item-3 {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
-    height: 100%;
-    padding: 40px;
-    position: relative;
+    grid-area: right-tall;
 }
 
-.test-result-item-content-wrapper>div {
+.test-result-grid-item {
     display: flex;
     flex-direction: column;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    box-sizing: border-box;
+    width: 100%;
+    user-select: none;
+    padding: 30px;
 }
 
-.test-result-item-content-wrapper>div h1 {
+.test-result-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.test-result-item-content .item-content-label {
     font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 20px;
+    font-weight: var(--font-weight-semibold);
     color: var(--text-primary-color);
 }
 
-.test-result-item-content-wrapper>div span {
+.test-result-item-content .item-content-description {
+    display: flex;
+    flex-direction: column;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
     color: var(--text-secondary-color);
+}
+
+.result-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.result-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.result-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
 }

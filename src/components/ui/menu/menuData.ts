@@ -1,5 +1,5 @@
 import { Home, FileCheck, ChartPie, Book, UserRound, Settings2, UsersRound, FileUp, BookPlus, Apple, DoorOpen } from "lucide-react"
-import React, { ReactNode } from "react"
+import React from "react"
 import { ROLES } from "../../../types/account/role"
 
 // Интерфейс для элемента сайдбара

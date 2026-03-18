@@ -1,9 +1,9 @@
 import "../css/testsResultStyles.css"
 
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
-import { calculateParams, calculateTemperament } from "./temperamentResultCalc"
-import { TemperamentFormA, TemperamentFormB, TemperamentOption, TemperamentType } from "./temperamentData"
+import { useLocation, useNavigate } from "react-router-dom"
+import { calculateParams, calculateTemperament, getScorebyName } from "./temperamentResultCalc"
+import { temeperamentParamLabels, TemperamentFormA, TemperamentFormB, TemperamentOption, TemperamentParam, TemperamentType } from "./temperamentData"
 import { useAuth } from "../../../contexts/AuthContext"
 import { testApi } from "../../../services/api/testApi"
 import toast, { Toaster } from "react-hot-toast"
@@ -11,6 +11,9 @@ import { TestResultRequest, TestResultResponse } from "../../../types/testTypes"
 import { TestItem } from "../TestsData"
 import { getActualTestByDate } from "../../resultsPage/services/testSort"
 import { formatDateRU } from "../../../services/dates/formatDate"
+import { EysenckCircle } from "./EysenckCircle"
+import { EysenckScales } from "./EysenckScales"
+import { Button } from "../../ui/reusable/button"
 
 /**
  * TODO
@@ -26,6 +29,7 @@ interface TemperamentResultsProps {
 
 export const TemperamentResults = () => {
 	const location = useLocation()
+	const navigate = useNavigate()
 
 	const { getToken } = useAuth()
 
@@ -78,6 +82,10 @@ export const TemperamentResults = () => {
 
 		setTemperamentType(calculateTemperament(psychTest))
 	}, [psychTest])
+
+	const ext = psychTest?.psychParams.find(p => p.name === "extrav_introver_score")?.param || 0
+	const neu = psychTest?.psychParams.find(p => p.name === "neirotizm_score")?.param || 0
+
 	if (!psychTest || !temperamentType)
 		return <>
 			<p>Загрузка</p>
@@ -85,90 +93,81 @@ export const TemperamentResults = () => {
 		</>
 		
 	return (
-		<div
-			className="test-result-grid-container">
+		<div className="test-result-grid">
 
-			<div
-				className="test-result-item">
+			<div className="test-result-grid-item result-grid-item-1">
 
-				<div
-					className="test-result-item-content-wrapper">
-
-					<div>
-						<h1>Набранные баллы</h1>
-					</div>
-
-					<div>
-						{psychTest.psychParams.map((param) => (
-							<span>{param.name}: {param.param}</span>
-						))}
-					</div>
-
-				</div>
+				<EysenckCircle extraversion={ext} neuroticism={neu} />
 
 			</div>
 
-			<div
-				className="test-result-item">
+			<div className="test-result-grid-item result-grid-item-2">
 
-				<div
-					className="test-result-item-content-wrapper">
-
-					<div>
-						<h1>Итог: Вы {temperamentType.name}</h1>
-					</div>
-
-					<div>
-						<span>{temperamentType.shortDescription}</span>
-						<span>{temperamentType.description}</span>
-					</div>
-
-				</div>
+				<EysenckScales params={psychTest.psychParams} />
 
 			</div>
 
-			<div
-				className="test-result-item">
+			<div className="test-result-grid-item result-grid-item-3">
 
-				<div
-					className="test-result-item-content-wrapper">
+				<div className="test-result-item-content">
 
-					<div>
-						<h1>Вам свойственно проявлять:</h1>
+					<div className="item-content-label">
+
+						{temperamentType.name}:
+
 					</div>
 
-					<div>
+					<div className="item-content-description">
+
+						<p>{temperamentType.shortDescription}</p>
+						<p>{temperamentType.description}</p>
+
+					</div>
+
+
+				</div>
+
+				<div className="test-result-item-content">
+
+					<div className="item-content-label">
+
+						Cвойственно проявлять:
+
+					</div>
+
+					<div className="item-content-description">
+
 						{temperamentType.traits.map((trait) => (
 							<span>{trait}</span>
 						))}
-					</div>
 
+					</div>
 				</div>
 
+				<div className="test-result-item-content">
 
-			</div>
+					<div className="item-content-label">
 
-			<div
-				className="test-result-item">
+						Подходящие профессии:
 
-				<div
-					className="test-result-item-content-wrapper">
-
-					<div>
-						<h1>Профессии которые могут вам подойти:</h1>
 					</div>
 
-					<div>
+					<div className="item-content-description">
+
 						{temperamentType.professions.map((profession) => (
 							<span>{profession}</span>
 						))}
-					</div>
 
+					</div>
 				</div>
+				<div className="test-result-item-content">
+					<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
+					<Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+				</div>
+				
 
 			</div>
 
-			<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
 		</div>
 	)
 }

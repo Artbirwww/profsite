@@ -1,0 +1,114 @@
+.custom-input-container input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    margin: 0;
+    border: 1px solid var(--border-color);
+    outline: none;
+    background: var(--primary-color);
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 15px;
+    height: 40px;
+    color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+    transition: all .2s ease;
+}
+
+.custom-input-container input::-webkit-outer-spin-button,
+.custom-input-container input::-webkit-inner-spin-button,
+.custom-input-container input::-webkit-search-decoration,
+.custom-input-container input::-ms-reveal {
+    display: none;
+}
+
+.custom-input-container input:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-primary-color) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.custom-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+.custom-input-wrapper label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary-color);
+    padding-left: 12px;
+    transition: color .3s ease;
+}
+
+.custom-input-container {
+    position: relative;
+    display: flex;
+    align-content: center;
+}
+
+.custom-input-icon,
+.custom-input-password-visibility {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary-color);
+    transition: all .3s ease;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.custom-input-icon {
+    left: 14px;
+    pointer-events: none;
+}
+
+.custom-input-password-visibility {
+    right: 14px;
+    cursor: pointer;
+}
+
+.custom-input-password-visibility:hover {
+    color: var(--accent-color);
+}
+
+.custom-input-container input:focus {
+    border-color: var(--accent-color);
+}
+
+.custom-input-container input:focus~.custom-input-icon {
+    color: var(--accent-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.custom-input-container input:focus~.custom-input-password-visibility {
+    color: var(--text-secondary-color);
+}
+
+.custom-input-container input::placeholder {
+    color: var(--text-tertiary-color);
+    font-weight: var(--font-weight-normal);
+    opacity: .7;
+}
+
+.custom-input-container input:disabled {
+    background-color: var(--border-color);
+    border-color: var(--border-color);
+    color: var(--text-tertiary-color);
+    cursor: not-allowed;
+    opacity: .8;
+}
+
+.input-disabled .custom-input-icon,
+.input-disabled .custom-input-password-visibility {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.input-disabled label {
+    opacity: 0.7;
+}

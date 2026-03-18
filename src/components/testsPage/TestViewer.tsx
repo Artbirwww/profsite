@@ -1,6 +1,8 @@
 import toast, { Toaster } from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 import "./css/testsViewerStyles.css"
+import "./css/generaltemplatesStyles.css"
+import "./css/temperamentResultStyles.css"
 
 import { Outlet } from "react-router-dom"
 import { useEffect } from "react"
@@ -14,17 +16,14 @@ export const TestViewer = () => {
         })
     }, [])
     return (
-        <>
-            <div
-                className="test-viewer-wrapper">
+        <div className="test-viewer-wrapper">
 
-                <div
-                    className="test-outlet">
+            <div className="test-outlet">
 
-                    <Outlet />
-                </div>
+                <Outlet />
+
             </div>
-           
-        </>
+
+        </div>
     )
 }

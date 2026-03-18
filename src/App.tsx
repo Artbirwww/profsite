@@ -2,10 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 // Хуки
 import { useAuth } from "./contexts/AuthContext";
-import { useApp } from "./contexts/AppContext";
 import { PupilDataLoading } from "./components/adminPages/pupils/data-loading/PupilDataLoading";
 import { PupilsList } from "./components/adminPages/pupils/PupilsList";
-import AutoRegisterForm from "./components/adminPages/AutoRegisterForm";
 import { ROLES } from "./types/account/role";
 
 import { PupilGradeLoading } from "./components/adminPages/pupils/grade-loading/PupilGradeLoading";
@@ -17,26 +15,38 @@ import { ProtectedRoute } from "./routing/ProtectedRoute";
 import { RolesProtectedRoute } from "./routing/RolesProtectedRoute";
 
 // Общий layout для страниц
-import { Layout } from "./layout/Layout";
+import { Layout } from "./components/layout/Layout"
 
 // Страницы
+// Авторизация / Регистрация
 import { LoginPage } from "./components/authorizationPages/LoginPage"
 import { RegistrationPage } from "./components/authorizationPages/RegistrationPage"
+
+// Главные страницы
 import { HomePage } from "./components/homePage/HomePage"
 import { TestsPage } from "./components/testsPage/TestsPage"
 import { ResultsPage } from "./components/resultsPage/ResultsPage"
 import { StudyPage } from "./components/studyPage/StudyPage"
 import { ProfilePage } from "./components/profilePage/ProfilePage"
-import { SettingsPage } from "./components/settingsPage/SettingsPage"
+
+// Outlet для тестов
 import { TestViewer } from "./components/testsPage/TestViewer"
+
+// Тест темперамента
 import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
-import { BelbinTest } from "./components/testsPage/belbin/BelbinTest"
-import { BelbinResults } from "./components/testsPage/belbin/BelbinResults"
-import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest";
-import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults";
-import { KlimovTest } from "./components/testsPage/klimov/KlimovTest";
-import { KlimovResults } from "./components/testsPage/klimov/KlimovResults";
+
+// Тест грпповых ролей
+import { GroupRolesTest } from "./components/testsPage/groupRoles/GroupRolesTest"
+import { GroupRolesResults } from "./components/testsPage/groupRoles/GroupRolesResults"
+
+// Тест инженерного мышления
+import { EngineeringThinkingTest } from "./components/testsPage/engineeringThinking/EngineeringThinkingTest"
+import { EngineeringThinkingResults } from "./components/testsPage/engineeringThinking/EngineeringThinkingResults"
+
+// Тест Климова
+import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
+import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 
 export default function App() {
 	return (
@@ -52,15 +62,10 @@ export default function App() {
 			{/* Protected routes */}
 			<Route element={<ProtectedRoute />}>
 				<Route element={<Layout />}>
-					<Route
-						element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}
-					>
+					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}>
 						<Route path="admin/pupil-loading" element={<PupilDataLoading />} />
 						<Route path="admin/pupil-list" element={<PupilsList />} />
-						<Route
-							path="admin/pupil-grades-loading"
-							element={<PupilGradeLoading />}
-						/>
+						<Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
 					</Route>
 
 					{/* Tests routes */}
@@ -71,17 +76,16 @@ export default function App() {
 							<Route path="temperament" element={<TemperamentFormSelection />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
 
-							<Route path="group-roles" element={<BelbinTest />} />
-							<Route path="group-roles-results" element={<BelbinResults />} />
+							<Route path="group-roles" element={<GroupRolesTest />} />
+							<Route path="group-roles-results" element={<GroupRolesResults />} />
 
 							<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
 							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults />} />
 
-							<Route path="professional-orientation-klimov" element = {<KlimovTest />} />
-							<Route path="professional-orientation-klimov-results" element = {<KlimovResults/>} />
+							<Route path="professional-orientation-klimov" element={<KlimovTest />} />
+							<Route path="professional-orientation-klimov-results" element={<KlimovResults />} />
 						</Route>
 					</Route>
-
 
 					{/* Results routes */}
 					<Route path="/my-results" element={<ResultsPage />} />
@@ -90,7 +94,6 @@ export default function App() {
 					{/* Rest routes */}
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/my-grades" element={<StudyPage />} />
-					<Route path="/settings" element={<SettingsPage />} />
 				</Route>
 			</Route>
 

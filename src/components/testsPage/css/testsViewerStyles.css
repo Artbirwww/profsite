@@ -1,4 +1,4 @@
-/*Обертка для всех элментов отображаемых в test viewer outlet*/
+/* обертка для всех элментов отображаемых в test viewer outlet */
 .test-viewer-wrapper {
     display: flex;
     flex-direction: column;
@@ -10,222 +10,46 @@
     box-sizing: border-box;
 }
 
-/*Общие стили для карточек тестов*/
-.test-card {
-    border-radius: 30px;
-    background-color: var(--primary-color);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
-    padding: 40px;
-}
-
-.test-grid-template-1 {
+/* стили для выбора формы теста (пока только темперамент) */
+.test-form-selection-grid {
     display: grid;
-    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 230px;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-.test-card-height-155 {
-    height: 155px;
-    min-height: 155px;
-}
-
-.test-card-height-200 {
-    height: 200px;
-    min-height: 200px;
-}
-
-.test-card-height-250 {
-    height: 250px;
-    min-height: 250px;
-}
-
-.test-card-height-600 {
-    height: 600px;
-    min-height: 600px;
-}
-
-.test-card-header {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 20px;
-    color: var(--text-primary-color);
-}
-
-.test-card-text {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-normal);
-}
-
-.test-card-img {
-    object-fit: cover;
-}
-
-.test-card-input {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-.test-card-list {
+.test-form-selection-grid-item {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-.test-card-selectable {
-    cursor: pointer;
-}
-.test-card-selectable.active {
-    color: violet;
-}
-
-.test-card-options {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    justify-content: end;
-}
-
-
-
-
-
-
-
-
-
-
-/*Стили для выбора формы теста*/
-/*Пока применимо только к тесту темперамента*/
-.test-viewer-selection-grid-container {
-    display: grid;
-    width: 100%;
-    height: 300px;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.test-viewer-selection-item {
+    justify-content: space-between;
     border-radius: 30px;
+    padding: 30px;
     background-color: var(--primary-color);
     box-sizing: border-box;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition:
-        opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
 
-.test-viewer-selection-item.fade-in {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.test-viewer-selection-item:nth-child(2n + 1) {
-    transition-delay: .1s;
-}
-
-.test-viewer-selection-item:nth-child(2n + 2) {
-    transition-delay: .2s;
-}
-
-.test-item-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    padding: 40px;
-    position: relative;
-}
-
-.test-item-content-wrapper h1 {
+.test-form-selection-name h4 {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
-    line-height: 20px;
     color: var(--text-primary-color);
 }
 
-.test-item-option-container {
-    display: flex;
+.test-form-selection-option {
     width: 100%;
+    display: flex;
     align-items: end;
     justify-content: end;
 }
 
-.test-item-option-container button {
+.test-form-selection-icon {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
     width: 40px;
     height: 40px;
-    background-color: var(--accent-color);
-    border-radius: 10px;
-}
-
-.test-item-option-container button .test-item-icon {
-    color: var(--bg-color)
-}
-
-
-
-/*Обертка отображения вопросов тестов*/
-.test-viewer-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-
-
-
-
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    background: transparent;
-    cursor: pointer;
-}
-
-input[type="range"]:focus {
-    outline: none;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 5px;
-    background-color: var(--border-color);
-    border-radius: 100px;
-}
-
-input[type="range"]::-moz-range-track {
-    height: 8px;
-    background: #ddd;
-    border-radius: 4px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    margin-top: -6px;
-    height: 16px;
-    width: 16px;
-    background: var(--accent-color);
-    border-radius: 50%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-input[type="range"]::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
-    background: var(--primary-color, #007bff);
-    border-radius: 50%;
-    border: 2px solid #fff;
+    border-radius: 15px;
 }

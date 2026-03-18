@@ -1,8 +1,9 @@
+import toast, { Toaster } from "react-hot-toast"
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
 import { WheelEvent } from "react"
-import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
+import { ArrowLeft } from "lucide-react"
 
 export interface SliderData {
     id: number
@@ -57,7 +58,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             return slider
         })
 
-        //setTotalValue(totalValueNew)
         setSliders(slidersTemp)
         setIsLocked(false)
 
@@ -68,29 +68,53 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             toast(`Пожалуйста наберите ${maxValue} баллов`)
             return
         }
-        //setTotal(sliders.length)
-        //setCurrentNumber(currentGroupNumber + 1)
         setTotalValue(0)
         nextPage(1)
     }
 
-    return (<>
-        <span>Распределено баллов: {totalValue} / 10</span>
-        <div>
-            <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
+    return (
+        <div className="test-card" style={{ minHeight: "575px" }}>
 
-            <div
-                className="test-grid-template-1">
+            {/*<ProgressBar currentTaskNumber={currentGroupNumber} total={7} />*/}
+
+            <div className="test-card-info">
+
+                <div className="test-card-back" onClick={() => { nextPage(-1) }}>
+
+                    <ArrowLeft size={20} />
+
+                </div>
+
+                <div className="test-card-count">
+
+                    {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
+                    <p>Вопрос <span>{(currentGroupNumber + 1).toString().padStart(2, "0")}</span> из <span>{(7).toString().padStart(2, "0")}</span></p>
+
+                </div>
+
+                <div className="test-card-count">
+
+                    {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
+                    <p>Распределено <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
+
+                </div>
+
+            </div>
+
+            <div className="test-grid-template-1">
+
                 {sliders.map(slider => (
 
-                    <div
-                        key={slider.id}
-                        className="test-card test-card-height-155">
+                    <div key={slider.id} className="test-grid-item" style={{ minHeight: "75px" }}>
 
-                        <span>{slider.text}</span>
+                        <div className="test-card-text">
 
-                        <div
-                            className="test-card-input">
+                            <span>{slider?.value}</span>
+                            {slider?.text}
+
+                        </div>
+
+                        <div className="test-card-input">
 
                             <input
                                 className="input-slider"
@@ -101,25 +125,24 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
                                 onWheel={handleWheel} />
 
-                            <span>{slider.value}</span>
                         </div>
+
                     </div>
+
                 ))}
+
             </div>
+
+            <div className="test-card-options">
+
+                <Button
+                    buttonLabel={"Далее"}
+                    buttonFunction={nextPageHandler} />
+
+            </div>
+
+            <Toaster />
+
         </div>
-
-        <div
-            className="test-card-options">
-
-            <Button
-                buttonLabel={"Назад"}
-                buttonFunction={() => { nextPage(-1) }} />
-
-            <Button
-                buttonLabel={"Далее"}
-                buttonFunction={nextPageHandler} />
-        </div>
-
-        <Toaster />
-    </>)
+    )
 }

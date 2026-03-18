@@ -1,40 +1,39 @@
-import "./css/dropdown-style.css"
+import "./css/dropdownStyles.css"
 
-import { FC, ReactNode, useEffect, useRef, useState, FocusEvent } from "react"
+import { FC, ReactNode, useEffect, useRef, useState, useId } from "react"
 import { ChevronDown } from "lucide-react"
 
-// Интерфейс для элемента dropdown
 export interface DropdownOption {
     value: string | number
     label: string
 }
 
-// Интерфейс для пропсов dropdown
 interface DropdownProps {
-    dropdownLabel?: string                           // Текст dropdown
-    dropdownIcon?: ReactNode                         // Иконка dropdown
-    dropdownOptions: DropdownOption[]                // Опции dropdown
-    dropdownSelected?: string | number               // Выбранный элемент dropdown
-    optionOnSelect: (option: DropdownOption) => void // Функиця при выборе опции
-    dropdownPlaceholder?: string                     // Placeholder dropdown
-    isDisabled?: boolean                             // Доступность
-    isImportant?: boolean                            // Поле важно?
-    name?: string                                    // Имя dropdown
+    dropdownLabel?: string
+    dropdownIcon?: ReactNode
+    dropdownOptions: DropdownOption[]
+    dropdownSelected?: string | number
+    optionOnSelect: (option: DropdownOption) => void
+    dropdownPlaceholder?: string
+    isDisabled?: boolean
+    dropdownDirection?: "up" | "down"
+    name?: string
 }
 
-export const Dropdown: FC<DropdownProps> = ({ dropdownLabel, dropdownIcon, dropdownOptions, dropdownSelected, optionOnSelect, dropdownPlaceholder = "Выберите...", isDisabled = false, isImportant, name = "custom-dropdown" }) => {
+export const Dropdown: FC<DropdownProps> = ({ dropdownLabel, dropdownIcon, dropdownOptions, dropdownSelected, optionOnSelect, dropdownPlaceholder = "Выберите...", isDisabled = false, dropdownDirection = "down", name }) => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isDirty, setIsDirty] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
+    const generatedId = useId()
 
+    const finalId = name || generatedId
     const selectedOption = dropdownOptions.find(opt => opt.value === dropdownSelected)
-
     const hasValue = dropdownSelected !== undefined && dropdownSelected !== ""
 
     useEffect(() => {
         const handleClickOutside = (e: Event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node))
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
                 setIsOpen(false)
+            }
         }
 
         document.addEventListener("mousedown", handleClickOutside)
@@ -47,13 +46,8 @@ export const Dropdown: FC<DropdownProps> = ({ dropdownLabel, dropdownIcon, dropd
     }, [])
 
     const toggleDropdown = () => {
-        if (!isDisabled)
+        if (!isDisabled) {
             setIsOpen(!isOpen)
-    }
-
-    const handleBlur = (e: FocusEvent<HTMLDivElement>) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(e.relatedTarget as Node)) {
-            setIsDirty(true)
         }
     }
 
@@ -62,50 +56,82 @@ export const Dropdown: FC<DropdownProps> = ({ dropdownLabel, dropdownIcon, dropd
         setIsOpen(false)
     }
 
-    const hasDirty = isImportant && isDirty && !hasValue
-    
     return (
         <div className={`custom-dropdown-wrapper ${isDisabled ? "dropdown-disabled" : ""}`} ref={dropdownRef}>
-            {dropdownLabel && <label className={`custom-dropdown-label ${hasDirty ? "custom-dropdown-label-dirty" : ""}`}>{dropdownLabel} {`${isImportant ? "*" : ""}`}</label>}
+
+            {dropdownLabel && (
+
+                <label htmlFor={finalId} className="custom-dropdown-label">
+
+                    {dropdownLabel}
+
+                </label>
+
+            )}
 
             <div className="custom-dropdown-container">
-                <div id={name}
-                     onClick={toggleDropdown}
-                     className={`custom-dropdown-header ${isOpen ? "dropdown-active" : ""} ${hasValue ? "dropdown-has-value" : ""}`}
-                     onBlur={handleBlur}
-                     tabIndex={isDisabled ? -1 : 0}
-                     style={{paddingLeft: `${dropdownIcon ? "45px" : "20px"}`}}>
+
+                <div
+                    id={finalId}
+                    onClick={toggleDropdown}
+                    className={`custom-dropdown-header ${isOpen ? "dropdown-active" : ""} ${hasValue ? "dropdown-has-value" : ""}`}
+                    tabIndex={isDisabled ? -1 : 0}
+                    style={{ paddingLeft: dropdownIcon ? "45px" : "20px" }}>
 
                     <div className="custom-dropdown-selected-content">
+
                         <span className="custom-dropdown-text">
+
                             {selectedOption ? selectedOption.label : dropdownPlaceholder}
+
                         </span>
+
                     </div>
 
-                    {dropdownIcon && <div className="custom-dropdown-icon">{dropdownIcon}</div>}
+                    {dropdownIcon && (
 
-                    <div className={`custom-dropdown-chevron ${isOpen ? "chevron-rotated" : ""}`}>{<ChevronDown size={20}/>}</div>
+                        <div className="custom-dropdown-icon">
+
+                            {dropdownIcon}
+
+                        </div>
+
+                    )}
+
+                    <div className={`custom-dropdown-chevron ${isOpen ? "chevron-rotated" : ""}`}>
+
+                        <ChevronDown size={20} />
+
+                    </div>
+
                 </div>
+
+                {isOpen && (
+
+                    <ul className={`custom-dropdown-list dropdown-${dropdownDirection}`}>
+
+                        <li onClick={() => handleOptionClick({ value: "", label: dropdownPlaceholder })} className={`custom-dropdown-item ${!hasValue ? "item-selected" : ""}`}>
+
+                            <span>{dropdownPlaceholder}</span>
+
+                        </li>
+
+                        {dropdownOptions.map((option) => (
+
+                            <li key={option.value} onClick={() => handleOptionClick(option)} className={`custom-dropdown-item ${option.value === dropdownSelected ? "item-selected" : ""}`}>
+
+                                <span>{option.label}</span>
+
+                            </li>
+
+                        ))}
+
+                    </ul>
+
+                )}
+
             </div>
 
-            {isOpen && (
-                <ul className="custom-dropdown-list">
-                    <li onClick={() => handleOptionClick({ value: "", label: dropdownPlaceholder })}
-                        className={`custom-dropdown-item ${!dropdownSelected ? "item-selected" : ""}`}>
-
-                         <span>{dropdownPlaceholder}</span>   
-                    </li>
-
-                    {dropdownOptions.map((option) => (
-                        <li key={option.value}
-                            onClick={() => handleOptionClick(option)}
-                            className={`custom-dropdown-item ${option.value === dropdownSelected ? "item-selected" : ""}`}>
-                            
-                            <span>{option.label}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
         </div>
     )
 }

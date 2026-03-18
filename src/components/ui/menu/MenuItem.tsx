@@ -12,16 +12,20 @@ export const MenuItem: FC<ItemProps> = ({ item, isActive, onClick }) => {
     const label = item.label
 
     return (
-        <div className={`menu-item-container ${isActive ? "menu-item-active" : ""}`}
-            onClick={() => onClick(item)}>
+        <div className={`menu-nav-item-container ${isActive ? "menu-nav-item-active" : ""}`} onClick={() => onClick(item)}>
 
-            <div className="menu-item-icon">
+            <div className="menu-nav-item-icon">
+
                 <Icon size={20} />
+
             </div>
 
-            <div className="menu-item-label">
+            <div className="menu-nav-item-label">
+
                 {label}
+
             </div>
+
         </div>
     )
 }

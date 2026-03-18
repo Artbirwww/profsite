@@ -1,5 +1,4 @@
 import "./index.css"
-import "./new_global.css"
 
 import App from "./App"
 import { createRoot } from "react-dom/client"

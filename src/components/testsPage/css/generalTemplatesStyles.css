@@ -1,0 +1,202 @@
+/* общие стили для карточек тестов */
+.test-card {
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+    padding: 30px;
+    user-select: none;
+}
+
+.test-card.type-1 {
+    min-height: 630px;
+}
+
+.test-card.type-2 {
+    min-height: 290px;
+}
+
+.test-card-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.test-card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.test-card-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-text-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: 2px solid var(--border-color);
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 15px;
+}
+
+.test-card-count p {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.test-card-count p span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+}
+
+.test-card-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.test-card-text span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    color: var(--primary-text-color);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border-radius: 15px;
+    height: 40px;
+    min-height: 40px;
+    width: 40px;
+    min-width: 40px;
+}
+
+.test-card-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.test-grid-template-1 {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 30px;
+}
+
+.test-grid-item {
+    border-radius: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.test-card-input {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background-color: var(--border-color);
+    border-radius: 100px;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -6px;
+    height: 16px;
+    width: 16px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    background: var(--primary-color, #007bff);
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.test-card-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+}
+
+.test-card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.test-card-selectable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.test-card-selectable.active {
+    border-color: var(--accent-color);
+}
+
+.test-card-selectable:hover {
+    border-color: var(--accent-color);
+}

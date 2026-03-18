@@ -1,0 +1,36 @@
+/*Стили для базового layout*/
+.layout-base-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    padding: 10px;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+.layout-background {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #eeeeee;
+    border-radius: 15px;
+}
+.layout-content-wrapper {
+    max-width: 1440px;
+    width: 1440px;
+    padding: 10px;
+}
+
+
+
+
+
+.layout-menu {
+    position: fixed;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    bottom: 0;
+}
