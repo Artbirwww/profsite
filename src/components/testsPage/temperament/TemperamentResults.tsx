@@ -64,7 +64,9 @@ export const TemperamentResults = () => {
 
 			} catch (err) {
 				console.error(err)
-				toast.error("Не удалось связаться с сервером, повторите попытку позже")
+				toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?", {
+                    duration: 5000
+                })
 			}
 		}
 
@@ -77,7 +79,10 @@ export const TemperamentResults = () => {
 		setTemperamentType(calculateTemperament(psychTest))
 	}, [psychTest])
 	if (!psychTest || !temperamentType)
-		return <p>Загрузка</p>
+		return <>
+			<p>Загрузка</p>
+			<Toaster/>
+		</>
 		
 	return (
 		<div

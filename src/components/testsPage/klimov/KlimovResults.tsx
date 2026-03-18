@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { TestResultResponse } from "../../../types/testTypes"
 import { useLocation } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { calculateResults } from "./KlimovResultsCalc"
 import { klimovTypeTranslate } from "./klimovTypes"
@@ -28,12 +28,17 @@ export const KlimovResults = () => {
                 setResult(createdTest)
             } catch(err) {
                 console.error(err)
-                toast.error("Возникла ошибка при сохранении результатов")
+                toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?", {
+                    duration: 5000
+                })
             }
         }
         createTest()
     }, [])
-    if (!result) return <p>Загрузка...</p>
+    if (!result) return <>
+        <p>Загрузка...</p>
+        <Toaster/>
+    </>
     return (<>
         <div>
             {result.psychParams.map(param => (
