@@ -3,11 +3,12 @@ import "./css/authStyle.css"
 import { FC, FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, KeyRound, MailOpen } from "lucide-react";
-import { FieldInput } from "../ui/reusable/FieldInput";
+
 import { Button } from "../../components/ui/reusable/button";
 import { authApi } from "../../services/api/authApi";
 import { useAuth } from "../../contexts/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
+import { FieldInput } from "../ui/reusable/fieldInput";
 
 export const LoginPage: FC = () => {
     const navigate = useNavigate()
