@@ -62,7 +62,7 @@ export const RegistrationPage: FC = () => {
         try {
             await authApi.register(formData.email, formData.password)
             toast.success("Регистрация успешна!")
-            handleBack()
+            navigate("/login")
         } catch(err) {
             console.error(err)
         }
