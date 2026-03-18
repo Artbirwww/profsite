@@ -8,22 +8,42 @@ import toast from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { useAuth } from "../../../contexts/AuthContext"
 import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
+import "../css/testsResultStyles.css"
+import engineerLevelsData from "./engineerLevels.json"
+import { EngineerLevels, Level } from "./engineerThinkingTypes"
+import { PupilResponse } from "../../../types/pupil/pupil"
+import { pupilApi } from "../../../services/api/pupilApi"
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
     const { getToken } = useAuth()
     const [result, setResult] = useState<TestResultResponse>()
+    const [pupilLevel, setPupilLevel] = useState<Level>()
+    const engineerLevels = engineerLevelsData as EngineerLevels[]
+
+    const [pupilData, setPupilData] = useState<PupilResponse>()
 
     const isViewMode = location.state?.isViewMode ? location.state?.isViewMode : false
 
     useEffect(() => {
+        //Если все подгружено найти описание результатов пользователя
+        if (!pupilData || !result) return
+        const resultParam = result?.psychParams[0].param
+        const levelTemp = engineerLevels.find(engineer => engineer.gender === pupilData?.pupilDTO.gender)
+                            ?.levels.find(level => resultParam >= level.min && resultParam <= level.max)
+        setPupilLevel(levelTemp)
+    }, [pupilData, result])
+    useEffect(() => {
         if (!isViewMode)
             return
-
-        const testTemp = location.state?.psychTest
-        if (!testTemp)
-            return
-
-        setResult(testTemp)
+        const loadResult = async () => {
+            const pupilDataTemp = await pupilApi.getPupilData(getToken())
+            const testTemp = location.state?.psychTest
+            if (!testTemp)
+                return
+            setResult(testTemp)
+            setPupilData(pupilDataTemp)
+        }
+        loadResult()
     }, [])
 
     useEffect(() => {
@@ -35,14 +55,10 @@ export const EngineeringThinkingResults = () => {
             const engineerThinkingTestResult = calculateResults(location.state?.tasks)
 
             try {
-                /**
-                 * TODO
-                 *     - Допилить в режим просмотра результатов 
-                 *     - Сохранить тест и проверить используемые параметр 
-                 *     - Протестировать на результаты
-                 */
                 const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
+                const pupilDataTemp = await pupilApi.getPupilData(getToken())
                 setResult(engineerThinkingTestResult)
+                setPupilData(pupilDataTemp)
 
             } catch (err) {
                 console.error(err)
@@ -53,30 +69,41 @@ export const EngineeringThinkingResults = () => {
         createTest()
     }, [])
 
-    if (!result) return (<>
+    if (!result || !pupilData) return (<>
         <p>Загрузка ваших результатов...</p>
     </>)
 
     return (<>
-        <div className="test-result-wrapper">
-            <p>Ваш уровень инженерного мышления:  {result.psychParams[0].param} / 70</p>
+        <div >
+            <h3>Ваш уровень инженерного мышления:  {result.psychParams[0].param} из 70 баллов</h3>
             <ProgressBar currentTaskNumber={result.psychParams[0].param} total={70} />
-            <div className="gender-results-wrapper">
-                <div className="results">
-                    <h4>Юноши (старше 18 лет)</h4>
-                    <div className="gender-card">Меньше 26 Очень низкий</div>
-                    <div className="gender-card">27 - 32 Низкий</div>
-                    <div className="gender-card">33 - 38 Средний</div>
-                    <div className="gender-card">39 - 47 Высокий</div>
-                    <div className="gender-card">Больше 48 Очень высокий</div>
+            <div className="result-wrapper" >
+                <div className="result-card">
+                    <h4>Ваш результат: </h4>
+                    {pupilLevel && 
+                    <>
+                        <p>{pupilLevel.description}</p>
+                        <p>{pupilLevel.techCapabilities}</p>
+                    </>
+                    }
                 </div>
-                <div className="results">
-                    <h4>Девушки (старше 18 лет)</h4>
-                        <div className="gender-card">Меньше 17 Очень низкий</div>
-                        <div className="gender-card">18 - 22 Низкий</div>
-                        <div className="gender-card">23 - 27 Средний</div>
-                        <div className="gender-card">28 - 34 Высокий</div>
-                        <div className="gender-card">Больше 35 Очень высокий</div>
+                <div className="result-card-wrapper">
+                    <div className="result-card">
+                        <h4>Юноши (старше 18 лет)</h4>
+                        <div className="gender-card">Меньше 26 Очень низкий</div>
+                        <div className="gender-card">27 - 32 Низкий</div>
+                        <div className="gender-card">33 - 38 Средний</div>
+                        <div className="gender-card">39 - 47 Высокий</div>
+                        <div className="gender-card">Больше 48 Очень высокий</div>
+                    </div>
+                    <div className="result-card">
+                        <h4>Девушки (старше 18 лет)</h4>
+                            <div className="gender-card">Меньше 17 Очень низкий</div>
+                            <div className="gender-card">18 - 22 Низкий</div>
+                            <div className="gender-card">23 - 27 Средний</div>
+                            <div className="gender-card">28 - 34 Высокий</div>
+                            <div className="gender-card">Больше 35 Очень высокий</div>
+                    </div>
                 </div>
             </div>
         </div>
