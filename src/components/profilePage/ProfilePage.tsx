@@ -4,7 +4,7 @@ import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from "reac
 import { FieldInput } from "../ui/reusable/fieldInput"
 import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
 import { Button } from "../ui/reusable/button"
-import { Radio, RadioGroup } from "../ui/reusable/Radio"
+import { Radio, RadioGroup } from "../ui/reusable/radio"
 import { Dropdown } from "../ui/reusable/dropdown"
 import { DatePicker } from "../ui/reusable/datePicker"
 import { Temporal } from "@js-temporal/polyfill"
