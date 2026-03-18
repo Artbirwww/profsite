@@ -3,13 +3,14 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { useEffect, useState } from "react"
 import { GroupRolesQuestion, groupRolesDataRoleEn, groupRolesDataRoleMapping, groupRoles } from "./groupRolesData"
 import { calculateGroupRolesDominantRoles, calculateGroupRolesParams } from "./groupRolesResultsCalc"
-import { TestResultRequest, TestResultResponse } from "../../../types/testTypes"
+import { PsychParam, TestResultRequest, TestResultResponse } from "../../../types/testTypes"
 import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { TestItem } from "../TestsData"
 import { formatDateRU } from "../../../services/dates/formatDate"
 import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
-
+import "../css/testsResultStyles.css"
+import { sortByParam } from "../utils/sortByParams"
 export const GroupRolesResults = () => {
     const location = useLocation()
     const { getToken } = useAuth()
@@ -25,8 +26,10 @@ export const GroupRolesResults = () => {
 
         if (!location.state?.psychTest)
             return
-
-        setGroupRolesResults(location.state?.psychTest)
+        setGroupRolesResults({
+            ...location.state?.psychTest, 
+            psychParams: sortByParam(location.state?.psychTest.psychParams)
+        })
     }, [])
 
     //when data is calculated send it to the server
@@ -55,7 +58,7 @@ export const GroupRolesResults = () => {
                 }
 
                 const createdTest = await testApi.createTest(token, calculatedResults)
-                setGroupRolesResults(createdTest)
+                setGroupRolesResults({...createdTest, psychParams: sortByParam(createdTest.psychParams)})
                 toast.success("Тест успешно пройден")
 
             } catch (err) {
@@ -70,41 +73,35 @@ export const GroupRolesResults = () => {
     const getReadableParamName = (paramName: string, paramsMap: Record<string, groupRolesDataRoleEn>) => {
         return Object.keys(paramsMap).find(key => paramsMap[key] === paramName)
     }
-
+    
     if (!groupRolesResults)
         return (<p>Загрузка...</p>)
 
 
     return (
-        <div
-            className="test-result-item">
+        <>
+            <div className="result-wrapper">
+            
+            <h3>Роли в команде. Ваши результаты:</h3>
+                    <div className="result-card">
+                        <h4>Доминантные роли: </h4>
+                        {calculateGroupRolesDominantRoles(groupRolesResults).map(param => (<>
+                            <p><b>{getReadableParamName(param.name, groupRolesDataRoleMapping)}</b> : {param.param} баллов, Ваш тип {groupRoles.find(role => role.name === param.name)?.description}</p>
+                            <p></p>
+                        </>
+                        ))}
+                    </div>
+                    
+                    <div className="result-card">
+                        <h4>Все результаты: </h4>
+                        {groupRolesResults.psychParams.map(result => (
+                            <p>{getReadableParamName(result.name, groupRolesDataRoleMapping)}: {result.param} баллов {groupRoles.find(role => role.name === result.name)?.description}</p>
+                        ))}
+                    </div>
 
-            <div
-                className="test-result-item-content-wrapper">
-
-                <div>
-                    <h1>Роли в команде. Ваши результаты:</h1>
-                </div>
-
-                <div>
-                    <h4>Доминантные роли: </h4>
-                    {calculateGroupRolesDominantRoles(groupRolesResults).map(param => (<>
-                        <p>{getReadableParamName(param.name, groupRolesDataRoleMapping)} : {param.param}, {groupRoles.find(role => role.name === param.name)?.description}</p>
-                        <p></p>
-                    </>
-                    ))}
-                </div>
-                <h4>Все результаты</h4>
-                <div>
-                    {groupRolesResults.psychParams.map(result => (
-                        <span>{getReadableParamName(result.name, groupRolesDataRoleMapping)}: {result.param} / 20</span>
-                    ))}
-                </div>
-
-                <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
-
-            </div>
+                    <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
         </div>
+        </>
     )
 
 }
