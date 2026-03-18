@@ -2,7 +2,7 @@ import "./css/authStyle.css"
 
 import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft } from "lucide-react"
 import { FC, FormEvent, useCallback, useState } from "react"
-import { FieldInput } from "../../components/ui/reusable/fieldInput"
+import { FieldInput } from "../ui/reusable/FieldInput"
 import { Button } from "../../components/ui/reusable/button"
 import { useNavigate } from "react-router-dom"
 import { authApi } from "../../services/api/authApi"
@@ -63,7 +63,7 @@ export const RegistrationPage: FC = () => {
             await authApi.register(formData.email, formData.password)
             toast.success("Регистрация успешна!")
             handleBack()
-        } catch(err) {
+        } catch (err) {
             console.error(err)
         }
     }
@@ -73,26 +73,26 @@ export const RegistrationPage: FC = () => {
             {step === 1 &&
                 <div className="registration-container">
                     <div className="registration-header">
-                        <div className="registration-icon"><GraduationCap size={34}/></div>
+                        <div className="registration-icon"><GraduationCap size={34} /></div>
                         <h2>Добро пожаловать!</h2>
                         <span>Выберите, кем вы являетесь</span>
                     </div>
-                    
+
                     <div className="registration-type-options">
                         {USER_TYPE.map(({ id, title, description }) => (
                             <div className="type-item" key={id} onClick={() => handleSelectType(id)}>
                                 <p>{title}</p>
                                 <span>{description}</span>
-                            </div>     
+                            </div>
                         ))}
                     </div>
                 </div>
             }
 
-            {step === 2 && 
+            {step === 2 &&
                 <div className="registration-container">
                     <div className="registration-header">
-                        <div className="registration-icon"><GraduationCap size={34}/></div>
+                        <div className="registration-icon"><GraduationCap size={34} /></div>
                         <h2>Регистрация - {`${userType}`}</h2>
                         <span>Заполните электронную почту и пароль</span>
                     </div>
@@ -100,56 +100,53 @@ export const RegistrationPage: FC = () => {
                     <div className="registrarion-form-cols">
                         <div className="registration-form-row">
                             <FieldInput inputLabel={"Электронная почта"}
-                                        inputIcon={<MailOpen size={20}/>}
-                                        inputPlaceholder={"example@gmail.com"}
-                                        isImportant={true}
-                                        inputValue={formData.email}
-                                        inputOnChange={updateField("email")}/>
+                                inputIcon={<MailOpen size={20} />}
+                                inputPlaceholder={"example@gmail.com"}
+                                inputValue={formData.email}
+                                inputOnChange={updateField("email")} />
                         </div>
 
                         <div className="registration-form-row">
                             <FieldInput inputLabel={"Пароль"}
-                                        inputIcon={<KeyRound size={20}/>}
-                                        inputType={"password"}
-                                        isImportant={true}
-                                        isPassword={true}
-                                        inputValue={formData.password}
-                                        inputOnChange={updateField("password")}/>
+                                inputIcon={<KeyRound size={20} />}
+                                inputType={"password"}
+                                isPassword={true}
+                                inputValue={formData.password}
+                                inputOnChange={updateField("password")} />
 
                             <FieldInput inputLabel={"Подтвердите пароль"}
-                                        inputIcon={<Repeat size={20}/>}
-                                        inputType={"password"}
-                                        isImportant={true}
-                                        isPassword={true}
-                                        inputValue={formData.repeatPassword}
-                                        inputOnChange={updateField("repeatPassword")}/>
+                                inputIcon={<Repeat size={20} />}
+                                inputType={"password"}
+                                isPassword={true}
+                                inputValue={formData.repeatPassword}
+                                inputOnChange={updateField("repeatPassword")} />
                         </div>
 
                         <div className="registration-form-row">
                             <div className="registration-form-tip">
                                 <p>После регистрации вы сможете заполнить профиль (ФИО, школа, класс и т. д.) в личном кабинете</p>
-                            </div>   
+                            </div>
                         </div>
 
                         <div className="registration-form-row">
-                            <Button buttonLabel={"Зарегистрироваться"} buttonFunction={handleRegistration}/>
+                            <Button buttonLabel={"Зарегистрироваться"} buttonFunction={handleRegistration} />
                         </div>
 
                         <div className="registration-form-row">
                             <Button buttonLabel={"Назад"}
-                                    buttonIcon={<MoveLeft size={20}/>}
-                                    iconPosition={"left"}
-                                    buttonType={"link"}
-                                    buttonFunction={handleBack}/>
+                                buttonIcon={<MoveLeft size={20} />}
+                                iconPosition={"left"}
+                                buttonType={"link"}
+                                buttonFunction={handleBack} />
                         </div>
                     </div>
                 </div>
             }
 
             <Button buttonLabel={"У меня уже есть аккаунт"}
-                    buttonType={"link"}
-                    buttonFunction={handleBackToLogin}/>
-        <Toaster />
+                buttonType={"link"}
+                buttonFunction={handleBackToLogin} />
+            <Toaster />
         </div>
     )
 }

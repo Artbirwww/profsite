@@ -2,12 +2,13 @@
 .test-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    position: relative;
     gap: 10px;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    padding-top: 30px;
-    padding-bottom: 100px;
+    padding: 100px 0;
     box-sizing: border-box;
 }
 
@@ -15,10 +16,11 @@
 .test-header {
     display: flex;
     flex-direction: row;
+    position: absolute;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    top: 25px;
+    top: 30px;
 }
 
 .test-header h1 {

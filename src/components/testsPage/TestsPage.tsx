@@ -78,7 +78,8 @@ export const TestsPage: FC = ({ }) => {
 
                 <h1>Тестирование</h1>
 
-                <div className="test-indicator">
+                {/* НЕ УДАЛЯТЬ */}
+                {/*<div className="test-indicator">
 
                     {testsList.map((_, index) => (
 
@@ -86,7 +87,7 @@ export const TestsPage: FC = ({ }) => {
 
                     ))}
 
-                </div>
+                </div>*/}
 
             </div>
 

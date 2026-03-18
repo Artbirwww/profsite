@@ -33,8 +33,9 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
             <div className="test-selection-item-label">
 
                 <div className="test-selection-item-name">
-
-                    <div className="test-selection-item-order">
+                    
+                    {/* НЕ УДАЛЯТЬ */}
+                    {/*<div className="test-selection-item-order">
 
                         {Array.from({ length: (index ?? 0) + 1 }).map((_, i) => (
 
@@ -42,7 +43,7 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
 
                         ))}
 
-                    </div>
+                    </div>*/}
 
                     <h4>{item.label}</h4>
 
