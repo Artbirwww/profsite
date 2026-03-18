@@ -28,3 +28,9 @@ export interface KlimovTask extends Task {
   options: [KlimovOption, KlimovOption];
   userAnswer: number; 
 }
+
+export interface KlimovProfession {
+    name: string
+    description: string
+    traits: string
+}
