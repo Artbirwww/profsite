@@ -65,7 +65,9 @@ export const GroupRolesResults = () => {
 
             } catch (err) {
                 console.error(err)
-                toast.error("Не получилось сохранить данные теста")
+                toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?", {
+                    duration: 5000
+                })
             }
         }
         //if tests just downloaded from somewhere show the result but dont upload it again
@@ -77,7 +79,10 @@ export const GroupRolesResults = () => {
     }
     
     if (!groupRolesResults)
-        return (<p>Загрузка...</p>)
+        return <>
+        <p>Загрузка...</p>
+        <Toaster/>
+    </>
 
 
     return (
