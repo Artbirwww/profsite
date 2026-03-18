@@ -56,3 +56,24 @@
     font-weight: var(--font-weight-normal);
     color: var(--text-secondary-color);
 }
+
+.result-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.result-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.result-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+}
