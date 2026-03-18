@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { TestItem } from "../TestsData"
 import { calculateResults } from "./engineeringThinkingResultsCalc"
 import { TestResultResponse } from "../../../types/testTypes"
@@ -13,8 +13,10 @@ import engineerLevelsData from "./engineerLevels.json"
 import { EngineerLevels, Level } from "./engineerThinkingTypes"
 import { PupilResponse } from "../../../types/pupil/pupil"
 import { pupilApi } from "../../../services/api/pupilApi"
+import { Button } from "../../ui/reusable/button"
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
+    const navigate = useNavigate()
     const { getToken } = useAuth()
     const [result, setResult] = useState<TestResultResponse>()
     const [pupilLevel, setPupilLevel] = useState<Level>()
@@ -73,8 +75,7 @@ export const EngineeringThinkingResults = () => {
         <p>Загрузка ваших результатов...</p>
     </>)
 
-    return (<>
-        <div >
+    return (<div>
             <h3>Ваш уровень инженерного мышления:  {result.psychParams[0].param} из 70 баллов</h3>
             <ProgressBar currentTaskNumber={result.psychParams[0].param} total={70} />
             <div className="result-wrapper" >
@@ -105,7 +106,9 @@ export const EngineeringThinkingResults = () => {
                             <div className="gender-card">Больше 35 Очень высокий</div>
                     </div>
                 </div>
+                <p>Дата прохождения: {result?.createdAt}</p>
+                <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
             </div>
-        </div>
-    </>)
+            
+    </div>)
 }

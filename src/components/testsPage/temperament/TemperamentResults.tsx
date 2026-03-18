@@ -1,7 +1,7 @@
 import "../css/testsResultStyles.css"
 
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { calculateParams, calculateTemperament, getScorebyName } from "./temperamentResultCalc"
 import { temeperamentParamLabels, TemperamentFormA, TemperamentFormB, TemperamentOption, TemperamentParam, TemperamentType } from "./temperamentData"
 import { useAuth } from "../../../contexts/AuthContext"
@@ -13,6 +13,7 @@ import { getActualTestByDate } from "../../resultsPage/services/testSort"
 import { formatDateRU } from "../../../services/dates/formatDate"
 import { EysenckCircle } from "./EysenckCircle"
 import { EysenckScales } from "./EysenckScales"
+import { Button } from "../../ui/reusable/button"
 
 /**
  * TODO
@@ -28,6 +29,7 @@ interface TemperamentResultsProps {
 
 export const TemperamentResults = () => {
 	const location = useLocation()
+	const navigate = useNavigate()
 
 	const { getToken } = useAuth()
 
@@ -153,8 +155,11 @@ export const TemperamentResults = () => {
 
 					</div>
 				</div>
-
-				<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
+				<div className="test-result-item-content">
+					<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
+					<Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+				</div>
+				
 
 			</div>
 

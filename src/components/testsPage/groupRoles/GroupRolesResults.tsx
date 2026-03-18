@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate, useNavigation } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 import { useEffect, useState } from "react"
 import { GroupRolesQuestion, groupRolesDataRoleEn, groupRolesDataRoleMapping, groupRoles } from "./groupRolesData"
@@ -11,8 +11,10 @@ import { formatDateRU } from "../../../services/dates/formatDate"
 import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
 import "../css/testsResultStyles.css"
 import { sortByParam } from "../utils/sortByParams"
+import { Button } from "../../ui/reusable/button"
 export const GroupRolesResults = () => {
     const location = useLocation()
+    const navigate = useNavigate()
     const { getToken } = useAuth()
 
     const groupQuestionsResult: GroupRolesQuestion[][] = location.state?.groupQuestionsResult
@@ -100,7 +102,8 @@ export const GroupRolesResults = () => {
                     </div>
 
                     <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
-        </div>
+                    <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+            </div>
         </>
     )
 

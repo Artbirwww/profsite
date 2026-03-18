@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { TestResultResponse } from "../../../types/testTypes"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
 import toast from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
@@ -9,8 +9,10 @@ import { KlimovProfession, klimovTypeTranslate } from "./klimovTypes"
 import "../css/testsResultStyles.css"
 import { sortByParam } from "../utils/sortByParams"
 import klimovProfessionsData from "./klimovProfessions.json"
+import { Button } from "../../ui/reusable/button"
 export const KlimovResults = () => {
     const location = useLocation()
+    const navigate = useNavigate()
     const { getToken } = useAuth()
     const [result, setResult] = useState<TestResultResponse>()
     //Описание профессий
@@ -63,6 +65,7 @@ export const KlimovResults = () => {
                 ))}
 
             <p>Дата прохождения: {result.createdAt}</p>
+            <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
         </div>
         
     </>)
