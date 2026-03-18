@@ -2,7 +2,7 @@ import "./css/authStyle.css"
 
 import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft } from "lucide-react"
 import { FC, FormEvent, useCallback, useState } from "react"
-import { FieldInput } from "../ui/reusable/FieldInput"
+import { FieldInput } from "../ui/reusable/fieldInput";
 import { Button } from "../../components/ui/reusable/button"
 import { useNavigate } from "react-router-dom"
 import { authApi } from "../../services/api/authApi"
