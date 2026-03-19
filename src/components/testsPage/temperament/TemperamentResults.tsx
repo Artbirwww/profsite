@@ -94,80 +94,53 @@ export const TemperamentResults = () => {
 		
 	return (
 		<div className="test-result-grid">
-
 			<div className="test-result-grid-item result-grid-item-1">
-
 				<EysenckCircle extraversion={ext} neuroticism={neu} />
-
 			</div>
 
 			<div className="test-result-grid-item result-grid-item-2">
-
 				<EysenckScales params={psychTest.psychParams} />
-
 			</div>
 
 			<div className="test-result-grid-item result-grid-item-3">
-
+				
 				<div className="test-result-item-content">
-
 					<div className="item-content-label">
-
 						{temperamentType.name}:
-
 					</div>
-
 					<div className="item-content-description">
-
 						<p>{temperamentType.shortDescription}</p>
 						<p>{temperamentType.description}</p>
-
 					</div>
-
-
 				</div>
 
 				<div className="test-result-item-content">
-
 					<div className="item-content-label">
-
 						Cвойственно проявлять:
-
 					</div>
-
 					<div className="item-content-description">
-
 						{temperamentType.traits.map((trait) => (
 							<span>{trait}</span>
 						))}
-
 					</div>
 				</div>
 
 				<div className="test-result-item-content">
-
 					<div className="item-content-label">
-
 						Подходящие профессии:
-
 					</div>
-
 					<div className="item-content-description">
-
 						{temperamentType.professions.map((profession) => (
 							<span>{profession}</span>
 						))}
-
 					</div>
 				</div>
+
 				<div className="test-result-item-content">
 					<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
 					<Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
 				</div>
-				
-
 			</div>
-
 		</div>
 	)
 }
