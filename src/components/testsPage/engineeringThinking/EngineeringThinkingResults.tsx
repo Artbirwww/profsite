@@ -54,12 +54,12 @@ export const EngineeringThinkingResults = () => {
 
         const createTest = async () => {
 
-            const engineerThinkingTestResult = calculateResults(location.state?.tasks)
-
+            const engineerThinkingTestResult = {...calculateResults(location.state?.tasks), complitionTimeSeconds: location.state?.complitionTimeSeconds}
+            console.log(engineerThinkingTestResult)
             try {
                 const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
                 const pupilDataTemp = await pupilApi.getPupilData(getToken())
-                setResult(engineerThinkingTestResult)
+                setResult(createdTest)
                 setPupilData(pupilDataTemp)
 
             } catch (err) {
