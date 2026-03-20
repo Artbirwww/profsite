@@ -2,7 +2,7 @@ import "./css/authStyle.css"
 
 import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft } from "lucide-react"
 import { FC, FormEvent, useCallback, useState } from "react"
-import { FieldInput } from "../ui/reusable/FieldInput"
+import { FieldInput } from "../ui/reusable/fieldInput";
 import { Button } from "../../components/ui/reusable/button"
 import { useNavigate } from "react-router-dom"
 import { authApi } from "../../services/api/authApi"
@@ -59,11 +59,20 @@ export const RegistrationPage: FC = () => {
         navigate("/login")
     }
     const handleRegistration = async () => {
+        if (!formData.email || !formData.password || !formData.repeatPassword) {
+            toast.error("Пожалуйста введите все поля")
+            return
+        }
+        if(formData.password !== formData.repeatPassword) {
+            toast.error("Пароли не совпадают")
+            return
+        }
         try {
             await authApi.register(formData.email, formData.password)
             toast.success("Регистрация успешна!")
-            handleBack()
+            navigate("/login")
         } catch (err) {
+            toast("Логин уже занят")
             console.error(err)
         }
     }

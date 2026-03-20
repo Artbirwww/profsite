@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { TestItem } from "../TestsData"
 import { calculateResults } from "./engineeringThinkingResultsCalc"
 import { TestResultResponse } from "../../../types/testTypes"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { useAuth } from "../../../contexts/AuthContext"
 import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
@@ -54,25 +54,25 @@ export const EngineeringThinkingResults = () => {
 
         const createTest = async () => {
 
-            const engineerThinkingTestResult = calculateResults(location.state?.tasks)
-
+            const engineerThinkingTestResult = {...calculateResults(location.state?.tasks), complitionTimeSeconds: location.state?.complitionTimeSeconds}
+            console.log(engineerThinkingTestResult)
             try {
                 const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
                 const pupilDataTemp = await pupilApi.getPupilData(getToken())
-                setResult(engineerThinkingTestResult)
+                setResult(createdTest)
                 setPupilData(pupilDataTemp)
 
             } catch (err) {
                 console.error(err)
-                toast.error("Возникла ошибка при сохранения результатов")
+                toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?")
             }
         }
-
         createTest()
     }, [])
 
     if (!result || !pupilData) return (<>
         <p>Загрузка ваших результатов...</p>
+        <Toaster/>
     </>)
 
     return (<div>

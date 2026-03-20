@@ -36,18 +36,19 @@ export const calculateTemperament = (test: TestResultResponse): TemperamentType 
     const extraversion = test.psychParams.find(param => param.name === "extrav_introver_score")?.param || 0
     const neurotizm = test.psychParams.find(param => param.name === "neirotizm_score")?.param || 0
     const sincerity = test.psychParams.find(param => param.name === "sincerity_score")?.param || 0
+
     let result
 
     if (sincerity > 4) {
         return temperamentTypes.unreliable as TemperamentType
     }
 
-    if (extraversion > 5) {
-        result = neurotizm > 5 ? temperamentTypes.choleric : temperamentTypes.sanguine
+    if (extraversion >= 12) {
+        result = neurotizm >= 12 ? temperamentTypes.choleric : temperamentTypes.sanguine
     }
 
-    if (extraversion < 5) {
-        result = neurotizm > 5 ? temperamentTypes.melancholic : temperamentTypes.phlegmatic
+    if (extraversion < 12) {
+        result = neurotizm >= 12 ? temperamentTypes.melancholic : temperamentTypes.phlegmatic
     }
 
     return result as TemperamentType

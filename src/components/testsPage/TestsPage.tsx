@@ -5,6 +5,7 @@ import { testsList } from "./TestsData"
 import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
 import { Check } from "lucide-react"
+import { Toaster } from "react-hot-toast"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
@@ -118,6 +119,16 @@ export const TestsPage: FC = ({ }) => {
                 ))}
             </div>
 
+            <div
+                className="test-indicator">
+
+                {testsList.map((_, index) => (
+
+                    <div
+                        key={index}
+                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
+                ))}
+            </div>
         </div>
     )
 }

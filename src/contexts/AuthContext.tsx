@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { authApi } from '../services/api/authApi'
 import Cookies from "js-cookie"
 import { Role, ROLES } from '../types/account/role';
+import {jwtDecode} from "jwt-decode"
 interface AuthContextType {
   token: string | null;
   isLoading: boolean;
@@ -12,8 +13,14 @@ interface AuthContextType {
   setRoles: (roles: Role[]) => void;
   getRoles: () => Role[] | undefined;
   checkRole: (role: Role) => boolean | undefined
+  isFirstLogin: () => boolean
+  getEmail: () => string
 }
-
+interface TokenClaims {
+  email: string
+  firstLogin: boolean
+  sub: string
+}
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -48,6 +55,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
     
   };
+  const getTokenClaims = () => {
+    try {
+      return jwtDecode(getToken().replace("Bearer ", "")) as TokenClaims
+    } catch(err) {
+      console.error(err)
+      return null
+    }
+  }
 
   const setRoles = (roles: Role[]) => {
     Cookies.set("roles", JSON.stringify(roles), {
@@ -71,9 +86,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const roles = getRoles()
     return !!roles?.some(r => r.name === role.name)
   }
+  const isFirstLogin = () => getTokenClaims()?.firstLogin || false
+  const getEmail = () => getTokenClaims()?.email || ""
 
   return (
-    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole}}>
+    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole, isFirstLogin, getEmail}}>
       {children}
     </AuthContext.Provider>
   );

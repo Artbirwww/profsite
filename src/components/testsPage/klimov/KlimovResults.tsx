@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { TestResultResponse } from "../../../types/testTypes"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
-import toast from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { calculateResults } from "./klimovResultsCalc"
 import { KlimovProfession, klimovTypeTranslate } from "./klimovTypes"
@@ -41,15 +41,17 @@ export const KlimovResults = () => {
                 })
             } catch (err) {
                 console.error(err)
-                toast.error("Возникла ошибка при сохранении результатов")
+                toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?", {
+                    duration: 5000
+                })
             }
         }
         createTest()
     }, [])
-
-    if (!result)
-        return (<p>загрузка...</p>)
-    
+    if (!result) return <>
+        <p>Загрузка...</p>
+        <Toaster/>
+    </>
     return (<>
         <div className="result-wrapper">
             <h3>Склонности к профессиям результат: </h3>
