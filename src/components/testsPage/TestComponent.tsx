@@ -1,4 +1,4 @@
-import { FC, memo } from "react"
+import { FC, memo, useRef, MouseEvent } from "react"
 import { TestItem } from "./TestsData"
 import { Timer, FileQuestion, ArrowRight } from "lucide-react"
 
@@ -13,6 +13,19 @@ interface TestItemProps {
 
 export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick }) => {
     const Icon = item.icon
+    const circleHoverRef = useRef<HTMLDivElement>(null)
+
+    const handleMouseEnter = (e: MouseEvent<HTMLDivElement>) => {
+        if (!circleHoverRef.current)
+            return
+
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        circleHoverRef.current.style.left = `${x}px`
+        circleHoverRef.current.style.top = `${y}px`
+    }
 
     const handleClick = () => {
         if (!isAvailable)
@@ -22,7 +35,7 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
     }
 
     return (
-        <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
+        <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick} onMouseEnter={handleMouseEnter}>
 
             <div className="test-selection-item-icon">
                 <Icon size={30} strokeWidth={1.5} />
@@ -41,6 +54,10 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
                 <span>{item.author}</span>
             </div>
 
+            <div className="test-selection-item-description">
+                <span>{item.description}</span>
+            </div>
+
             <div className="test-selection-item-info">
                 <div className="test-selection-item-options">
                     <Timer size={20} strokeWidth={1.5} />
@@ -56,6 +73,8 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
                     <ArrowRight size={20} />
                 </div>
             </div>
+
+            <div className="hover-circle" ref={circleHoverRef} />
 
         </div>
     )

@@ -64,7 +64,7 @@ button {
     color: var(--primary-color);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-base);
-    border-radius: 15px;
+    border-radius: 100px;
     transition: all .3s ease;
 }
 
