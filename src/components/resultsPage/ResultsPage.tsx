@@ -45,7 +45,7 @@ export const ResultsPage: FC = () => {
       const token = getToken();
       if (!token || !selectedTest.name) throw new Error("Can't load test");
       const psychTests = await testApi.getTestsByType(token, selectedTest.name);
-
+      console.log(psychTests)
       const actualTest = getActualTestByDate(psychTests);
       const testTypeName = selectedTest.name as testType;
       navigate(testsResultPages[testTypeName], {

@@ -1,4 +1,4 @@
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 import "./css/testsViewerStyles.css"
 import "./css/generalTemplatesStyles.css"
@@ -15,15 +15,12 @@ export const TestViewer = () => {
             duration: 4500
         })
     }, [])
+    
     return (
         <div className="test-viewer-wrapper">
-
             <div className="test-outlet">
-
                 <Outlet />
-
             </div>
-
         </div>
     )
 }
