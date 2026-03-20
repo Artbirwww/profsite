@@ -75,47 +75,31 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     return (
         <div className="test-card" style={{ minHeight: "575px" }}>
 
-            {/*<ProgressBar currentTaskNumber={currentGroupNumber} total={7} />*/}
-
             <div className="test-card-info">
-
                 <div className="test-card-back" onClick={() => { nextPage(-1) }}>
-
                     <ArrowLeft size={20} />
-
                 </div>
 
                 <div className="test-card-count">
-
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
                     <p>Вопрос <span>{(currentGroupNumber + 1).toString().padStart(2, "0")}</span> из <span>{(7).toString().padStart(2, "0")}</span></p>
-
                 </div>
 
                 <div className="test-card-count">
-
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
                     <p>Распределено <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
-
                 </div>
-
             </div>
 
             <div className="test-grid-template-1">
-
                 {sliders.map(slider => (
-
                     <div key={slider.id} className="test-grid-item" style={{ minHeight: "75px" }}>
-
                         <div className="test-card-text">
-
                             <span>{slider?.value}</span>
                             {slider?.text}
-
                         </div>
 
                         <div className="test-card-input">
-
                             <input
                                 className="input-slider"
                                 type="range"
@@ -124,22 +108,19 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                                 value={slider.value}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
                                 onWheel={handleWheel} />
-
                         </div>
-
                     </div>
-
                 ))}
-
             </div>
 
             <div className="test-card-options">
-
                 <Button
                     buttonLabel={"Далее"}
                     buttonFunction={nextPageHandler} />
-
             </div>
+
+            {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
+            <ProgressBar currentTaskNumber={currentGroupNumber} total={7}/>
 
             <Toaster />
 

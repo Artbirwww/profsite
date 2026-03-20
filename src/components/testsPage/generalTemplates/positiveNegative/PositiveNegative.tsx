@@ -61,41 +61,30 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
     return (
         <div className="test-card" style={{ minHeight: "230px" }}>
 
-            {/*ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />*/}
-
             <div className="test-card-info">
-
                 <div className="test-card-back" onClick={() => { changeOption(-1) }}>
-
                     <ArrowLeft size={20} />
-
                 </div>
 
                 <div className="test-card-count">
-
                     <p>Вопрос <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(options.length).toString().padStart(2, "0")}</span></p>
-
                 </div>
-
             </div>
 
             <div className="test-card-text">
-
                 {currentOption?.text}
-
             </div>
 
             <div className="test-card-options">
-
                 <Button
                     buttonLabel={"Да"}
                     buttonFunction={() => handleAnswer(true)} />
-
                 <Button
                     buttonLabel={"Нет"}
                     buttonFunction={() => handleAnswer(false)} />
-
             </div>
+
+            <ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />
 
             <Toaster />
 

@@ -5,11 +5,26 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    position: relative;
     justify-content: space-between;
     gap: 30px;
-    width: 100%;
+    width: 100% !important;
+    overflow: hidden;
     padding: 30px;
     user-select: none;
+}
+
+.test-card::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--primary-color);
+    border-radius: 28px;
+    z-index: 2;
 }
 
 .test-card.type-1 {
@@ -25,6 +40,7 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    z-index: 3;
 }
 
 .test-card-back {
@@ -72,6 +88,7 @@
     gap: 10px;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
+    z-index: 3;
 }
 
 .test-card-text span {
@@ -96,6 +113,7 @@
     justify-content: center;
     gap: 10px;
     width: 100%;
+    z-index: 3;
 }
 
 .test-grid-template-1 {
@@ -106,6 +124,7 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 60px;
     row-gap: 30px;
+    z-index: 3;
 }
 
 .test-grid-item {
@@ -172,6 +191,7 @@ input[type="range"]::-moz-range-thumb {
     align-items: center;
     justify-content: center;
     object-fit: cover;
+    z-index: 3;
 }
 
 .test-card-list {
@@ -179,6 +199,7 @@ input[type="range"]::-moz-range-thumb {
     flex-direction: column;
     align-items: normal;
     gap: 10px;
+    z-index: 3;
 }
 
 .test-card-selectable {
@@ -199,4 +220,14 @@ input[type="range"]::-moz-range-thumb {
 
 .test-card-selectable:hover {
     border-color: var(--accent-color);
+}
+
+.test-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--accent-color);
+    z-index: 1;
+    transition: width .4s ease;
 }

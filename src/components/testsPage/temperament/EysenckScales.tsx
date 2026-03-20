@@ -30,37 +30,20 @@ export const ProgressBar: FC<ScaleProps> = ({ name, label, value }) => {
     const percentage = Math.min((value / max) * 100, 100)
 
     return (
-        <div
-            className="eysenck-scales-container">
+        <div className="eysenck-scales-container">
 
-            <div
-                className="scale-status">
-
+            <div className="scale-status">
                 <p><span>{(value).toString().padStart(2, "0")}</span> из <span>{(max).toString().padStart(2, "0")}</span></p>
-
             </div>
 
-            <div
-                className="eysenck-scales-text">
-
-                <div
-                    className="scales-status-label">
-
+            <div className="eysenck-scales-text">
+                <div className="scales-status-label">
                     <p><span>{label} </span> <span className={`${status.className}`}>({status.text})</span></p>
-
                 </div>
 
-                <div
-                    className="eysenck-scales-progress-bar-container">
-
-                    <div
-                        className={`eysenck-scales-progress-bar ${status.className}`}
-                        style={{ width: `${percentage}%` }}>
-                    </div>
-
+                <div className="eysenck-scales-progress-bar-container">
+                    <div className={`eysenck-scales-progress-bar ${status.className}`} style={{ width: `${percentage}%` }} />
                 </div>
-
-
             </div>
 
         </div>
@@ -79,9 +62,7 @@ export const EysenckScales = ({ params }: { params: { name: string, param: numbe
     })
 
     return (
-        <div
-            className="eysenck-scales-wrapper">
-
+        <div className="eysenck-scales-wrapper">
             {sortedParams.map((p) => (
                 <ProgressBar
                     key={p.name}
@@ -89,7 +70,6 @@ export const EysenckScales = ({ params }: { params: { name: string, param: numbe
                     label={temeperamentParamLabels[p.name as TemperamentParam] || p.name}
                     value={p.param} />
             ))}
-
         </div>
     )
 }

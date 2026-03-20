@@ -33,43 +33,27 @@ export const TemperamentFormSelection = () => {
             <div className="test-form-selection-grid">
 
                 <div className="test-form-selection-grid-item" onClick={() => handleSelect("A", TemperamentFormA)}>
-
                     <div className="test-form-selection-name">
-
                         <h4>Форма A</h4>
-
                     </div>
 
                     <div className="test-form-selection-option">
-
                         <div className="test-form-selection-icon">
-
                             <ArrowRight size={20} />
-
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="test-form-selection-grid-item" onClick={() => handleSelect("B", TemperamentFormB)}>
-
                     <div className="test-form-selection-name">
-
                         <h4>Форма B</h4>
-
                     </div>
 
                     <div className="test-form-selection-option">
-
                         <div className="test-form-selection-icon">
-
                             <ArrowRight size={20} />
-
                         </div>
-
                     </div>
-
                 </div>
 
             </div>

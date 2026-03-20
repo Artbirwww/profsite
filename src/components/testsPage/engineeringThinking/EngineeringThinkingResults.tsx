@@ -7,8 +7,6 @@ import { TestResultResponse } from "../../../types/testTypes"
 import toast, { Toaster } from "react-hot-toast"
 import { testApi } from "../../../services/api/testApi"
 import { useAuth } from "../../../contexts/AuthContext"
-import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
-import "../css/testsResultStyles.css"
 import engineerLevelsData from "./engineerLevels.json"
 import { EngineerLevels, Level } from "./engineerThinkingTypes"
 import { PupilResponse } from "../../../types/pupil/pupil"
@@ -77,7 +75,6 @@ export const EngineeringThinkingResults = () => {
 
     return (<div>
             <h3>Ваш уровень инженерного мышления:  {result.psychParams[0].param} из 70 баллов</h3>
-            <ProgressBar currentTaskNumber={result.psychParams[0].param} total={70} />
             <div className="result-wrapper" >
                 <div className="result-card">
                     <h4>Ваш результат: </h4>

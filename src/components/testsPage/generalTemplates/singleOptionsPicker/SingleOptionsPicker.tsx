@@ -75,78 +75,50 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
     return (
         <div className={`test-card ${classType}`}>
 
-            {/*<ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />*/}
-
             <div className="test-card-info">
-
                 <div className="test-card-back" onClick={() => { changeTask(-1) }}>
-
                     <ArrowLeft size={20} />
-
                 </div>
 
                 <div className="test-card-count">
-
                     <p>Вопрос <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
-
                 </div>
-
             </div>
 
             {currentTask?.text &&
-
                 <div className="test-card-text">
-
                     {currentTask?.text}
-
                 </div>
-
             }
 
             {currentTask?.imageUrl &&
-
                 <div className="test-card-img" style={{ maxHeight: "180px", minHeight: "180px" }}>
-
                     <img src={currentTask?.imageUrl} alt="" />
-
                 </div>
-
             }
 
             <div className="test-card-list">
-
                 {currentTask?.options.map(option => (
-
                     <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
-
                         <div className="test-card-text">
-
                             {option?.text}
-
                         </div>
-
-
                     </div>
-
                 ))}
-
             </div>
 
             <div className="test-card-options">
-
                 {currentTaskNumber < tasks.length - 1 && (
-
                     <Button
                         buttonLabel={"Пропустить"}
                         buttonFunction={() => changeTask(1)} />
-
                 )}
-
                 <Button
                     buttonLabel={"Завершить тест"}
                     buttonFunction={navigateToResults} />
-
             </div>
+
+            <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length}/>
 
             <Toaster />
 

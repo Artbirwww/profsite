@@ -1,9 +1,0 @@
-
-.float-timer-wrapper {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0);
-    color: black;
-    top: 1%;
-    left: 50%;
-    transform: translateX(-50%);
-}
