@@ -119,16 +119,6 @@ export const TestsPage: FC = ({ }) => {
                 ))}
             </div>
 
-            <div
-                className="test-indicator">
-
-                {testsList.map((_, index) => (
-
-                    <div
-                        key={index}
-                        className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
-                ))}
-            </div>
         </div>
     )
 }
