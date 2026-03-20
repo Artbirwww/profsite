@@ -8,7 +8,7 @@ import { formatTime } from "../utils/formatTime"
 export const EngineeringThinkingTest = () => {
     const navigate = useNavigate()
     const [tasks, setTasks] = useState<Task[]>()
-    const {start, stop, minutes, remaningSeconds, seconds} = useTimer(1200)
+    const {start, stop, minutes, remaningSeconds, seconds} = useTimer(1500)
     useEffect(() => {
         const getTasksData = async () => {
             setTasks(tasksData as Task[])
