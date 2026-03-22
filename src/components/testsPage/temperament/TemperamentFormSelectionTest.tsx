@@ -1,14 +1,21 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { PositiveNegative, PositiveNegativeOption } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
 import { useNavigate } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
+import { formatTime } from "../utils/formatTime"
+import { useTimer } from "../hooks/useTimer"
 
 export const TemperamentFormSelection = () => {
     const navigate = useNavigate()
+    const {start, minutes, remaningSeconds, seconds} = useTimer(0, false)
 
     const [pickedForm, setPickedForm] = useState<string | null>(null)
     const [options, setOptions] = useState<TemperamentOption[]>([])
+
+    useEffect(() => {
+        start()
+    }, [options])
 
     const handleSelect = (testForm: string, temperamentData: TemperamentOption[]) => {
         if (temperamentData === null) return
@@ -20,7 +27,8 @@ export const TemperamentFormSelection = () => {
         navigate("/tests/temperament-results", {
             state: {
                 options: options,
-                temperamentForm: pickedForm
+                temperamentForm: pickedForm,
+                completionTimeSeconds: seconds
             }
         })
     }
@@ -60,9 +68,15 @@ export const TemperamentFormSelection = () => {
         )
 
     return (
-        <PositiveNegative
-            options={options}
-            setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
-            navigateToResults={navigateToResult} />
+        <div className="test-timer-wrapper">
+            <div className="float-timer">
+                {formatTime(minutes)} : {formatTime(remaningSeconds)}
+            </div>
+        
+            <PositiveNegative
+                options={options}
+                setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
+                navigateToResults={navigateToResult} />
+        </div>
     )
 }

@@ -10,6 +10,7 @@ import "../css/testsResultStyles.css"
 import { sortByParam } from "../utils/sortByParams"
 import klimovProfessionsData from "./klimovProfessions.json"
 import { Button } from "../../ui/reusable/button"
+import { formatTime } from "../utils/formatTime"
 export const KlimovResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ export const KlimovResults = () => {
     useEffect(() => {
         if (isViewMode) return
         const createTest = async () => {
-            const klimovResult = calculateResults(location.state?.klimovTasks)
+            const klimovResult = {...calculateResults(location.state?.klimovTasks), completionTimeSeconds: location.state?.completionTimeSeconds}
             try {
                 const createdTest = await testApi.createTest(getToken(), klimovResult)
                 setResult({
@@ -67,6 +68,9 @@ export const KlimovResults = () => {
                 ))}
 
             <p>Дата прохождения: {result.createdAt}</p>
+            {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
+                <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)}</span>
+            }
             <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
         </div>
         
