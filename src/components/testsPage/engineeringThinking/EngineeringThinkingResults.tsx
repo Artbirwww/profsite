@@ -12,6 +12,7 @@ import { EngineerLevels, Level } from "./engineerThinkingTypes"
 import { PupilResponse } from "../../../types/pupil/pupil"
 import { pupilApi } from "../../../services/api/pupilApi"
 import { Button } from "../../ui/reusable/button"
+import { formatTime } from "../utils/formatTime"
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -52,7 +53,7 @@ export const EngineeringThinkingResults = () => {
 
         const createTest = async () => {
 
-            const engineerThinkingTestResult = {...calculateResults(location.state?.tasks), complitionTimeSeconds: location.state?.complitionTimeSeconds}
+            const engineerThinkingTestResult = {...calculateResults(location.state?.tasks), completionTimeSeconds: location.state?.completionTimeSeconds}
             console.log(engineerThinkingTestResult)
             try {
                 const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
@@ -104,6 +105,8 @@ export const EngineeringThinkingResults = () => {
                     </div>
                 </div>
                 <p>Дата прохождения: {result?.createdAt}</p>
+                {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
+                    <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)} из 25:00</span>} 
                 <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
             </div>
             

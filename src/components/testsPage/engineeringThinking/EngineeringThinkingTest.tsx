@@ -4,11 +4,11 @@ import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPick
 import { useNavigate } from "react-router-dom"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
-
+const initialSeconds = 1500
 export const EngineeringThinkingTest = () => {
     const navigate = useNavigate()
     const [tasks, setTasks] = useState<Task[]>()
-    const { start, stop, minutes, remaningSeconds, seconds } = useTimer(1500)
+    const { start, stop, minutes, remaningSeconds, seconds } = useTimer(initialSeconds)
     useEffect(() => {
         const getTasksData = async () => {
             setTasks(tasksData as Task[])
@@ -30,7 +30,7 @@ export const EngineeringThinkingTest = () => {
         navigate("/tests/engineering-thinking-results", {
             state: {
                 tasks: tasks,
-                complitionTimeSeconds: minutes * 60 + remaningSeconds
+                completionTimeSeconds: initialSeconds - seconds //Узнаем сколько прошло с начала теста
             }
         })
     }
