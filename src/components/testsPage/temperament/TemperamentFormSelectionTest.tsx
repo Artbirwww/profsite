@@ -14,6 +14,7 @@ export const TemperamentFormSelection = () => {
     const [options, setOptions] = useState<TemperamentOption[]>([])
 
     useEffect(() => {
+        if (!options || options.length === 0) return
         start()
     }, [options])
 
