@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { SimulationsList } from "./SimulationsList"
-import { simulationAPI } from "../../../services/api/simulation"
+import { simulationAPI } from "../../../services/api/simulationApi"
 import { useAuth } from "../../../contexts/AuthContext"
 import { PaginatedSimulationResponse, SimulationRequest, SimulationResponse } from "../../../types/simulation/Simulation"
 //TODO добавить фильтрацию, сделать страницы
