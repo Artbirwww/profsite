@@ -1,0 +1,18 @@
+
+.simulation-card {
+    padding: 10px;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+}
+.simulation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.simulation-footer {
+    
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: gray;
+}
