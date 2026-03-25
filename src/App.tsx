@@ -47,6 +47,7 @@ import { EngineeringThinkingResults } from "./components/testsPage/engineeringTh
 // Тест Климова
 import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
 import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
+import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
 
 export default function App() {
 	return (
@@ -66,6 +67,7 @@ export default function App() {
 						<Route path="admin/pupil-loading" element={<PupilDataLoading />} />
 						<Route path="admin/pupil-list" element={<PupilsList />} />
 						<Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
+						<Route path="admin/simulation-list" element={<SimulationPage />} />
 					</Route>
 
 					{/* Tests routes */}
