@@ -22,10 +22,21 @@ export const SimulationFilerBar = ({simulationsRequest, setSimulationsRequest}: 
     return (
         <div className="filter-bar">
             <input type="text" name="email" placeholder="Логин" onChange={handleChange}/>
-            <input type="text" name="profession" placeholder="Профессия" onChange={handleChange}/>
+            <select
+                name="profession"
+                value={simulationsRequest.profession || "Все профессии"}
+                onChange={handleChange}>
+                    <option value="">Все профессии</option>
+                    <option value="Взрывник">Взрывник</option>
+                    <option value="Горный инженер">Горный инженер</option>
+                    <option value="Горный мастер">Горный мастер</option>
+                    <option value="Водитель белаза">Водитель белаза</option>
+                    <option value="Горноспасатель">Горноспасатель</option>
+            </select>
             <input type="text" name="simulationType" placeholder="Тип симуляции" onChange={handleChange}/>
             <input type="text" name="startSimulation" placeholder="Дата начала" onChange={handleChange}/>
             <input type="text" name="endSimulation" placeholder="Дата окончания" onChange={handleChange}/>
+            
         </div>)
 
 }

@@ -9,6 +9,9 @@
 .simulations-content {
     flex: 1;
 }
+input, select {
+    flex: 1;
+}
 .simulation-card {
     padding: 10px;
     background-color: var(--primary-color);
