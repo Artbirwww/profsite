@@ -6,7 +6,7 @@ interface SimulationsListProps {
 }
 export const SimulationsList = ({simulations} : SimulationsListProps) => {
     if (simulations.length === 0) return (
-        <p>Загрузка...</p>
+        <p>Симуляций не нашлось</p>
     )
     return (<>
         <div className="simulations-list">

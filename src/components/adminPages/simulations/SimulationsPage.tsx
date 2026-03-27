@@ -40,13 +40,7 @@ export const SimulationPage = () => {
             controller.abort()
         }
     }, [simulationRequest])
-    useEffect(()=> {
-        const controller = new AbortController()
-        loadSimulations(controller.signal)
-        return () => {
-            controller.abort()
-        }
-    }, [])
+
     const changePage = (pageNumber: number) => {
         if (pageNumber === simulationRequest.page) return
         setSimulationsRequest(prev => ({...prev, page: pageNumber}))
