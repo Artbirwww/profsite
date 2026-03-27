@@ -1,18 +1,69 @@
 
+.simulations-page {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 90%;
+}
+.simulations-content {
+    flex: 1;
+}
 .simulation-card {
     padding: 10px;
     background-color: var(--primary-color);
-    border-radius: 15px;
+    border-radius: 5px;
 }
-.simulation-list {
+.simulations-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.simulation-footer {
+.simulations-footer {
     
     display: flex;
     flex-direction: row;
     gap: 5px;
     color: gray;
+}
+.pagination {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+.pagination .current-page,
+.pagination .page {
+    background-color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.pagination .current-page {
+    font-weight: 600;
+    cursor: auto;
+    user-select: none;
+    background-color: var(--accent-hover-color);
+    color: var(--primary-color);
+}
+.pagination .page {
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    transition: 0.2s;
+}
+a:hover {
+    color: var(--accent-hover-color);
+    text-decoration: underline;
+}
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 15px;
+    margin: 10px 0px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
 }

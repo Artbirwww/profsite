@@ -9,7 +9,7 @@ export const SimulationsList = ({simulations} : SimulationsListProps) => {
         <p>Загрузка...</p>
     )
     return (<>
-        <div className="simulation-list">
+        <div className="simulations-list">
             {simulations.map(simulation => (
                 <SimulationCard simulation={simulation} />
             ))}
