@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 export const ProtectedRoute: React.FC = () => {
-  const { token, getToken, isLoading } = useAuth();
+  const { token, getToken, isLoading, isTokenExpired } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -19,7 +19,7 @@ export const ProtectedRoute: React.FC = () => {
     );
   }
 
-  if (!getToken()) {
+  if (!getToken() || isTokenExpired()) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return <Outlet/>
