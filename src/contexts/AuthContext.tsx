@@ -15,11 +15,13 @@ interface AuthContextType {
   checkRole: (role: Role) => boolean | undefined
   isFirstLogin: () => boolean
   getEmail: () => string
+  isTokenExpired: () => boolean
 }
 interface TokenClaims {
   email: string
   firstLogin: boolean
   sub: string
+  exp: number
 }
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
@@ -88,9 +90,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
   const isFirstLogin = () => getTokenClaims()?.firstLogin || false
   const getEmail = () => getTokenClaims()?.email || ""
+  const isTokenExpired = () : boolean => {
+    const token = getToken()
+    if (!token) return true
+    try {
+      const expireDate = getTokenClaims()?.exp
+      console.log(expireDate, Date.now() / 1000)
+      if (!expireDate) return true
+      const currentTime = Date.now() / 1000
+      return expireDate < currentTime
+    } catch(err) {
+      console.error("Invalid token", err)
+      return true
+    }
+  }
 
   return (
-    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole, isFirstLogin, getEmail}}>
+    <AuthContext.Provider value={{token, isLoading, login, logout, getToken, getRoles, setRoles, checkRole, isFirstLogin, getEmail, isTokenExpired}}>
       {children}
     </AuthContext.Provider>
   );
