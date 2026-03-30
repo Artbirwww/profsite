@@ -1,11 +1,8 @@
 // src/services/api/authApi.ts
-import { BASE_URL } from './baseUrl';
 import { AccountApiRegisterDTO } from '../../types/pupil/account';
 import { PupilResponse } from '../../types/pupil/pupil';
 import api from './api';
 import { Role } from '../../types/account/role';
-const AUTH_ENDPOINT = `${BASE_URL}/api/auth`;
-const PUPIL_ENDPOINT = `${BASE_URL}/api/pupils`;
 
 export const authApi = {
   autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
