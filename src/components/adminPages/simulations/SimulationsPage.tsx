@@ -14,7 +14,7 @@ export const SimulationPage = () => {
         startSimulation: undefined, 
         endSimulation: undefined, 
         page: 0, 
-        size: 5, 
+        size: 6, 
         profession: undefined, 
         simulationType: undefined 
     })
