@@ -128,7 +128,8 @@ export const RegistrationPage: FC = () => {
                                 inputType={"password"}
                                 isPassword={true}
                                 inputValue={formData.repeatPassword}
-                                inputOnChange={updateField("repeatPassword")} />
+                                inputOnChange={updateField("repeatPassword")}
+                                onKeyDown={(e) => {if (e.key === "Enter") handleRegistration()} } />
                         </div>
 
                         <div className="registration-form-row">

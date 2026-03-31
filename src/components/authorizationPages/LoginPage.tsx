@@ -1,6 +1,6 @@
 import "./css/authStyle.css"
 
-import { FC, FormEvent, useCallback, useState } from "react";
+import { FC, FormEvent, useCallback, useState, KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, KeyRound, MailOpen } from "lucide-react";
 
@@ -24,7 +24,7 @@ export const LoginPage: FC = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-
+        
         try {
             const token = await authApi.login(formData.email, formData.password)
             const roles = await authApi.getRoles(token)
@@ -53,7 +53,7 @@ export const LoginPage: FC = () => {
                     <span>Система профориентации для школьников, студентов и специалистов</span>
                 </div>
 
-                <div className="login-form-cols">
+                <form className="login-form-cols" onSubmit={handleSubmit}>
                     <div className="login-form-row">
                         <FieldInput inputLabel={"Электронная почта"}
                             inputIcon={<MailOpen size={20} />}
@@ -68,14 +68,14 @@ export const LoginPage: FC = () => {
                             inputType={"password"}
                             isPassword={true}
                             inputValue={formData.password}
-                            inputOnChange={updateField("password")} />
+                            inputOnChange={updateField("password")} 
+                            onKeyDown={(e) => {if (e.key === "Enter") handleSubmit(e)}}/>
                     </div>
 
                     <div className="login-form-row">
-                        <Button buttonLabel={"Войти"}
-                            buttonFunction={handleSubmit} />
+                        <button type="submit" >Войти</button>
                     </div>
-                </div>
+                </form>
             </div>
 
             <Button buttonLabel={"У меня нет аккаунта"}
