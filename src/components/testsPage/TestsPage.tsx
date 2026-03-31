@@ -97,14 +97,12 @@ export const TestsPage: FC = ({ }) => {
 
                 <div ref={testContainerRef} className="test-grid">
                     {testsList.map((item, index) => {
-                        const lockedIndices = [4, 5, 6, 7, 8]
-                        const isAvailable = !lockedIndices.includes(index)
                         return (
                             <div key={index} data-id={index} className="test-grid-item">
                                 <TestComponent
                                     dataId={item.id}
                                     index={index}
-                                    isAvailable={isAvailable}
+                                    isAvailable={item.isAvailable}
                                     item={item}
                                     onClick={handleClick} />
                             </div>
