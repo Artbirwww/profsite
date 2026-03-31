@@ -15,7 +15,7 @@ const testsResultPages: Record<TestTypeName, string> = {
   "Group-Roles": "/tests/group-roles-results",
   "Engineering-Thinking" : "/tests/engineering-thinking-results", 
   "Professional-Orientation-Klimov": "/tests/professional-orientation-klimov-results",
-  "Intellectual-Potential": "",
+  "Intellectual-Potential": "/tests/iq-potential-results",
   "Professional-Orientation": ""
 };
 export const ResultsPage: FC = () => {

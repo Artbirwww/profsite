@@ -25,9 +25,10 @@ interface SingleOptionPickerProps {
     setTasks: (tasks: Task[]) => void
     navigateToResults: () => void
     classType?: string
+    optionsListClass?: string
 }
 
-export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classType }: SingleOptionPickerProps) => {
+export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classType, optionsListClass }: SingleOptionPickerProps) => {
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
@@ -97,7 +98,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
                 </div>
             }
 
-            <div className="test-card-list">
+            <div className={`${optionsListClass ? optionsListClass : "test-card-list"}`}>
                 {currentTask?.options.map(option => (
                     <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
                         <div className="test-card-text">
