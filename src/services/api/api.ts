@@ -5,7 +5,7 @@ const isLocalNetwork = () => {
   const currentHost = window.location.hostname
   return currentHost.includes(localIP)
 }
-const getBaseUrl = () => {
+export const getBaseUrl = () => {
   //if (isLocalNetwork()) return import.meta.env.VITE_API_LOCAL_URL
   return import.meta.env.VITE_API_URL
 }
