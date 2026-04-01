@@ -4,9 +4,19 @@ import { ArrowRight } from "lucide-react"
 import axios from "axios"
 import api, { getBaseUrl } from "../../../services/api/api"
 import toast from "react-hot-toast"
-const iqTestPath = "public/iq_potential/data"
+import { useNavigate } from "react-router-dom"
+import { useTimer } from "../hooks/useTimer"
+import { formatTime } from "../utils/formatTime"
+export const iqTestPath = "public/iq_potential/data"
+const initialSeconds = 720
 export const IqPotentialTest = () => {
+    const navigate = useNavigate()
+    const {start, minutes, remaningSeconds, seconds} = useTimer(initialSeconds)
     const [iqTestForm, setIqTestForm] = useState<Task[] | undefined>(undefined)
+    useEffect(()=>{
+        if (!iqTestForm) return
+        start()
+    }, [iqTestForm])
     const handleSelect = (formName: string) => {
         const loadFormData = async() => {
             try {
@@ -25,6 +35,14 @@ export const IqPotentialTest = () => {
         text: (num + 1).toString(),
         isPicked: false
     }))
+    const navigateToResults = () => {
+        navigate("/tests/iq-potential-results", {
+            state: {
+                tasks: iqTestForm,
+                completionTimeSeconds: initialSeconds - seconds
+            }
+        })
+    }
     if (!iqTestForm) return (
             <div className="test-form-selection-grid">
 
@@ -55,6 +73,11 @@ export const IqPotentialTest = () => {
             </div>
         )
     return (<>
-        <SingleOptionsPicker navigateToResults={() => {console.log("Test Results")}} tasks={iqTestForm} setTasks={setIqTestForm} optionsListClass="test-card-list-row" />
+    <div className="test-timer-wrapper">
+        <div className="float-timer">
+            {formatTime(minutes)}:{formatTime(remaningSeconds)}
+        </div>
+        <SingleOptionsPicker navigateToResults={navigateToResults} tasks={iqTestForm} setTasks={setIqTestForm} optionsListClass="test-card-list-row" />
+    </div>
     </>)
 }
