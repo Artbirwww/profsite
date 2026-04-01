@@ -25,20 +25,28 @@ export const IqPotentialResults = () => {
 
     const [allResults, setAllResults] = useState<TestResultResponse[]>()
     const [showHistory, setShowHistory] = useState(false)
-    useEffect(() => {
-        console.log(showHistory)
-        if (showHistory) return
-        const loadTestResults = async () => {
-            try {
-                const results = await testApi.getTestsByType(getToken(), "Intellectual-Potential")
-                setAllResults(results)
-            } catch(err) {
-                console.error(err)
-                toast.error("Произошла ошибка при загрузке теста")
-            }
+
+    const loadTestResults = async () => {
+        //Просто закроем окно
+        if (showHistory) {
+            setShowHistory(false)
+            return
         }
-        loadTestResults()
-    }, [showHistory])
+        //Не нужно грузить повторно
+        if (allResults && !showHistory) {
+            setShowHistory(true)
+            return
+        }
+        try {
+            const results = await testApi.getTestsByType(getToken(), "Intellectual-Potential")
+            setAllResults(results)
+            setShowHistory(true)
+        } catch(err) {
+            console.error(err)
+            toast.error("Произошла ошибка при загрузке теста")
+        }
+    }
+
     useEffect(() => {
         if (!isViewMode) return
 
@@ -67,7 +75,7 @@ export const IqPotentialResults = () => {
             //full years (for more accurrate result)
             const birthday =  getBirthdayDate(pupilData)
             //16 by default (if there is no birthday or more then 16 years)
-            const age = birthday !== undefined  ? new Date().getFullYear() - birthday.getFullYear() : 16 
+            const age = birthday !== undefined && birthday.getFullYear() <= 16  ? new Date().getFullYear() - birthday.getFullYear() : 16 
             const testScore = calcIqTestScore(iqTasks)
             const resultTemp = await testApi.createTest(getToken(),calcIqTestResult(iqTableData.iqTable[age][testScore], location.state?.completionTimeSeconds))
             setResult(resultTemp)
@@ -88,12 +96,16 @@ export const IqPotentialResults = () => {
             <h3>Результаты теста интеллектуального потенциала: </h3>
             <p>Балл с последнего прохождения: {result.psychParams[0].param}</p>
             <div className="history-content-wrapper">
-            <ChevronDown className={`rotate-item ${showHistory ? "rotated" : ""}`} onClick={() => setShowHistory(!showHistory)}/>
-            <div className={`history-content ${showHistory ? "visible" : ""}`}>
-                {showHistory && allResults && allResults.map(res => (
-                        <p>{formatDateRU(res.createdAt)} - {res.psychParams[0].param} баллов</p>
-                ))}
-            </div>
+                <div className="detailed-title">
+                    <p>Подробнее</p>
+                    <ChevronDown className={`rotate-item ${showHistory ? "rotated" : ""}`} onClick={() => loadTestResults()}/>
+                </div>
+                
+                <div className={`history-content ${showHistory ? "visible" : ""}`}>
+                    {showHistory && allResults && allResults.map(res => (
+                            <p>{formatDateRU(res.createdAt)} - {res.psychParams[0].param} баллов</p>
+                    ))}
+                </div>
             </div>
         </div>
         <div className="result-card">
