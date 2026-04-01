@@ -49,6 +49,7 @@ import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
 import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
 import { IqPotentialTest } from "./components/testsPage/iqPotential/iqPotentialTest";
+import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotentialResults";
 
 export default function App() {
 	return (
@@ -89,7 +90,7 @@ export default function App() {
 							<Route path="professional-orientation-klimov-results" element={<KlimovResults />} />
 
 							<Route path="iq-potential" element={<IqPotentialTest/>} />
-							<Route path="iq-potential-results" element={<p>IQ: 1 score</p>}/>
+							<Route path="iq-potential-results" element={<IqPotentialResults />}/>
 						</Route>
 					</Route>
 
