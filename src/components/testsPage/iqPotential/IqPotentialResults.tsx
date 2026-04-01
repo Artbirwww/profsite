@@ -12,6 +12,7 @@ import { testApi } from "../../../services/api/testApi"
 import { formatDateRU } from "../../../services/dates/formatDate"
 import { Moon, Clock, Droplet, Repeat, MessageCircleQuestion, ChevronDown } from "lucide-react"
 import { Button } from "../../ui/reusable/button"
+import { formatTime } from "../utils/formatTime"
 const iqTestPath = "public/iq_potential/data"
 export const IqPotentialResults = () => {
     const location = useLocation()
@@ -93,7 +94,7 @@ export const IqPotentialResults = () => {
     <div className="result-wrapper">
         <div className="result-card">
             <h3>Результаты теста интеллектуального потенциала: </h3>
-            <p>Балл с последнего прохождения: {result.psychParams[0].param}</p>
+            <p>Балл с последнего прохождения: <b>{result.psychParams[0].param}</b></p>
             <div className="history-content-wrapper">
                 <div className="detailed-title">
                     <p>Подробнее</p>
@@ -101,8 +102,14 @@ export const IqPotentialResults = () => {
                 </div>
                 
                 <div className={`history-content ${showHistory ? "visible" : ""}`}>
+                    {showHistory && allResults &&
+                        <p><b>Средний Балл: { Math.round(allResults?.reduce((total, res) => total + res.psychParams[0].param, 0) / allResults?.length)}</b></p>
+                    }
                     {showHistory && allResults && allResults.map(res => (
-                            <p>{formatDateRU(res.createdAt)} - {res.psychParams[0].param} баллов</p>
+                        <div className="history-card">
+                            <p><b>{res.psychParams[0].param} Баллов</b></p>
+                            <p>Время - {`${formatTime(Math.floor(res.completionTimeSeconds / 60))}:${formatTime(res.completionTimeSeconds % 60)}`} Дата - {formatDateRU(res.createdAt)}</p>
+                        </div>   
                     ))}
                 </div>
             </div>
@@ -112,7 +119,7 @@ export const IqPotentialResults = () => {
                 <h3>На заметку</h3>
                 <MessageCircleQuestion />       
             </div>
-            <p>Ваш интеллект не меняется день ото дня, а вот концентрация, утомляемость и эмоциональный фон — да. Этот тест фиксирует вашу текущую продуктивность. Низкий результат сегодня — это повод отдохнуть, а не сомневаться в себе. Исследования подтверждают: многократное прохождение в разных состояниях дает более объективную картину, чем один замер.</p>
+            <p>Ваш интеллект не меняется день ото дня, а вот концентрация, утомляемость и эмоциональный фон — да. Этот тест фиксирует вашу текущую продуктивность. Низкий результат сегодня — это повод отдохнуть. Исследования подтверждают: многократное прохождение в разных состояниях дает более объективную картину, чем один замер.</p>
         </div>
         <div className="test-result-grid">
             <div className="result-card">

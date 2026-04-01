@@ -86,15 +86,29 @@
 }
 
 .history-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     max-height: 0;
+    width: 50%;
     opacity: 0;
-    overflow: hidden;
+    scrollbar-width: none;
+    overflow-y: scroll;
     transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
 }
 .history-content.visible {
-    max-height: 500px;
+    max-height: 200px;
     opacity: 1;
     padding-left: 5px;
+}
+.history-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
 }
 .detailed-title {
     display: flex;
