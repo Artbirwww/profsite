@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { TestResultResponse } from "../../../types/testTypes"
 import axios from "axios"
 import { getBaseUrl } from "../../../services/api/api"
-import { iqTestPath } from "./iqPotentialTest"
 import { calcIqTestResult, calcIqTestScore } from "./IqPotentialResultsCalc"
 import { pupilApi } from "../../../services/api/pupilApi"
 import { usePupilData } from "../hooks/usePupilData"
@@ -13,7 +12,7 @@ import { testApi } from "../../../services/api/testApi"
 import { formatDateRU } from "../../../services/dates/formatDate"
 import { Moon, Clock, Droplet, Repeat, MessageCircleQuestion, ChevronDown } from "lucide-react"
 import { Button } from "../../ui/reusable/button"
-
+const iqTestPath = "public/iq_potential/data"
 export const IqPotentialResults = () => {
     const location = useLocation()
     const navigate = useNavigate()

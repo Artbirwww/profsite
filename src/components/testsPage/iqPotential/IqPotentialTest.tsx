@@ -7,7 +7,7 @@ import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
-export const iqTestPath = "public/iq_potential/data"
+const iqTestPath = "public/iq_potential/data"
 const initialSeconds = 720
 export const IqPotentialTest = () => {
     const navigate = useNavigate()
