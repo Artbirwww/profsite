@@ -48,7 +48,7 @@ import { EngineeringThinkingResults } from "./components/testsPage/engineeringTh
 import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
 import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
-import { IqPotentialTest } from "./components/testsPage/iqPotential/iqPotentialTest";
+import { IqPotentialTest } from "./components/testsPage/iqPotential/IqPotentialTest";
 import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotentialResults";
 
 export default function App() {
