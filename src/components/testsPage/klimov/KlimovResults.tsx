@@ -11,6 +11,7 @@ import { sortByParam } from "../utils/sortByParams"
 import klimovProfessionsData from "./klimovProfessions.json"
 import { Button } from "../../ui/reusable/button"
 import { formatTime } from "../utils/formatTime"
+import { formatDateRU } from "../../../services/dates/formatDate"
 export const KlimovResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -67,7 +68,7 @@ export const KlimovResults = () => {
                     </div>
                 ))}
 
-            <p>Дата прохождения: {result.createdAt}</p>
+            <p>Дата прохождения: {formatDateRU(result.createdAt)}</p>
             {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
                 <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)}</span>
             }
