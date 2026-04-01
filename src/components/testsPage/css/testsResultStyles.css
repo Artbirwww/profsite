@@ -77,3 +77,26 @@
     border-radius: 15px;
     background-color: var(--primary-color);
 }
+.rotate-item {
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+.rotate-item.rotated {
+    transform: rotate(180deg);
+}
+
+.history-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+}
+.history-content.visible {
+    max-height: 500px;
+    opacity: 1;
+}
+.detailed-title {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
