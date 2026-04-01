@@ -10,6 +10,7 @@ import { getActualTestByDate } from "./services/testSort";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 type testType = "Temperament" | "Group-Roles" | "Engineering-Thinking";
+
 const testsResultPages: Record<TestTypeName, string> = {
   "Temperament": "/tests/temperament-results",
   "Group-Roles": "/tests/group-roles-results",
@@ -67,14 +68,19 @@ export const ResultsPage: FC = () => {
 
   return (
     <div className="results-wrapper">
-      <h1>Results</h1>
+      <h1>Результаты</h1>
       <div className="tests-container">
         {completedTests.map((test) => (
           <div
             className="test-result-card"
             onClick={() => handleSelectTest(test)}
           >
-            <p>Тест: {test.label}</p>
+            
+            <div className="test-result-title">
+              
+              <test.icon />
+              <h3>{test.label}</h3>
+            </div>
             <p>{test.description}</p>
           </div>
         ))}

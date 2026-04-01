@@ -18,3 +18,12 @@
     border-radius: 15px;
     padding: 15px
 }
+.test-result-card:hover {
+    transform: translateY(-4px);
+    transition: transform 0.1s ease-in-out;
+}
+.test-result-title {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
