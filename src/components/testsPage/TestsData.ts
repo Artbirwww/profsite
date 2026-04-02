@@ -74,7 +74,7 @@ export const testsList: TestItem[] = [
         id: "test-intellectual-potential",
         label: "Интеллектуальный потенциал",
         description: "Анализ когнитивных способностей и потенциала развития",
-        time: 720,
+        time: 12,
         questionscount: 29,
         icon: Brain,
         path: "/tests/iq-potential",
