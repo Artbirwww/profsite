@@ -2,13 +2,19 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { PositiveNegative, PositiveNegativeOption } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
 import { useNavigate } from "react-router-dom"
-import { ArrowRight } from "lucide-react"
 import { formatTime } from "../utils/formatTime"
 import { useTimer } from "../hooks/useTimer"
+import { TestFormConfig, TestFormSelection } from "../generalTemplates/formSelection/TestFormSelection"
 
-export const TemperamentFormSelection = () => {
+const TEMPERAMENT_FORMS: TestFormConfig<TemperamentOption>[] = [
+    { id: "A", label: "Форма A", data: TemperamentFormA },
+    { id: "B", label: "Форма B", data: TemperamentFormB },
+]
+
+export const TemperamentTest = () => {
     const navigate = useNavigate()
-    const {start, minutes, remaningSeconds, seconds} = useTimer(0, false)
+
+    const { start, minutes, remaningSeconds, seconds } = useTimer(0, false)
 
     const [pickedForm, setPickedForm] = useState<string | null>(null)
     const [options, setOptions] = useState<TemperamentOption[]>([])
@@ -34,46 +40,16 @@ export const TemperamentFormSelection = () => {
         })
     }
 
-    if (!pickedForm && !options)
-        return (<p>загрузка...</p>)
-
-    if (!pickedForm)
-        return (
-            <div className="test-form-selection-grid">
-
-                <div className="test-form-selection-grid-item" onClick={() => handleSelect("A", TemperamentFormA)}>
-                    <div className="test-form-selection-name">
-                        <h4>Форма A</h4>
-                    </div>
-
-                    <div className="test-form-selection-option">
-                        <div className="test-form-selection-icon">
-                            <ArrowRight size={20} />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="test-form-selection-grid-item" onClick={() => handleSelect("B", TemperamentFormB)}>
-                    <div className="test-form-selection-name">
-                        <h4>Форма B</h4>
-                    </div>
-
-                    <div className="test-form-selection-option">
-                        <div className="test-form-selection-icon">
-                            <ArrowRight size={20} />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        )
+    if (!pickedForm) {
+        return <TestFormSelection forms={TEMPERAMENT_FORMS} onSelect={handleSelect} />
+    }
 
     return (
         <div className="test-timer-wrapper">
             <div className="float-timer">
                 {formatTime(minutes)} : {formatTime(remaningSeconds)}
             </div>
-        
+
             <PositiveNegative
                 options={options}
                 setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}

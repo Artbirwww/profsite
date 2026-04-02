@@ -33,7 +33,7 @@ import { ProfilePage } from "./components/profilePage/ProfilePage"
 import { TestViewer } from "./components/testsPage/TestViewer"
 
 // Тест темперамента
-import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
+import { TemperamentTest } from "./components/testsPage/temperament/TemperamentTest"
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 
 // Тест грпповых ролей
@@ -77,7 +77,7 @@ export default function App() {
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
 						<Route element={<TestViewer />}>
-							<Route path="temperament" element={<TemperamentFormSelection />} />
+							<Route path="temperament" element={<TemperamentTest />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
 
 							<Route path="group-roles" element={<GroupRolesTest />} />
