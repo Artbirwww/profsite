@@ -12,6 +12,8 @@
     box-sizing: border-box;
 }
 
+
+
 /* стили для хедера страницы */
 .test-header {
     display: flex;
@@ -28,6 +30,8 @@
     font-weight: var(--font-weight-medium);
     text-transform: uppercase;
 }
+
+
 
 /* стили для индикатора прокрутки */
 .test-indicator {
@@ -55,6 +59,8 @@
 .dot.active {
     background-color: var(--accent-color);
 }
+
+
 
 /* стили для индикатора завершенности тестов */
 /* общее количество и сколько завершено */
@@ -109,6 +115,8 @@
     z-index: 3;
 }
 
+
+
 /* прогресс бар завершенности тестов */
 .progress-container {
     width: 60px;
@@ -133,6 +141,8 @@
     transition: height 1s ease-in-out;
     height: 0%;
 }
+
+
 
 /* общие стили для "волн" */
 .wave-element {
@@ -172,6 +182,8 @@
     }
 }
 
+
+
 /* стили для outlet */
 .test-outlet {
     display: flex;
@@ -188,6 +200,8 @@
 .test-outlet::-webkit-scrollbar {
     display: none;
 }
+
+
 
 /* стили для сетки карточек выбора теста */
 .test-grid {
@@ -214,158 +228,9 @@
     position: relative;
 }
 
-/* стили для карточки теста */
-.test-selection-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    padding: 30px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 30px;
-    background-color: var(--primary-color);
-    box-sizing: border-box;
-    cursor: pointer;
-    overflow: hidden;
-    user-select: none;
-}
 
-.test-selection-item::after {
-    content: "";
-    position: absolute;
-    background-color: var(--primary-color);
-    top: 3px;
-    left: 3px;
-    right: 3px;
-    bottom: 3px;
-    border-radius: 27px;
-    z-index: 2;
-}
 
-.test-selection-item-icon {
-    position: absolute;
-    right: 30px;
-    border-radius: 15px;
-    border: 2px solid var(--border-color);
-    color: var(--text-primary-color);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-}
-
-.test-selection-item-label {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 3;
-}
-
-.test-selection-item-name {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-}
-
-.test-selection-item-order {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 3px);
-    max-width: 15px;
-    direction: rtl;
-    gap: 3px;
-    flex-shrink: 0;
-    justify-content: start;
-}
-
-.order-dot {
-    width: 3px;
-    min-width: 3px;
-    height: 3px;
-    min-height: 3px;
-    border-radius: 100px;
-    background-color: var(--text-primary-color);
-}
-
-.test-selection-item-name h4 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 20px;
-    white-space: normal;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    width: 300px;
-    color: var(--text-primary-color);
-}
-
-.test-selection-item-name span {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    color: var(--text-secondary-color);
-}
-
-.test-selection-item-description {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -200%;
-    width: 300px;
-    z-index: 3;
-    transition: left .5s ease;
-}
-
-.test-selection-item-info {
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: space-between;
-    z-index: 3;
-}
-
-.test-selection-item-options {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-}
-
-.test-selection-item-options span {
-    color: var(--text-primary-color);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
-}
-
-.test-selection-item-icon.icon-2 {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
-}
-
-.hover-circle {
-    position: absolute;
-    background-color: var(--accent-color);
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width .8s ease, height .8s ease;
-    z-index: 1;
-}
-
-/* состояния */
+/* состояния (заблокировано) */
 .test-selection-item.locked {
     cursor: not-allowed;
     filter: grayscale(1);
@@ -375,9 +240,4 @@
 
 .test-selection-item:hover .test-selection-item-description {
     left: 30px;
-}
-
-.test-selection-item:hover .hover-circle {
-    width: 1200px;
-    height: 1200px;
 }

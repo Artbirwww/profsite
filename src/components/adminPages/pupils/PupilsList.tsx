@@ -3,6 +3,7 @@ import { PupilListResponse, PupilResponse } from "../../../types/pupil/pupil"
 import toast, { Toaster } from "react-hot-toast"
 import { pupilApi } from "../../../services/api/pupilApi"
 import style from "./pupils-list.module.css"
+const paginationLimit = 5
 export const PupilsList = () => {
     const [pupilListResponse, setPupilListResponse] = useState<PupilListResponse | undefined>(undefined)
     const [currentPage, setCurrentPage] = useState<number>(0)
@@ -29,6 +30,32 @@ export const PupilsList = () => {
             controller.abort();
         }
     }, [fetchPupils])
+    const generatePagination = (total: number, limit: number, ) => {
+        let startPage = Math.max(1, currentPage - Math.floor(limit / 2))
+        let endPage = Math.min(total, startPage + limit - 1)
+        if (endPage - startPage + 1 < limit) 
+            startPage = Math.max(1, endPage - limit + 1)
+        const pages = []
+        for (let i = startPage; i <= endPage; i++) pages.push(i)
+        return (<>
+            {pages.map(pageNum => (
+                <p key={pageNum} 
+                    className={`${pageNum === currentPage ? "current-page": "page"}`}
+                    onClick={() => setCurrentPage(pageNum)}>
+                        {pageNum}
+                </p>
+            ))}
+            {endPage < total && (
+                <>
+                    <p>...</p>
+                    <p className="page" onClick={() => setCurrentPage(total)}>
+                        {total}
+                    </p>
+                </>
+            )}
+        </>)
+        
+    }
 
     if (!pupilListResponse) 
         return <><p>Загружаем ...</p></>
@@ -43,10 +70,8 @@ export const PupilsList = () => {
                     </div>
                 ))}
             </div>
-        <div className={style["pages"]}>
-            {Array.from({length: pupilListResponse.totalPages}, (_, index) => (
-                <button onClick={() => {setCurrentPage(index)}}>{index + 1}</button>
-            ))}
+        <div className="pagination">
+            {generatePagination(pupilListResponse.totalPages - 1, paginationLimit)}
         </div>
         
         </div>
