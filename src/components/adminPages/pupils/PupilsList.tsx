@@ -40,8 +40,8 @@ export const PupilsList = () => {
         return (<>
             {pages.map(pageNum => (
                 <p key={pageNum} 
-                    className={`${pageNum === currentPage ? "current-page": "page"}`}
-                    onClick={() => setCurrentPage(pageNum)}>
+                    className={`${pageNum - 1 === currentPage ? "current-page": "page"}`}
+                    onClick={() => setCurrentPage(pageNum - 1)}>
                         {pageNum}
                 </p>
             ))}
@@ -71,7 +71,7 @@ export const PupilsList = () => {
                 ))}
             </div>
         <div className="pagination">
-            {generatePagination(pupilListResponse.totalPages - 1, paginationLimit)}
+            {generatePagination(pupilListResponse.totalPages, paginationLimit)}
         </div>
         
         </div>
