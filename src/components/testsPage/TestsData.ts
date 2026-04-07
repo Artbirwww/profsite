@@ -12,7 +12,7 @@ export interface TestItem {
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
     dataItem: string        // Для тестирования / селекторов
-    name?: string
+    name: string
     isAvailable?: boolean
 }
 
@@ -92,6 +92,7 @@ export const testsList: TestItem[] = [
         icon: Compass,
         path: "/tests/iq-potential",
         dataItem: "test-item-6",
+        name: "",
         isAvailable: false
     },
     {
@@ -104,6 +105,7 @@ export const testsList: TestItem[] = [
         icon: Map,
         path: "/tests/iq-potential",
         dataItem: "test-item-7",
+        name: "",
         isAvailable: false
     },
     {
@@ -116,6 +118,7 @@ export const testsList: TestItem[] = [
         icon: Target,
         path: "/tests/iq-potential",
         dataItem: "test-item-8",
+        name: "",
         isAvailable: false
     },
     {
@@ -128,6 +131,7 @@ export const testsList: TestItem[] = [
         icon: Anchor,
         path: "/tests/iq-potential",
         dataItem: "test-item-9",
+        name: "",
         isAvailable: false
     },
 ]
