@@ -48,5 +48,15 @@ export const testApi = {
       console.error(err)
       throw err
     }
-  } 
+  },
+  getRecentTests: async (token: string) => {
+    try {
+      const response = await api.get<Record<string, TestResultResponse>>(`api/psych-tests/my-recent-tests`, {
+        headers: {Authorization: token}
+      })
+      return response.data
+    } catch(err) {
+      throw err
+    }
+  }
 };
