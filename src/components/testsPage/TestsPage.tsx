@@ -6,14 +6,20 @@ import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
 import { Check } from "lucide-react"
 import { Toaster } from "react-hot-toast"
+import { testApi } from "../../services/api/testApi"
+import { useAuth } from "../../contexts/AuthContext"
+import { TestResultResponse } from "../../types/testTypes"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
+    const {getToken} = useAuth()
 
     const testContainerRef = useRef<HTMLDivElement>(null)
 
     const [displayHeight, setDisplayHeight] = useState(0)
     const [visibleIds, setVisibleIds] = useState<number[]>([])
+
+    const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>({})
 
     const calculateProgress = (current: number, total: number) => {
         if (total <= 0)
@@ -24,15 +30,22 @@ export const TestsPage: FC = ({ }) => {
         return Math.min(Math.max(rawPercent, 0), 95)
     }
 
-    //TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо 0
-    const targetValue = calculateProgress(0, testsList.length)
-
     useEffect(() => {
+        if (!recentTests) return
         const timer = setTimeout(() => {
-            setDisplayHeight(targetValue)
+            console.log("set height")
+            setDisplayHeight(calculateProgress(Object.keys(recentTests).length, testsList.length))
         }, 100)
 
         return () => clearTimeout(timer)
+    }, [recentTests])
+    useEffect(()=> {
+        const loadRecentTests = async () => {
+            const tests = await testApi.getRecentTests(getToken())
+            console.log(tests)
+            setRecentTests(tests)
+        }
+        loadRecentTests()
     }, [])
 
     useEffect(() => {
@@ -83,7 +96,7 @@ export const TestsPage: FC = ({ }) => {
                 <div className="test-completness">
                     <div className="test-count">
                         {/*TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо N*/}
-                        <span><Check size={18} strokeWidth={1.5} />N</span>
+                        <span><Check size={18} strokeWidth={1.5} />{Object.keys(recentTests).length}</span>
                         <div className="divider"></div>
                         <span>{testsList.length}</span>
                     </div>
