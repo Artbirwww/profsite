@@ -24,6 +24,7 @@ export const ResultsPage: FC = () => {
   const { getToken } = useAuth();
   const navigate = useNavigate();
   const [completedTests, setCompletedTests] = useState<TestItem []>([])
+  const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>([])
   useEffect(() => {
     console.log(completedTests)
   }, [completedTests])
@@ -31,9 +32,9 @@ export const ResultsPage: FC = () => {
     const getAvailableTests = async () => {
       try {
         const token = getToken()
-        const completedTestsByUser = await testApi.getTestsByPupil(token)
-        setCompletedTests(testsList
-          .filter((test) =>  test !== null && completedTestsByUser.some(completedTest => completedTest.testTypeName === test.name)))
+        const recentTestsTemp = await testApi.getRecentTests(token)
+        setRecentTests(recentTestsTemp)
+        setCompletedTests(testsList.filter((testItem => testItem.name in recentTestsTemp)))
       } catch(err) {
         toast.error("Не удалось загрузить пройденные тесты")
       }
@@ -41,18 +42,12 @@ export const ResultsPage: FC = () => {
     getAvailableTests()
   }, [])
   const handleSelectTest = async (selectedTest: TestItem) => {
-    const TestResultComponent = testsResultPages[selectedTest.name as testType];
     try {
-      const token = getToken();
-      if (!token || !selectedTest.name) throw new Error("Can't load test");
-      const psychTests = await testApi.getTestsByType(token, selectedTest.name);
-      console.log(psychTests)
-      const actualTest = getActualTestByDate(psychTests);
       const testTypeName = selectedTest.name as testType;
       navigate(testsResultPages[testTypeName], {
         state: {
           isViewMode: true,
-          psychTest: actualTest,
+          psychTest: recentTests[selectedTest.name],
         },
       });
     } catch (err) {
