@@ -7,12 +7,13 @@ const paginationLimit = 5
 export const PupilsList = () => {
     const [pupilListResponse, setPupilListResponse] = useState<PupilListResponse | undefined>(undefined)
     const [currentPage, setCurrentPage] = useState<number>(0)
-    const [size, setSize] = useState<number>(10)
+    const [size, setSize] = useState<number>(9)
 
     const fetchPupils = useCallback(async (signal: AbortSignal) => {
         
         try {
             const response = await pupilApi.getAllPupils(currentPage, size, signal);
+            console.log(response)
             setPupilListResponse(response)
         } catch(err: any) {
             if (err.name === "AbortError" || err.name === "CanceledError"){
@@ -61,18 +62,20 @@ export const PupilsList = () => {
         return <><p>Загружаем ...</p></>
     return <>
         <div className={style["pupils-list-wrapper"]}>
-            <p>Список учеников</p>
+            <h3>Список учеников</h3>
+            <div className="pagination">
+                {generatePagination(pupilListResponse.totalPages, paginationLimit)}
+            </div>
             <div className={style["pupils-list"]}>
                 {pupilListResponse.content.map(p => (
                     <div className={style["pupil-item"]}>
-                        <p>{p.pupilDTO?.surname} {p.pupilDTO?.name} {p.pupilDTO?.patronymic} {p.pupilDTO?.classNumber}{p.pupilDTO?.classLabel}</p>
-                        <p>{p.email}</p>
+                        <p><b>{p.pupilDTO?.surname} {p.pupilDTO?.name} {p.pupilDTO?.patronymic}</b> {p.pupilDTO?.classNumber}{p.pupilDTO?.classLabel}</p>
+                        <p>Почта: {p.email}</p>
+                        <p>Дата регистрации: {p.pupilDTO.createdAt}</p>
                     </div>
                 ))}
             </div>
-        <div className="pagination">
-            {generatePagination(pupilListResponse.totalPages, paginationLimit)}
-        </div>
+        
         
         </div>
         <Toaster position="top-right" />
