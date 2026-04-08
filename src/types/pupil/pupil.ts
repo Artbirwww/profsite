@@ -13,6 +13,7 @@ export interface PupilDTO {
   classNumber: number;
   classLabel: string;
   gender: Gender;
+  createdAt?:string
 }
 
 export interface PupilResponse {
