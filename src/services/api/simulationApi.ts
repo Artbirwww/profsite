@@ -22,5 +22,14 @@ export const simulationAPI = {
         const requestUrl = `api/simulations${params.toString() ? `?${params.toString()}` : ""}`
         const response = await api.get<PaginatedSimulationResponse>(requestUrl, {signal, headers: {Authorization: token}})
         return response.data
+    },
+    getSimulationsTypes: async () => {
+        try {
+            const response = await api.get("api/simulations/types")
+            return response.data
+        } catch(err) {
+            console.error(err)
+            throw err
+        }
     }
 }
