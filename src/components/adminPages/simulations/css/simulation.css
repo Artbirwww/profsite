@@ -5,6 +5,7 @@
     overflow-y: scroll;
     scrollbar-width: none;
     height: 90%;
+    gap: 15px;
 }
 .simulations-content {
     flex: 1;
