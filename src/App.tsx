@@ -50,6 +50,8 @@ import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
 import { IqPotentialTest } from "./components/testsPage/iqPotential/IqPotentialTest";
 import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotentialResults";
+import { Specialists } from "./components/adminPages/specialists/specialists";
+import { UploadSpecialists } from "./components/adminPages/specialists/UploadSpecialists";
 
 export default function App() {
 	return (
@@ -66,10 +68,11 @@ export default function App() {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<Layout />}>
 					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}>
-						<Route path="admin/pupil-loading" element={<PupilDataLoading />} />
-						<Route path="admin/pupil-list" element={<PupilsList />} />
-						<Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
-						<Route path="admin/simulation-list" element={<SimulationPage />} />
+						<Route path="admin/pupils-upload" element={<PupilDataLoading />} />
+						<Route path="admin/pupils" element={<PupilsList />} />
+						<Route path="admin/simulations" element={<SimulationPage />} />
+						<Route path="admin/specialists" element={<Specialists />}/>
+						<Route path="admin/specialists-upload" element={<UploadSpecialists/>}/>
 					</Route>
 
 					{/* Tests routes */}
