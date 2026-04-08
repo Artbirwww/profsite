@@ -1,4 +1,4 @@
-import { Home, FileCheck, ChartPie, Book, UserRound, Settings2, UsersRound, FileUp, BookPlus, Apple, DoorOpen } from "lucide-react"
+import { Home, FileCheck, ChartPie, Book, UserRound, Settings2, UsersRound, FileUp, BookPlus, Apple, DoorOpen, HardHat } from "lucide-react"
 import React from "react"
 import { ROLES } from "../../../types/account/role"
 
@@ -51,36 +51,45 @@ export const menuButtons: MenuItemProps[] = [
         id: "admin-list",
         label: "Список учеников",
         icon: UsersRound,
-        path: "/admin/pupil-list",
+        path: "/admin/pupils",
         allowedRoles: [ROLES.ADMIN],
         dataItem: "role-based-item",
     },
     {
         id: "admin-upload",
-        label: "Загрузить данные",
+        label: "Загрузить учеников",
         icon: FileUp,
-        path: "/admin/pupil-loading",
+        path: "/admin/pupils-upload",
         allowedRoles: [ROLES.ADMIN],
         dataItem: "role-based-item",
     },
     {
-        id: "admin-grade-upload",
-        label: "Загрузить оценки",
-        icon: BookPlus,
-        path: "/admin/pupil-grades-loading",
+        id: "specialists",
+        label: "Специалисты",
+        icon: HardHat,
+        path: "/admin/specialists",
         allowedRoles: [ROLES.ADMIN],
-        dataItem: "role-based-item",
-        
+        dataItem: "role-based-item"
     },
+    {
+        id: "specialists-upload",
+        label: "Загрузить специалистов",
+        icon: FileUp,
+        path: "/admin/specialists-upload",
+        allowedRoles: [ROLES.ADMIN],
+        dataItem: "role-based-item"
+    },
+
     {
         id: "admin-simulations",
         label: "Симуляции",
         icon: FileUp,
-        path: "/admin/simulation-list",
+        path: "/admin/simulations",
         allowedRoles: [ROLES.ADMIN],
         dataItem: "role-based-item",
         
     },
+    
 
     // Учитель
     {
