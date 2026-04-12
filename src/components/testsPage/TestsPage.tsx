@@ -5,7 +5,6 @@ import { testsList } from "./TestsData"
 import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
 import { Check } from "lucide-react"
-import { Toaster } from "react-hot-toast"
 import { testApi } from "../../services/api/testApi"
 import { useAuth } from "../../contexts/AuthContext"
 import { TestResultResponse } from "../../types/testTypes"
@@ -39,6 +38,7 @@ export const TestsPage: FC = ({ }) => {
 
         return () => clearTimeout(timer)
     }, [recentTests])
+
     useEffect(()=> {
         const loadRecentTests = async () => {
             const tests = await testApi.getRecentTests(getToken())
@@ -93,13 +93,14 @@ export const TestsPage: FC = ({ }) => {
             </div>
 
             <div className="test-container">
+
                 <div className="test-completness">
                     <div className="test-count">
-                        {/*TODO - Подсосать данные о кол-во выполненых тестах и подставить вместо N*/}
                         <span><Check size={18} strokeWidth={1.5} />{Object.keys(recentTests).length}</span>
                         <div className="divider"></div>
                         <span>{testsList.length}</span>
                     </div>
+
                     <div className="progress-container">
                         <div className="progress-fill" style={{ height: `${displayHeight}%` }}>
                             <div className="wave-element wave-front" />
