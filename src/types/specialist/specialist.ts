@@ -1,13 +1,21 @@
+import { AccountRequest } from "../account/account"
+
 export interface Specialist {
+    id?: number,
     email: string,
     name: string
     surname: string
     patronymic: string
     contactEmail: string
     contactPhone: string
-    expirience: string
+    experience: string
     jobSatisfaction: string
     profession: string
+    gender: string
+}
+export interface SpecialistRegisterRequest {
+    specialist: Specialist
+    account: AccountRequest
 }
 export interface SpecialistsPage {
     content: Specialist[]
@@ -24,4 +32,7 @@ export interface SpecialistsFilter {
     page: number
     size: number
     
+}
+export interface profession {
+    name: string
 }
