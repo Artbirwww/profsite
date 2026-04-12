@@ -3,12 +3,12 @@ import api from "./api";
 
 export const simulationAPI = {
     //Запрашивает страницу с симуляция применяя фильтры 
-    getSimulationsPageable: async (request: SimulationRequest, token:string, signal?: AbortSignal) => {
+    getSimulationsPageable: async (request: SimulationRequest, page: number, size:number, token:string, signal?: AbortSignal) => {
         const params = new URLSearchParams()
-        if (request.page !== undefined && request.page !== null) 
-            params.append('page', request.page.toString())
-        if (request.size !== undefined && request.size !== null) 
-            params.append('size', request.size.toString())
+        if (page !== undefined && page !== null) 
+            params.append('page', page.toString())
+        if (size !== undefined && size !== null) 
+            params.append('size', size.toString())
         if (request.email) 
             params.append('email', (request.email))
         if (request.profession) 
