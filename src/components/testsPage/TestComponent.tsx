@@ -9,9 +9,10 @@ interface TestItemProps {
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
+    isCompleted?: boolean
 }
 
-export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick }) => {
+export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick, isCompleted = false }) => {
     const Icon = item.icon
     const circleHoverRef = useRef<HTMLDivElement>(null)
 
@@ -69,12 +70,12 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
                     <span>{item.questionscount} вопросов</span>
                 </div>
 
-                <div className="test-selection-item-icon icon-2">
+                <div className={`test-selection-item-icon icon-2 ${isComplete ? "complete" : ""}`}>
                     <ArrowRight size={20} />
                 </div>
             </div>
 
-            <div className="hover-circle" ref={circleHoverRef} />
+            <div className={`hover-circle ${isComplete ?  "complete" : ""}`} ref={circleHoverRef} />
 
         </div>
     )

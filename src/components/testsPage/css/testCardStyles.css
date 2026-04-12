@@ -45,6 +45,21 @@
     justify-content: center;
     z-index: 3;
 }
+.test-selection-item-icon.icon-2 {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+}
+.test-selection-item-icon.complete {
+    background-color: var(--ok-color);
+}
 
 .test-selection-item-label {
     display: flex;
@@ -127,21 +142,6 @@
     font-weight: var(--font-weight-medium);
 }
 
-.test-selection-item-icon.icon-2 {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 15px;
-}
-
-
-
 /* доп. стили для выбора формы */
 .test-form-selection-name {
     z-index: 3;
@@ -184,6 +184,9 @@
     transform: translate(-50%, -50%);
     transition: width .8s ease, height .8s ease;
     z-index: 1;
+}
+.hover-circle.complete {
+    background-color: var(--ok-color);
 }
 
 .test-selection-item:hover .hover-circle {
