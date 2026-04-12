@@ -50,8 +50,13 @@ import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
 import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
 import { IqPotentialTest } from "./components/testsPage/iqPotential/IqPotentialTest";
 import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotentialResults";
-import { Specialists } from "./components/adminPages/specialists/specialists";
+
 import { UploadSpecialists } from "./components/adminPages/specialists/UploadSpecialists";
+import { RegistrationTypePicker } from "./components/authorizationPages/RegistrationTypePage";
+import { Specialists } from "./components/adminPages/specialists/Specialists";
+import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage";
+import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
+import { ProfileCommonPage } from "./components/profilePage/ProfileCommonPage";
 
 export default function App() {
 	return (
@@ -60,7 +65,12 @@ export default function App() {
 			<Route element={<AuthRouter />}>
 				<Route element={<Layout />}>
 					<Route path="/login" element={<LoginPage />} />
-					<Route path="/register" element={<RegistrationPage />} />
+					<Route path="/register" >
+						<Route path="" element = {<RegistrationTypePicker/>}/>
+						<Route path="specialist" element = {<SpecialistRegistrationPage/>}/>
+						<Route path="pupil" element = {<PupilRegistrationPage/>}/>
+					</Route>
+					
 				</Route>
 			</Route>
 
@@ -102,7 +112,7 @@ export default function App() {
 					<Route path="/my-results/:testType" element={<ResultsPage />} />
 
 					{/* Rest routes */}
-					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="/profile" element={<ProfileCommonPage />} />
 					<Route path="/my-grades" element={<StudyPage />} />
 				</Route>
 			</Route>
