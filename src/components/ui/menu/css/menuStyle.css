@@ -12,6 +12,7 @@
     max-height: 60px;
     gap: 10px;
     user-select: none;
+    opacity: 0.85;
 }
 
 .menu-nav {

@@ -1,7 +1,7 @@
 import "./css/datePickerStyles.css"
 import "@js-temporal/polyfill"
 import { Temporal } from "@js-temporal/polyfill"
-import { ChevronLeft, ChevronRight, CalendarRange } from "lucide-react"
+import { ChevronLeft, ChevronRight, ChevronDown, CalendarRange } from "lucide-react"
 import { FC, useRef, useState, MouseEvent, ReactNode, ChangeEvent, useEffect, useId } from "react"
 
 interface DatePickerProps {
@@ -26,6 +26,14 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
 
     const currentYear = Temporal.Now.plainDateISO().year
     const years = Array.from({ length: 100 }, (_, i) => currentYear - i)
+
+    const months = Array.from({ length: 12 }, (_, i) => {
+        const date = Temporal.PlainDate.from({ year: 2024, month: i + 1, day: 1 })
+        return {
+            value: i + 1,
+            label: date.toLocaleString("ru-RU", { month: "long" })
+        }
+    })
 
     useEffect(() => {
         const handleClickOutside = (e: Event) => {
@@ -56,6 +64,11 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
     const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const newYear = parseInt(e.target.value)
         setViewDate(viewDate.with({ year: newYear }) as Temporal.PlainDate)
+    }
+
+    const handleMonthChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const newMonth = parseInt(e.target.value)
+        setViewDate(viewDate.with({ month: newMonth }))
     }
 
     const handlePrevMonth = (e: MouseEvent<HTMLButtonElement>) => {
@@ -96,19 +109,13 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
 
     return (
         <div className={`custom-date-picker-wrapper ${isDisabled ? "date-picker-disabled" : ""}`} ref={containerRef}>
-
             {datePickerLabel && (
-
                 <label htmlFor={finalId} className="custom-date-picker-label">
-
                     {datePickerLabel}
-
                 </label>
-
             )}
 
             <div className="custom-date-picker-container">
-
                 <div
                     id={finalId}
                     onClick={toggleDatePicker}
@@ -117,83 +124,54 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
                     style={{ paddingLeft: datePickerIcon ? "45px" : "20px" }}>
 
                     <span className="custom-date-picker-text">
-
                         {datePickerSelected
                             ? datePickerSelected.toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" })
                             : datePickerPlaceholder}
-
                     </span>
 
                     {datePickerIcon &&
-
                         <div className="custom-date-picker-icon">
-
                             {datePickerIcon}
-
                         </div>
-
                     }
-
                 </div>
-
             </div>
 
             {isOpen && (
-
                 <div className={`calendar-dropdown dropdown-${dropdownDirection}`}>
-
                     <div className="calendar-header">
 
                         <button type="button" onClick={handlePrevMonth}>
-
                             <div className="calendar-button-icon">
-
                                 {"<"}
-
                             </div>
-
                         </button>
 
                         <div className="calendar-title-group">
-
-                            <span className="month-label">
-
-                                {viewDate.toLocaleString("ru-RU", { month: "long" })}
-
-                            </span>
-
-                            <select className="calendar-year-select" value={viewDate.year} onChange={handleYearChange}>
-
-                                {years.map(y => <option key={y} value={y}>{y}</option>)}
-
+                            <select className="calendar-select" value={viewDate.month} onChange={handleMonthChange}>
+                                {months.map(m => <option key={m.value} value={m.value}>{m.label.charAt(0).toUpperCase() + m.label.slice(1)}</option>)}
                             </select>
 
+                            <select className="calendar-select" value={viewDate.year} onChange={handleYearChange}>
+                                {years.map(y => <option key={y} value={y}>{y}</option>)}
+                            </select>
                         </div>
 
                         <button type="button" onClick={handleNextMonth}>
-
                             {">"}
-
                         </button>
 
                     </div>
 
                     <div className="calendar-grid-header">
-
                         {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(d => <div key={d}>{d}</div>)}
-
                     </div>
 
                     <div className="calendar-grid">
-
                         {renderDays()}
-
                     </div>
-
                 </div>
-
             )}
-
         </div>
     )
 }

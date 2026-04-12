@@ -200,6 +200,14 @@ input[type="range"]::-moz-range-thumb {
     gap: 10px;
     z-index: 3;
 }
+.test-card-list-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 3;
+}
 
 .test-card-selectable {
     display: flex;

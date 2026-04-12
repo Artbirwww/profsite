@@ -1,0 +1,31 @@
+
+.simulations-page {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 90%;
+}
+.simulations-content {
+    flex: 1;
+}
+input, select {
+    flex: 1;
+}
+.simulation-card {
+    padding: 10px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+.simulations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.simulations-footer {
+    
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: gray;
+}

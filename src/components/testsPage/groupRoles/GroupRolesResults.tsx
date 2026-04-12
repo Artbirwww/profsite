@@ -12,6 +12,7 @@ import { ProgressBar } from "../generalTemplates/progressBar/ProgressBar"
 import "../css/testsResultStyles.css"
 import { sortByParam } from "../utils/sortByParams"
 import { Button } from "../../ui/reusable/button"
+import { formatTime } from "../utils/formatTime"
 export const GroupRolesResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -44,7 +45,7 @@ export const GroupRolesResults = () => {
 
         const sendGroupRolesResults = async () => {
 
-            const calculatedResults = calculateGroupRolesParams(groupQuestionsResult)
+            const calculatedResults = {...calculateGroupRolesParams(groupQuestionsResult), completionTimeSeconds: location.state?.completionTimeSeconds}
 
             try {
                 const token = getToken()
@@ -107,6 +108,9 @@ export const GroupRolesResults = () => {
                     </div>
 
                     <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
+                    {groupRolesResults.completionTimeSeconds !== null && groupRolesResults.completionTimeSeconds !== 0 &&
+                        <span>Пройдено за: {formatTime(Math.floor(groupRolesResults.completionTimeSeconds / 60))} : {formatTime(groupRolesResults.completionTimeSeconds % 60)}</span>
+                    }
                     <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
             </div>
         </>

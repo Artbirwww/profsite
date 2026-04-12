@@ -14,6 +14,7 @@ import { formatDateRU } from "../../../services/dates/formatDate"
 import { EysenckCircle } from "./EysenckCircle"
 import { EysenckScales } from "./EysenckScales"
 import { Button } from "../../ui/reusable/button"
+import { formatTime } from "../utils/formatTime"
 
 /**
  * TODO
@@ -56,7 +57,7 @@ export const TemperamentResults = () => {
 		if (!navigationOptions || navigationOptions.length <= 0) return
 
 		const createTest = async () => {
-			const psychTestTemp = calculateParams(navigationOptions, 0, temperamentFormData,)
+			const psychTestTemp = {...calculateParams(navigationOptions, 0, temperamentFormData,), completionTimeSeconds: location.state?.completionTimeSeconds}
 
 			try {
 				const token = getToken()
@@ -138,6 +139,8 @@ export const TemperamentResults = () => {
 
 				<div className="test-result-item-content">
 					<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
+					{psychTest.completionTimeSeconds !== null && psychTest.completionTimeSeconds !== 0 &&
+						<span>Пройдено за: {formatTime(Math.floor(psychTest.completionTimeSeconds / 60))} : {formatTime(psychTest.completionTimeSeconds % 60)}</span>}
 					<Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
 				</div>
 			</div>

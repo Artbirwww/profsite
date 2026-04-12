@@ -69,7 +69,17 @@ export const menuButtons: MenuItemProps[] = [
         icon: BookPlus,
         path: "/admin/pupil-grades-loading",
         allowedRoles: [ROLES.ADMIN],
-        dataItem: "role-based-item"
+        dataItem: "role-based-item",
+        
+    },
+    {
+        id: "admin-simulations",
+        label: "Симуляции",
+        icon: FileUp,
+        path: "/admin/simulation-list",
+        allowedRoles: [ROLES.ADMIN],
+        dataItem: "role-based-item",
+        
     },
 
     // Учитель

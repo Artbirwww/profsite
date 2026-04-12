@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { authApi } from "../../services/api/authApi"
 import toast, { Toaster } from "react-hot-toast"
 
-type UserType = "Школьник" | "Студент" | "Специалист"
+type UserType = "Школьник" | "Специалист" | "Эксперт" 
 
 const USER_TYPE = [
     {
@@ -17,14 +17,15 @@ const USER_TYPE = [
         description: "Я учусь в школе",
     },
     {
-        id: "Студент" as UserType,
-        title: "Студент",
-        description: "Я учусь в университете",
-    },
-    {
         id: "Специалист" as UserType,
         title: "Специалист",
         description: "Я работаю по профессии",
+    },
+    {
+        id: "Эксперт" as UserType,
+        title: "Эксперт",
+        description: "Я эксперт",
+        disabled: true,
     },
 ]
 
@@ -39,6 +40,9 @@ export const RegistrationPage: FC = () => {
     })
 
     const handleSelectType = (type: UserType) => {
+        const selected = USER_TYPE.find(item => item.id === type)
+        if (selected?.disabled) return
+
         setUserType(type)
         setStep(2)
     }
@@ -63,7 +67,7 @@ export const RegistrationPage: FC = () => {
             toast.error("Пожалуйста введите все поля")
             return
         }
-        if(formData.password !== formData.repeatPassword) {
+        if (formData.password !== formData.repeatPassword) {
             toast.error("Пароли не совпадают")
             return
         }
@@ -88,8 +92,8 @@ export const RegistrationPage: FC = () => {
                     </div>
 
                     <div className="registration-type-options">
-                        {USER_TYPE.map(({ id, title, description }) => (
-                            <div className="type-item" key={id} onClick={() => handleSelectType(id)}>
+                        {USER_TYPE.map(({ id, title, description, disabled }) => (
+                            <div className="type-item" key={id} onClick={() => handleSelectType(id)} style={{ opacity: disabled ? .5 : 1, cursor: disabled ? "not-allowed" : "pointer" }}>
                                 <p>{title}</p>
                                 <span>{description}</span>
                             </div>
@@ -128,7 +132,8 @@ export const RegistrationPage: FC = () => {
                                 inputType={"password"}
                                 isPassword={true}
                                 inputValue={formData.repeatPassword}
-                                inputOnChange={updateField("repeatPassword")} />
+                                inputOnChange={updateField("repeatPassword")}
+                                onKeyDown={(e) => { if (e.key === "Enter") handleRegistration() }} />
                         </div>
 
                         <div className="registration-form-row">

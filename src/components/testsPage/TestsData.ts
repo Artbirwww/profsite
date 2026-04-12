@@ -13,6 +13,7 @@ export interface TestItem {
     path: string            // URL до теста
     dataItem: string        // Для тестирования / селекторов
     name?: string
+    isAvailable?: boolean
 }
 
 // Список доступных тестов для прохождения
@@ -27,7 +28,8 @@ export const testsList: TestItem[] = [
         icon: Palette,
         path: "/tests/temperament",
         dataItem: "test-item-1",
-        name: "Temperament"
+        name: "Temperament",
+        isAvailable: true
     },
     {
         id: "test-group-roles",
@@ -39,7 +41,8 @@ export const testsList: TestItem[] = [
         icon: UsersRound,
         path: "/tests/group-roles",
         dataItem: "test-item-2",
-        name: "Group-Roles"
+        name: "Group-Roles",
+        isAvailable: true
     },
     {
         id: "test-engineering-thinking",
@@ -51,7 +54,8 @@ export const testsList: TestItem[] = [
         icon: Settings,
         path: "/tests/engineering-thinking",
         dataItem: "test-item-3",
-        name: "Engineering-Thinking"
+        name: "Engineering-Thinking",
+        isAvailable: true
     },
     {
         id: "test-professional-orientation-klimov",
@@ -63,7 +67,8 @@ export const testsList: TestItem[] = [
         icon: BriefcaseBusiness,
         path: "/tests/professional-orientation-klimov",
         dataItem: "test-item-5",
-        name: "Professional-Orientation-Klimov"
+        name: "Professional-Orientation-Klimov",
+        isAvailable: true
     },
     {
         id: "test-intellectual-potential",
@@ -74,7 +79,8 @@ export const testsList: TestItem[] = [
         icon: Brain,
         path: "/tests/iq-potential",
         dataItem: "test-item-4",
-        name: "Intellectual-Potential"
+        name: "Intellectual-Potential",
+        isAvailable: true
     },
     {
         id: "test-professional-orientation-holland",
@@ -86,6 +92,7 @@ export const testsList: TestItem[] = [
         icon: Compass,
         path: "/tests/iq-potential",
         dataItem: "test-item-6",
+        isAvailable: false
     },
     {
         id: "test-professional-orientation-glomshtok",
@@ -97,6 +104,7 @@ export const testsList: TestItem[] = [
         icon: Map,
         path: "/tests/iq-potential",
         dataItem: "test-item-7",
+        isAvailable: false
     },
     {
         id: "test-professional-orientation-yovayshi",
@@ -108,6 +116,7 @@ export const testsList: TestItem[] = [
         icon: Target,
         path: "/tests/iq-potential",
         dataItem: "test-item-8",
+        isAvailable: false
     },
     {
         id: "test-professional-orientation-sheyn",
@@ -119,5 +128,6 @@ export const testsList: TestItem[] = [
         icon: Anchor,
         path: "/tests/iq-potential",
         dataItem: "test-item-9",
+        isAvailable: false
     },
 ]

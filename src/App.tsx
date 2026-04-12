@@ -33,7 +33,7 @@ import { ProfilePage } from "./components/profilePage/ProfilePage"
 import { TestViewer } from "./components/testsPage/TestViewer"
 
 // Тест темперамента
-import { TemperamentFormSelection } from "./components/testsPage/temperament/TemperamentFormSelectionTest"
+import { TemperamentTest } from "./components/testsPage/temperament/TemperamentTest"
 import { TemperamentResults } from "./components/testsPage/temperament/TemperamentResults"
 
 // Тест грпповых ролей
@@ -47,6 +47,9 @@ import { EngineeringThinkingResults } from "./components/testsPage/engineeringTh
 // Тест Климова
 import { KlimovTest } from "./components/testsPage/klimov/KlimovTest"
 import { KlimovResults } from "./components/testsPage/klimov/KlimovResults"
+import { SimulationPage } from "./components/adminPages/simulations/SimulationsPage";
+import { IqPotentialTest } from "./components/testsPage/iqPotential/iqPotentialTest";
+import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotentialResults";
 
 export default function App() {
 	return (
@@ -66,6 +69,7 @@ export default function App() {
 						<Route path="admin/pupil-loading" element={<PupilDataLoading />} />
 						<Route path="admin/pupil-list" element={<PupilsList />} />
 						<Route path="admin/pupil-grades-loading" element={<PupilGradeLoading />} />
+						<Route path="admin/simulation-list" element={<SimulationPage />} />
 					</Route>
 
 					{/* Tests routes */}
@@ -73,7 +77,7 @@ export default function App() {
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
 						<Route element={<TestViewer />}>
-							<Route path="temperament" element={<TemperamentFormSelection />} />
+							<Route path="temperament" element={<TemperamentTest />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
 
 							<Route path="group-roles" element={<GroupRolesTest />} />
@@ -84,6 +88,9 @@ export default function App() {
 
 							<Route path="professional-orientation-klimov" element={<KlimovTest />} />
 							<Route path="professional-orientation-klimov-results" element={<KlimovResults />} />
+
+							<Route path="iq-potential" element={<IqPotentialTest/>} />
+							<Route path="iq-potential-results" element={<IqPotentialResults />}/>
 						</Route>
 					</Route>
 
