@@ -9,16 +9,29 @@ interface SimulationCardProps {
 }
 export const SimulationCard = ({simulation}: SimulationCardProps) => {
     return( 
-        <div key={simulation.id} className="simulation-card">
-            <h3>Логин: {simulation.simulation.email}</h3>
-            <p>Профессия: {simulation.simulation.profession ? simulation.simulation.profession : "-"}</p>
-            <p>Тип симуляции: {simulation.simulation.simulationType ? simulation.simulation.simulationType : "-"}</p>
-            <p><a className="download-link" download={true} href={`${BASE_URL}/${simulation.simulation.filePath}`}>Скачать файл симуляции  {simulation.simulation.filePath.split("/").pop()}</a></p>
-            <div className="simulations-footer">
-                <small>Дата начала: {simulation.simulation.startSimulation}</small>
-                <small>Дата завершения: {simulation.simulation.endSimulation}</small>
+        <div className="base-card">
+            <div className="card-title">{simulation.simulation.email}</div>
+            
+            <div className="info-row">
+                <span className="info-label">Профессия:</span>
+                <span>{simulation.simulation.profession || '--'}</span>
+            </div>
+            <div className="info-row">
+                <span className="info-label">Тип:</span>
+                <span>{simulation.simulation.simulationType || '--'}</span>
             </div>
             
+            <div className="info-row">
+                <span className="info-label">Файл:</span>
+                <a download href={`${BASE_URL}/${simulation.simulation.filePath}`}>
+                    {simulation.simulation.filePath?.split('/').pop() || 'скачать'}
+                </a>
+            </div>
+            
+            <div className="card-footer">
+                <span>{simulation.simulation.startSimulation || '--'}</span>
+                <span>{simulation.simulation.endSimulation || '--'}</span>
+            </div>
         </div>)
 
 }

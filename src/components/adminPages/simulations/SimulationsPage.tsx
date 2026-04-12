@@ -6,6 +6,8 @@ import { PaginatedSimulationResponse, SimulationRequest, SimulationResponse } fr
 import { SimulationFilerBar } from "./SimulationFilterBar"
 import toast, { Toaster } from "react-hot-toast"
 import "../css/admin-pages.css"
+import { Pagination } from "../../ui/reusable/Pagination"
+
 //TODO добавить фильтрацию, сделать страницы
 export const SimulationPage = () => {
     const {getToken} = useAuth()
@@ -14,38 +16,35 @@ export const SimulationPage = () => {
         email: undefined, 
         startSimulation: undefined, 
         endSimulation: undefined, 
-        page: 0, 
-        size: 6, 
         profession: undefined, 
         simulationType: undefined 
     })
+    const [currentPage, setCurrentPage] = useState<number>(0)
+    const [size, setSize] = useState<number>(5)
     const [totalPages, setTotalPages] = useState<number>(0)
     const loadSimulations = useCallback(async (signal: AbortSignal) => {
         try {
             const token = getToken()
             //TODO can use metadata from page
-            const page = await simulationAPI.getSimulationsPageable(simulationRequest, token, signal)
+            const page = await simulationAPI.getSimulationsPageable(simulationRequest, currentPage, size, token, signal)
             console.log("Симуляции: ", page)
+            console.log(currentPage)
             setSimulations(page.content)
             setTotalPages(page.totalPages)
         } catch(err) {
             console.error(err)
             toast("Не удалось загрузить симуляции, проверьте даты")
         }
-    }, [simulationRequest])
+    }, [simulationRequest, currentPage, size])
     useEffect(()=>{
-        if (!simulationRequest) return
+        //if (!simulationRequest) return
         const controller = new AbortController()
         loadSimulations(controller.signal)
         return () => {
             controller.abort()
         }
-    }, [simulationRequest])
+    }, [simulationRequest, currentPage, size])
 
-    const changePage = (pageNumber: number) => {
-        if (pageNumber === simulationRequest.page) return
-        setSimulationsRequest(prev => ({...prev, page: pageNumber}))
-    }
     return (<>
     <div className="simulations-page">
         <div className="simulations-content">
@@ -54,12 +53,8 @@ export const SimulationPage = () => {
                 setSimulationsRequest = {setSimulationsRequest} />
             <SimulationsList simulations={simulations} />
         </div>
-        {totalPages && totalPages !== 0 && 
-        <div className="pagination">
-            {Array.from({length: totalPages}, (_, pageNumber) => (
-                <p className={`${pageNumber === simulationRequest.page ? "current-page" : "page"}`} onClick={() => changePage(pageNumber)}>{pageNumber+1}</p>
-            ))}
-        </div>}
+
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={totalPages} />
         <Toaster/>
     </div>
     </>)
