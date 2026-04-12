@@ -5,7 +5,6 @@ import "./css/testsViewerStyles.css"
 import "./css/generalTemplatesStyles.css"
 import "./css/temperamentResultStyles.css"
 import "./css/testCardStyles.css"
-import "./css/cardhoverEffect.css"
 
 import { Outlet } from "react-router-dom"
 import { useEffect } from "react"
