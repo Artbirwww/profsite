@@ -2,7 +2,7 @@ import "../../css/generalTemplatesStyles.css"
 
 interface ProgressBarProps {
     currentTaskNumber: number
-    total: number,
+    total: number
 }
 
 export const ProgressBar = ({ currentTaskNumber, total }: ProgressBarProps) => {

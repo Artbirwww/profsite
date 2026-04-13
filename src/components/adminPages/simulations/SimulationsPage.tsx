@@ -5,6 +5,7 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { PaginatedSimulationResponse, SimulationRequest, SimulationResponse } from "../../../types/simulation/Simulation"
 import { SimulationFilerBar } from "./SimulationFilterBar"
 import toast, { Toaster } from "react-hot-toast"
+import "../css/admin-pages.css"
 //TODO добавить фильтрацию, сделать страницы
 export const SimulationPage = () => {
     const {getToken} = useAuth()
