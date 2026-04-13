@@ -82,6 +82,12 @@ export const ProfilePage: FC = () => {
         { value: "other", label: "Другая" },
     ], []);
 
+    const schoolNames = useMemo(() => [
+        { value: "sosh 33", label: "МБОУ СОШ №33 города Абакана" },
+        { value: "top", label: "Академия 'Топ'" },
+        { value: "test", label: "Тест" },
+    ], []);
+
     const updateField = useCallback((field: keyof PupilDTO) => (value: any) => {
         const extractedValue = (value && typeof value === 'object' && 'value' in value)
             ? value.value
@@ -291,11 +297,12 @@ export const ProfilePage: FC = () => {
 
                                 </div>
 
-                                <FieldInput
-                                    inputIcon={<School size={20} />}
-                                    inputPlaceholder="МБОУ СОШ №9"
-                                    inputValue={formData.school}
-                                    inputOnChange={updateField("school")} />
+                                <Dropdown
+                                    dropdownIcon={<School size={20} />}
+                                    dropdownOptions={schoolNames}
+                                    dropdownSelected={formData.school}
+                                    optionOnSelect={(opt) => updateField("school")(opt.value)}
+                                    dropdownDirection="up" />
 
                             </div>
 
