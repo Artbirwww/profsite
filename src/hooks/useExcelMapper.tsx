@@ -6,8 +6,11 @@ export const useExcelMapper = () => {
     const [headers, setHeaders] = useState<any[]>([])
     const extractHeaders = (data: any[]) => {
         const firstRow = data[0]
-        console.log(firstRow)
-        return Object.keys(firstRow).map(key => key)
+        const allKeys = new Set<string>()
+        data.forEach(row => {
+            Object.keys(row).forEach(key => allKeys.add(key))
+        })
+        return Array.from(allKeys)
     }
     
     const processExcelFile = useCallback((file: File): Promise<any[]> => {
