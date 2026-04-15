@@ -1,7 +1,7 @@
 import "./css/menuStyles.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
-import { FC, useCallback, useMemo } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { logoutButton, menuButtons, MenuItemProps } from "./menuData"
 
 interface ItemProps {
@@ -60,7 +60,7 @@ export const Menu = () => {
                 ))}
 
                 {/* виден только в десктопе */}
-                <div className="menu-nav-logout-desktop">
+                <div className="logout-desktop">
                     <MenuItem
                         item={logoutButton}
                         isActive={false}
@@ -73,7 +73,7 @@ export const Menu = () => {
                 <nav className="menu-nav-external">
 
                     {/* виден только на мобилках */}
-                    <div className="menu-nav-logout-mobile">
+                    <div className="logout-mobile">
                         <MenuItem
                             item={logoutButton}
                             isActive={false}
