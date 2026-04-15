@@ -73,7 +73,7 @@ export const UploadSpecialists = () => {
                         </label>
                     </div>
                     <Button buttonLabel="Загрузить" buttonFunction={() => uploadSpecialists()}/>
-                    <a href={`${BASE_URL}/public/admin/specialist.xlsx`}>Скачать шаблон specialist.xlsx</a>
+                    <a download href={`${BASE_URL}/public/admin/specialists.xlsx`}>Скачать шаблон specialist.xlsx</a>
                 </div>
             </div>
             {headers && headers.length > 0 && (
