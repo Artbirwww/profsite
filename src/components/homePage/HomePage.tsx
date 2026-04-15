@@ -1,8 +1,60 @@
 import "./css/homePageStyles.css"
 
-import { FC } from "react"
+import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
+
+import { FC, useEffect, useRef, useState } from "react"
+import { HomeAbout } from "./HomeAbout"
+import { HomeHowto } from "./HomeHowto"
+import { HomeProfessions } from "./HomeProfessions"
+import { HomePartners } from "./HomePartners"
+
+const SECTIONS = [
+    { Icon: MousePointerClick, Component: HomeAbout },
+    { Icon: Lightbulb, Component: HomeHowto },
+    { Icon: HardHat, Component: HomeProfessions },
+    { Icon: Handshake, Component: HomePartners },
+]
 
 export const HomePage: FC = ({ }) => {
+    const homeContainerRef = useRef<HTMLDivElement>(null)
+    const [visibleIds, setVisibleIds] = useState<number[]>([])
+
+    useEffect(() => {
+        const container = homeContainerRef.current
+        if (!container)
+            return
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const idAttr = entry.target.getAttribute("data-id")
+                    if (idAttr === null)
+                        return
+
+                    const index = Number(idAttr)
+
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show")
+                        setVisibleIds(prev => (prev.includes(index) ? prev : [...prev, index]))
+
+                    } else {
+                        entry.target.classList.remove("show")
+                        setVisibleIds(prev => prev.filter(i => i !== index))
+                    }
+                })
+            },
+            {
+                root: container,
+                threshold: .2,
+            }
+        )
+
+        const items = container.querySelectorAll(".home-grid-item-container")
+        items.forEach((el) => observer.observe(el))
+
+        return () => observer.disconnect()
+    }, [])
+
     return (
         <div className="home-wrapper">
 
@@ -10,108 +62,19 @@ export const HomePage: FC = ({ }) => {
                 <h1>Добро пожаловать</h1>
             </div>
 
-            <div className="home-grid">
-
-                <div className="home-grid-item">
-
-                    <div className="grid-item-header">
-                        <h4>Подбор профессий</h4>
+            <div className="home-grid" ref={homeContainerRef}>
+                {SECTIONS.map(({ Component }, index) => (
+                    <div className="home-grid-item-container" data-id={index}>
+                        <Component />
                     </div>
 
-                    <div className="home-about-wrapper">
-
-                        <div className="home-about-item">
-
-                        </div>
-
-                        <div className="home-about-item">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="home-grid-item">
-
-                    <div className="grid-item-header">
-                        <h4>Что это такое?</h4>
-                    </div>
-
-                    <div className="home-howto-wrapper">
-
-                        <div className="home-howto-item">
-
-                        </div>
-
-                        <div className="home-howto-item">
-
-                        </div>
-
-                        <div className="home-howto-item">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="home-grid-item">
-
-                    <div className="grid-item-header">
-                        <h4>Наши профессии</h4>
-                    </div>
-
-                    <div className="home-professions-wrapper">
-
-                        <div className="home-proffesions-item">
-
-                        </div>
-
-                        <div className="home-proffesions-item">
-
-                        </div>
-
-                        <div className="home-proffesions-item">
-
-                        </div>
-
-                        <div className="home-proffesions-item">
-
-                        </div>
-
-                        <div className="home-proffesions-item">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="home-grid-item">
-
-                    <div className="grid-item-header">
-                        <h4>Проект реализован благодаря</h4>
-                    </div>
-
-                    <div className="home-partners-wrapper">
-
-                        <div className="home-partners-item">
-
-                        </div>
-
-                        <div className="home-partners-item">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+                ))}
             </div>
 
             <div className="home-indicator">
-
+                {SECTIONS.map(({ Icon }, index) => (
+                    <Icon key={index} className={`icon ${visibleIds.includes(index) ? "active" : ""}`} />
+                ))}
             </div>
 
         </div>

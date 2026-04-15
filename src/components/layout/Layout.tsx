@@ -22,13 +22,7 @@ export const Layout: FC = () => {
             </div>
 
             {getToken() &&
-
-                <div className="layout-menu">
-
-                    <Menu />
-
-                </div>
-
+                <Menu />
             }
 
         </div>

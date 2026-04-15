@@ -216,6 +216,7 @@
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    border-radius: 30px;
 }
 
 .test-grid::-webkit-scrollbar {

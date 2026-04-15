@@ -1,3 +1,4 @@
+/* стили для обертки домашней страницы */
 .home-wrapper {
     display: flex;
     flex-direction: column;
@@ -9,8 +10,6 @@
     padding: 100px 0;
     box-sizing: border-box;
 }
-
-
 
 /* стили для хедера страницы */
 .home-header {
@@ -29,38 +28,37 @@
     text-transform: uppercase;
 }
 
-
-
+/* сетка для секций домашней страницы */
 .home-grid {
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-rows: repeat(4, calc(100% - 5px));
-    grid-auto-rows: calc(100% - 5px);
+    grid-template-rows: repeat(4, 100%);
+    grid-auto-rows: 100%;
     gap: 10px;
     overflow-y: auto;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    border-radius: 20px 20px 30px 30px;
 }
 
 .home-grid::-webkit-scrollbar {
     display: none;
 }
 
-.home-grid-item {
+/* общие стили для секции домашней страницы */
+.home-section-item {
     width: 100%;
     height: 100%;
     position: relative;
-}
-
-.home-grid-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.grid-item-header {
+/* Хедер для секции */
+.home-section-header {
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
@@ -70,7 +68,7 @@
     padding: 0 30px;
 }
 
-.grid-item-header h4 {
+.home-section-header h4 {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
     line-height: 20px;
@@ -80,9 +78,8 @@
     color: var(--text-primary-color);
 }
 
-
-
-.home-about-wrapper {
+/* стили для 1 секции */
+.home-about-section-wrapper {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -94,12 +91,12 @@
     background-color: var(--primary-color);
     width: 100%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
+    padding: 30px;
 }
 
-
-
-.home-howto-wrapper {
+/* стили для 2 секции */
+.home-howto-section-wrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -111,29 +108,29 @@
     background-color: var(--primary-color);
     width: 100%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
+    padding: 30px;
 }
 
-
-
-.home-professions-wrapper {
+/* стили для 3 секции */
+.home-professions-section-wrapper {
     display: flex;
     flex-direction: row;
     gap: 10px;
     height: 100%;
 }
 
-.home-proffesions-item {
+.home-professions-item {
     display: flex;
     background-color: var(--primary-color);
     width: 100%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
+    padding: 30px;
 }
 
-
-
-.home-partners-wrapper {
+/* стили для 4 секции */
+.home-partners-section-wrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -145,12 +142,20 @@
     background-color: var(--primary-color);
     width: 100%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
+    padding: 30px;
 }
 
 
 
 
+
+
+
+
+
+
+/* стили для индикатора прокрутки страницы */
 .home-indicator {
     display: flex;
     flex-direction: row;
@@ -162,4 +167,15 @@
     gap: 20px;
     padding: 0 25px;
     background-color: var(--primary-color);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    color: var(--text-tertiary-color);
+    transition: color .7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon.active {
+    color: var(--accent-color);
 }
