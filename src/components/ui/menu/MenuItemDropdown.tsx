@@ -13,6 +13,7 @@ const ROLE_CONFIG: Record<string, { label: string, icon: LucideIcon }> = {
     [ROLES.DIRECTOR]: { label: "Директор", icon: UserCog },
     [ROLES.TEACHER]: { label: "Учитель", icon: GraduationCap },
     [ROLES.SPECIALIST]: { label: "Специалист", icon: Briefcase },
+    [ROLES.PUPIL]: {label: "Ученик", icon: GraduationCap}
 }
 
 export const MenuItemDropdown: FC<DropdownItemProps> = ({ roleKey, children, isGroupActive }) => {

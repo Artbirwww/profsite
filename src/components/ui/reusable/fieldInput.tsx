@@ -10,6 +10,7 @@ interface FieldInputProps {
     inputType?: string
     inputValue?: string
     inputOnChange?: (value: string) => void
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void//Легаси добавил функцию для полной обработки события
     isPassword?: boolean
     isRequired?: boolean
     isDisabled?: boolean
@@ -17,12 +18,15 @@ interface FieldInputProps {
     name?: string
 }
 
-export const FieldInput: FC<FieldInputProps> = ({ inputLabel, inputIcon, inputPlaceholder, inputType = "text", inputValue, inputOnChange, isPassword, isRequired = true, isDisabled = false, onKeyDown, name }) => {
+export const FieldInput: FC<FieldInputProps> = ({ inputLabel, inputIcon, inputPlaceholder, inputType = "text", inputValue, inputOnChange, onChange, isPassword, isRequired = true, isDisabled = false, onKeyDown, name }) => {
     const [isVisible, setIsVisible] = useState(false)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (isDisabled) return
-        inputOnChange?.(e.target.value)
+        if (onChange) 
+            onChange(e)
+        else
+            inputOnChange?.(e.target.value)
     }
 
     const toggleVisibility = () => {
@@ -49,11 +53,13 @@ export const FieldInput: FC<FieldInputProps> = ({ inputLabel, inputIcon, inputPl
 
                 <input
                     id={name}
+                    name={name}
                     type={finalType}
                     placeholder={inputPlaceholder}
                     value={inputValue}
                     required={isRequired}
                     disabled={isDisabled}
+                    //Легаси, пришлось добавить еще одну функцию потому что inputChange принимает только valye, но не name
                     onChange={handleChange}
                     onKeyDown={onKeyDown}
                     style={{ paddingLeft: inputIcon ? "45px" : "20px", paddingRight: isPassword ? "45px" : "20px" }} />

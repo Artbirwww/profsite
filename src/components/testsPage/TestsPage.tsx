@@ -118,7 +118,8 @@ export const TestsPage: FC = ({ }) => {
                                     index={index}
                                     isAvailable={item.isAvailable}
                                     item={item}
-                                    onClick={handleClick} />
+                                    onClick={handleClick}
+                                    isComplete = {recentTests ? recentTests[item.name] != null : false} />
                             </div>
                         )
                     })}

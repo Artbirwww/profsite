@@ -47,14 +47,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const getToken = (): string => {
-    try {
-      const token = Cookies.get("token")
-      if (!token) throw new Error("Auth token is empty")
-      return token;
-    } catch(err) {
-      console.error(err)
-      return ""
-    }
+
+    const token = Cookies.get("token")
+    //if (!token) throw new Error("Auth token is empty")
+    return token || "";
+
     
   };
   const getTokenClaims = () => {
@@ -91,7 +88,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const isFirstLogin = () => getTokenClaims()?.firstLogin || false
   const getEmail = () => getTokenClaims()?.email || ""
   const isTokenExpired = () : boolean => {
-    const token = getToken()
+    const token = Cookies.get("token")
     if (!token) return true
     try {
       const expireDate = getTokenClaims()?.exp

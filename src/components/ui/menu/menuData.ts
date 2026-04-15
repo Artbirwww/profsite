@@ -106,17 +106,21 @@ export const menuButtons: MenuItemProps[] = [
         icon: ChartPie,
         path: "/my-results",
     },
-    {
-        id: "grades",
-        label: "Учеба",
-        icon: Book,
-        path: "/my-grades",
-    },
+    
     {
         id: "profile",
         label: "Профиль",
         icon: UserRound,
         path: "/profile",
+    },
+    //Ученик
+    {
+        id: "grades",
+        label: "Учеба",
+        icon: Book,
+        path: "/my-grades",
+        allowedRoles: [ROLES.PUPIL],
+        dataItem: "role-based-item"
     },
 
     // Админ
@@ -171,16 +175,6 @@ export const menuButtons: MenuItemProps[] = [
         icon: Apple,
         path: "/teacher-test-1",
         allowedRoles: [ROLES.TEACHER],
-        dataItem: "role-based-item",
-    },
-
-    // Специалист
-    {
-        id: "specialist-list",
-        label: "Специалист тест 1",
-        icon: Apple,
-        path: "/speacialist-test-1",
-        allowedRoles: [ROLES.SPECIALIST],
         dataItem: "role-based-item",
     },
 

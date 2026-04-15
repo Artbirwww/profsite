@@ -102,3 +102,8 @@
     align-items: end;
     justify-content: end;
 }
+select {
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}

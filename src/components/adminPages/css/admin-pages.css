@@ -1,26 +1,4 @@
-.pagination {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-.pagination .current-page,
-.pagination .page {
-    background-color: var(--primary-color);
-    padding: 5px 15px;
-    border-radius: 5px;
-}
-.pagination .current-page {
-    font-weight: 600;
-    cursor: auto;
-    user-select: none;
-    background-color: var(--accent-hover-color);
-    color: var(--primary-color);
-}
-.pagination .page {
-    cursor: pointer;
-}
+
 a {
     text-decoration: none;
     transition: 0.2s;
@@ -37,4 +15,9 @@ a:hover {
     margin: 10px 0px;
     border-radius: 15px;
     background-color: var(--primary-color);
+}
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

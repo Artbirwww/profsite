@@ -4,6 +4,7 @@ import React from 'react';
 export const AuthRouter: React.FC = () => {
     const {token, getToken, isLoading} = useAuth()
     const navigate = useNavigate()
+    
     if (isLoading) return(
         <>
             <p>Загрузка...</p>
@@ -11,7 +12,6 @@ export const AuthRouter: React.FC = () => {
     if (getToken()) {
         return <Navigate to={'/'} />
     }
-
 
     return <Outlet />
 }

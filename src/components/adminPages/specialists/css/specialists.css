@@ -1,0 +1,6 @@
+.specialist-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: scroll;
+}

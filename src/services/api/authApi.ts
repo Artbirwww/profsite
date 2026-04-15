@@ -3,6 +3,7 @@ import { AccountApiRegisterDTO } from '../../types/pupil/account';
 import { PupilResponse } from '../../types/pupil/pupil';
 import api from './api';
 import { Role } from '../../types/account/role';
+import { SpecialistRegisterRequest } from '../../types/specialist/specialist';
 
 export const authApi = {
   autoRegister: async (data: AccountApiRegisterDTO): Promise<PupilResponse> => {
