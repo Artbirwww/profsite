@@ -67,6 +67,7 @@ export const logoutButton: MenuItemProps = {
     label: "Выход",
     icon: DoorOpen,
     path: "/login",
+    order: 99,
     isLogout: true,
 }
 

@@ -38,7 +38,7 @@ export const Menu = () => {
 
     const { internalItems, externalItems } = useMemo(() => {
 
-        const filtered = [...menuButtons]
+        const filtered = [...menuButtons, logoutButton]
             .filter(btn => !btn.allowedRoles?.length || btn.allowedRoles.some(r => checkRole({ name: r })))
             .sort((a, b) => (a.order || 0) - (b.order || 0))
 
@@ -58,28 +58,10 @@ export const Menu = () => {
                         isActive={isActive(item.path)}
                         onClick={handleAction} />
                 ))}
-
-                {/* виден только в десктопе */}
-                <div className="logout-desktop">
-                    <MenuItem
-                        item={logoutButton}
-                        isActive={false}
-                        onClick={handleAction} />
-                </div>
-
             </nav>
 
             {externalItems.length > 0 && (
                 <nav className="menu-nav-external">
-
-                    {/* виден только на мобилках */}
-                    <div className="logout-mobile">
-                        <MenuItem
-                            item={logoutButton}
-                            isActive={false}
-                            onClick={handleAction} />
-                    </div>
-
                     {externalItems.map(item => (
                         <MenuItem
                             key={item.id}
@@ -88,7 +70,6 @@ export const Menu = () => {
                             onClick={handleAction}
                         />
                     ))}
-
                 </nav>
             )}
         </div>
