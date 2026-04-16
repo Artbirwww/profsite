@@ -12,8 +12,6 @@
     box-sizing: border-box;
 }
 
-
-
 /* стили для хедера страницы */
 .test-header {
     display: flex;
@@ -30,8 +28,6 @@
     font-weight: var(--font-weight-medium);
     text-transform: uppercase;
 }
-
-
 
 /* стили для индикатора прокрутки */
 .test-indicator {
@@ -59,8 +55,6 @@
 .dot.active {
     background-color: var(--accent-color);
 }
-
-
 
 /* стили для индикатора завершенности тестов */
 /* общее количество и сколько завершено */
@@ -115,8 +109,6 @@
     z-index: 3;
 }
 
-
-
 /* прогресс бар завершенности тестов */
 .progress-container {
     width: 60px;
@@ -141,8 +133,6 @@
     transition: height 1s ease-in-out;
     height: 0%;
 }
-
-
 
 /* общие стили для "волн" */
 .wave-element {
@@ -182,8 +172,6 @@
     }
 }
 
-
-
 /* стили для outlet */
 .test-outlet {
     display: flex;
@@ -200,8 +188,6 @@
 .test-outlet::-webkit-scrollbar {
     display: none;
 }
-
-
 
 /* стили для сетки карточек выбора теста */
 .test-grid {
@@ -229,8 +215,6 @@
     position: relative;
 }
 
-
-
 /* состояния (заблокировано) */
 .test-selection-item.locked {
     cursor: not-allowed;
@@ -241,4 +225,12 @@
 
 .test-selection-item:hover .test-selection-item-description {
     left: 30px;
+}
+
+
+
+@media (max-width: 1300px) {
+    .test-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
