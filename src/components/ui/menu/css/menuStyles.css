@@ -1,75 +1,109 @@
-/* стлили для обертки меню */
 .menu-wrapper {
-    display: flex;
     position: fixed;
+    display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
     gap: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     bottom: 20px;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    width: calc(100% - 20px);
 }
 
-/* стили для основных пунктов меню (домой, тесты, результаты, учеба, профиль, выход) */
 .menu-nav {
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 5px;
+    align-items: center;
+    align-self: center;
     background-color: var(--primary-color);
-    border-radius: 100px;
-    height: 60px;
     padding: 3px;
-    scroll-padding: 3px;
-
+    height: 60px;
     overflow-x: auto;
-    white-space: nowrap;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
     scrollbar-width: none;
+    border-radius: 1000px;
 }
 
 .menu-nav::-webkit-scrollbar {
     display: none;
 }
 
+
+
 .menu-nav-item-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-    cursor: pointer;
-    transition: all .2s ease;
-    border-radius: 100px;
+    align-items: center;
     padding: 0 20px;
-
-    flex: 1 0 auto;
-    min-width: 0;
-    white-space: nowrap;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 1000px;
+    scroll-snap-align: start;
+    transition: all .2s ease;
 }
 
-.menu-nav-item-icon {
-    color: var(--text-primary-color);
+.menu-nav-item-container .menu-nav-item-icon {
     width: 18px;
     height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-color);
     transition: all .2s ease;
 }
 
-.menu-nav-item-icon svg {
+.menu-nav-item-container .menu-nav-item-icon svg {
     width: 100%;
     height: 100%;
 }
 
-.menu-nav-item-label {
-    font-size: var(--font-size-sm);
+.menu-nav-item-container .menu-nav-item-label {
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
-    white-space: nowrap;
     transition: all .2s ease;
 }
 
-/* стлили для наводки */
+
+
+.menu-nav-external {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-nav-external .menu-nav-item-container {
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-hover-color);
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-label {
+    display: none;
+}
+
+
+
 .menu-nav-item-container:hover {
     background-color: var(--accent-hover-color);
 }
@@ -79,115 +113,45 @@
     color: var(--primary-color);
 }
 
-/* стили если элемент активен */
-.menu-nav-item-container.active {
-    background-color: var(--accent-hover-color);
-}
-
-.menu-nav-item-container.active .menu-nav-item-icon,
-.menu-nav-item-container.active .menu-nav-item-label {
-    color: var(--primary-color);
-}
-
-/* стили для внешникх пунктов меню (админ, выход) */
-.menu-nav-external {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    border-radius: 100px;
-    height: 100%;
-    padding: 3px;
-}
-
-.menu-nav-external .menu-nav-item-container {
-    background-color: var(--accent-hover-color);
-    padding: 0;
-    min-width: 50px;
-    width: 50px;
-    min-height: 50px;
-    height: 50px;
-}
-
-.menu-nav-external .menu-nav-item-container .menu-nav-item-icon,
-.menu-nav-external .menu-nav-item-container .menu-nav-item-label {
-    color: var(--primary-color);
-}
-
-.menu-nav-external .menu-nav-item-container .menu-nav-item-label {
-    display: none;
-}
-
-.menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-}
-
-.menu-nav-external .menu-nav-item-container .menu-nav-item-icon svg {
-    width: 100%;
-    height: 100%;
-}
 
 
-/* медиа запросы */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .menu-wrapper {
         flex-direction: column-reverse;
-        align-items: flex-end;
-        gap: 5px;
         bottom: 10px;
     }
 
+    .menu-nav {
+        height: 50px;
+    }
+
+    .menu-nav-external {
+        align-self: flex-end;
+        flex-direction: column;
+    }
+
+    .menu-nav-item-container .menu-nav-item-label {
+        font-size: var(--font-size-sm);
+    }
+
+    .menu-nav-external .menu-nav-item-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 640px) {
     .menu-nav {
         width: 100%;
     }
 
     .menu-nav-item-container {
-        flex: 0 0 calc((100% - (5px * 4) - 6px) / 5);
-    }
-
-    .menu-nav-item-container:last-child {
-        flex: 0 0 auto;
-    }
-
-    .menu-nav-external {
-        flex-direction: column-reverse;
-    }
-}
-
-@media (max-width: 576px) {
-    .menu-nav {
-        height: 50px;
-    }
-
-    .menu-nav-item-container {
         padding: 0 15px;
-        display: inline-flex;
-    }
-
-    .menu-nav-item-label {
-        font-size: var(--font-size-xs);
-    }
-
-    .menu-nav-external .menu-nav-item-container {
-        min-width: 40px;
-        width: 40px;
-        min-height: 40px;
-        height: 40px;
-    }
-
-    .menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@media (max-width: 360px) {
-    .menu-nav-item-container .menu-nav-item-label {
-        display: none;
+        width: 100%;
     }
 }

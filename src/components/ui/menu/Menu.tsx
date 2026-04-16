@@ -1,7 +1,8 @@
 import "./css/menuStyles.css"
+
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../../../contexts/AuthContext"
-import { FC, useCallback, useEffect, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { logoutButton, menuButtons, MenuItemProps } from "./menuData"
 
 interface ItemProps {
@@ -24,6 +25,28 @@ export const Menu = () => {
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const { logout, checkRole } = useAuth()
+    const scrollRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const el = scrollRef.current
+        if (!el)
+            return
+
+        const onWheel = (e: WheelEvent) => {
+            if (e.deltaY === 0)
+                return
+
+            e.preventDefault()
+
+            el.scrollTo({
+                left: el.scrollLeft + e.deltaY,
+                behavior: "smooth",
+            })
+        }
+
+        el.addEventListener("wheel", onWheel, { passive: false })
+        return () => el.removeEventListener("wheel", onWheel)
+    }, [])
 
     const isActive = useCallback((path: string) =>
         pathname === path || (path !== "/" && pathname.startsWith(`${path}/`)),
@@ -50,7 +73,7 @@ export const Menu = () => {
 
     return (
         <div className="menu-wrapper">
-            <nav className="menu-nav">
+            <nav className="menu-nav" ref={scrollRef}>
                 {internalItems.map(item => (
                     <MenuItem
                         key={item.id}
