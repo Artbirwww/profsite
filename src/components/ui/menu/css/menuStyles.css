@@ -104,14 +104,21 @@
 
 
 
-.menu-nav-item-container:hover {
+.menu-nav-item-container:hover,
+.menu-nav-item-container.active {
     background-color: var(--accent-hover-color);
 }
 
 .menu-nav-item-container:hover .menu-nav-item-icon,
-.menu-nav-item-container:hover .menu-nav-item-label {
+.menu-nav-item-container:hover .menu-nav-item-label,
+.menu-nav-item-container.active .menu-nav-item-icon,
+.menu-nav-item-container.active .menu-nav-item-label {
     color: var(--primary-color);
 }
+
+
+
+
 
 
 
