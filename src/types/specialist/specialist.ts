@@ -36,3 +36,5 @@ export interface SpecialistsFilter {
 export interface profession {
     name: string
 }
+export const SpecialistKeys = ["email", "password", "name", "surname", "patronymic", "contactEmail", "contactPhone", 
+    "experience", "jobSatisfaction", "profession", "gender"]

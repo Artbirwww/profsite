@@ -34,6 +34,16 @@ export const specialistsAPI = {
             throw err
     }
   },
+    specialistAutoRegister: async (specialistsRegisterRequest: SpecialistRegisterRequest[], token: string) => {
+        try {
+            const response = await api.post("/api/specialists/register-all", 
+                specialistsRegisterRequest, {headers: {Authorization: token}})
+            return response.data
+        } catch(err) {
+            console.error(err)
+            throw err
+        }
+  },
     getSpecialistData: async (token: string) => {
         try {
             const response = await api.get<Specialist>("/api/specialists/specialist", {headers: {Authorization: token}})
