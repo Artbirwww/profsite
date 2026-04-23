@@ -82,7 +82,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
                 </div>
 
                 <div className="test-card-count">
-                    <p>Вопрос <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
+                    <p><span>Вопрос</span> <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
                 </div>
             </div>
 
@@ -101,9 +101,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
             <div className={`${optionsListClass ? optionsListClass : "test-card-list"}`}>
                 {currentTask?.options.map(option => (
                     <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
-                        <div className="test-card-text">
-                            {option?.text}
-                        </div>
+                        {option?.text}
                     </div>
                 ))}
             </div>
@@ -115,11 +113,11 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, classT
                         buttonFunction={() => changeTask(1)} />
                 )}
                 <Button
-                    buttonLabel={"Завершить тест"}
+                    buttonLabel={"Завершить"}
                     buttonFunction={navigateToResults} />
             </div>
 
-            <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length}/>
+            <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />
 
             <Toaster />
 

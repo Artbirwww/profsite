@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ChevronUp, ChevronDown } from "lucide-react"
 
 export interface SliderData {
     id: number
@@ -73,7 +73,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     }
 
     return (
-        <div className="test-card" style={{ minHeight: "575px" }}>
+        <div className="test-card constant-sum-slider">
 
             <div className="test-card-info">
                 <div className="test-card-back" onClick={() => { nextPage(-1) }}>
@@ -82,18 +82,18 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    <p>Вопрос <span>{(currentGroupNumber + 1).toString().padStart(2, "0")}</span> из <span>{(7).toString().padStart(2, "0")}</span></p>
+                    <p><span>Вопрос</span> <span>{(currentGroupNumber + 1).toString().padStart(2, "0")}</span> из <span>{(7).toString().padStart(2, "0")}</span></p>
                 </div>
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <p>Распределено <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
+                    <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
                 </div>
             </div>
 
             <div className="test-grid-template-1">
                 {sliders.map(slider => (
-                    <div key={slider.id} className="test-grid-item" style={{ minHeight: "75px" }}>
+                    <div key={slider.id} className="test-grid-item">
                         <div className="test-card-text">
                             <span>{slider?.value}</span>
                             {slider?.text}
@@ -120,7 +120,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             </div>
 
             {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-            <ProgressBar currentTaskNumber={currentGroupNumber} total={7}/>
+            <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
             <Toaster />
 

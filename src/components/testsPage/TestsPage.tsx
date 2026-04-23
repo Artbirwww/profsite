@@ -11,7 +11,7 @@ import { TestResultResponse } from "../../types/testTypes"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
-    const {getToken} = useAuth()
+    const { getToken } = useAuth()
 
     const testContainerRef = useRef<HTMLDivElement>(null)
 
@@ -39,7 +39,7 @@ export const TestsPage: FC = ({ }) => {
         return () => clearTimeout(timer)
     }, [recentTests])
 
-    useEffect(()=> {
+    useEffect(() => {
         const loadRecentTests = async () => {
             const tests = await testApi.getRecentTests(getToken())
             console.log(tests)
@@ -85,15 +85,13 @@ export const TestsPage: FC = ({ }) => {
         navigate(path)
     }, [navigate])
 
-    return (
+    return (<>
+        <div className="page-header">
+            <h1>Тестирование</h1>
+        </div>
+
         <div className="test-wrapper">
-
-            <div className="test-header">
-                <h1>Тестирование</h1>
-            </div>
-
             <div className="test-container">
-
                 <div className="test-completness">
                     <div className="test-count">
                         <span><Check size={18} strokeWidth={1.5} />{Object.keys(recentTests).length}</span>
@@ -119,19 +117,18 @@ export const TestsPage: FC = ({ }) => {
                                     isAvailable={item.isAvailable}
                                     item={item}
                                     onClick={handleClick}
-                                    isComplete = {recentTests ? recentTests[item.name] != null : false} />
+                                    isComplete={recentTests ? recentTests[item.name] != null : false} />
                             </div>
                         )
                     })}
                 </div>
-            </div>
 
-            <div className="test-indicator">
-                {testsList.map((_, index) => (
-                    <div key={index} className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
-                ))}
+                <div className="test-indicator">
+                    {testsList.map((_, index) => (
+                        <div key={index} className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
+                    ))}
+                </div>
             </div>
-
         </div>
-    )
+    </>)
 }

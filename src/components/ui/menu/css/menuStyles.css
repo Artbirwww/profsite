@@ -133,8 +133,9 @@
     }
 
     .menu-nav-external {
-        align-self: flex-end;
-        flex-direction: column;
+        position: absolute;
+        right: 10px;
+        bottom: 60px;
     }
 
     .menu-nav-item-container .menu-nav-item-label {

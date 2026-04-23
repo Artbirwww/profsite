@@ -1,150 +1,43 @@
-/* стили для обертки тестов */
+/* ОБЕРТКА СТРАНИЦЫ ВЫБОРА ТЕСТА */
 .test-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
     gap: 10px;
     width: 100%;
     height: 100%;
+    padding-top: 10px;
+    padding-bottom: 190px;
     overflow: hidden;
-    padding: 100px 0;
     box-sizing: border-box;
 }
 
-
-
-/* стили для хедера страницы */
-.test-header {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    top: 30px;
-}
-
-.test-header h1 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-}
-
-
-
-
+/* СЕТКА - ПРОГРЕСС БАР, СЕТКА КАРТОЧЕК ТЕСТОВ, ИНДИКТОР ПРОКРУТКИ */
 .test-container {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
     width: 100%;
     height: 100%;
-}
-
-
-
-
-
-
-
-/* стили для outlet */
-.test-outlet {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.test-outlet::-webkit-scrollbar {
-    display: none;
-}
-
-/* стили для сетки карточек выбора теста */
-.test-grid {
     display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, calc(50% - 5px));
-    grid-auto-rows: calc(50% - 5px);
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 1fr max-content;
     gap: 10px;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    border-radius: 30px;
+    grid-template-areas:
+        "completness cards"
+        "indicator indicator";
 }
 
-.test-grid::-webkit-scrollbar {
-    display: none;
+.test-completness {
+    grid-area: completness;
 }
 
-.test-grid-item {
-    width: 100%;
-    height: 100%;
-    position: relative;
+.test-grid {
+    grid-area: cards;
 }
 
-/* состояния (заблокировано) */
-.test-selection-item.locked {
-    cursor: not-allowed;
-    filter: grayscale(1);
-    opacity: .6;
-    pointer-events: none;
-}
-
-.test-selection-item:hover .test-selection-item-description {
-    left: 30px;
-}
-
-
-
-
-
-
-
-
-
-
-/* стили для индикатора прокрутки */
 .test-indicator {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    height: 60px;
-    gap: 20px;
-    padding: 0 25px;
-    background-color: var(--primary-color);
+    grid-area: indicator;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--border-color);
-    transition:
-        background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dot.active {
-    background-color: var(--accent-color);
-}
-
-
-
-
-
-
-/* стили для индикатора завершенности тестов */
-/* общее количество и сколько завершено */
+/* СЧЕТЧИК КОЛИЧЕСТВА ЗАВЕРШЕННЫХ ТЕСТОВ */
 .test-completness {
     display: flex;
     flex-direction: column;
@@ -158,7 +51,6 @@
     align-items: center;
     justify-content: center;
     width: 60px;
-    min-width: 60px;
     height: 60px;
     min-height: 60px;
     background-color: var(--primary-color);
@@ -188,16 +80,14 @@
     z-index: 3;
 }
 
-/* прогресс бар завершенности тестов */
+/* ПРОГРЕСС БАР ЗАВЕРШЕННЫХ ТЕСТОВ */
 .progress-container {
     width: 60px;
     height: 100%;
-    min-height: 200px;
     background-color: #e0e0e0;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
-    padding-top: 20px;
     display: flex;
     align-items: flex-end;
 }
@@ -213,7 +103,7 @@
     height: 0%;
 }
 
-/* общие стили для "волн" */
+/* "ВОЛНЫ" ДЛЯ ПРОГРЕСС БАРА */
 .wave-element {
     position: absolute;
     width: 250px;
@@ -251,13 +141,228 @@
     }
 }
 
+/* СЕТКА ДЛЯ КАРТОЧЕК ТЕСТОВ */
+.test-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, calc(50% - 5px));
+    grid-auto-rows: calc(50% - 5px);
+    gap: 10px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.test-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.test-grid-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* ИНЛИКТОР ПРОКРУТКИ СЕТКИ */
+.test-indicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    height: 60px;
+    gap: 20px;
+    background-color: var(--primary-color);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    transition:
+        background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot.active {
+    background-color: var(--accent-color);
+}
+
+/* ОБЕРТКА ВЫБОРА ФОРМЫ ТЕСТА */
+.actual-test-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 70px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.test-form-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.test-form-selection-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 100%;
+    padding: 30px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 30px;
+}
+
+.test-form-selection-item::after {
+    content: "";
+    position: absolute;
+    background-color: var(--primary-color);
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border-radius: 27px;
+    z-index: 2;
+}
+
+.test-form-selection-name {
+    z-index: 3;
+}
+
+.test-form-selection-name h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+}
+
+.test-form-selection-icon {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    z-index: 3;
+}
 
 
 
-
-
-@media (max-width: 1345px) {
+/* МЕДИА ЗАПРОСЫ */
+@media (max-width: 1288px) {
     .test-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, calc(50% - 5px));
+    }
+}
+
+@media (max-width: 992px) {
+    .test-indicator {
+        height: 50px;
+        border-radius: 15px;
+    }
+
+    .test-count {
+        width: 50px;
+        height: 50px;
+        min-height: 50px;
+        border-radius: 15px;
+    }
+
+    .test-count span:first-child {
+        font-size: var(--font-size-sm);
+    }
+
+    .test-count .divider {
+        height: 1px;
+    }
+
+    .progress-container {
+        width: 50px;
+        border-radius: 15px;
+    }
+
+    .actual-test-wrapper {
+        padding-bottom: 60px;
+    }
+
+    .test-form-selection {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .test-wrapper {
+        padding-bottom: 110px;
+    }
+
+    .test-indicator {
+        background: transparent;
+        gap: 15px;
+    }
+
+    .dot {
+        background-color: #e0e0e0;
+    }
+
+    .test-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, calc(33% - 5px));
+        grid-auto-rows: calc(33% - 5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .test-indicator {
+        height: 20px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .test-count {
+        display: none;
+    }
+
+    .progress-container {
+        width: 20px;
+    }
+}
+
+@media (max-height: 768px) and (max-width: 480px) {
+    .test-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, calc(50% - 5px));
+        grid-auto-rows: calc(50% - 5px);
+    }
+
+    .test-form-selection-item {
+        height: 100%;
     }
 }

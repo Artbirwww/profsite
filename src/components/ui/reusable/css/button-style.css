@@ -57,13 +57,13 @@ button {
     align-items: center;
     justify-content: center;
     min-height: 40px;
-    min-width: 150px;
+    width: 150px;
     text-wrap: nowrap;
     padding: 0 20px !important;
     background-color: var(--accent-color);
     color: var(--primary-color);
     font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     border-radius: 100px;
     transition: all .3s ease;
 }
@@ -86,4 +86,10 @@ button:hover {
 
 button:hover .button-icon {
     transform: scale(1.1);
+}
+
+@media (max-width: 480px) {
+    button {
+        width: 100%;
+    }
 }
