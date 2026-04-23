@@ -64,17 +64,15 @@ export const IqPotentialTest = () => {
         return <TestFormSelection forms={IQ_FORMS} onSelect={handleSelect} />
     }
 
-    return (
-        <div className="test-timer-wrapper">
-            <div className="float-timer">
-                {formatTime(minutes)} : {formatTime(remaningSeconds)}
-            </div>
-
-            <SingleOptionsPicker
-                navigateToResults={navigateToResults}
-                tasks={iqTestForm}
-                setTasks={setIqTestForm}
-                optionsListClass="test-card-list-row" />
+    return (<>
+        <div className="float-timer">
+            {formatTime(minutes)} : {formatTime(remaningSeconds)}
         </div>
-    )
+
+        <SingleOptionsPicker
+            navigateToResults={navigateToResults}
+            tasks={iqTestForm}
+            setTasks={setIqTestForm}
+            optionsListClass="test-card-list-row" />
+    </>)
 }

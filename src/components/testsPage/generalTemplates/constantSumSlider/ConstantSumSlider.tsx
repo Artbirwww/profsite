@@ -91,11 +91,11 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                 </div>
             </div>
 
-            <div className="test-grid-template-1">
+            <div className="test-slider-grid">
                 {sliders.map(slider => (
                     <div key={slider.id} className="test-grid-item">
                         <div className="test-card-text">
-                            <span>{slider?.value}</span>
+                            <div className="input-slider-count">{slider?.value}</div>
                             {slider?.text}
                         </div>
 
