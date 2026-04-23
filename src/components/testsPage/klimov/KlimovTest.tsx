@@ -44,6 +44,8 @@ export const KlimovTest = () => {
         <SingleOptionsPicker
             tasks={tasks}
             setTasks={handleTasksUpdate}
-            navigateToResults={navigateToResults} />
+            navigateToResults={navigateToResults}
+            pickerStyleType={"squeezed"}
+            optionStyleType={"column"}/>
     </>)
 }

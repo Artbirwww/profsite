@@ -1,7 +1,6 @@
 import toast from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 
-import "./css/testsViewerStyles.css"
 import "./css/generalTemplatesStyles.css"
 import "./css/temperamentResultStyles.css"
 import "./css/testCardStyles.css"

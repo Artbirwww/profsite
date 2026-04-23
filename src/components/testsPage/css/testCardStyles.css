@@ -6,7 +6,6 @@
     height: 100%;
     justify-content: space-between;
     padding: 30px;
-    padding-right: 80px;
     top: 0;
     right: 0;
     bottom: 0;
@@ -70,6 +69,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 280px;
 }
 
 .test-selection-item-name h4 {
@@ -123,9 +123,22 @@
 }
 
 
+.test-selection-item.locked {
+    opacity: .5;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    user-select: none;
+    pointer-events: none;
+}
+
+
 
 /* МЕДИА ЗАПРОСЫ */
 @media (max-width: 480px) {
+    .test-selection-item-name {
+        width: 220px;
+    }
+
     .test-selection-item-info {
         flex-direction: column;
         align-items: start;

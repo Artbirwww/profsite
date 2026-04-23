@@ -73,6 +73,7 @@ export const IqPotentialTest = () => {
             navigateToResults={navigateToResults}
             tasks={iqTestForm}
             setTasks={setIqTestForm}
-            optionsListClass="test-card-list-row" />
+            pickerStyleType={"squeezed"}
+            optionStyleType={"row"} />
     </>)
 }

@@ -59,7 +59,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
     }
 
     return (
-        <div className="test-card" style={{ minHeight: "230px" }}>
+        <div className="test-card pozitive-negative">
 
             <div className="test-card-info">
                 <div className="test-card-back" onClick={() => { changeOption(-1) }}>

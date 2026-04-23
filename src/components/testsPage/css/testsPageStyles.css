@@ -361,8 +361,4 @@
         grid-template-rows: repeat(2, calc(50% - 5px));
         grid-auto-rows: calc(50% - 5px);
     }
-
-    .test-form-selection-item {
-        height: 100%;
-    }
 }

@@ -9,10 +9,9 @@ interface TestItemProps {
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
-    isCompleted?: boolean
 }
 
-export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick, isCompleted = false }) => {
+export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick }) => {
     const Icon = item.icon
 
     const handleClick = () => {

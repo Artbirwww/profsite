@@ -30,9 +30,10 @@ export const TestsPage: FC = ({ }) => {
     }
 
     useEffect(() => {
-        if (!recentTests) return
+        if (!recentTests)
+            return
+
         const timer = setTimeout(() => {
-            console.log("set height")
             setDisplayHeight(calculateProgress(Object.keys(recentTests).length, testsList.length))
         }, 100)
 
@@ -42,9 +43,9 @@ export const TestsPage: FC = ({ }) => {
     useEffect(() => {
         const loadRecentTests = async () => {
             const tests = await testApi.getRecentTests(getToken())
-            console.log(tests)
             setRecentTests(tests)
         }
+
         loadRecentTests()
     }, [])
 

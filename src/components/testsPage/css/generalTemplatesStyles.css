@@ -127,6 +127,7 @@
     z-index: 3;
 }
 
+/* ЭЛМЕНТ СЛАЙДЕРА */
 .test-grid-item {
     border-radius: 30px;
     box-sizing: border-box;
@@ -137,6 +138,7 @@
     width: 100%;
 }
 
+/* КАСТОМНЫЙ СЛАЙДЕР */
 .test-card-input {
     display: flex;
     flex-direction: row;
@@ -186,15 +188,32 @@ input[type="range"]::-moz-range-thumb {
     border: 2px solid #fff;
 }
 
+/* КАРТИНКИ ТЕСТА */
 .test-card-img {
     display: flex;
+    flex-grow: 1;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
+    justify-self: center;
+    align-self: center;
     object-fit: cover;
     z-index: 3;
+    max-height: 200px;
+    max-width: 600px;
+    width: 100%;
 }
 
-.test-card-list {
+.test-card-img img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* ОПЦИИ ВЫБОРА (ЕСЛИ ЕСТЬ) В КОЛОНКЕ */
+.test-card-list.column {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -203,7 +222,8 @@ input[type="range"]::-moz-range-thumb {
     z-index: 3;
 }
 
-.test-card-list-row {
+/* ОПЦИИ ВЫБОРА (ЕСЛИ ЕСТЬ) В СТРОКЕ */
+.test-card-list.row {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -212,6 +232,7 @@ input[type="range"]::-moz-range-thumb {
     z-index: 3;
 }
 
+/* ОПЦИИ ВЫБОРА */
 .test-card-selectable {
     display: flex;
     align-items: center;
@@ -222,11 +243,15 @@ input[type="range"]::-moz-range-thumb {
     font-weight: var(--font-weight-medium);
     border: 2px solid var(--border-color);
     min-height: 40px;
-    min-width: 60px;
-    padding: 0 20px;
+    min-width: 40px;
+    padding: 0 40px;
     border-radius: 15px;
     cursor: pointer;
     transition: all .2s ease;
+}
+
+.test-card-list.row .test-card-selectable {
+    padding: 0;
 }
 
 .test-card-selectable.active {
@@ -237,6 +262,7 @@ input[type="range"]::-moz-range-thumb {
     border-color: var(--accent-color);
 }
 
+/* ПРОГРЕСС ПРОХОЖДЕНИЯ ТЕСТА */
 .test-progress-bar {
     position: absolute;
     top: 0;
@@ -247,6 +273,20 @@ input[type="range"]::-moz-range-thumb {
     transition: width .4s ease;
 }
 
+/* ТАЙМЕР */
+.float-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    font-weight: var(--font-weight-medium);
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+}
+
+/* МЕДИА ЗАПРОСЫ */
 @media (max-width: 992px) {
     .test-slider-grid {
         grid-template-columns: 1fr;
@@ -280,14 +320,12 @@ input[type="range"]::-moz-range-thumb {
         width: 100%;
     }
 
-    .test-card-selectable {
+    .test-card-selectable:not(.test-card-list.row .test-card-selectable) {
         width: 100%;
-        padding: 10px 20px;
     }
 
-    .test-card-list-row .test-card-selectable {
-        max-width: 60px !important;
-        padding: 0;
+    .test-progress-bar {
+        display: none;
     }
 }
 
@@ -295,10 +333,25 @@ input[type="range"]::-moz-range-thumb {
     .test-card {
         padding: 20px;
         gap: 20px;
+        justify-content: unset;
+    }
+
+    .test-card::after {
+        display: none;
+    }
+
+    .pozitive-negative {
+        height: auto;
+        gap: 30px;
     }
 
     .constant-sum-slider {
         height: 100%;
+        gap: 20px;
+    }
+
+    .single-options-picker.squeezed {
+        height: auto;
     }
 
     .test-slider-grid {
@@ -320,8 +373,28 @@ input[type="range"]::-moz-range-thumb {
         border-radius: 10px;
     }
 
-    .test-card-list-row .test-card-selectable {
-        min-width: 40px;
+    .test-card-list.row .test-card-selectable {
         width: 100%;
+    }
+
+    .test-card-img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    .test-card-img {
+        height: 200px;
+        width: 100%;
+    }
+
+    .test-progress-bar {
+        display: none;
+    }
+}
+
+@media (max-height: 680px) and (max-width: 480px) {
+    .single-options-picker.extended {
+        height: 100%;
+        gap: 20px;
     }
 }

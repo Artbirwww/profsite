@@ -1,5 +1,5 @@
 import toast, { Toaster } from "react-hot-toast"
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
@@ -24,6 +24,14 @@ interface ConstantSumSliderProps {
 export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, maxValue, nextPage }: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
+
+    const gridRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (gridRef.current) {
+            gridRef.current.scrollTop = 0
+        }
+    }, [currentGroupNumber])
 
     //При переходе назад помогает показать заполненные очки (в новых 0)
     useEffect(() => {
@@ -91,7 +99,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                 </div>
             </div>
 
-            <div className="test-slider-grid">
+            <div className="test-slider-grid" ref={gridRef}>
                 {sliders.map(slider => (
                     <div key={slider.id} className="test-grid-item">
                         <div className="test-card-text">

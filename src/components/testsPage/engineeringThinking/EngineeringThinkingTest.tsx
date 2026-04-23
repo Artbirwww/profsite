@@ -45,6 +45,8 @@ export const EngineeringThinkingTest = () => {
         <SingleOptionsPicker
             tasks={tasks}
             setTasks={handleTasksUpdate}
-            navigateToResults={navigateToResults} />
+            navigateToResults={navigateToResults}
+            pickerStyleType={"extended"}
+            optionStyleType={"column"}/>
     </>)
 }
