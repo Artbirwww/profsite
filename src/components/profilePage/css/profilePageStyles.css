@@ -12,6 +12,13 @@
     box-sizing: border-box;
 }
 
+.profile-container {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .profile-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -74,7 +81,7 @@
 }
 
 .profile-grid-item-header h4 {
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
 }
@@ -93,12 +100,7 @@ select {
 }
 
 @media (max-width: 992px) {
-    .profile-container {
-        overflow-y: auto;
-        scroll-behavior: smooth;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+
 
     .profile-container::-webkit-scrollbar {
         display: none;

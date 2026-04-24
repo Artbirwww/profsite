@@ -1,8 +1,8 @@
 import "./css/profilePageStyles.css"
 
-import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { FieldInput } from "../ui/reusable/fieldInput"
-import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
+import { UserPen, UserRound, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
 import { Button } from "../ui/reusable/button"
 import { Radio, RadioGroup } from "../ui/reusable/radio"
 import { Dropdown } from "../ui/reusable/dropdown"
@@ -123,6 +123,7 @@ export const PupilProfilePage: FC = () => {
         <div className="profile-wrapper">
             <div className="profile-container">
                 <div className="profile-grid">
+
                     {/* пол */}
                     <div className="profile-grid-item profile-grid-item-1">
                         <div className="profile-grid-wrapper">
@@ -143,16 +144,16 @@ export const PupilProfilePage: FC = () => {
                         </div>
                     </div>
 
-                    {/* почта */}
+                    {/* логин / почта */}
                     <div className="profile-grid-item profile-grid-item-2">
                         <div className="profile-grid-wrapper">
                             <div className="profile-grid-item-header">
-                                <h4>Электронная почта</h4>
+                                <h4>Логин / Электронная почта</h4>
                             </div>
 
                             <FieldInput
                                 name="email"
-                                inputIcon={<MailOpen size={20} />}
+                                inputIcon={<UserRound size={20} />}
                                 inputPlaceholder="example@mail.ru"
                                 inputValue={email}
                                 isDisabled={true} />
@@ -202,6 +203,7 @@ export const PupilProfilePage: FC = () => {
                             <div className="profile-grid-item-header">
                                 <h4>Национальность</h4>
                             </div>
+                            
                             <Dropdown
                                 dropdownIcon={<PersonStanding size={20} />}
                                 dropdownOptions={nationalityOptions}
