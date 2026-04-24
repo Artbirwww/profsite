@@ -203,7 +203,7 @@ export const PupilProfilePage: FC = () => {
                             <div className="profile-grid-item-header">
                                 <h4>Национальность</h4>
                             </div>
-                            
+
                             <Dropdown
                                 dropdownIcon={<PersonStanding size={20} />}
                                 dropdownOptions={nationalityOptions}

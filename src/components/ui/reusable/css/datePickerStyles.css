@@ -119,7 +119,12 @@
     background: var(--border-color);
     outline: none;
     cursor: pointer;
+    scrollbar-width: 0;
     transition: background 0.3s ease;
+}
+
+.calendar-select::-webkit-scrollbar {
+    display: none;
 }
 
 .calendar-select:hover {

@@ -55,8 +55,6 @@
     grid-area: fifth-row;
 }
 
-
-
 .profile-grid-item {
     display: flex;
     flex-direction: row;
@@ -89,8 +87,9 @@
 .profile-options {
     display: flex;
     width: 100%;
-    align-items: end;
-    justify-content: end;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
 
 select {
@@ -157,5 +156,11 @@ select {
     .profile-grid-item-6 {
         align-items: center;
         justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-grid-item {
+        padding: 20px;
     }
 }

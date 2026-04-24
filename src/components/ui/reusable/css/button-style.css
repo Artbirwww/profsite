@@ -57,7 +57,7 @@ button {
     align-items: center;
     justify-content: center;
     min-height: 40px;
-    width: 150px;
+    min-width: 100px;
     text-wrap: nowrap;
     padding: 0 20px !important;
     background-color: var(--accent-color);
