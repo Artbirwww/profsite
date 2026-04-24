@@ -27,7 +27,7 @@ import { HomePage } from "./components/homePage/HomePage"
 import { TestsPage } from "./components/testsPage/TestsPage"
 import { ResultsPage } from "./components/resultsPage/ResultsPage"
 import { StudyPage } from "./components/studyPage/StudyPage"
-import { ProfilePage } from "./components/profilePage/ProfilePage"
+import { ProfilePage } from "./components/profilePage/PupilProfilePage"
 
 // Outlet для тестов
 import { TestViewer } from "./components/testsPage/TestViewer"

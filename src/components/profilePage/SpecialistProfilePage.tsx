@@ -14,12 +14,14 @@ import toast, { Toaster } from "react-hot-toast"
 import { Specialist } from "../../types/specialist/specialist"
 import { specialistsAPI } from "../../services/api/specialistApi"
 import { spec } from "node:test/reporters"
+
 const jobExpirienceOptions = [
     {value: "менее 1 года", label: "менее 1 года"},
     {value: "1 - 2 года", label: "1 - 2 года"},
     {value: "3 - 4 года", label: "3 - 4 года"},
     {value: "более 4 лет", label: "более 4 лет"}
 ]
+
 const jobSatisfactionOptions = [
     {value: "Нравится", label: "Нравится"},
     {value: "Скорее нравится", label: "Скорее нравится"},
@@ -27,6 +29,7 @@ const jobSatisfactionOptions = [
     {value: "Скорее не нравится", label: "Скорее не нравится"},
     {value: "Не нравится", label: "Не нравится"}
 ]
+
 export const SpecialistProfilePage = () => {
     const [specialist, setSpecialist] = useState<Specialist>({email: '',
                                             name: '', surname: '', patronymic: '',
@@ -78,10 +81,11 @@ export const SpecialistProfilePage = () => {
         }
     }
     return (<>
+        <div className="page-header">
+            <h1>Личный кабинет</h1>
+        </div>
+
         <div className="profile-wrapper">
-            <div className="profile-header">
-                <h1>Профиль специалиста</h1>
-            </div>
             <div className="profile-container">
                 <div className="profile-grid">
                     <div className="profile-grid-item profile-grid-item-1">

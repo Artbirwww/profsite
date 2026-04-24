@@ -1,16 +1,17 @@
 import { useAuth } from "../../contexts/AuthContext"
 import { ROLES } from "../../types/account/role"
-import { ProfilePage } from "./ProfilePage"
+import { PupilProfilePage } from "./PupilProfilePage"
 import { SpecialistProfilePage } from "./SpecialistProfilePage"
 
 export const ProfileCommonPage = () => {
 
-    const {getRoles} = useAuth()
+    const { getRoles } = useAuth()
 
     if (getRoles()?.find(role => role.name === ROLES.PUPIL))
         return (<>
-            <ProfilePage />
+            <PupilProfilePage />
         </>)
+
     if (getRoles()?.find(role => role.name === ROLES.SPECIALIST))
         return (<>
             <SpecialistProfilePage />
