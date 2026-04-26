@@ -57,6 +57,7 @@ import { Specialists } from "./components/adminPages/specialists/Specialists";
 import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage";
 import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
 import { ProfileCommonPage } from "./components/profilePage/ProfileCommonPage";
+import { TestIntro } from "./components/testsPage/TestIntro";
 
 export default function App() {
 	return (
@@ -92,18 +93,23 @@ export default function App() {
 						<Route element={<TestViewer />}>
 							<Route path="temperament" element={<TemperamentTest />} />
 							<Route path="temperament-results" element={<TemperamentResults />} />
+							<Route path="temperament-intro" element = {<TestIntro testDescriptionPath="public/temperament/data/description.json" testNavigation="/tests/temperament" />} />
 
 							<Route path="group-roles" element={<GroupRolesTest />} />
 							<Route path="group-roles-results" element={<GroupRolesResults />} />
+							<Route path="group-roles-intro" element = {<TestIntro testDescriptionPath="public/group_roles/data/description.json" testNavigation="/tests/group-roles" />} />
 
 							<Route path="engineering-thinking" element={<EngineeringThinkingTest />} />
 							<Route path="engineering-thinking-results" element={<EngineeringThinkingResults />} />
+							<Route path="engineering-thinking-intro" element = {<TestIntro testDescriptionPath="public/engineering_thinking/data/description.json" testNavigation="/tests/engineering-thinking" />} />
 
 							<Route path="professional-orientation-klimov" element={<KlimovTest />} />
 							<Route path="professional-orientation-klimov-results" element={<KlimovResults />} />
+							<Route path="professional-orientation-klimov-intro" element = {<TestIntro testDescriptionPath="public/prof_klimov/data/description.json" testNavigation="/tests/professional-orientation-klimov" />} />
 
 							<Route path="iq-potential" element={<IqPotentialTest/>} />
 							<Route path="iq-potential-results" element={<IqPotentialResults />}/>
+							<Route path="iq-potential-intro" element={<TestIntro testDescriptionPath="public/iq_potential/data/description.json" testNavigation="/tests/iq-potential"/>} />
 						</Route>
 					</Route>
 
