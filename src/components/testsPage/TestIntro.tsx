@@ -55,14 +55,15 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
 
                 <div className="intro-time-hint">
                     {description.timeHint &&
-                        <span>Времени на выполнение: {description.timeHint}</span>
-                    }
+                        <span>Времени на выполнение: {description.timeHint}</span>}
+                </div>
+
+                <div className="intro-options">
+                    <Button
+                        buttonLabel="Начать тест"
+                        buttonFunction={() => navigate(testNavigation)} />
                 </div>
             </div>
-
-            <Button
-                buttonLabel="Начать"
-                buttonFunction={() => navigate(testNavigation)} />
         </div>
     </>)
 }

@@ -8,24 +8,28 @@ import { formatTime } from "../utils/formatTime"
 
 export const HollandTest = () => {
     const navigate = useNavigate()
-    const {start, minutes, remaningSeconds, seconds} = useTimer(0, false)
+    const { start, minutes, remaningSeconds, seconds } = useTimer(0, false)
 
     const [tasks, setTasks] = useState<Task[]>()
+
     useEffect(() => {
         const loadHollandTestData = async () => {
             try {
                 const response = await api.get(`${getBaseUrl()}/public/prof_klimov/data/profKlimovFormA.json`)
                 setTasks(response.data.data as Task[])
-            } catch(err) {
+
+            } catch (err) {
                 console.error(err)
                 toast("Ошибка при загрузке данных теста")
             }
         }
         loadHollandTestData()
     }, [])
+
     useEffect(() => {
         start()
     }, [tasks])
+
     const navigateToResults = () => {
         navigate("/tests/prof-holland-results", {
             state: {
@@ -34,22 +38,19 @@ export const HollandTest = () => {
             }
         })
     }
-    if (!tasks) 
+    if (!tasks)
         return (<p>Загрузка...</p>)
-    return (<>
-    <div className="test-timer-wrapper">
-        <div className="float-timer">
-            {formatTime(minutes)} : {formatTime(remaningSeconds)}
+
+    return (
+        <div className="actual-test-wrapper">
+            <div className="float-timer">
+                {formatTime(minutes)} : {formatTime(remaningSeconds)}
+            </div>
+
+            <SingleOptionsPicker
+                tasks={tasks}
+                setTasks={setTasks}
+                navigateToResults={navigateToResults} />
         </div>
-    
-        <SingleOptionsPicker 
-            tasks={tasks} 
-            setTasks={setTasks} 
-            navigateToResults={navigateToResults}
-            classType={"type-2"}/>
-        <Toaster />
-    </div>
-    </>
-        
     )
 }

@@ -56,16 +56,18 @@ export const GroupRolesTest = () => {
     if (!currentQuestions)
         return (<p>загрузка...</p>)
 
-    return (<>
-        <div className="float-timer">
-            {formatTime(minutes)} : {formatTime(remaningSeconds)}
-        </div>
+    return (
+        <div className="actual-test-wrapper">
+            <div className="float-timer">
+                {formatTime(minutes)} : {formatTime(remaningSeconds)}
+            </div>
 
-        <ConstantSumSlider
-            sliders={currentQuestions}
-            setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
-            currentGroupNumber={currentGroupNumber}
-            nextPage={nextQuestionsGroup}
-            maxValue={maxValue} />
-    </>)
+            <ConstantSumSlider
+                sliders={currentQuestions}
+                setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
+                currentGroupNumber={currentGroupNumber}
+                nextPage={nextQuestionsGroup}
+                maxValue={maxValue} />
+        </div>
+    )
 }

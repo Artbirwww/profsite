@@ -8,7 +8,7 @@ export interface TestItem {
     author?: string         // Автор теста
     description: string     // Описание теста
     time?: number           // Примерное затраченое время на тест
-    questionscount?: number // Количсетво вопросов в тесте
+    questionscount: number // Количсетво вопросов в тесте
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
     dataItem: string        // Для тестирования / селекторов
@@ -87,8 +87,8 @@ export const testsList: TestItem[] = [
         label: "Профориентация",
         author: "Джон Льюис Холланд",
         description: "Описание",
-        time: 999,
-        questionscount: 999,
+        time: 15,
+        questionscount: 42,
         icon: Compass,
         path: "/tests/prof-holland-intro",
         dataItem: "test-item-6",

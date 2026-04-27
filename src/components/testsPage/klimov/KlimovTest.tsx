@@ -36,16 +36,18 @@ export const KlimovTest = () => {
     if (!tasks)
         return (<p>загрузка...</p>)
 
-    return (<>
-        <div className="float-timer">
-            {formatTime(minutes)} : {formatTime(remaningSeconds)}
-        </div>
+    return (
+        <div className="actual-test-wrapper">
+            <div className="float-timer">
+                {formatTime(minutes)} : {formatTime(remaningSeconds)}
+            </div>
 
-        <SingleOptionsPicker
-            tasks={tasks}
-            setTasks={handleTasksUpdate}
-            navigateToResults={navigateToResults}
-            pickerStyleType={"squeezed"}
-            optionStyleType={"column"}/>
-    </>)
+            <SingleOptionsPicker
+                tasks={tasks}
+                setTasks={handleTasksUpdate}
+                navigateToResults={navigateToResults}
+                pickerStyleType={"squeezed"}
+                optionStyleType={"column"} />
+        </div>
+    )
 }
