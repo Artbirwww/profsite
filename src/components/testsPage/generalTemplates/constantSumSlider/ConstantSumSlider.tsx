@@ -54,8 +54,8 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
         const totalValueNew = totalValueCurrent + value - sliderScrolled.value
 
         if (totalValueNew > maxValue) {
-            setIsLocked(true)
-            return
+            //setIsLocked(true)
+            //return
         }
 
         const slidersTemp = sliders.map(slider => {
@@ -67,13 +67,13 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
         })
 
         setSliders(slidersTemp)
-        setIsLocked(false)
+        //setIsLocked(false)
 
     }
 
     const nextPageHandler = () => {
         if (totalValue !== maxValue) {
-            toast(`Пожалуйста наберите ${maxValue} баллов`)
+            toast(`Наберите ровно ${maxValue} баллов`)
             return
         }
         setTotalValue(0)
@@ -95,7 +95,11 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
+                    {sliders.reduce((total, slider) => total + slider.value, 0) > maxValue ?
+                        <p style={{color: "red"}}>Распределено <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p> :
+                        <p>Распределено <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
+                }
+                    
                 </div>
             </div>
 

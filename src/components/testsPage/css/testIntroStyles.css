@@ -1,0 +1,9 @@
+
+.intro-card {
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 15px;
+}

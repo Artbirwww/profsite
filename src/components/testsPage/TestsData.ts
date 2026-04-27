@@ -26,7 +26,7 @@ export const testsList: TestItem[] = [
         time: 10,
         questionscount: 57,
         icon: Palette,
-        path: "/tests/temperament",
+        path: "/tests/temperament-intro",
         dataItem: "test-item-1",
         name: "Temperament",
         isAvailable: true
@@ -39,7 +39,7 @@ export const testsList: TestItem[] = [
         time: 10,
         questionscount: 7,
         icon: UsersRound,
-        path: "/tests/group-roles",
+        path: "/tests/group-roles-intro",
         dataItem: "test-item-2",
         name: "Group-Roles",
         isAvailable: true
@@ -52,7 +52,7 @@ export const testsList: TestItem[] = [
         time: 25,
         questionscount: 70,
         icon: Settings,
-        path: "/tests/engineering-thinking",
+        path: "/tests/engineering-thinking-intro",
         dataItem: "test-item-3",
         name: "Engineering-Thinking",
         isAvailable: true
@@ -65,7 +65,7 @@ export const testsList: TestItem[] = [
         time: 20,
         questionscount: 20,
         icon: BriefcaseBusiness,
-        path: "/tests/professional-orientation-klimov",
+        path: "/tests/professional-orientation-klimov-intro",
         dataItem: "test-item-5",
         name: "Professional-Orientation-Klimov",
         isAvailable: true
@@ -77,7 +77,7 @@ export const testsList: TestItem[] = [
         time: 12,
         questionscount: 29,
         icon: Brain,
-        path: "/tests/iq-potential",
+        path: "/tests/iq-potential-intro",
         dataItem: "test-item-4",
         name: "Intellectual-Potential",
         isAvailable: true
