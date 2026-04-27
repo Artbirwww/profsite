@@ -58,6 +58,7 @@ import { SpecialistRegistrationPage } from "./components/authorizationPages/Spec
 import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
 import { ProfileCommonPage } from "./components/profilePage/ProfileCommonPage";
 import { TestIntro } from "./components/testsPage/TestIntro";
+import { HollandTest } from "./components/testsPage/holland/HollandTest";
 
 export default function App() {
 	return (
@@ -110,6 +111,11 @@ export default function App() {
 							<Route path="iq-potential" element={<IqPotentialTest/>} />
 							<Route path="iq-potential-results" element={<IqPotentialResults />}/>
 							<Route path="iq-potential-intro" element={<TestIntro testDescriptionPath="public/iq_potential/data/description.json" testNavigation="/tests/iq-potential"/>} />
+
+							<Route path="prof-holland" element={<HollandTest/>} />
+							<Route path="prof-holland-results" element={<p>Holland Result</p>}/>
+							<Route path="prof-holland-intro" element = {<TestIntro testDescriptionPath="public/prof_holland/data/description.json" testNavigation="/tests/prof-holland" />} />
+
 						</Route>
 					</Route>
 

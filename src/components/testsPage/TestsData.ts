@@ -90,10 +90,10 @@ export const testsList: TestItem[] = [
         time: 999,
         questionscount: 999,
         icon: Compass,
-        path: "/tests/iq-potential",
+        path: "/tests/prof-holland-intro",
         dataItem: "test-item-6",
-        name: "",
-        isAvailable: false
+        name: "Professional-Orientation-Holland",
+        isAvailable: true
     },
     {
         id: "test-professional-orientation-glomshtok",
