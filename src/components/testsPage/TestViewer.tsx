@@ -18,8 +18,6 @@ export const TestViewer = () => {
     }, [])
 
     return (
-        <div className="actual-test-wrapper">
-            <Outlet />
-        </div>
+        <Outlet />
     )
 }
