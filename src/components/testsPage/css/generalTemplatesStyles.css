@@ -36,21 +36,6 @@
     flex-wrap: wrap;
 }
 
-/* КНОПКА НАЗАД */
-.test-card-back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 30px;
-    height: 40px;
-    padding: 0 20px;
-    border-radius: 100px;
-    border: 2px solid var(--accent-color);
-    cursor: pointer;
-    z-index: 4;
-}
-
 /* ОСТАВЩЕЕСЯ КОЛ-ВО ВОПРОСОВ */
 .test-card-count {
     display: flex;

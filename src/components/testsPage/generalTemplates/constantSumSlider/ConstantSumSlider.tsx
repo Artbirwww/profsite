@@ -88,6 +88,12 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     return (
         <div className="test-card constant-sum-slider">
             <div className="test-card-info">
+                <div className="test-card-back">
+                    <Button
+                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
+                        buttonFunction={() => { nextPage(-1) }} />
+                </div>
+
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
                     <p>

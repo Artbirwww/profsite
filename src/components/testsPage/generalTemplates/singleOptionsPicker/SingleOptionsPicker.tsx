@@ -76,6 +76,12 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
     return (
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
             <div className="test-card-info">
+                <div className="test-card-back">
+                    <Button
+                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
+                        buttonFunction={() => { changeTask(-1) }} />
+                </div>
+
                 <div className="test-card-count">
                     <p><span>Вопрос</span> <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
                 </div>
