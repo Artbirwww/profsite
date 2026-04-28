@@ -5,6 +5,7 @@ import api, { getBaseUrl } from "../../../services/api/api"
 import { useNavigate } from "react-router-dom"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
+import { HollandProfession } from "./hollandTypes"
 
 export const HollandTest = () => {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ export const HollandTest = () => {
     useEffect(() => {
         const loadHollandTestData = async () => {
             try {
-                const response = await api.get(`${getBaseUrl()}/public/prof_klimov/data/profKlimovFormA.json`)
+                const response = await api.get(`${getBaseUrl()}/public/prof_holland/data/profHollandFormA.json`)
                 setTasks(response.data.data as Task[])
             } catch(err) {
                 console.error(err)
