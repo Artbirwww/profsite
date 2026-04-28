@@ -4,48 +4,10 @@ import { tasks as tasksData } from "./tasks.json"
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
-
-export const KlimovTest = () => {
-    const navigate = useNavigate()
-    const { start, minutes, remaningSeconds, seconds } = useTimer(0, false)
-
-    const [tasks, setTasks] = useState<Task[]>()
-
-    useEffect(() => {
-        const getTasksData = async () => {
-            setTasks(tasksData as Task[])
-        }
-        getTasksData()
-    }, [])
-    useEffect(() => {
-        start()
-    }, [tasks])
-    const handleTasksUpdate = (tasks: Task[]) => {
-        setTasks(tasks)
-    }
-    const navigateToResults = () => {
-        navigate("/tests/professional-orientation-klimov-results", {
-            state: {
-                klimovTasks: tasks,
-                completionTimeSeconds: seconds
-            }
-        })
-        return
-    }
-
-    if (!tasks)
-        return (<p>загрузка...</p>)
-
-    return (<>
-        <div className="float-timer">
-            {formatTime(minutes)} : {formatTime(remaningSeconds)}
-        </div>
-
-        <SingleOptionsPicker
-            tasks={tasks}
-            setTasks={handleTasksUpdate}
-            navigateToResults={navigateToResults}
-            pickerStyleType={"squeezed"}
-            optionStyleType={"column"}/>
-    </>)
-}
+import { createStandartTest } from "../generalTests/StandartTest"
+export const KlimovTest = createStandartTest({
+    fetchData: async () => tasksData as Task[],
+    resultPath: "/tests/professional-orientation-klimov-results",
+    stateKey: "klimovTasks",
+    autoStartTimer: true
+})
