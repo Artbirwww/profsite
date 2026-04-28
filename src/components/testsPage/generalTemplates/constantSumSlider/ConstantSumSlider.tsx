@@ -95,7 +95,9 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>
+                    {sliders.reduce((total, slider) => total + slider.value, 0) > maxValue ? 
+                    <p style={{color: "red"}}><span >Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p> :
+                    <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>}
                 </div>
             </div>
 
