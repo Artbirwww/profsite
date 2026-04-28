@@ -21,6 +21,16 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
         onClick(item.path)
     }
 
+    const getQuestionLabel = (count: number) => {
+        const lastDigit = count % 10
+        const lastTwoDigits = count % 100
+
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return "вопросов"
+        if (lastDigit == 1) return "вопрос"
+        if (lastDigit >= 2 && lastDigit <= 4) return "вопроса"
+        return "вопросов"
+    }
+
     return (
         <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
             <div className="test-selection-item-icon">
@@ -46,7 +56,7 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
 
                 <div className="test-selection-item-options">
                     <FileQuestion size={20} strokeWidth={1.5} />
-                    <span>{item.questionscount} вопросов</span>
+                    <span>{item.questionscount} {getQuestionLabel(item.questionscount)}</span>
                 </div>
             </div>
 

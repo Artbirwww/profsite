@@ -7,6 +7,7 @@
     width: 100%;
     height: 100%;
 }
+
 .registration-container,
 .login-container {
     display: flex;
@@ -14,10 +15,12 @@
     gap: 40px;
     padding: 40px;
     width: 600px;
+    max-width: 600px;
     border-radius: 20px;
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
 }
+
 .registration-header,
 .login-header {
     display: flex;
@@ -26,6 +29,7 @@
     justify-content: center;
     gap: 5px;
 }
+
 .registration-icon,
 .login-icon {
     display: flex;
@@ -43,12 +47,14 @@
     font-weight: var(--font-weight-medium);
     color: var(--text-secondary-color);
 }
+
 .registration-type-options {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
+
 .type-item {
     display: flex;
     flex-direction: column;
@@ -60,11 +66,13 @@
     cursor: pointer;
     transition: all .3s ease;
 }
+
 .type-item p {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
 }
+
 .type-item span {
     font-size: var(--font-size-base);
     color: var(--text-secondary-color);
@@ -79,19 +87,22 @@
     flex-direction: column;
     gap: 20px;
 }
+
 .registration-form-row,
 .login-form-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
     width: 100%;
 }
-.registration-form-row > div,
-.login-form-row > div {
+
+.registration-form-row>div,
+.login-form-row>div {
     flex: 1;
 }
+
 .registration-form-tip {
     border: 1px solid var(--color-accent-tertiary);
     padding: 10px 20px;
@@ -100,4 +111,12 @@
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
     user-select: none;
+}
+
+@media (max-width: 668px) {
+    .registration-container,
+    .login-container {
+        width: 100%;
+        padding: 20px;
+    }
 }

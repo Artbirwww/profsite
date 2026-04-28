@@ -80,17 +80,27 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
         nextPage(1)
     }
 
+    const currentTotal = sliders.reduce((sum, s) => sum + s.value, 0)
+    const isOverLimit = currentTotal > maxValue
+
+    const formatNumber = (num: number) => num.toString().padStart(2, "0")
+
     return (
         <div className="test-card constant-sum-slider">
-
             <div className="test-card-info">
-                <div className="test-card-back" onClick={() => { nextPage(-1) }}>
-                    <ArrowLeft size={20} />
+                <div className="test-card-back">
+                    <Button
+                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
+                        buttonFunction={() => { nextPage(-1) }} />
                 </div>
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    <p><span>Вопрос</span> <span>{(currentGroupNumber + 1).toString().padStart(2, "0")}</span> из <span>{(7).toString().padStart(2, "0")}</span></p>
+                    <p>
+                        <span>Вопрос</span>
+                        <span>{formatNumber(currentGroupNumber + 1)}</span> из
+                        <span>{formatNumber(7)}</span>
+                    </p>
                 </div>
 
                 <div className="test-card-count">
@@ -133,7 +143,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
             <Toaster />
-
         </div>
     )
 }

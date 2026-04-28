@@ -36,25 +36,12 @@
     flex-wrap: wrap;
 }
 
-/* КНОПКА НАЗАД */
-.test-card-back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    height: 40px;
-    width: 40px;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
 /* ОСТАВЩЕЕСЯ КОЛ-ВО ВОПРОСОВ */
 .test-card-count {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-text-color);
+    color: var(--text-primary-color);
     font-weight: var(--font-weight-medium);
     border: 2px solid var(--border-color);
     height: 40px;
@@ -94,7 +81,7 @@
     align-items: center;
     justify-content: center;
     border: 2px solid var(--border-color);
-    color: var(--primary-text-color);
+    color: var(--text-primary-color);
     font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     border-radius: 15px;
@@ -238,7 +225,7 @@ input[type="range"]::-moz-range-thumb {
     align-items: center;
     text-align: center;
     justify-content: center;
-    color: var(--primary-text-color);
+    color: var(--text-primary-color);
     font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     border: 2px solid var(--border-color);
@@ -281,6 +268,7 @@ input[type="range"]::-moz-range-thumb {
     background-color: var(--primary-color);
     font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
     width: 100px;
     height: 40px;
     border-radius: 15px;

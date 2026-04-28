@@ -75,10 +75,11 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
 
     return (
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
-
             <div className="test-card-info">
-                <div className="test-card-back" onClick={() => { changeTask(-1) }}>
-                    <ArrowLeft size={20} />
+                <div className="test-card-back">
+                    <Button
+                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
+                        buttonFunction={() => { changeTask(-1) }} />
                 </div>
 
                 <div className="test-card-count">
@@ -109,7 +110,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
             <div className="test-card-options">
                 {currentTaskNumber < tasks.length - 1 && (
                     <Button
-                        buttonLabel={"Пропустить"}
+                        buttonLabel={"Пропустить вопрос"}
                         buttonFunction={() => changeTask(1)} />
                 )}
                 <Button
@@ -120,7 +121,6 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
             <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />
 
             <Toaster />
-
         </div>
     )
 }

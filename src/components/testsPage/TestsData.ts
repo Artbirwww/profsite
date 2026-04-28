@@ -8,7 +8,7 @@ export interface TestItem {
     author?: string         // Автор теста
     description: string     // Описание теста
     time?: number           // Примерное затраченое время на тест
-    questionscount?: number // Количсетво вопросов в тесте
+    questionscount: number // Количсетво вопросов в тесте
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
     pathResults?: string     // URL до результатов

@@ -44,14 +44,16 @@ export const TemperamentTest = () => {
         return <TestFormSelection forms={TEMPERAMENT_FORMS} onSelect={handleSelect} />
     }
 
-    return (<>
-        <div className="float-timer">
-            {formatTime(minutes)} : {formatTime(remaningSeconds)}
-        </div>
+    return (
+        <div className="actual-test-wrapper">
+            <div className="float-timer">
+                {formatTime(minutes)} : {formatTime(remaningSeconds)}
+            </div>
 
-        <PositiveNegative
-            options={options}
-            setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
-            navigateToResults={navigateToResult} />
-    </>)
+            <PositiveNegative
+                options={options}
+                setOptions={setOptions as Dispatch<SetStateAction<PositiveNegativeOption[]>>}
+                navigateToResults={navigateToResult} />
+        </div>
+    )
 }

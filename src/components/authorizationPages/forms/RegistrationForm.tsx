@@ -35,7 +35,7 @@ export const RegistrationForm = ({userType, account, setAccount, handleRegistrat
         <div className="registration-container">
             <div className="registration-header">
                 <div className="registration-icon"><GraduationCap size={34} /></div>
-                <h2>Регистрация - {`${userType}`}</h2>
+                <h2>Регистрация</h2>
                 <span>Заполните электронную почту и пароль</span>
             </div>
 
@@ -58,7 +58,7 @@ export const RegistrationForm = ({userType, account, setAccount, handleRegistrat
                             name="password"
                             onChange={(e) => updateField(e)} />
 
-                        <FieldInput inputLabel={"Подтвердите пароль"}
+                        <FieldInput inputLabel={"Повторите пароль"}
                             inputIcon={<Repeat size={20} />}
                             inputType={"password"}
                             isPassword={true}
@@ -66,12 +66,6 @@ export const RegistrationForm = ({userType, account, setAccount, handleRegistrat
                             name="repeatPassword"
                             onChange={(e) => updateField(e)}
                             onKeyDown={(e) => { if (e.key === "Enter") handleRegistration() }} />
-                    </div>
-
-                    <div className="registration-form-row">
-                        <div className="registration-form-tip">
-                            <p>После регистрации вы можете заполнить свой профиль в личном кабинете, это важно для анализа результатов. </p>
-                        </div>
                     </div>
 
                     <div className="registration-form-row">

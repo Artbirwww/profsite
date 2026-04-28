@@ -61,6 +61,7 @@ export const createStandartTest = (config: StandartTestConfig) => {
         if (!tasks) return <p>загрузка ...</p>
 
         return (<>
+        <div className="actual-test-wrapper">
             {config.hasTimer !== false && (
                 <div className="float-timer">
                     {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
@@ -73,6 +74,7 @@ export const createStandartTest = (config: StandartTestConfig) => {
                 pickerStyleType={config.pickerStyle || 'squeezed'}
                 optionStyleType={config.optionStyle || 'column'}
             />
+        </div>
         </>)
     }
 }
