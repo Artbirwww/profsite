@@ -3,7 +3,19 @@ import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPick
 import { useEffect, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
-
+/**
+ * 
+ * params 
+ * fetchData: асинхронная функция для загрузки задач
+ * resultPath: путь до результатов теста
+ * stateKey: уникальное наименование передаваемого state для результатов (легаси)
+ * hasTimer: использует ли тест таймер
+ * initialSeconds: начальное значение таймера
+ * autoStartTimer: нужно ли начать отчет сразу же
+ * autoNavigateOnTimeout: нужно ли закончить тест по истечению времени
+ * pickerStyle: ?
+ * optionStyle: как отобразить опции столбцом или строкой
+ */
 interface StandartTestConfig {
     fetchData: () => Promise<Task[]>
     resultPath: string
