@@ -2,23 +2,11 @@ import { FC, useEffect, useState, ComponentType } from "react";
 import { TestItem, testsList } from "../testsPage/TestsData";
 import { useAuth } from "../../contexts/AuthContext";
 import "./resultPage.css";
-import { TemperamentResults } from "../testsPage/temperament/TemperamentResults";
-import { BelbinResults } from "../testsPage/groupRoles/GroupRolesResults";
 import { TestResultResponse, TestTypeName } from "../../types/testTypes";
 import { testApi } from "../../services/api/testApi";
-import { getActualTestByDate } from "./services/testSort";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-type testType = "Temperament" | "Group-Roles" | "Engineering-Thinking";
 
-const testsResultPages: Record<TestTypeName, string> = {
-  "Temperament": "/tests/temperament-results",
-  "Group-Roles": "/tests/group-roles-results",
-  "Engineering-Thinking" : "/tests/engineering-thinking-results", 
-  "Professional-Orientation-Klimov": "/tests/professional-orientation-klimov-results",
-  "Intellectual-Potential": "/tests/iq-potential-results",
-  "Professional-Orientation": ""
-};
 export const ResultsPage: FC = () => {
   //const [psychTest, setPsychTest] = useState<TestResultResponse | null>(null)
   const { getToken } = useAuth();
@@ -43,8 +31,12 @@ export const ResultsPage: FC = () => {
   }, [])
   const handleSelectTest = async (selectedTest: TestItem) => {
     try {
-      const testTypeName = selectedTest.name as testType;
-      navigate(testsResultPages[testTypeName], {
+      if (!selectedTest.pathResults) {
+        console.error(`Путь к тесту ${selectedTest.name} не найден`)
+        toast.error(`Путь к тесту ${selectedTest.name} не найден`)
+        return
+      }
+      navigate(selectedTest.pathResults, {
         state: {
           isViewMode: true,
           psychTest: recentTests[selectedTest.name],

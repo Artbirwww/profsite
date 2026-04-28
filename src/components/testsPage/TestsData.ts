@@ -11,6 +11,7 @@ export interface TestItem {
     questionscount?: number // Количсетво вопросов в тесте
     icon: React.ElementType // Иконка теста
     path: string            // URL до теста
+    pathResults?: string     // URL до результатов
     dataItem: string        // Для тестирования / селекторов
     name: string
     isAvailable?: boolean
@@ -27,6 +28,7 @@ export const testsList: TestItem[] = [
         questionscount: 57,
         icon: Palette,
         path: "/tests/temperament-intro",
+        pathResults: "/tests/temperament-results",
         dataItem: "test-item-1",
         name: "Temperament",
         isAvailable: true
@@ -40,6 +42,7 @@ export const testsList: TestItem[] = [
         questionscount: 7,
         icon: UsersRound,
         path: "/tests/group-roles-intro",
+        pathResults:"/tests/group-roles-results",
         dataItem: "test-item-2",
         name: "Group-Roles",
         isAvailable: true
@@ -53,6 +56,7 @@ export const testsList: TestItem[] = [
         questionscount: 70,
         icon: Settings,
         path: "/tests/engineering-thinking-intro",
+        pathResults: "/tests/engineering-thinking-results",
         dataItem: "test-item-3",
         name: "Engineering-Thinking",
         isAvailable: true
@@ -66,6 +70,7 @@ export const testsList: TestItem[] = [
         questionscount: 20,
         icon: BriefcaseBusiness,
         path: "/tests/professional-orientation-klimov-intro",
+        pathResults: "/tests/professional-orientation-klimov-results",
         dataItem: "test-item-5",
         name: "Professional-Orientation-Klimov",
         isAvailable: true
@@ -78,19 +83,21 @@ export const testsList: TestItem[] = [
         questionscount: 29,
         icon: Brain,
         path: "/tests/iq-potential-intro",
+        pathResults: "/tests/iq-potential-results",
         dataItem: "test-item-4",
         name: "Intellectual-Potential",
         isAvailable: true
     },
     {
         id: "test-professional-orientation-holland",
-        label: "Профориентация",
+        label: "Профориентация Холланд",
         author: "Джон Льюис Холланд",
-        description: "Описание",
+        description: "Профессиональные предпочтения",
         time: 999,
         questionscount: 999,
         icon: Compass,
         path: "/tests/prof-holland-intro",
+        pathResults: "/tests/prof-holland-results",
         dataItem: "test-item-6",
         name: "Professional-Orientation-Holland",
         isAvailable: true
