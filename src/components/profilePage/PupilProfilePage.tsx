@@ -1,8 +1,8 @@
 import "./css/profilePageStyles.css"
 
-import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { FieldInput } from "../ui/reusable/fieldInput"
-import { UserPen, MailOpen, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
+import { UserPen, UserRound, School, Hash, CaseUpper, PersonStanding, CheckCheck } from "lucide-react"
 import { Button } from "../ui/reusable/button"
 import { Radio, RadioGroup } from "../ui/reusable/radio"
 import { Dropdown } from "../ui/reusable/dropdown"
@@ -14,7 +14,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import { pupilApi } from "../../services/api/pupilApi"
 import toast, { Toaster } from "react-hot-toast"
 
-export const ProfilePage: FC = () => {
+export const PupilProfilePage: FC = () => {
     const { getToken } = useAuth()
 
     const [email, setEmail] = useState<string>("")
@@ -82,6 +82,12 @@ export const ProfilePage: FC = () => {
         { value: "other", label: "Другая" },
     ], []);
 
+    const schoolNames = useMemo(() => [
+        { value: "sosh 33", label: "МБОУ СОШ №33 города Абакана" },
+        { value: "top", label: "Академия 'Топ'" },
+        { value: "test", label: "Тест" },
+    ], []);
+
     const updateField = useCallback((field: keyof PupilDTO) => (value: any) => {
         const extractedValue = (value && typeof value === 'object' && 'value' in value)
             ? value.value
@@ -109,28 +115,20 @@ export const ProfilePage: FC = () => {
         }
     }
 
-    return (
+    return (<>
+        <div className="page-header">
+            <h1>Личный кабинет</h1>
+        </div>
+
         <div className="profile-wrapper">
-
-            <div className="profile-header">
-
-                <h1>Профиль</h1>
-
-            </div>
-
             <div className="profile-container">
-
                 <div className="profile-grid">
 
                     {/* пол */}
                     <div className="profile-grid-item profile-grid-item-1">
-
                         <div className="profile-grid-wrapper">
-
                             <div className="profile-grid-item-header">
-
                                 <h4>Пол</h4>
-
                             </div>
 
                             <RadioGroup
@@ -143,222 +141,139 @@ export const ProfilePage: FC = () => {
                                 <Radio radioLabel="Женский" radioValue={Gender.FEMALE}></Radio>
 
                             </RadioGroup>
-
                         </div>
-
                     </div>
 
-                    {/* почта */}
+                    {/* логин / почта */}
                     <div className="profile-grid-item profile-grid-item-2">
-
                         <div className="profile-grid-wrapper">
-
                             <div className="profile-grid-item-header">
-
-                                <h4>Электронная почта</h4>
-
+                                <h4>Логин / Электронная почта</h4>
                             </div>
 
                             <FieldInput
                                 name="email"
-                                inputIcon={<MailOpen size={20} />}
+                                inputIcon={<UserRound size={20} />}
                                 inputPlaceholder="example@mail.ru"
                                 inputValue={email}
                                 isDisabled={true} />
-
                         </div>
-
                     </div>
 
                     {/* фио */}
                     <div className="profile-grid-item profile-grid-item-3">
-
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Фамилия</h4>
-
-                                </div>
-
-                                <FieldInput
-                                    inputIcon={<UserPen size={20} />}
-                                    inputPlaceholder="Иванов"
-                                    inputValue={formData.surname}
-                                    inputOnChange={updateField("surname")} />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Фамилия</h4>
                             </div>
 
+                            <FieldInput
+                                inputIcon={<UserPen size={20} />}
+                                inputPlaceholder="Иванов"
+                                inputValue={formData.surname}
+                                inputOnChange={updateField("surname")} />
                         </div>
 
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Имя</h4>
-
-                                </div>
-
-                                <FieldInput
-                                    inputPlaceholder="Иван"
-                                    inputValue={formData.name}
-                                    inputOnChange={updateField("name")} />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Имя</h4>
                             </div>
 
+                            <FieldInput
+                                inputPlaceholder="Иван"
+                                inputValue={formData.name}
+                                inputOnChange={updateField("name")} />
                         </div>
 
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Отчество</h4>
-
-                                </div>
-
-                                <FieldInput
-                                    inputPlaceholder="Иванович"
-                                    inputValue={formData.patronymic}
-                                    inputOnChange={updateField("patronymic")} />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Отчество</h4>
                             </div>
 
+                            <FieldInput
+                                inputPlaceholder="Иванович"
+                                inputValue={formData.patronymic}
+                                inputOnChange={updateField("patronymic")} />
                         </div>
-
                     </div>
 
                     {/* национальность и дата рождения */}
                     <div className="profile-grid-item profile-grid-item-4">
-
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Национальность</h4>
-
-                                </div>
-
-                                <Dropdown
-                                    dropdownIcon={<PersonStanding size={20} />}
-                                    dropdownOptions={nationalityOptions}
-                                    dropdownSelected={formData.nationality}
-                                    optionOnSelect={(opt) => updateField("nationality")(opt.value)}
-                                    dropdownDirection="up" />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Национальность</h4>
                             </div>
 
+                            <Dropdown
+                                dropdownIcon={<PersonStanding size={20} />}
+                                dropdownOptions={nationalityOptions}
+                                dropdownSelected={formData.nationality}
+                                optionOnSelect={(opt) => updateField("nationality")(opt.value)}
+                                dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Дата рождения</h4>
-
-                                </div>
-
-                                <DatePicker
-                                    datePickerSelected={Temporal.PlainDate.from(formData.birthday ? formData.birthday : Temporal.Now.plainDateISO().toString())}
-                                    onDateSelect={handleDateSelect}
-                                    dropdownDirection="up" />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Дата рождения</h4>
                             </div>
 
+                            <DatePicker
+                                datePickerSelected={Temporal.PlainDate.from(formData.birthday ? formData.birthday : Temporal.Now.plainDateISO().toString())}
+                                onDateSelect={handleDateSelect}
+                                dropdownDirection="up" />
                         </div>
-
                     </div>
 
                     {/* школа и класс */}
                     <div className="profile-grid-item profile-grid-item-5">
-
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Школа</h4>
-
-                                </div>
-
-                                <FieldInput
-                                    inputIcon={<School size={20} />}
-                                    inputPlaceholder="МБОУ СОШ №9"
-                                    inputValue={formData.school}
-                                    inputOnChange={updateField("school")} />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Школа</h4>
                             </div>
 
+                            <Dropdown
+                                dropdownIcon={<School size={20} />}
+                                dropdownOptions={schoolNames}
+                                dropdownSelected={formData.school}
+                                optionOnSelect={(opt) => updateField("school")(opt.value)}
+                                dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Номер класса</h4>
-
-                                </div>
-
-                                <Dropdown
-                                    dropdownIcon={<Hash size={20} />}
-                                    dropdownOptions={classNumberOptions}
-                                    dropdownSelected={formData.classNumber}
-                                    optionOnSelect={(opt) => updateField("classNumber")(opt.value)}
-                                    dropdownDirection="up" />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Номер класса</h4>
                             </div>
 
+                            <Dropdown
+                                dropdownIcon={<Hash size={20} />}
+                                dropdownOptions={classNumberOptions}
+                                dropdownSelected={formData.classNumber}
+                                optionOnSelect={(opt) => updateField("classNumber")(opt.value)}
+                                dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-item-container">
-
-                            <div className="profile-grid-wrapper">
-
-                                <div className="profile-grid-item-header">
-
-                                    <h4>Буква класса</h4>
-
-                                </div>
-
-                                <FieldInput
-                                    inputIcon={<CaseUpper size={20} />}
-                                    inputPlaceholder="а-я"
-                                    inputValue={formData.classLabel}
-                                    inputOnChange={updateField("classLabel")} />
-
+                        <div className="profile-grid-wrapper">
+                            <div className="profile-grid-item-header">
+                                <h4>Буква класса</h4>
                             </div>
 
+                            <FieldInput
+                                inputIcon={<CaseUpper size={20} />}
+                                inputPlaceholder="а-я"
+                                inputValue={formData.classLabel}
+                                inputOnChange={updateField("classLabel")} />
                         </div>
-
                     </div>
 
                     {/* кнопка сохранения */}
                     <div className="profile-options profile-grid-item-6 ">
-
                         <Button
                             buttonLabel="Сохранить"
                             buttonFunction={handleSaveClick} />
-
                     </div>
-
                 </div>
-
-                <Toaster />
-
             </div>
-
+            <Toaster />
         </div>
-    )
+    </>)
 }

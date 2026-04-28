@@ -1,0 +1,165 @@
+.menu-wrapper {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    gap: 10px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    align-self: center;
+    background-color: var(--primary-color);
+    padding: 3px;
+    height: 60px;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    border-radius: 1000px;
+}
+
+.menu-nav::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.menu-nav-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 1000px;
+    scroll-snap-align: start;
+    transition: all .2s ease;
+}
+
+.menu-nav-item-container .menu-nav-item-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary-color);
+    transition: all .2s ease;
+}
+
+.menu-nav-item-container .menu-nav-item-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-nav-item-container .menu-nav-item-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+    transition: all .2s ease;
+}
+
+
+
+.menu-nav-external {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-nav-external .menu-nav-item-container {
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-hover-color);
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-nav-external .menu-nav-item-container .menu-nav-item-label {
+    display: none;
+}
+
+
+
+.menu-nav-item-container:hover,
+.menu-nav-item-container.active {
+    background-color: var(--accent-hover-color);
+}
+
+.menu-nav-item-container:hover .menu-nav-item-icon,
+.menu-nav-item-container:hover .menu-nav-item-label,
+.menu-nav-item-container.active .menu-nav-item-icon,
+.menu-nav-item-container.active .menu-nav-item-label {
+    color: var(--primary-color);
+}
+
+
+
+
+
+
+
+@media (max-width: 992px) {
+    .menu-wrapper {
+        flex-direction: column-reverse;
+        bottom: 10px;
+    }
+
+    .menu-nav {
+        height: 50px;
+    }
+
+    .menu-nav-external {
+        position: absolute;
+        right: 10px;
+        bottom: 60px;
+    }
+
+    .menu-nav-item-container .menu-nav-item-label {
+        font-size: var(--font-size-sm);
+    }
+
+    .menu-nav-external .menu-nav-item-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .menu-nav-external .menu-nav-item-container .menu-nav-item-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .menu-nav {
+        width: 100%;
+    }
+
+    .menu-nav-item-container {
+        padding: 0 15px;
+        width: 100%;
+    }
+}

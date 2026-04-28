@@ -37,18 +37,16 @@ export const EngineeringThinkingTest = () => {
     if (!tasks)
         return (<p>pагрузка...</p>)
 
-    return (
-        <div className="test-timer-wrapper">
-
-            <div className="float-timer">
-                {formatTime(minutes)}:{formatTime(remaningSeconds)}
-            </div>
-
-            <SingleOptionsPicker
-                tasks={tasks}
-                setTasks={handleTasksUpdate}
-                navigateToResults={navigateToResults}
-                classType={"type-1"} />
+    return (<>
+        <div className="float-timer">
+            {formatTime(minutes)}:{formatTime(remaningSeconds)}
         </div>
-    )
+
+        <SingleOptionsPicker
+            tasks={tasks}
+            setTasks={handleTasksUpdate}
+            navigateToResults={navigateToResults}
+            pickerStyleType={"extended"}
+            optionStyleType={"column"}/>
+    </>)
 }

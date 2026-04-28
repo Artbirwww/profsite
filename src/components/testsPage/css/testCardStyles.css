@@ -1,6 +1,5 @@
-/* стили для карточки теста и выбора формы */
-.test-selection-item,
-.test-form-selection-grid-item {
+/* КАРТОЧКИ ТЕСТОВ */
+.test-selection-item {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -19,8 +18,7 @@
     user-select: none;
 }
 
-.test-selection-item::after,
-.test-form-selection-grid-item::after {
+.test-selection-item::after {
     content: "";
     position: absolute;
     background-color: var(--primary-color);
@@ -45,8 +43,9 @@
     justify-content: center;
     z-index: 3;
 }
+
 .test-selection-item-icon.icon-2 {
-    position: static;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,11 +53,9 @@
     color: var(--primary-color);
     border: none;
     width: 40px;
+    bottom: 30px;
     height: 40px;
     border-radius: 15px;
-}
-.test-selection-item-icon.complete {
-    background-color: var(--ok-color);
 }
 
 .test-selection-item-label {
@@ -70,44 +67,27 @@
 
 .test-selection-item-name {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
-    align-items: center;
-}
-
-.test-selection-item-order {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 3px);
-    max-width: 15px;
-    direction: rtl;
-    gap: 3px;
-    flex-shrink: 0;
-    justify-content: start;
-}
-
-.order-dot {
-    width: 3px;
-    min-width: 3px;
-    height: 3px;
-    min-height: 3px;
-    border-radius: 100px;
-    background-color: var(--text-primary-color);
+    width: 280px;
 }
 
 .test-selection-item-name h4 {
-    font-size: var(--font-size-lg);
+    font-size: clamp(var(--font-size-md), 1.027rem + 0.39vw, var(--font-size-lg));
     font-weight: var(--font-weight-medium);
     line-height: 20px;
     white-space: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    width: 300px;
     color: var(--text-primary-color);
 }
 
-.test-selection-item-name span {
-    font-size: var(--font-size-sm);
+.test-selection-item-label span {
+    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-normal);
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     color: var(--text-secondary-color);
 }
 
@@ -125,7 +105,6 @@
     display: flex;
     flex-direction: row;
     align-items: end;
-    justify-content: space-between;
     z-index: 3;
 }
 
@@ -133,68 +112,40 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 135px;
     gap: 5px;
 }
 
 .test-selection-item-options span {
     color: var(--text-primary-color);
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
 }
 
-/* доп. стили для выбора формы */
-.test-form-selection-name {
-    z-index: 3;
-}
 
-.test-form-selection-name h4 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-primary-color);
-}
-
-.test-form-selection-option {
-    width: 100%;
-    display: flex;
-    align-items: end;
-    justify-content: end;
-    z-index: 3;
-}
-
-.test-form-selection-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 15px;
-    z-index: 3;
+.test-selection-item.locked {
+    opacity: .5;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    user-select: none;
+    pointer-events: none;
 }
 
 
-/* круг для анимации заполенения границы при выделении */
-.hover-circle {
-    position: absolute;
-    background-color: var(--accent-color);
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width .8s ease, height .8s ease;
-    z-index: 1;
-}
-.hover-circle.complete {
-    background-color: var(--ok-color);
-}
 
-.test-selection-item:hover .hover-circle {
-    width: 1200px;
-    height: 1200px;
-}
+/* МЕДИА ЗАПРОСЫ */
+@media (max-width: 480px) {
+    .test-selection-item-name {
+        width: 220px;
+    }
 
-.test-form-selection-grid-item:hover .hover-circle {
-    width: 1500px;
-    height: 1500px;
+    .test-selection-item-info {
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+
+    .test-selection-item-options {
+        width: auto;
+    }
 }

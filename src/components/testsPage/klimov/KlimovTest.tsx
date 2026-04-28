@@ -7,7 +7,7 @@ import { formatTime } from "../utils/formatTime"
 
 export const KlimovTest = () => {
     const navigate = useNavigate()
-    const {start, minutes, remaningSeconds, seconds} = useTimer(0, false)
+    const { start, minutes, remaningSeconds, seconds } = useTimer(0, false)
 
     const [tasks, setTasks] = useState<Task[]>()
 
@@ -36,18 +36,16 @@ export const KlimovTest = () => {
     if (!tasks)
         return (<p>загрузка...</p>)
 
-    return (
-        <div className="test-timer-wrapper">
-            <div className="float-timer">
-                {formatTime(minutes)} : {formatTime(remaningSeconds)}
-            </div>
-        
-            <SingleOptionsPicker
-                tasks={tasks}
-                setTasks={handleTasksUpdate}
-                navigateToResults={navigateToResults}
-                classType={"type-2"} />
+    return (<>
+        <div className="float-timer">
+            {formatTime(minutes)} : {formatTime(remaningSeconds)}
         </div>
 
-    )
+        <SingleOptionsPicker
+            tasks={tasks}
+            setTasks={handleTasksUpdate}
+            navigateToResults={navigateToResults}
+            pickerStyleType={"squeezed"}
+            optionStyleType={"column"}/>
+    </>)
 }

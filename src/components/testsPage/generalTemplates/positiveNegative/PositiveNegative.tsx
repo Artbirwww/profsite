@@ -59,7 +59,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
     }
 
     return (
-        <div className="test-card" style={{ minHeight: "230px" }}>
+        <div className="test-card pozitive-negative">
 
             <div className="test-card-info">
                 <div className="test-card-back" onClick={() => { changeOption(-1) }}>
@@ -67,7 +67,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
                 </div>
 
                 <div className="test-card-count">
-                    <p>Вопрос <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(options.length).toString().padStart(2, "0")}</span></p>
+                    <p><span>Вопрос</span> <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(options.length).toString().padStart(2, "0")}</span></p>
                 </div>
             </div>
 

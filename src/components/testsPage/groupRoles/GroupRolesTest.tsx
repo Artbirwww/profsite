@@ -7,7 +7,7 @@ import { formatTime } from "../utils/formatTime"
 
 export const GroupRolesTest = () => {
     const navigate = useNavigate()
-    const {start, minutes, remaningSeconds, seconds} = useTimer(0, false)
+    const { start, minutes, remaningSeconds, seconds } = useTimer(0, false)
 
     const [currentGroupNumber, setCurrentGroupNumber] = useState<number>(0)
     const groupQuestionsResult = useRef<GroupRolesQuestion[][]>([...groupQuestions])
@@ -56,18 +56,16 @@ export const GroupRolesTest = () => {
     if (!currentQuestions)
         return (<p>загрузка...</p>)
 
-    return (
-        <div className="test-timer-wrapper">
-            <div className="float-timer">
-                {formatTime(minutes)} : {formatTime(remaningSeconds)}
-            </div>
-        
-            <ConstantSumSlider
-                sliders={currentQuestions}
-                setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
-                currentGroupNumber={currentGroupNumber}
-                nextPage={nextQuestionsGroup}
-                maxValue={maxValue} />
+    return (<>
+        <div className="float-timer">
+            {formatTime(minutes)} : {formatTime(remaningSeconds)}
         </div>
-    )
+
+        <ConstantSumSlider
+            sliders={currentQuestions}
+            setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
+            currentGroupNumber={currentGroupNumber}
+            nextPage={nextQuestionsGroup}
+            maxValue={maxValue} />
+    </>)
 }

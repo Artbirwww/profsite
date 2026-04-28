@@ -1,3 +1,77 @@
+import { Home, FileCheck, ChartPie, Book, UserRound, ShieldUser, DoorOpen } from "lucide-react"
+import { ROLES } from "../../../types/account/role"
+
+export interface MenuItemProps {
+    id: string
+    label?: string
+    icon: React.ElementType
+    path: string
+    order?: number
+    position?: 0 | 1
+    allowedRoles?: string[]
+    isLogout?: boolean
+}
+
+export const menuButtons: MenuItemProps[] = [
+    // пункты меню доступные всем
+    {
+        id: "home",
+        label: "Домой",
+        icon: Home,
+        path: "/",
+        order: 1,
+    },
+    {
+        id: "tests",
+        label: "Тесты",
+        icon: FileCheck,
+        path: "/tests",
+        order: 2,
+    },
+    {
+        id: "results",
+        label: "Результаты",
+        icon: ChartPie,
+        path: "/my-results",
+        order: 3,
+    },
+    {
+        id: "profile",
+        label: "Профиль",
+        icon: UserRound,
+        path: "/profile",
+        order: 5,
+    },
+
+    // пункты меню по ролям
+    {
+        id: "grades",
+        label: "Учеба",
+        icon: Book,
+        path: "/my-grades",
+        order: 4,
+        allowedRoles: [ROLES.PUPIL],
+    },
+    {
+        id: "admin-panel",
+        label: "Админ",
+        icon: ShieldUser,
+        path: "/admin",
+        position: 0,
+        allowedRoles: [ROLES.ADMIN],
+    },
+]
+
+export const logoutButton: MenuItemProps = {
+    id: "logout",
+    label: "Выход",
+    icon: DoorOpen,
+    path: "/login",
+    order: 99,
+    isLogout: true,
+}
+
+/* OLD
 import { Home, FileCheck, ChartPie, Book, UserRound, Settings2, UsersRound, FileUp, BookPlus, Apple, DoorOpen, HardHat } from "lucide-react"
 import React from "react"
 import { ROLES } from "../../../types/account/role"
@@ -124,3 +198,4 @@ export const logoutButton: MenuItemProps = {
     path: "/login",
     isExit: true,
 }
+*/
