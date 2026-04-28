@@ -38,18 +38,17 @@ export const HollandTest = () => {
     if (!tasks) 
         return (<p>Загрузка...</p>)
     return (<>
-    <div className="test-timer-wrapper">
         <div className="float-timer">
             {formatTime(minutes)} : {formatTime(remaningSeconds)}
         </div>
-    
+
         <SingleOptionsPicker 
             tasks={tasks} 
             setTasks={setTasks} 
             navigateToResults={navigateToResults}
-            classType={"type-2"}/>
+            pickerStyleType={"squeezed"}
+            optionStyleType={"column"}/>
         <Toaster />
-    </div>
     </>
         
     )
