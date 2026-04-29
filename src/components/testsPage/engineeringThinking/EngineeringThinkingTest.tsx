@@ -10,7 +10,7 @@ export const EngineeringThinkingTest = createStandartTest({
     resultPath: "/tests/engineering-thinking-results",
     stateKey: "tasks",
     initialSeconds: 1500,
-    autoStartTimer: false,
+    autoStartTimer: true,
     autoNavigateOnTimeout: true,
     pickerStyle: "extended",
     optionStyle: "column"
