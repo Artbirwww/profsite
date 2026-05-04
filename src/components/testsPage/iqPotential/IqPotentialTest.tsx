@@ -31,6 +31,7 @@ export const IqPotentialTest = createFormSelectionTest({
     resultPath: "/tests/iq-potential-results",
     stateKey: "tasks",
     Component: SingleOptionsPicker,
-    componentProps: { pickerStyleType: "squeezed", optionStyleType: "row" },
-    initialSeconds: 720
+    componentProps: {pickerStyleType: "squeezed", optionStyleType: "row"},
+    initialSeconds: 720,
+    autoNavigateOnTimeout: true
 })

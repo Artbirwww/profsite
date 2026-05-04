@@ -21,7 +21,7 @@ interface StandartTestConfig {
     resultPath: string
     stateKey: string
     hasTimer?: boolean
-    initialSeconds?: number
+    initialSeconds?: number //Если это значение есть, значит таймер идет назад
     autoStartTimer?: boolean
     autoNavigateOnTimeout?: boolean
     pickerStyle?: 'squeezed' | 'extended'
@@ -32,7 +32,7 @@ export const createStandartTest = (config: StandartTestConfig) => {
     return () => {
         const navigate = useNavigate()
         const [tasks, setTasks] = useState<Task[]>()
-        const timer = useTimer(config.initialSeconds || 0, false)
+        const timer = useTimer(config.initialSeconds || 0, config.initialSeconds ? true : false)
 
         useEffect(() => {
             config.fetchData().then(setTasks)
