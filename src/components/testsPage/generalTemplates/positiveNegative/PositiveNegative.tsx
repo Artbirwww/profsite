@@ -3,7 +3,7 @@ import { Button } from "../../../ui/reusable/button"
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Check, X } from "lucide-react"
 
 export interface PositiveNegativeOption {
     id: number
@@ -62,9 +62,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
         <div className="test-card pozitive-negative">
             <div className="test-card-info">
                 <div className="test-card-back">
-                    <Button 
-                        buttonIcon={<ArrowLeft size={20} strokeWidth={2}/>}
-                        buttonFunction={() => {changeOption(-1)}}/>
+                    <Button variant="icon-only" icon={<ArrowLeft />} onClick={() => { changeOption(-1) }} />
                 </div>
 
                 <div className="test-card-count">
@@ -77,12 +75,8 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
             </div>
 
             <div className="test-card-options">
-                <Button
-                    buttonLabel={"Да"}
-                    buttonFunction={() => handleAnswer(true)} />
-                <Button
-                    buttonLabel={"Нет"}
-                    buttonFunction={() => handleAnswer(false)} />
+                <Button label={"Да"} icon={<Check />} onClick={() => handleAnswer(true)} />
+                <Button label={"Нет"} icon={<X />} onClick={() => handleAnswer(false)} />
             </div>
 
             <ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />

@@ -11,19 +11,19 @@ export const ResultsPage: FC = () => {
   //const [psychTest, setPsychTest] = useState<TestResultResponse | null>(null)
   const { getToken } = useAuth();
   const navigate = useNavigate();
-  const [completedTests, setCompletedTests] = useState<TestItem []>([])
+  const [completedTests, setCompletedTests] = useState<TestItem[]>([])
   const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>([])
   useEffect(() => {
     console.log(completedTests)
   }, [completedTests])
-  useEffect(()=>{
+  useEffect(() => {
     const getAvailableTests = async () => {
       try {
         const token = getToken()
         const recentTestsTemp = await testApi.getRecentTests(token)
         setRecentTests(recentTestsTemp)
         setCompletedTests(testsList.filter((testItem => testItem.name in recentTestsTemp)))
-      } catch(err) {
+      } catch (err) {
         toast.error("Не удалось загрузить пройденные тесты")
       }
     }
@@ -62,9 +62,9 @@ export const ResultsPage: FC = () => {
             className="test-result-card"
             onClick={() => handleSelectTest(test)}
           >
-            
+
             <div className="test-result-title">
-              
+
               <test.icon />
               <h3>{test.label}</h3>
             </div>

@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast"
 import api, { getBaseUrl } from "../../services/api/api"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../ui/reusable/button"
+import { ArrowRight } from "lucide-react"
 
 interface TestIntroProps {
     testDescriptionPath: string,
@@ -59,9 +60,7 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
                 </div>
 
                 <div className="intro-options">
-                    <Button
-                        buttonLabel="Начать тест"
-                        buttonFunction={() => navigate(testNavigation)} />
+                    <Button label="Начать тест" icon={<ArrowRight />} onClick={() => navigate(testNavigation)} />
                 </div>
             </div>
         </div>

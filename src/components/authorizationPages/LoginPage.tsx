@@ -2,9 +2,9 @@ import "./css/authStyle.css"
 
 import { FC, FormEvent, useCallback, useState, KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { GraduationCap, KeyRound, MailOpen } from "lucide-react";
+import { GraduationCap, KeyRound, MailOpen, DoorOpen, UserRoundPlus } from "lucide-react"
 
-import { Button } from "../../components/ui/reusable/button";
+import { Button } from "../ui/reusable/button";
 import { authApi } from "../../services/api/authApi";
 import { useAuth } from "../../contexts/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,7 +24,7 @@ export const LoginPage: FC = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        
+
         try {
             const token = await authApi.login(formData.email, formData.password)
             const roles = await authApi.getRoles(token)
@@ -68,19 +68,17 @@ export const LoginPage: FC = () => {
                             inputType={"password"}
                             isPassword={true}
                             inputValue={formData.password}
-                            inputOnChange={updateField("password")} 
-                            onKeyDown={(e) => {if (e.key === "Enter") handleSubmit(e)}}/>
+                            inputOnChange={updateField("password")}
+                            onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(e) }} />
                     </div>
 
                     <div className="login-form-row">
-                        <button type="submit" >Войти</button>
+                        <Button type="submit" label="Войти" icon={<DoorOpen />} />
+                        <Button variant="tertiary" label="Создать аккаунт" onClick={handleBackToRegistration} icon={<UserRoundPlus />} />
                     </div>
                 </form>
             </div>
 
-            <Button buttonLabel={"У меня нет аккаунта"}
-                buttonType={"link"}
-                buttonFunction={handleBackToRegistration} />
             <Toaster />
         </div>
     )

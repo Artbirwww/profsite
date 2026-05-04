@@ -1,0 +1,257 @@
+/* сброс браузерных стилей кнопок */
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
+
+
+/* базовые стили (default) */
+.custom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    font-family: inherit;
+    position: relative;
+    min-height: 36px;
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.button-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    font-size: clamp(0.875rem, 0.842rem + 0.18vw, 1rem);
+    font-weight: 500;
+}
+
+.button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 50px;
+}
+
+.button-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
+}
+
+
+
+/* primary button */
+.custom-button.primary {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.custom-button.primary .button-icon {
+    background-color: var(--secondary-accent-color);
+}
+
+.custom-button.primary:hover {}
+
+.custom-button.primary:active {}
+
+.custom-button.primary:focus {}
+
+.custom-button.primary:disabled {
+    background-color: var(--disabled-color) !important;
+    color: var(--tertiary-disabled-color) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.custom-button.primary:disabled .button-icon {
+    background-color: var(--secondary-disabled-color) !important;
+}
+
+
+
+/* secondary button */
+.custom-button.secondary {
+    background-color: var(--secondary-primary-color);
+    color: var(--accent-color);
+}
+
+.custom-button.secondary .button-icon {
+    background-color: var(--tertiary-primary-color);
+}
+
+.custom-button.secondary:hover {}
+
+.custom-button.secondary:active {}
+
+.custom-button.secondary:focus {}
+
+.custom-button.secondary:disabled {
+    background-color: var(--disabled-color) !important;
+    color: var(--tertiary-disabled-color) !important;
+    filter: opacity(.7) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.custom-button.secondary:disabled .button-icon {
+    background-color: var(--secondary-disabled-color) !important;
+}
+
+
+
+/* tertiary button */
+.custom-button.tertiary {
+    flex-direction: row-reverse;
+    background-color: transparent;
+    color: var(--accent-color);
+    gap: 8px;
+}
+
+.custom-button.tertiary .button-icon {
+    width: max-content;
+    height: max-content;
+}
+
+.custom-button.tertiary .button-label {
+    padding: 0;
+}
+
+.custom-button.tertiary:hover {}
+
+.custom-button.tertiary:active {}
+
+.custom-button.tertiary:focus {}
+
+.custom-button.tertiary:disabled {
+    color: var(--tertiary-disabled-color) !important;
+    filter: opacity(.7) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+
+/* ghost button */
+.custom-button.ghost {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid;
+    border-right: none;
+    border-color: var(--accent-color);
+}
+
+.custom-button.ghost .button-icon {
+    background-color: var(--secondary-accent-color);
+    color: var(--primary-color);
+}
+
+.custom-button.ghost:hover {}
+
+.custom-button.ghost:active {}
+
+.custom-button.ghost:focus {}
+
+.custom-button.ghost:disabled {
+    border-color: var(--disabled-color) !important;
+    color: var(--tertiary-disabled-color) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.custom-button.ghost:disabled .button-icon {
+    background-color: var(--secondary-disabled-color) !important;
+}
+
+
+
+.custom-button.icon-only {
+    width: 44px;
+}
+
+.custom-button.icon-only .button-icon {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.custom-button.icon-only:hover {}
+
+.custom-button.icon-only:active {}
+
+.custom-button.icon-only:focus {}
+
+.custom-button.icon-only:disabled {
+    color: var(--tertiary-disabled-color) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.custom-button.icon-only:disabled .button-icon {
+    background-color: var(--secondary-disabled-color) !important;
+}
+
+
+@media (max-width: 1280px) {
+    .custom-button {
+        height: 40px;
+    }
+
+    .button-label {
+        padding: 0 20px;
+    }
+
+    .button-icon {
+        height: 40px;
+        width: 40px;
+    }
+
+    .button-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 662px) {
+    .custom-button {
+        height: 36px;
+    }
+
+    .button-label {
+        padding: 0 16px;
+    }
+
+    .button-icon {
+        height: 36px;
+        width: 36px;
+    }
+
+    .button-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}

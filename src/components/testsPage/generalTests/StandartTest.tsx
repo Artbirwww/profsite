@@ -44,37 +44,37 @@ export const createStandartTest = (config: StandartTestConfig) => {
         }, [tasks])
 
         useEffect(() => {
-            if (config.autoNavigateOnTimeout && timer.seconds === 0 && tasks) 
+            if (config.autoNavigateOnTimeout && timer.seconds === 0 && tasks)
                 handleComplete()
         }, [timer.seconds])
         const handleComplete = () => {
             const completionTime = config.initialSeconds ?
-                                    config.initialSeconds - timer.seconds :
-                                    timer.seconds
+                config.initialSeconds - timer.seconds :
+                timer.seconds
             navigate(config.resultPath, {
                 state: {
                     [config.stateKey]: tasks,
                     completionTimeSeconds: completionTime
                 }
-            }) 
+            })
         }
         if (!tasks) return <p>загрузка ...</p>
 
         return (<>
-        <div className="actual-test-wrapper">
-            {config.hasTimer !== false && (
-                <div className="float-timer">
-                    {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
-                </div>
-            )}
-            <SingleOptionsPicker 
-                tasks={tasks}
-                setTasks={setTasks}
-                navigateToResults={handleComplete}
-                pickerStyleType={config.pickerStyle || 'squeezed'}
-                optionStyleType={config.optionStyle || 'column'}
-            />
-        </div>
+            <div className="actual-test-wrapper">
+                {config.hasTimer !== false && (
+                    <div className="float-timer">
+                        {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
+                    </div>
+                )}
+                <SingleOptionsPicker
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    navigateToResults={handleComplete}
+                    pickerStyleType={config.pickerStyle || 'squeezed'}
+                    optionStyleType={config.optionStyle || 'column'}
+                />
+            </div>
         </>)
     }
 }

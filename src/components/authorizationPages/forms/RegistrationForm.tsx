@@ -1,12 +1,12 @@
-import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft } from "lucide-react"
+import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft, CheckCheck, ArrowLeft } from "lucide-react"
 import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useCallback, useState } from "react"
 import { FieldInput } from "../../ui/reusable/fieldInput";
-import { Button } from "../../../components/ui/reusable/button"
+import { Button } from "../../ui/reusable/button"
 import { useNavigate } from "react-router-dom"
 import { authApi } from "../../../services/api/authApi"
 import toast, { Toaster } from "react-hot-toast"
 import { AccountForm } from "../../../types/account/account";
-type UserType = "Школьник" | "Специалист" | "Эксперт" 
+type UserType = "Школьник" | "Специалист" | "Эксперт"
 interface RegistrationFormProps {
     userType: UserType
     account: AccountForm
@@ -14,13 +14,13 @@ interface RegistrationFormProps {
     handleRegistration: () => void
     handleBack: () => void
 }
-export const RegistrationForm = ({userType, account, setAccount, handleRegistration, handleBack}: RegistrationFormProps) => {
+export const RegistrationForm = ({ userType, account, setAccount, handleRegistration, handleBack }: RegistrationFormProps) => {
     const updateField = (e: ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
-        setAccount(prev => ({...prev, [name]: value}))
+        const { name, value } = e.target
+        setAccount(prev => ({ ...prev, [name]: value }))
     }
     const startRegistration = () => {
-        if (account.email === "" || account.password === "" || account.repeatPassword == ""){
+        if (account.email === "" || account.password === "" || account.repeatPassword == "") {
             toast.error("Заполните все поля")
             return
         }
@@ -31,13 +31,13 @@ export const RegistrationForm = ({userType, account, setAccount, handleRegistrat
         handleRegistration()
     }
     return (<>
-    <div className="auth-container">
-        <div className="registration-container">
-            <div className="registration-header">
-                <div className="registration-icon"><GraduationCap size={34} /></div>
-                <h2>Регистрация</h2>
-                <span>Заполните электронную почту и пароль</span>
-            </div>
+        <div className="auth-container">
+            <div className="registration-container">
+                <div className="registration-header">
+                    <div className="registration-icon"><GraduationCap size={34} /></div>
+                    <h2>Регистрация</h2>
+                    <span>Заполните электронную почту и пароль</span>
+                </div>
 
                 <div className="registrarion-form-cols">
                     <div className="registration-form-row">
@@ -69,18 +69,12 @@ export const RegistrationForm = ({userType, account, setAccount, handleRegistrat
                     </div>
 
                     <div className="registration-form-row">
-                        <Button buttonLabel={"Зарегистрироваться"} buttonFunction={startRegistration} />
-                    </div>
-                    <div className="registration-form-row">
-                            <Button buttonLabel={"Назад"}
-                                buttonIcon={<MoveLeft size={20} />}
-                                iconPosition={"left"}
-                                buttonType={"link"}
-                                buttonFunction={handleBack} />
+                        <Button label="Зарегистрироваться" onClick={startRegistration} icon={<CheckCheck />} />
+                        <Button label="Назад" variant="tertiary" onClick={handleBack} icon={<ArrowLeft />} />
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-    <Toaster/>
+        <Toaster />
     </>)
 }

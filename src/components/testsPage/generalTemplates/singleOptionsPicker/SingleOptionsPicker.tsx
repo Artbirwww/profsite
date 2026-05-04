@@ -2,7 +2,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft, Option } from "lucide-react"
+import { ArrowLeft, ArrowRight, Option } from "lucide-react"
 
 export interface Task {
     id: number
@@ -77,9 +77,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
             <div className="test-card-info">
                 <div className="test-card-back">
-                    <Button
-                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
-                        buttonFunction={() => { changeTask(-1) }} />
+                    <Button variant="icon-only" icon={<ArrowLeft />} onClick={() => { changeTask(-1) }} />
                 </div>
 
                 <div className="test-card-count">
@@ -109,13 +107,9 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
 
             <div className="test-card-options">
                 {currentTaskNumber < tasks.length - 1 && (
-                    <Button
-                        buttonLabel={"Пропустить вопрос"}
-                        buttonFunction={() => changeTask(1)} />
+                    <Button label={"Пропустить"} icon={<ArrowRight />} onClick={() => changeTask(1)} />
                 )}
-                <Button
-                    buttonLabel={"Завершить"}
-                    buttonFunction={navigateToResults} />
+                <Button label={"Завершить"} onClick={navigateToResults} />
             </div>
 
             <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />

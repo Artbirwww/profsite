@@ -1,15 +1,15 @@
 import "./css/authStyle.css"
 
-import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft } from "lucide-react"
+import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft, ArrowLeft } from "lucide-react"
 import { FC, FormEvent, useCallback, useState } from "react"
 import { FieldInput } from "../ui/reusable/fieldInput";
-import { Button } from "../../components/ui/reusable/button"
+import { Button } from "../ui/reusable/button"
 import { useNavigate } from "react-router-dom"
 import { authApi } from "../../services/api/authApi"
 import toast, { Toaster } from "react-hot-toast"
 import { User } from "../../types/User";
 
-type UserType = "Школьник" | "Специалист" | "Эксперт" 
+type UserType = "Школьник" | "Специалист" | "Эксперт"
 
 const USER_TYPE = [
     {
@@ -29,17 +29,17 @@ const USER_TYPE = [
         disabled: true,
     },
 ]
-const registrationRoutes: Record<UserType, string> = {"Школьник": "/register/pupil", "Специалист": "/register/specialist", "Эксперт": "/login"}
+const registrationRoutes: Record<UserType, string> = { "Школьник": "/register/pupil", "Специалист": "/register/specialist", "Эксперт": "/login" }
 export const RegistrationTypePicker = () => {
     const navigate = useNavigate()
     const [userType, setUserType] = useState<UserType>()
     const handleSelectType = (type: UserType) => {
-            const selected = USER_TYPE.find(item => item.id === type)
-            if (selected?.disabled) return
-    
-            navigate(registrationRoutes[type])
-        }
-    
+        const selected = USER_TYPE.find(item => item.id === type)
+        if (selected?.disabled) return
+
+        navigate(registrationRoutes[type])
+    }
+
     return (<>
         <div className="auth-container">
             <div className="registration-container">
@@ -57,11 +57,13 @@ export const RegistrationTypePicker = () => {
                         </div>
                     ))}
                 </div>
+
+                <div className="registration-form-row">
+                    <Button label="Уже есть аккаунт" variant="tertiary" onClick={() => navigate("/login")} icon={<ArrowLeft />} />
+                </div>
             </div>
-            
-            <Button buttonLabel={"У меня уже есть аккаунт"}
-                    buttonType={"link"}
-                    buttonFunction={() => navigate("/login")} />
+
+
         </div>
         <Toaster />
     </>)

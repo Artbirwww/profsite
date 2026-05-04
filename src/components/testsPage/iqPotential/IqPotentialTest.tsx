@@ -15,7 +15,7 @@ const IQ_FORMS: TestFormConfig<Task>[] = [
     { id: "iqTestFormB", label: "Форма B", data: [] },
 ]
 
-const generateOptions = (count: number) => Array.from({length: count}, (_, num) => ({
+const generateOptions = (count: number) => Array.from({ length: count }, (_, num) => ({
     id: num + 1, text: (num + 1).toString(), isPicked: false
 }))
 export const IqPotentialTest = createFormSelectionTest({
@@ -31,6 +31,6 @@ export const IqPotentialTest = createFormSelectionTest({
     resultPath: "/tests/iq-potential-results",
     stateKey: "tasks",
     Component: SingleOptionsPicker,
-    componentProps: {pickerStyleType: "squeezed", optionStyleType: "row"},
+    componentProps: { pickerStyleType: "squeezed", optionStyleType: "row" },
     initialSeconds: 720
 })

@@ -1,52 +1,31 @@
-import "./css/button-style.css"
+import { ButtonHTMLAttributes, FC, ReactNode } from "react"
+import "./css/buttonStyles.css"
 
-import { FC, ReactNode, MouseEvent } from "react";
-
-// Интерфейс для пропсов button
-interface ButtonProps {
-    buttonLabel?: string                                        // Текст button
-    buttonIcon?: ReactNode                                      // Иконка button
-    iconPosition?: "left" | "right" | "center"                  // Расположение иконки
-    buttonType?: "default" | "link"                             // Тип button
-    buttonFunction?: (e: MouseEvent<HTMLButtonElement>) => void // Функция для выполнения
-    isDisabled?: boolean                                        // Заблокирована ли?
-    name?: string                                               // Имя button
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    label?: string
+    icon?: ReactNode
+    variant?: "primary" | "secondary" | "tertiary" | "ghost" | "icon-only"
+    width?: number
+    isLoading?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({ buttonLabel, buttonIcon, iconPosition = "left", buttonType = "default", buttonFunction, isDisabled = false, name = "custom-button" }) => {
-    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        if (!isDisabled && buttonFunction)
-            buttonFunction(e)
-    }
+export const Button: FC<ButtonProps> = ({ label, icon, variant = "primary", width, isLoading = false, className = "", children, ...props }) => {
+    const classes = [
+        "custom-button",
+        variant,
+        isLoading ? "loading" : "",
+        className,
+    ].join(" ").trim()
 
     return (
-        <button id={name} disabled={isDisabled} onClick={handleClick} className={`custom-button ${buttonType} ${isDisabled ? "disabled" : ""} ${iconPosition}`}>
-
-            {buttonIcon && (iconPosition === "left" || iconPosition === "center") && (
-
-                <div className="button-icon">
-
-                    {buttonIcon}
-
+        <button className={classes} style={{ width: `${width}px` }} disabled={isLoading || props.disabled} {...props}>
+            {variant !== "icon-only" &&
+                <div className="button-label">
+                    {label || children}
                 </div>
+            }
 
-            )}
-
-            {buttonLabel && iconPosition !== "center" && (
-
-                <span className="custom-button-text">{buttonLabel}</span>
-
-            )}
-
-            {buttonIcon && iconPosition === "right" && (
-                <div className="custom-button-icon">
-
-                    {buttonIcon}
-
-                </div>
-
-            )}
-
+            {icon && <div className="button-icon"><span>{icon}</span></div>}
         </button>
     )
 }

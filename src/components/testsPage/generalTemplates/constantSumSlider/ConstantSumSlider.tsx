@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } fr
 import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft, ChevronUp, ChevronDown } from "lucide-react"
+import { ArrowLeft, ChevronUp, ChevronDown, ArrowRight } from "lucide-react"
 
 export interface SliderData {
     id: number
@@ -89,9 +89,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
         <div className="test-card constant-sum-slider">
             <div className="test-card-info">
                 <div className="test-card-back">
-                    <Button
-                        buttonIcon={<ArrowLeft size={20} strokeWidth={2} />}
-                        buttonFunction={() => { nextPage(-1) }} />
+                    <Button variant="icon-only" icon={<ArrowLeft />} onClick={() => { nextPage(-1) }} />
                 </div>
 
                 <div className="test-card-count">
@@ -105,9 +103,9 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
                 <div className="test-card-count">
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    {sliders.reduce((total, slider) => total + slider.value, 0) > maxValue ? 
-                    <p style={{color: "red"}}><span >Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p> :
-                    <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>}
+                    {sliders.reduce((total, slider) => total + slider.value, 0) > maxValue ?
+                        <p style={{ color: "red" }}><span >Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p> :
+                        <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>}
                 </div>
             </div>
 
@@ -134,9 +132,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             </div>
 
             <div className="test-card-options">
-                <Button
-                    buttonLabel={"Далее"}
-                    buttonFunction={nextPageHandler} />
+                <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
             </div>
 
             {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}

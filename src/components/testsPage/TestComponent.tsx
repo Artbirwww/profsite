@@ -1,6 +1,7 @@
 import { FC, memo } from "react"
 import { TestItem } from "./TestsData"
 import { Timer, FileQuestion, ArrowRight } from "lucide-react"
+import { Button } from "../ui/reusable/button"
 
 interface TestItemProps {
     item: TestItem
@@ -33,9 +34,7 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
 
     return (
         <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
-            <div className="test-selection-item-icon">
-                <Icon />
-            </div>
+
 
             <div className="test-selection-item-label">
                 <div className="test-selection-item-name">
@@ -49,19 +48,19 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
             </div>
 
             <div className="test-selection-item-info">
-                <div className="test-selection-item-options">
+                <div className="test-selection-item-hint">
                     <Timer size={20} strokeWidth={1.5} />
                     <span>{item.time} минут</span>
                 </div>
 
-                <div className="test-selection-item-options">
+                <div className="test-selection-item-hint">
                     <FileQuestion size={20} strokeWidth={1.5} />
                     <span>{item.questionscount} {getQuestionLabel(item.questionscount)}</span>
                 </div>
             </div>
 
-            <div className={`test-selection-item-icon icon-2 ${isComplete ? "complete" : ""}`}>
-                <ArrowRight size={20} />
+            <div className="test-selection-options">
+                <Button variant="icon-only" icon={<ArrowRight />} />
             </div>
         </div>
     )

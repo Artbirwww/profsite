@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react"
+import { Button } from "../../../ui/reusable/button"
 
 export interface TestFormConfig<T> {
     id: string
@@ -19,7 +20,7 @@ const FormItem = <T,>({ form, onSelect }: { form: TestFormConfig<T>, onSelect: (
             </div>
 
             <div className="test-form-selection-icon">
-                <ArrowRight size={20} />
+                <Button variant="icon-only" icon={<ArrowRight />} />
             </div>
         </div>
     )
