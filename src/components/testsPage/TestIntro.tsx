@@ -43,11 +43,7 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
         return <p>Загрузка описания теста...</p>
     }
 
-    return (<>
-        <div className="page-header">
-            <h1>{description.title}</h1>
-        </div>
-
+    return (
         <div className="intro-wrapper">
             <div className="intro-container">
                 <div className="intro-description">
@@ -64,5 +60,5 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
                 </div>
             </div>
         </div>
-    </>)
+    )
 }

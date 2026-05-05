@@ -86,50 +86,41 @@ export const TestsPage: FC = ({ }) => {
         navigate(path)
     }, [navigate])
 
-    return (<>
-        <div className="page-header">
-            <h1>Тестирование</h1>
-        </div>
+    return (
+        <div className="test-container">
 
-        <div className="test-wrapper">
-            <div className="test-container">
-                <div className="test-completness">
-                    <div className="test-count">
-                        <span><Check size={18} strokeWidth={1.5} />{Object.keys(recentTests).length}</span>
-                        <div className="divider"></div>
-                        <span>{testsList.length}</span>
-                    </div>
-
-                    <div className="progress-container">
-                        <div className="progress-fill" style={{ height: `${displayHeight}%` }}>
-                            <div className="wave-element wave-front" />
-                            <div className="wave-element wave-back" />
-                        </div>
-                    </div>
+            <div className="progress-container">
+                <div className="progress-fill" style={{ height: `${displayHeight}%` }}>
+                    <div className="wave-element wave-front" />
+                    <div className="wave-element wave-back" />
                 </div>
 
-                <div ref={testContainerRef} className="test-grid">
-                    {testsList.map((item, index) => {
-                        return (
-                            <div key={index} data-id={index} className="test-grid-item">
-                                <TestComponent
-                                    dataId={item.id}
-                                    index={index}
-                                    isAvailable={item.isAvailable}
-                                    item={item}
-                                    onClick={handleClick}
-                                    isComplete={recentTests ? recentTests[item.name] != null : false} />
-                            </div>
-                        )
-                    })}
-                </div>
-
-                <div className="test-indicator">
-                    {testsList.map((_, index) => (
-                        <div key={index} className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
-                    ))}
+                <div className="progress-count">
+                    {Object.keys(recentTests).length} / {testsList.length}
                 </div>
             </div>
+
+            <div ref={testContainerRef} className="test-grid">
+                {testsList.map((item, index) => {
+                    return (
+                        <div key={index} data-id={index} className="test-grid-item">
+                            <TestComponent
+                                dataId={item.id}
+                                index={index}
+                                isAvailable={item.isAvailable}
+                                item={item}
+                                onClick={handleClick}
+                                isComplete={recentTests ? recentTests[item.name] != null : false} />
+                        </div>
+                    )
+                })}
+            </div>
+
+            <div className="test-indicator">
+                {testsList.map((_, index) => (
+                    <div key={index} className={`dot ${visibleIds.includes(index) ? "active" : ""}`} />
+                ))}
+            </div>
         </div>
-    </>)
+    )
 }

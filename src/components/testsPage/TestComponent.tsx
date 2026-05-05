@@ -1,7 +1,8 @@
-import { FC, memo } from "react"
+import React, { FC, memo, useRef, useState } from "react"
 import { TestItem } from "./TestsData"
 import { Timer, FileQuestion, ArrowRight } from "lucide-react"
 import { Button } from "../ui/reusable/button"
+import { title } from "process"
 
 interface TestItemProps {
     item: TestItem
@@ -12,9 +13,7 @@ interface TestItemProps {
     onClick: (path: string) => void
 }
 
-export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isAvailable, isComplete, onClick }) => {
-    const Icon = item.icon
-
+export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick }) => {
     const handleClick = () => {
         if (!isAvailable)
             return
@@ -22,19 +21,15 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
         onClick(item.path)
     }
 
-    const getQuestionLabel = (count: number) => {
-        const lastDigit = count % 10
-        const lastTwoDigits = count % 100
-
-        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return "вопросов"
-        if (lastDigit == 1) return "вопрос"
-        if (lastDigit >= 2 && lastDigit <= 4) return "вопроса"
-        return "вопросов"
+    const declension = (count: number, titles: [string, string, string]) => {
+        const cases = [2, 0, 1, 1, 1, 2]
+        return titles[
+            count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]
+        ]
     }
 
     return (
         <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
-
 
             <div className="test-selection-item-label">
                 <div className="test-selection-item-name">
@@ -49,18 +44,18 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, index, isA
 
             <div className="test-selection-item-info">
                 <div className="test-selection-item-hint">
-                    <Timer size={20} strokeWidth={1.5} />
-                    <span>{item.time} минут</span>
+                    <Timer />
+                    <span>{item.time} {declension(item.time, ["минута", "минуты", "минут"])}</span>
                 </div>
 
                 <div className="test-selection-item-hint">
-                    <FileQuestion size={20} strokeWidth={1.5} />
-                    <span>{item.questionscount} {getQuestionLabel(item.questionscount)}</span>
+                    <FileQuestion />
+                    <span>{item.questionscount} {declension(item.questionscount, ["вопрос", "вопроса", "вопросов"])}</span>
                 </div>
             </div>
 
-            <div className="test-selection-options">
-                <Button variant="icon-only" icon={<ArrowRight />} />
+            <div className="test-selection-decal">
+                <ArrowRight />
             </div>
         </div>
     )
