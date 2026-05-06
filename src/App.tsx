@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import { PupilDataLoading } from "./components/adminPages/pupils/data-loading/PupilDataLoading";
 import { PupilsList } from "./components/adminPages/pupils/PupilsList";
+import {AdminPage} from "./components/adminPages/AdminPage"
 import { ROLES } from "./types/account/role";
 
 import { PupilGradeLoading } from "./components/adminPages/pupils/grade-loading/PupilGradeLoading";
@@ -81,11 +82,13 @@ export default function App() {
 			<Route element={<ProtectedRoute />}>
 				<Route element={<Layout />}>
 					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}>
-						<Route path="admin/pupils-upload" element={<PupilDataLoading />} />
-						<Route path="admin/pupils" element={<PupilsList />} />
-						<Route path="admin/simulations" element={<SimulationPage />} />
-						<Route path="admin/specialists" element={<Specialists />}/>
-						<Route path="admin/specialists-upload" element={<UploadSpecialists/>}/>
+						<Route path="/admin" element={<AdminPage />}>
+							<Route path="pupils-upload" element={<PupilDataLoading />} />
+							<Route path="pupils" element={<PupilsList />} />
+							<Route path="simulations" element={<SimulationPage />} />
+							<Route path="specialists" element={<Specialists />}/>
+							<Route path="specialists-upload" element={<UploadSpecialists/>}/>
+						</Route>
 					</Route>
 
 					{/* Tests routes */}
