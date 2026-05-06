@@ -1,0 +1,29 @@
+
+
+.sidebar {
+    background-color: white;
+    padding: 10px 25px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+    z-index: 999;
+    align-items: center;
+    justify-content: space-between;
+}
+.items {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.item {
+    transition: color ease-in-out 0.2s;
+    text-decoration: none !important;
+}
+.item:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+}
+.item.active {
+    color: var(--accent-color);
+}

@@ -39,7 +39,6 @@ export const PupilsList = () => {
         return <><p>Загружаем ...</p></>
     return <>
         <div className={"content-wrapper"}>
-            <h3>Список учеников</h3>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={pupilListResponse.totalPages}  />
             <div className={"cards-container"}>
                 {pupilListResponse.content.map(p => (
