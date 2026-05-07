@@ -57,11 +57,6 @@ export const HomePage: FC = ({ }) => {
 
     return (
         <div className="home-wrapper">
-
-            <div className="home-header">
-                <h1>Добро пожаловать</h1>
-            </div>
-
             <div className="home-grid" ref={homeContainerRef}>
                 {SECTIONS.map(({ Component }, index) => (
                     <div className="home-grid-item-container" data-id={index}>
@@ -76,7 +71,6 @@ export const HomePage: FC = ({ }) => {
                     <Icon key={index} className={`icon ${visibleIds.includes(index) ? "active" : ""}`} />
                 ))}
             </div>
-
         </div>
     )
 }

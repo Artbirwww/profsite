@@ -78,6 +78,12 @@
     }
 }
 
+@media (max-width: 624px) {
+    .outlet {
+        padding-bottom: 70px;
+    }
+}
+
 @media (max-width: 480px) {
     .header {
         top: 10px;

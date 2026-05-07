@@ -8,6 +8,6 @@ export const AdminPage = () => {
         <div className="content">
             <Outlet />
         </div>
-        
+
     </>)
 }

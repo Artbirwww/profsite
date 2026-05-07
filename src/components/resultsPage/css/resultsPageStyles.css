@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 40px;
     width: 100%;
     height: 100%;
 }
+
 .tests-container {
     display: flex;
     flex-direction: column;
@@ -14,23 +14,23 @@
     scrollbar-width: none;
     padding-bottom: 3rem;
 }
+
 .test-result-card {
     display: flex;
     flex-direction: column;
     user-select: none;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     border-radius: 15px;
-    padding: 15px
+    cursor: pointer;
+    padding: 30px
 }
-.test-result-card:hover {
-    transform: translateY(-4px);
-    transition: transform 0.1s ease-in-out;
-}
+
 .test-result-title {
     display: flex;
     flex-direction: row;
     gap: 15px;
 }
+
 @media screen and (max-width: 768px) {
     .results-wrapper {
         padding: 15px;

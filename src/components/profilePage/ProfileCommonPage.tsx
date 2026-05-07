@@ -8,12 +8,8 @@ export const ProfileCommonPage = () => {
     const { getRoles } = useAuth()
 
     if (getRoles()?.find(role => role.name === ROLES.PUPIL))
-        return (<>
-            <PupilProfilePage />
-        </>)
+        return (<PupilProfilePage />)
 
     if (getRoles()?.find(role => role.name === ROLES.SPECIALIST))
-        return (<>
-            <SpecialistProfilePage />
-        </>)
+        return (<SpecialistProfilePage />)
 }

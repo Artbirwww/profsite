@@ -7,7 +7,7 @@ export interface MenuItemProps {
     icon: React.ElementType
     path: string
     order?: number
-    position?: 0 | 1
+    className?: string
     allowedRoles?: string[]
     isLogout?: boolean
 }
@@ -36,15 +36,6 @@ export const menuButtons: MenuItemProps[] = [
         order: 3,
     },
     {
-        id: "profile",
-        label: "Профиль",
-        icon: UserRound,
-        path: "/profile",
-        order: 5,
-    },
-
-    // пункты меню по ролям
-    {
         id: "grades",
         label: "Учеба",
         icon: Book,
@@ -53,11 +44,19 @@ export const menuButtons: MenuItemProps[] = [
         allowedRoles: [ROLES.PUPIL],
     },
     {
+        id: "profile",
+        label: "Профиль",
+        icon: UserRound,
+        path: "/profile",
+        order: 5,
+    },
+    {
         id: "admin-panel",
-        label: "Админ",
+        label: "Адм",
         icon: ShieldUser,
         path: "/admin",
-        position: 0,
+        order: 6,
+        className: "spec",
         allowedRoles: [ROLES.ADMIN],
     },
 ]

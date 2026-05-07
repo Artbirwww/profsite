@@ -5,9 +5,9 @@
     font-family: inherit;
     font-size: var(--font-size-base);
     margin: 0;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--grey-color-300);
     outline: none;
-    background: var(--primary-color);
+    background: var(--primary-color-50);
     box-sizing: border-box;
     width: 100%;
     border-radius: 15px;
@@ -55,7 +55,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-tertiary-color);
+    color: var(--text-placeholder-color);
     transition: all .3s ease;
     display: flex;
     align-items: center;
@@ -73,32 +73,32 @@
 }
 
 .custom-input-password-visibility:hover {
-    color: var(--accent-color);
+    color: var(--accent-color-500);
 }
 
 .custom-input-container input:focus {
-    border-color: var(--accent-color);
+    border-color: var(--accent-color-500);
 }
 
 .custom-input-container input:focus~.custom-input-icon {
-    color: var(--accent-color);
+    color: var(--accent-color-500);
     transform: translateY(-50%) scale(1.1);
 }
 
 .custom-input-container input:focus~.custom-input-password-visibility {
-    color: var(--text-secondary-color);
+    color: var(--text-placeholder-color);
 }
 
 .custom-input-container input::placeholder {
-    color: var(--text-tertiary-color);
+    color: var(--text-placeholder-color);
     font-weight: var(--font-weight-normal);
     opacity: .7;
 }
 
 .custom-input-container input:disabled {
-    background-color: var(--border-color);
-    border-color: var(--border-color);
-    color: var(--text-tertiary-color);
+    background-color: var(--grey-color-200);
+    border-color: var(--grey-color-300);
+    color: var(--text-placeholder-color);
     cursor: not-allowed;
     opacity: .8;
 }

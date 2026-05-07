@@ -201,8 +201,11 @@ export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubject
 
                     </tbody>
                 </table>
-                <Button buttonLabel="Сохранить" buttonIcon={<CheckCheck size={20} />}
-                    buttonFunction={addGradesToPupil} />
+
+                <div className="study-options">
+                    <Button label="Сохранить" icon={<CheckCheck />} onClick={addGradesToPupil} />
+                </div>
+
             </div>
             <Toaster />
         </div>

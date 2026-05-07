@@ -7,7 +7,6 @@
     gap: 10px;
     width: 100%;
     height: 100%;
-    padding: 100px 0;
     box-sizing: border-box;
 }
 
@@ -40,7 +39,7 @@
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    border-radius: 20px 20px 30px 30px;
+    border-radius: 15px;
 }
 
 .home-grid::-webkit-scrollbar {
@@ -61,7 +60,7 @@
 .home-section-header {
     display: flex;
     align-items: center;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     min-height: 60px;
     width: 100%;
     border-radius: 20px;
@@ -88,10 +87,10 @@
 
 .home-about-item {
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 30px;
 }
 
@@ -105,10 +104,10 @@
 
 .home-howto-item {
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 30px;
 }
 
@@ -122,10 +121,10 @@
 
 .home-professions-item {
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 30px;
 }
 
@@ -139,10 +138,10 @@
 
 .home-partners-item {
     display: flex;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 30px;
 }
 
@@ -161,12 +160,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 15px;
     height: 60px;
     min-height: 60px;
     gap: 20px;
     padding: 0 25px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-50);
 }
 
 .icon {
@@ -177,5 +176,5 @@
 }
 
 .icon.active {
-    color: var(--accent-color);
+    color: var(--accent-color-500);
 }

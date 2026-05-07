@@ -24,8 +24,8 @@
     display: flex;
     align-items: center;
     height: 40px;
-    background: var(--primary-color);
-    border: 1px solid var(--border-color);
+    background: var(--primary-color-50);
+    border: 1px solid var(--grey-color-300);
     color: var(--text-primary-color);
     cursor: pointer;
     border-radius: 15px;
@@ -35,7 +35,7 @@
 }
 
 .custom-date-picker-header:hover {
-    border-color: var(--accent-color);
+    border-color: var(--accent-color-500);
 }
 
 .custom-date-picker-text {
@@ -49,21 +49,21 @@
     top: 50%;
     transform: translateY(-50%);
     left: 14px;
-    color: var(--text-tertiary-color);
+    color: var(--text-placeholder-color);
     transition: all 0.3s ease;
     display: flex;
 }
 
 .date-picker-active .custom-date-picker-icon {
-    color: var(--accent-color);
+    color: var(--accent-color-500);
     transform: translateY(-50%) scale(1.1);
 }
 
 .calendar-dropdown {
     position: absolute;
     left: 0;
-    background-color: var(--primary-color);
-    border: 1px solid var(--border-color);
+    background-color: var(--primary-color-50);
+    border: 1px solid var(--grey-color-300);
     border-radius: 15px;
     padding: 15px;
     width: 280px;
@@ -87,8 +87,8 @@
     min-width: 30px !important;
     height: 30px;
     border-radius: 15px;
-    background: var(--accent-color);
-    color: var(--primary-color);
+    background: var(--accent-color-500);
+    color: var(--primary-color-50);
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -116,7 +116,7 @@
     font-family: inherit;
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
-    background: var(--border-color);
+    background: var(--grey-color-300);
     outline: none;
     cursor: pointer;
     scrollbar-width: 0;
@@ -128,7 +128,7 @@
 }
 
 .calendar-select:hover {
-    background: var(--border-color);
+    background: var(--grey-color-400);
 }
 
 .calendar-grid-header {
@@ -140,7 +140,7 @@
 
 .calendar-grid-header>div {
     font-size: var(--font-size-sm);
-    color: var(--accent-color);
+    color: var(--accent-color-500);
     font-weight: var(--font-weight-medium);
 }
 
@@ -155,7 +155,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 50px;
     cursor: pointer;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
@@ -164,8 +164,8 @@
 }
 
 .calendar-day:hover:not(.empty) {
-    background: var(--accent-color);
-    color: var(--primary-color);
+    background: var(--accent-color-500);
+    color: var(--primary-color-50);
 }
 
 .calendar-day.empty {
@@ -173,8 +173,8 @@
 }
 
 .calendar-day-selected {
-    background-color: var(--accent-color) !important;
-    color: var(--primary-color) !important;
+    background-color: var(--accent-color-500) !important;
+    color: var(--primary-color-50) !important;
 }
 
 .date-picker-disabled {
@@ -183,9 +183,9 @@
 }
 
 .date-picker-disabled .custom-date-picker-header {
-    background-color: var(--border-color);
-    border-color: var(--border-color);
-    color: var(--text-tertiary-color);
+    background-color: var(--grey-color-200);
+    border-color: var(--grey-color-300);
+    color: var(--text-placeholder-color);
     pointer-events: none;
 }
 

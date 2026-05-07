@@ -14,8 +14,8 @@ interface ItemProps {
 const MenuItem: FC<ItemProps> = ({ item, isActive, onClick }) => {
     const Icon = item.icon
     return (
-        <div className={`menu-nav-item-container ${isActive ? "active" : ""}`} onClick={() => onClick(item)}>
-            <div className="menu-nav-item-icon"><Icon size={20} /></div>
+        <div className={`menu-nav-item-container ${item.className || ""} ${isActive ? "active" : ""}`} onClick={() => onClick(item)}>
+            <div className="menu-nav-item-icon"><Icon /></div>
             <div className="menu-nav-item-label">{item.label}</div>
         </div>
     )
@@ -59,22 +59,16 @@ export const Menu = () => {
         navigate(item.path)
     }, [logout, navigate])
 
-    const { internalItems, externalItems } = useMemo(() => {
-
-        const filtered = [...menuButtons, logoutButton]
+    const menuItems = useMemo(() => {
+        return [...menuButtons, logoutButton]
             .filter(btn => !btn.allowedRoles?.length || btn.allowedRoles.some(r => checkRole({ name: r })))
             .sort((a, b) => (a.order || 0) - (b.order || 0))
-
-        return {
-            internalItems: filtered.filter(i => (i.position ?? 1) === 1),
-            externalItems: filtered.filter(i => i.position === 0)
-        }
     }, [checkRole])
 
     return (
         <div className="menu-wrapper">
             <nav className="menu-nav" ref={scrollRef}>
-                {internalItems.map(item => (
+                {menuItems.map(item => (
                     <MenuItem
                         key={item.id}
                         item={item}
@@ -82,19 +76,6 @@ export const Menu = () => {
                         onClick={handleAction} />
                 ))}
             </nav>
-
-            {externalItems.length > 0 && (
-                <nav className="menu-nav-external">
-                    {externalItems.map(item => (
-                        <MenuItem
-                            key={item.id}
-                            item={item}
-                            isActive={isActive(item.path)}
-                            onClick={handleAction}
-                        />
-                    ))}
-                </nav>
-            )}
         </div>
     )
 }

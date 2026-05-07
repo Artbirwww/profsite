@@ -258,9 +258,7 @@ export const SpecialistProfilePage: FC = () => {
                     </div>
 
                     <div className="profile-options profile-grid-item-6">
-                        <Button
-                            buttonLabel="Сохранить"
-                            buttonFunction={updateData} />
+                        <Button label="Сохранить" icon={<CheckCheck />} onClick={updateData} />
                     </div>
                 </div>
             </div>

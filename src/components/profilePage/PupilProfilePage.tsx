@@ -115,11 +115,7 @@ export const PupilProfilePage: FC = () => {
         }
     }
 
-    return (<>
-        <div className="page-header">
-            <h1>Личный кабинет</h1>
-        </div>
-
+    return (
         <div className="profile-wrapper">
             <div className="profile-container">
                 <div className="profile-grid">
@@ -267,13 +263,11 @@ export const PupilProfilePage: FC = () => {
 
                     {/* кнопка сохранения */}
                     <div className="profile-options profile-grid-item-6 ">
-                        <Button
-                            buttonLabel="Сохранить"
-                            buttonFunction={handleSaveClick} />
+                        <Button label="Сохранить" icon={<CheckCheck />} onClick={handleSaveClick} />
                     </div>
                 </div>
             </div>
             <Toaster />
         </div>
-    </>)
+    )
 }

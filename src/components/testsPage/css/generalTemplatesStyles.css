@@ -281,7 +281,7 @@ input[type="range"].input-slider::-moz-range-track {
 
 @media (max-width: 992px) {
     .test-card {
-        gap: 10px;
+        gap: 20px;
     }
 
     .constant-sum-slider {
@@ -290,7 +290,7 @@ input[type="range"].input-slider::-moz-range-track {
 
     .test-slider-grid {
         grid-template-columns: 1fr;
-        row-gap: 30px;
+        row-gap: 10px;
         overflow-y: auto;
         scroll-behavior: smooth;
         padding-right: 10px;
@@ -359,9 +359,8 @@ input[type="range"].input-slider::-moz-range-track {
 
     .test-slider-grid {
         height: 100%;
-        grid-template-rows: repeat(5, 1fr);
         grid-auto-rows: 1fr;
-        row-gap: 40px;
+        row-gap: 10px;
     }
 
     .test-grid-item {
