@@ -13,8 +13,8 @@ interface FormSelectionTestConfig<T> {
     Component: React.ComponentType<any>
     componentProps?: any
     hasTimer?: boolean
-    initialSeconds?:number
-    autoNavigateOnTimeout?:boolean
+    initialSeconds?: number
+    autoNavigateOnTimeout?: boolean
 }
 
 export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => {
@@ -32,15 +32,18 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
                 setData(formData)
             setSelectedForm(formId)
         }
+
         useEffect(() => {
             if (data && data.length > 0 && config.hasTimer !== false)
                 timer.start()
         }, [data])
+
         useEffect(() => {
-            if (data && config.autoNavigateOnTimeout && timer.seconds === 0) 
+            if (data && config.autoNavigateOnTimeout && timer.seconds === 0)
                 navigateToResults()
-            
+
         }, [timer.seconds])
+
         const navigateToResults = () => {
             const state: any = {
                 [config.stateKey]: data,
@@ -50,27 +53,25 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
                 state[config.stateKeyForm] = selectedForm
             navigate(config.resultPath, { state })
         }
-        if (!selectedForm)
-            return <TestFormSelection forms={config.forms} onSelect={handleSelect} />
+
+        if (!selectedForm) return <TestFormSelection forms={config.forms} onSelect={handleSelect} />
 
         if (!data) return <p>загрузка...</p>
 
-        return (<>
-        <div className="actual-test-wrapper">
+        return (
+            <div className="actual-test-wrapper">
+                {config.hasTimer !== false && (
+                    <div className="float-timer">
+                        {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
+                    </div>
+                )}
 
-        
-            {config.hasTimer !== false && (
-                <div className="float-timer">
-                    {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
-                </div>
-            )}
-            
-            <config.Component
-                {...config.componentProps}
-                tasks={data}
-                setTasks={setData as any}
-                navigateToResults={navigateToResults} />
-        </div>
-        </>)
+                <config.Component
+                    {...config.componentProps}
+                    tasks={data}
+                    setTasks={setData as any}
+                    navigateToResults={navigateToResults} />
+            </div>
+        )
     }
 }

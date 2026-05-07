@@ -77,7 +77,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
             <div className="test-card-info">
                 <div className="test-card-count">
-                    <p><span>Вопрос</span> <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
+                    {currentTaskNumber + 1} из {tasks.length}
                 </div>
             </div>
 
@@ -110,10 +110,6 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
                     <Button label={"Завершить"} icon={<CheckCheck />} onClick={navigateToResults} />
                 )}
 
-            </div>
-
-            <div className="test-card-exit">
-                <Button label={"Завершить досрочно"} variant="tertiary" icon={<X />} onClick={navigateToResults} />
             </div>
 
             <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />

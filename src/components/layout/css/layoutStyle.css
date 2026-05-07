@@ -64,6 +64,7 @@
         right: 0;
         bottom: 0;
         left: 0;
+        border-radius: 0;
     }
 
     .outlet {
@@ -74,5 +75,16 @@
     .header {
         max-height: 40px;
         left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        top: 10px;
+    }
+
+    .outlet {
+        padding-top: 60px;
+        margin: 0 10px;
     }
 }

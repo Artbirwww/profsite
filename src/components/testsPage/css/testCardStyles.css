@@ -62,7 +62,7 @@
     font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-placeholder-color);
-    transition: all .4s cubic-bezier(.4, 0, .2, 1)
+    transition: all .4s cubic-bezier(.4, 0, .2, 1);
 }
 
 .test-selection-item:hover .test-selection-item-label span {

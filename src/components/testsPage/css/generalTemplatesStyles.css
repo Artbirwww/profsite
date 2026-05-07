@@ -209,8 +209,8 @@ input[type="range"].input-slider::-moz-range-track {
 .test-card-list.column {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 10px;
     z-index: 3;
 }
@@ -232,15 +232,15 @@ input[type="range"].input-slider::-moz-range-track {
     text-align: center;
     justify-content: center;
     color: var(--text-primary-color);
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
-    border: 2px solid var(--border-color);
-    min-height: 40px;
-    min-width: 40px;
-    padding: 0 40px;
-    border-radius: 15px;
+    background-color: var(--grey-color-300);
+    min-height: 44px;
+    min-width: 44px;
+    padding: 5px 40px;
+    border-radius: 100px;
     cursor: pointer;
-    transition: all .2s ease;
+    transition: all .4s cubic-bezier(.4, 0, .2, 1);
 }
 
 .test-card-list.row .test-card-selectable {
@@ -248,11 +248,8 @@ input[type="range"].input-slider::-moz-range-track {
 }
 
 .test-card-selectable.active {
-    border-color: var(--accent-color);
-}
-
-.test-card-selectable:hover {
-    border-color: var(--accent-color);
+    background-color: var(--accent-color-500);
+    color: var(--primary-color-50);
 }
 
 /* ПРОГРЕСС ПРОХОЖДЕНИЯ ТЕСТА */
@@ -271,27 +268,33 @@ input[type="range"].input-slider::-moz-range-track {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-color);
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    background-color: var(--primary-color-50);
+    font-size: clamp(var(--font-size-sm), 0.638rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
     width: 100px;
-    height: 40px;
-    border-radius: 15px;
+    height: 44px;
+    border-radius: 100px;
 }
 
 /* МЕДИА ЗАПРОСЫ */
 
 @media (max-width: 992px) {
+    .test-card {
+        gap: 10px;
+    }
+
+    .constant-sum-slider {
+        height: 100%;
+    }
+
     .test-slider-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 55px);
         row-gap: 30px;
-        grid-auto-rows: 55px;
         overflow-y: auto;
         scroll-behavior: smooth;
         padding-right: 10px;
-        height: calc((58px * 4) + (30px * 3));
+        height: 100%;
         scrollbar-width: thin;
         scrollbar-color: var(--border-color);
     }
@@ -300,39 +303,39 @@ input[type="range"].input-slider::-moz-range-track {
         display: flex;
         gap: 10px;
     }
+
+    .test-card-selectable {
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .float-timer {
+        height: 40px;
+    }
 }
 
 @media (max-width: 768px) {
-    .test-card-back {
-        border: none;
-    }
-
-    .test-card-count span:first-child {
+    .test-card::after {
         display: none;
-    }
-
-    .test-card-list {
-        width: 100%;
-    }
-
-    .test-card-selectable:not(.test-card-list.row .test-card-selectable) {
-        width: 100%;
     }
 
     .test-progress-bar {
         display: none;
+    }
+
+    .test-card-selectable {
+        min-width: 34px;
+        min-height: 34px;
+    }
+
+    .float-timer {
+        height: 34px;
     }
 }
 
 @media (max-width: 480px) {
     .test-card {
         padding: 20px;
-        gap: 20px;
-        justify-content: unset;
-    }
-
-    .test-card::after {
-        display: none;
     }
 
     .pozitive-negative {
@@ -373,10 +376,6 @@ input[type="range"].input-slider::-moz-range-track {
         border-radius: 10px;
     }
 
-    .test-card-list.row .test-card-selectable {
-        width: 100%;
-    }
-
     .test-card-img {
         max-height: 100%;
         max-width: 100%;
@@ -395,6 +394,5 @@ input[type="range"].input-slider::-moz-range-track {
 @media (max-height: 680px) and (max-width: 480px) {
     .single-options-picker.extended {
         height: 100%;
-        gap: 20px;
     }
 }

@@ -47,6 +47,7 @@ export const createStandartTest = (config: StandartTestConfig) => {
             if (config.autoNavigateOnTimeout && timer.seconds === 0 && tasks)
                 handleComplete()
         }, [timer.seconds])
+
         const handleComplete = () => {
             const completionTime = config.initialSeconds ?
                 config.initialSeconds - timer.seconds :
@@ -58,15 +59,17 @@ export const createStandartTest = (config: StandartTestConfig) => {
                 }
             })
         }
+
         if (!tasks) return <p>загрузка ...</p>
 
-        return (<>
+        return (
             <div className="actual-test-wrapper">
                 {config.hasTimer !== false && (
                     <div className="float-timer">
                         {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
                     </div>
                 )}
+
                 <SingleOptionsPicker
                     tasks={tasks}
                     setTasks={setTasks}
@@ -75,6 +78,6 @@ export const createStandartTest = (config: StandartTestConfig) => {
                     optionStyleType={config.optionStyle || 'column'}
                 />
             </div>
-        </>)
+        )
     }
 }

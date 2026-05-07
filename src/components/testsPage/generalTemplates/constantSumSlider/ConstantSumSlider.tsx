@@ -138,7 +138,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                 ) : (
                     <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
                 )}
-
             </div>
 
             {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}

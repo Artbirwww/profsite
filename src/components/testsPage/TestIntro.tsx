@@ -50,10 +50,11 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
                     <span>{description.fullDescription}</span>
                 </div>
 
+                {/* НЕ УДАЛЯТЬ
                 <div className="intro-time-hint">
                     {description.timeHint &&
                         <span>Времени на выполнение: {description.timeHint}</span>}
-                </div>
+                </div>*/}
 
                 <div className="intro-options">
                     <Button label="Начать тест" variant="timer" timerSeconds={5} icon={<ArrowRight />} onClick={() => navigate(testNavigation)} />

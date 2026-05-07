@@ -11,6 +11,7 @@ const TEMPERAMENT_FORMS: TestFormConfig<TemperamentOption>[] = [
     { id: "A", label: "Форма A", data: TemperamentFormA },
     { id: "B", label: "Форма B", data: TemperamentFormB },
 ]
+
 export const TemperamentTest = createFormSelectionTest({
     forms: TEMPERAMENT_FORMS,
     resultPath: "/tests/temperament-results",
