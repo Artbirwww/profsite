@@ -64,7 +64,6 @@ export const UploadSpecialists = () => {
     return(<>
         <div className="content-wrapper">
             <div className="upload-section">
-                <h3>Загрузка специалистов</h3>
                 <div className="upload-container">
                     <div className="file-input-wrapper">
                         <input type="file" ref={fileRef} accept=".xlsx, .xls" onChange={pickupFileHandler} id="file-upload"/>

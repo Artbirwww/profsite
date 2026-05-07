@@ -46,7 +46,6 @@ export const Specialists = () => {
     }
     return (<>
     <div className="content-wrapper">
-        <h3>Специалисты</h3>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={totalPages} />
         <div className="cards-container">
             {specialists.map(specialist => (
