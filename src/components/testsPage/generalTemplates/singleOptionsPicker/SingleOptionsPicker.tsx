@@ -2,7 +2,7 @@ import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft, ArrowRight, Option } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCheck, Option, X } from "lucide-react"
 
 export interface Task {
     id: number
@@ -76,10 +76,6 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
     return (
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
             <div className="test-card-info">
-                <div className="test-card-back">
-                    <Button variant="icon-only" icon={<ArrowLeft />} onClick={() => { changeTask(-1) }} />
-                </div>
-
                 <div className="test-card-count">
                     <p><span>Вопрос</span> <span>{(currentTaskNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
                 </div>
@@ -106,10 +102,18 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
             </div>
 
             <div className="test-card-options">
-                {currentTaskNumber < tasks.length - 1 && (
+                <Button label="Назад" variant="secondary" icon={<ArrowLeft />} disabled={currentTaskNumber === 0} onClick={() => { changeTask(-1) }} />
+
+                {currentTaskNumber < tasks.length - 1 ? (
                     <Button label={"Пропустить"} icon={<ArrowRight />} onClick={() => changeTask(1)} />
+                ) : (
+                    <Button label={"Завершить"} icon={<CheckCheck />} onClick={navigateToResults} />
                 )}
-                <Button label={"Завершить"} onClick={navigateToResults} />
+
+            </div>
+
+            <div className="test-card-exit">
+                <Button label={"Завершить досрочно"} variant="tertiary" icon={<X />} onClick={navigateToResults} />
             </div>
 
             <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />

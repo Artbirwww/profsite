@@ -56,7 +56,7 @@ export const TestIntro = ({ testDescriptionPath, testNavigation }: TestIntroProp
                 </div>
 
                 <div className="intro-options">
-                    <Button label="Начать тест" icon={<ArrowRight />} onClick={() => navigate(testNavigation)} />
+                    <Button label="Начать тест" variant="timer" timerSeconds={5} icon={<ArrowRight />} onClick={() => navigate(testNavigation)} />
                 </div>
             </div>
         </div>

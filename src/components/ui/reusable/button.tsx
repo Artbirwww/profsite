@@ -1,15 +1,35 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from "react"
+import { ButtonHTMLAttributes, FC, ReactNode, useEffect, useState } from "react"
 import "./css/buttonStyles.css"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     label?: string
     icon?: ReactNode
-    variant?: "primary" | "secondary" | "tertiary" | "ghost" | "icon-only"
+    variant?: "primary" | "secondary" | "tertiary" | "ghost" | "icon-only" | "timer" | "done"
     width?: number
+    height?: number
     isLoading?: boolean
+    timerSeconds?: number
 }
 
-export const Button: FC<ButtonProps> = ({ label, icon, variant = "primary", width, isLoading = false, className = "", children, ...props }) => {
+export const Button: FC<ButtonProps> = ({ label, icon, variant = "primary", width, height, isLoading = false, timerSeconds = 0, className = "", children, ...props }) => {
+    const [secondsLeft, setSecodnsLeft] = useState(timerSeconds)
+
+    useEffect(() => {
+        if (variant === "timer" && secondsLeft > 0) {
+            const timer = setInterval(() => {
+                setSecodnsLeft((prev) => prev - 1)
+            }, 1000)
+
+            return () => clearInterval(timer)
+        }
+    }, [variant, secondsLeft])
+
+    useEffect(() => {
+        setSecodnsLeft(timerSeconds)
+    }, [timerSeconds])
+
+    const isTimerActive = variant === "timer" && secondsLeft > 0
+
     const classes = [
         "custom-button",
         variant,
@@ -17,15 +37,21 @@ export const Button: FC<ButtonProps> = ({ label, icon, variant = "primary", widt
         className,
     ].join(" ").trim()
 
+
+
     return (
-        <button className={classes} style={{ width: `${width}px` }} disabled={isLoading || props.disabled} {...props}>
+        <button className={classes} style={{ width: `${width}px`, height: `${height}px` }} disabled={isLoading || isTimerActive || props.disabled} {...props}>
             {variant !== "icon-only" &&
                 <div className="button-label">
                     {label || children}
                 </div>
             }
 
-            {icon && <div className="button-icon"><span>{icon}</span></div>}
+            {(icon || isTimerActive) &&
+                <div className="button-icon">
+                    <span>{isTimerActive ? secondsLeft : icon}</span>
+                </div>
+            }
         </button>
     )
 }

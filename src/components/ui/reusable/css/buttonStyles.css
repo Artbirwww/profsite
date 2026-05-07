@@ -30,6 +30,7 @@ button {
     cursor: pointer;
     user-select: none;
     font-family: inherit;
+    overflow: hidden;
     position: relative;
     min-height: 36px;
     transition: all .2s cubic-bezier(.4, 0, .2, 1);
@@ -42,6 +43,7 @@ button {
     padding: 0 24px;
     font-size: clamp(0.875rem, 0.683rem + 0.77vw, 1rem);
     font-weight: 500;
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
 }
 
 .button-icon {
@@ -51,12 +53,14 @@ button {
     height: 44px;
     width: 44px;
     border-radius: 50px;
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
 }
 
 .button-icon svg {
     width: 22px;
     height: 22px;
     stroke-width: 1.8;
+    transition: all .2s cubic-bezier(.4, 0, .2, 1);
 }
 
 
@@ -68,7 +72,7 @@ button {
 }
 
 .custom-button.primary .button-icon {
-    background-color: var(--secondary-accent-color);
+    background-color: var(--accent-color-600);
 }
 
 .custom-button.primary:hover {}
@@ -78,27 +82,28 @@ button {
 .custom-button.primary:focus {}
 
 .custom-button.primary:disabled {
-    background-color: var(--disabled-color) !important;
-    color: var(--tertiary-disabled-color) !important;
+    background-color: var(--grey-color-300) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8) !important;
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
 .custom-button.primary:disabled .button-icon {
-    background-color: var(--secondary-disabled-color) !important;
+    background-color: var(--grey-color-400) !important;
 }
 
 
 
 /* secondary button */
 .custom-button.secondary {
-    background-color: var(--secondary-primary-color);
-    color: var(--accent-color);
+    background-color: var(--grey-color-200);
+    color: var(--accent-color-500);
 }
 
 .custom-button.secondary .button-icon {
-    background-color: var(--tertiary-primary-color);
+    background-color: var(--grey-color-300);
 }
 
 .custom-button.secondary:hover {}
@@ -108,35 +113,28 @@ button {
 .custom-button.secondary:focus {}
 
 .custom-button.secondary:disabled {
-    background-color: var(--disabled-color) !important;
-    color: var(--tertiary-disabled-color) !important;
-    filter: opacity(.7) !important;
+    background-color: var(--grey-color-300) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8) !important;
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
 .custom-button.secondary:disabled .button-icon {
-    background-color: var(--secondary-disabled-color) !important;
+    background-color: var(--grey-color-400) !important;
 }
 
 
 
 /* tertiary button */
 .custom-button.tertiary {
-    flex-direction: row-reverse;
     background-color: transparent;
-    color: var(--accent-color);
-    gap: 8px;
-}
-
-.custom-button.tertiary .button-icon {
-    width: max-content;
-    height: max-content;
+    color: var(--accent-color-500);
 }
 
 .custom-button.tertiary .button-label {
-    padding: 0;
+    padding: 0 5px;
 }
 
 .custom-button.tertiary:hover {}
@@ -146,8 +144,8 @@ button {
 .custom-button.tertiary:focus {}
 
 .custom-button.tertiary:disabled {
-    color: var(--tertiary-disabled-color) !important;
-    filter: opacity(.7) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8) !important;
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
@@ -158,15 +156,8 @@ button {
 /* ghost button */
 .custom-button.ghost {
     background-color: transparent;
-    color: var(--accent-color);
-    border: 1px solid;
-    border-right: none;
-    border-color: var(--accent-color);
-}
-
-.custom-button.ghost .button-icon {
-    background-color: var(--secondary-accent-color);
-    color: var(--primary-color);
+    color: var(--accent-color-500);
+    border: 1px solid var(--accent-color-500);
 }
 
 .custom-button.ghost:hover {}
@@ -176,26 +167,24 @@ button {
 .custom-button.ghost:focus {}
 
 .custom-button.ghost:disabled {
-    border-color: var(--disabled-color) !important;
-    color: var(--tertiary-disabled-color) !important;
+    border-color: var(--grey-color-400) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8);
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
-.custom-button.ghost:disabled .button-icon {
-    background-color: var(--secondary-disabled-color) !important;
-}
 
 
-
+/* icon-only button */
 .custom-button.icon-only {
     width: 44px;
 }
 
 .custom-button.icon-only .button-icon {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+    background-color: var(--accent-color-500);
+    color: var(--text-accent-color);
 }
 
 .custom-button.icon-only:hover {}
@@ -204,15 +193,76 @@ button {
 
 .custom-button.icon-only:focus {}
 
-.custom-button.icon-only:disabled {
-    color: var(--tertiary-disabled-color) !important;
+.custom-button.icon-only:disabled .button-icon {
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    color: var(--text-secondary-color) !important;
+    background-color: var(--grey-color-400) !important;
+}
+
+
+
+/* timer button */
+.custom-button.timer {
+    background-color: var(--accent-color-500);
+    color: var(--primary-color-50);
+}
+
+.custom-button.timer .button-icon {
+    background-color: var(--accent-color-600);
+}
+
+.custom-button.timer:hover {}
+
+.custom-button.timer:active {}
+
+.custom-button.timer:focus {}
+
+.custom-button.timer:disabled {
+    background-color: var(--grey-color-300) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8) !important;
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
-.custom-button.icon-only:disabled .button-icon {
-    background-color: var(--secondary-disabled-color) !important;
+.custom-button.timer:disabled .button-icon {
+    background-color: var(--grey-color-400) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+
+
+/* done button */
+.custom-button.done {
+    background-color: var(--scfly-color-400);
+    color: var(--primary-color-50);
+}
+
+.custom-button.done .button-icon {
+    background-color: var(--scfly-color-500);
+}
+
+.custom-button.done:hover {}
+
+.custom-button.done:active {}
+
+.custom-button.done:focus {}
+
+.custom-button.done:disabled {
+    background-color: var(--grey-color-300) !important;
+    color: var(--text-secondary-color) !important;
+    filter: opacity(.8) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.custom-button.done:disabled .button-icon {
+    background-color: var(--grey-color-400) !important;
+    font-weight: var(--font-weight-medium);
 }
 
 

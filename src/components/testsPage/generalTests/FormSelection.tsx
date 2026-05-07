@@ -64,6 +64,7 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
                     {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
                 </div>
             )}
+            
             <config.Component
                 {...config.componentProps}
                 tasks={data}

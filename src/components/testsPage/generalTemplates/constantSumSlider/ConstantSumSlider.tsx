@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } fr
 import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft, ChevronUp, ChevronDown, ArrowRight } from "lucide-react"
+import { ArrowLeft, ChevronUp, ChevronDown, ArrowRight, CheckCheck } from "lucide-react"
 
 export interface SliderData {
     id: number
@@ -81,64 +81,70 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     }
 
     const currentTotal = sliders.reduce((sum, s) => sum + s.value, 0)
-    const isOverLimit = currentTotal > maxValue
 
-    const formatNumber = (num: number) => num.toString().padStart(2, "0")
 
     return (
         <div className="test-card constant-sum-slider">
             <div className="test-card-info">
-                <div className="test-card-back">
-                    <Button variant="icon-only" icon={<ArrowLeft />} onClick={() => { nextPage(-1) }} />
-                </div>
-
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    <p>
-                        <span>Вопрос</span>
-                        <span>{formatNumber(currentGroupNumber + 1)}</span> из
-                        <span>{formatNumber(7)}</span>
-                    </p>
+                    {currentGroupNumber + 1} из 7
                 </div>
 
-                <div className="test-card-count">
+                <div className="test-card-count" style={{ color: currentTotal > maxValue ? "#f03063" : currentTotal === maxValue ? "#55d38e" : "" }}>
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    {sliders.reduce((total, slider) => total + slider.value, 0) > maxValue ?
-                        <p style={{ color: "red" }}><span >Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p> :
-                        <p><span>Распределено</span> <span>{(totalValue).toString().padStart(2, "0")}</span> из <span>{(10).toString().padStart(2, "0")}</span></p>}
+                    {totalValue} из 10
                 </div>
             </div>
 
             <div className="test-slider-grid" ref={gridRef}>
-                {sliders.map(slider => (
-                    <div key={slider.id} className="test-grid-item">
-                        <div className="test-card-text">
-                            <div className="input-slider-count">{slider?.value}</div>
-                            {slider?.text}
-                        </div>
+                {sliders.map(slider => {
+                    const progress = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
 
-                        <div className="test-card-input">
-                            <input
-                                className="input-slider"
-                                type="range"
-                                min={slider.min}
-                                max={slider.max}
-                                value={slider.value}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => { handleSliderScroll(parseInt(e.target.value), slider) }}
-                                onWheel={handleWheel} />
+                    return (
+                        <div key={slider.id} className="test-grid-item">
+                            
+                            <div className="test-card-text">{slider?.text}</div>
+
+                            <div className="test-card-input">
+                                <input
+                                    className="input-slider"
+                                    type="range"
+                                    min={slider.min}
+                                    max={slider.max}
+                                    value={slider.value}
+                                    style={{ '--progress': `${progress}%` } as React.CSSProperties}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        handleSliderScroll(parseInt(e.target.value), slider)
+                                    }}
+                                    onWheel={handleWheel}
+                                />
+                                <div className="slider-labels">
+                                    <span>0</span>
+                                    <span>5</span>
+                                    <span>10</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    )
+                })}
             </div>
 
             <div className="test-card-options">
-                <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
+                <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentGroupNumber === 0} onClick={() => { nextPage(-1) }} />
+                
+                {currentGroupNumber === 6 ? (
+                    <Button label={"Завершить"} icon={<CheckCheck />} onClick={nextPageHandler} />
+                ) : (
+                    <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
+                )}
+
             </div>
 
             {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
             <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
             <Toaster />
-        </div>
+        </div >
     )
 }

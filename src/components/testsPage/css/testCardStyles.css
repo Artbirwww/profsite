@@ -18,7 +18,7 @@
     user-select: none;
 }
 
-.hover-circle {
+.test-selection-item .hover-circle {
     position: absolute;
     left: var(--mouse-x);
     top: var(--mouse-y);
@@ -201,6 +201,10 @@
 }
 
 @media (max-width: 480px) {
+    .test-selection-item {
+        padding: 20px;
+    }
+
     .test-selection-item-info {
         flex-direction: row;
         align-items: start;

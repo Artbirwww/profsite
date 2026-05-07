@@ -28,6 +28,12 @@
     --accent-color-900: #103e6a;
     --accent-color-950: #0a2747;
 
+    --grey-color-100: #f8f8f8;
+    --grey-color-200: #f3f3f4;
+    --grey-color-300: #e8e9ea;
+    --grey-color-400: #c4c6c8;
+    --grey-color-500: #7e8287;
+
     --scfly-color-300: #7ae3a9;
     --scfly-color-400: #55d38e;
     --scfly-color-500: #2eb96d;
@@ -41,6 +47,7 @@
     --error-color-600: #de205c;
 
     --text-primary-color: #2c2c2c;
+    --text-accent-color: #fafafa;
     --text-secondary-color: #6e6e6e;
     --text-placeholder-color: #8e8e8e;
     --text-disabled-color: #cacaca;
