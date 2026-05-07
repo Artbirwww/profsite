@@ -40,7 +40,7 @@ button {
     align-items: center;
     justify-content: center;
     padding: 0 24px;
-    font-size: clamp(0.875rem, 0.842rem + 0.18vw, 1rem);
+    font-size: clamp(0.875rem, 0.683rem + 0.77vw, 1rem);
     font-weight: 500;
 }
 
@@ -63,8 +63,8 @@ button {
 
 /* primary button */
 .custom-button.primary {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
+    background-color: var(--accent-color-500);
+    color: var(--primary-color-50);
 }
 
 .custom-button.primary .button-icon {

@@ -18,10 +18,30 @@
     user-select: none;
 }
 
+.hover-circle {
+    position: absolute;
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    width: 350px;
+    height: 350px;
+    background-color: var(--accent-color-300);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform .2s ease-in-out, opacity .4s ease-in-out;
+    opacity: 0;
+    filter: blur(40px);
+}
+
+.test-selection-item:hover .hover-circle {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
 .test-selection-item-label {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    z-index: 1;
 }
 
 .test-selection-item-name {
@@ -32,29 +52,35 @@
 }
 
 .test-selection-item-label h4 {
-    font-size: clamp(var(--font-size-md), 1.027rem + 0.39vw, var(--font-size-lg));
+    font-size: clamp(var(--font-size-md), 0.683rem + 0.77vw, var(--font-size-lg));
     font-weight: var(--font-weight-medium);
     line-height: 20px;
     color: var(--text-primary-color);
 }
 
 .test-selection-item-label span {
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-placeholder-color);
+    transition: all .4s cubic-bezier(.4, 0, .2, 1)
+}
+
+.test-selection-item:hover .test-selection-item-label span {
+    color: var(--text-primary-color);
 }
 
 .test-selection-item-description {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-placeholder-color);
     opacity: 0;
     left: -200%;
     width: 350px;
     transition: all .4s cubic-bezier(.4, 0, .2, 1);
+    z-index: 1;
 }
 
 .test-selection-item:hover .test-selection-item-description {
@@ -67,6 +93,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    z-index: 1;
 }
 
 .test-selection-item-hint {
@@ -86,7 +113,7 @@
 }
 
 .test-selection-item-hint span {
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-base));
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     transition: all .4s cubic-bezier(.4, 0, .2, 1);
 }
@@ -106,6 +133,7 @@
     align-items: center;
     justify-content: center;
     transition: all .4s cubic-bezier(.4, 0, .2, 1);
+    z-index: 1;
 }
 
 .test-selection-decal svg {
@@ -131,12 +159,83 @@
     user-select: none;
 }
 
-/* МЕДИА ЗАПРОСЫ */
+@media (pointer: coarse) {
+    .test-selection-item {
+        pointer-events: auto;
+        transform: none !important;
+    }
+
+    .hover-circle {
+        display: none !important;
+    }
+
+    .test-selection-item-description {
+        display: none !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .test-selection-item-name {
+        gap: 5px;
+    }
+
+    .test-selection-item-info {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .test-selection-item-hint svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .test-selection-decal {
+        width: 38px;
+        height: 38px;
+    }
+
+    .test-selection-decal svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
 @media (max-width: 480px) {
     .test-selection-item-info {
-        flex-direction: column;
+        flex-direction: row;
         align-items: start;
         gap: 10px;
+    }
+
+    .test-selection-item-label span {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .test-selection-item-hint span {
+        width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .test-selection-item-hint svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .test-selection-decal {
+        width: 34px;
+        height: 34px;
+        background-color: transparent;
+    }
+
+    .test-selection-decal svg {
+        width: 20px;
+        height: 20px;
+        color: var(--accent-color-500);
     }
 
     .test-selection-item-options {

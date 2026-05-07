@@ -10,21 +10,17 @@ export const Layout: FC = () => {
 
     return (
         <div className="layout-wrapper">
-            <div className="background">
+            <div className="background" />
 
-                <div className="header">
-                    <h1>Хедер</h1>
-                </div>
-
-                <div className="content">
-                    <Outlet />
-                </div>
-
-                <div className="menu">
-                    {getToken() && <Menu />}
-                </div>
-                
+            <div className="header">
+                page name
             </div>
+
+            <div className="outlet">
+                <Outlet />
+            </div>
+
+            {getToken() && <Menu />}
         </div>
     )
 }

@@ -1,8 +1,6 @@
-import React, { FC, memo, useRef, useState } from "react"
+import { FC, memo, useRef, MouseEvent, useEffect } from "react"
 import { TestItem } from "./TestsData"
 import { Timer, FileQuestion, ArrowRight } from "lucide-react"
-import { Button } from "../ui/reusable/button"
-import { title } from "process"
 
 interface TestItemProps {
     item: TestItem
@@ -14,6 +12,44 @@ interface TestItemProps {
 }
 
 export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick }) => {
+    const cardRef = useRef<HTMLDivElement>(null)
+    const targetPos = useRef({ x: 0, y: 0 })
+    const currentPos = useRef({ x: 0, y: 0 })
+
+    useEffect(() => {
+        let frameId: number
+
+        const animate = () => {
+            // Коэффициент инерции (0.1 — плавно, 0.2 — быстрее)
+            const lerpFactor = 0.1
+
+            // Вычисляем разницу и прибавляем часть к текущей позиции
+            currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerpFactor
+            currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerpFactor
+
+            if (cardRef.current) {
+                cardRef.current.style.setProperty("--mouse-x", `${currentPos.current.x}px`)
+                cardRef.current.style.setProperty("--mouse-y", `${currentPos.current.y}px`)
+            }
+
+            frameId = requestAnimationFrame(animate)
+        }
+
+        frameId = requestAnimationFrame(animate)
+        return () => cancelAnimationFrame(frameId)
+    }, [])
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return
+        const rect = cardRef.current.getBoundingClientRect()
+
+        // Обновляем только целевую позицию
+        targetPos.current = {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        }
+    }
+
     const handleClick = () => {
         if (!isAvailable)
             return
@@ -29,7 +65,13 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
     }
 
     return (
-        <div className={`test-selection-item ${!isAvailable ? "locked" : ""}`} data-id={dataId} onClick={handleClick}>
+        <div ref={cardRef}
+            className={`test-selection-item ${!isAvailable ? "locked" : ""}`}
+            onMouseMove={handleMouseMove}
+            data-id={dataId}
+            onClick={handleClick}>
+
+            <div className="hover-circle" />
 
             <div className="test-selection-item-label">
                 <div className="test-selection-item-name">

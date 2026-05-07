@@ -26,7 +26,7 @@
 .intro-description {
     width: 100%;
     text-align: justify;
-    font-size: clamp(var(--font-size-sm), 0.826rem + 0.2vw, var(--font-size-md));
+    font-size: clamp(var(--font-size-sm), 0.683rem + 0.77vw, var(--font-size-md));
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
 }

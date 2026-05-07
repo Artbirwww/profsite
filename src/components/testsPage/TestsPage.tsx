@@ -4,7 +4,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react"
 import { testsList } from "./TestsData"
 import { TestComponent } from "./TestComponent"
 import { useNavigate } from "react-router-dom"
-import { Check } from "lucide-react"
+import { Check, CheckCheck } from "lucide-react"
 import { testApi } from "../../services/api/testApi"
 import { useAuth } from "../../contexts/AuthContext"
 import { TestResultResponse } from "../../types/testTypes"
@@ -96,7 +96,8 @@ export const TestsPage: FC = ({ }) => {
                 </div>
 
                 <div className="progress-count">
-                    {Object.keys(recentTests).length} / {testsList.length}
+                    <CheckCheck />
+                    <span>{Object.keys(recentTests).length} / {testsList.length}</span>
                 </div>
             </div>
 
