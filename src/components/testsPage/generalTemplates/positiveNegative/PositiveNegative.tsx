@@ -12,46 +12,46 @@ export interface PositiveNegativeOption {
 }
 
 interface PositiveNegativeProps<T extends PositiveNegativeOption = PositiveNegativeOption> {
-    options: T[]
-    setOptions: Dispatch<SetStateAction<T[]>>
+    tasks: T[]
+    setTasks: Dispatch<SetStateAction<T[]>>
     navigateToResults: () => void;
 }
 
-export const PositiveNegative = ({ options, setOptions, navigateToResults }: PositiveNegativeProps) => {
+export const PositiveNegative = ({ tasks, setTasks, navigateToResults }: PositiveNegativeProps) => {
     const [currentOption, setCurrentOption] = useState<PositiveNegativeOption | null>(null)
     const [currentOptionNumber, setCurrentOptionNumber] = useState<number>(0)
 
     //Первый вопрос
     useEffect(() => {
-        if (options.length === currentOptionNumber) {
+        if (tasks.length === currentOptionNumber) {
             navigateToResults()
             return
         }
 
-        if (options.length > 0)
-            setCurrentOption(options[currentOptionNumber])
-    }, [options])
+        if (tasks.length > 0)
+            setCurrentOption(tasks[currentOptionNumber])
+    }, [tasks])
 
     //следующий вопрос
     useEffect(() => {
-        setCurrentOption(options[currentOptionNumber])
+        setCurrentOption(tasks[currentOptionNumber])
     }, [currentOptionNumber])
 
     //Ответ на вопрос пользователя, сохранить и показать новый
     const handleAnswer = (userAnswer: boolean) => {
-        const optionsTemp = options.map(option => {
-            if (option.text === currentOption?.text)
-                return { ...option, answer: userAnswer }
-            return option
+        const optionsTemp = tasks.map(task => {
+            if (task.text === currentOption?.text)
+                return { ...task, answer: userAnswer }
+            return task
         })
-        setOptions(optionsTemp)
+        setTasks(optionsTemp)
         changeOption(1)
         setCurrentOptionNumber(currentOptionNumber + 1)
     }
 
     const changeOption = (step: number) => {
         const newNumber = currentOptionNumber + step
-        if (newNumber < 0 || newNumber >= options.length) {
+        if (newNumber < 0 || newNumber >= tasks.length) {
             toast("Дальше некуда идти")
             return
         }
@@ -68,7 +68,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
                 </div>
 
                 <div className="test-card-count">
-                    <p><span>Вопрос</span> <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(options.length).toString().padStart(2, "0")}</span></p>
+                    <p><span>Вопрос</span> <span>{(currentOptionNumber + 1).toString().padStart(2, "0")}</span> из <span>{(tasks.length).toString().padStart(2, "0")}</span></p>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@ export const PositiveNegative = ({ options, setOptions, navigateToResults }: Pos
                     buttonFunction={() => handleAnswer(false)} />
             </div>
 
-            <ProgressBar currentTaskNumber={currentOptionNumber} total={options.length} />
+            <ProgressBar currentTaskNumber={currentOptionNumber} total={tasks.length} />
 
             <Toaster />
         </div>

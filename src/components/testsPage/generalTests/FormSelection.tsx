@@ -14,6 +14,7 @@ interface FormSelectionTestConfig<T> {
     componentProps?:any
     hasTimer?: boolean
     initialSeconds?:number
+    autoNavigateOnTimeout?:boolean
 }
 
 export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => {
@@ -21,7 +22,7 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
         const navigate = useNavigate()
         const [selectedForm, setSelectedForm] = useState<string | null>(null)
         const [data, setData] = useState<T[]>()
-        const timer = useTimer(config.initialSeconds || 0, false)
+        const timer = useTimer(config.initialSeconds || 0, config.initialSeconds ? true : false)
 
         const handleSelect = async (formId: string, formData: T[]) => {
             if (config.fetchFormData) {
@@ -35,6 +36,11 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
             if (data && data.length > 0 && config.hasTimer !== false) 
                 timer.start()
         }, [data])
+        useEffect(() => {
+            if (data && config.autoNavigateOnTimeout && timer.seconds === 0) 
+                navigateToResults()
+            
+        }, [timer.seconds])
         const navigateToResults = () => {
             const state: any = {
                 [config.stateKey]: data,
@@ -48,6 +54,9 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
             return <TestFormSelection forms={config.forms} onSelect={handleSelect} />
         if (!data) return <p>загрузка...</p>
         return (<>
+        <div className="actual-test-wrapper">
+
+        
             {config.hasTimer !== false && (
                 <div className="float-timer">
                     {formatTime(timer.minutes)}:{formatTime(timer.remaningSeconds)}
@@ -58,6 +67,7 @@ export const createFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) 
                 tasks={data}
                 setTasks={setData as any}
                 navigateToResults={navigateToResults} />
+        </div>
         </>)
     }
 }
