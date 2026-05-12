@@ -1,7 +1,6 @@
 import "./css/adminPageStyles.css"
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import "./css/admin-sidebar.css"
 
 import { adminButtons, AdminMenuItemProps } from "./adminData"
 import { FC, useCallback, useMemo } from "react"
