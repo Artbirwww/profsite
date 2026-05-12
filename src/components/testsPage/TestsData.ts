@@ -35,7 +35,7 @@ export const testsList: TestItem[] = [
     },
     {
         id: "test-group-roles",
-        label: "Роли в команде",
+        label: "Групповые роли",
         author: "Реймонд Мередит Белбин",
         description: "Выявление вашей роли в команде по методике Белбина",
         time: 10,
@@ -63,7 +63,7 @@ export const testsList: TestItem[] = [
     },
     {
         id: "test-professional-orientation-klimov",
-        label: "Профориентация Климов",
+        label: "Профориентация",
         author: "Евгений Александрович Климов",
         description: "Профессиональные предпочтения",
         time: 20,
@@ -90,7 +90,7 @@ export const testsList: TestItem[] = [
     },
     {
         id: "test-professional-orientation-holland",
-        label: "Профориентация Холланд",
+        label: "Тип личности",
         author: "Джон Льюис Холланд",
         description: "Профессиональные предпочтения",
         time: 15,

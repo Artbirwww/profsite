@@ -12,6 +12,7 @@ import klimovProfessionsData from "./klimovProfessions.json"
 import { Button } from "../../ui/reusable/button"
 import { formatTime } from "../utils/formatTime"
 import { formatDateRU } from "../../../services/dates/formatDate"
+import { ArrowLeft } from "lucide-react"
 export const KlimovResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -26,7 +27,7 @@ export const KlimovResults = () => {
         const testDataTemp = location.state?.psychTest
         if (!testDataTemp) return
         setResult({
-            ...testDataTemp, 
+            ...testDataTemp,
             psychParams: sortByParam(testDataTemp.psychParams)
         })
     }, [])
@@ -34,11 +35,11 @@ export const KlimovResults = () => {
     useEffect(() => {
         if (isViewMode) return
         const createTest = async () => {
-            const klimovResult = {...calculateResults(location.state?.klimovTasks), completionTimeSeconds: location.state?.completionTimeSeconds}
+            const klimovResult = { ...calculateResults(location.state?.klimovTasks), completionTimeSeconds: location.state?.completionTimeSeconds }
             try {
                 const createdTest = await testApi.createTest(getToken(), klimovResult)
                 setResult({
-                    ...createdTest, 
+                    ...createdTest,
                     psychParams: sortByParam(createdTest.psychParams)
                 })
             } catch (err) {
@@ -52,28 +53,31 @@ export const KlimovResults = () => {
     }, [])
     if (!result) return <>
         <p>Загрузка...</p>
-        <Toaster/>
+        <Toaster />
     </>
     return (<>
         <div className="result-wrapper">
             <h3>Склонности к профессиям результат: </h3>
 
-                {result.psychParams.map(param => (
-                    <div className="result-card">
-                        {param.param >= 5 ? 
-                            <p><b>{`${klimovTypeTranslate[param.name]} : ${param.param}`}</b></p> : 
-                            <p>{`${klimovTypeTranslate[param.name]} : ${param.param}`}</p>}
-                        <p>{klimovProfessions.find(prof => prof.name === param.name)?.description}</p>
-                        <p>{klimovProfessions.find(prof => prof.name === param.name)?.traits}</p>
-                    </div>
-                ))}
+            {result.psychParams.map(param => (
+                <div className="result-card">
+                    {param.param >= 5 ?
+                        <p><b>{`${klimovTypeTranslate[param.name]} : ${param.param}`}</b></p> :
+                        <p>{`${klimovTypeTranslate[param.name]} : ${param.param}`}</p>}
+                    <p>{klimovProfessions.find(prof => prof.name === param.name)?.description}</p>
+                    <p>{klimovProfessions.find(prof => prof.name === param.name)?.traits}</p>
+                </div>
+            ))}
 
             <p>Дата прохождения: {formatDateRU(result.createdAt)}</p>
             {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
                 <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)}</span>
             }
-            <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+            <div>
+                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+            </div>
+
         </div>
-        
+
     </>)
 }

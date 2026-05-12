@@ -23,7 +23,6 @@ import { Layout } from "./components/layout/Layout"
 import { LoginPage } from "./components/authorizationPages/LoginPage"
 import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage";
 import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
-import { RegistrationPage } from "./components/authorizationPages/RegistrationPage"
 
 // Главные страницы
 import { HomePage } from "./components/homePage/HomePage"
@@ -88,6 +87,8 @@ export default function App() {
 				<Route element={<Layout />}>
 					<Route element={<RolesProtectedRoute approvedRoles={[ROLES.ADMIN]} />}>
 						<Route path="/admin" element={<AdminPage />}>
+							<Route index element={<Navigate to="/admin/pupils" replace />} />
+
 							<Route path="pupils-upload" element={<PupilDataLoading />} />
 							<Route path="pupils" element={<PupilsList />} />
 							<Route path="simulations" element={<SimulationPage />} />

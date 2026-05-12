@@ -8,9 +8,10 @@ import { AccountRequest } from "../../../types/account/account"
 import { specialistsAPI } from "../../../services/api/specialistApi"
 import { useAuth } from "../../../contexts/AuthContext"
 import { BASE_URL } from "../../../services/api/baseUrl"
+import { ArrowUpFromLine } from "lucide-react"
 export const UploadSpecialists = () => {
-    const {getToken} = useAuth()
-    const {rawData, headers, setHeaders, processExcelFile, resetData} = useExcelMapper()
+    const { getToken } = useAuth()
+    const { rawData, headers, setHeaders, processExcelFile, resetData } = useExcelMapper()
     const [specialistKeys, setSpecialistKeys] = useState(SpecialistKeys)
     const [headerMapping, setHeaderMapping] = useState<Record<string, string>>({})
 
@@ -23,8 +24,8 @@ export const UploadSpecialists = () => {
             resetData()
             if (fileRef.current) {
                 fileRef.current.value = '';
-}
-        } catch(err) {
+            }
+        } catch (err) {
             console.error(err)
             toast.error("Ошибка при выгрузке специалистов, проверьте логи F12")
         }
@@ -48,7 +49,7 @@ export const UploadSpecialists = () => {
                     specialist[mappedKey] = row[header]
             })
             console.log(specialist, account)
-            return {  "specialist" : specialist as Specialist, "account": account as AccountRequest}
+            return { "specialist": specialist as Specialist, "account": account as AccountRequest }
         })
         return specialists
     }
@@ -56,22 +57,22 @@ export const UploadSpecialists = () => {
         const file = e.target.files?.[0]
         processExcelFile(file as File)
     }
-    const handleSpecialistKeys = (headerName:string, selectedKey: string) => {
+    const handleSpecialistKeys = (headerName: string, selectedKey: string) => {
         console.log(headerName, selectedKey)
-        setHeaderMapping(prev => ({...prev, [headerName]: selectedKey}))
+        setHeaderMapping(prev => ({ ...prev, [headerName]: selectedKey }))
     }
 
-    return(<>
+    return (<>
         <div className="content-wrapper">
             <div className="upload-section">
                 <div className="upload-container">
                     <div className="file-input-wrapper">
-                        <input type="file" ref={fileRef} accept=".xlsx, .xls" onChange={pickupFileHandler} id="file-upload"/>
+                        <input type="file" ref={fileRef} accept=".xlsx, .xls" onChange={pickupFileHandler} id="file-upload" />
                         <label htmlFor="file-upload" className="file-label">
                             {"Excel файл"}
                         </label>
                     </div>
-                    <Button buttonLabel="Загрузить" buttonFunction={() => uploadSpecialists()}/>
+                    <Button label="Загрузить" icon={<ArrowUpFromLine />} onClick={() => uploadSpecialists()} />
                     <a download href={`${BASE_URL}/public/admin/specialists.xlsx`}>Скачать шаблон specialist.xlsx</a>
                 </div>
             </div>
@@ -84,14 +85,14 @@ export const UploadSpecialists = () => {
                                 <div className="excel-header">
                                     <p>{name}</p>
                                 </div>
-                                <select 
+                                <select
                                     className="default mapping-select"
                                     onChange={(e) => handleSpecialistKeys(name, e.target.value)}
                                     value={headerMapping[name] || ""}>
-                                        <option value={""}>Выбрать</option>
-                                        {specialistKeys.map(key => (
-                                            <option value={key}>{key}</option>
-                                        ))}
+                                    <option value={""}>Выбрать</option>
+                                    {specialistKeys.map(key => (
+                                        <option value={key}>{key}</option>
+                                    ))}
 
                                 </select>
                             </div>
@@ -99,7 +100,7 @@ export const UploadSpecialists = () => {
                     </div>
                 </div>
             )}
-            <Toaster/>
+            <Toaster />
         </div>
     </>)
 }

@@ -14,6 +14,7 @@ import { pupilApi } from "../../../services/api/pupilApi"
 import { Button } from "../../ui/reusable/button"
 import { formatTime } from "../utils/formatTime"
 import { formatDateRU } from "../../../services/dates/formatDate"
+import { ArrowLeft } from "lucide-react"
 export const EngineeringThinkingResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -31,7 +32,7 @@ export const EngineeringThinkingResults = () => {
         if (!pupilData || !result) return
         const resultParam = result?.psychParams[0].param
         const levelTemp = engineerLevels.find(engineer => engineer.gender === pupilData?.pupilDTO.gender)
-                            ?.levels.find(level => resultParam >= level.min && resultParam <= level.max)
+            ?.levels.find(level => resultParam >= level.min && resultParam <= level.max)
         setPupilLevel(levelTemp)
     }, [pupilData, result])
     useEffect(() => {
@@ -54,7 +55,7 @@ export const EngineeringThinkingResults = () => {
 
         const createTest = async () => {
 
-            const engineerThinkingTestResult = {...calculateResults(location.state?.tasks), completionTimeSeconds: location.state?.completionTimeSeconds}
+            const engineerThinkingTestResult = { ...calculateResults(location.state?.tasks), completionTimeSeconds: location.state?.completionTimeSeconds }
             console.log(engineerThinkingTestResult)
             try {
                 const createdTest = await testApi.createTest(getToken(), engineerThinkingTestResult)
@@ -72,44 +73,47 @@ export const EngineeringThinkingResults = () => {
 
     if (!result || !pupilData) return (<>
         <p>Загрузка ваших результатов...</p>
-        <Toaster/>
+        <Toaster />
     </>)
 
-    return (<div>
-            <h3>Ваш уровень инженерного мышления:  {result.psychParams[0].param} из 70 баллов</h3>
-            <div className="result-wrapper" >
-                <div className="result-card">
-                    <h4>Ваш результат: </h4>
-                    {pupilLevel && 
+    return (<div className="result-wrapper">
+        <h3>Ваш уровень инженерного мышления:  {result.psychParams[0].param} из 70 баллов</h3>
+        <div className="result-wrapper" >
+            <div className="result-card">
+                <h4>Ваш результат: </h4>
+                {pupilLevel &&
                     <>
                         <p>{pupilLevel.description}</p>
                         <p>{pupilLevel.techCapabilities}</p>
                     </>
-                    }
-                </div>
-                <div className="result-card-wrapper">
-                    <div className="result-card">
-                        <h4>Юноши (старше 18 лет)</h4>
-                        <div className="gender-card">Меньше 26 Очень низкий</div>
-                        <div className="gender-card">27 - 32 Низкий</div>
-                        <div className="gender-card">33 - 38 Средний</div>
-                        <div className="gender-card">39 - 47 Высокий</div>
-                        <div className="gender-card">Больше 48 Очень высокий</div>
-                    </div>
-                    <div className="result-card">
-                        <h4>Девушки (старше 18 лет)</h4>
-                            <div className="gender-card">Меньше 17 Очень низкий</div>
-                            <div className="gender-card">18 - 22 Низкий</div>
-                            <div className="gender-card">23 - 27 Средний</div>
-                            <div className="gender-card">28 - 34 Высокий</div>
-                            <div className="gender-card">Больше 35 Очень высокий</div>
-                    </div>
-                </div>
-                <p>Дата прохождения: {formatDateRU(result?.createdAt)}</p>
-                {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
-                    <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)} из 25:00</span>} 
-                <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+                }
             </div>
-            
+            <div className="result-card-wrapper">
+                <div className="result-card">
+                    <h4>Юноши (старше 18 лет)</h4>
+                    <div className="gender-card">Меньше 26 Очень низкий</div>
+                    <div className="gender-card">27 - 32 Низкий</div>
+                    <div className="gender-card">33 - 38 Средний</div>
+                    <div className="gender-card">39 - 47 Высокий</div>
+                    <div className="gender-card">Больше 48 Очень высокий</div>
+                </div>
+                <div className="result-card">
+                    <h4>Девушки (старше 18 лет)</h4>
+                    <div className="gender-card">Меньше 17 Очень низкий</div>
+                    <div className="gender-card">18 - 22 Низкий</div>
+                    <div className="gender-card">23 - 27 Средний</div>
+                    <div className="gender-card">28 - 34 Высокий</div>
+                    <div className="gender-card">Больше 35 Очень высокий</div>
+                </div>
+            </div>
+            <p>Дата прохождения: {formatDateRU(result?.createdAt)}</p>
+            {result.completionTimeSeconds !== null && result.completionTimeSeconds !== 0 &&
+                <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)} из 25:00</span>}
+            <div>
+                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+            </div>
+
+        </div>
+
     </div>)
 }

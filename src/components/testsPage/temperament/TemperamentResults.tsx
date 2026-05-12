@@ -15,6 +15,7 @@ import { EysenckCircle } from "./EysenckCircle"
 import { EysenckScales } from "./EysenckScales"
 import { Button } from "../../ui/reusable/button"
 import { formatTime } from "../utils/formatTime"
+import { ArrowLeft } from "lucide-react"
 
 /**
  * TODO
@@ -57,7 +58,7 @@ export const TemperamentResults = () => {
 		if (!navigationOptions || navigationOptions.length <= 0) return
 
 		const createTest = async () => {
-			const psychTestTemp = {...calculateParams(navigationOptions, 0, temperamentFormData,), completionTimeSeconds: location.state?.completionTimeSeconds}
+			const psychTestTemp = { ...calculateParams(navigationOptions, 0, temperamentFormData,), completionTimeSeconds: location.state?.completionTimeSeconds }
 
 			try {
 				const token = getToken()
@@ -70,8 +71,8 @@ export const TemperamentResults = () => {
 			} catch (err) {
 				console.error(err)
 				toast.error("Возникла ошибка при сохранении результатов, вы заполнили профиль ?", {
-                    duration: 5000
-                })
+					duration: 5000
+				})
 			}
 		}
 
@@ -90,58 +91,63 @@ export const TemperamentResults = () => {
 	if (!psychTest || !temperamentType)
 		return <>
 			<p>Загрузка</p>
-			<Toaster/>
+			<Toaster />
 		</>
-		
+
 	return (
-		<div className="test-result-grid">
-			<div className="test-result-grid-item result-grid-item-1">
-				<EysenckCircle extraversion={ext} neuroticism={neu} />
-			</div>
-
-			<div className="test-result-grid-item result-grid-item-2">
-				<EysenckScales params={psychTest.psychParams} />
-			</div>
-
-			<div className="test-result-grid-item result-grid-item-3">
-				
-				<div className="test-result-item-content">
-					<div className="item-content-label">
-						{temperamentType.name}:
-					</div>
-					<div className="item-content-description">
-						<p>{temperamentType.shortDescription}</p>
-						<p>{temperamentType.description}</p>
-					</div>
+		<div className="result-wrapper">
+			<div className="test-result-grid">
+				<div className="test-result-grid-item result-grid-item-1">
+					<EysenckCircle extraversion={ext} neuroticism={neu} />
 				</div>
 
-				<div className="test-result-item-content">
-					<div className="item-content-label">
-						Cвойственно проявлять:
-					</div>
-					<div className="item-content-description">
-						{temperamentType.traits.map((trait) => (
-							<span>{trait}</span>
-						))}
-					</div>
+				<div className="test-result-grid-item result-grid-item-2">
+					<EysenckScales params={psychTest.psychParams} />
 				</div>
 
-				<div className="test-result-item-content">
-					<div className="item-content-label">
-						Подходящие профессии:
-					</div>
-					<div className="item-content-description">
-						{temperamentType.professions.map((profession) => (
-							<span>{profession}</span>
-						))}
-					</div>
-				</div>
+				<div className="test-result-grid-item result-grid-item-3">
 
-				<div className="test-result-item-content">
-					<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
-					{psychTest.completionTimeSeconds !== null && psychTest.completionTimeSeconds !== 0 &&
-						<span>Пройдено за: {formatTime(Math.floor(psychTest.completionTimeSeconds / 60))} : {formatTime(psychTest.completionTimeSeconds % 60)}</span>}
-					<Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+					<div className="test-result-item-content">
+						<div className="item-content-label">
+							{temperamentType.name}:
+						</div>
+						<div className="item-content-description">
+							<p>{temperamentType.shortDescription}</p>
+							<p>{temperamentType.description}</p>
+						</div>
+					</div>
+
+					<div className="test-result-item-content">
+						<div className="item-content-label">
+							Cвойственно проявлять:
+						</div>
+						<div className="item-content-description">
+							{temperamentType.traits.map((trait) => (
+								<span>{trait}</span>
+							))}
+						</div>
+					</div>
+
+					<div className="test-result-item-content">
+						<div className="item-content-label">
+							Подходящие профессии:
+						</div>
+						<div className="item-content-description">
+							{temperamentType.professions.map((profession) => (
+								<span>{profession}</span>
+							))}
+						</div>
+					</div>
+
+					<div className="test-result-item-content">
+						<span>Дата прохождения: {formatDateRU(psychTest?.createdAt)}</span>
+						{psychTest.completionTimeSeconds !== null && psychTest.completionTimeSeconds !== 0 &&
+							<span>Пройдено за: {formatTime(Math.floor(psychTest.completionTimeSeconds / 60))} : {formatTime(psychTest.completionTimeSeconds % 60)}</span>}
+						<div>
+							<Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>

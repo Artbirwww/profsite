@@ -13,6 +13,7 @@ import "../css/testsResultStyles.css"
 import { sortByParam } from "../utils/sortByParams"
 import { Button } from "../../ui/reusable/button"
 import { formatTime } from "../utils/formatTime"
+import { ArrowLeft } from "lucide-react"
 export const GroupRolesResults = () => {
     const location = useLocation()
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export const GroupRolesResults = () => {
         if (!location.state?.psychTest)
             return
         setGroupRolesResults({
-            ...location.state?.psychTest, 
+            ...location.state?.psychTest,
             psychParams: sortByParam(location.state?.psychTest.psychParams)
         })
     }, [])
@@ -45,7 +46,7 @@ export const GroupRolesResults = () => {
 
         const sendGroupRolesResults = async () => {
 
-            const calculatedResults = {...calculateGroupRolesParams(groupQuestionsResult), completionTimeSeconds: location.state?.completionTimeSeconds}
+            const calculatedResults = { ...calculateGroupRolesParams(groupQuestionsResult), completionTimeSeconds: location.state?.completionTimeSeconds }
 
             try {
                 const token = getToken()
@@ -61,7 +62,7 @@ export const GroupRolesResults = () => {
                 }
 
                 const createdTest = await testApi.createTest(token, calculatedResults)
-                setGroupRolesResults({...createdTest, psychParams: sortByParam(createdTest.psychParams)})
+                setGroupRolesResults({ ...createdTest, psychParams: sortByParam(createdTest.psychParams) })
                 toast.success("Тест успешно пройден")
 
             } catch (err) {
@@ -78,40 +79,43 @@ export const GroupRolesResults = () => {
     const getReadableParamName = (paramName: string, paramsMap: Record<string, groupRolesDataRoleEn>) => {
         return Object.keys(paramsMap).find(key => paramsMap[key] === paramName)
     }
-    
+
     if (!groupRolesResults)
         return <>
-        <p>Загрузка...</p>
-        <Toaster/>
-    </>
+            <p>Загрузка...</p>
+            <Toaster />
+        </>
 
 
     return (
         <>
             <div className="result-wrapper">
-            
-            <h3>Роли в команде. Ваши результаты:</h3>
-                    <div className="result-card">
-                        <h4>Доминантные роли: </h4>
-                        {calculateGroupRolesDominantRoles(groupRolesResults).map(param => (<>
-                            <p><b>{getReadableParamName(param.name, groupRolesDataRoleMapping)}</b> : {param.param} баллов, Ваш тип {groupRoles.find(role => role.name === param.name)?.description}</p>
-                            <p></p>
-                        </>
-                        ))}
-                    </div>
-                    
-                    <div className="result-card">
-                        <h4>Все результаты: </h4>
-                        {groupRolesResults.psychParams.map(result => (
-                            <p>{getReadableParamName(result.name, groupRolesDataRoleMapping)}: {result.param} баллов {groupRoles.find(role => role.name === result.name)?.description}</p>
-                        ))}
-                    </div>
 
-                    <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
-                    {groupRolesResults.completionTimeSeconds !== null && groupRolesResults.completionTimeSeconds !== 0 &&
-                        <span>Пройдено за: {formatTime(Math.floor(groupRolesResults.completionTimeSeconds / 60))} : {formatTime(groupRolesResults.completionTimeSeconds % 60)}</span>
-                    }
-                    <Button buttonLabel="Назад" buttonFunction={() => navigate("/my-results")}/>
+                <h3>Роли в команде. Ваши результаты:</h3>
+                <div className="result-card">
+                    <h4>Доминантные роли: </h4>
+                    {calculateGroupRolesDominantRoles(groupRolesResults).map(param => (<>
+                        <p><b>{getReadableParamName(param.name, groupRolesDataRoleMapping)}</b> : {param.param} баллов, Ваш тип {groupRoles.find(role => role.name === param.name)?.description}</p>
+                        <p></p>
+                    </>
+                    ))}
+                </div>
+
+                <div className="result-card">
+                    <h4>Все результаты: </h4>
+                    {groupRolesResults.psychParams.map(result => (
+                        <p>{getReadableParamName(result.name, groupRolesDataRoleMapping)}: {result.param} баллов {groupRoles.find(role => role.name === result.name)?.description}</p>
+                    ))}
+                </div>
+
+                <span>Дата прохождения {formatDateRU(groupRolesResults?.createdAt)}</span>
+                {groupRolesResults.completionTimeSeconds !== null && groupRolesResults.completionTimeSeconds !== 0 &&
+                    <span>Пройдено за: {formatTime(Math.floor(groupRolesResults.completionTimeSeconds / 60))} : {formatTime(groupRolesResults.completionTimeSeconds % 60)}</span>
+                }
+                <div>
+                    <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+                </div>
+
             </div>
         </>
     )

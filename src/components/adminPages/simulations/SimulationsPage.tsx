@@ -5,19 +5,18 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { PaginatedSimulationResponse, SimulationRequest, SimulationResponse } from "../../../types/simulation/Simulation"
 import { SimulationFilerBar } from "./SimulationFilterBar"
 import toast, { Toaster } from "react-hot-toast"
-import "../css/admin-pages.css"
 import { Pagination } from "../../ui/reusable/Pagination"
 
 //TODO добавить фильтрацию, сделать страницы
 export const SimulationPage = () => {
-    const {getToken} = useAuth()
+    const { getToken } = useAuth()
     const [simulations, setSimulations] = useState<SimulationResponse[]>([])
     const [simulationRequest, setSimulationsRequest] = useState<SimulationRequest>({
-        email: undefined, 
-        startSimulation: undefined, 
-        endSimulation: undefined, 
-        profession: undefined, 
-        simulationType: undefined 
+        email: undefined,
+        startSimulation: undefined,
+        endSimulation: undefined,
+        profession: undefined,
+        simulationType: undefined
     })
     const [currentPage, setCurrentPage] = useState<number>(0)
     const [size, setSize] = useState<number>(5)
@@ -31,12 +30,12 @@ export const SimulationPage = () => {
             console.log(currentPage)
             setSimulations(page.content)
             setTotalPages(page.totalPages)
-        } catch(err) {
+        } catch (err) {
             console.error(err)
             toast("Не удалось загрузить симуляции, проверьте даты")
         }
     }, [simulationRequest, currentPage, size])
-    useEffect(()=>{
+    useEffect(() => {
         //if (!simulationRequest) return
         const controller = new AbortController()
         loadSimulations(controller.signal)
@@ -46,16 +45,16 @@ export const SimulationPage = () => {
     }, [simulationRequest, currentPage, size])
 
     return (<>
-    <div className="simulations-page">
-        <div className="simulations-content">
-            <SimulationFilerBar 
-                simulationsRequest = {simulationRequest} 
-                setSimulationsRequest = {setSimulationsRequest} />
-            <SimulationsList simulations={simulations} />
-        </div>
+        <div className="simulations-page">
 
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={totalPages} />
-        <Toaster/>
-    </div>
+            <SimulationFilerBar
+                simulationsRequest={simulationRequest}
+                setSimulationsRequest={setSimulationsRequest} />
+            <SimulationsList simulations={simulations} />
+
+
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={totalPages} />
+            <Toaster />
+        </div>
     </>)
 }

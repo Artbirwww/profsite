@@ -2,8 +2,6 @@ import { useCallback, useEffect, useState } from "react"
 import { PupilListResponse, PupilResponse } from "../../../types/pupil/pupil"
 import toast, { Toaster } from "react-hot-toast"
 import { pupilApi } from "../../../services/api/pupilApi"
-import style from "./pupils-list.module.css"
-import "../css/admin-pages.css"
 import "../css/card.css"
 import { Pagination } from "../../ui/reusable/Pagination"
 import { PupilCard } from "./PupilCard"
@@ -13,18 +11,18 @@ export const PupilsList = () => {
     const [size, setSize] = useState<number>(9)
 
     const fetchPupils = useCallback(async (signal: AbortSignal) => {
-        
+
         try {
             const response = await pupilApi.getAllPupils(currentPage, size, signal);
             console.log(response)
             setPupilListResponse(response)
-        } catch(err: any) {
-            if (err.name === "AbortError" || err.name === "CanceledError"){
+        } catch (err: any) {
+            if (err.name === "AbortError" || err.name === "CanceledError") {
                 console.log("Request was cancelled");
                 return;
             }
             console.log(err)
-            toast.error("Ошибка, не удалось загрузить список учеников", {style : {backgroundColor: "#FF7F7F"}})
+            toast.error("Ошибка, не удалось загрузить список учеников", { style: { backgroundColor: "#FF7F7F" } })
         }
     }, [currentPage, size])
     useEffect(() => {
@@ -35,18 +33,18 @@ export const PupilsList = () => {
         }
     }, [fetchPupils])
 
-    if (!pupilListResponse) 
+    if (!pupilListResponse)
         return <><p>Загружаем ...</p></>
     return <>
-        <div className={"content-wrapper"}>
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={pupilListResponse.totalPages}  />
+        <div className={"admin-list-wrapper"}>
+
             <div className={"cards-container"}>
                 {pupilListResponse.content.map(p => (
                     <PupilCard pupil={p} />
                 ))}
             </div>
-        
-        
+
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} total={pupilListResponse.totalPages} />
         </div>
         <Toaster position="top-right" />
 
