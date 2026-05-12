@@ -1,6 +1,8 @@
+import "./css/testCardStyles.css"
+
 import { FC, memo, useRef, MouseEvent, useEffect } from "react"
 import { TestItem } from "./TestsData"
-import { Timer, FileQuestion, ArrowRight } from "lucide-react"
+import { Timer, FileQuestion, ArrowRight, CheckCheck } from "lucide-react"
 
 interface TestItemProps {
     item: TestItem
@@ -9,9 +11,10 @@ interface TestItemProps {
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
+    resultOnClick: (path: string) => void
 }
 
-export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick }) => {
+export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick, resultOnClick }) => {
     const cardRef = useRef<HTMLDivElement>(null)
     const targetPos = useRef({ x: 0, y: 0 })
     const currentPos = useRef({ x: 0, y: 0 })
@@ -20,10 +23,8 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
         let frameId: number
 
         const animate = () => {
-            // Коэффициент инерции (0.1 — плавно, 0.2 — быстрее)
             const lerpFactor = 0.1
 
-            // Вычисляем разницу и прибавляем часть к текущей позиции
             currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerpFactor
             currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerpFactor
 
@@ -43,7 +44,6 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
         if (!cardRef.current) return
         const rect = cardRef.current.getBoundingClientRect()
 
-        // Обновляем только целевую позицию
         targetPos.current = {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
@@ -54,7 +54,8 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
         if (!isAvailable)
             return
 
-        onClick(item.path)
+        if (item.path)
+            onClick(item.path)
     }
 
     const declension = (count: number, titles: [string, string, string]) => {
@@ -64,9 +65,9 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
         ]
     }
 
-    return (
+    return (<>
         <div ref={cardRef}
-            className={`test-selection-item ${!isAvailable ? "locked" : ""}`}
+            className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""}`}
             onMouseMove={handleMouseMove}
             data-id={dataId}
             onClick={handleClick}>
@@ -80,9 +81,11 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
                 </div>
             </div>
 
-            <div className="test-selection-item-description">
-                <span>{item.description}</span>
-            </div>
+            {!isComplete && (
+                <div className="test-selection-item-description">
+                    <span>{item.description}</span>
+                </div>
+            )}
 
             <div className="test-selection-item-info">
                 <div className="test-selection-item-hint">
@@ -97,8 +100,18 @@ export const TestComponent: FC<TestItemProps> = memo(({ item, dataId, isAvailabl
             </div>
 
             <div className="test-selection-decal">
-                <ArrowRight />
+                {isComplete ? <CheckCheck /> : <ArrowRight />}
             </div>
         </div>
-    )
+
+        {isComplete && (
+            <div className="test-selection-result">
+                <h4>Результаты по тесту</h4>
+
+                <div className="test-selection-decal">
+                    <ArrowRight />
+                </div>
+            </div>
+        )}
+    </>)
 })

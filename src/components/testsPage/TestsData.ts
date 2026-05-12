@@ -10,7 +10,7 @@ export interface TestItem {
     time: number            // Примерное затраченое время на тест
     questionscount: number  // Количсетво вопросов в тесте
     icon: React.ElementType // Иконка теста
-    path: string            // URL до теста
+    path?: string           // URL до теста
     pathResults?: string    // URL до результатов
     dataItem: string        // Для тестирования / селекторов
     name: string
@@ -42,7 +42,7 @@ export const testsList: TestItem[] = [
         questionscount: 7,
         icon: UsersRound,
         path: "/tests/group-roles-intro",
-        pathResults:"/tests/group-roles-results",
+        pathResults: "/tests/group-roles-results",
         dataItem: "test-item-2",
         name: "Group-Roles",
         isAvailable: true

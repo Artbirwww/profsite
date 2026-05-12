@@ -66,6 +66,12 @@
     z-index: 3;
 }
 
+.test-card-text span {
+    display: flex;
+    width: 30px;
+    color: var(--accent-color-500);
+}
+
 /* КОНТЕЙНЕР ДЛЯ КНОПОК КАРТОЧЕК */
 .test-card-options {
     display: flex;
@@ -95,8 +101,8 @@
     width: 100%;
     height: 100%;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 30px;
-    row-gap: 10px;
+    column-gap: 40px;
+    row-gap: 40px;
     z-index: 3;
 }
 
@@ -117,19 +123,6 @@
     flex-direction: column;
     width: 100%;
     gap: 5px;
-}
-
-.slider-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 2px;
-}
-
-.slider-labels span {
-    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-sm));
-    color: var(--text-secondary-color);
-    position: relative;
-    user-select: none;
 }
 
 input[type="range"].input-slider {
@@ -290,7 +283,7 @@ input[type="range"].input-slider::-moz-range-track {
 
     .test-slider-grid {
         grid-template-columns: 1fr;
-        row-gap: 10px;
+        row-gap: 30px;
         overflow-y: auto;
         scroll-behavior: smooth;
         padding-right: 10px;

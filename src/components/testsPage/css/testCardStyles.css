@@ -159,6 +159,46 @@
     user-select: none;
 }
 
+.test-selection-item.complete .hover-circle {
+    background-color: var(--scfly-color-300);
+}
+
+.test-selection-item.complete:hover .test-selection-decal svg {
+    color: var(--scfly-color-500);
+}
+
+.test-selection-result {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-height: 50px;
+    padding: 0 30px;
+    height: 100%;
+    background-color: var(--scfly-color-300);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.test-selection-result h4 {
+    font-size: clamp(var(--font-size-sm), 0.683rem + 0.77vw, var(--font-size-base));
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+    color: var(--text-primary-color);
+}
+
+.test-selection-result .test-selection-decal {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.test-selection-result:hover .test-selection-decal {
+    background-color: var(--primary-color-50);
+}
+
+.test-selection-result:hover .test-selection-decal svg {
+    color: var(--scfly-color-500);
+}
+
 @media (pointer: coarse) {
     .test-selection-item {
         pointer-events: auto;

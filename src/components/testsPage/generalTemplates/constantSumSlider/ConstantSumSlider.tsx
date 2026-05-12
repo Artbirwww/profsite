@@ -103,8 +103,11 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
                     return (
                         <div key={slider.id} className="test-grid-item">
-                            
-                            <div className="test-card-text">{slider?.text}</div>
+
+                            <div className="test-card-text">
+                                <span>{slider?.value === 0 ? "-" : slider.value}</span>
+                                {slider?.text}
+                            </div>
 
                             <div className="test-card-input">
                                 <input
@@ -119,12 +122,8 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                                     }}
                                     onWheel={handleWheel}
                                 />
-                                <div className="slider-labels">
-                                    <span>0</span>
-                                    <span>5</span>
-                                    <span>10</span>
-                                </div>
                             </div>
+
                         </div>
                     )
                 })}
@@ -132,7 +131,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
             <div className="test-card-options">
                 <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentGroupNumber === 0} onClick={() => { nextPage(-1) }} />
-                
+
                 {currentGroupNumber === 6 ? (
                     <Button label={"Завершить"} icon={<CheckCheck />} onClick={nextPageHandler} />
                 ) : (

@@ -2,9 +2,9 @@ import "./css/testsPageStyles.css"
 
 import { FC, useCallback, useEffect, useRef, useState } from "react"
 import { testsList } from "./TestsData"
-import { TestComponent } from "./TestComponent"
+import { TestCard } from "./TestCard"
 import { useNavigate } from "react-router-dom"
-import { Check, CheckCheck } from "lucide-react"
+import { CheckCheck } from "lucide-react"
 import { testApi } from "../../services/api/testApi"
 import { useAuth } from "../../contexts/AuthContext"
 import { TestResultResponse } from "../../types/testTypes"
@@ -105,12 +105,13 @@ export const TestsPage: FC = ({ }) => {
                 {testsList.map((item, index) => {
                     return (
                         <div key={index} data-id={index} className="test-grid-item">
-                            <TestComponent
+                            <TestCard
                                 dataId={item.id}
                                 index={index}
                                 isAvailable={item.isAvailable}
                                 item={item}
                                 onClick={handleClick}
+                                resultOnClick={handleClick}
                                 isComplete={recentTests ? recentTests[item.name] != null : false} />
                         </div>
                     )
