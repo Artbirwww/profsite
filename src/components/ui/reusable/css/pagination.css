@@ -15,7 +15,7 @@
     font-weight: 600;
     cursor: auto;
     user-select: none;
-    background-color: var(--accent-hover-color);
+    background-color: var(--accent-color-500);
     color: var(--primary-color);
 }
 .pagination .page {

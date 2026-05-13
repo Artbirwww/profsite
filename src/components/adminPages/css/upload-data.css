@@ -1,7 +1,8 @@
 .content-wrapper {
     display: flex;
     height: 100vh;
-    justify-content: flex-start;
+    justify-content: center;
+    flex-direction: column;
 }
 .upload-container {
     
@@ -32,13 +33,14 @@
 .file-label {
     display: inline-block;
     padding: 10px 16px;
-    background: var(--bg-color);
+    background: var(--accent-color-500);
+    color: var(--primary-color);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: 50px;
     cursor: pointer;
 }
 .file-label:hover {
-    background-color: var(--accent-hover-color);
+    background-color: var(--accent-color-400);
 }
 .mapping-section {
     border-top: 1px solid var(--border-color);
