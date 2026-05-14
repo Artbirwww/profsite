@@ -167,6 +167,11 @@
     color: var(--scfly-color-500);
 }
 
+
+
+
+
+
 .test-selection-result {
     display: flex;
     align-items: center;
@@ -232,11 +237,18 @@
     .test-selection-decal {
         width: 38px;
         height: 38px;
+        bottom: 20px;
+        right: 20px;
     }
 
     .test-selection-decal svg {
         width: 22px;
         height: 22px;
+        color: var(--text-primary-color) !important;
+    }
+
+    .test-selection-result {
+        max-height: 30px;
     }
 }
 
@@ -273,13 +285,7 @@
     .test-selection-decal {
         width: 34px;
         height: 34px;
-        background-color: transparent;
-    }
-
-    .test-selection-decal svg {
-        width: 20px;
-        height: 20px;
-        color: var(--accent-color-500);
+        background-color: transparent !important;
     }
 
     .test-selection-item-options {

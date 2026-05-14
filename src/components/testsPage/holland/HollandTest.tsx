@@ -1,15 +1,25 @@
-import { useEffect, useState } from "react"
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
-import toast, { Toaster } from "react-hot-toast"
 import api, { getBaseUrl } from "../../../services/api/api"
-import { useNavigate } from "react-router-dom"
-import { useTimer } from "../hooks/useTimer"
-import { formatTime } from "../utils/formatTime"
-import { HollandProfession } from "./hollandTypes"
 import { createStandartTest } from "../generalTests/StandartTest"
+import { UseStandartTest } from "../generalTests/UseStandartTest"
 
+export const HollandTest = UseStandartTest<Task>({
+    Component: SingleOptionsPicker,
+    fetchData: async () => {
+        const response = await api.get(`${getBaseUrl()}/public/prof_holland/data/profHollandFormA.json`)
+        return response.data.data as Task[]
+    },
+    resultPath: "/tests/prof-holland-results",
+    stateKey: "hollandTasks",
+    description: "Выбирай занятия, которые приносят тебе удовольствие, и будь предельно искренним.",
+    autoStartTimer: true,
+    pickerStyle: "squeezed",
+    optionStyle: "column",
+})
+
+{/* 
 export const HollandTest = createStandartTest({
-    fetchData: async() => {
+    fetchData: async () => {
         const response = await api.get(`${getBaseUrl()}/public/prof_holland/data/profHollandFormA.json`)
         return response.data.data as Task[]
     },
@@ -17,3 +27,4 @@ export const HollandTest = createStandartTest({
     stateKey: "hollandTasks",
     autoStartTimer: true
 })
+*/}

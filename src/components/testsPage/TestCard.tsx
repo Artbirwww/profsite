@@ -106,7 +106,7 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
 
         {isComplete && (
             <div className="test-selection-result">
-                <h4>Результаты по тесту</h4>
+                <h4>Результаты</h4>
 
                 <div className="test-selection-decal">
                     <ArrowRight />

@@ -1,6 +1,6 @@
 import "./css/layoutStyle.css"
 
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { Menu } from "../ui/menu/Menu"
 import { useAuth } from "../../contexts/AuthContext"
@@ -12,8 +12,18 @@ export const Layout: FC = () => {
 
     const isAuthPage = location.pathname === "/login" || location.pathname.startsWith("/register")
     const isAdminPage = location.pathname.startsWith("/admin")
-
     const shouldHideHeader = isAuthPage || isAdminPage
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
 
     return (
         <div className="layout-wrapper">
@@ -29,7 +39,7 @@ export const Layout: FC = () => {
                 <Outlet />
             </div>
 
-            {(getToken() && !isAdminPage) && <Menu />}
+            {(getToken() && !isAdminPage && !isMobile) && <Menu />}
         </div>
     )
 }

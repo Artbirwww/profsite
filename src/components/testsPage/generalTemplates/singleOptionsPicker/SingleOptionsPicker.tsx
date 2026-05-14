@@ -24,20 +24,20 @@ interface SingleOptionPickerProps {
     tasks: Task[]
     setTasks: (tasks: Task[]) => void
     navigateToResults: () => void
+    description?: string
     pickerStyleType?: "squeezed" | "extended"
     optionStyleType?: "row" | "column"
 }
 
-export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, pickerStyleType = "squeezed", optionStyleType = "column" }: SingleOptionPickerProps) => {
+export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, description, pickerStyleType = "squeezed", optionStyleType = "column" }: SingleOptionPickerProps) => {
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
     useEffect(() => {
-        if (!tasks)
-            return
+        if (!tasks || tasks.length === 0) return
 
         setCurrentTask(tasks[currentTaskNumber])
-    }, [currentTaskNumber])
+    }, [currentTaskNumber, tasks])
 
     const handleUserAnswer = (task: Task, option: Option) => {
         const changedTask = changeOption(task, option)
@@ -79,6 +79,12 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, picker
                 <div className="test-card-count">
                     {currentTaskNumber + 1} из {tasks.length}
                 </div>
+
+                {description && (
+                    <div className="test-card-description">
+                        {description}
+                    </div>
+                )}
             </div>
 
             {currentTask?.text &&

@@ -18,10 +18,11 @@ interface ConstantSumSliderProps {
     setSliders: Dispatch<SetStateAction<SliderData[]>>
     currentGroupNumber: number
     maxValue: number
+    description?: string
     nextPage: (step: number) => void
 }
 
-export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, maxValue, nextPage }: ConstantSumSliderProps) => {
+export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, maxValue, description, nextPage }: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
 
@@ -88,13 +89,17 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             <div className="test-card-info">
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    {currentGroupNumber + 1} из 7
+                    <div>{currentGroupNumber + 1} из 7</div>
+
+                    {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
+                    <div>{totalValue} из 10</div>
                 </div>
 
-                <div className="test-card-count" style={{ color: currentTotal > maxValue ? "#f03063" : currentTotal === maxValue ? "#55d38e" : "" }}>
-                    {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    {totalValue} из 10
-                </div>
+                {description && (
+                    <div className="test-card-description">
+                        {description}
+                    </div>
+                )}
             </div>
 
             <div className="test-slider-grid" ref={gridRef}>

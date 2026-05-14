@@ -7,7 +7,6 @@
     flex-direction: column;
     position: relative;
     justify-content: space-between;
-    gap: 20px;
     width: 100% !important;
     overflow: hidden;
     padding: 30px;
@@ -29,10 +28,10 @@
 /* ОБЕРТКА ДЛЯ КНОПКИ НАЗАД И ТЕКУЩЕГО ВОПРОСА */
 .test-card-info {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     border-bottom: 1px solid var(--grey-color-300);
-    gap: 20px;
+    gap: 5px;
     padding-bottom: 10px;
     z-index: 3;
     flex-wrap: wrap;
@@ -43,16 +42,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    font-size: clamp(var(--font-size-sm), 0.638rem + 0.77vw, var(--font-size-base));
+    gap: 15px;
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     color: var(--text-primary-color);
     font-weight: var(--font-weight-medium);
 }
 
-.test-card-count svg {
+.test-card-description {
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     color: var(--text-primary-color);
-    width: 20px;
-    height: 20px;
+    font-weight: var(--font-weight-medium);
 }
 
 /* ТЕКСТ ВОПРОСА */
@@ -64,6 +63,7 @@
     font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     z-index: 3;
+    padding-top: 10px;
 }
 
 .test-card-text span {
@@ -79,6 +79,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    padding-top: 10px;
     width: 100%;
     z-index: 3;
 }
@@ -187,6 +188,7 @@ input[type="range"].input-slider::-moz-range-track {
     z-index: 3;
     max-height: 200px;
     max-width: 600px;
+    padding-top: 10px;
     width: 100%;
 }
 
@@ -204,6 +206,7 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 10px;
     gap: 10px;
     z-index: 3;
 }
@@ -214,6 +217,7 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding-top: 10px;
     gap: 10px;
     z-index: 3;
 }
@@ -273,10 +277,6 @@ input[type="range"].input-slider::-moz-range-track {
 /* МЕДИА ЗАПРОСЫ */
 
 @media (max-width: 992px) {
-    .test-card {
-        gap: 20px;
-    }
-
     .constant-sum-slider {
         height: 100%;
     }
@@ -290,6 +290,27 @@ input[type="range"].input-slider::-moz-range-track {
         height: 100%;
         scrollbar-width: thin;
         scrollbar-color: var(--border-color);
+    }
+
+    .test-card-info {
+        padding-bottom: 5px;
+    }
+
+    .test-card-text {
+        padding-top: 5px;
+    }
+    
+    .test-card-img {
+        padding-top: 5px;
+    }
+
+    .test-card-list.column,
+    .test-card-list.row {
+        padding-top: 5px;
+    }
+
+    .test-card-options {
+        padding-top: 5px;
     }
 
     .test-grid-item {
@@ -353,11 +374,10 @@ input[type="range"].input-slider::-moz-range-track {
     .test-slider-grid {
         height: 100%;
         grid-auto-rows: 1fr;
-        row-gap: 10px;
     }
 
     .test-grid-item {
-        gap: 10px;
+        gap: 5px;
     }
 
     .input-slider-count {

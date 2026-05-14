@@ -4,6 +4,7 @@ import { Button } from "../../../ui/reusable/button"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
 import { ArrowLeft, Check, FileQuestion, X } from "lucide-react"
+import { BaseTestComponentProps } from "../../generalTests/BaseTest"
 
 export interface PositiveNegativeOption {
     id: number
@@ -11,18 +12,16 @@ export interface PositiveNegativeOption {
     answer: boolean
 }
 
-interface PositiveNegativeProps<T extends PositiveNegativeOption = PositiveNegativeOption> {
-    tasks: T[]
-    setTasks: Dispatch<SetStateAction<T[]>>
-    navigateToResults: () => void;
-}
+interface PositiveNegativeProps<T extends PositiveNegativeOption> extends BaseTestComponentProps<T> { }
 
-export const PositiveNegative = ({ tasks, setTasks, navigateToResults }: PositiveNegativeProps) => {
+export const PositiveNegative = <T extends PositiveNegativeOption>({ tasks, setTasks, navigateToResults, description }: PositiveNegativeProps<T>) => {
     const [currentOption, setCurrentOption] = useState<PositiveNegativeOption | null>(null)
     const [currentOptionNumber, setCurrentOptionNumber] = useState<number>(0)
 
     //Первый вопрос
     useEffect(() => {
+        if (!tasks || tasks.length === 0) return
+
         if (tasks.length === currentOptionNumber) {
             navigateToResults()
             return
@@ -30,7 +29,7 @@ export const PositiveNegative = ({ tasks, setTasks, navigateToResults }: Positiv
 
         if (tasks.length > 0)
             setCurrentOption(tasks[currentOptionNumber])
-    }, [tasks])
+    }, [tasks, currentOptionNumber, navigateToResults])
 
     //следующий вопрос
     useEffect(() => {
@@ -64,6 +63,12 @@ export const PositiveNegative = ({ tasks, setTasks, navigateToResults }: Positiv
                 <div className="test-card-count">
                     {currentOptionNumber + 1} из {tasks.length}
                 </div>
+
+                {description && (
+                    <div className="test-card-description">
+                        {description}
+                    </div>
+                )}
             </div>
 
             <div className="test-card-text">

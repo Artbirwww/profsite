@@ -25,13 +25,11 @@
 .header {
     max-width: 1440px;
     width: 100%;
-    max-height: 60px;
-    height: 100%;
     display: flex;
     position: absolute;
     box-sizing: border-box;
     top: 20px;
-    align-items: end;
+    align-items: start;
     justify-content: start;
     color: var(--text-primary-color);
     font-weight: var(--font-weight-medium);
@@ -59,6 +57,13 @@
     }
 }
 
+@media (max-width: 768px) {
+    .outlet {
+        padding-bottom: 0 !important;
+        margin-bottom: 20px !important;
+    }
+}
+
 @media (max-width: 992px) {
     .background {
         top: 0;
@@ -71,11 +76,6 @@
     .outlet {
         padding: 80px 0;
         margin: 0 10px;
-    }
-
-    .header {
-        max-height: 40px;
-        left: 10px;
     }
 }
 
