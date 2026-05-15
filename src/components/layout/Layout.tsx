@@ -23,10 +23,7 @@ export const Layout: FC = () => {
             {!shouldHideHeader && (
                 <>
                     <div className="header">
-                        {routeTitles[location.pathname] || "Загрузка..."}
-                    </div>
-                    <div className="header center-align">
-                        {isTestsPage && <p>{getEmail()}</p>}
+                        { isTestsPage ? `${getEmail()}` : routeTitles[location.pathname] || "Загрузка..."}
                     </div>
                 </>
             )}
