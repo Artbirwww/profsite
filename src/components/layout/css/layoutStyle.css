@@ -39,7 +39,9 @@
     font-size: clamp(var(--font-size-lg), 0.804rem + 1.61vw, var(--font-size-xl));
     z-index: 2;
 }
-
+.header.center-align {
+    justify-content: center;
+}
 .outlet {
     max-width: 1440px;
     width: 100%;
