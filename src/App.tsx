@@ -65,6 +65,7 @@ import { IqPotentialResults } from "./components/testsPage/iqPotential/IqPotenti
 // Тест Холланда
 import { HollandTest } from "./components/testsPage/holland/HollandTest"
 import { HollandResults } from "./components/testsPage/holland/HollandResults"
+import { DownloadTestsResults } from "./components/adminPages/results/DownloadTestsResults";
 
 export default function App() {
 	return (
@@ -91,9 +92,13 @@ export default function App() {
 
 							<Route path="pupils-upload" element={<PupilDataLoading />} />
 							<Route path="pupils" element={<PupilsList />} />
+
 							<Route path="simulations" element={<SimulationPage />} />
+
 							<Route path="specialists" element={<Specialists />} />
 							<Route path="specialists-upload" element={<UploadSpecialists />} />
+
+							<Route path="results" element={<DownloadTestsResults/>} />
 						</Route>
 					</Route>
 

@@ -1,0 +1,12 @@
+ form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+ }
+input[type="radio"] {
+    -webkit-appearance: radio;
+    appearance: radio;
+    flex: none; /* Override flex:1 from your other rule */
+    width: auto;
+    margin-right: 8px;
+}
