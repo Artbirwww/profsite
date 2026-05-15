@@ -11,7 +11,7 @@ interface TestItemProps {
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
-    resultOnClick: (path: string) => void
+    resultOnClick: (item: TestItem) => void
 }
 
 export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick, resultOnClick }) => {
@@ -105,7 +105,7 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
         </div>
 
         {isComplete && (
-            <div className="test-selection-result">
+            <div className="test-selection-result" onClick={() => (resultOnClick(item))}>
                 <h4>Результаты по тесту</h4>
 
                 <div className="test-selection-decal">

@@ -1,13 +1,14 @@
 import "./css/testsPageStyles.css"
 
 import { FC, useCallback, useEffect, useRef, useState } from "react"
-import { testsList } from "./TestsData"
+import { TestItem, testsList } from "./TestsData"
 import { TestCard } from "./TestCard"
 import { useNavigate } from "react-router-dom"
 import { CheckCheck } from "lucide-react"
 import { testApi } from "../../services/api/testApi"
 import { useAuth } from "../../contexts/AuthContext"
 import { TestResultResponse } from "../../types/testTypes"
+import toast from "react-hot-toast"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
@@ -85,7 +86,23 @@ export const TestsPage: FC = ({ }) => {
     const handleClick = useCallback((path: string) => {
         navigate(path)
     }, [navigate])
-
+    const showResultClick = async(testItem: TestItem) => {
+        if (!testItem.pathResults) {
+            toast.error("Результаты не найдены для теста, попробуйте позже")
+            return
+        }
+        try {
+            navigate(testItem.pathResults, {
+                state: {
+                    isViewMode: true,
+                    psychTest: recentTests[testItem.name]
+                }
+            })
+        } catch(err) {
+            console.error(err)
+            toast.error("Ошибка при загрузке результатов")
+        }
+    }
     return (
         <div className="test-container">
 
@@ -111,7 +128,7 @@ export const TestsPage: FC = ({ }) => {
                                 isAvailable={item.isAvailable}
                                 item={item}
                                 onClick={handleClick}
-                                resultOnClick={handleClick}
+                                resultOnClick={showResultClick}
                                 isComplete={recentTests ? recentTests[item.name] != null : false} />
                         </div>
                     )
