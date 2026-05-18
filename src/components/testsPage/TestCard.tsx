@@ -80,43 +80,45 @@ export const TestCard: FC<TestItemProps> = memo(({
     }
 
     return (
-        <div
-            ref={cardRef}
-            className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""} ${className || ""}`}
-            onMouseMove={handleMouseMove}
-            onClick={handleClick}
-            data-id={dataIdAttr ?? index}
-            data-test-id={dataId}>
+        <div className="test-card-wrapper">
+            <div
+                ref={cardRef}
+                className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""} ${className || ""}`}
+                onMouseMove={handleMouseMove}
+                onClick={handleClick}
+                data-id={dataIdAttr ?? index}
+                data-test-id={dataId}>
 
-            <div className="hover-circle" />
+                <div className="hover-circle" />
 
-            <div className="test-selection-item-label">
-                <div className="test-selection-item-name">
-                    <h4>{item.label}</h4>
-                    <span>{item.author}</span>
-                </div>
-            </div>
-
-            {!isComplete && (
-                <div className="test-selection-item-description">
-                    <span>{item.description}</span>
-                </div>
-            )}
-
-            <div className="test-selection-item-info">
-                <div className="test-selection-item-hint">
-                    <Timer />
-                    <span>{item.time} {getDeclension(item.time, ["минута", "минуты", "минут"])}</span>
+                <div className="test-selection-item-label">
+                    <div className="test-selection-item-name">
+                        <h4>{item.label}</h4>
+                        <span>{item.author}</span>
+                    </div>
                 </div>
 
-                <div className="test-selection-item-hint">
-                    <FileQuestion />
-                    <span>{item.questionscount} {getDeclension(item.questionscount, ["вопрос", "вопроса", "вопросов"])}</span>
-                </div>
-            </div>
+                {!isComplete && (
+                    <div className="test-selection-item-description">
+                        <span>{item.description}</span>
+                    </div>
+                )}
 
-            <div className="test-selection-decal">
-                {isComplete ? <CheckCheck /> : <ArrowRight />}
+                <div className="test-selection-item-info">
+                    <div className="test-selection-item-hint">
+                        <Timer />
+                        <span>{item.time} {getDeclension(item.time, ["минута", "минуты", "минут"])}</span>
+                    </div>
+
+                    <div className="test-selection-item-hint">
+                        <FileQuestion />
+                        <span>{item.questionscount} {getDeclension(item.questionscount, ["вопрос", "вопроса", "вопросов"])}</span>
+                    </div>
+                </div>
+
+                <div className="test-selection-decal">
+                    {isComplete ? <CheckCheck /> : <ArrowRight />}
+                </div>
             </div>
 
             {isComplete && (
@@ -125,8 +127,7 @@ export const TestCard: FC<TestItemProps> = memo(({
                     <div className="test-selection-decal">
                         <ArrowRight />
                     </div>
-                </div>
-            )}
+                </div>)}
         </div>
     )
 })

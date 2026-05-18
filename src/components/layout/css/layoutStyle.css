@@ -46,6 +46,7 @@
     align-items: center;
     width: 100%;
     max-width: 1440px;
+    max-height: 800px;
     height: 100%;
     padding: 20px 0;
 }
