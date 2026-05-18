@@ -1,4 +1,17 @@
-/* ОБЩИЙ КОНТЕЙНЕР ТЕСТА 
+/* ОБЩИЙ КОНТЕЙНЕР ТЕСТА */
+.actual-test-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
 .test-card {
     border-radius: 15px;
     background-color: var(--primary-color-50);
@@ -10,7 +23,6 @@
     width: 100% !important;
     overflow: hidden;
     padding: 30px;
-    user-select: none;
 }
 
 .test-card::after {
@@ -23,9 +35,9 @@
     bottom: 3px;
     border-radius: 12px;
     z-index: 2;
-}*/
+}
 
-/* ОБЕРТКА ДЛЯ КНОПКИ НАЗАД И ТЕКУЩЕГО ВОПРОСА */
+/* ОБЕРТКА ТЕКУЩЕГО ВОПРОСА */
 .test-card-info {
     display: flex;
     flex-direction: column;
@@ -292,27 +304,6 @@ input[type="range"].input-slider::-moz-range-track {
         scrollbar-color: var(--border-color);
     }
 
-    .test-card-info {
-        padding-bottom: 5px;
-    }
-
-    .test-card-text {
-        padding-top: 5px;
-    }
-    
-    .test-card-img {
-        padding-top: 5px;
-    }
-
-    .test-card-list.column,
-    .test-card-list.row {
-        padding-top: 5px;
-    }
-
-    .test-card-options {
-        padding-top: 5px;
-    }
-
     .test-grid-item {
         display: flex;
         gap: 10px;
@@ -321,6 +312,10 @@ input[type="range"].input-slider::-moz-range-track {
     .test-card-selectable {
         min-width: 40px;
         min-height: 40px;
+    }
+
+    .actual-test-wrapper {
+        gap: 5px;
     }
 
     .float-timer {
@@ -354,7 +349,6 @@ input[type="range"].input-slider::-moz-range-track {
 
     .pozitive-negative {
         height: auto;
-        gap: 30px;
     }
 
     .constant-sum-slider {

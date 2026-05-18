@@ -1,5 +1,3 @@
-import "../../css/generalTemplatesStyles.css"
-
 interface ProgressBarProps {
     currentTaskNumber: number
     total: number

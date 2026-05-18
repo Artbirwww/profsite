@@ -1,3 +1,5 @@
+import "./css/templates.css"
+
 import toast from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 

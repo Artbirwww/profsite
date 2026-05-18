@@ -29,13 +29,6 @@ export const menuButtons: MenuItemProps[] = [
         order: 2,
     },
     {
-        id: "results",
-        label: "Результаты",
-        icon: ChartPie,
-        path: "/my-results",
-        order: 3,
-    },
-    {
         id: "grades",
         label: "Учеба",
         icon: Book,

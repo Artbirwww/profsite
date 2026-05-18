@@ -1,0 +1,111 @@
+.test-form-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.test-form-selection-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 100%;
+    padding: 30px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color-50);
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 15px;
+}
+
+.test-form-selection-item .hover-circle {
+    position: absolute;
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    width: 350px;
+    height: 350px;
+    background-color: var(--accent-color-300);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform .2s ease-in-out, opacity .4s ease-in-out;
+    opacity: 0;
+    filter: blur(40px);
+}
+
+.test-form-selection-item:hover .hover-circle {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.test-form-selection-name {
+    z-index: 1;
+}
+
+.test-form-selection-name h4 {
+    font-size: clamp(var(--font-size-md), 0.683rem + 0.77vw, var(--font-size-lg));
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+}
+
+.test-form-selection-decal {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    width: 42px;
+    height: 42px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .4s cubic-bezier(.4, 0, .2, 1);
+    z-index: 1;
+}
+
+.test-form-selection-decal svg {
+    stroke-width: 1.5;
+    width: 24px;
+    height: 24px;
+    color: var(--text-primary-color);
+    transition: all .4s cubic-bezier(.4, 0, .2, 1);
+}
+
+.test-form-selection-item:hover .test-form-selection-decal {
+    background-color: var(--primary-color-50);
+}
+
+.test-form-selection-item:hover .test-form-selection-decal svg {
+    color: var(--accent-color-500);
+}
+
+@media (max-width: 768px) {
+    .test-form-selection {
+        flex-direction: column;
+    }
+
+    .test-form-selection-item {
+        padding: 20px;
+    }
+
+    .test-form-selection-decal {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .test-form-selection-decal svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .test-foorm-selection-item .hover-circle {
+        display: none;
+    }
+}

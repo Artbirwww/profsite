@@ -22,7 +22,7 @@ export const TestsPage: FC = ({ }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerHeight < 768)
+        const handleResize = () => setIsMobile(window.innerWidth < 768)
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
     }, [])
@@ -85,7 +85,7 @@ export const TestsPage: FC = ({ }) => {
             { root: container, threshold: 0.15 }
         )
 
-        const items = container.querySelectorAll(".test-card")
+        const items = container.querySelectorAll(".test-grid-item")
         items.forEach((el) => observer.observe(el))
 
         return () => observer.disconnect()
@@ -94,11 +94,13 @@ export const TestsPage: FC = ({ }) => {
     const handleClick = useCallback((path: string) => {
         navigate(path)
     }, [navigate])
-    const showResultClick = async(testItem: TestItem) => {
+
+    const showResultClick = async (testItem: TestItem) => {
         if (!testItem.pathResults) {
             toast.error("Результаты не найдены для теста, попробуйте позже")
             return
         }
+
         try {
             navigate(testItem.pathResults, {
                 state: {
@@ -106,11 +108,13 @@ export const TestsPage: FC = ({ }) => {
                     psychTest: recentTests[testItem.name]
                 }
             })
-        } catch(err) {
+
+        } catch (err) {
             console.error(err)
             toast.error("Ошибка при загрузке результатов")
         }
     }
+
     return (
         <div className="test-container">
 
@@ -118,10 +122,10 @@ export const TestsPage: FC = ({ }) => {
             <div className="progress-container">
                 <div
                     className="progress-fill"
-                    style={isMobile ? { width: `${displayProgress}%` } : { height: `${displayProgress}%` }}>
+                    style={{ height: `${displayProgress}%` }}>
 
-                    {!isMobile && <div className="wave-element wave-front" />}
-                    {!isMobile && <div className="wave-element wave-back" />}
+                    <div className="wave-element wave-front" />
+                    <div className="wave-element wave-back" />
                 </div>
 
                 <div className="progress-count">

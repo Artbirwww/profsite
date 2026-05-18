@@ -74,7 +74,7 @@ export const KlimovResults = () => {
                 <span>Пройдено за: {formatTime(Math.floor(result.completionTimeSeconds / 60))} : {formatTime(result.completionTimeSeconds % 60)}</span>
             }
             <div>
-                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/tests")} />
             </div>
 
         </div>

@@ -4,7 +4,7 @@ import "./css/buttonStyles.css"
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     label?: string
     icon?: ReactNode
-    variant?: "primary" | "secondary" | "tertiary" | "ghost" | "icon-only" | "timer" | "done"
+    variant?: "primary" | "secondary" | "tertiary" | "ghost" | "icon-only" | "ghost-icon-only" | "timer" | "done"
     width?: number
     height?: number
     isLoading?: boolean

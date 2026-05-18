@@ -3,6 +3,8 @@ import { BaseTestComponentProps } from "./BaseTest"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
+import { Button } from "../../ui/reusable/button"
+import { X } from "lucide-react"
 
 interface StandartTestConfig<T> {
     fetchData: () => Promise<T[]>

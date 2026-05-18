@@ -1,7 +1,7 @@
 import toast, { Toaster } from "react-hot-toast"
 import { Button } from "../../../ui/reusable/button"
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { ProgressBar } from "../progressBar/ProgressBar"
 import { ArrowLeft, Check, FileQuestion, X } from "lucide-react"
 import { BaseTestComponentProps } from "../../generalTests/BaseTest"

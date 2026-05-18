@@ -11,8 +11,6 @@ export const Layout: FC = () => {
 
     const isAuthPage = location.pathname === "/login" || location.pathname.startsWith("/register")
     const isAdminPage = location.pathname.startsWith("/admin")
-    const isTestsPage = location.pathname === "/tests"
-    console.log(isTestsPage)
     const shouldHideHeader = isAuthPage || isAdminPage
     const hasToken = !!getToken()
 
@@ -22,18 +20,14 @@ export const Layout: FC = () => {
 
             {!shouldHideHeader && (
                 <header className="header">
-                    {routeTitles[location.pathname] || "Загрузка..."}
+                    <h4>{routeTitles[location.pathname] || "Загрузка..."}</h4>
+                    <span>Профиль: {getEmail()} </span>
                 </header>
-                <>
-                    <div className="header">
-                        { isTestsPage ? `${getEmail()}` : routeTitles[location.pathname] || "Загрузка..."}
-                    </div>
-                </>
             )}
 
-            <main className="outlet">
+            <div className="outlet">
                 <Outlet />
-            </main>
+            </div>
 
             {hasToken && !isAdminPage && (
                 <div className="menu">

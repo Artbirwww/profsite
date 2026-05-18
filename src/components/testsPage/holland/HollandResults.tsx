@@ -104,7 +104,7 @@ export const HollandResults = () => {
                 return renderProfessionCard(param, profession)
             })}
             <div>
-                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/tests")} />
             </div>
         </div>
         <Toaster />

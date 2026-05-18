@@ -1,7 +1,7 @@
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
 import axios from "axios"
 import { getBaseUrl } from "../../../services/api/api"
-import { TestFormConfig } from "../generalTemplates/formSelection/TestFormSelection"
+import { TestFormConfig } from "../TestFormSelection"
 import { UseFormSelectionTest } from "../generalTests/UseFormSelectionTest"
 
 const IQ_FORMS: TestFormConfig<Task>[] = [

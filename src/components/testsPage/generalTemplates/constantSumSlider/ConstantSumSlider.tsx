@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } fr
 import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
-import { ArrowLeft, ChevronUp, ChevronDown, ArrowRight, CheckCheck } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCheck } from "lucide-react"
 
 export interface SliderData {
     id: number

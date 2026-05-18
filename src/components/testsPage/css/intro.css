@@ -28,6 +28,7 @@
     font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
+    line-height: 27px;
 }
 
 .intro-time-hint {

@@ -20,7 +20,7 @@
 .test-selection-result h4 {
     color: var(--text-primary-color);
     font-weight: var(--font-weight-medium);
-    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-md));
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
     line-height: 20px;
 }
 
@@ -37,4 +37,30 @@
 
 .test-selection-result:hover .test-selection-decal svg {
     color: var(--scfly-color-500);
+}
+
+@media (max-width: 1260px) {
+    .test-selection-result {
+        max-height: 30px;
+    }
+
+    .test-selection-result .test-selection-decal {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .test-selection-result {
+        padding: 0 20px;
+    }
+}
+
+@media (max-height: 750px) {
+    .test-selection-result {
+        max-height: 30px;
+    }
+
+    .test-selection-result .test-selection-decal {
+        display: none;
+    }
 }

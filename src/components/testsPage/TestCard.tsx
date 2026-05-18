@@ -31,8 +31,6 @@ export const TestCard: FC<TestItemProps> = memo(({
     isComplete,
     onClick,
     resultOnClick,
-    className,
-    "data-id": dataIdAttr
 }) => {
     const cardRef = useRef<HTMLDivElement>(null)
     const targetPos = useRef({ x: 0, y: 0 })
@@ -72,19 +70,13 @@ export const TestCard: FC<TestItemProps> = memo(({
         if (item.path) onClick(item.path)
     }
 
-    const handleResultClick = (e: MouseEvent) => {
-        e.stopPropagation()
-        if (item.path) resultOnClick(`${item.path}/results`)
-    }
-
     return (
         <div className="test-card-wrapper">
             <div
                 ref={cardRef}
-                className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""} ${className || ""}`}
+                className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""}`}
                 onMouseMove={handleMouseMove}
                 onClick={handleClick}
-                data-id={dataIdAttr ?? index}
                 data-test-id={dataId}>
 
                 <div className="hover-circle" />
@@ -120,12 +112,13 @@ export const TestCard: FC<TestItemProps> = memo(({
             </div>
 
             {isComplete && (
-                <div className="test-selection-result" onClick={handleResultClick}>
+                <div className="test-selection-result" onClick={() => resultOnClick(item)}>
                     <h4>Результаты</h4>
                     <div className="test-selection-decal">
                         <ArrowRight />
                     </div>
-                </div>)}
+                </div>
+            )}
         </div>
     )
 })

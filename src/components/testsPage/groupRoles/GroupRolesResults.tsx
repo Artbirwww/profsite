@@ -113,7 +113,7 @@ export const GroupRolesResults = () => {
                     <span>Пройдено за: {formatTime(Math.floor(groupRolesResults.completionTimeSeconds / 60))} : {formatTime(groupRolesResults.completionTimeSeconds % 60)}</span>
                 }
                 <div>
-                    <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+                    <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/tests")} />
                 </div>
 
             </div>

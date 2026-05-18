@@ -1,4 +1,5 @@
 import "../css/testsResultStyles.css"
+import "../css/temperamentResultStyles.css"
 
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -144,7 +145,7 @@ export const TemperamentResults = () => {
 						{psychTest.completionTimeSeconds !== null && psychTest.completionTimeSeconds !== 0 &&
 							<span>Пройдено за: {formatTime(Math.floor(psychTest.completionTimeSeconds / 60))} : {formatTime(psychTest.completionTimeSeconds % 60)}</span>}
 						<div>
-							<Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+							<Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/tests")} />
 						</div>
 
 					</div>

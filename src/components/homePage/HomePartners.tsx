@@ -5,7 +5,7 @@ export const HomePartners: FC = ({ }) => {
         <div className="home-section-item">
 
             <div className="home-section-header">
-                <h4>Проект реализован благодаря</h4>
+                <h4>Проект создан при поддержке</h4>
             </div>
 
             <div className="home-partners-section-wrapper">

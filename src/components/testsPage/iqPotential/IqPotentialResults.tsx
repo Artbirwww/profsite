@@ -142,7 +142,7 @@ export const IqPotentialResults = () => {
             </div>
             <p>Дата последнего прохождения: {formatDateRU(result.createdAt)}</p>
             <div>
-                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/my-results")} />
+                <Button label="Назад" icon={<ArrowLeft />} onClick={() => navigate("/tests")} />
             </div>
 
         </div>

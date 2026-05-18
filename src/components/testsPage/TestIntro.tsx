@@ -1,4 +1,4 @@
-import "./css/testIntroStyles.css"
+import "./css/intro.css"
 
 import { useEffect, useState } from "react"
 import toast, { Toaster } from "react-hot-toast"

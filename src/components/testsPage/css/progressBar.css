@@ -85,3 +85,19 @@
         transform: translateX(-50%) rotate(360deg);
     }
 }
+
+@media (max-width: 1260px) {
+    .progress-container {
+        width: 30px;
+    }
+
+    .progress-count {
+        display: none;
+    }
+}
+
+@media (max-width: 996px) {
+    .progress-container {
+        width: 15px;
+    }
+}

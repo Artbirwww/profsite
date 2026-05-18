@@ -2,7 +2,7 @@ import { data, useNavigate } from "react-router-dom";
 import { BaseTestComponentProps } from "./BaseTest";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTimer } from "../hooks/useTimer";
-import { TestFormSelection } from "../generalTemplates/formSelection/TestFormSelection";
+import { TestFormSelection } from "../TestFormSelection";
 import { formatTime } from "../utils/formatTime";
 
 interface FormSelectionTestConfig<T> {

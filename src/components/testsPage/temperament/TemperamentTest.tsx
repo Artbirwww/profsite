@@ -1,6 +1,6 @@
 import { PositiveNegative } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
-import { TestFormConfig } from "../generalTemplates/formSelection/TestFormSelection"
+import { TestFormConfig } from "../TestFormSelection"
 import { UseFormSelectionTest } from "../generalTests/UseFormSelectionTest"
 
 const TEMPERAMENT_FORMS: TestFormConfig<TemperamentOption>[] = [

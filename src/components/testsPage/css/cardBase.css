@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: 100%;
 }
 
 .test-selection-item {
@@ -53,4 +54,14 @@
 
 .test-selection-item.complete .hover-circle {
     background-color: var(--scfly-color-300);
+}
+
+@media (max-width: 768px) {
+    .test-selection-item {
+        padding: 20px;
+    }
+
+    .test-selection-item .hover-circle {
+        display: none;
+    }
 }
