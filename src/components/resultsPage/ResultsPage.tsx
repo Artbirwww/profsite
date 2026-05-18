@@ -12,7 +12,7 @@ export const ResultsPage: FC = () => {
 	const { getToken } = useAuth()
 	const navigate = useNavigate()
 	const [completedTests, setCompletedTests] = useState<TestItem[]>([])
-	const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>([])
+	const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>({})
 
 	useEffect(() => {
 		console.log(completedTests)

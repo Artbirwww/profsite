@@ -2,13 +2,14 @@ import "./css/layoutGrid.css"
 import "./css/progressBar.css"
 
 import { FC, useCallback, useEffect, useRef, useState } from "react"
-import { testsList } from "./TestsData"
+import { TestItem, testsList } from "./TestsData"
 import { TestCard } from "./TestCard"
 import { useNavigate } from "react-router-dom"
 import { CheckCheck } from "lucide-react"
 import { testApi } from "../../services/api/testApi"
 import { useAuth } from "../../contexts/AuthContext"
 import { TestResultResponse } from "../../types/testTypes"
+import toast from "react-hot-toast"
 
 export const TestsPage: FC = ({ }) => {
     const navigate = useNavigate()
@@ -93,7 +94,23 @@ export const TestsPage: FC = ({ }) => {
     const handleClick = useCallback((path: string) => {
         navigate(path)
     }, [navigate])
-
+    const showResultClick = async(testItem: TestItem) => {
+        if (!testItem.pathResults) {
+            toast.error("Результаты не найдены для теста, попробуйте позже")
+            return
+        }
+        try {
+            navigate(testItem.pathResults, {
+                state: {
+                    isViewMode: true,
+                    psychTest: recentTests[testItem.name]
+                }
+            })
+        } catch(err) {
+            console.error(err)
+            toast.error("Ошибка при загрузке результатов")
+        }
+    }
     return (
         <div className="test-container">
 
@@ -119,17 +136,16 @@ export const TestsPage: FC = ({ }) => {
                 className="test-grid">
                 {testsList.map((item, index) => {
                     return (
-                        <TestCard
-                            key={item.id || index}
-                            dataId={item.id}
-                            index={index}
-                            isAvailable={item.isAvailable}
-                            item={item}
-                            onClick={handleClick}
-                            resultOnClick={handleClick}
-                            isComplete={!!recentTests[item.name]}
-                            className={"test-card"}
-                            data-id={index} />
+                        <div key={index} data-id={index} className="test-grid-item">
+                            <TestCard
+                                dataId={item.id}
+                                index={index}
+                                isAvailable={item.isAvailable}
+                                item={item}
+                                onClick={handleClick}
+                                resultOnClick={showResultClick}
+                                isComplete={recentTests ? recentTests[item.name] != null : false} />
+                        </div>
                     )
                 })}
             </div>

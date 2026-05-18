@@ -36,7 +36,9 @@
     font-size: clamp(var(--font-size-md), 0.804rem + 1.61vw, var(--font-size-xl));
     text-transform: uppercase;
 }
-
+.header.center-align {
+    justify-content: center;
+}
 .outlet {
     position: relative;
     z-index: 1;

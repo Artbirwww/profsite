@@ -13,9 +13,7 @@ interface TestItemProps {
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
-    resultOnClick: (path: string) => void
-    className?: string
-    "data-id"?: number
+    resultOnClick: (item: TestItem) => void
 }
 
 const getDeclension = (count: number, titles: [string, string, string]) => {
