@@ -47,6 +47,14 @@
     font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
 }
 
+.sidebar-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
 .outlet {
     position: relative;
     z-index: 1;
@@ -96,5 +104,9 @@
 
     .menu {
         display: none;
+    }
+
+    .sidebar-button {
+        display: block;
     }
 }

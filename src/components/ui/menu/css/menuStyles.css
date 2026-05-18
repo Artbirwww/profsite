@@ -82,30 +82,3 @@
     color: var(--primary-color-50) !important;
     stroke-width: 2 !important;
 }
-
-@media (max-width: 992px) {
-    .menu-wrapper {
-        bottom: 10px;
-    }
-}
-
-@media (max-width: 624px) {
-    .menu-nav {
-        height: 50px;
-    }
-
-    .menu-nav-item-container {
-        padding: 0;
-        height: 44px;
-        width: 44px;
-    }
-
-    .menu-nav-item-label {
-        display: none;
-    }
-
-    .menu-nav-item-icon svg {
-        width: 22px;
-        height: 22px;
-    }
-}
