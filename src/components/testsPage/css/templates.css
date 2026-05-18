@@ -74,6 +74,7 @@
     gap: 10px;
     font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
     z-index: 3;
     padding-top: 10px;
 }
