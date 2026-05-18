@@ -1,0 +1,87 @@
+/* ПРОГРЕСС БАР ЗАВЕРШЕННЫХ ТЕСТОВ */
+.progress-container {
+    grid-area: progress-bar;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    width: 50px;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--grey-color-300);
+    border-radius: 15px;
+}
+
+.progress-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background-color: var(--accent-color-500);
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-count {
+    position: absolute;
+    bottom: 5px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    text-align: center;
+}
+
+.progress-count svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color-50);
+    stroke-width: 1.8;
+}
+
+.progress-count span {
+    color: var(--primary-color-50);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-sm));
+}
+
+/* "ВОЛНЫ" ДЛЯ ПРОГРЕСС БАРА */
+.wave-element {
+    position: absolute;
+    bottom: calc(100% - 240px);
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    background-color: var(--accent-color-500);
+    transform: translateX(-50%);
+    border-radius: 40%;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.wave-front {
+    z-index: 2;
+    opacity: 1;
+    animation: rotate-wave 5s linear infinite;
+}
+
+.wave-back {
+    z-index: 1;
+    bottom: calc(100% - 235px);
+    opacity: 0.5;
+    background-color: var(--accent-color-500);
+    border-radius: 35%;
+    animation: rotate-wave 8s linear infinite reverse;
+}
+
+@keyframes rotate-wave {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}

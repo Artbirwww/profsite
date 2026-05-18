@@ -1,4 +1,6 @@
-import "./css/testCardStyles.css"
+import "./css/cardBase.css"
+import "./css/cardContent.css"
+import "./css/cardResult.css"
 
 import { FC, memo, useRef, MouseEvent, useEffect } from "react"
 import { TestItem } from "./TestsData"
@@ -7,14 +9,33 @@ import { Timer, FileQuestion, ArrowRight, CheckCheck } from "lucide-react"
 interface TestItemProps {
     item: TestItem
     dataId: string
-    index?: number
+    index: number
     isAvailable?: boolean
     isComplete?: boolean
     onClick: (path: string) => void
     resultOnClick: (path: string) => void
+    className?: string
+    "data-id"?: number
 }
 
-export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, isComplete, onClick, resultOnClick }) => {
+const getDeclension = (count: number, titles: [string, string, string]) => {
+    const cases = [2, 0, 1, 1, 1, 2]
+    return titles[
+        count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]
+    ]
+}
+
+export const TestCard: FC<TestItemProps> = memo(({
+    item,
+    dataId,
+    index,
+    isAvailable,
+    isComplete,
+    onClick,
+    resultOnClick,
+    className,
+    "data-id": dataIdAttr
+}) => {
     const cardRef = useRef<HTMLDivElement>(null)
     const targetPos = useRef({ x: 0, y: 0 })
     const currentPos = useRef({ x: 0, y: 0 })
@@ -24,7 +45,6 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
 
         const animate = () => {
             const lerpFactor = 0.1
-
             currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerpFactor
             currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerpFactor
 
@@ -32,7 +52,6 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
                 cardRef.current.style.setProperty("--mouse-x", `${currentPos.current.x}px`)
                 cardRef.current.style.setProperty("--mouse-y", `${currentPos.current.y}px`)
             }
-
             frameId = requestAnimationFrame(animate)
         }
 
@@ -51,26 +70,23 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
     }
 
     const handleClick = () => {
-        if (!isAvailable)
-            return
-
-        if (item.path)
-            onClick(item.path)
+        if (!isAvailable) return
+        if (item.path) onClick(item.path)
     }
 
-    const declension = (count: number, titles: [string, string, string]) => {
-        const cases = [2, 0, 1, 1, 1, 2]
-        return titles[
-            count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]
-        ]
+    const handleResultClick = (e: MouseEvent) => {
+        e.stopPropagation()
+        if (item.path) resultOnClick(`${item.path}/results`)
     }
 
-    return (<>
-        <div ref={cardRef}
-            className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""}`}
+    return (
+        <div
+            ref={cardRef}
+            className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""} ${className || ""}`}
             onMouseMove={handleMouseMove}
-            data-id={dataId}
-            onClick={handleClick}>
+            onClick={handleClick}
+            data-id={dataIdAttr ?? index}
+            data-test-id={dataId}>
 
             <div className="hover-circle" />
 
@@ -90,28 +106,29 @@ export const TestCard: FC<TestItemProps> = memo(({ item, dataId, isAvailable, is
             <div className="test-selection-item-info">
                 <div className="test-selection-item-hint">
                     <Timer />
-                    <span>{item.time} {declension(item.time, ["минута", "минуты", "минут"])}</span>
+                    <span>{item.time} {getDeclension(item.time, ["минута", "минуты", "минут"])}</span>
                 </div>
 
                 <div className="test-selection-item-hint">
                     <FileQuestion />
-                    <span>{item.questionscount} {declension(item.questionscount, ["вопрос", "вопроса", "вопросов"])}</span>
+                    <span>{item.questionscount} {getDeclension(item.questionscount, ["вопрос", "вопроса", "вопросов"])}</span>
                 </div>
             </div>
 
             <div className="test-selection-decal">
                 {isComplete ? <CheckCheck /> : <ArrowRight />}
             </div>
-        </div>
 
-        {isComplete && (
-            <div className="test-selection-result">
-                <h4>Результаты</h4>
-
-                <div className="test-selection-decal">
-                    <ArrowRight />
+            {isComplete && (
+                <div className="test-selection-result" onClick={handleResultClick}>
+                    <h4>Результаты</h4>
+                    <div className="test-selection-decal">
+                        <ArrowRight />
+                    </div>
                 </div>
-            </div>
-        )}
-    </>)
+            )}
+        </div>
+    )
 })
+
+TestCard.displayName = "TestCard"

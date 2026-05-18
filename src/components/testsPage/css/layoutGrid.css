@@ -1,0 +1,58 @@
+/* СЕТКА - ПРОГРЕСС БАР, СЕТКА КАРТОЧЕК ТЕСТОВ, ИНДИКАТОР ПРОКРУТКИ */
+.test-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "progress-bar cards"
+        "indicator indicator";
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.test-grid {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: calc(50% - 5px);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-radius: 15px;
+}
+
+.test-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* ИНДИКАТОР ПРОКРУТКИ СЕТКИ */
+.test-indicator {
+    grid-area: indicator;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    height: 50px;
+    background-color: var(--primary-color-50);
+    border-radius: 15px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--grey-color-300);
+    border-radius: 50%;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot.active {
+    background-color: var(--accent-color-500);
+}

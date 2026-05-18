@@ -1,0 +1,126 @@
+/* ИНФОРМАЦИОННЫЕ БЛОКИ (ПРИПОДНЯТЫ НАД ХОВЕР-КРУГОМ) */
+.test-selection-item-label,
+.test-selection-item-info,
+.test-selection-decal {
+    position: relative;
+    z-index: 2;
+}
+
+.test-selection-item-label {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.test-selection-item-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.test-selection-item-label h4 {
+    color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-md), 0.683rem + 0.77vw, var(--font-size-lg));
+    line-height: 20px;
+}
+
+.test-selection-item-label span {
+    color: var(--text-placeholder-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item:not(.locked):hover .test-selection-item-label span {
+    color: var(--text-primary-color);
+}
+
+/* ДИНАМИЧЕСКОЕ ОПИСАНИЕ ПРИ НАВЕДЕНИИ */
+.test-selection-item-description {
+    position: absolute;
+    top: 50%;
+    left: -200%;
+    z-index: 2;
+    width: 350px;
+    color: var(--text-placeholder-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item:not(.locked):hover .test-selection-item-description {
+    left: 30px;
+    color: var(--text-primary-color);
+    opacity: 1;
+}
+
+/* БЛОК ИКОНОК-ХИНТОВ */
+.test-selection-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.test-selection-item-hint {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-placeholder-color);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item-hint svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.5;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item-hint span {
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item:not(.locked):hover .test-selection-item-hint {
+    color: var(--text-primary-color);
+}
+
+/* КНОПКА СТРЕЛКИ / ГАЛОЧКИ В УГЛУ */
+.test-selection-decal {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 100px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-decal svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-primary-color);
+    stroke-width: 1.5;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.test-selection-item:not(.locked):hover .test-selection-decal {
+    background-color: var(--primary-color-50);
+}
+
+.test-selection-item:not(.locked):hover .test-selection-decal svg {
+    color: var(--accent-color-500);
+}
+
+.test-selection-item.complete:not(.locked):hover .test-selection-decal svg {
+    color: var(--scfly-color-500);
+}

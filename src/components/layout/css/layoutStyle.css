@@ -1,70 +1,66 @@
 .layout-wrapper {
-    box-sizing: border-box;
     position: relative;
-    height: 100dvh;
-    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 100dvh;
+    padding: 20px;
+    box-sizing: border-box;
     overflow: hidden;
     background-color: var(--primary-color-50);
 }
 
 .background {
-    flex: 1;
     position: absolute;
     top: 10px;
     right: 10px;
     bottom: 10px;
     left: 10px;
-    overflow: hidden;
+    z-index: 0;
     background-color: #eeeeee;
     border-radius: 15px;
 }
 
 .header {
-    max-width: 1440px;
-    width: 100%;
+    position: relative;
+    z-index: 2;
     display: flex;
-    position: absolute;
-    box-sizing: border-box;
-    top: 20px;
-    align-items: start;
     justify-content: start;
+    align-items: start;
+    width: 100%;
+    max-width: 1440px;
     color: var(--text-primary-color);
     font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-md), 0.804rem + 1.61vw, var(--font-size-xl));
     text-transform: uppercase;
-    font-size: clamp(var(--font-size-lg), 0.804rem + 1.61vw, var(--font-size-xl));
-    z-index: 2;
 }
 
 .outlet {
-    max-width: 1440px;
-    width: 100%;
-    height: 100%;
-    padding: 110px 0;
-    margin: 0 20px;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    z-index: 1;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    padding: 20px 0;
 }
 
-@media (max-width: 1480px) {
-    .header {
-        left: 20px;
-    }
+.menu {
+    position: relative;
+    z-index: 2;
 }
 
+/* Адаптив для мобильных устройств */
 @media (max-width: 768px) {
-    .outlet {
-        padding-bottom: 0 !important;
-        margin-bottom: 20px !important;
+    .layout-wrapper {
+        padding: 10px;
     }
-}
 
-@media (max-width: 992px) {
     .background {
         top: 0;
         right: 0;
@@ -74,24 +70,10 @@
     }
 
     .outlet {
-        padding: 80px 0;
-        margin: 0 10px;
-    }
-}
-
-@media (max-width: 624px) {
-    .outlet {
-        padding-bottom: 70px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        top: 10px;
+        padding: 10px 0 0 0;
     }
 
-    .outlet {
-        padding-top: 60px;
-        margin: 0 10px;
+    .menu {
+        display: none;
     }
 }

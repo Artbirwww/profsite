@@ -1,6 +1,5 @@
 import "./css/layoutStyle.css"
-
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { Menu } from "../ui/menu/Menu"
 import { useAuth } from "../../contexts/AuthContext"
@@ -13,33 +12,27 @@ export const Layout: FC = () => {
     const isAuthPage = location.pathname === "/login" || location.pathname.startsWith("/register")
     const isAdminPage = location.pathname.startsWith("/admin")
     const shouldHideHeader = isAuthPage || isAdminPage
-
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-
-        window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
-    }, [])
+    const hasToken = !!getToken()
 
     return (
         <div className="layout-wrapper">
             <div className="background" />
 
             {!shouldHideHeader && (
-                <div className="header">
+                <header className="header">
                     {routeTitles[location.pathname] || "Загрузка..."}
-                </div>
+                </header>
             )}
 
-            <div className="outlet" style={{ paddingTop: `${isAdminPage ? "20px" : ""}`, paddingBottom: `${isAdminPage ? "20px" : ""}` }}>
+            <main className="outlet">
                 <Outlet />
-            </div>
+            </main>
 
-            {(getToken() && !isAdminPage && !isMobile) && <Menu />}
+            {hasToken && !isAdminPage && (
+                <div className="menu">
+                    <Menu />
+                </div>
+            )}
         </div>
     )
 }

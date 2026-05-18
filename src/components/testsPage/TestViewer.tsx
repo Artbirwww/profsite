@@ -1,10 +1,6 @@
 import toast from "react-hot-toast"
 import { useAuth } from "../../contexts/AuthContext"
 
-import "./css/generalTemplatesStyles.css"
-import "./css/temperamentResultStyles.css"
-import "./css/testCardStyles.css"
-
 import { Outlet } from "react-router-dom"
 import { useEffect } from "react"
 

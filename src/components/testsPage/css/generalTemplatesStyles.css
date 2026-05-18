@@ -1,4 +1,4 @@
-/* ОБЩИЙ КОНТЕЙНЕР ТЕСТА */
+/* ОБЩИЙ КОНТЕЙНЕР ТЕСТА 
 .test-card {
     border-radius: 15px;
     background-color: var(--primary-color-50);
@@ -23,7 +23,7 @@
     bottom: 3px;
     border-radius: 12px;
     z-index: 2;
-}
+}*/
 
 /* ОБЕРТКА ДЛЯ КНОПКИ НАЗАД И ТЕКУЩЕГО ВОПРОСА */
 .test-card-info {

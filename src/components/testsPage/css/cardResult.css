@@ -1,0 +1,38 @@
+/* ПЛАШКА РЕЗУЛЬТАТОВ (ВСТРОЕНА ВНУТРЬ КОНТЕЙНЕРА) */
+.test-selection-result {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 30px;
+    background-color: var(--scfly-color-300);
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.test-selection-result h4 {
+    color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-sm), 0.683rem + 0.77vw, var(--font-size-base));
+    line-height: 20px;
+}
+
+.test-selection-result .test-selection-decal {
+    bottom: auto;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.test-selection-result:hover .test-selection-decal {
+    background-color: var(--primary-color-50);
+}
+
+.test-selection-result:hover .test-selection-decal svg {
+    color: var(--scfly-color-500);
+}
