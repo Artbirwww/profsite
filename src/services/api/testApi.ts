@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import api from './api';
 import { TestResultRequest, TestResultResponse } from '../../types/testTypes';
+import { AccountsTests } from '../../types/account/account';
 
 export const testApi = {
   createTest: async (token: string, testData: TestResultRequest): Promise<TestResultResponse> => {
@@ -56,6 +57,32 @@ export const testApi = {
       })
       return response.data
     } catch(err) {
+      throw err
+    }
+  },
+  getCompletedTestsByDates: async (token: string, type: string, startDate:string, endDate:string) =>  {
+    
+    if (!token) throw new Error("Authentication token is required")
+    if (!type) throw new Error("Test type is required")
+    if (!startDate) throw new Error("Start date is required")
+    if (!endDate) throw new Error("End date is required")
+    try {
+      const query = `type=${type}&startDate=${startDate}&endDate=${endDate}`
+      const params = new URLSearchParams({
+        type: type,
+        startDate: startDate,
+        endDate: endDate
+      })
+      const response = await api.get<AccountsTests[]>(`api/psych-tests/completed-tests?${params.toString()}`, {
+        headers: {Authorization: token}
+      })
+      return response.data
+    } catch(err) {
+      console.error('API call failed:', {
+        endpoint: 'getCompletedTestsByDates',
+        params: { type, startDate, endDate },
+        error: err
+    })
       throw err
     }
   }
