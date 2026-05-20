@@ -6,10 +6,12 @@ import { formatTime } from "../utils/formatTime"
 import { useTimer } from "../hooks/useTimer"
 import { TestFormConfig, TestFormSelection } from "../generalTemplates/formSelection/TestFormSelection"
 import { createFormSelectionTest } from "../generalTests/FormSelection"
-
+const resetAnswers = (data: TemperamentOption[]) => {
+    return data.map(({answer, ...rest}) => rest)
+}
 const TEMPERAMENT_FORMS: TestFormConfig<TemperamentOption>[] = [
-    { id: "A", label: "Форма A", data: TemperamentFormA },
-    { id: "B", label: "Форма B", data: TemperamentFormB },
+    { id: "A", label: "Форма A", data: resetAnswers(TemperamentFormA) },
+    { id: "B", label: "Форма B", data: resetAnswers(TemperamentFormB) },
 ]
 
 export const TemperamentTest = createFormSelectionTest({
