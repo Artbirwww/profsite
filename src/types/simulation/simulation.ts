@@ -7,6 +7,8 @@ export interface Simulation {
     email: string
     simulationType: string
     profession: string
+    scenario?: string
+    simulationDataSource?: string
 }
 
 export interface SimulationResponse {

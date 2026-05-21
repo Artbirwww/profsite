@@ -20,6 +20,14 @@ export const SimulationCard = ({simulation}: SimulationCardProps) => {
                 <span className="info-label">Тип:</span>
                 <span>{simulation.simulation.simulationType || '--'}</span>
             </div>
+            <div className="info-row">
+                <span className="info-label">Сценарий:</span>
+                <span>{simulation.simulation.scenario || '--'}</span>
+            </div>
+            <div className="info-row">
+                <span className="info-label">Источник данных:</span>
+                <span>{simulation.simulation.simulationDataSource || '--'}</span>
+            </div>
             
             <div className="info-row">
                 <span className="info-label">Файл:</span>

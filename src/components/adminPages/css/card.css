@@ -36,6 +36,9 @@
     min-width: 110px;
     color: #666;
 }
+.info-row a {
+    color: var(--accent-color-400);
+}
 .card-footer {
     margin-top: 12px;
     padding-top: 8px;
