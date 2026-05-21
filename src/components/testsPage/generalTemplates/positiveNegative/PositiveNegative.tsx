@@ -9,7 +9,7 @@ import { BaseTestComponentProps } from "../../generalTests/BaseTest"
 export interface PositiveNegativeOption {
     id: number
     text: string
-    answer: boolean
+    answer?: boolean
 }
 
 interface PositiveNegativeProps<T extends PositiveNegativeOption> extends BaseTestComponentProps<T> { }
@@ -77,8 +77,8 @@ export const PositiveNegative = <T extends PositiveNegativeOption>({ tasks, setT
 
             <div className="test-card-options">
                 <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentOptionNumber === 0} onClick={() => { changeOption(-1) }} />
-                <Button label={"Да"} icon={<Check />} onClick={() => handleAnswer(true)} />
-                <Button label={"Нет"} icon={<X />} onClick={() => handleAnswer(false)} />
+                <Button label={"Да"} icon={<Check />} onClick={() => handleAnswer(true)} style={{background: `${currentOption?.answer === true  ? "#2eb96d" : ""}`}}/>
+                <Button label={"Нет"} icon={<X />} onClick={() => handleAnswer(false)} style={{background: `${currentOption?.answer === false ? "#2eb96d" : ""}`}} />
             </div>
 
             <ProgressBar currentTaskNumber={currentOptionNumber} total={tasks.length} />
