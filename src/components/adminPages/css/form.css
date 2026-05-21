@@ -18,3 +18,114 @@ input[type="radio"] {
     width: auto;
     margin-right: 8px;
 }
+.content-wrapper h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Table header - visible on desktop only */
+.table-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.875rem;
+}
+
+.header-cell {
+    flex: 1;
+    padding: 0.25rem;
+}
+
+.header-cell:last-child {
+    flex: 0 0 40px; /* Match delete button width */
+}
+
+/* Data rows */
+.data-table .row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: background 0.2s;
+}
+
+.data-table .row:hover {
+    background: #f8fafc;
+}
+
+.data-table .param-cell {
+    flex: 1;
+    padding: 0.25rem;
+    color: #334155;
+    word-break: break-word;
+}
+
+.delete-cell {
+    flex: 0 0 40px;
+    cursor: pointer;
+    color: #ef4444;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.delete-cell:hover {
+    background: #fee2e2;
+    transform: scale(1.05);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .table-header {
+        display: none; /* Hide header on mobile */
+    }
+    
+    .data-table .row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    .data-table .param-cell {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #f1f5f9;
+        margin: 0;
+    }
+    
+    .data-table .param-cell:last-of-type {
+        border-bottom: none;
+    }
+    
+    /* Show labels on mobile */
+    .data-table .param-cell::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #64748b;
+        margin-right: 1rem;
+    }
+    
+    .delete-cell {
+        margin: 0.75rem 1rem;
+        align-self: flex-end;
+        background: #fef2f2;
+    }
+}
