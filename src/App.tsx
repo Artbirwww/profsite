@@ -68,6 +68,8 @@ import { HollandResults } from "./components/testsPage/holland/HollandResults"
 import { DownloadTestsResults } from "./components/adminPages/results/DownloadTestsResults";
 import { ProfessionsForm } from "./components/adminPages/crud/crudForms/ProfessionsForm";
 import { ProfessionSphereForm } from "./components/adminPages/crud/crudForms/ProfessionSphereForm";
+import { crudRoutes } from "./components/adminPages/crud/routes.config";
+import { FormsListPage } from "./components/adminPages/crud/FormsListPage";
 
 export default function App() {
 	return (
@@ -101,9 +103,12 @@ export default function App() {
 							<Route path="specialists-upload" element={<UploadSpecialists />} />
 
 							<Route path="results" element={<DownloadTestsResults/>} />
+							/**Admin cruds routes from template  */
+							<Route path="forms" element={<FormsListPage/>}/>
+							{crudRoutes.map(route => (
+								<Route key={route.path} path={route.path} element={<route.element />} />
+							))}
 
-							<Route path="forms/professions" element={<ProfessionsForm />} />
-							<Route path="forms/professions-spheres" element={<ProfessionSphereForm />} />
 						</Route>
 					</Route>
 
