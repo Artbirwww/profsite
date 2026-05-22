@@ -95,7 +95,7 @@ input[type="radio"] {
     }
     
     .data-table .row {
-        flex-direction: column;
+        /*flex-direction: column;*/
         align-items: stretch;
         gap: 0;
         padding: 0;

@@ -7,6 +7,8 @@ export const ProfessionSphereForm = () => {
         <>
             <ApiTemplate  
                 getApiUrl={`${baseUrl}/api/specialists/professions-spheres`}
+                postApiUrl={`${baseUrl}/api/specialists/professions-spheres`}
+                deleteApiUrl={`${baseUrl}/api/specialists/professions-spheres`}
                 apiParams={["name"]}
                 name="Профессии"
             />
