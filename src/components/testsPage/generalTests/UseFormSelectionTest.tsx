@@ -1,9 +1,8 @@
-import { data, useNavigate } from "react-router-dom";
-import { BaseTestComponentProps } from "./BaseTest";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useTimer } from "../hooks/useTimer";
-import { TestFormSelection } from "../TestFormSelection";
-import { formatTime } from "../utils/formatTime";
+import { useNavigate } from "react-router-dom"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useTimer } from "../hooks/useTimer"
+import { TestFormSelection } from "../TestFormSelection"
+import { formatTime } from "../utils/formatTime"
 
 interface FormSelectionTestConfig<T> {
     forms: Array<{ id: string; label: string; data: T[] }>
@@ -11,7 +10,8 @@ interface FormSelectionTestConfig<T> {
     resultPath: string
     stateKey: string
     stateKeyForm: string
-    Component: React.ComponentType<BaseTestComponentProps<T>>
+    Component: React.ComponentType<any>
+    componentProps?: any
     description?: string
     hasTimer?: boolean
     initialSeconds?: number
@@ -44,7 +44,7 @@ export const UseFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => 
                 state[config.stateKeyForm] = selectedForm
 
             navigate(config.resultPath, { state })
-        }, [navigate, data, selectedForm, timer.seconds, config.initialSeconds, config.stateKey, config.stateKeyForm, config.resultPath])
+        }, [navigate, selectedForm, timer.seconds, config.initialSeconds, config.stateKey, config.stateKeyForm, config.resultPath])
 
         const handleSelect = async (formId: string, formData: T[]) => {
             if (config.fetchFormData) {
@@ -82,6 +82,7 @@ export const UseFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => 
                 )}
 
                 <config.Component
+                    {...config.componentProps}
                     tasks={tasks}
                     setTasks={setTasks}
                     navigateToResults={handleComplete}

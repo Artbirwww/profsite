@@ -4,7 +4,8 @@ import { Outlet, useLocation } from "react-router-dom"
 import { Menu } from "../ui/menu/Menu"
 import { useAuth } from "../../contexts/AuthContext"
 import { routeTitles } from "./routeMap"
-import { MenuIcon, Sidebar } from "lucide-react"
+import { MenuIcon } from "lucide-react"
+import { Sidebar } from "../ui/menu/Sidebar"
 
 export const Layout: FC = () => {
     const { getToken, getEmail } = useAuth()
@@ -27,7 +28,7 @@ export const Layout: FC = () => {
                     <span>Профиль: {getEmail()} </span>
 
                     {hasToken && (
-                        <div className="sidebar-button">
+                        <div className="sidebar-button" onClick={() => setIsSidebarOpen(true)}>
                             <MenuIcon />
                         </div>
                     )}
@@ -45,7 +46,7 @@ export const Layout: FC = () => {
             )}
 
             {hasToken && (
-                <Sidebar />
+                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}/>
             )}
         </div>
     )

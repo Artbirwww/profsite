@@ -83,7 +83,6 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
 
     const currentTotal = sliders.reduce((sum, s) => sum + s.value, 0)
 
-
     return (
         <div className="test-card constant-sum-slider">
             <div className="test-card-info">
@@ -92,7 +91,7 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
                     <div>{currentGroupNumber + 1} из 7</div>
 
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <div>{totalValue} из 10</div>
+                    <div className={currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}>{totalValue} из 10</div>
                 </div>
 
                 {description && (

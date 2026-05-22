@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import { BaseTestComponentProps } from "./BaseTest"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { formatTime } from "../utils/formatTime"
-import { Button } from "../../ui/reusable/button"
-import { X } from "lucide-react"
 
 interface StandartTestConfig<T> {
     fetchData: () => Promise<T[]>
     resultPath: string
     stateKey: string
-    Component: React.ComponentType<BaseTestComponentProps<T>>
+    Component: React.ComponentType<any>
+    componentProps?: any
     description?: string
     hasTimer?: boolean
     initialSeconds?: number
@@ -58,7 +56,7 @@ export const UseStandartTest = <T,>(config: StandartTestConfig<T>) => {
         }, [tasks])
 
         useEffect(() => {
-            if (config.autoNavigationOnTimeout && timer.seconds === 0 && tasks && isTimerStarted && isCountdown)
+            if (config.autoNavigationOnTimeout && timer.seconds === 0 && tasks && isTimerStarted.current && isCountdown)
                 handleComplete()
         }, [timer.seconds, tasks, handleComplete, config.autoNavigationOnTimeout, isCountdown])
 
@@ -73,6 +71,7 @@ export const UseStandartTest = <T,>(config: StandartTestConfig<T>) => {
                 )}
 
                 <config.Component
+                    {...config.componentProps}
                     tasks={tasks}
                     setTasks={setTasks}
                     navigateToResults={handleComplete}

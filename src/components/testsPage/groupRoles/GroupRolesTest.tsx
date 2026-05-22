@@ -66,6 +66,7 @@ export const GroupRolesTest = () => {
                 sliders={currentQuestions}
                 setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
                 currentGroupNumber={currentGroupNumber}
+                description="Честно распредели 10 баллов между ответами, выбирая то, как ты реально ведёшь себя при работе в команде, а не то, как хотелось бы."
                 nextPage={nextQuestionsGroup}
                 maxValue={maxValue} />
         </div>

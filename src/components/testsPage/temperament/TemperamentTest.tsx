@@ -1,14 +1,12 @@
 import { PositiveNegative } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
-import { useNavigate } from "react-router-dom"
-import { formatTime } from "../utils/formatTime"
-import { useTimer } from "../hooks/useTimer"
-import { TestFormConfig, TestFormSelection } from "../generalTemplates/formSelection/TestFormSelection"
-import { createFormSelectionTest } from "../generalTests/FormSelection"
+import { UseFormSelectionTest } from "../generalTests/UseFormSelectionTest"
+
 const resetAnswers = (data: TemperamentOption[]) => {
     return data.map(({answer, ...rest}) => rest)
 }
-const TEMPERAMENT_FORMS: TestFormConfig<TemperamentOption>[] = [
+
+const TEMPERAMENT_FORMS = [
     { id: "A", label: "Форма A", data: resetAnswers(TemperamentFormA) },
     { id: "B", label: "Форма B", data: resetAnswers(TemperamentFormB) },
 ]

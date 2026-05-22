@@ -60,6 +60,14 @@
     font-weight: var(--font-weight-medium);
 }
 
+.count-danger {
+    color: var(--error-color-500) !important;
+}
+
+.count-good {
+    color: var(--scfly-color-400) !important;
+}
+
 .test-card-description {
     font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     color: var(--text-primary-color);
@@ -76,7 +84,7 @@
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
     z-index: 3;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .test-card-text span {
@@ -92,7 +100,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding-top: 10px;
+    padding-top: 30px;
     width: 100%;
     z-index: 3;
 }
@@ -116,7 +124,7 @@
     height: 100%;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 40px;
-    row-gap: 40px;
+    row-gap: 10px;
     z-index: 3;
 }
 
@@ -128,6 +136,7 @@
     justify-content: space-between;
     gap: 10px;
     border-radius: 10px;
+    height: 100%;
     width: 100%;
 }
 
@@ -201,7 +210,7 @@ input[type="range"].input-slider::-moz-range-track {
     z-index: 3;
     max-height: 200px;
     max-width: 600px;
-    padding-top: 10px;
+    padding-top: 30px;
     width: 100%;
 }
 
@@ -219,7 +228,7 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 30px;
     gap: 10px;
     z-index: 3;
 }
@@ -230,7 +239,7 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 10px;
+    padding-top: 30px;
     gap: 10px;
     z-index: 3;
 }
@@ -294,6 +303,10 @@ input[type="range"].input-slider::-moz-range-track {
         height: 100%;
     }
 
+    .test-card-text {
+        padding-top: 10px;
+    }
+
     .test-slider-grid {
         grid-template-columns: 1fr;
         row-gap: 30px;
@@ -313,6 +326,22 @@ input[type="range"].input-slider::-moz-range-track {
     .test-card-selectable {
         min-width: 40px;
         min-height: 40px;
+    }
+
+    .test-card-img {
+        padding-top: 10px;
+    }
+
+    .test-card-list.column {
+        padding-top: 10px;
+    }
+
+    .test-card-list.row {
+        padding-top: 10px;
+    }
+
+    .test-card-options {
+        padding-top: 10px;
     }
 
     .actual-test-wrapper {

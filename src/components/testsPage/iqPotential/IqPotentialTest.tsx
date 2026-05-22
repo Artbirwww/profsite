@@ -30,7 +30,7 @@ export const IqPotentialTest = UseFormSelectionTest<Task>({
     resultPath: "/tests/iq-potential-results",
     stateKey: "tasks",
     stateKeyForm: "iqTestForm",
-    description: "Реешай быстро, пропуская сложные задачи и возвращайся к ним позже. Выбери 1 из 6 фигур которая подходит в свободный квадрат.",
+    description: "Решай быстро, пропуская сложные задачи и возвращайся к ним позже. Выбери 1 из 6 фигур которая подходит в свободный квадрат.",
     hasTimer: true,
     initialSeconds: 720,
     autoNavigationOnTimeout: true,
