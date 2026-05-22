@@ -1,16 +1,109 @@
-.sidebar-aside {
+.sidebar-overlay {
     position: fixed;
     top: 0;
-    right: -300px;
-    width: 280px;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    background: rgba(0, 0, 0, .4);
+    backdrop-filter: blur(2px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-aside {
+    position: fixed;
+    top: 10px;
+    bottom: 10px;
+    right: -300px;
+    width: 200px;
+    height: calc(100vh - 20px);
     background-color: var(--primary-color-50);
+    border-radius: 15px;
     z-index: 999;
+    padding: 0px 10px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-aside.open {
-    right: 0;
+    right: 10px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey-color-300);
+}
+
+.sidebar-nav-item-logo {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 0;
+    overflow-y: auto;
+}
+
+.sidebar-nav-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.sidebar-nav-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-nav-item-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.5;
+    color: var(--text-primary-color);
+}
+
+.sidebar-nav-item-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--grey-color-300);
+}
+
+.sidebar-nav-item-container.active {
+    background-color: var(--accent-color-500);
+}
+
+.sidebar-nav-item-container.spec .sidebar-nav-item-icon svg,
+.sidebar-nav-item-container.spec .sidebar-nav-item-label {
+    color: var(--error-color-600)
+}
+
+.sidebar-nav-item-container.active .sidebar-nav-item-icon svg,
+.sidebar-nav-item-container.active .sidebar-nav-item-label {
+    color: var(--primary-color-50) !important;
+    stroke-width: 2 !important;
 }

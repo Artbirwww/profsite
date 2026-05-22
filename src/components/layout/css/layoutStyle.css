@@ -55,6 +55,13 @@
     display: none;
 }
 
+.sidebar-button {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+    color: var(--text-primary-color);
+}
+
 .outlet {
     position: relative;
     z-index: 1;

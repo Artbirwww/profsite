@@ -1,6 +1,6 @@
 import "./css/sidebar.css"
 
-import { FC, useCallback, useMemo } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef } from "react"
 import { useAuth } from "../../../contexts/AuthContext"
 import { useLocation, useNavigate } from "react-router-dom"
 import { logoutButton, menuButtons, MenuItemProps } from "./optionsData"
@@ -21,8 +21,8 @@ const SidebarItem: FC<ItemProps> = ({ item, isActive, onClick }) => {
     const Icon = item.icon
     return (
         <div className={`sidebar-nav-item-container ${item.className || ""} ${isActive ? "active" : ""}`} onClick={() => onClick(item)}>
-            <div className="sidebar-nav-item-label">{item.label}</div>
             <div className="sidebar-nav-item-icon"><Icon /></div>
+            <div className="sidebar-nav-item-label">{item.label}</div>
         </div>
     )
 }
@@ -31,6 +31,37 @@ export const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const { logout, checkRole } = useAuth()
+    const sidebarRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (!isOpen) return
+
+        const handleResize = () => {
+            onClose()
+        }
+
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    }, [isOpen, onClose])
+
+    useEffect(() => {
+        if (!isOpen) return
+
+        const handleClickOutside = (event: MouseEvent) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+                onClose()
+            }
+        }
+
+        const timeoutId = setTimeout(() => {
+            document.addEventListener("click", handleClickOutside)
+        }, 0)
+
+        return () => {
+            clearTimeout(timeoutId)
+            document.removeEventListener("click", handleClickOutside)
+        }
+    }, [isOpen, onClose])
 
     const isActive = useCallback((path: string) =>
         pathname === path || (path !== "/" && pathname.startsWith(`${path}/`)),
@@ -50,11 +81,13 @@ export const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
             .sort((a, b) => (a.order || 0) - (b.order || 0))
     }, [checkRole])
 
-    return (
-        <aside className={`sidebar-aside ${isOpen ? "open" : ""}`}>
+    return (<>
+        <div className={`sidebar-overlay ${isOpen ? "open" : ""}`} onClick={onClose}></div>
+
+        <aside ref={sidebarRef} className={`sidebar-aside ${isOpen ? "open" : ""}`}>
             <div className="sidebar-header">
-                <p>EVCG</p>
-                <div className="sidebar-close" onClick={onClose}><X /></div>
+                <p className="sidebar-nav-item-logo">evcg</p>
+                <div className="sidebar-nav-item-icon" onClick={onClose}><X /></div>
             </div>
 
             <div className="sidebar-links">
@@ -70,10 +103,10 @@ export const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
 
             <div className="sidebar-footer">
                 <div className={`sidebar-nav-item-container sidebar-logout ${logoutButton.className || ""}`} onClick={() => handleAction(logoutButton)}>
-                    <div className="sidebar-nav-item-label">{logoutButton.label}</div>
                     <div className="sidebar-nav-item-icon"><DoorOpen /></div>
+                    <div className="sidebar-nav-item-label">{logoutButton.label}</div>
                 </div>
             </div>
         </aside>
-    )
+    </>)
 }
