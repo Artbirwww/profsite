@@ -39,7 +39,7 @@ export const TestsPage: FC = ({ }) => {
         }
 
         loadRecentTests()
-    }, [recentTests])
+    }, [])
 
     useEffect(() => {
         if (!recentTests || testsList.length === 0) return
