@@ -16,7 +16,9 @@ export const SimulationPage = () => {
         startSimulation: undefined,
         endSimulation: undefined,
         profession: undefined,
-        simulationType: undefined
+        simulationType: undefined,
+        scenario: undefined,
+        simulationDataSource: undefined
     })
     const [currentPage, setCurrentPage] = useState<number>(0)
     const [size, setSize] = useState<number>(5)

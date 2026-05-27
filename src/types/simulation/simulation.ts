@@ -23,6 +23,8 @@ export interface SimulationRequest {
     profession?: string
     page?: number
     size?: number
+    scenario?: string
+    simulationDataSource?: string
 }
 export interface PaginatedSimulationResponse {
     content: SimulationResponse[]

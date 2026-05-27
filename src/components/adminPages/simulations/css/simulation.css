@@ -10,8 +10,22 @@
 .simulations-content {
     flex: 1;
 }
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.filter-bar > * {
+    flex: 1 1 0;
+    min-width: 0;
+}
 input, select {
     flex: 1;
+}
+select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .simulation-card {
     padding: 10px;

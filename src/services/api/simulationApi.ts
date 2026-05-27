@@ -9,16 +9,10 @@ export const simulationAPI = {
             params.append('page', page.toString())
         if (size !== undefined && size !== null) 
             params.append('size', size.toString())
-        if (request.email) 
-            params.append('email', (request.email))
-        if (request.profession) 
-            params.append('profession', (request.profession))
-        if (request.simulationType) 
-            params.append('simulationType', (request.simulationType))
-        if (request.startSimulation) 
-            params.append('startSimulation', request.startSimulation)
-        if (request.endSimulation) 
-            params.append('endSimulation', request.endSimulation)
+        Object.entries(request).forEach(([Key, value]) => {
+            if (value !== undefined && value !== null && value !== '')
+                params.append(Key, value.toString())
+        })
         const requestUrl = `api/simulations${params.toString() ? `?${params.toString()}` : ""}`
         const response = await api.get<PaginatedSimulationResponse>(requestUrl, {signal, headers: {Authorization: token}})
         return response.data
@@ -31,5 +25,13 @@ export const simulationAPI = {
             console.error(err)
             throw err
         }
+    },
+    getSimulationsScenarios: async () => {
+        const response = await api.get("api/simulations/scenarios")
+        return response.data
+    },
+    getSimulationsDataSource: async() => {
+        const response = await api.get("api/simulations/simulation-data-sources")
+        return response.data
     }
 }
