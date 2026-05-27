@@ -63,7 +63,7 @@ export const UploadSpecialists = () => {
     }
 
     return (<>
-        <div className="content-wrapper">
+        <div className="content-wrapper justify-center">
             <div className="upload-section">
                 <div className="upload-container">
                     <div className="file-input-wrapper">

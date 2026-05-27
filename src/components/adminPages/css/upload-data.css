@@ -1,9 +1,11 @@
 .content-wrapper {
     display: flex;
     height: 100vh;
-    justify-content: center;
     flex-direction: column;
     overflow: auto;
+}
+.justify-center {
+    justify-content: center;
 }
 .upload-container {
     

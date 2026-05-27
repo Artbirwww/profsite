@@ -45,7 +45,7 @@ export const DownloadTestsResults = () => {
     }
 
     return (<>
-        <div className="content-wrapper">
+        <div className="content-wrapper justify-center" >
             <form onSubmit={handleSubmit}>
                 <label>
                     <input 
