@@ -1,6 +1,6 @@
 import { PositiveNegative } from "../generalTemplates/positiveNegative/PositiveNegative"
 import { TemperamentFormA, TemperamentFormB, TemperamentOption } from "./temperamentData"
-import { UseFormSelectionTest } from "../generalTests/UseFormSelectionTest"
+import { FormSelectionTest } from "../generalTests/FormSelectionTest"
 
 const resetAnswers = (data: TemperamentOption[]) => {
     return data.map(({answer, ...rest}) => rest)
@@ -11,7 +11,7 @@ const TEMPERAMENT_FORMS = [
     { id: "B", label: "Форма B", data: resetAnswers(TemperamentFormB) },
 ]
 
-export const TemperamentTest = UseFormSelectionTest<TemperamentOption>({
+export const TemperamentTest = FormSelectionTest<TemperamentOption>({
     forms: TEMPERAMENT_FORMS,
     Component: PositiveNegative,
     resultPath: "/tests/temperament-results",

@@ -1,15 +1,17 @@
 /* ОБЩИЙ КОНТЕЙНЕР ТЕСТА */
-.actual-test-wrapper {
+.test-wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
     gap: 10px;
     align-items: center;
     justify-content: center;
-    height: 100%;
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
+    background-color: var(--grey-color-300);
+    padding: 5px;
+    border-radius: 20px;
 }
 
 .test-card {
@@ -18,9 +20,11 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    align-items: start;
     position: relative;
     justify-content: space-between;
-    width: 100% !important;
+    width: 100%;
     overflow: hidden;
     padding: 30px;
 }
@@ -37,40 +41,67 @@
     z-index: 2;
 }
 
-/* ОБЕРТКА ТЕКУЩЕГО ВОПРОСА */
 .test-card-info {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: start;
-    border-bottom: 1px solid var(--grey-color-300);
-    gap: 5px;
-    padding-bottom: 10px;
-    z-index: 3;
-    flex-wrap: wrap;
+    justify-content: end;
+    gap: 10px;
+    padding: 10px 20px 0 20px;
 }
 
 /* ОСТАВЩЕЕСЯ КОЛ-ВО ВОПРОСОВ */
 .test-card-count {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
-    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
-    color: var(--text-primary-color);
-    font-weight: var(--font-weight-medium);
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
 }
 
-.count-danger {
+.test-card-count-left {
+    display: flex;
+    align-items: start;
+    gap: 30px;
+}
+
+.test-card-timer {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    border-radius: 100px;
+    color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
+}
+
+.test-card-questions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
+}
+
+.test-card-questions.count-danger {
     color: var(--error-color-500) !important;
 }
 
-.count-good {
-    color: var(--scfly-color-400) !important;
+.test-card-questions.count-good {
+    color: var(--scfly-color-500) !important;
 }
 
 .test-card-description {
     font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
     color: var(--text-primary-color);
+    font-weight: var(--font-weight-medium);
+}
+
+.test-card-description span {
+    color: var(--accent-color-500);
     font-weight: var(--font-weight-medium);
 }
 
@@ -84,7 +115,6 @@
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
     z-index: 3;
-    padding-top: 30px;
 }
 
 .test-card-text span {
@@ -100,101 +130,123 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding-top: 30px;
     width: 100%;
     z-index: 3;
-}
-
-.test-card-exit {
-    position: absolute;
-    right: 20px;
-    top: 18px;
-    z-index: 3;
-}
-
-.test-card-exit .custom-button {
-    color: var(--error-color-500);
 }
 
 /* СЕТКА ДЛЯ СЛАЙДЕРОВ */
-.test-slider-grid {
-    display: grid;
+.test-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 3;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.slider-track-zone {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--primary-color-50);
+    border: 1px solid var(--grey-color-300);
+}
+
+/* Шкала заполнения прогресса */
+.slider-progress-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: calc(var(--progress, 0%) + 20px);
+    border-radius: 15px;
+    background-color: var(--grey-color-300);
+    z-index: 2;
+    transition: width 0.1s ease-out;
+}
+
+/* ТЕКСТ: Находится в обычном потоке, именно он определяет высоту слайдера */
+.slider-inner-text {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 40px;
-    row-gap: 10px;
-    z-index: 3;
+    font-size: 16px;
+    padding: 10px 10px 10px 30px;
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary-color);
+    line-height: 1.4;
+    pointer-events: none;
+    word-break: break-word;
 }
 
-/* ЭЛМЕНТ СЛАЙДЕРА */
-.test-grid-item {
-    box-sizing: border-box;
+.slider-inner-text .slider-text-content:last-child {
+    word-break: keep-all;
+    padding-left: 40px;
+    padding-right: 10px;
+}
+
+/* Вертикальный ползунок */
+.slider-custom-thumb {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    transform: translateX(9px);
+    width: 2px;
+    border-radius: 100px;
+    background-color: var(--grey-color-400);
+    z-index: 4;
+    pointer-events: none;
+    transition: left 0.1s ease-out;
+}
+
+.slider-control-zone {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color-50);
+    border: 1px solid var(--grey-color-300);
+    border-radius: 15px;
+    width: 80px;
 }
 
-/* КАСТОМНЫЙ СЛАЙДЕР */
-.test-card-input {
-    display: flex;
-    flex-direction: column;
+/* Нативный инпут */
+.input-slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    gap: 5px;
-}
-
-input[type="range"].input-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 32px;
-    cursor: pointer;
     margin: 0;
-    background: transparent;
+    opacity: 0;
+    cursor: ew-resize;
+    touch-action: pan-y;
+    z-index: 5;
 }
 
-input[type="range"].input-slider:focus {
-    outline: none;
-}
-
-/* Дорожка для Chrome/Safari */
-input[type="range"].input-slider::-webkit-slider-runnable-track {
-    height: 6px;
-    border-radius: 100px;
-    cursor: pointer;
-    background-image: linear-gradient(to right,
-            var(--accent-color-500) var(--progress, 0%),
-            var(--grey-color-300) var(--progress, 0%));
-}
-
-/* Ползунок (Thumb) */
-input[type="range"].input-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    margin-top: -3px;
-    height: 12px;
-    cursor: pointer;
-    width: 12px;
-    background: var(--accent-color-500);
-    border-radius: 50%;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Для Firefox всё проще, там есть специальный псевдоэлемент для прогресса */
-input[type="range"].input-slider::-moz-range-progress {
-    background-color: var(--accent-color-500);
-    height: 6px;
-    border-radius: 100px;
-}
-
-input[type="range"].input-slider::-moz-range-track {
-    background-color: var(--grey-color-300);
-    height: 6px;
-    border-radius: 100px;
+.test-card-image-text-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
 }
 
 /* КАРТИНКИ ТЕСТА */
@@ -208,9 +260,7 @@ input[type="range"].input-slider::-moz-range-track {
     align-self: center;
     object-fit: cover;
     z-index: 3;
-    max-height: 200px;
-    max-width: 600px;
-    padding-top: 30px;
+    max-width: 350px;
     width: 100%;
 }
 
@@ -228,7 +278,6 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
     gap: 10px;
     z-index: 3;
 }
@@ -239,7 +288,6 @@ input[type="range"].input-slider::-moz-range-track {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 30px;
     gap: 10px;
     z-index: 3;
 }
@@ -259,6 +307,7 @@ input[type="range"].input-slider::-moz-range-track {
     padding: 5px 40px;
     border-radius: 100px;
     cursor: pointer;
+    user-select: none;
     transition: all .4s cubic-bezier(.4, 0, .2, 1);
 }
 
@@ -282,99 +331,62 @@ input[type="range"].input-slider::-moz-range-track {
     transition: width .4s ease;
 }
 
-/* ТАЙМЕР */
-.float-timer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--primary-color-50);
-    font-size: clamp(var(--font-size-sm), 0.638rem + 0.77vw, var(--font-size-base));
-    font-weight: var(--font-weight-medium);
-    color: var(--text-primary-color);
-    width: 100px;
-    height: 44px;
-    border-radius: 100px;
-}
-
 /* МЕДИА ЗАПРОСЫ */
-
 @media (max-width: 992px) {
     .constant-sum-slider {
         height: 100%;
     }
 
-    .test-card-text {
-        padding-top: 10px;
-    }
-
-    .test-slider-grid {
-        grid-template-columns: 1fr;
-        row-gap: 30px;
-        overflow-y: auto;
-        scroll-behavior: smooth;
-        padding-right: 10px;
-        height: 100%;
-        scrollbar-width: thin;
-        scrollbar-color: var(--border-color);
-    }
-
-    .test-grid-item {
-        display: flex;
+    .test-card-image-text-wrapper {
+        flex-direction: column;
         gap: 10px;
+    }
+    
+    .test-card-img {
+        max-height: 150px;
     }
 
     .test-card-selectable {
         min-width: 40px;
         min-height: 40px;
     }
-
-    .test-card-img {
-        padding-top: 10px;
-    }
-
-    .test-card-list.column {
-        padding-top: 10px;
-    }
-
-    .test-card-list.row {
-        padding-top: 10px;
-    }
-
-    .test-card-options {
-        padding-top: 10px;
-    }
-
-    .actual-test-wrapper {
-        gap: 5px;
-    }
-
-    .float-timer {
-        height: 40px;
-    }
 }
 
 @media (max-width: 768px) {
+    .test-card {
+        gap: 10px;
+    }
     .test-card::after {
         display: none;
+    }
+
+    .test-card-info {
+        padding: 5px 10px 0 10px;
+        gap: 5px;
     }
 
     .test-progress-bar {
         display: none;
     }
 
+    .slider-inner-text {
+        padding: 5px 5px 5px 30px;
+    }
+
     .test-card-selectable {
         min-width: 34px;
         min-height: 34px;
-    }
-
-    .float-timer {
-        height: 34px;
     }
 }
 
 @media (max-width: 480px) {
     .test-card {
         padding: 20px;
+    }
+
+    .test-card-count-left {
+        flex-direction: column;
+        gap: 0;
     }
 
     .pozitive-negative {
@@ -395,15 +407,6 @@ input[type="range"].input-slider::-moz-range-track {
         height: auto;
     }
 
-    .test-slider-grid {
-        height: 100%;
-        grid-auto-rows: 1fr;
-    }
-
-    .test-grid-item {
-        gap: 5px;
-    }
-
     .input-slider-count {
         width: 30px;
         height: 30px;
@@ -413,12 +416,7 @@ input[type="range"].input-slider::-moz-range-track {
     }
 
     .test-card-img {
-        max-height: 100%;
-        max-width: 100%;
-    }
-
-    .test-card-img {
-        height: 200px;
+        max-height: 130px;
         width: 100%;
     }
 

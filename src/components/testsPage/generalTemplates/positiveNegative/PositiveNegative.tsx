@@ -16,6 +16,7 @@ interface PositiveNegativeProps {
     setTasks: Dispatch<SetStateAction<any[]>>
     navigateToResults: () => void
     description?: string
+    timerString?: string
 }
 
 export const PositiveNegative = ({
@@ -23,6 +24,7 @@ export const PositiveNegative = ({
     setTasks,
     navigateToResults,
     description,
+    timerString,
 }: PositiveNegativeProps) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0)
 
@@ -58,32 +60,42 @@ export const PositiveNegative = ({
     }
 
     return (
-        <div className="test-card pozitive-negative">
+        <div className="test-wrapper">
             <div className="test-card-info">
                 <div className="test-card-count">
-                    <div>Вопрос {currentIndex + 1} из {tasks.length}</div>
+                    <div className="test-card-questions">
+                        Вопрос {currentIndex + 1} из {tasks.length}
+                    </div>
+
+                    {timerString && (
+                        <div className="test-card-timer">
+                            {timerString}
+                        </div>
+                    )}
                 </div>
 
                 {description && (
                     <div className="test-card-description">
-                        {description}
+                        <span>Как отвечать: </span>{description}
                     </div>
                 )}
             </div>
 
-            <div className="test-card-text">
-                {currentOption?.text}
+            <div className="test-card pozitive-negative">
+                <div className="test-card-text">
+                    {currentOption?.text}
+                </div>
+
+                <div className="test-card-options">
+                    <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentIndex === 0} onClick={handleGoBack} />
+                    <Button label={"Да"} variant={currentOption?.answer === true ? "done" : "primary"} icon={<Check />} onClick={() => handleAnswer(true)} />
+                    <Button label={"Нет"} variant={currentOption?.answer === false ? "done" : "primary"} icon={<X />} onClick={() => handleAnswer(false)} />
+                </div>
+
+                <ProgressBar currentTaskNumber={currentIndex} total={tasks.length} />
+
+                <Toaster />
             </div>
-
-            <div className="test-card-options">
-                <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentIndex === 0} onClick={handleGoBack} />
-                <Button label={"Да"} variant={currentOption?.answer === true ? "done" : "primary"} icon={<Check />} onClick={() => handleAnswer(true)} />
-                <Button label={"Нет"} variant={currentOption?.answer === false ? "done" : "primary"} icon={<X />} onClick={() => handleAnswer(false)} />
-            </div>
-
-            <ProgressBar currentTaskNumber={currentIndex} total={tasks.length} />
-
-            <Toaster />
         </div>
     )
 }

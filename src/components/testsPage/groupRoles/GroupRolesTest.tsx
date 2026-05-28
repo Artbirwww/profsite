@@ -53,22 +53,18 @@ export const GroupRolesTest = () => {
         setCurrentGroupNumber(prev => prev + step)
     }
 
-    if (!currentQuestions)
-        return (<p>загрузка...</p>)
+    const timerString = `${formatTime(minutes)} : ${formatTime(remaningSeconds)}`
+
+    if (!currentQuestions) return (<p>загрузка...</p>)
 
     return (
-        <div className="actual-test-wrapper">
-            <div className="float-timer">
-                {formatTime(minutes)} : {formatTime(remaningSeconds)}
-            </div>
-
-            <ConstantSumSlider
-                sliders={currentQuestions}
-                setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
-                currentGroupNumber={currentGroupNumber}
-                description="Честно распредели 10 баллов между ответами, выбирая то, как ты реально ведёшь себя при работе в команде, а не то, как хотелось бы."
-                nextPage={nextQuestionsGroup}
-                maxValue={maxValue} />
-        </div>
+        <ConstantSumSlider
+            sliders={currentQuestions}
+            setSliders={setCurrentQuestions as Dispatch<SetStateAction<SliderData[]>>}
+            currentGroupNumber={currentGroupNumber}
+            description="Используя ползунки честно распредели 10 баллов между 8 ответами ниже, выбирая то, как ты реально ведёшь себя при работе в команде, а не то, как хотелось бы."
+            nextPage={nextQuestionsGroup}
+            maxValue={maxValue}
+            timerString={timerString ? timerString : undefined} />
     )
 }

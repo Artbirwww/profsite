@@ -1,4 +1,4 @@
-import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen } from "lucide-react"
+import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, ThumbsUp } from "lucide-react"
 import { ROLES } from "../../../types/account/role"
 
 export interface MenuItemProps {
@@ -46,7 +46,7 @@ export const menuButtons: MenuItemProps[] = [
     {
         id: "recomendations",
         label: "Рекомендации",
-        icon: UserRound,
+        icon: ThumbsUp,
         path: "/recomendations",
         order: 5,
     },

@@ -1,9 +1,8 @@
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
 import api, { getBaseUrl } from "../../../services/api/api"
-import { createStandartTest } from "../generalTests/StandartTest"
-import { UseStandartTest } from "../generalTests/UseStandartTest"
+import { StandartTest } from "../generalTests/StandartTest"
 
-export const HollandTest = UseStandartTest<Task>({
+export const HollandTest = StandartTest<Task>({
     Component: SingleOptionsPicker,
     fetchData: async () => {
         const response = await api.get(`${getBaseUrl()}/public/prof_holland/data/profHollandFormA.json`)

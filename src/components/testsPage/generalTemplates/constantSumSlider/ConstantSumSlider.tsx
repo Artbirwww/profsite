@@ -19,10 +19,19 @@ interface ConstantSumSliderProps {
     currentGroupNumber: number
     maxValue: number
     description?: string
+    timerString?: string
     nextPage: (step: number) => void
 }
 
-export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, maxValue, description, nextPage }: ConstantSumSliderProps) => {
+export const ConstantSumSlider = ({
+    sliders,
+    setSliders,
+    currentGroupNumber,
+    maxValue,
+    description,
+    timerString,
+    nextPage
+}: ConstantSumSliderProps) => {
     const [totalValue, setTotalValue] = useState(0)
     const [isLocked, setIsLocked] = useState(false)
 
@@ -84,69 +93,88 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
     const currentTotal = sliders.reduce((sum, s) => sum + s.value, 0)
 
     return (
-        <div className="test-card constant-sum-slider">
+        <div className="test-wrapper">
             <div className="test-card-info">
                 <div className="test-card-count">
-                    {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    <div>Вопрос {currentGroupNumber + 1} из 7</div>
+                    <div className="test-card-count-left">
+                        {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
+                        <div className="test-card-questions">
+                            Вопрос {currentGroupNumber + 1} из 7
+                        </div>
 
-                    {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <div className={currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}>Распределено {totalValue} из 10</div>
+                        {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
+                        <div className={`test-card-questions ${currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}`}>
+                            Распределено {totalValue} из 10
+                        </div>
+                    </div>
+
+                    {timerString && (
+                        <div className="test-card-timer">
+                            {timerString}
+                        </div>
+                    )}
                 </div>
 
                 {description && (
                     <div className="test-card-description">
-                        {description}
+                        <span>Как отвечать: </span>{description}
                     </div>
                 )}
             </div>
 
-            <div className="test-slider-grid" ref={gridRef}>
-                {sliders.map(slider => {
-                    const progress = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            <div className="test-card constant-sum-slider">
+                <div className="test-slider-container" ref={gridRef}>
+                    {sliders.map(slider => {
+                        const range = slider.max - slider.min
+                        const progress = ((slider.value - slider.min) / range) * 100
 
-                    return (
-                        <div key={slider.id} className="test-grid-item">
+                        return (
+                            <div key={slider.id} className="slider-wrapper" style={{ '--progress': `${progress}%` } as React.CSSProperties}>
+                                <div className="slider-track-zone">
 
-                            <div className="test-card-text">
-                                <span>{slider?.value === 0 ? "-" : slider.value}</span>
-                                {slider?.text}
+                                    <div className="slider-progress-fill" />
+
+                                    <div className="slider-inner-text">
+                                        <span className="slider-text-content">
+                                            {slider?.text || "Загрузка..."}
+                                        </span>
+
+                                        <span className="slider-text-content">
+                                            {slider?.value}
+                                        </span>
+                                    </div>
+
+                                    <div className="slider-custom-thumb" style={{ left: `calc(${progress}% - 1px)` }} />
+
+                                    <input
+                                        className="input-slider"
+                                        type="range"
+                                        min={slider.min}
+                                        max={slider.max}
+                                        value={slider.value}
+                                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleSliderScroll(parseInt(e.target.value), slider)}
+                                        onWheel={handleWheel} />
+                                </div>
                             </div>
+                        )
+                    })}
+                </div>
 
-                            <div className="test-card-input">
-                                <input
-                                    className="input-slider"
-                                    type="range"
-                                    min={slider.min}
-                                    max={slider.max}
-                                    value={slider.value}
-                                    style={{ '--progress': `${progress}%` } as React.CSSProperties}
-                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                        handleSliderScroll(parseInt(e.target.value), slider)
-                                    }}
-                                    onWheel={handleWheel}
-                                />
-                            </div>
+                <div className="test-card-options">
+                    <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentGroupNumber === 0} onClick={() => { nextPage(-1) }} />
 
-                        </div>
-                    )
-                })}
-            </div>
+                    {currentGroupNumber === 6 ? (
+                        <Button label={"Завершить"} icon={<CheckCheck />} onClick={nextPageHandler} />
+                    ) : (
+                        <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
+                    )}
+                </div>
 
-            <div className="test-card-options">
-                <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentGroupNumber === 0} onClick={() => { nextPage(-1) }} />
+                {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
+                <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
 
-                {currentGroupNumber === 6 ? (
-                    <Button label={"Завершить"} icon={<CheckCheck />} onClick={nextPageHandler} />
-                ) : (
-                    <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
-                )}
-            </div>
-
-            {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-            <ProgressBar currentTaskNumber={currentGroupNumber} total={7} />
-
-            <Toaster />
-        </div >
+                <Toaster />
+            </div >
+        </div>
     )
 }
