@@ -61,7 +61,7 @@ export const PositiveNegative = ({
         <div className="test-card pozitive-negative">
             <div className="test-card-info">
                 <div className="test-card-count">
-                    {currentIndex + 1} из {tasks.length}
+                    <div>Вопрос {currentIndex + 1} из {tasks.length}</div>
                 </div>
 
                 {description && (

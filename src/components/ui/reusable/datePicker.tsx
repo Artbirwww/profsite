@@ -1,7 +1,7 @@
 import "./css/datePickerStyles.css"
 import "@js-temporal/polyfill"
 import { Temporal } from "@js-temporal/polyfill"
-import { ChevronLeft, ChevronRight, ChevronDown, CalendarRange } from "lucide-react"
+import { CalendarRange } from "lucide-react"
 import { FC, useRef, useState, MouseEvent, ReactNode, ChangeEvent, useEffect, useId } from "react"
 
 interface DatePickerProps {
@@ -15,7 +15,16 @@ interface DatePickerProps {
     name?: string
 }
 
-export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIcon = <CalendarRange size={20} />, datePickerSelected, onDateSelect, datePickerPlaceholder = "Выберите дату...", isDisabled = false, dropdownDirection = "down", name }) => {
+export const DatePicker: FC<DatePickerProps> = ({
+    datePickerLabel,
+    datePickerIcon = <CalendarRange size={20} />,
+    datePickerSelected,
+    onDateSelect,
+    datePickerPlaceholder = "Выберите дату...",
+    isDisabled = false,
+    dropdownDirection = "down",
+    name
+}) => {
     const [isOpen, setIsOpen] = useState(false)
     const [viewDate, setViewDate] = useState<Temporal.PlainDate>((datePickerSelected || Temporal.Now.plainDateISO()) as Temporal.PlainDate)
 
@@ -35,6 +44,13 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
         }
     })
 
+    // Синхронизируем календарную сетку, если дата изменилась извне
+    useEffect(() => {
+        if (datePickerSelected) {
+            setViewDate(datePickerSelected)
+        }
+    }, [datePickerSelected])
+
     useEffect(() => {
         const handleClickOutside = (e: Event) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node))
@@ -48,17 +64,25 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
             document.removeEventListener("mousedown", handleClickOutside)
             document.removeEventListener("touchstart", handleClickOutside)
         }
-
     }, [])
-
-    const toggleDatePicker = () => {
-        if (!isDisabled) setIsOpen(!isOpen)
-    }
 
     const handleDateClick = (day: number) => {
         const currentDate = viewDate.with({ day }) as Temporal.PlainDate
         onDateSelect(currentDate)
         setIsOpen(false)
+    }
+
+    // Обработчик ручного ввода из input type="date" (формат YYYY-MM-DD)
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value
+        if (!val) return
+
+        try {
+            const parsedDate = Temporal.PlainDate.from(val)
+            onDateSelect(parsedDate)
+        } catch (err) {
+            // Игнорируем неполные или некорректные даты в процессе ввода
+        }
     }
 
     const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -97,9 +121,7 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
 
             days.push(
                 <div key={d} onClick={() => handleDateClick(d)} className={`calendar-day ${isSelected ? "calendar-day-selected" : ""}`}>
-
                     {d}
-
                 </div>
             )
         }
@@ -115,36 +137,35 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
                 </label>
             )}
 
-            <div className="custom-date-picker-container">
-                <div
+            <div className="custom-date-picker-container" style={{ position: "relative" }}>
+                {/* Скрытый или стилизованный под дизайн инпут с типом date */}
+                <input
                     id={finalId}
-                    onClick={toggleDatePicker}
+                    type="date"
+                    disabled={isDisabled}
+                    value={datePickerSelected ? datePickerSelected.toString() : ""}
+                    onChange={handleInputChange}
+                    onFocus={() => setIsOpen(true)}
+                    onClick={(e) => e.preventDefault()}
                     className={`custom-date-picker-header ${isOpen ? "date-picker-active" : ""} ${hasValue ? "date-picker-has-value" : ""}`}
-                    tabIndex={isDisabled ? -1 : 0}
-                    style={{ paddingLeft: datePickerIcon ? "45px" : "20px" }}>
+                    style={{
+                        paddingLeft: datePickerIcon ? "45px" : "20px",
+                        width: "100%",
+                        boxSizing: "border-box"
+                    }} />
 
-                    <span className="custom-date-picker-text">
-                        {datePickerSelected
-                            ? datePickerSelected.toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" })
-                            : datePickerPlaceholder}
-                    </span>
-
-                    {datePickerIcon &&
-                        <div className="custom-date-picker-icon">
-                            {datePickerIcon}
-                        </div>
-                    }
-                </div>
+                {datePickerIcon && (
+                    <div className="custom-date-picker-icon" onClick={() => !isDisabled && setIsOpen(!isOpen)} style={{ cursor: "pointer" }}>
+                        {datePickerIcon}
+                    </div>
+                )}
             </div>
 
             {isOpen && (
                 <div className={`calendar-dropdown dropdown-${dropdownDirection}`}>
                     <div className="calendar-header">
-
                         <button type="button" onClick={handlePrevMonth}>
-                            <div className="calendar-button-icon">
-                                {"<"}
-                            </div>
+                            <div className="calendar-button-icon">{"<"}</div>
                         </button>
 
                         <div className="calendar-title-group">
@@ -160,7 +181,6 @@ export const DatePicker: FC<DatePickerProps> = ({ datePickerLabel, datePickerIco
                         <button type="button" onClick={handleNextMonth}>
                             {">"}
                         </button>
-
                     </div>
 
                     <div className="calendar-grid-header">

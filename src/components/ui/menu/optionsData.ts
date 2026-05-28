@@ -44,6 +44,13 @@ export const menuButtons: MenuItemProps[] = [
         order: 5,
     },
     {
+        id: "recomendations",
+        label: "Рекомендации",
+        icon: UserRound,
+        path: "/recomendations",
+        order: 5,
+    },
+    {
         id: "admin-panel",
         label: "Адм",
         icon: ShieldUser,

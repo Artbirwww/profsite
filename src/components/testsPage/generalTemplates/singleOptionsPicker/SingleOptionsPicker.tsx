@@ -77,7 +77,7 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, descri
         <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
             <div className="test-card-info">
                 <div className="test-card-count">
-                    {currentTaskNumber + 1} из {tasks.length}
+                    <div>Вопрос {currentTaskNumber + 1} из {tasks.length}</div>
                 </div>
 
                 {description && (

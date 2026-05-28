@@ -88,10 +88,10 @@ export const ConstantSumSlider = ({ sliders, setSliders, currentGroupNumber, max
             <div className="test-card-info">
                 <div className="test-card-count">
                     {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
-                    <div>{currentGroupNumber + 1} из 7</div>
+                    <div>Вопрос {currentGroupNumber + 1} из 7</div>
 
                     {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
-                    <div className={currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}>{totalValue} из 10</div>
+                    <div className={currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}>Распределено {totalValue} из 10</div>
                 </div>
 
                 {description && (

@@ -10,11 +10,9 @@ export const HomePartners: FC = ({ }) => {
 
             <div className="home-partners-section-wrapper">
                 <div className="home-partners-item">
-                    <h4>Lorem, ipsum.</h4>
                 </div>
 
                 <div className="home-partners-item">
-                    <h4>Lorem, ipsum dolor.</h4>
                 </div>
             </div>
 

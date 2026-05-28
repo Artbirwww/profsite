@@ -20,6 +20,10 @@
     width: 100%;
 }
 
+.custom-date-picker-container input {
+    font-weight: var(--font-weight-medium);
+}
+
 .custom-date-picker-header {
     display: flex;
     align-items: center;
@@ -38,6 +42,33 @@
     border-color: var(--accent-color-500);
 }
 
+.custom-date-picker-header::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-date-picker-header::-webkit-inner-spin-button,
+.custom-date-picker-header::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+@supports (-moz-appearance: none) {
+    .custom-date-picker-header {
+        -moz-appearance: textfield;
+    }
+}
+
 .custom-date-picker-text {
     font-size: var(--font-size-base);
     color: var(--text-primary-color);
@@ -54,7 +85,7 @@
     display: flex;
 }
 
-.date-picker-active .custom-date-picker-icon {
+.date-picker-active + .custom-date-picker-icon {
     color: var(--accent-color-500);
     transform: translateY(-50%) scale(1.1);
 }
