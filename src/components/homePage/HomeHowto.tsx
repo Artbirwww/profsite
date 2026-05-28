@@ -1,11 +1,15 @@
 import { FC } from "react"
 
+import testingImage from "../../res/home-imgs/test.webp"
+import vrImage from "../../res/home-imgs/vr.webp"
+import eegImage from "../../res/home-imgs/eeg.webp"
+
 export const HomeHowto: FC = ({ }) => {
     return (
         <div className="home-section-item">
 
             <div className="home-section-header">
-                <h4>Что это такое?</h4>
+                <h4>Как работает наш сервис</h4>
             </div>
 
             <div className="home-howto-section-wrapper">

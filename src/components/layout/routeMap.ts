@@ -5,9 +5,10 @@ export const routeTitles: Record<string, string> = {
     "/admin/specialists": "Список специалистов",
     "/admin/specialists-upload": "Загрузка специалистов",
 
-    "/": "Главная",
+    "/": "Добро пожаловать!",
     "/tests": "Тестирование",
     "/my-results": "Результаты тестов",
+    "/recomendations": "Рекомендации",
     "/profile": "Профиль",
     "/my-grades": "Учеба",
 
