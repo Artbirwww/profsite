@@ -1,5 +1,6 @@
 
 export interface Simulation {
+    id: number
     filePath: string
     startSimulation: string
     endSimulation: string
@@ -9,6 +10,7 @@ export interface Simulation {
     profession: string
     scenario?: string
     simulationDataSource?: string
+    description: string
 }
 
 export interface SimulationResponse {

@@ -33,5 +33,11 @@ export const simulationAPI = {
     getSimulationsDataSource: async() => {
         const response = await api.get("api/simulations/simulation-data-sources")
         return response.data
+    },
+    updateSimulationDescription: async(simulationId:number, description: string) => {
+        const response = await api.patch(`api/simulations/${simulationId}/description`, description, {
+            headers: {"Content-Type": "text/plain"}
+        })
+        return response.data
     }
 }
