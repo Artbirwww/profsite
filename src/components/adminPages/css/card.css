@@ -48,3 +48,9 @@
     font-size: 0.75rem;
     color: #888;
 }
+.description {
+    background: var(--grey-color-200);
+    border-radius: 5px;
+    width: 100%;
+    resize: none;
+}
