@@ -16,7 +16,7 @@ export const SimulationCard = ({simulation}: SimulationCardProps) => {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
     const handleDescription = (e: any) => {
         const value = e.target.value
-        setDescription(description)
+        setDescription(value)
         if (timeoutRef.current) clearTimeout(timeoutRef.current)
         
         // Set new timeout (same pattern as filter bar)
@@ -75,7 +75,6 @@ export const SimulationCard = ({simulation}: SimulationCardProps) => {
                 <span>{simulation.simulation.startSimulation || '--'}</span>
                 <span>{simulation.simulation.endSimulation || '--'}</span>
             </div>
-            <Toaster/>
         </div>)
 
 }
