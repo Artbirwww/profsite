@@ -7,14 +7,19 @@ import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
 import { predictionAPI } from "../../services/api/predictionApi"
 import { getTopProfessions } from "./ProcessPrediction"
-import { PredictionChart } from "./PredictionChart"
+import { PredictionChart } from "./charts/PredictionChart"
 import "./css/prediction.css"
 import { NoResults, Status } from "../ui/noResultComponent/NoResult"
+import { CategoryDistributionChart } from "./charts/CategoryDistributionChart"
+
 export const Predictions = () => {
     const [prediction, setPrediction] = useState<Prediction>()
     const [results, setResult] = useState<PredictionResult[]>()
     const {getToken, getEmail} = useAuth()
     const [status, setStatus] = useState<Status>("loading")
+
+    const [currentCluster, setCurrentCluster] = useState<number>(2)
+    const [resultsOriginalData, setResulsOriginalData] = useState()
     useEffect(() => {
         const getPredictions = async () => {
             try {
@@ -43,14 +48,14 @@ export const Predictions = () => {
         //подгружаем файл из результатов
         const getPredictionJson = async () => {
             try {
-                const recentPredictionJson =  await predictionAPI.getPredictionJson(prediction.filePath)
-                if (recentPredictionJson === null) {
+                const resultsOriginalDataTemp =  await predictionAPI.getPredictionJson(prediction.filePath)
+                if (resultsOriginalDataTemp === null) {
                     setStatus("empty")
                     return
                 }
-                console.log("res", recentPredictionJson)
                 setStatus("success")
-                setResult(getTopProfessions(recentPredictionJson))
+                setResult(getTopProfessions(resultsOriginalDataTemp))
+                setResulsOriginalData(resultsOriginalDataTemp)
             } catch(err) {
                 console.error(err)
                 toast.error("Ошибка при загрузке результатов")
@@ -59,9 +64,15 @@ export const Predictions = () => {
         }
         getPredictionJson()
     }, [prediction])
+    const countClusters = () : number => {
+        if (!resultsOriginalData) return 8 //by default always 8 (K2-K9)
+        return Object.keys(resultsOriginalData)
+            .filter(key => key.match(/^K[2-9]_cluster$/))
+            .length;
+    }
     if (status === "empty") 
         return <NoResults variant={status} message="У вас пока нет результатов"/>
-    if (status === "loading" || !results) 
+    if (status === "loading" || !results || !resultsOriginalData) 
         return (<> <NoResults variant={status} message="Ищем ваши результаты" title="Поиск"/>
     </>)
     
@@ -109,9 +120,19 @@ export const Predictions = () => {
 
             {/* Chart Section */}
             <div className="chart-section">
-                <h2 className="section-title">Визуализация</h2>
+                <h2 className="section-title">Визуализация ТОП профессий</h2>
                 <div className="chart-container">
                     <PredictionChart data={results} />
+                </div>
+            </div>
+            <div className="chart-section" style={{height: "100%", overflowY: "auto", scrollbarWidth: "none"}}>
+                <h2 className="section-title">Насколько близко вы к специалистам</h2>
+                <div className="chart-container" style={{height: "100%"}}>
+                    <CategoryDistributionChart 
+                        categoriesData={resultsOriginalData[`K${currentCluster}_categories`]}
+                        clustersCount={countClusters()}
+                        currentCluster={currentCluster}
+                        setCurrentCluster={setCurrentCluster}/>
                 </div>
             </div>
 
