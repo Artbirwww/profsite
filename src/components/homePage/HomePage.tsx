@@ -1,14 +1,16 @@
 import "./css/homePageStyles.css"
+import "./css/banner.css"
+import "./css/howTo.css"
 
 import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
 
 import { FC, useEffect, useRef, useState } from "react"
-import { HomeAbout } from "./HomeAbout"
+import { HomeBanner } from "./HomeBanner"
 import { HomeHowto } from "./HomeHowto"
 import { HomeProfessions } from "./HomeProfessions"
 
 const SECTIONS = [
-    { Icon: MousePointerClick, Component: HomeAbout },
+    { Icon: MousePointerClick, Component: HomeBanner },
     { Icon: Lightbulb, Component: HomeHowto },
     { Icon: HardHat, Component: HomeProfessions },
 ]
@@ -60,7 +62,6 @@ export const HomePage: FC = ({ }) => {
                     <div className="home-grid-item-container" data-id={index}>
                         <Component />
                     </div>
-
                 ))}
             </div>
 

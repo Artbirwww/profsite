@@ -95,9 +95,9 @@
 }
 
 .test-card-description {
-    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-base));
+    font-size: clamp(var(--font-size-xs), 0.638rem + 0.77vw, var(--font-size-md));
     color: var(--text-primary-color);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
 }
 
 .test-card-description span {
