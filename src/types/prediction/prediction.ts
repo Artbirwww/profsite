@@ -6,3 +6,8 @@ export interface Prediction {
     predictionType: string
     createdAt: string
 }
+export interface PredictionResult {
+    name: string
+    distance: number
+    cluster: number
+}
