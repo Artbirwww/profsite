@@ -32,6 +32,7 @@ export const Predictions = () => {
                 
             } catch(err) {
                 console.error(err)
+                setStatus("empty")
                 toast.error("Возникла ошибка при загрузке результатов")
             }
         }
@@ -53,6 +54,7 @@ export const Predictions = () => {
             } catch(err) {
                 console.error(err)
                 toast.error("Ошибка при загрузке результатов")
+                setStatus("empty")
             }
         }
         getPredictionJson()
