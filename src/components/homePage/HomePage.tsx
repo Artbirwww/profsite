@@ -6,13 +6,11 @@ import { FC, useEffect, useRef, useState } from "react"
 import { HomeAbout } from "./HomeAbout"
 import { HomeHowto } from "./HomeHowto"
 import { HomeProfessions } from "./HomeProfessions"
-import { HomePartners } from "./HomePartners"
 
 const SECTIONS = [
     { Icon: MousePointerClick, Component: HomeAbout },
     { Icon: Lightbulb, Component: HomeHowto },
     { Icon: HardHat, Component: HomeProfessions },
-    { Icon: Handshake, Component: HomePartners },
 ]
 
 export const HomePage: FC = ({ }) => {
