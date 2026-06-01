@@ -2,6 +2,7 @@ import api from './api';
 import { AccountApiRegisterDTO } from '../../types/pupil/account';
 import { PupilDTO, PupilListResponse, PupilResponse } from '../../types/pupil/pupil';
 import axios from 'axios';
+import { Prediction } from '../../types/prediction/prediction';
 
 export const pupilApi = {
   
@@ -30,5 +31,13 @@ export const pupilApi = {
       console.error(err)
       throw err
     }
+  },
+  getPupilPrediction: async (token: string) => {
+    const response = await api.get<Prediction[]>("api/pupils/pupil/predictions", {
+      headers: {
+        Authorization: token
+      }
+    })
+    return response.data
   }
 }
