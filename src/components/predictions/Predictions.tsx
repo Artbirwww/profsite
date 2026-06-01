@@ -59,8 +59,8 @@ export const Predictions = () => {
     }, [prediction])
     if (status === "empty") 
         return <NoResults variant={status} message="У вас пока нет результатов"/>
-    if (status === "loading" || !results) return (<>
-        <p>Загружаем результаты...</p>
+    if (status === "loading" || !results) 
+        return (<> <NoResults variant={status} message="Ищем ваши результаты" title="Поиск"/>
     </>)
     
     return (
