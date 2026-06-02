@@ -1,5 +1,8 @@
 import "./css/homePageStyles.css"
 import "./css/heroSection.css"
+import "./css/howItsWorkingSection.css"
+import "./css/professionsSection.css"
+import "./css/footerInfoSection.css"
 
 import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
 

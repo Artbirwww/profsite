@@ -2,9 +2,17 @@ import { FC } from "react"
 
 export const HomeFooterInfo: FC = ({ }) => {
     return (
-        <div className="home-row-section-wrapper">
-            <div className="row-block">
-                <div className="home-block row-widget">
+        <div className="home-section-wrapper">
+            <div className="home-footer-gird">
+                <div className="home-block header">
+                    Футер
+                </div>
+
+                <div className="home-block item-1">
+
+                </div>
+
+                <div className="home-block item-2">
                     <div className="widget-socials">
                         <p>ВК</p> <p>MAX</p>
                     </div>

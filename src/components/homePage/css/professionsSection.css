@@ -1,0 +1,40 @@
+.home-prof-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 60px 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.home-prof-grid .header {
+    grid-column: span 3 / span 3;
+}
+
+.home-prof-grid .item-1 {
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.home-prof-grid .item-2 {
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.home-prof-grid .item-3 {
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
+.home-prof-grid .item-4 {
+    grid-row: span 2 / span 2;
+    grid-column-start: 4;
+    grid-row-start: 1;
+}
+
+.home-prof-grid .item-5 {
+    grid-row: span 2 / span 2;
+    grid-column-start: 5;
+    grid-row-start: 1;
+}
