@@ -1,9 +1,0 @@
-import { FC } from "react"
-
-export const HomeHowto: FC = ({ }) => {
-    return (
-        <div className="home-section-wrapper">
-            
-        </div>
-    )
-}

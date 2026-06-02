@@ -1,18 +1,19 @@
 import "./css/homePageStyles.css"
-import "./css/banner.css"
-import "./css/howTo.css"
+import "./css/heroSection.css"
 
 import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
 
 import { FC, useEffect, useRef, useState } from "react"
-import { HomeBanner } from "./HomeBanner"
-import { HomeHowto } from "./HomeHowto"
+import { HomeHero } from "./HomeHero"
+import { HomeHowItsWorking } from "./HomeHowItsWorking"
 import { HomeProfessions } from "./HomeProfessions"
+import { HomeFooterInfo } from "./HomeFooterInfo"
 
 const SECTIONS = [
-    { Icon: MousePointerClick, Component: HomeBanner },
-    { Icon: Lightbulb, Component: HomeHowto },
+    { Icon: MousePointerClick, Component: HomeHero },
+    { Icon: Lightbulb, Component: HomeHowItsWorking },
     { Icon: HardHat, Component: HomeProfessions },
+    { Icon: HardHat, Component: HomeFooterInfo },
 ]
 
 export const HomePage: FC = ({ }) => {

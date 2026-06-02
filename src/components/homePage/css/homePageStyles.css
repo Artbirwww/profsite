@@ -10,29 +10,12 @@
     box-sizing: border-box;
 }
 
-/* стили для хедера страницы */
-.home-header {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    top: 30px;
-}
-
-.home-header h1 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-}
-
 /* сетка для секций домашней страницы */
 .home-grid {
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-rows: repeat(4, 100%);
+    grid-template-rows: 100% 100% 100% 50%;
     grid-auto-rows: 100%;
     gap: 10px;
     overflow-y: auto;
@@ -46,113 +29,96 @@
     display: none;
 }
 
-/* общие стили для секции домашней страницы */
-.home-section-item {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Хедер для секции */
-.home-section-header {
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color-50);
-    min-height: 60px;
-    width: 100%;
-    border-radius: 20px;
-    padding: 0 30px;
-}
-
-.home-section-header h4 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: 20px;
-    white-space: normal;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    color: var(--text-primary-color);
-}
-
-/* стили для 1 секции */
-.home-about-section-wrapper {
+/* обертка секции со строчным расположение элментов внутри */
+.home-row-section-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    height: 100%;
-}
-
-.home-about-item {
-    display: flex;
-    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 15px;
-    padding: 30px;
+    gap: 10px;
+    box-sizing: border-box;
 }
 
-/* стили для 2 секции */
-.home-howto-section-wrapper {
+/* обертка секции с колонным расположением элментов внтури */
+.home-column-section-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    height: 100%;
-}
-
-.home-howto-item {
-    display: flex;
-    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 15px;
-    padding: 30px;
+    gap: 10px;
+    box-sizing: border-box;
 }
 
-/* стили для 3 секции */
-.home-professions-section-wrapper {
+/*контейнеры с колонным расположением элментов внтури */
+.col-left {
+    display: flex;
+    flex-direction: column;
+    width: calc(80% - 5px);
+    height: 100%;
+    gap: 10px;
+}
+
+.col-right {
+    display: flex;
+    flex-direction: column;
+    width: calc(20% - 5px);
+    height: 100%;
+}
+
+.left-top-widget {
+    height: calc(80% - 5px);
+}
+
+.left-bottom-widget {
+    height: calc(20% - 5px);
+}
+
+.right-widget {
+    height: 100%;
+    width: 100%;
+}
+
+/*контейнеры со строчным расположением элментов внтури */
+.row-block {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    height: 100%;
-}
-
-.home-professions-item {
-    display: flex;
-    background-color: var(--primary-color-50);
     width: 100%;
     height: 100%;
-    border-radius: 15px;
-    padding: 30px;
+    gap: 10px;
 }
 
-/* стили для 4 секции */
-.home-partners-section-wrapper {
+.row-top {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    height: calc(60% - 5px);
     gap: 10px;
+}
+
+.row-bottom {
+    display: flex;
+    width: 100%;
+    height: calc(40% - 5px);
+}
+
+.top-left-widget,
+.top-mid-widget,
+.top-right-widget {
+    flex: 1;
     height: 100%;
 }
 
-.home-partners-item {
-    display: flex;
-    background-color: var(--primary-color-50);
+.bottom-widget {
     width: 100%;
     height: 100%;
-    border-radius: 15px;
-    padding: 30px;
 }
 
-
-
-
-
-
-
-
-
+/* общий стиль для элмента*/
+.home-block {
+    background-color: var(--primary-color-50);
+    border-radius: 15px;
+    box-sizing: border-box;
+}
 
 /* стили для индикатора прокрутки страницы */
 .home-indicator {
