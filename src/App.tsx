@@ -70,6 +70,7 @@ import { ProfessionsForm } from "./components/adminPages/crud/crudForms/Professi
 import { ProfessionSphereForm } from "./components/adminPages/crud/crudForms/ProfessionSphereForm";
 import { crudRoutes } from "./components/adminPages/crud/routes.config";
 import { FormsListPage } from "./components/adminPages/crud/FormsListPage";
+import { Predictions } from "./components/predictions/Predictions";
 
 export default function App() {
 	return (
@@ -145,6 +146,7 @@ export default function App() {
 					</Route>
 
 					{/* Results routes */}
+					<Route path="/predictions" element={<Predictions/>} />
 					<Route path="/my-results" element={<ResultsPage />} />
 					<Route path="/my-results/:testType" element={<ResultsPage />} />
 

@@ -40,5 +40,8 @@ export const routeTitles: Record<string, string> = {
     // Тип личности
     "/tests/prof-holland-intro": "Тип личности",
     "/tests/prof-holland": "Тип личности",
-    "/tests/prof-holland-results": "Тип личности"
+    "/tests/prof-holland-results": "Тип личности",
+
+    //Результаты
+    "/predictions" : "Результаты"
 }

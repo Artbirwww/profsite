@@ -11,7 +11,7 @@ export const PupilRegistrationPage = () => {
     const [accountData, setAccountData] = useState<AccountForm>({email : "", password : "", repeatPassword : ""})
     const registration = async () => {
         try {
-            authApi.register(accountData.email, accountData.password)
+            await authApi.register(accountData.email, accountData.password)
             toast.success("Вы успешно зарегистрировались")
             navigate("/login")
         } catch(err) {

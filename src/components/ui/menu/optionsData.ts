@@ -1,4 +1,4 @@
-import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, ThumbsUp } from "lucide-react"
+import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain, ThumbsUp } from "lucide-react"
 import { ROLES } from "../../../types/account/role"
 
 export interface MenuItemProps {
@@ -35,6 +35,14 @@ export const menuButtons: MenuItemProps[] = [
         path: "/my-grades",
         order: 4,
         allowedRoles: [ROLES.PUPIL],
+    },
+    {
+        id: "predictions",
+        label: "Результаты",
+        icon: Brain,
+        path: "/predictions",
+        order: 3,
+        allowedRoles: [ROLES.PUPIL]
     },
     {
         id: "profile",

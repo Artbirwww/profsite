@@ -74,7 +74,7 @@ export const LoginPage: FC = () => {
 
                     <div className="login-form-row">
                         <Button type="submit" label="Войти" icon={<DoorOpen />} />
-                        <Button variant="tertiary" label="Создать аккаунт" onClick={handleBackToRegistration} icon={<UserRoundPlus />} />
+                        <Button type="button" variant="tertiary" label="Создать аккаунт" onClick={handleBackToRegistration} icon={<UserRoundPlus />} />
                     </div>
                 </form>
             </div>
