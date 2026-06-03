@@ -4,7 +4,7 @@ import "./css/howItsWorkingSection.css"
 import "./css/professionsSection.css"
 import "./css/footerInfoSection.css"
 
-import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
+import { MousePointerClick, Lightbulb, HardHat, RectangleEllipsis } from "lucide-react"
 
 import { FC, useEffect, useRef, useState } from "react"
 import { HomeHero } from "./HomeHero"
@@ -16,7 +16,7 @@ const SECTIONS = [
     { Icon: MousePointerClick, Component: HomeHero },
     { Icon: Lightbulb, Component: HomeHowItsWorking },
     { Icon: HardHat, Component: HomeProfessions },
-    { Icon: HardHat, Component: HomeFooterInfo },
+    { Icon: RectangleEllipsis, Component: HomeFooterInfo },
 ]
 
 export const HomePage: FC = ({ }) => {

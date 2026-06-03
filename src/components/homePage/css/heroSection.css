@@ -2,7 +2,7 @@
 .home-hero-grid {
     display: grid;
     grid-template-columns: 1fr 20%;
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 1fr;
     row-gap: 10px;
     column-gap: 10px;
     height: 100%;
@@ -11,9 +11,6 @@
 
 /*левый нижний элемент секции*/
 .home-hero-grid .item-1 {
-    grid-column-start: 1;
-    grid-row-start: 2;
-
     background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../../../res//home-imgs/banner-image.webp");
     background-size: cover;
     background-position: center;
@@ -86,12 +83,6 @@
 }
 
 
-/*правый элемент секции*/
-.home-hero-grid .item-2 {
-    grid-row: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 1;
-}
 
 /* сетка статов правого элмента hero секции */
 .hero-stats-grid {

@@ -10,16 +10,20 @@
 
 .home-prof-grid .header {
     grid-column: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 1;
 }
 
 .home-prof-grid .item-1 {
+    grid-row: span 2 / span 2;
     grid-column-start: 1;
-    grid-row-start: 2;
+    grid-row-start: 1;
 }
 
 .home-prof-grid .item-2 {
+    grid-row: span 2 / span 2;
     grid-column-start: 2;
-    grid-row-start: 2;
+    grid-row-start: 1;
 }
 
 .home-prof-grid .item-3 {
@@ -28,13 +32,78 @@
 }
 
 .home-prof-grid .item-4 {
-    grid-row: span 2 / span 2;
     grid-column-start: 4;
-    grid-row-start: 1;
+    grid-row-start: 2;
 }
 
 .home-prof-grid .item-5 {
-    grid-row: span 2 / span 2;
     grid-column-start: 5;
-    grid-row-start: 1;
+    grid-row-start: 2;
+}
+
+.home-prof-grid .prof-item {
+    position: relative;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: start;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+}
+
+.prof-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.prof-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-darkening-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .2);
+    pointer-events: none;
+}
+
+.image-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--primary-color-50) 10%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
+.prof-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 230px;
+    z-index: 2;
+    color: var(--text-primary-color);
+}
+
+.prof-content h4 {
+    font-size: clamp(var(--font-size-sm), 0.683rem + 0.77vw, var(--font-size-md));
+    opacity: .9;
+}
+
+.prof-content p {
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
+    opacity: .9;
 }

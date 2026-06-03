@@ -45,6 +45,17 @@
     box-sizing: border-box;
 }
 
+.home-block.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 30px;
+    color: var(--text-tertiary-color);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-medium);
+    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-md));
+}
+
 /* стили для индикатора прокрутки страницы */
 .home-indicator {
     display: flex;

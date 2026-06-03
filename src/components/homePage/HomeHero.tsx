@@ -7,10 +7,6 @@ export const HomeHero: FC = ({ }) => {
         <div className="home-section-wrapper">
             <div className="home-hero-grid">
 
-                <div className="home-block header">
-                    Твой цифровой дублер в горном деле
-                </div>
-
                 <div className="home-block item-1">
                     <div className="hero-logo">
                         <h2>EVCG</h2>

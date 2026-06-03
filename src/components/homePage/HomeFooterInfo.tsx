@@ -5,7 +5,7 @@ export const HomeFooterInfo: FC = ({ }) => {
         <div className="home-section-wrapper">
             <div className="home-footer-gird">
                 <div className="home-block header">
-                    Футер
+                    Дополнительная информация
                 </div>
 
                 <div className="home-block item-1">
@@ -13,10 +13,6 @@ export const HomeFooterInfo: FC = ({ }) => {
                 </div>
 
                 <div className="home-block item-2">
-                    <div className="widget-socials">
-                        <p>ВК</p> <p>MAX</p>
-                    </div>
-
                     <div className="widget-info">
                         <p>ООО "Цифровые образовательные решения"</p>
                         <p>655017, РХ, г. Абакан, ул. Богдана-Хмельницкого, д. 155, кв. 159</p>
