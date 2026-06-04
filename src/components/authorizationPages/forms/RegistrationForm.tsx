@@ -4,7 +4,8 @@ import { FieldInput } from "../../ui/reusable/fieldInput";
 import { Button } from "../../ui/reusable/button"
 import toast, { Toaster } from "react-hot-toast"
 import { AccountForm } from "../../../types/account/account";
-import { Checkbox } from "../../ui/reusable/Checkbox";
+import { Checkbox } from "../../ui/reusable/checkbox";
+
 type UserType = "Школьник" | "Специалист" | "Эксперт"
 interface RegistrationFormProps {
     userType: UserType
