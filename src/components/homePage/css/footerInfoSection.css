@@ -1,0 +1,24 @@
+.home-footer-gird {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 60px 1fr 40%;
+    row-gap: 10px;
+    column-gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.home-footer-gird .item-1,
+.home-footer-gird .item-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

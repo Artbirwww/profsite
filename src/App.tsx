@@ -21,8 +21,8 @@ import { Layout } from "./components/layout/Layout"
 // Страницы
 // Авторизация / Регистрация
 import { LoginPage } from "./components/authorizationPages/LoginPage"
-import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage";
-import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
+import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage"
+import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage"
 
 // Главные страницы
 import { HomePage } from "./components/homePage/HomePage"

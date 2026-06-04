@@ -1,4 +1,4 @@
-import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain } from "lucide-react"
+import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain, ThumbsUp } from "lucide-react"
 import { ROLES } from "../../../types/account/role"
 
 export interface MenuItemProps {

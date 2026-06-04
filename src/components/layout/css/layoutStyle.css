@@ -38,7 +38,7 @@
 .header h4 {
     text-transform: uppercase;
     font-weight: var(--font-weight-medium);
-    font-size: clamp(var(--font-size-md), 0.683rem + 0.77vw, var(--font-size-xl));
+    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-xl));
 }
 
 .header span {

@@ -1,18 +1,22 @@
 import "./css/homePageStyles.css"
+import "./css/heroSection.css"
+import "./css/howItsWorkingSection.css"
+import "./css/professionsSection.css"
+import "./css/footerInfoSection.css"
 
-import { MousePointerClick, Lightbulb, HardHat, Handshake } from "lucide-react"
+import { MousePointerClick, Lightbulb, HardHat, RectangleEllipsis } from "lucide-react"
 
 import { FC, useEffect, useRef, useState } from "react"
-import { HomeAbout } from "./HomeAbout"
-import { HomeHowto } from "./HomeHowto"
+import { HomeHero } from "./HomeHero"
+import { HomeHowItsWorking } from "./HomeHowItsWorking"
 import { HomeProfessions } from "./HomeProfessions"
-import { HomePartners } from "./HomePartners"
+import { HomeFooterInfo } from "./HomeFooterInfo"
 
 const SECTIONS = [
-    { Icon: MousePointerClick, Component: HomeAbout },
-    { Icon: Lightbulb, Component: HomeHowto },
+    { Icon: MousePointerClick, Component: HomeHero },
+    { Icon: Lightbulb, Component: HomeHowItsWorking },
     { Icon: HardHat, Component: HomeProfessions },
-    { Icon: Handshake, Component: HomePartners },
+    { Icon: RectangleEllipsis, Component: HomeFooterInfo },
 ]
 
 export const HomePage: FC = ({ }) => {
@@ -62,7 +66,6 @@ export const HomePage: FC = ({ }) => {
                     <div className="home-grid-item-container" data-id={index}>
                         <Component />
                     </div>
-
                 ))}
             </div>
 
