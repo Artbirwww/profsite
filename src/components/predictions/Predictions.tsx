@@ -11,6 +11,7 @@ import { PredictionChart } from "./charts/PredictionChart"
 import "./css/prediction.css"
 import { NoResults, Status } from "../ui/noResultComponent/NoResult"
 import { CategoryDistributionChart } from "./charts/CategoryDistributionChart"
+import { BubbleDistanceChart } from "./charts/BubbleDistanceChart"
 
 export const Predictions = () => {
     const [prediction, setPrediction] = useState<Prediction>()
@@ -75,7 +76,9 @@ export const Predictions = () => {
     if (status === "loading" || !results || !resultsOriginalData) 
         return (<> <NoResults variant={status} message="Ищем ваши результаты" title="Поиск"/>
     </>)
-    
+    const handleClusterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setCurrentCluster(Number(e.target.value));
+    };
     return (
         <div className="prediction-results">
             <div className="results-header">
@@ -118,22 +121,34 @@ export const Predictions = () => {
                 </div>
             </div>
 
-            {/* Chart Section */}
+            {/* Overall chart by all clusters */}
             <div className="chart-section">
                 <h2 className="section-title">Визуализация ТОП профессий</h2>
                 <div className="chart-container">
                     <PredictionChart data={results} />
                 </div>
             </div>
-            <div className="chart-section" style={{height: "100%", overflowY: "auto", scrollbarWidth: "none"}}>
+            {/*Chart for individual cluster*/}
+            <select 
+                name='cluster'
+                value={currentCluster}
+                onChange={handleClusterChange}
+                style={{ padding: '8px 12px', borderRadius: 4, border: '1px solid #ddd' }}
+            >
+                {Array.from({ length: countClusters() }, (_, i) => i + 2).map(num => (
+                    <option key={num} value={num}>Кластер {num}</option>
+                ))}
+            </select>
+            <div className="chart-section" style={{overflowY: "auto", scrollbarWidth: "none"}}>
                 <h2 className="section-title">Насколько близко вы к специалистам</h2>
                 <div className="chart-container" style={{height: "100%"}}>
                     <CategoryDistributionChart 
-                        categoriesData={resultsOriginalData[`K${currentCluster}_categories`]}
-                        clustersCount={countClusters()}
-                        currentCluster={currentCluster}
-                        setCurrentCluster={setCurrentCluster}/>
+                        categories={resultsOriginalData[`K${currentCluster}_categories`]}/>
                 </div>
+            </div>
+            <div className="chart-section">
+                <h2 className="section-title">Визуализация дистанции для каждого специалиста</h2>
+                <BubbleDistanceChart categories={resultsOriginalData[`K${currentCluster}_categories`]} />
             </div>
 
             {/* Full List */}
