@@ -34,7 +34,14 @@
     max-width: 1440px;
     color: var(--text-primary-color);
 }
-
+.header-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 5px;
+}
 .header h4 {
     text-transform: uppercase;
     font-weight: var(--font-weight-medium);

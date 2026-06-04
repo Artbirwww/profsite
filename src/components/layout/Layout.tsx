@@ -1,11 +1,12 @@
 import "./css/layoutStyle.css"
 import { FC, useState } from "react"
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import { Menu } from "../ui/menu/Menu"
 import { useAuth } from "../../contexts/AuthContext"
 import { routeTitles } from "./routeMap"
 import { MenuIcon } from "lucide-react"
 import { Sidebar } from "../ui/menu/Sidebar"
+import { Button } from "../ui/reusable/button"
 
 export const Layout: FC = () => {
     const { getToken, getEmail } = useAuth()
@@ -18,14 +19,22 @@ export const Layout: FC = () => {
     const shouldHideHeader = isAuthPage || isAdminPage
     const hasToken = !!getToken()
 
+    const navigate = useNavigate()
     return (
         <div className="layout-wrapper">
             <div className="background" />
 
             {!shouldHideHeader && (
                 <header className="header">
-                    <h4>{routeTitles[location.pathname] || "Загрузка..."}</h4>
-                    <span>Профиль: {getEmail()} </span>
+                    <div className="header-title">
+                        <h4>{routeTitles[location.pathname] || "Загрузка..."}</h4>
+                        {!getEmail() && 
+                            <Button label="Войти" onClick={() => navigate("/login")} />}
+                    </div>
+                    
+                    {getEmail() &&
+                        <span>Профиль: {getEmail()} </span>
+                    }
 
                     {hasToken && (
                         <div className="sidebar-button" onClick={() => setIsSidebarOpen(true)}>

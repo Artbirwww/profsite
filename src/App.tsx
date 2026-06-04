@@ -76,6 +76,9 @@ export default function App() {
 	return (
 		<Routes>
 			{/* Public routes */}
+			<Route element={<Layout />}>
+				<Route path="/" element={<HomePage />} />
+			</Route>
 			<Route element={<AuthRouter />}>
 				<Route element={<Layout />}>
 					<Route path="/login" element={<LoginPage />} />
@@ -114,7 +117,7 @@ export default function App() {
 					</Route>
 
 					{/* Tests routes */}
-					<Route path="/" element={<HomePage />} />
+					
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
 						<Route element={<TestViewer />}>
@@ -157,7 +160,7 @@ export default function App() {
 			</Route>
 
 			{/* Fallback routes */}
-			<Route path="*" element={<Navigate to="/login" replace />} />
+			<Route path="*" element={<Navigate to="/" replace />} />
 		</Routes>
 	);
 }
