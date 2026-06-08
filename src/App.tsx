@@ -71,6 +71,7 @@ import { ProfessionSphereForm } from "./components/adminPages/crud/crudForms/Pro
 import { crudRoutes } from "./components/adminPages/crud/routes.config";
 import { FormsListPage } from "./components/adminPages/crud/FormsListPage";
 import { Predictions } from "./components/predictions/Predictions";
+import { VRTestsPage } from "./components/VRTestsPage/VRTestsPage";
 
 export default function App() {
 	return (
@@ -147,6 +148,9 @@ export default function App() {
 
 						</Route>
 					</Route>
+
+					{/* VR tests routes*/}
+					<Route path="/vr-tests" element={<VRTestsPage/>} />
 
 					{/* Results routes */}
 					<Route path="/predictions" element={<Predictions/>} />
