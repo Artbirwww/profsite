@@ -4,7 +4,7 @@ import { WheelEvent } from "react"
 import { Button } from "../../../ui/reusable/button"
 import { ProgressBar } from "../progressBar/ProgressBar"
 import { ArrowLeft, ArrowRight, CheckCheck } from "lucide-react"
-
+import "./css/constant-sum-slider.css"
 export interface SliderData {
     id: number
     text: string
@@ -18,6 +18,7 @@ interface ConstantSumSliderProps {
     setSliders: Dispatch<SetStateAction<SliderData[]>>
     currentGroupNumber: number
     maxValue: number
+    totalQuestions: number
     description?: string
     timerString?: string
     nextPage: (step: number) => void
@@ -28,6 +29,7 @@ export const ConstantSumSlider = ({
     setSliders,
     currentGroupNumber,
     maxValue,
+    totalQuestions,
     description,
     timerString,
     nextPage
@@ -91,20 +93,17 @@ export const ConstantSumSlider = ({
     }
 
     const currentTotal = sliders.reduce((sum, s) => sum + s.value, 0)
-
     return (
         <div className="test-wrapper">
             <div className="test-card-info">
                 <div className="test-card-count">
                     <div className="test-card-count-left">
-                        {/* TODO: Вместо 7 здесь надо подсасывать кол-во вопросов */}
                         <div className="test-card-questions">
-                            Вопрос {currentGroupNumber + 1} из 7
+                            Вопрос {currentGroupNumber + 1} из {totalQuestions}
                         </div>
 
-                        {/* TODO: Вместо 10 здесь надо подсасывать максимальное кол-во баллов для распределения */}
                         <div className={`test-card-questions ${currentTotal > maxValue ? "count-danger" : currentTotal === maxValue ? "count-good" : ""}`}>
-                            Распределено {totalValue} из 10
+                            Сумма {totalValue}, должно быть {maxValue}
                         </div>
                     </div>
 
@@ -124,11 +123,26 @@ export const ConstantSumSlider = ({
 
             <div className="test-card constant-sum-slider">
                 <div className="test-slider-container" ref={gridRef}>
-                    {sliders.map(slider => {
-                        const range = slider.max - slider.min
-                        const progress = ((slider.value - slider.min) / range) * 100
+                    {sliders.map(slider => 
 
-                        return (
+                        (<div className="slider-wrapper">
+                            <span className="slider-text-content">
+                                {slider?.text || "Загрузка..."}
+                            </span>
+                            <div className="options-wrapper">
+                                {Array.from({length: slider.max + 1}, (_, num) => (
+                                    <>
+                                        <button 
+                                            className={`option ${slider.value === num ? "picked" : ""}`}
+                                            onClick={(e) => handleSliderScroll(num, slider)}>
+                                                {num.toString()}
+                                        </button>
+                                    </>
+                                ))}
+                            </div>
+                            {/*
+                            //const range = slider.max - slider.min
+                            //const progress = ((slider.value - slider.min) / range) * 100
                             <div key={slider.id} className="slider-wrapper" style={{ '--progress': `${progress}%` } as React.CSSProperties}>
                                 <div className="slider-track-zone">
 
@@ -156,17 +170,24 @@ export const ConstantSumSlider = ({
                                         onWheel={handleWheel} />
                                 </div>
                             </div>
+                            */}
+                            </div>
                         )
-                    })}
+                    )}
                 </div>
 
                 <div className="test-card-options">
                     <Button label={"Назад"} variant="secondary" icon={<ArrowLeft />} disabled={currentGroupNumber === 0} onClick={() => { nextPage(-1) }} />
 
                     {currentGroupNumber === 6 ? (
-                        <Button label={"Завершить"} icon={<CheckCheck />} onClick={nextPageHandler} />
+                        <Button label={"Завершить"} 
+                            icon={<CheckCheck />} onClick={nextPageHandler} 
+                            style={{backgroundColor: `var(${currentTotal > maxValue ? "--error-color-500" : currentTotal === maxValue ? "--scfly-color-500" : "--accent-color-500"})`}} />
                     ) : (
-                        <Button label={"Далее"} icon={<ArrowRight />} onClick={nextPageHandler} />
+                        <Button label={"Далее"} 
+                            style={{backgroundColor: `var(${currentTotal > maxValue ? "--error-color-500" : currentTotal === maxValue ? "--scfly-color-500" : "--accent-color-500"})`}}
+                            icon={<ArrowRight />} 
+                            onClick={nextPageHandler} />
                     )}
                 </div>
 

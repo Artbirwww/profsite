@@ -65,6 +65,7 @@ export const GroupRolesTest = () => {
             description="Используя ползунки честно распредели 10 баллов между 8 ответами ниже, выбирая то, как ты реально ведёшь себя при работе в команде, а не то, как хотелось бы."
             nextPage={nextQuestionsGroup}
             maxValue={maxValue}
+            totalQuestions={groupQuestions.length}
             timerString={timerString ? timerString : undefined} />
     )
 }
