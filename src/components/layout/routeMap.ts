@@ -7,6 +7,7 @@ export const routeTitles: Record<string, string> = {
 
     "/": "Добро пожаловать!",
     "/tests": "Тестирование",
+    "/vr-tests": "VR Тестирование",
     "/my-results": "Результаты тестов",
     "/recomendations": "Рекомендации",
     "/profile": "Профиль",
