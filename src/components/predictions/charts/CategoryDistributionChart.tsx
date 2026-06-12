@@ -15,14 +15,11 @@ import {
   LabelList
 } from 'recharts';
 interface CategoryDistributionChartProps {
-    categoriesData: any
-    currentCluster: number
-    setCurrentCluster: (value: number) => void
-    clustersCount: number
+    categories: any
 }
-export const CategoryDistributionChart = ({categoriesData, currentCluster, setCurrentCluster, clustersCount} : CategoryDistributionChartProps) => {
+export const CategoryDistributionChart = ({categories} : CategoryDistributionChartProps) => {
     
-    const chartData = Object.entries(categoriesData || {})  // Add fallback
+    const chartData = Object.entries(categories || {})  // Add fallback
         .map(([category, specialists]: [string, any]) => ({
             category: category,
             count: specialists.length,
@@ -45,28 +42,17 @@ export const CategoryDistributionChart = ({categoriesData, currentCluster, setCu
             'Нижнее среднее': '#FFC107',
             'Верхнее среднее': '#FF9800',
             'Большое': '#FF5722',
-            'Очень большое': '#F44336',
+            'Очень большое': '#ff9891',
             'Экстремальное': '#9C27B0'
             };
             return colors[category] || '#999';
   };
   // Handle cluster change
-    const handleClusterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setCurrentCluster(Number(e.target.value));
-    };
+
     return (
     <div style={{ width: '100%', height: "400px"}}>
         <h4>Ваш профиль относительно специалистов разных профессий</h4>
-        <select 
-            name='cluster'
-            value={currentCluster}
-            onChange={handleClusterChange}
-            style={{ padding: '8px 12px', borderRadius: 4, border: '1px solid #ddd' }}
-        >
-            {Array.from({ length: clustersCount }, (_, i) => i + 2).map(num => (
-                <option key={num} value={num}>Кластер {num}</option>
-            ))}
-        </select>
+
       <ResponsiveContainer>
         <BarChart
           data={chartData}

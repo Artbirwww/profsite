@@ -2,7 +2,7 @@ import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPick
 import axios from "axios"
 import { getBaseUrl } from "../../../services/api/api"
 import { TestFormConfig } from "../TestFormSelection"
-import { UseFormSelectionTest } from "../generalTests/UseFormSelectionTest"
+import { FormSelectionTest } from "../generalTests/FormSelectionTest"
 
 const IQ_FORMS: TestFormConfig<Task>[] = [
     { id: "iqTestFormA", label: "Форма A", data: [] },
@@ -15,7 +15,7 @@ const generateOptions = (count: number) => Array.from({ length: count }, (_, num
     isPicked: false,
 }))
 
-export const IqPotentialTest = UseFormSelectionTest<Task>({
+export const IqPotentialTest = FormSelectionTest<Task>({
     forms: IQ_FORMS,
     Component: SingleOptionsPicker,
     fetchFormData: async (formId) => {

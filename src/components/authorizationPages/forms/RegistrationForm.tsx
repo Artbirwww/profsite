@@ -2,10 +2,10 @@ import { GraduationCap, MailOpen, KeyRound, Repeat, MoveLeft, CheckCheck, ArrowL
 import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useCallback, useState } from "react"
 import { FieldInput } from "../../ui/reusable/fieldInput";
 import { Button } from "../../ui/reusable/button"
-import { useNavigate } from "react-router-dom"
-import { authApi } from "../../../services/api/authApi"
 import toast, { Toaster } from "react-hot-toast"
 import { AccountForm } from "../../../types/account/account";
+import { Checkbox } from "../../ui/reusable/checkbox";
+
 type UserType = "Школьник" | "Специалист" | "Эксперт"
 interface RegistrationFormProps {
     userType: UserType
@@ -15,6 +15,9 @@ interface RegistrationFormProps {
     handleBack: () => void
 }
 export const RegistrationForm = ({ userType, account, setAccount, handleRegistration, handleBack }: RegistrationFormProps) => {
+    const [privacyPoliceChecked, setPrivacyPoliceChecked] = useState(false)
+    const [userAgreementChecked, setUserAgreementChecked] = useState(false)
+
     const updateField = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setAccount(prev => ({ ...prev, [name]: value }))
@@ -26,6 +29,10 @@ export const RegistrationForm = ({ userType, account, setAccount, handleRegistra
         }
         if (account.password !== account.repeatPassword) {
             toast.error("Пароли не совпадают")
+            return
+        }
+        if (!privacyPoliceChecked || !userAgreementChecked) {
+            toast.error("Пожалуйста подтвердите согласие")
             return
         }
         handleRegistration()
@@ -66,6 +73,36 @@ export const RegistrationForm = ({ userType, account, setAccount, handleRegistra
                             name="repeatPassword"
                             onChange={(e) => updateField(e)}
                             onKeyDown={(e) => { if (e.key === "Enter") handleRegistration() }} />
+                    </div>
+
+                    <div className="registration-form-row">
+                        <Checkbox
+                            checked={privacyPoliceChecked}
+                            onChange={(e) => setPrivacyPoliceChecked(e.target.checked)}
+                            label={<>
+                                Я согласен с{" "}
+                                <a
+                                    href="/documents/privacy_profivector.docx"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={(e) => e.stopPropagation()}>
+                                    политикой конфиденциальности
+                                </a>
+                            </>} />
+
+                        <Checkbox
+                            checked={userAgreementChecked}
+                            onChange={(e) => setUserAgreementChecked(e.target.checked)}
+                            label={<>
+                                Я согласен с{" "}
+                                <a
+                                    href="/documents/user_agreement_profivector.docx"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={(e) => e.stopPropagation()}>
+                                    пользовательским соглашением
+                                </a>
+                            </>} />
                     </div>
 
                     <div className="registration-form-row">

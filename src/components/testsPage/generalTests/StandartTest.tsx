@@ -18,7 +18,7 @@ interface StandartTestConfig<T> {
     optionStyle?: "column" | "row"
 }
 
-export const UseStandartTest = <T,>(config: StandartTestConfig<T>) => {
+export const StandartTest = <T,>(config: StandartTestConfig<T>) => {
     return () => {
         const navigate = useNavigate()
         const [tasks, setTasks] = useState<T[]>()
@@ -60,25 +60,20 @@ export const UseStandartTest = <T,>(config: StandartTestConfig<T>) => {
                 handleComplete()
         }, [timer.seconds, tasks, handleComplete, config.autoNavigationOnTimeout, isCountdown])
 
+        const timerString = `${formatTime(timer.minutes)} : ${formatTime(timer.remaningSeconds)}`
+
         if (!tasks) return <p>Загрузка...</p>
 
         return (
-            <div className="actual-test-wrapper">
-                {config.hasTimer !== false && (
-                    <div className="float-timer">
-                        {formatTime(timer.minutes)} : {formatTime(timer.remaningSeconds)}
-                    </div>
-                )}
-
-                <config.Component
-                    {...config.componentProps}
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    navigateToResults={handleComplete}
-                    description={config.description}
-                    pickerStyleType={config.pickerStyle}
-                    optionStyleType={config.optionStyle} />
-            </div>
+            <config.Component
+                {...config.componentProps}
+                tasks={tasks}
+                setTasks={setTasks}
+                navigateToResults={handleComplete}
+                description={config.description}
+                pickerStyleType={config.pickerStyle}
+                optionStyleType={config.optionStyle}
+                timerString={config.hasTimer !== false ? timerString : undefined} />
         )
     }
 }

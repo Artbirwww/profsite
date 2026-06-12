@@ -21,8 +21,8 @@ import { Layout } from "./components/layout/Layout"
 // Страницы
 // Авторизация / Регистрация
 import { LoginPage } from "./components/authorizationPages/LoginPage"
-import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage";
-import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage";
+import { SpecialistRegistrationPage } from "./components/authorizationPages/SpecialistRegistrationPage"
+import { PupilRegistrationPage } from "./components/authorizationPages/PupilRegistrationPage"
 
 // Главные страницы
 import { HomePage } from "./components/homePage/HomePage"
@@ -71,11 +71,15 @@ import { ProfessionSphereForm } from "./components/adminPages/crud/crudForms/Pro
 import { crudRoutes } from "./components/adminPages/crud/routes.config";
 import { FormsListPage } from "./components/adminPages/crud/FormsListPage";
 import { Predictions } from "./components/predictions/Predictions";
+import { VRTestsPage } from "./components/VRTestsPage/VRTestsPage";
 
 export default function App() {
 	return (
 		<Routes>
 			{/* Public routes */}
+			<Route element={<Layout />}>
+				<Route path="/" element={<HomePage />} />
+			</Route>
 			<Route element={<AuthRouter />}>
 				<Route element={<Layout />}>
 					<Route path="/login" element={<LoginPage />} />
@@ -114,7 +118,7 @@ export default function App() {
 					</Route>
 
 					{/* Tests routes */}
-					<Route path="/" element={<HomePage />} />
+					
 					<Route path="/tests">
 						<Route index element={<TestsPage />} />
 						<Route element={<TestViewer />}>
@@ -145,6 +149,9 @@ export default function App() {
 						</Route>
 					</Route>
 
+					{/* VR tests routes*/}
+					<Route path="/vr-tests" element={<VRTestsPage/>} />
+
 					{/* Results routes */}
 					<Route path="/predictions" element={<Predictions/>} />
 					<Route path="/my-results" element={<ResultsPage />} />
@@ -157,7 +164,7 @@ export default function App() {
 			</Route>
 
 			{/* Fallback routes */}
-			<Route path="*" element={<Navigate to="/login" replace />} />
+			<Route path="*" element={<Navigate to="/" replace />} />
 		</Routes>
 	);
 }

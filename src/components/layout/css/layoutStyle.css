@@ -34,11 +34,18 @@
     max-width: 1440px;
     color: var(--text-primary-color);
 }
-
+.header-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 5px;
+}
 .header h4 {
     text-transform: uppercase;
     font-weight: var(--font-weight-medium);
-    font-size: clamp(var(--font-size-md), 0.683rem + 0.77vw, var(--font-size-xl));
+    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-xl));
 }
 
 .header span {

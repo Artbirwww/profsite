@@ -21,7 +21,7 @@ interface FormSelectionTestConfig<T> {
     optionStyle?: "column" | "row"
 }
 
-export const UseFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => {
+export const FormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => {
     return () => {
         const navigate = useNavigate()
         const [selectedForm, setSelectedForm] = useState<string | null>(null)
@@ -69,27 +69,22 @@ export const UseFormSelectionTest = <T,>(config: FormSelectionTestConfig<T>) => 
                 handleComplete()
         }, [timer.seconds, tasks, handleComplete, config.autoNavigationOnTimeout, isCountdown])
 
+        const timerString = `${formatTime(timer.minutes)} : ${formatTime(timer.remaningSeconds)}`
+
         if (!selectedForm) return <TestFormSelection forms={config.forms} onSelect={handleSelect} />
 
         if (!tasks) return <p>Загрузка...</p>
 
         return (
-            <div className="actual-test-wrapper">
-                {config.hasTimer !== false && (
-                    <div className="float-timer">
-                        {formatTime(timer.minutes)} : {formatTime(timer.remaningSeconds)}
-                    </div>
-                )}
-
-                <config.Component
-                    {...config.componentProps}
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    navigateToResults={handleComplete}
-                    description={config.description}
-                    pickerStyleType={config.pickerStyle}
-                    optionStyleType={config.optionStyle} />
-            </div>
+            <config.Component
+                {...config.componentProps}
+                tasks={tasks}
+                setTasks={setTasks}
+                navigateToResults={handleComplete}
+                description={config.description}
+                pickerStyleType={config.pickerStyle}
+                optionStyleType={config.optionStyle}
+                timerString={config.hasTimer !== false ? timerString : undefined} />
         )
     }
 }

@@ -1,0 +1,110 @@
+/* сетка hero секции домашней страницы */
+.home-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 20%;
+    grid-template-rows: 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+/*левый нижний элемент секции*/
+.home-hero-grid .item-1 {
+    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../../../res//home-imgs/banner-image.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--primary-color-50);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: start;
+    position: relative;
+    user-select: none;
+}
+
+.home-hero-grid .item-1 p {
+    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-xl));
+    text-transform: uppercase;
+    line-height: 1.5;
+    opacity: .9;
+    max-width: 60%;
+}
+
+.item-1 .partner-badge {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 30px;
+    right: 30px;
+    padding: 10px;
+    padding-left: 30px;
+    border-radius: 10px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+.item-1 .partner-badge p {
+    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
+    max-width: 200px;
+    margin: 0;
+    opacity: .6;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.partner-logo-wrapper {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.partner-logo-wrapper img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: .6;
+    transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item-1:hover .partner-badge p {
+    opacity: 1;
+}
+
+.item-1:hover .partner-logo-wrapper img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+
+
+/* сетка статов правого элмента hero секции */
+.hero-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.hero-stats-grid .stat-item {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+}
+
+.hero-stats-grid .stat-item h1 {
+    font-size: 2.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary-color);
+    line-height: 25px;
+}

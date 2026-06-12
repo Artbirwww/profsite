@@ -1,4 +1,4 @@
-import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain } from "lucide-react"
+import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain, ThumbsUp, Glasses } from "lucide-react"
 import { ROLES } from "../../../types/account/role"
 
 export interface MenuItemProps {
@@ -28,6 +28,13 @@ export const menuButtons: MenuItemProps[] = [
         path: "/tests",
         order: 2,
     },
+        {
+        id: "VR",
+        label: "VR тесты",
+        icon: Glasses,
+        path: "/vr-tests",
+        order: 3
+    },
     {
         id: "grades",
         label: "Учеба",
@@ -41,7 +48,7 @@ export const menuButtons: MenuItemProps[] = [
         label: "Результаты",
         icon: Brain,
         path: "/predictions",
-        order: 3,
+        order: 5,
         allowedRoles: [ROLES.PUPIL]
     },
     {
@@ -49,14 +56,15 @@ export const menuButtons: MenuItemProps[] = [
         label: "Профиль",
         icon: UserRound,
         path: "/profile",
-        order: 5,
+        order: 6,
     },
+
     {
         id: "admin-panel",
         label: "Адм",
         icon: ShieldUser,
         path: "/admin",
-        order: 6,
+        order: 7,
         className: "spec",
         allowedRoles: [ROLES.ADMIN],
     },

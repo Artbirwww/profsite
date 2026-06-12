@@ -1,0 +1,29 @@
+.slider-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.options-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.option {
+    padding: 10px 15px;
+    border-radius: 5px;
+    min-width: 50px;
+    background-color: var(--grey-color-300);
+}
+.option.picked {
+    background-color: var(--scfly-color-400);
+}
+@media (max-width: 768px) {
+    .options-wrapper{
+        gap: 10px;
+    }
+    .option {
+        flex: 0 0 calc(20% - 12px);
+        padding: 8px 12px;
+    }
+}

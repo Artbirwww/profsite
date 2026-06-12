@@ -1,8 +1,8 @@
 import { tasks as tasksData } from "./tasks.json"
 import { SingleOptionsPicker, Task } from "../generalTemplates/singleOptionsPicker/SingleOptionsPicker"
-import { UseStandartTest } from "../generalTests/UseStandartTest"
+import { StandartTest } from "../generalTests/StandartTest"
 
-export const KlimovTest = UseStandartTest<Task>({
+export const KlimovTest = StandartTest<Task>({
     Component: SingleOptionsPicker,
     fetchData: async () => tasksData as Task[],
     resultPath: "/tests/professional-orientation-klimov-results",

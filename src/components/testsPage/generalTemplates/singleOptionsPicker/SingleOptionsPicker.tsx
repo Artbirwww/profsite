@@ -25,11 +25,20 @@ interface SingleOptionPickerProps {
     setTasks: (tasks: Task[]) => void
     navigateToResults: () => void
     description?: string
+    timerString?: string
     pickerStyleType?: "squeezed" | "extended"
     optionStyleType?: "row" | "column"
 }
 
-export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, description, pickerStyleType = "squeezed", optionStyleType = "column" }: SingleOptionPickerProps) => {
+export const SingleOptionsPicker = ({
+    tasks,
+    setTasks,
+    navigateToResults,
+    description,
+    timerString,
+    pickerStyleType = "squeezed",
+    optionStyleType = "column"
+}: SingleOptionPickerProps) => {
     const [currentTask, setCurrentTask] = useState<Task>()
     const [currentTaskNumber, setCurrentTaskNumber] = useState<number>(0)
 
@@ -74,53 +83,68 @@ export const SingleOptionsPicker = ({ tasks, setTasks, navigateToResults, descri
     }
 
     return (
-        <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
+        <div className="test-wrapper">
             <div className="test-card-info">
                 <div className="test-card-count">
-                    {currentTaskNumber + 1} из {tasks.length}
+                    <div className="test-card-questions">
+                        Вопрос {currentTaskNumber + 1} из {tasks.length}
+                    </div>
+
+                    {timerString && (
+                        <div className="test-card-timer">
+                            {timerString}
+                        </div>
+                    )}
                 </div>
 
                 {description && (
                     <div className="test-card-description">
-                        {description}
+                        <span>Как отвечать: </span>{description}
                     </div>
                 )}
             </div>
 
-            {currentTask?.text &&
-                <div className="test-card-text">
-                    {currentTask?.text}
-                </div>
-            }
-
-            {currentTask?.imageUrl &&
-                <div className="test-card-img">
-                    <img src={currentTask?.imageUrl} alt="" />
-                </div>
-            }
-
-            <div className={`test-card-list ${optionStyleType ? optionStyleType : ""}`}>
-                {currentTask?.options.map(option => (
-                    <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
-                        {option?.text}
+            <div className={`test-card single-options-picker ${pickerStyleType && pickerStyleType}`}>
+                {currentTask?.text &&
+                    <div className="test-card-text">
+                        {currentTask?.text}
                     </div>
-                ))}
+                }
+
+                <div className="test-card-image-text-wrapper">
+                    {currentTask?.imageUrl &&
+                        <div className="test-card-img">
+                            <img src={currentTask?.imageUrl} alt="" />
+                        </div>
+                    }
+
+                    <div className={`test-card-list ${optionStyleType ? optionStyleType : ""}`}>
+                        {currentTask?.options.map(option => (
+                            <div onClick={() => handleUserAnswer(currentTask, option)} className={`test-card-selectable ${option.isPicked ? "active" : ""}`}>
+                                {option?.text}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+
+                <div className="test-card-options">
+                    <Button label="Назад" variant="secondary" icon={<ArrowLeft />} disabled={currentTaskNumber === 0} onClick={() => { changeTask(-1) }} />
+
+                    {currentTaskNumber < tasks.length - 1 ? (
+                        <Button label={"Пропустить"} icon={<ArrowRight />} onClick={() => changeTask(1)} />
+                    ) : (
+                        <Button label={"Завершить"} icon={<CheckCheck />} onClick={navigateToResults} />
+                    )}
+
+                </div>
+
+                <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />
+
+                <Toaster />
             </div>
-
-            <div className="test-card-options">
-                <Button label="Назад" variant="secondary" icon={<ArrowLeft />} disabled={currentTaskNumber === 0} onClick={() => { changeTask(-1) }} />
-
-                {currentTaskNumber < tasks.length - 1 ? (
-                    <Button label={"Пропустить"} icon={<ArrowRight />} onClick={() => changeTask(1)} />
-                ) : (
-                    <Button label={"Завершить"} icon={<CheckCheck />} onClick={navigateToResults} />
-                )}
-
-            </div>
-
-            <ProgressBar currentTaskNumber={currentTaskNumber} total={tasks.length} />
-
-            <Toaster />
         </div>
+
+
     )
 }
