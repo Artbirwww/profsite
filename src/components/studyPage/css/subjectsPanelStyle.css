@@ -1,28 +1,154 @@
-.subject-content {
-    height: 100%;
-    border-radius: 20px;
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-structure-100);
-    padding: 40px;
+.study-wrapper {
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
+
+/* subjectsPanelStyle.css - Simple Version */
+
 .subjects-panel {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-table {
-    border-radius: 5px;
-}
-table thead tr th {
-    padding: 5px;
-    border: 1px solid gray;
-}
-table tbody tr th, td {
-    padding: 5px;
-    border: 1px solid gray;
+    gap: 1.5rem;
 }
 
+/* Cards Container */
+.subjects-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Subject Card */
+.subject-card {
+    background: white;
+    border: 1px solid var(--grey-color-300);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Card Header */
+.card-header {
+    background: var(--accent-color-50);
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--grey-color-200);
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--accent-color-700);
+}
+
+/* Card Sections */
+.card-section {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--grey-color-200);
+}
+
+.card-section:last-child {
+    border-bottom: none;
+}
+
+.card-section-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Grades Grid */
+.grades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.75rem;
+}
+
+.grade-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.grade-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary-color);
+}
+
+/* Profile Grid */
+.profile-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary-color);
+}
+
+/* Select Dropdowns */
 .select-option {
     width: 100%;
-    height: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--grey-color-300);
+    border-radius: 8px;
+    background: white;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+}
+
+.select-option:hover {
+    border-color: var(--accent-color-400);
+}
+
+/* Save Button */
+.study-options {
+    position: sticky;
+    bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    z-index: 10;
+}
+
+.save-button {
+    background: var(--accent-color-500);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.save-button:hover {
+    background: var(--accent-color-600);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+    .grades-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    
+    .card-section {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .save-button {
+        padding: 0.5rem;
+    }
 }

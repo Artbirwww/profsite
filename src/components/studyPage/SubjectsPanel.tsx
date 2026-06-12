@@ -138,76 +138,130 @@ export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubject
         return pupilData.pupilDTO.id !== null
     }
     return (
-        <div className="subject-content">
-            <div className="subjects-panel">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Предмет</th>
-                            {Array.from({ length: 6 }, (_, classNumber) => (
-                                <th key={classNumber}>{classNumber + 5}</th>
-                            ))}
-                            {PUPIL_SUBJECT_PROFILE_TOPICS.map(topic => (
-                                <th>{topic}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div className="subjects-panel">
+            {/* Cards Container */}
+            <div className="subjects-cards">
+                {pupilSubjects.map((subject, subjectIndex) => (
+                    <div key={subject.name} className="subject-card">
+                        {/* Card Header */}
+                        <div className="card-header">
+                            <h3>{subject.name}</h3>
+                        </div>
 
-                        {pupilSubjects.map((pupilSubject, subjectIndex) => (
-                            <tr key={pupilSubject.name}>
-                                <td><strong>{pupilSubject.name}</strong></td>
-                                {pupilSubject.grades.map((pupilGrade, index) => (
-                                    <td key={index}>
-                                        <select value={pupilGrade.grade} className="select-option" onChange={e => { updateGradeForSubject({ ...pupilGrade, grade: e.target.value as Grade }, pupilSubject.name) }}>
-                                            {options.map((op, index) => (
-                                                <option key={index} value={op}>
-                                                    {op}
+                        {/* Grades Section */}
+                        <div className="card-section">
+                            <div className="card-section-title">Оценки по классам</div>
+                            <div className="grades-grid">
+                                {subject.grades.map((grade) => (
+                                    <div key={grade.classNumber} className="grade-item">
+                                        <span className="grade-label">{grade.classNumber} класс</span>
+                                        <select
+                                            value={grade.grade}
+                                            className="select-option"
+                                            onChange={(e) => updateGradeForSubject(
+                                                { ...grade, grade: e.target.value as Grade },
+                                                subject.name
+                                            )}
+                                        >
+                                            {options.map((opt, idx) => (
+                                                <option key={idx} value={opt}>
+                                                    {opt === "" ? "—" : opt}
                                                 </option>
                                             ))}
                                         </select>
-                                    </td>
+                                    </div>
                                 ))}
-                                <td>
-                                    <select value={pupilSubject.pupilSubjectProfileDTO.selectionProbabilityLevel} className="select-option" onChange={e => updateProfileForSubject(subjectIndex, "selectionProbabilityLevel", e.target.value as ProbabilityLevelType)}>
-                                        {ALL_PROBABILITY_LEVELS.map((level, index) => (
-                                            <option key={index} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td>
-                                    <select value={pupilSubject.pupilSubjectProfileDTO.contestParticipationLevel} className="select-option" onChange={e => updateProfileForSubject(subjectIndex, "contestParticipationLevel", e.target.value as ParticipationLevelType)}>
-                                        {ALL_PARTICIPATION_LEVELS.map((level, index) => (
-                                            <option key={index} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td>
-                                    <select value={pupilSubject.pupilSubjectProfileDTO.projectParticipationLevel} className="select-option" onChange={e => updateProfileForSubject(subjectIndex, "projectParticipationLevel", e.target.value as ParticipationLevelType)}>
-                                        {ALL_PARTICIPATION_LEVELS.map((level, index) => (
-                                            <option key={index} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td>
-                                    <select value={pupilSubject.pupilSubjectProfileDTO.interestLevel} className="select-option" onChange={e => updateProfileForSubject(subjectIndex, "interestLevel", e.target.value as InterestLevelType)}>
-                                        {ALL_INTEREST_LEVELS.map((level, index) => (
-                                            <option key={index} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </td>
-                            </tr>
-                        ))}
+                            </div>
+                        </div>
 
-                    </tbody>
-                </table>
+                        {/* Profile Section */}
+                        <div className="card-section">
+                            <div className="card-section-title">Профиль предмета</div>
+                            <div className="profile-grid">
+                                {/* Probability */}
+                                <div className="profile-item">
+                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[0]}</span>
+                                    <select
+                                        value={subject.pupilSubjectProfileDTO.selectionProbabilityLevel}
+                                        className="select-option"
+                                        onChange={(e) => updateProfileForSubject(
+                                            subjectIndex,
+                                            "selectionProbabilityLevel",
+                                            e.target.value as ProbabilityLevelType
+                                        )}
+                                    >
+                                        {ALL_PROBABILITY_LEVELS.map((level, idx) => (
+                                            <option key={idx} value={level}>{level}</option>
+                                        ))}
+                                    </select>
+                                </div>
 
-                <div className="study-options">
-                    <Button label="Сохранить" icon={<CheckCheck />} onClick={addGradesToPupil} />
-                </div>
+                                {/* Contest Participation */}
+                                <div className="profile-item">
+                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[1]}</span>
+                                    <select
+                                        value={subject.pupilSubjectProfileDTO.contestParticipationLevel}
+                                        className="select-option"
+                                        onChange={(e) => updateProfileForSubject(
+                                            subjectIndex,
+                                            "contestParticipationLevel",
+                                            e.target.value as ParticipationLevelType
+                                        )}
+                                    >
+                                        {ALL_PARTICIPATION_LEVELS.map((level, idx) => (
+                                            <option key={idx} value={level}>{level}</option>
+                                        ))}
+                                    </select>
+                                </div>
 
+                                {/* Project Participation */}
+                                <div className="profile-item">
+                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[2]}</span>
+                                    <select
+                                        value={subject.pupilSubjectProfileDTO.projectParticipationLevel}
+                                        className="select-option"
+                                        onChange={(e) => updateProfileForSubject(
+                                            subjectIndex,
+                                            "projectParticipationLevel",
+                                            e.target.value as ParticipationLevelType
+                                        )}
+                                    >
+                                        {ALL_PARTICIPATION_LEVELS.map((level, idx) => (
+                                            <option key={idx} value={level}>{level}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Interest Level */}
+                                <div className="profile-item">
+                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[3]}</span>
+                                    <select
+                                        value={subject.pupilSubjectProfileDTO.interestLevel}
+                                        className="select-option"
+                                        onChange={(e) => updateProfileForSubject(
+                                            subjectIndex,
+                                            "interestLevel",
+                                            e.target.value as InterestLevelType
+                                        )}
+                                    >
+                                        {ALL_INTEREST_LEVELS.map((level, idx) => (
+                                            <option key={idx} value={level}>{level}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
-            <Toaster />
+
+            {/* Save Button */}
+            <div className="study-options">
+                <button className="save-button" onClick={addGradesToPupil}>
+                    Сохранить оценки
+                </button>
+            </div>
+            <Toaster/>
         </div>
     )
 }

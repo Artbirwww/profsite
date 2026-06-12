@@ -41,7 +41,7 @@ export const StudyPage: FC = ({ }) => {
             try {
                 const serverData = await pupilSubjectsApi.getPupilSubjects(token)
                 if (serverData?.length) {
-                    setPupilSubject(mergeData(serverData, TEMPLATE_SUBJECTS))
+                    setPupilSubject(transformServerData(serverData))
                 }
             } catch (error) {
                 console.error("Error while load grades:", error)
@@ -50,20 +50,35 @@ export const StudyPage: FC = ({ }) => {
         loadData()
     }, [getToken])
 
-    const mergeData = (serverData: PupilSubject[], template: PupilSubject[]): PupilSubject[] => {
-        const serverMap = new Map(serverData.map(s => [s.name, s]))
-
-        return template.map(tItem => {
-            const sItem = serverMap.get(tItem.name)
-            if (!sItem) return tItem
-
-            return {
-                ...tItem,
-                grades: tItem.grades.map(tGrade =>
-                    sItem.grades?.find(sG => sG.classNumber === tGrade.classNumber) || tGrade),
-                pupilSubjectProfileDTO: sItem.pupilSubjectProfileDTO || tItem.pupilSubjectProfileDTO,
+    // Helper function to transform server data into consistent format
+    const transformServerData = (serverData: any[]): PupilSubject[] => {
+        return serverData.map(subject => ({
+            name: subject.name,
+            // Create empty grades for classes 5-10 if missing, then merge with server grades
+            grades: createCompleteGrades(subject.grades || []),
+            pupilSubjectProfileDTO: subject.pupilSubjectProfileDTO || {
+                interestLevel: "-",
+                projectParticipationLevel: "-",
+                contestParticipationLevel: "-",
+                selectionProbabilityLevel: "-",
             }
-        })
+        }))
+    }
+
+    // Creates grades array for classes 5-10, filling missing ones with empty strings
+    const createCompleteGrades = (serverGrades: any[]): any[] => {
+        const requiredClasses = [5, 6, 7, 8, 9, 10]
+        
+        // Create a map of existing grades from server
+        const gradesMap = new Map(
+            serverGrades.map(grade => [grade.classNumber, grade.grade])
+        )
+        
+        // Generate complete array with all required classes
+        return requiredClasses.map(classNumber => ({
+            classNumber,
+            grade: gradesMap.get(classNumber) || '' // Empty string for missing grades
+        }))
     }
 
     return (
