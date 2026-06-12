@@ -8,10 +8,27 @@ import { useAuth } from "../../contexts/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
 import { InterestLevelType, ParticipationLevelType, ProbabilityLevelType, PupilSubjectProfile } from "../../types/pupil/pupilSubjectProfile"
 import { pupilApi } from "../../services/api/pupilApi"
+import classNames from "classnames"
 /**
  * TODO если пользователь не заполнил данные аккаунта, попросить его это сделать
  * перед внесеинем оценок, поскольку его профиль еще не создан
  */
+/* TODO подумать как можно отслеживать только измененные оценки что бы не отправлять все каждый раз
+//Если добавляется вообще первая оценка для этого предмета (subject) тупо добавляем ее
+if (!changedPupilSubjectsRef.current.some(pS => pS.name === subject)) {
+    changedPupilSubjectsRef.current = [... changedPupilSubjectsRef.current, {name: subject, grades: [updatedPupilGrade]}]
+    return
+}
+//Если такой предмет уже есть, пытаемся выяснить мы добавляем новую оценку или меняем старую (смотрим по классу)
+//Если добавляем новую то просто берем найденный предмет и в его массив пихаем grade
+const pupilSubjectTemp = changedPupilSubjectsRef.current.find(pS => {pS.name === subject})
+if (!pupilSubjectTemp?.grades.find(g => g.classNumber === updatedPupilGrade.classNumber)){
+    pupilSubjectTemp?.grades = [...pupilSubjectTemp?.grades, updatedPupilGrade]
+    return
+}
+//Если оказалось так, что мы меняем старую тупо обновляем ее и сохраняем
+changedPupilSubjectsRef.current = update(updatedPupilGrade, subject, changedPupilSubjectsRef.current)
+*/
 const ALL_INTEREST_LEVELS: InterestLevelType[] = [
     "Не занимаюсь дополнительно",
     "Занимаюсь редко",
@@ -38,112 +55,143 @@ const ALL_PROBABILITY_LEVELS: ProbabilityLevelType[] = [
     "Однозначно да",
     "-"
 ];
-const PUPIL_SUBJECT_PROFILE_TOPICS: string[] = [
-    "Вероятность выбора экзамена по предмету",
-    "Опыт участия в олимпиадах по предмету",
-    "Участие в проектах/конкурсах/конференциях по предмету",
-    "Интенсивность доп. занятий по предмету"
-]
+
+// Profile config to map fields to their data
+const PROFILE_FIELDS = [
+    { key: "selectionProbabilityLevel", label: "Вероятность выбора экзамена по предмету", options: ALL_PROBABILITY_LEVELS },
+    { key: "contestParticipationLevel", label: "Опыт участия в олимпиадах по предмету", options: ALL_PARTICIPATION_LEVELS },
+    { key: "projectParticipationLevel", label: "Участие в проектах/конкурсах/конференциях по предмету", options: ALL_PARTICIPATION_LEVELS },
+    { key: "interestLevel", label: "Интенсивность доп. занятий по предмету", options: ALL_INTEREST_LEVELS }
+] as const;
+
 interface SubjectProps {
     pupilSubjects: PupilSubject[]
     setPupilSubjects: Dispatch<SetStateAction<PupilSubject[]>>
 }
-const options: Grade[] = ["", "н/а", 3, 4, 5]
-export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubjects }) => {
-    const changedPupilSubjectsRef = useRef<PupilSubject[]>([])
-    const { getToken } = useAuth()
-    useEffect(() => {
-        console.log(pupilSubjects)
-    }, [pupilSubjects])
-    const updateGradeForSubject = (updatedPupilGrade: PupilGrade, subject: Subject) => {
-        const update = (updatedPupilGrade: PupilGrade, subject: Subject, list: PupilSubject[]) => {
-            return list.map((pupilSubject: PupilSubject) => {
-                if (pupilSubject.name === subject)
-                    return {
-                        ...pupilSubject,
-                        grades: pupilSubject.grades.map((pupilGrade: PupilGrade) => {
-                            if (pupilGrade.classNumber === updatedPupilGrade.classNumber)
-                                return { ...pupilGrade, grade: updatedPupilGrade.grade }
-                            return pupilGrade
-                        })
-                    }
-                return pupilSubject
-            })
-        }
-        const updatedPupilSubjects = update(updatedPupilGrade, subject, pupilSubjects);
-        setPupilSubjects(updatedPupilSubjects)
-        /* TODO подумать как можно отслеживать только измененные оценки что бы не отправлять все каждый раз
-        //Если добавляется вообще первая оценка для этого предмета (subject) тупо добавляем ее
-        if (!changedPupilSubjectsRef.current.some(pS => pS.name === subject)) {
-            changedPupilSubjectsRef.current = [... changedPupilSubjectsRef.current, {name: subject, grades: [updatedPupilGrade]}]
-            return
-        }
-        //Если такой предмет уже есть, пытаемся выяснить мы добавляем новую оценку или меняем старую (смотрим по классу)
-        //Если добавляем новую то просто берем найденный предмет и в его массив пихаем grade
-        const pupilSubjectTemp = changedPupilSubjectsRef.current.find(pS => {pS.name === subject})
-        if (!pupilSubjectTemp?.grades.find(g => g.classNumber === updatedPupilGrade.classNumber)){
-            pupilSubjectTemp?.grades = [...pupilSubjectTemp?.grades, updatedPupilGrade]
-            return
-        }
-        //Если оказалось так, что мы меняем старую тупо обновляем ее и сохраняем
-        changedPupilSubjectsRef.current = update(updatedPupilGrade, subject, changedPupilSubjectsRef.current)
-        */
 
+const options: Grade[] = ["", "н/а", 3, 4, 5]
+
+export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubjects }) => {
+    const { getToken } = useAuth()
+
+    // Simplified grade update
+    const updateGrade = (subjectName: string, classNumber: number, grade: Grade) => {
+        setPupilSubjects(prev => prev.map(subject => 
+            subject.name === subjectName ? {
+                ...subject,
+                grades: subject.grades.map(g => 
+                    g.classNumber === classNumber ? { ...g, grade } : g
+                )
+            } : subject
+        ))
     }
-    const updateProfileForSubject = (subjectIndex: number, field: keyof PupilSubjectProfile, value: InterestLevelType | ParticipationLevelType | ProbabilityLevelType) => {
-        setPupilSubjects(prev => {
-            const updated = [...prev]
-            updated[subjectIndex] = {
-                ...updated[subjectIndex],
+
+    // Simplified profile update
+    const updateProfile = (subjectName: string, field: string, value: string) => {
+        setPupilSubjects(prev => prev.map(subject =>
+            subject.name === subjectName ? {
+                ...subject,
                 pupilSubjectProfileDTO: {
-                    ...updated[subjectIndex].pupilSubjectProfileDTO,
+                    ...subject.pupilSubjectProfileDTO,
                     [field]: value
                 }
-            }
-            return updated
-        })
+            } : subject
+        ))
     }
-    const addGradesToPupil = async () => {
-        const data = pupilSubjects
-            .map(subject => {
-                const filteredGrades = subject.grades.filter(grade =>
-                    grade.grade !== '' && grade.grade !== undefined)
 
-                return {
-                    ...subject,
-                    grades: filteredGrades
-                }
-            })//.filter(subject => subject.grades.length > 0)
-        console.log(data)
+    // Save data
+    const saveData = async () => {
+        const data = pupilSubjects.map(subject => ({
+            ...subject,
+            grades: subject.grades.filter(g => g.grade !== '' && g.grade !== undefined)
+        }))
+
         try {
             const token = getToken()
-            if (!token)
-                throw new Error("empty token")
-            if (!await isProfileDataValid()) {
+            if (!token) throw new Error("empty token")
+            
+            const pupilData = await pupilApi.getPupilData(token)
+            if (!pupilData.pupilDTO.id) {
                 toast.error("Перед выставлением оценок заполните профиль")
                 return
             }
-            const response = await pupilSubjectsApi.addGradesToPupil(data, token)
+            
+            await pupilSubjectsApi.addGradesToPupil(data, token)
             toast.success("Оценки успешно добавлены")
         } catch (err) {
             console.error(err)
             toast.error("Не удалось сохранить оценки")
         }
-
     }
-    const isProfileDataValid = async () => {
-        const token = getToken()
-        if (!token) return false
-        const pupilData = await pupilApi.getPupilData(token)
-        return pupilData.pupilDTO.id !== null
-    }
-    return (
+     return (
         <div className="subjects-panel">
-            {/* Cards Container */}
+
+            <div className="subjects-table-container">
+                <div className="subjects-table">
+                    <thead>
+                        <tr>
+                            <th>Предмет</th>
+                            <th colSpan={6}>Оценки по классам</th>
+                            {PROFILE_FIELDS.map(field => (
+                                <th key={field.key}>{field.label}</th>
+                            ))}
+                        </tr>
+                        <tr>
+                            <th></th>
+                            {[5,6,7,8,9,10].map(classNum => (
+                                <th key={classNum}>{classNum} кл</th>
+                            ))}
+                            {PROFILE_FIELDS.map(field => (
+                                <th key={field.key}>
+
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {pupilSubjects.map(subject => (
+                            <tr key={subject.name}>
+                                <td className="subject-cell">{subject.name}</td>
+                                {subject.grades.map(grade => (
+                                    <td key={grade.classNumber}>
+                                        <select 
+                                            value={grade.grade}
+                                            className="select-option"
+                                            onChange={e => updateGrade(
+                                                subject.name,
+                                                grade.classNumber,
+                                                e.target.value as Grade
+                                            )}>
+                                                {options.map((opt, idx) => (
+                                                    <option
+                                                        key={idx} 
+                                                        value={opt}>{opt === "" ? "-" : opt}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                    </td>
+                                ))}
+                                {PROFILE_FIELDS.map(field => (
+                                    <td key={field.key}>
+                                        <select
+                                            value={subject.pupilSubjectProfileDTO[field.key]}
+                                            className="select-option"
+                                            onChange={(e) => updateProfile(subject.name, field.key, e.target.value)}>
+                                                {field.options.map((opt, idx) => (
+                                                    <option key={idx} value={opt}>{opt}</option>
+                                                ))}
+                                            </select>
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </div>
+            </div>
+
             <div className="subjects-cards">
-                {pupilSubjects.map((subject, subjectIndex) => (
+                {pupilSubjects.map(subject => (
                     <div key={subject.name} className="subject-card">
-                        {/* Card Header */}
                         <div className="card-header">
                             <h3>{subject.name}</h3>
                         </div>
@@ -158,9 +206,10 @@ export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubject
                                         <select
                                             value={grade.grade}
                                             className="select-option"
-                                            onChange={(e) => updateGradeForSubject(
-                                                { ...grade, grade: e.target.value as Grade },
-                                                subject.name
+                                            onChange={(e) => updateGrade(
+                                                subject.name,
+                                                grade.classNumber,
+                                                e.target.value as Grade
                                             )}
                                         >
                                             {options.map((opt, idx) => (
@@ -174,94 +223,36 @@ export const SubjectsPanel: FC<SubjectProps> = ({ pupilSubjects, setPupilSubject
                             </div>
                         </div>
 
-                        {/* Profile Section */}
+                        {/* Profile Section - Mapped */}
                         <div className="card-section">
                             <div className="card-section-title">Профиль предмета</div>
                             <div className="profile-grid">
-                                {/* Probability */}
-                                <div className="profile-item">
-                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[0]}</span>
-                                    <select
-                                        value={subject.pupilSubjectProfileDTO.selectionProbabilityLevel}
-                                        className="select-option"
-                                        onChange={(e) => updateProfileForSubject(
-                                            subjectIndex,
-                                            "selectionProbabilityLevel",
-                                            e.target.value as ProbabilityLevelType
-                                        )}
-                                    >
-                                        {ALL_PROBABILITY_LEVELS.map((level, idx) => (
-                                            <option key={idx} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Contest Participation */}
-                                <div className="profile-item">
-                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[1]}</span>
-                                    <select
-                                        value={subject.pupilSubjectProfileDTO.contestParticipationLevel}
-                                        className="select-option"
-                                        onChange={(e) => updateProfileForSubject(
-                                            subjectIndex,
-                                            "contestParticipationLevel",
-                                            e.target.value as ParticipationLevelType
-                                        )}
-                                    >
-                                        {ALL_PARTICIPATION_LEVELS.map((level, idx) => (
-                                            <option key={idx} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Project Participation */}
-                                <div className="profile-item">
-                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[2]}</span>
-                                    <select
-                                        value={subject.pupilSubjectProfileDTO.projectParticipationLevel}
-                                        className="select-option"
-                                        onChange={(e) => updateProfileForSubject(
-                                            subjectIndex,
-                                            "projectParticipationLevel",
-                                            e.target.value as ParticipationLevelType
-                                        )}
-                                    >
-                                        {ALL_PARTICIPATION_LEVELS.map((level, idx) => (
-                                            <option key={idx} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Interest Level */}
-                                <div className="profile-item">
-                                    <span className="profile-label">{PUPIL_SUBJECT_PROFILE_TOPICS[3]}</span>
-                                    <select
-                                        value={subject.pupilSubjectProfileDTO.interestLevel}
-                                        className="select-option"
-                                        onChange={(e) => updateProfileForSubject(
-                                            subjectIndex,
-                                            "interestLevel",
-                                            e.target.value as InterestLevelType
-                                        )}
-                                    >
-                                        {ALL_INTEREST_LEVELS.map((level, idx) => (
-                                            <option key={idx} value={level}>{level}</option>
-                                        ))}
-                                    </select>
-                                </div>
+                                {PROFILE_FIELDS.map((field) => (
+                                    <div key={field.key} className="profile-item">
+                                        <span className="profile-label">{field.label}</span>
+                                        <select
+                                            value={subject.pupilSubjectProfileDTO[field.key] as string}
+                                            className="select-option"
+                                            onChange={(e) => updateProfile(subject.name, field.key, e.target.value)}
+                                        >
+                                            {field.options.map((opt, idx) => (
+                                                <option key={idx} value={opt}>{opt}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {/* Save Button */}
             <div className="study-options">
-                <button className="save-button" onClick={addGradesToPupil}>
+                <button className="save-button" onClick={saveData}>
                     Сохранить оценки
                 </button>
             </div>
-            <Toaster/>
+            <Toaster />
         </div>
     )
 }

@@ -1,9 +1,52 @@
 .study-wrapper {
     overflow-y: scroll;
     scrollbar-width: thin;
+    width: 100%;
 }
 
-/* subjectsPanelStyle.css - Simple Version */
+/* ===== PC TABLE VIEW (visible on desktop) ===== */
+.subjects-table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--grey-color-300);
+    background: white;
+}
+
+.subjects-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.subjects-table th {
+    background: var(--accent-color-500);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+    border: 1px solid var(--accent-color-700);
+}
+
+.subjects-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--grey-color-300);
+}
+
+.subject-cell {
+    font-weight: var(--font-weight-semibold);
+    background: var(--accent-color-50);
+    text-align: left !important;
+    padding-left: 1rem !important;
+    position: sticky;
+    left: 0;
+    background: white;
+}
+
+.subjects-table tr:hover td {
+    background-color: var(--accent-color-50);
+}
+/*MOBILE VERSION*/
 
 .subjects-panel {
     display: flex;
@@ -150,5 +193,30 @@
     
     .save-button {
         padding: 0.5rem;
+    }
+}
+
+/*  RESPONSIVE  PC + MOBILE версии*/
+@media (min-width: 769px) {
+    .subjects-cards {
+        display: none;
+    }
+    .subjects-table-container {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .subjects-table-container {
+        display: none;
+    }
+    .subjects-cards {
+        display: flex;
+    }
+    .grades-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    .save-button {
+        width: 100%;
     }
 }
