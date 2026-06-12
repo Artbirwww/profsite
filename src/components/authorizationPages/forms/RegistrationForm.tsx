@@ -31,6 +31,10 @@ export const RegistrationForm = ({ userType, account, setAccount, handleRegistra
             toast.error("Пароли не совпадают")
             return
         }
+        if (!privacyPoliceChecked || !userAgreementChecked) {
+            toast.error("Пожалуйста подтвердите согласие")
+            return
+        }
         handleRegistration()
     }
     return (<>
@@ -78,7 +82,7 @@ export const RegistrationForm = ({ userType, account, setAccount, handleRegistra
                             label={<>
                                 Я согласен с{" "}
                                 <a
-                                    href="/privacy-police"
+                                    href="/documents/privacy_profivector.docx"
                                     target="_blank"
                                     rel="noreferrer"
                                     onClick={(e) => e.stopPropagation()}>
@@ -92,7 +96,7 @@ export const RegistrationForm = ({ userType, account, setAccount, handleRegistra
                             label={<>
                                 Я согласен с{" "}
                                 <a
-                                    href="/user-agreemnt"
+                                    href="/documents/user_agreement_profivector.docx"
                                     target="_blank"
                                     rel="noreferrer"
                                     onClick={(e) => e.stopPropagation()}>
