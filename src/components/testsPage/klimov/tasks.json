@@ -383,7 +383,7 @@
         {
             "id": 20,
             "taskNumber": 20,
-            "text": "null",
+            "text": null,
             "options": [
                 {
                     "id": 1,

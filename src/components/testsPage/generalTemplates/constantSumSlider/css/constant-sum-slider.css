@@ -1,11 +1,12 @@
 .slider-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 .options-wrapper {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     gap: 15px;
 }
 
@@ -19,8 +20,13 @@
     background-color: var(--scfly-color-400);
 }
 @media (max-width: 768px) {
+    .slider-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
     .options-wrapper{
         gap: 10px;
+        flex-wrap: wrap;
     }
     .option {
         flex: 0 0 calc(20% - 12px);
