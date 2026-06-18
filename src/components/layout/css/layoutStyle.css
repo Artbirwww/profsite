@@ -31,9 +31,10 @@
     justify-content: start;
     align-items: start;
     width: 100%;
-    max-width: 1680px;
+    max-width: 1610px;
     color: var(--text-primary-color);
 }
+
 .header-title {
     display: flex;
     flex-direction: row;
@@ -41,10 +42,12 @@
     width: 100%;
     justify-content: space-between;
 }
+
 .header h4 {
     text-transform: uppercase;
     font-weight: var(--font-weight-medium);
     font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-xl));
+    color: var(--text-primary-color);
 }
 
 .header span {
@@ -75,7 +78,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 1680px;
+    max-width: 1610px;
     width: 100%;
     margin: 0 auto;
 

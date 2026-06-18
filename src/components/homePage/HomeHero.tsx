@@ -6,16 +6,22 @@ export const HomeHero: FC = ({ }) => {
     return (
         <div className="home-grid-item-1-grid">
             <div className="home-block item-1">
-                <div className="hero-logo">
-                    <h2>ПрофиВектор</h2>
+                <div className="home-block-header">
+                    ПрофиВектор
                 </div>
-                <p>Пройди тесты, примерь VR-шлем и узнай, какая высокооплачиваемая профессия в горнодобывающей индустрии подходит именно тебе!</p>
+
+                <div className="home-block-subtitle">
+                    Пройди тесты, примерь VR-шлем и узнай, какая высокооплачиваемая профессия в горнодобывающей индустрии подходит именно тебе!
+                </div>
 
                 <a className="partner-badge"
                     href="https://fasie.ru/"
                     target="_blank"
                     rel="noopener noreferrer">
-                    <p>Проект реализован при поддержке:</p>
+
+                    <div className="partner-badge-text">
+                        Проект реализован при поддержке:
+                    </div>
 
                     <div className="partner-logo-wrapper">
                         <img src={bannerLogoFasie} alt="Логотип Фонда содействия инновациям" />
@@ -23,20 +29,36 @@ export const HomeHero: FC = ({ }) => {
                 </a>
             </div>
 
-            <div className="item-2-grid">
+            <div className="item-2-grid item-2">
                 <div className="home-block stat-item">
-                    <h1>5</h1>
-                    <p>Топовых профессий</p>
+                    <div className="home-block-header">
+                        5
+                    </div>
+
+                    <div className="home-block-text">
+                        Топовых профессий
+                    </div>
                 </div>
 
                 <div className="home-block stat-item">
-                    <h1>9</h1>
-                    <p>Фундаментальных тестов</p>
+                    <div className="home-block-header">
+                        9
+                    </div>
+
+                    <div className="home-block-text">
+                        Ключевых тестов
+                    </div>
                 </div>
 
                 <div className="home-block stat-item">
-                    <h1>VR</h1>
-                    <p>VR-аналитика будущего</p>
+                    <div className="home-block-header">
+                        VR
+                    </div>
+
+
+                    <div className="home-block-text">
+                        VR-аналитика будущего
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,33 +6,47 @@ export const HomeHowItsWorking: FC = ({ }) => {
 
             <div className="item-1-grid">
                 <div className="home-block">
-                    <h4>9 фундаментальных тестов</h4>
+                    <div className="home-block-header">
+                        Ключевые тесты
+                    </div>
 
-                    <p>Цифровой профиль товего мышления, характера и карьерных ценностей</p>
+                    <div className="home-block-text">
+                        Цифровой профиль товего мышления, характера и карьерных ценностей
+                    </div>
 
                     <div className="widget-tags-container">
                         <div className="widget-tag">Темперамент</div>
                         <div className="widget-tag">Групповые роли</div>
                         <div className="widget-tag">Инженерное мышление</div>
+                        <div className="widget-tag">Профориентационное тестирование</div>
                     </div>
                 </div>
 
                 <div className="home-block">
-                    <h4>Тест-драйв в VR-шлеме</h4>
+                    <div className="home-block-header">
+                        Тест-драйв в VR шлеме
+                    </div>
 
-                    <p>Погружение в реальные рабочие сценарии на добывающем предприятии</p>
+                    <div className="home-block-text">
+                        Погружение в реальные рабочие сценарии на добывающем предприятии
+                    </div>
 
                     <div className="widget-tags-container">
                         <div className="widget-tag">Интерактивные задачи</div>
                         <div className="widget-tag">Симуляция работы в карьере</div>
                         <div className="widget-tag">Eye-tracking</div>
+                        <div className="widget-tag">Face-tracking</div>
                     </div>
                 </div>
 
                 <div className="home-block">
-                    <h4>Биологическая Обратная Связь</h4>
+                    <div className="home-block-header">
+                        Биологическая обратная связь
+                    </div>
 
-                    <p>Считывание сигналов мозга  во время прохождения VR-симуляции</p>
+                    <div className="home-block-text">
+                        Считывание сигналов мозга  во время прохождения VR-симуляции
+                    </div>
 
                     <div className="widget-tags-container">
                         <div className="widget-tag">Фиксация пиков концентрации</div>
@@ -43,9 +57,14 @@ export const HomeHowItsWorking: FC = ({ }) => {
             </div>
 
             <div className="home-block item-2">
-                <h4>Сравнение с эталоном индустрии</h4>
-                <p>Наш алгоритм собирает данные твоих тестов, взгляда в VR и сигналов ЭЭГ, а затем сравнивает их с цифровыми профилями реальных, успешных сотрудников горнодобывающей промышленности.</p>
-                <p>Результат: Ты получаешь точный персональный отчет: насколько ты подходишь профессии, и — главное — насколько тебе понравится эта работа через 5–10 лет.</p>
+                <div className="home-block-header">
+                    Сравнение с эталоном индустрии
+                </div>
+
+                <div className="home-block-text">
+                    Наш алгоритм собирает данные твоих тестов, взгляда в VR и сигналов ЭЭГ, а затем сравнивает их с цифровыми профилями реальных, успешных сотрудников горнодобывающей промышленности.
+                    Результат: Ты получаешь точный персональный отчет: насколько ты подходишь профессии, и — главное — насколько тебе понравится эта работа через 5–10 лет.
+                </div>
             </div>
         </div>
     )

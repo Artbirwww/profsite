@@ -1,5 +1,5 @@
 /*левый нижний элемент секции*/
-.home-hero-grid .item-1 {
+.home-grid-item-1-grid .item-1 {
     background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../../../res//home-imgs/banner-image.webp");
     background-size: cover;
     background-position: center;
@@ -8,21 +8,13 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     justify-content: start;
     position: relative;
     user-select: none;
 }
 
-.home-hero-grid .item-1 p {
-    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-xl));
-    text-transform: uppercase;
-    line-height: 1.5;
-    opacity: .9;
-    max-width: 60%;
-}
-
-.item-1 .partner-badge {
+.home-grid-item-1-grid .item-1 .partner-badge {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -38,16 +30,21 @@
     cursor: pointer;
 }
 
-.item-1 .partner-badge p {
-    font-size: clamp(var(--font-size-xs), 0.683rem + 0.77vw, var(--font-size-base));
-    max-width: 200px;
+.item-1 .partner-badge .partner-badge-text {
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-base);
+    margin-bottom: auto;
+    white-space: pre-line;
+    flex-grow: 1;
+    margin-bottom: 0;
+    max-width: 170px;
     margin: 0;
     opacity: .6;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .partner-logo-wrapper {
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
 }
@@ -56,17 +53,35 @@
     max-height: 100%;
     width: auto;
     object-fit: contain;
-    filter: grayscale(100%);
     opacity: .6;
-    transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.item-1:hover .partner-badge p {
+.item-1:hover .partner-badge .partner-badge-text {
     opacity: 1;
 }
 
 .item-1:hover .partner-logo-wrapper img {
     transform: scale(1.05);
-    filter: grayscale(0%);
     opacity: 1;
+}
+
+
+
+@media (max-width: 699px) {
+    .home-grid-item-1-grid .item-1 {
+        gap: 5px;
+        padding: 20px;
+    }
+
+    .partner-logo-wrapper {
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .item-1 .partner-badge .partner-badge-text {
+        font-size: var(--font-size-xs);
+        max-width: 130px;
+    }
 }
