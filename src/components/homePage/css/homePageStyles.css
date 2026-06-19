@@ -1,10 +1,8 @@
 /* стили для обертки домашней страницы */
 .home-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     position: relative;
-    gap: 10px;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -13,48 +11,100 @@
 /* сетка для секций домашней страницы */
 .home-grid {
     display: grid;
-    width: 100%;
-    height: 100%;
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 100%);
-    grid-auto-rows: 100%;
     gap: 10px;
+    padding: 5px;
     overflow-y: auto;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    border-radius: 15px;
 }
 
 .home-grid::-webkit-scrollbar {
     display: none;
 }
 
-.home-section-wrapper {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+
+.home-grid-item-1-grid {
+    display: grid;
+    grid-template-columns: 1fr 20%;
+    grid-template-rows: 1fr;
+    gap: 10px;
 }
 
+.home-grid-item-1-grid .item-2-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    padding: 5px;
+    background-color: var(--grey-color-300);
+    border-radius: 20px;
+}
 
+.home-grid-item-2-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 40%;
+    gap: 10px;
+}
+
+.home-grid-item-2-grid .item-1-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 5px;
+    background-color: var(--grey-color-300);
+    border-radius: 20px;
+}
+
+.home-grid-item-3-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+.home-grid-item-3-grid .item-1-grid,
+.home-grid-item-3-grid .item-2-grid,
+.home-grid-item-3-grid .item-3-grid,
+.home-grid-item-3-grid .item-4-grid,
+.home-grid-item-3-grid .item-5-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 40% 1fr;
+    gap: 10px;
+    padding: 5px;
+    background-color: var(--grey-color-300);
+    border-radius: 20px;
+}
+
+.home-grid-item-4-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 30% 1fr;
+    gap: 10px;
+}
 
 /* общий стиль для элмента*/
 .home-block {
     background-color: var(--primary-color-50);
     border-radius: 15px;
     box-sizing: border-box;
+    border: 1px solid var(--grey-color-300);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+    padding: 30px;
 }
 
-.home-block.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 30px;
-    color: var(--text-tertiary-color);
-    text-transform: uppercase;
-    font-weight: var(--font-weight-medium);
-    font-size: clamp(var(--font-size-base), 0.683rem + 0.77vw, var(--font-size-md));
-}
+
+
+
+
+
+
+
+
+
 
 /* стили для индикатора прокрутки страницы */
 .home-indicator {
