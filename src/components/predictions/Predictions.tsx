@@ -12,11 +12,12 @@ import "./css/prediction.css"
 import { NoResults, Status } from "../ui/noResultComponent/NoResult"
 import { CategoryDistributionChart } from "./charts/CategoryDistributionChart"
 import { BubbleDistanceChart } from "./charts/BubbleDistanceChart"
+import { Button } from "../ui/reusable/button"
 
 export const Predictions = () => {
     const [prediction, setPrediction] = useState<Prediction>()
     const [results, setResult] = useState<PredictionResult[]>()
-    const {getToken, getEmail} = useAuth()
+    const { getToken, getEmail } = useAuth()
     const [status, setStatus] = useState<Status>("loading")
 
     const [currentCluster, setCurrentCluster] = useState<number>(2)
@@ -30,13 +31,13 @@ export const Predictions = () => {
                     setStatus("empty")
                     return
                 }
-                const recentPrediction = predictionsTemp.sort((a, b) => 
+                const recentPrediction = predictionsTemp.sort((a, b) =>
                     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0]
-                
-                
+
+
                 setPrediction(recentPrediction)
-                
-            } catch(err) {
+
+            } catch (err) {
                 console.error(err)
                 setStatus("empty")
                 toast.error("Возникла ошибка при загрузке результатов")
@@ -49,7 +50,7 @@ export const Predictions = () => {
         //подгружаем файл из результатов
         const getPredictionJson = async () => {
             try {
-                const resultsOriginalDataTemp =  await predictionAPI.getPredictionJson(prediction.filePath)
+                const resultsOriginalDataTemp = await predictionAPI.getPredictionJson(prediction.filePath)
                 if (resultsOriginalDataTemp === null) {
                     setStatus("empty")
                     return
@@ -57,7 +58,7 @@ export const Predictions = () => {
                 setStatus("success")
                 setResult(getTopProfessions(resultsOriginalDataTemp))
                 setResulsOriginalData(resultsOriginalDataTemp)
-            } catch(err) {
+            } catch (err) {
                 console.error(err)
                 toast.error("Ошибка при загрузке результатов")
                 setStatus("empty")
@@ -65,17 +66,17 @@ export const Predictions = () => {
         }
         getPredictionJson()
     }, [prediction])
-    const countClusters = () : number => {
+    const countClusters = (): number => {
         if (!resultsOriginalData) return 8 //by default always 8 (K2-K9)
         return Object.keys(resultsOriginalData)
             .filter(key => key.match(/^K[2-9]_cluster$/))
             .length;
     }
-    if (status === "empty") 
-        return <NoResults variant={status} message="У вас пока нет результатов"/>
-    if (status === "loading" || !results || !resultsOriginalData) 
-        return (<> <NoResults variant={status} message="Ищем ваши результаты" title="Поиск"/>
-    </>)
+    if (status === "empty")
+        return <NoResults variant={status} message="У вас пока нет результатов" />
+    if (status === "loading" || !results || !resultsOriginalData)
+        return (<> <NoResults variant={status} message="Ищем ваши результаты" title="Поиск" />
+        </>)
     const handleClusterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCurrentCluster(Number(e.target.value));
     };
@@ -86,6 +87,7 @@ export const Predictions = () => {
                 <p className="results-subtitle">
                     На основе анализа ваших данных подготовлены следующие рекомендации
                 </p>
+                <Button label={"Обновить результаты"}/>
             </div>
 
             {/* Top 3 Cards */}
@@ -109,10 +111,10 @@ export const Predictions = () => {
                                 </div>
                             </div>
                             <div className="card-progress">
-                                <div 
+                                <div
                                     className="progress-bar"
-                                    style={{ 
-                                        width: `${Math.min(100, Math.round((1 / prof.distance) * 100))}%` 
+                                    style={{
+                                        width: `${Math.min(100, Math.round((1 / prof.distance) * 100))}%`
                                     }}
                                 />
                             </div>
@@ -129,7 +131,7 @@ export const Predictions = () => {
                 </div>
             </div>
             {/*Chart for individual cluster*/}
-            <select 
+            <select
                 name='cluster'
                 value={currentCluster}
                 onChange={handleClusterChange}
@@ -139,11 +141,11 @@ export const Predictions = () => {
                     <option key={num} value={num}>Кластер {num}</option>
                 ))}
             </select>
-            <div className="chart-section" style={{overflowY: "auto", scrollbarWidth: "none"}}>
+            <div className="chart-section" style={{ overflowY: "auto", scrollbarWidth: "none" }}>
                 <h2 className="section-title">Насколько близко вы к специалистам</h2>
-                <div className="chart-container" style={{height: "100%"}}>
-                    <CategoryDistributionChart 
-                        categories={resultsOriginalData[`K${currentCluster}_categories`]}/>
+                <div className="chart-container" style={{ height: "100%" }}>
+                    <CategoryDistributionChart
+                        categories={resultsOriginalData[`K${currentCluster}_categories`]} />
                 </div>
             </div>
             <div className="chart-section">
@@ -171,10 +173,10 @@ export const Predictions = () => {
                                     <td className="profession">{prof.name}</td>
                                     <td className="compatibility">
                                         <div className="compat-bar">
-                                            <div 
+                                            <div
                                                 className="compat-fill"
-                                                style={{ 
-                                                    width: `${Math.min(100, Math.round((1 / prof.distance) * 100))}%` 
+                                                style={{
+                                                    width: `${Math.min(100, Math.round((1 / prof.distance) * 100))}%`
                                                 }}
                                             />
                                         </div>
