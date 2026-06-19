@@ -74,6 +74,7 @@ import { Predictions } from "./components/predictions/Predictions";
 import { VRTestsPage } from "./components/VRTestsPage/VRTestsPage";
 import { VRTestIntro } from "./components/VRTestsPage/VRTestIntro";
 import { VRTest } from "./components/VRTestsPage/VRTest";
+import { VRTestResults } from "./components/VRTestsPage/results/VRTestResults";
 
 export default function App() {
 	return (
@@ -152,9 +153,12 @@ export default function App() {
 					</Route>
 
 					{/* VR tests routes*/}
-					<Route path="/vr-tests" element={<VRTestsPage/>} />
-					<Route path="/vr-tests/:profession/intro" element={<VRTestIntro/>}/>
-					<Route path="/vr-tests/:profession/questionnaire" element={<VRTest />} />
+					<Route path="/vr-tests">
+						<Route index element={<VRTestsPage />} />
+						<Route path=":profession/intro" element={<VRTestIntro />} />
+						<Route path=":profession/questionnaire" element={<VRTest />} />
+						<Route path=":profession/results" element={<VRTestResults />} />
+					</Route>
 
 					{/* Results routes */}
 					<Route path="/predictions" element={<Predictions/>} />
