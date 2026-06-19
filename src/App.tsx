@@ -72,6 +72,8 @@ import { crudRoutes } from "./components/adminPages/crud/routes.config";
 import { FormsListPage } from "./components/adminPages/crud/FormsListPage";
 import { Predictions } from "./components/predictions/Predictions";
 import { VRTestsPage } from "./components/VRTestsPage/VRTestsPage";
+import { VRTestIntro } from "./components/VRTestsPage/VRTestIntro";
+import { VRTest } from "./components/VRTestsPage/VRTest";
 
 export default function App() {
 	return (
@@ -151,6 +153,8 @@ export default function App() {
 
 					{/* VR tests routes*/}
 					<Route path="/vr-tests" element={<VRTestsPage/>} />
+					<Route path="/vr-tests/:profession/intro" element={<VRTestIntro/>}/>
+					<Route path="/vr-tests/:profession/questionnaire" element={<VRTest />} />
 
 					{/* Results routes */}
 					<Route path="/predictions" element={<Predictions/>} />

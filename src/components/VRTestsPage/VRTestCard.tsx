@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { profession } from "../../types/specialist/specialist"
 import { Button } from "../ui/reusable/button"
 import { Status } from "./VRTestsPage"
@@ -13,7 +14,10 @@ const statusesRu: Record<Status, string> = {
 }
 
 export const VRTestCard = ({item, status} : VRTestCardProps) => {
-    console.log(status)
+    const navigate = useNavigate()
+        const handleStart = () => {
+        navigate(`/vr-tests/${item.name}/intro`)
+    }
 
     return (<>
         <div key={item.id} className="test">
@@ -25,7 +29,7 @@ export const VRTestCard = ({item, status} : VRTestCardProps) => {
                 
                 <a href="#" style={{color: "var(--error-color-500)"}}>Сбросить</a>
             </div>
-            <Button label="Начать" />
+            <Button label="Начать" onClick={handleStart}/>
         </div>
     </>)
 }

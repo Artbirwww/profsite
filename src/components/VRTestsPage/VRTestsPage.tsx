@@ -5,6 +5,7 @@ import { profession } from "../../types/specialist/specialist"
 import "./css/vr-tests-page.css"
 import { VRTestCard } from "./VRTestCard"
 import { Search } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export type Status = "not started" | "first stage" | "second stage"
 
@@ -12,6 +13,7 @@ export const VRTestsPage = () => {
     const [professions, setProfessions] = useState<profession[]>()
     const [professionsOriginal, setProfessionsOriginal] = useState<profession[]>()
     const [search, setSearch] = useState<string>()
+
     useEffect(() => {
         const loadProfessions = async () => {
             try {
@@ -26,9 +28,14 @@ export const VRTestsPage = () => {
         loadProfessions()
     }, [])
     useEffect(() => {
-        if (!search || search === "") setProfessions(professionsOriginal)
+        if (!professionsOriginal) return
+        if (!search) {
+            setProfessions(professionsOriginal)
+            return
+        }
         setProfessions(professionsOriginal?.filter(prof => prof.name.toLocaleLowerCase().includes(search?.toLocaleLowerCase())))
-    }, [search])
+    }, [search, professionsOriginal])
+
     if (!professions) return (<>
         <p>Загрузка тестов</p>
     </>)
