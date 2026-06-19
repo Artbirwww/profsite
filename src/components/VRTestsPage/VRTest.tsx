@@ -35,7 +35,7 @@ export const VRTest = () => {
         Component: SingleOptionsPicker,
         fetchData: async () => tasksWithProfession,
         resultPath: `/vr-tests/${profession}/results`,
-        stateKey: "VRStandartAnswers",
+        stateKey: "results",
         description: testData.description || "Оцените профессию по различным критериям",
         autoStartTimer: true,
         pickerStyle: "extended",
