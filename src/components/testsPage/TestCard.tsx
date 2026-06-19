@@ -36,6 +36,7 @@ export const TestCard: FC<TestItemProps> = memo(({
     const targetPos = useRef({ x: 0, y: 0 })
     const currentPos = useRef({ x: 0, y: 0 })
 
+    {/* 
     useEffect(() => {
         let frameId: number
 
@@ -63,7 +64,7 @@ export const TestCard: FC<TestItemProps> = memo(({
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
         }
-    }
+    }*/}
 
     const handleClick = () => {
         if (!isAvailable) return
@@ -75,7 +76,7 @@ export const TestCard: FC<TestItemProps> = memo(({
             <div
                 ref={cardRef}
                 className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""}`}
-                onMouseMove={handleMouseMove}
+                /*onMouseMove={handleMouseMove}*/
                 onClick={handleClick}
                 data-test-id={dataId}>
 
