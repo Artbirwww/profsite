@@ -155,9 +155,9 @@ export default function App() {
 					{/* VR tests routes*/}
 					<Route path="/vr-tests">
 						<Route index element={<VRTestsPage />} />
-						<Route path=":profession/intro" element={<VRTestIntro />} />
-						<Route path=":profession/questionnaire" element={<VRTest />} />
-						<Route path=":profession/results" element={<VRTestResults />} />
+						<Route path=":profession/:professionId/intro" element={<VRTestIntro />} />
+						<Route path=":profession/:professionId/questionnaire" element={<VRTest />} />
+						<Route path=":profession/:professionId/results" element={<VRTestResults />} />
 					</Route>
 
 					{/* Results routes */}

@@ -8,7 +8,7 @@ import { NoResults } from "../ui/noResultComponent/NoResult"
 
 export const VRTest = () => {
     const [testData, setTestData] = useState()
-    const {profession} = useParams<{profession: string}>()
+    const {profession, professionId} = useParams<{profession: string, professionId: string}>()
 
     // Load data on mount
     useEffect(() => {
@@ -34,7 +34,7 @@ export const VRTest = () => {
     const DynamicTest = StandartTest<Task>({
         Component: SingleOptionsPicker,
         fetchData: async () => tasksWithProfession,
-        resultPath: `/vr-tests/${profession}/results`,
+        resultPath: `/vr-tests/${profession}/${professionId}/results`,
         stateKey: "results",
         description: testData.description || "Оцените профессию по различным критериям",
         autoStartTimer: true,
