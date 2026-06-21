@@ -1,0 +1,117 @@
+.test {
+    flex: 0 0 calc((100% / 3) - (20px / 3));
+    padding: 16px 20px;
+    border-radius: 15px;
+    background-color: var(--primary-color-50);
+    border: 1px solid var(--grey-color-300);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.25s ease;
+}
+
+.test:hover {
+    border-color: var(--accent-color-400);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.test-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.test-title h4 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary-color);
+    margin: 0 0 4px 0;
+}
+
+.test-title small {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: color 0.2s ease;
+}
+
+.test-header a {
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    color: var(--error-color-500);
+}
+
+.test-header a:hover {
+    background: var(--error-color-500);
+    color: white !important;
+}
+
+.test-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-track {
+    flex: 1;
+    height: 6px;  /* ← Make sure height is set */
+    background: var(--grey-color-300);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;  /* ← Add this */
+}
+
+.progress-fill {
+    height: 100%;  /* ← Make sure it's 100% of parent */
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    position: absolute;  /* ← Add this for better control */
+    left: 0;
+    top: 0;
+}
+
+.progress-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary-color);
+    min-width: 28px;
+    text-align: right;
+}
+
+.test button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .test {
+        flex: 0 0 calc((100% / 2) - (20px / 2));
+    }
+}
+
+@media (max-width: 480px) {
+    .test {
+        flex: 0 0 100%;
+    }
+
+    .test-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .test-header a {
+        align-self: flex-start;
+    }
+}
