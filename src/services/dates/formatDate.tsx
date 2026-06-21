@@ -19,3 +19,8 @@ export const formatDateToDateTime = (dateStr: string, isEndOfDay: boolean = fals
     const time = isEndOfDay ? "23:59:59" : "00:00:00"
     return `${date.toString()}T${time}`
 }
+const formatTime = (seconds: number): string => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
