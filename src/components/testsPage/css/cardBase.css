@@ -30,38 +30,8 @@
     cursor: not-allowed;
 }
 
-/* СЛЕДЯЩИЙ ИНТЕРАКТИВНЫЙ КРУГ */
-.test-selection-item .hover-circle {
-    position: absolute;
-    top: var(--mouse-y);
-    left: var(--mouse-x);
-    width: 350px;
-    height: 350px;
-    background-color: var(--accent-color-300);
-    border-radius: 50%;
-    filter: blur(40px);
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.2s ease-in-out, opacity 0.4s ease-in-out;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.test-selection-item:not(.locked):hover .hover-circle {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-.test-selection-item.complete .hover-circle {
-    background-color: var(--scfly-color-300);
-}
-
 @media (max-width: 768px) {
     .test-selection-item {
         padding: 20px;
-    }
-
-    .test-selection-item .hover-circle {
-        display: none;
     }
 }

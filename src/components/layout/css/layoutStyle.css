@@ -31,7 +31,7 @@
     justify-content: start;
     align-items: start;
     width: 100%;
-    max-width: 1610px;
+    max-width: 1600px;
     color: var(--text-primary-color);
 }
 
@@ -78,7 +78,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 1610px;
+    max-width: 1600px;
     width: 100%;
     margin: 0 auto;
 

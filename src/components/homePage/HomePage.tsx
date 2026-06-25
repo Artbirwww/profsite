@@ -21,12 +21,10 @@ const SECTIONS = [
 
 export const HomePage: FC = ({ }) => {
     return (
-        <div className="home-wrapper">
-            <div className="home-grid">
-                {SECTIONS.map(({ Component }, index) => (
-                    <Component />
-                ))}
-            </div>
+        <div className="home-grid">
+            {SECTIONS.map(({ Component }, index) => (
+                <Component />
+            ))}
         </div>
     )
 }

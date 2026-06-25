@@ -1,11 +1,8 @@
 /* СЕТКА - ПРОГРЕСС БАР, СЕТКА КАРТОЧЕК ТЕСТОВ, ИНДИКАТОР ПРОКРУТКИ */
 .test-container {
     display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
-        "progress-bar cards"
-        "indicator indicator";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
     gap: 10px;
     width: 100%;
     height: 100%;
@@ -13,7 +10,6 @@
 }
 
 .test-grid {
-    grid-area: cards;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: calc(50% - 5px);
@@ -33,7 +29,6 @@
 
 /* ИНДИКАТОР ПРОКРУТКИ СЕТКИ */
 .test-indicator {
-    grid-area: indicator;
     display: flex;
     flex-direction: row;
     align-items: center;

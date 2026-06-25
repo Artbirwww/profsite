@@ -26,44 +26,11 @@ const getDeclension = (count: number, titles: [string, string, string]) => {
 export const TestCard: FC<TestItemProps> = memo(({
     item,
     dataId,
-    index,
     isAvailable,
     isComplete,
     onClick,
     resultOnClick,
 }) => {
-    const cardRef = useRef<HTMLDivElement>(null)
-    const targetPos = useRef({ x: 0, y: 0 })
-    const currentPos = useRef({ x: 0, y: 0 })
-
-    useEffect(() => {
-        let frameId: number
-
-        const animate = () => {
-            const lerpFactor = 0.1
-            currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerpFactor
-            currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerpFactor
-
-            if (cardRef.current) {
-                cardRef.current.style.setProperty("--mouse-x", `${currentPos.current.x}px`)
-                cardRef.current.style.setProperty("--mouse-y", `${currentPos.current.y}px`)
-            }
-            frameId = requestAnimationFrame(animate)
-        }
-
-        frameId = requestAnimationFrame(animate)
-        return () => cancelAnimationFrame(frameId)
-    }, [])
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return
-        const rect = cardRef.current.getBoundingClientRect()
-
-        targetPos.current = {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-        }
-    }
 
     const handleClick = () => {
         if (!isAvailable) return
@@ -73,13 +40,9 @@ export const TestCard: FC<TestItemProps> = memo(({
     return (
         <div className="test-card-wrapper">
             <div
-                ref={cardRef}
                 className={`test-selection-item ${!isAvailable ? "locked" : ""} ${isComplete ? "complete" : ""}`}
-                onMouseMove={handleMouseMove}
                 onClick={handleClick}
                 data-test-id={dataId}>
-
-                <div className="hover-circle" />
 
                 <div className="test-selection-item-label">
                     <div className="test-selection-item-name">

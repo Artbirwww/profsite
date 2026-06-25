@@ -16,10 +16,11 @@ export const TestsPage: FC = ({ }) => {
     const { getToken } = useAuth()
     const testContainerRef = useRef<HTMLDivElement>(null)
 
-    const [displayProgress, setDisplayProgress] = useState(0)
     const [visibleIds, setVisibleIds] = useState<number[]>([])
     const [recentTests, setRecentTests] = useState<Record<string, TestResultResponse>>({})
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+    const completedCount = Object.keys(recentTests).length
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768)
@@ -40,17 +41,6 @@ export const TestsPage: FC = ({ }) => {
 
         loadRecentTests()
     }, [])
-
-    useEffect(() => {
-        if (!recentTests || testsList.length === 0) return
-
-        const completedCount = Object.keys(recentTests).length
-        const rawPercent = (completedCount / testsList.length) * 100
-        const finalPercent = isMobile ? Math.min(rawPercent, 100) : Math.min(Math.max(rawPercent, 0), 95)
-
-        const timer = setTimeout(() => setDisplayProgress(finalPercent), 100)
-        return () => clearTimeout(timer)
-    }, [recentTests, isMobile])
 
     useEffect(() => {
         const container = testContainerRef.current
@@ -120,17 +110,19 @@ export const TestsPage: FC = ({ }) => {
 
             {/* Прогресс-бар */}
             <div className="progress-container">
-                <div
-                    className="progress-fill"
-                    style={{ height: `${displayProgress}%` }}>
+                <div className="progress-segments">
+                    <div className="progress-count">
+                        <CheckCheck />
+                        <span>{completedCount} / {testsList.length}</span>
+                    </div>
 
-                    <div className="wave-element wave-front" />
-                    <div className="wave-element wave-back" />
-                </div>
+                    {testsList.map((_, index) => {
+                        const isActive = index < completedCount
 
-                <div className="progress-count">
-                    <CheckCheck />
-                    <span>{Object.keys(recentTests).length} / {testsList.length}</span>
+                        return (
+                            <div key={index} className={`progress-segment ${isActive ? "active" : ""}`} />
+                        )
+                    })}
                 </div>
             </div>
 
