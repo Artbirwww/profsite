@@ -9,6 +9,8 @@ import { useAuth } from "../../contexts/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
 import { Specialist } from "../../types/specialist/specialist"
 import { specialistsAPI } from "../../services/api/specialistApi"
+import { companyApi } from "../../services/api/companyApi"
+import { Company } from "../../types/company/Company"
 
 export const SpecialistProfilePage: FC = () => {
     const { getToken } = useAuth()
@@ -27,6 +29,7 @@ export const SpecialistProfilePage: FC = () => {
     })
 
     const [professions, setProfessions] = useState<Array<{ value: string; label: string }>>([])
+    const [company, setCompany] = useState<Company>()
 
 
     useEffect(() => {
@@ -53,9 +56,18 @@ export const SpecialistProfilePage: FC = () => {
                 toast.error("Ошибка при загрузке профессий")
             }
         }
+        const loadCompany = async () => {
+            try {
+                const companyTemp = await companyApi.getCompanyBySpecialist(getToken())
+                setCompany(companyTemp)
+            } catch(err) {
+                console.error(err)
+            }
+        }
 
         loadSpecialistData()
         loadProfessions()
+        loadCompany()
     }, [])
 
     const jobExpirienceOptions = useMemo(() => [
@@ -96,8 +108,9 @@ export const SpecialistProfilePage: FC = () => {
     }
 
     return (<>
-        <div className="page-header">
+        <div className="page-header flex flex-col items-start">
             <h1>Личный кабинет</h1>
+            {company && <span>Ваша организаия {company?.name}</span> }
         </div>
 
         <div className="profile-wrapper">
