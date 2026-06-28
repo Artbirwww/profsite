@@ -75,6 +75,7 @@ import { VRTestsPage } from "./components/VRTestsPage/VRTestsPage";
 import { VRTestIntro } from "./components/VRTestsPage/VRTestIntro";
 import { VRTest } from "./components/VRTestsPage/VRTest";
 import { VRTestResults } from "./components/VRTestsPage/results/VRTestResults";
+import { HRList } from "./components/adminPages/hr-managers/HRList";
 
 export default function App() {
 	return (
@@ -116,6 +117,7 @@ export default function App() {
 							{crudRoutes.map(route => (
 								<Route key={route.path} path={route.path} element={<route.element />} />
 							))}
+							<Route path="hrs" element={<HRList />} />
 
 						</Route>
 					</Route>
