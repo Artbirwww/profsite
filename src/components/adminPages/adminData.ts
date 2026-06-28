@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpFromLine, CloudDownload, Download, UsersRound, Database } from "lucide-react"
+import { ArrowLeft, ArrowUpFromLine, CloudDownload, Download, UsersRound, Database, UserCheck } from "lucide-react"
 
 export interface AdminMenuItemProps {
     id: string
@@ -15,6 +15,13 @@ export const adminButtons: AdminMenuItemProps[] = [
         icon: ArrowLeft,
         path: "/",
         group: "Назад",
+    },
+    {
+        id: "hr-managers",
+        label: "HR",
+        icon: UserCheck,
+        path: "/admin/hrs",
+        group: "Предприятия"
     },
     {
         id: "pupils-upload",
