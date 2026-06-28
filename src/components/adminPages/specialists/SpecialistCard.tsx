@@ -9,7 +9,7 @@ export const SpecialistCard = ({specialist}: SpecialistCardProps) => {
                     .join(' ') || 'ФИО не заполнено'
     return (<>
         <div className="base-card">
-            <div className="card-tit">
+            <div className="card-title">
                 {fullName}
             </div>
             <div className="info-row">
