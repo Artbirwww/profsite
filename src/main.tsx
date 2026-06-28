@@ -1,5 +1,5 @@
 import "./index.css"
-
+import "./utility.css"
 import App from "./App"
 import { createRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
