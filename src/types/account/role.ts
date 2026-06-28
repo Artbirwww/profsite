@@ -6,5 +6,6 @@ export const ROLES = {
     DIRECTOR: "DIRECTOR",
     TEACHER: "TEACHER",
     ADMIN: "ADMIN",
-    SPECIALIST: "SPECIALIST"
+    SPECIALIST: "SPECIALIST",
+    HR: "HR"
 }
