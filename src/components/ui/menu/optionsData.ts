@@ -1,4 +1,4 @@
-import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain, ThumbsUp, Glasses } from "lucide-react"
+import { Home, FileCheck, Book, UserRound, ShieldUser, DoorOpen, Brain, ThumbsUp, Glasses, UserSquare2, FolderHeart, Users } from "lucide-react"
 import { ROLES } from "../../../types/account/role"
 
 export interface MenuItemProps {
@@ -68,6 +68,14 @@ export const menuButtons: MenuItemProps[] = [
         className: "spec",
         allowedRoles: [ROLES.ADMIN],
     },
+    {
+        id: "hr-panel",
+        label: "Работники",
+        icon: Users,
+        path: "/hr/specialists",
+        order: 7,
+        allowedRoles: [ROLES.HR]
+    }
 ]
 
 export const logoutButton: MenuItemProps = {

@@ -18,7 +18,7 @@ export const adminButtons: AdminMenuItemProps[] = [
     },
     {
         id: "hr-managers",
-        label: "HR",
+        label: "HR-менедржены",
         icon: UserCheck,
         path: "/admin/hrs",
         group: "Предприятия"
