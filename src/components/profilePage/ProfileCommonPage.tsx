@@ -10,6 +10,6 @@ export const ProfileCommonPage = () => {
     if (getRoles()?.find(role => role.name === ROLES.PUPIL))
         return (<PupilProfilePage />)
 
-    if (getRoles()?.find(role => role.name === ROLES.SPECIALIST))
+    if (getRoles()?.find(role => role.name === ROLES.SPECIALIST || role.name === ROLES.HR))
         return (<SpecialistProfilePage />)
 }
