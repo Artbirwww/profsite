@@ -53,5 +53,11 @@ export const authApi = {
       console.log(err)
       throw err
     }
+  },
+  updatePassword: async(token: string, password: string) => {
+    const response = await api.post('/api/auth/update-password', {password: password}, {
+      headers: {Authorization: token}
+    })
+    return response.data
   }
 }
