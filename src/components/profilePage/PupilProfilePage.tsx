@@ -13,6 +13,7 @@ import { Gender } from "../../types/pupil/gender"
 import { useAuth } from "../../contexts/AuthContext"
 import { pupilApi } from "../../services/api/pupilApi"
 import toast, { Toaster } from "react-hot-toast"
+import { PasswordReset } from "./PasswordReset"
 
 export const PupilProfilePage: FC = () => {
     const { getToken } = useAuth()
@@ -115,38 +116,29 @@ export const PupilProfilePage: FC = () => {
         }
     }
 
+    // Replace all className with these:
+
     return (
         <div className="profile-wrapper">
             <div className="profile-container">
-                <div className="profile-grid">
-
-                    {/* пол */}
-                    <div className="profile-grid-item profile-grid-item-1">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Пол</h4>
-                            </div>
-
+                <div className="profile-grid flex-layout">
+                    
+                    {/* Row 1: Gender + Email */}
+                    <div className="profile-row row-2">
+                        <div className="profile-card">
+                            <h4>Пол</h4>
                             <RadioGroup
                                 name="gender"
                                 value={formData.gender}
                                 onChange={updateField("gender")}
                                 direction="row">
-
-                                <Radio radioLabel="Мужской" radioValue={Gender.MALE}></Radio>
-                                <Radio radioLabel="Женский" radioValue={Gender.FEMALE}></Radio>
-
+                                <Radio radioLabel="Мужской" radioValue={Gender.MALE} />
+                                <Radio radioLabel="Женский" radioValue={Gender.FEMALE} />
                             </RadioGroup>
                         </div>
-                    </div>
 
-                    {/* логин / почта */}
-                    <div className="profile-grid-item profile-grid-item-2">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Логин / Электронная почта</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Логин / Электронная почта</h4>
                             <FieldInput
                                 name="email"
                                 inputIcon={<UserRound size={20} />}
@@ -156,50 +148,38 @@ export const PupilProfilePage: FC = () => {
                         </div>
                     </div>
 
-                    {/* фио */}
-                    <div className="profile-grid-item profile-grid-item-3">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                    {/* Row 2: Full Name */}
+                    <div className="profile-card row-full">
+                        <div className="name-fields">
+                            <div>
                                 <h4>Фамилия</h4>
+                                <FieldInput
+                                    inputIcon={<UserPen size={20} />}
+                                    inputPlaceholder="Иванов"
+                                    inputValue={formData.surname}
+                                    inputOnChange={updateField("surname")} />
                             </div>
-
-                            <FieldInput
-                                inputIcon={<UserPen size={20} />}
-                                inputPlaceholder="Иванов"
-                                inputValue={formData.surname}
-                                inputOnChange={updateField("surname")} />
-                        </div>
-
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                            <div>
                                 <h4>Имя</h4>
+                                <FieldInput
+                                    inputPlaceholder="Иван"
+                                    inputValue={formData.name}
+                                    inputOnChange={updateField("name")} />
                             </div>
-
-                            <FieldInput
-                                inputPlaceholder="Иван"
-                                inputValue={formData.name}
-                                inputOnChange={updateField("name")} />
-                        </div>
-
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                            <div>
                                 <h4>Отчество</h4>
+                                <FieldInput
+                                    inputPlaceholder="Иванович"
+                                    inputValue={formData.patronymic}
+                                    inputOnChange={updateField("patronymic")} />
                             </div>
-
-                            <FieldInput
-                                inputPlaceholder="Иванович"
-                                inputValue={formData.patronymic}
-                                inputOnChange={updateField("patronymic")} />
                         </div>
                     </div>
 
-                    {/* национальность и дата рождения */}
-                    <div className="profile-grid-item profile-grid-item-4">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Национальность</h4>
-                            </div>
-
+                    {/* Row 3: Nationality + Birthday */}
+                    <div className="profile-row row-2">
+                        <div className="profile-card">
+                            <h4>Национальность</h4>
                             <Dropdown
                                 dropdownIcon={<PersonStanding size={20} />}
                                 dropdownOptions={nationalityOptions}
@@ -208,25 +188,19 @@ export const PupilProfilePage: FC = () => {
                                 dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Дата рождения</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Дата рождения</h4>
                             <DatePicker
-                                datePickerSelected={Temporal.PlainDate.from(formData.birthday ? formData.birthday : Temporal.Now.plainDateISO().toString())}
+                                datePickerSelected={Temporal.PlainDate.from(formData.birthday || Temporal.Now.plainDateISO().toString())}
                                 onDateSelect={handleDateSelect}
                                 dropdownDirection="up" />
                         </div>
                     </div>
 
-                    {/* школа и класс */}
-                    <div className="profile-grid-item profile-grid-item-5">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Школа</h4>
-                            </div>
-
+                    {/* Row 4: School Info */}
+                    <div className="profile-row row-3">
+                        <div className="profile-card">
+                            <h4>Школа</h4>
                             <Dropdown
                                 dropdownIcon={<School size={20} />}
                                 dropdownOptions={schoolNames}
@@ -235,11 +209,8 @@ export const PupilProfilePage: FC = () => {
                                 dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Номер класса</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Номер класса</h4>
                             <Dropdown
                                 dropdownIcon={<Hash size={20} />}
                                 dropdownOptions={classNumberOptions}
@@ -248,11 +219,8 @@ export const PupilProfilePage: FC = () => {
                                 dropdownDirection="up" />
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Буква класса</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Буква класса</h4>
                             <FieldInput
                                 inputIcon={<CaseUpper size={20} />}
                                 inputPlaceholder="а-я"
@@ -261,10 +229,19 @@ export const PupilProfilePage: FC = () => {
                         </div>
                     </div>
 
-                    {/* кнопка сохранения */}
-                    <div className="profile-options profile-grid-item-6 ">
-                        <Button label="Сохранить" icon={<CheckCheck />} onClick={handleSaveClick} />
+                    {/* Row 5: Buttons */}
+                    <div className="profile-card">
+                        <div className="flex flex-col gap-4">
+                            <Button 
+                                label="Сохранить" 
+                                icon={<CheckCheck />} 
+                                onClick={handleSaveClick} 
+                                className="w-full flex justify-center"
+                            />
+                        </div>
+                        
                     </div>
+                    <PasswordReset />
                 </div>
             </div>
             <Toaster />

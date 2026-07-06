@@ -11,6 +11,7 @@ import { Specialist } from "../../types/specialist/specialist"
 import { specialistsAPI } from "../../services/api/specialistApi"
 import { companyApi } from "../../services/api/companyApi"
 import { Company } from "../../types/company/Company"
+import { PasswordReset } from "./PasswordReset"
 
 export const SpecialistProfilePage: FC = () => {
     const { getToken } = useAuth()
@@ -107,175 +108,170 @@ export const SpecialistProfilePage: FC = () => {
         }
     }
 
-    return (<>
+ return (
+    <>
         <div className="page-header flex flex-col items-start">
             <h1>Личный кабинет</h1>
-            {company && <span>Ваша организаия {company?.name}</span> }
+            {company && <span>Ваша организация {company?.name}</span>}
         </div>
 
         <div className="profile-wrapper">
             <div className="profile-container">
-                <div className="profile-grid">
-
-                    {/* пол */}
-                    <div className="profile-grid-item profile-grid-item-1">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Пол</h4>
-                            </div>
-
+                <div className="profile-grid flex-layout">
+                    
+                    {/* Row 1: Gender + Email */}
+                    <div className="profile-row row-2">
+                        <div className="profile-card">
+                            <h4>Пол</h4>
                             <RadioGroup
                                 name="gender"
                                 value={specialist.gender}
                                 onChange={(value) => radioGroupHandleChange("gender", value)}
                                 direction="row">
-
-                                <Radio radioLabel="Мужской" radioValue={Gender.MALE}></Radio>
-                                <Radio radioLabel="Женский" radioValue={Gender.FEMALE}></Radio>
+                                <Radio radioLabel="Мужской" radioValue={Gender.MALE} />
+                                <Radio radioLabel="Женский" radioValue={Gender.FEMALE} />
                             </RadioGroup>
                         </div>
-                    </div>
 
-                    {/* логин / почта */}
-                    <div className="profile-grid-item profile-grid-item-2">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Логин / Электронная почта</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Логин / Электронная почта</h4>
                             <FieldInput
                                 name="email"
                                 inputIcon={<UserRound size={20} />}
                                 inputPlaceholder="example@mail.ru"
                                 inputValue={specialist?.email}
-                                isDisabled={true} />
+                                isDisabled={true}
+                            />
                         </div>
                     </div>
 
-                    {/* фио */}
-                    <div className="profile-grid-item profile-grid-item-3">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                    {/* Row 2: Full Name */}
+                    <div className="profile-card row-full">
+                        <div className="name-fields">
+                            <div>
                                 <h4>Фамилия</h4>
+                                <FieldInput
+                                    name="surname"
+                                    inputIcon={<UserPen size={20} />}
+                                    inputPlaceholder="Иванов"
+                                    inputValue={specialist.surname}
+                                    onChange={handleChange}
+                                />
                             </div>
-
-                            <FieldInput
-                                name="surname"
-                                inputIcon={<UserPen size={20} />}
-                                inputPlaceholder="Иванов"
-                                inputValue={specialist.surname}
-                                onChange={handleChange} />
-                        </div>
-
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                            <div>
                                 <h4>Имя</h4>
+                                <FieldInput
+                                    name="name"
+                                    inputPlaceholder="Иван"
+                                    inputValue={specialist.name}
+                                    onChange={handleChange}
+                                />
                             </div>
-
-                            <FieldInput
-                                name="name"
-                                inputPlaceholder="Иван"
-                                inputValue={specialist.name}
-                                onChange={handleChange} />
-                        </div>
-
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
+                            <div>
                                 <h4>Отчество</h4>
+                                <FieldInput
+                                    name="patronymic"
+                                    inputPlaceholder="Иванович"
+                                    inputValue={specialist.patronymic}
+                                    onChange={handleChange}
+                                />
                             </div>
-
-                            <FieldInput
-                                name="patronymic"
-                                inputPlaceholder="Иванович"
-                                inputValue={specialist.patronymic}
-                                onChange={handleChange} />
                         </div>
                     </div>
 
-                    {/* контакты */}
-                    <div className="profile-grid-item profile-grid-item-4">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Почта для контакта</h4>
-                            </div>
-
+                    {/* Row 3: Contacts */}
+                    <div className="profile-row row-2">
+                        <div className="profile-card">
+                            <h4>Почта для контакта</h4>
                             <FieldInput
                                 name="contactEmail"
                                 inputIcon={<MailOpen size={20} />}
                                 inputPlaceholder="example@mail.ru"
                                 inputValue={specialist.contactEmail}
-                                onChange={handleChange} />
+                                onChange={handleChange}
+                            />
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Номер телефона</h4>
-                            </div>
-
+                        <div className="profile-card">
+                            <h4>Номер телефона</h4>
                             <FieldInput
                                 name="contactPhone"
                                 inputIcon={<Phone size={20} />}
                                 inputPlaceholder="+7"
                                 inputValue={specialist.contactPhone}
-                                onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    {/* опыт работы */}
-                    <div className="profile-grid-item profile-grid-item-5">
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Опыт работы</h4>
-                            </div>
-
-                            <select name="experience"
                                 onChange={handleChange}
-                                value={specialist.experience ? specialist.experience : "Выберите..."}>
-                                <option value={""}>Выберите...</option>
-                                {jobExpirienceOptions && jobExpirienceOptions.map(exp => (
-                                    <option value={exp.value}>{exp.label}</option>
+                            />
+                        </div>
+                    </div>
+
+                    {/* Row 4: Experience, Satisfaction, Profession */}
+                    <div className="profile-row row-3">
+                        <div className="profile-card">
+                            <h4>Опыт работы</h4>
+                            <select 
+                                name="experience"
+                                onChange={handleChange}
+                                value={specialist.experience || ""}
+                            >
+                                <option value="">Выберите...</option>
+                                {jobExpirienceOptions?.map(exp => (
+                                    <option key={exp.value} value={exp.value}>
+                                        {exp.label}
+                                    </option>
                                 ))}
                             </select>
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Насколько вы довольны работой</h4>
-                            </div>
-
-                            <select name="jobSatisfaction"
-                                value={specialist.jobSatisfaction ? specialist.jobSatisfaction : "Выберите..."}
-                                onChange={handleChange}>
-                                <option value={""}>Выберите...</option>
-                                {jobSatisfactionOptions && jobSatisfactionOptions.map(s => (
-                                    <option value={s.label}>{s.value}</option>
+                        <div className="profile-card">
+                            <h4>Насколько вы довольны работой</h4>
+                            <select 
+                                name="jobSatisfaction"
+                                value={specialist.jobSatisfaction || ""}
+                                onChange={handleChange}
+                            >
+                                <option value="">Выберите...</option>
+                                {jobSatisfactionOptions?.map(s => (
+                                    <option key={s.label} value={s.label}>
+                                        {s.value}
+                                    </option>
                                 ))}
-
                             </select>
                         </div>
 
-                        <div className="profile-grid-wrapper">
-                            <div className="profile-grid-item-header">
-                                <h4>Ваша профессия</h4>
-                            </div>
-
-                            <select name="profession"
-                                value={specialist.profession ? specialist.profession : "Выберите..."}
-                                onChange={handleChange}>
+                        <div className="profile-card">
+                            <h4>Ваша профессия</h4>
+                            <select 
+                                name="profession"
+                                value={specialist.profession || ""}
+                                onChange={handleChange}
+                            >
                                 <option value="">Ваша профессия</option>
-                                {professions && professions.map(p => (
-                                    <option value={p.value}>{p.label}</option>
+                                {professions?.map(p => (
+                                    <option key={p.value} value={p.value}>
+                                        {p.label}
+                                    </option>
                                 ))}
                             </select>
                         </div>
                     </div>
 
-                    <div className="profile-options profile-grid-item-6">
-                        <Button label="Сохранить" icon={<CheckCheck />} onClick={updateData} />
+                    {/* Row 5: Actions */}
+                    <div className="profile-card">
+                        <div className="flex flex-col gap-4">
+                            <Button 
+                                label="Сохранить" 
+                                icon={<CheckCheck />} 
+                                onClick={updateData} 
+                                className="w-full flex justify-center"
+                            />
+                        </div>
+                        
                     </div>
+                    <PasswordReset />
                 </div>
             </div>
         </div>
         <Toaster />
-    </>)
+    </>
+)
 }

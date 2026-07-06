@@ -1,159 +1,165 @@
 .profile-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    position: relative;
-    gap: 10px;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    padding: 20px;
     box-sizing: border-box;
-    border-radius: 15px;
 }
 
 .profile-container {
     overflow-y: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
     scrollbar-width: none;
+    flex: 1;
 }
 
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-        "left-top right-top"
-        "second-row second-row"
-        "third-row third-row"
-        "fourth-row fourth-row"
-        "fifth-row fifth-row";
-    gap: 10px;
-}
-
-.profile-grid-item-1 {
-    grid-area: left-top;
-}
-
-.profile-grid-item-2 {
-    grid-area: right-top;
-}
-
-.profile-grid-item-3 {
-    grid-area: second-row;
-}
-
-.profile-grid-item-4 {
-    grid-area: third-row;
-}
-
-.profile-grid-item-5 {
-    grid-area: fourth-row;
-}
-
-.profile-grid-item-6 {
-    grid-area: fifth-row;
-}
-
-.profile-grid-item {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    background-color: var(--primary-color-50);
-    border-radius: 15px;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 30px;
-}
-
-.profile-grid-wrapper {
+/* Main flex container */
+.flex-layout {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
-    justify-content: space-between;
+    margin: 0 auto;
 }
 
-.profile-grid-item-header {
-    margin-left: 10px;
+/* Row variants */
+.profile-row {
+    display: flex;
+    gap: 10px;
 }
 
-.profile-grid-item-header h4 {
+.row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.row-full {
+    display: block;
+}
+
+/* Cards */
+.profile-card {
+    background-color: var(--primary-color-50);
+    border-radius: 15px;
+    padding: 30px;
+    flex: 1;
+}
+
+.profile-card h4 {
     font-size: clamp(var(--font-size-sm), 0.682rem + 0.77vw, var(--font-size-base));
     font-weight: var(--font-weight-medium);
     color: var(--text-primary-color);
+    margin: 0 0 10px 10px;
 }
 
-.profile-options {
+/* Name fields inside card */
+.name-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.name-fields > div {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.name-fields h4 {
+    margin-left: 10px;
+}
+
+/* Actions row */
+.profile-actions {
+    display: flex;
+    gap: 10px;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    padding: 10px 0;
+}
+.full-width-button {
+    width: 100%;
+    justify-content: center;
 }
 
-select {
-    padding: 8px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-}
-
+/* Responsive */
 @media (max-width: 992px) {
-    .profile-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .profile-grid {
+    .row-2,
+    .row-3 {
         grid-template-columns: 1fr;
-        grid-template-areas:
-            "email"
-            "sex"
-            "name"
-            "birth"
-            "school"
-            "options";
     }
-
-    .profile-grid-item-2 {
-        grid-area: email;
+    
+    .name-fields {
+        grid-template-columns: 1fr;
     }
-
-    .profile-grid-item-1 {
-        grid-area: sex;
-    }
-
-    .profile-grid-item-3 {
-        grid-area: name;
-    }
-
-    .profile-grid-item-4 {
-        grid-area: birth;
-    }
-
-    .profile-grid-item-5 {
-        grid-area: school;
-    }
-
-    .profile-grid-item-6 {
-        grid-area: options;
+    
+    .profile-card {
+        padding: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .profile-grid-item-3,
-    .profile-grid-item-4,
-    .profile-grid-item-5 {
-        flex-direction: column;
-        gap: 20px;
+    .profile-wrapper {
+        padding: 10px;
     }
-
-    .profile-grid-item-6 {
-        align-items: center;
-        justify-content: center;
+    
+    .profile-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .profile-actions button {
+        width: 100%;
     }
 }
 
-@media (max-width: 480px) {
-    .profile-grid-item {
-        padding: 20px;
+.password-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .password-fields {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* Select styling to match inputs */
+.profile-card select {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    background-color: white;
+    font-size: var(--font-size-sm);
+    color: var(--text-primary-color);
+    outline: none;
+    appearance: auto;
+    cursor: pointer;
+}
+
+.profile-card select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.profile-card select option {
+    padding: 8px;
+}
+
+/* Dark mode support if you have it */
+@media (prefers-color-scheme: dark) {
+    .profile-card select {
+        background-color: var(--background-secondary);
+        color: var(--text-primary-color);
     }
 }
