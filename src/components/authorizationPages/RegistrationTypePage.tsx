@@ -9,7 +9,7 @@ import { authApi } from "../../services/api/authApi"
 import toast, { Toaster } from "react-hot-toast"
 import { User } from "../../types/User";
 
-type UserType = "Школьник" | "Специалист" | "Эксперт"
+type UserType = "Школьник" | "Специалист" | "Соискатель"
 
 const USER_TYPE = [
     {
@@ -23,13 +23,13 @@ const USER_TYPE = [
         description: "Я работаю по профессии",
     },
     {
-        id: "Эксперт" as UserType,
-        title: "Эксперт",
-        description: "Я эксперт",
-        disabled: true,
+        id: "Соискатель" as UserType,
+        title: "Соискатель",
+        description: "Хочу трудоустроиться",
+        disabled: true
     },
 ]
-const registrationRoutes: Record<UserType, string> = { "Школьник": "/register/pupil", "Специалист": "/register/specialist", "Эксперт": "/login" }
+const registrationRoutes: Record<UserType, string> = { "Школьник": "/register/pupil", "Специалист": "/register/specialist", "Соискатель": "/login" }
 export const RegistrationTypePicker = () => {
     const navigate = useNavigate()
     const [userType, setUserType] = useState<UserType>()
