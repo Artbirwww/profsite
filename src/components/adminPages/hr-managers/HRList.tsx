@@ -19,8 +19,8 @@ export const HRList = () => {
     const loadHRs = async () => {
         try {
             setIsLoading(true)
-            const managersTemp = await companyApi.getHRs(getToken())
-            setManagers(managersTemp)
+            //const managersTemp = await companyApi.getHRs(getToken())
+            //setManagers(managersTemp)
         } catch (error) {
             console.error("Failed to load HRs:", error)
             toast.error("Ошибка при загрузке HR-менеджеров")

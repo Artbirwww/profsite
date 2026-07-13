@@ -77,6 +77,7 @@ import { VRTest } from "./components/VRTestsPage/VRTest";
 import { VRTestResults } from "./components/VRTestsPage/results/VRTestResults";
 import { HRList } from "./components/adminPages/hr-managers/HRList";
 import { CompanySpecialists } from "./components/hrPage/CompanySpecialists";
+import { CompanyManagement } from "./components/adminPages/companies/CompanyManagement";
 
 export default function App() {
 	return (
@@ -118,7 +119,7 @@ export default function App() {
 							{crudRoutes.map(route => (
 								<Route key={route.path} path={route.path} element={<route.element />} />
 							))}
-							<Route path="hrs" element={<HRList />} />
+							<Route path="companies" element= {<CompanyManagement />} />
 
 						</Route>
 					</Route>
@@ -173,6 +174,7 @@ export default function App() {
 					<Route path="/my-grades" element={<StudyPage />} />
 					{/* HR routes */}
 					<Route path="hr/specialists" element={<CompanySpecialists/>} />
+
 				</Route>
 			</Route>
 
