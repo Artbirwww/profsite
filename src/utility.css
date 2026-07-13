@@ -69,3 +69,7 @@
 .hidden { display: none; }
 .w-full { width: 100%; }
 .h-full { height: 100%; }
+
+.scroll-x {overflow-x: scroll;}
+.scroll-y {overflow-y: scroll}
+

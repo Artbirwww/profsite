@@ -1,0 +1,303 @@
+/* ===== COMPANY MANAGEMENT PAGE ===== */
+.company-management {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ===== PAGE HEADER ===== */
+.company-management .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.company-management .page-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary-color);
+    margin: 0;
+}
+
+/* ===== ADD COMPANY BUTTON ===== */
+.company-management .add-company-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: var(--accent-color-500);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.company-management .add-company-btn:hover {
+    background: var(--accent-color-600);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(32, 146, 233, 0.35);
+}
+
+.company-management .add-company-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== COMPANIES GRID ===== */
+.company-management .companies-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== COMPANY CARD ===== */
+.company-management .company-card {
+    background: var(--primary-color-50);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid var(--grey-color-300);
+    transition: all 0.2s ease;
+}
+
+.company-management .company-card:hover {
+    border-color: var(--accent-color-400);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== COMPANY HEADER ===== */
+.company-management .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--grey-color-300);
+}
+
+.company-management .company-info h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary-color);
+    margin: 0 0 8px 0;
+}
+
+.company-management .company-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--text-secondary-color);
+}
+
+.company-management .company-meta .employee-count {
+    font-weight: 500;
+    color: var(--accent-color-600);
+}
+
+/* ===== ADD EMPLOYEE BUTTON ===== */
+.company-management .add-employee-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--accent-color-50);
+    color: var(--accent-color-600);
+    border: 1px solid var(--accent-color-200);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.company-management .add-employee-btn:hover {
+    background: var(--accent-color-100);
+    border-color: var(--accent-color-400);
+}
+
+/* ===== EMPLOYEES SECTION ===== */
+.company-management .employees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+
+/* ===== EMPLOYEE ITEM ===== */
+.company-management .employee-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--grey-color-200);
+    transition: all 0.2s ease;
+}
+
+.company-management .employee-item:hover {
+    border-color: var(--grey-color-400);
+}
+
+.company-management .employee-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.company-management .employee-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary-color);
+}
+
+.company-management .employee-email {
+    font-size: 0.8rem;
+    color: var(--text-placeholder-color);
+}
+
+/* ===== EMPLOYEE ROLE BADGE ===== */
+.company-management .employee-role {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.company-management .employee-role.role-hr {
+    background: var(--accent-color-100);
+    color: var(--accent-color-700);
+}
+
+.company-management .employee-role.role-specialist {
+    background: var(--grey-color-200);
+    color: var(--text-secondary-color);
+}
+
+/* ===== NO EMPLOYEES ===== */
+.company-management .no-employees {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    color: var(--text-placeholder-color);
+    justify-content: center;
+}
+
+/* ===== EMPTY STATE ===== */
+.company-management .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 16px;
+    color: var(--text-placeholder-color);
+}
+
+.company-management .empty-state svg {
+    color: var(--grey-color-400);
+}
+
+.company-management .empty-state p {
+    font-size: 1.1rem;
+}
+
+.company-management .empty-state .add-company-btn {
+    margin-top: 8px;
+}
+
+/* ===== CENTER UTILITY ===== */
+.company-management .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+/* ===== FORM SELECT ===== */
+.company-management .form-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--grey-color-300);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: var(--grey-color-100);
+    transition: all 0.2s ease;
+}
+
+.company-management .form-select:focus {
+    outline: none;
+    border-color: var(--accent-color-400);
+    box-shadow: 0 0 0 3px rgba(32, 146, 233, 0.15);
+    background: white;
+}
+
+
+/* Tablets */
+@media (max-width: 768px) {
+    .company-management {
+        padding: 12px;
+    }
+
+    .company-management .company-card .company-header {
+        flex-direction: column;
+    }
+
+    .company-management .company-card .add-employee-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .company-management .employees-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .company-management .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .company-management .add-company-btn {
+        justify-content: center;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .company-management {
+        padding: 8px;
+    }
+
+    .company-management .company-card {
+        padding: 12px;
+    }
+
+    .company-management .company-meta {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .company-management .employee-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .company-management .employee-role {
+        align-self: flex-start;
+    }
+
+    .company-management .empty-state {
+        padding: 40px 16px;
+    }
+}

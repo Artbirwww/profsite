@@ -96,7 +96,7 @@ input[type="radio"] {
     margin-bottom: 20px;
 }
 
-.form-grid .form-group {
+.form-group {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -108,7 +108,7 @@ input[type="radio"] {
     color: var(--text-secondary-color);
 }
 
-.form-grid .form-group input {
+.form-grid .form-group input, select {
     padding: 10px 14px;
     border: 1px solid var(--grey-color-300);
     border-radius: 10px;
