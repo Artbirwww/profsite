@@ -1,5 +1,6 @@
 import { Company, CompanyWithEmployees } from "../../types/company/Company"
-import { CreateSpecialistRequest, HRManager, HRManagerRequest } from "../../types/company/HRManager"
+import { Employee } from "../../types/company/Employees"
+import { CreateEmployeeRequest, CreateSpecialistRequest, HRManager, HRManagerRequest } from "../../types/company/HRManager"
 import { Specialist } from "../../types/specialist/specialist"
 import api from "./api"
 
@@ -25,8 +26,8 @@ export const companyApi = {
         })
         return response.data
     },
-    createSpecialistByHR: async (token: string, specialist: CreateSpecialistRequest) => {
-        const response = await api.post("/api/hr/specialists", specialist, {
+    createEmployeeByHR: async (token: string, employee: CreateEmployeeRequest) => {
+        const response = await api.post("/api/hr/employee", employee, {
             headers:{ Authorization: token}
         })
         return response.data
@@ -45,8 +46,8 @@ export const companyApi = {
         })
         return response.data
     },
-    getSpecialistsByCompany: async (token: string): Promise<Specialist[]> => {
-        const response = await api.get("/api/company/specialists", {
+    getEmployeesByCompany: async (token: string): Promise<Employee[]> => {
+        const response = await api.get("/api/company/employees", {
             headers: {Authorization: token}
         })
         return response.data
