@@ -25,6 +25,10 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    width: 100%;
+    overflow-x: auto;
+    justify-content: center;
+    scrollbar-width: thin;
 }
 
 .admin-menu-group-section {
