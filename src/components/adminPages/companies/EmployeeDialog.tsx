@@ -3,8 +3,20 @@ import { useAuth } from "../../../contexts/AuthContext";
 import toast from "react-hot-toast";
 import { companyApi } from "../../../services/api/companyApi";
 import { CompanyWithEmployees } from "../../../types/company/Company";
+import { getRoleDisplayName } from "../../../types/account/role";
 
-export const EmployeeDialog = ({ company, onClose, onSuccess }: { company: CompanyWithEmployees; onClose: () => void; onSuccess: () => void }) => {
+// Available roles for selection (single choice)
+const AVAILABLE_ROLES = [
+    { value: 'SPECIALIST', label: 'Специалист' },
+    { value: 'HR', label: 'HR-менеджер' },
+    { value: 'APPLICANT', label: 'Соискатель' }
+]
+
+export const EmployeeDialog = ({ company, onClose, onSuccess }: { 
+    company: CompanyWithEmployees; 
+    onClose: () => void; 
+    onSuccess: () => void 
+}) => {
     const { getToken } = useAuth()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState({
@@ -14,7 +26,7 @@ export const EmployeeDialog = ({ company, onClose, onSuccess }: { company: Compa
         name: '',
         surname: '',
         patronymic: '',
-        role: 'SPECIALIST' as 'HR' | 'SPECIALIST'
+        role: 'SPECIALIST'  // Single role
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -57,16 +69,12 @@ export const EmployeeDialog = ({ company, onClose, onSuccess }: { company: Compa
             surname: formData.surname,
             patronymic: formData.patronymic,
             companyName: company.name,
-            role: formData.role
+            roles: [formData.role]
         }
 
         try {
             setIsSubmitting(true)
-            if (formData.role === 'HR') {
-                await companyApi.createHR(getToken(), payload as any)
-            } else {
-                await companyApi.createSpecialistByHR(getToken(), payload)
-            }
+            await companyApi.createEmployeeByHR(getToken(), payload)
             onSuccess()
         } catch (error: any) {
             const message = error.response?.data || 'Ошибка при создании сотрудника'
@@ -98,13 +106,6 @@ export const EmployeeDialog = ({ company, onClose, onSuccess }: { company: Compa
                             <input name="patronymic" value={formData.patronymic} onChange={handleChange} placeholder="Иванович" />
                         </div>
                         <div className="form-group">
-                            <label>Роль</label>
-                            <select name="role" value={formData.role} onChange={handleChange} className="form-select">
-                                <option value="SPECIALIST">Специалист</option>
-                                <option value="HR">HR-менеджер</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
                             <label>Email *</label>
                             <input name="email" value={formData.email} onChange={handleChange} placeholder="employee@company.com" type="email" required />
                         </div>
@@ -115,6 +116,24 @@ export const EmployeeDialog = ({ company, onClose, onSuccess }: { company: Compa
                         <div className="form-group">
                             <label>Повторите пароль *</label>
                             <input name="repeatPassword" value={formData.repeatPassword} onChange={handleChange} placeholder="Минимум 6 символов" type="password" required minLength={6} />
+                        </div>
+                        <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                            <label>Роль</label>
+                            <select 
+                                name="role" 
+                                value={formData.role} 
+                                onChange={handleChange}
+                                className="form-select"
+                            >
+                                {AVAILABLE_ROLES.map(role => (
+                                    <option key={role.value} value={role.value}>
+                                        {role.label}
+                                    </option>
+                                ))}
+                            </select>
+                            <small style={{ color: 'var(--text-placeholder-color)', marginTop: '4px', display: 'block' }}>
+                                * Выбранная роль будет определять доступ сотрудника
+                            </small>
                         </div>
                     </div>
                     <div className="form-actions">
