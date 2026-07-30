@@ -72,7 +72,7 @@ export const menuButtons: MenuItemProps[] = [
         id: "hr-panel",
         label: "Работники",
         icon: Users,
-        path: "/hr/specialists",
+        path: "/hr/employees",
         order: 7,
         allowedRoles: [ROLES.HR]
     }

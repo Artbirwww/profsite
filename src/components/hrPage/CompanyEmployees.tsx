@@ -2,46 +2,45 @@ import { useEffect, useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { companyApi } from "../../services/api/companyApi"
 import { useAuth } from "../../contexts/AuthContext"
-import { Specialist } from "../../types/specialist/specialist"
+import { Employee } from "../../types/company/Employees"
 import { NoResults } from "../ui/noResultComponent/NoResult"
-import { SpecialistCard } from "../adminPages/specialists/SpecialistCard"
+import { EmployeeCard } from "./EmployeeCard"
 import { Plus } from "lucide-react"
 import "../adminPages/css/card.css"
 import "../adminPages/css/modal.css"
-import { CreateSpecialistForm } from "./CreateSpecialistForm"
+import { CreateEmployeeForm } from "./CreateEmployeeForm"
 
-export const CompanySpecialists = () => {
+export const CompanyEmployees = () => {
     const { getToken } = useAuth()
-    const [specialists, setSpecialists] = useState<Specialist[]>([])
+    const [employees, setEmployees] = useState<Employee[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [showForm, setShowForm] = useState(false)
     const [companyName, setCompanyName] = useState<string>("")
 
-    const loadSpecialists = async () => {
+    const loadEmployees = async () => {
         try {
             setIsLoading(true)
-            // Load company info and specialists in parallel
-            const [company, specialistsData] = await Promise.all([
+            const [company, employeesData] = await Promise.all([
                 companyApi.getCompanyBySpecialist(getToken()),
-                companyApi.getSpecialistsByCompany(getToken())
+                companyApi.getEmployeesByCompany(getToken())
             ])
             setCompanyName(company.name)
-            setSpecialists(specialistsData)
+            setEmployees(employeesData)
         } catch (err) {
             console.error(err)
-            toast.error("Возникла ошибка при загрузке работников")
+            toast.error("Возникла ошибка при загрузке сотрудников")
         } finally {
             setIsLoading(false)
         }
     }
 
     useEffect(() => {
-        loadSpecialists()
+        loadEmployees()
     }, [])
 
-    const handleSpecialistCreated = (newSpecialist: Specialist) => {
-        setSpecialists(prev => [newSpecialist, ...prev])
-        toast.success(`Сотрудник ${newSpecialist.name || newSpecialist.email} добавлен!`)
+    const handleEmployeeCreated = (newEmployee: Employee) => {
+        setEmployees(prev => [newEmployee, ...prev])
+        toast.success(`Сотрудник ${newEmployee.fullName} добавлен!`)
     }
 
     if (isLoading) {
@@ -52,9 +51,9 @@ export const CompanySpecialists = () => {
         )
     }
 
-        return (
+    return (
         <>
-            <div style={{width: "100%", height: "100%"}}>
+            <div style={{ width: "100%", height: "100%" }}>
                 <div className="list-header">
                     <div>
                         <h2>Сотрудники компании</h2>
@@ -73,16 +72,16 @@ export const CompanySpecialists = () => {
                     </button>
                 </div>
 
-                {specialists.length === 0 ? (
+                {employees.length === 0 ? (
                     <div className="center" style={{ height: '300px' }}>
                         <NoResults message="В вашей компании пока нет сотрудников" variant="empty" />
                     </div>
                 ) : (
                     <div className="cards-container">
-                        {specialists.map((specialist) => (
-                            <SpecialistCard 
-                                key={specialist.id} 
-                                specialist={specialist} 
+                        {employees.map((employee) => (
+                            <EmployeeCard 
+                                key={employee.id} 
+                                employee={employee} 
                             />
                         ))}
                     </div>
@@ -102,8 +101,8 @@ export const CompanySpecialists = () => {
                                 ✕
                             </button>
                         </div>
-                        <CreateSpecialistForm 
-                            onSuccess={handleSpecialistCreated}
+                        <CreateEmployeeForm 
+                            onSuccess={handleEmployeeCreated}
                             onCancel={() => setShowForm(false)}
                             defaultCompanyName={companyName}
                         />
@@ -114,5 +113,4 @@ export const CompanySpecialists = () => {
             <Toaster />
         </>
     )
-
 }

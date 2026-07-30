@@ -1,43 +1,40 @@
-
 import { useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import { companyApi } from "../../services/api/companyApi"
 import { toast } from "react-hot-toast"
 import "../adminPages/css/form.css"
 
-interface CreateSpecialistFormProps {
-    onSuccess: (specialist: any) => void
+interface CreateEmployeeFormProps {
+    onSuccess: (employee: any) => void
     onCancel: () => void
     defaultCompanyName?: string
 }
 
-interface FormField {
-    name: string
-    label: string
-    type: string
-    placeholder: string
-    required?: boolean
-    minLength?: number
-}
+const AVAILABLE_ROLES = [
+    { value: 'SPECIALIST', label: 'Специалист' },
+    { value: 'APPLICANT', label: 'Соискатель' },
+]
 
-const FORM_FIELDS: FormField[] = [
-    { name: 'email', label: 'Email *', type: 'email', placeholder: 'specialist@company.com', required: true },
-    { name: 'password', label: 'Пароль *', type: 'password', placeholder: 'Минимум 6 символов', required: true, minLength: 6 },
+const FORM_FIELDS = [
     { name: 'surname', label: 'Фамилия *', type: 'text', placeholder: 'Иванов', required: true },
     { name: 'name', label: 'Имя *', type: 'text', placeholder: 'Иван', required: true },
     { name: 'patronymic', label: 'Отчество', type: 'text', placeholder: 'Иванович' },
+    { name: 'email', label: 'Email *', type: 'email', placeholder: 'employee@company.com', required: true },
+    { name: 'password', label: 'Пароль *', type: 'password', placeholder: 'Минимум 6 символов', required: true, minLength: 6 },
+    { name: 'repeatPassword', label: 'Повторите пароль *', type: 'password', placeholder: 'Минимум 6 символов', required: true, minLength: 6 },
 ]
 
-export const CreateSpecialistForm = ({ 
+export const CreateEmployeeForm = ({ 
     onSuccess, 
     onCancel, 
     defaultCompanyName 
-}: CreateSpecialistFormProps) => {
+}: CreateEmployeeFormProps) => {
     const { getToken } = useAuth()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
+        repeatPassword: '',
         name: '',
         surname: '',
         patronymic: '',
@@ -45,17 +42,16 @@ export const CreateSpecialistForm = ({
         role: 'SPECIALIST'
     })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
     const validateForm = (): boolean => {
-        const requiredFields = FORM_FIELDS.filter(f => f.required)
-        
-        for (const field of requiredFields) {
-            if (!formData[field.name as keyof typeof formData]?.trim()) {
-                toast.error(`Поле "${field.label}" обязательно для заполнения`)
+        const required = ['surname', 'name', 'email', 'password', 'repeatPassword']
+        for (const field of required) {
+            if (!formData[field as keyof typeof formData]?.trim()) {
+                toast.error(`Поле "${field}" обязательно для заполнения`)
                 return false
             }
         }
@@ -66,7 +62,12 @@ export const CreateSpecialistForm = ({
         }
 
         if (formData.password.length < 6) {
-            toast.error('Пароль должен содержать минимум 6 символов')
+            toast.error('Пароль должен быть минимум 6 символов')
+            return false
+        }
+
+        if (formData.password !== formData.repeatPassword) {
+            toast.error('Пароли не совпадают')
             return false
         }
 
@@ -79,13 +80,21 @@ export const CreateSpecialistForm = ({
 
         try {
             setIsSubmitting(true)
-            const newSpecialist = await companyApi.createSpecialistByHR(getToken(), formData)
-            onSuccess(newSpecialist)
+            const payload = {
+                email: formData.email,
+                password: formData.password,
+                name: formData.name,
+                surname: formData.surname,
+                patronymic: formData.patronymic,
+                companyName: formData.companyName,
+                roles: [formData.role]
+            }
+            const newEmployee = await companyApi.createEmployeeByHR(getToken(), payload)
+            onSuccess(newEmployee)
             onCancel()
-            toast.success(`Специалист ${newSpecialist.fullName || newSpecialist.email} создан!`)
+            toast.success(`Сотрудник ${newEmployee.fullName} создан!`)
         } catch (error: any) {
-            console.error("Failed to create specialist:", error)
-            const message = error.response?.data || 'Ошибка при создании специалиста'
+            const message = error.response?.data || 'Ошибка при создании сотрудника'
             toast.error(message)
         } finally {
             setIsSubmitting(false)
@@ -109,7 +118,23 @@ export const CreateSpecialistForm = ({
                         />
                     </div>
                 ))}
-                
+
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                    <label>Роль</label>
+                    <select 
+                        name="role" 
+                        value={formData.role} 
+                        onChange={handleChange}
+                        className="form-select"
+                    >
+                        {AVAILABLE_ROLES.map(role => (
+                            <option key={role.value} value={role.value}>
+                                {role.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
                 {defaultCompanyName && (
                     <div className="form-group" style={{ gridColumn: '1 / -1' }}>
                         <label>Компания</label>

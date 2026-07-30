@@ -76,7 +76,7 @@ import { VRTestIntro } from "./components/VRTestsPage/VRTestIntro";
 import { VRTest } from "./components/VRTestsPage/VRTest";
 import { VRTestResults } from "./components/VRTestsPage/results/VRTestResults";
 import { HRList } from "./components/adminPages/hr-managers/HRList";
-import { CompanySpecialists } from "./components/hrPage/CompanySpecialists";
+import { CompanyEmployees } from "./components/hrPage/CompanyEmployees";
 import { CompanyManagement } from "./components/adminPages/companies/CompanyManagement";
 
 export default function App() {
@@ -173,7 +173,7 @@ export default function App() {
 					<Route path="/profile" element={<ProfileCommonPage />} />
 					<Route path="/my-grades" element={<StudyPage />} />
 					{/* HR routes */}
-					<Route path="hr/specialists" element={<CompanySpecialists/>} />
+					<Route path="hr/employees" element={<CompanyEmployees/>} />
 
 				</Route>
 			</Route>
