@@ -112,6 +112,8 @@
 
 .admin-list-wrapper {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .center {
     display: flex;
