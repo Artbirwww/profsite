@@ -49,6 +49,7 @@ export const EmployeeCard = ({employee}: EmployeeCardProps) => {
                         borderRadius: '12px',
                         fontSize: '0.75rem',
                         fontWeight: 500,
+                        margin: '0px 5px',
                         ...getRoleBadgeStyle(primaryRole)
                     }}
                 >
