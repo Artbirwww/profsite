@@ -1,0 +1,16 @@
+.component-layout-wrapper {
+    width: 100%;
+    /* Dynamically fills the remaining viewport parent height, safely adapting to extra top components */
+    height: calc(100vh - 40px); 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevents the main page body from scrolling */
+}
+@media (max-width: 768px) {
+    .component-layout-wrapper {
+        /* Gives mobile views breathing space since elements wrap vertically */
+        height: auto; 
+        min-height: calc(100vh - 20px);
+        overflow: visible;
+    }
+}
