@@ -1,3 +1,4 @@
+import { PaginatedResponse } from "../../types/common"
 import { Company, CompanyWithEmployees } from "../../types/company/Company"
 import { Employee } from "../../types/company/Employees"
 import { CreateEmployeeRequest, CreateSpecialistRequest, HRManager, HRManagerRequest } from "../../types/company/HRManager"
@@ -46,9 +47,18 @@ export const companyApi = {
         })
         return response.data
     },
-    getEmployeesByCompany: async (token: string): Promise<Employee[]> => {
-        const response = await api.get("/api/company/employees", {
-            headers: {Authorization: token}
+    getEmployeesByCompany: async (
+        token: string,
+        page: number = 0,
+        size: number = 10,
+        role?: string
+    ): Promise<PaginatedResponse<Employee>> => {
+        let url = `/api/company/employees?page=${page}&size=${size}`
+        if (role) {
+            url += `&role=${role}`
+        }
+        const response = await api.get(url, {
+            headers: { Authorization: token }
         })
         return response.data
     }
