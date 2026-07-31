@@ -44,5 +44,7 @@ export const routeTitles: Record<string, string> = {
     "/tests/prof-holland-results": "Тип личности",
 
     //Результаты
-    "/predictions" : "Результаты"
+    "/predictions" : "Результаты",
+
+    "/hr/employees" : "Сотрудники"
 }

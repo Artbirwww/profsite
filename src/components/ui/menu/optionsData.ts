@@ -70,7 +70,7 @@ export const menuButtons: MenuItemProps[] = [
     },
     {
         id: "hr-panel",
-        label: "Работники",
+        label: "Сотрудники",
         icon: Users,
         path: "/hr/employees",
         order: 7,
