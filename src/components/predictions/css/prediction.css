@@ -1,369 +1,336 @@
-.prediction-results {
-    /*max-width: 1280px;*/
-    width: 100%;
+/* Prediction Card */
+.prediction-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
-    /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;*/
-    background: #f8fafc;
-    overflow-y: auto;
-    border-radius: 15px;
-    scrollbar-width: none;
-    /*min-height: 100vh;*/
 }
 
-/* Header */
-.results-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.results-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.3px;
-}
-
-.results-subtitle {
-    font-size: 0.95rem;
-    color: #475569;
-    line-height: 1.5;
-}
-
-/* Section Title */
-.section-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 1.25rem;
-}
-
-/* Cards Grid - Flex with mobile adaptation */
-.top-section {
-    margin-bottom: 2.5rem;
-}
-
-.cards-grid {
+.card-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-top: 0.5rem;
-}
-
-.card {
-    flex: 1;
-    min-width: 250px;
-    background: white;
-    border-radius: 12px;
-    padding: 1.25rem;
-    position: relative;
-    transition: all 0.2s ease;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    border-color: #cbd5e1;
-}
-
-.card-1 {
-    border-top: 3px solid #3b82f6;
-}
-
-.card-2 {
-    border-top: 3px solid #10b981;
-}
-
-.card-3 {
-    border-top: 3px solid #f59e0b;
-}
-
-.card-rank {
-    position: absolute;
-    top: -12px;
-    left: 16px;
-    width: 28px;
-    height: 28px;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #475569;
-    background: white;
+    align-items: center;
 }
 
-.card-1 .card-rank {
+.card-badge {
     background: #3b82f6;
-    border-color: #3b82f6;
     color: white;
-}
-
-.card-2 .card-rank {
-    background: #10b981;
-    border-color: #10b981;
-    color: white;
-}
-
-.card-3 .card-rank {
-    background: #f59e0b;
-    border-color: #f59e0b;
-    color: white;
-}
-
-.card-title {
-    font-size: 1rem;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: #0f172a;
-    margin: 0.75rem 0 1rem 0;
-    line-height: 1.4;
-    min-height: 2.8rem;
 }
 
-.card-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-}
-
-.stat {
+.card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 1.5rem;
 }
 
-.stat-label {
-    font-size: 0.7rem;
+.profession-section {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.profession-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0.5rem 0 0 0;
+}
+
+.label {
+    font-size: 0.8rem;
     color: #64748b;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.stat-item {
+    text-align: center;
 }
 
 .stat-value {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #0f172a;
+    margin-top: 0.25rem;
 }
 
-.card-progress {
-    background: #f1f5f9;
-    border-radius: 20px;
-    height: 6px;
-    overflow: hidden;
+/* Compatibility Bar */
+.compatibility-section {
+    padding: 0.5rem 0;
 }
 
-.progress-bar {
-    height: 100%;
-    background: #3b82f6;
-    border-radius: 20px;
-    transition: width 0.3s ease;
-}
-
-.card-2 .progress-bar {
-    background: #10b981;
-}
-
-.card-3 .progress-bar {
-    background: #f59e0b;
-}
-
-/* Chart Section */
-.chart-section {
-    background: white;
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-bottom: 2.5rem;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.chart-container {
-    width: 100%;
-    overflow-x: auto;
-}
-
-/* Table Section */
-.list-section {
-    background: white;
-    border-radius: 12px;
-    padding: 1.25rem;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.table-container {
-    overflow-x: auto;
-}
-
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.875rem;
-}
-
-.results-table thead tr {
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.results-table th {
-    text-align: left;
-    padding: 0.75rem 0.5rem;
-    font-weight: 600;
+.compat-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
     color: #475569;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-
-.results-table td {
-    padding: 0.75rem 0.5rem;
-    border-bottom: 1px solid #f1f5f9;
-    color: #334155;
-}
-
-.results-table tr:hover {
-    background: #f8fafc;
-}
-
-.results-table .highlight {
-    background: #eff6ff;
-}
-
-.results-table .rank {
-    font-weight: 600;
-    width: 50px;
-}
-
-.results-table .profession {
-    font-weight: 500;
-}
-
-.compatibility {
-    width: 180px;
+    margin-bottom: 0.5rem;
 }
 
 .compat-bar {
-    display: inline-block;
-    width: 80px;
-    background: #e2e8f0;
+    width: 100%;
+    height: 8px;
+    background: #f1f5f9;
     border-radius: 10px;
-    height: 6px;
     overflow: hidden;
-    vertical-align: middle;
-    margin-right: 8px;
 }
 
 .compat-fill {
     height: 100%;
-    background: #3b82f6;
     border-radius: 10px;
+    transition: width 0.5s ease;
 }
 
-.compat-value {
+/* Card Footer */
+.card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
     font-size: 0.8rem;
-    color: #475569;
+    color: #94a3b8;
 }
-
-.cluster {
+/* Distance info */
+.distance-info {
     text-align: center;
-    width: 80px;
+    padding: 0.5rem 0 0 0;
 }
 
-/* Mobile Adaptation */
+.info-text {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Compatibility value - show color based on percentage */
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 0.25rem;
+}
+
+/* K-cluster styling */
+.stat-value {
+    font-weight: 700;
+}
+
+/* Make distance value less prominent if it's high (bad) */
+.stat-item .stat-value {
+    transition: color 0.3s ease;
+}
+/* Category Info */
+.category-info {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.info-badge {
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.info-text {
+    font-size: 0.9rem;
+    color: #475569;
+    flex: 1;
+}
+
+/* Distance Scale */
+.distance-scale {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-bottom: 0.25rem;
+}
+
+.scale-bar {
+    position: relative;
+    height: 8px;
+    border-radius: 10px;
+    overflow: visible;
+}
+
+.scale-gradient {
+    display: flex;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.gradient-section {
+    flex: 1;
+    height: 100%;
+}
+
+.scale-marker {
+    position: absolute;
+    top: -14px;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    transition: left 0.5s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* ============================================ */
+/* SIMPLE MOBILE ADAPTATION                    */
+/* ============================================ */
+
+/* Tablets and small laptops */
 @media (max-width: 768px) {
-    .prediction-results {
+    .prediction-card {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .profession-name {
+        font-size: 1.6rem;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-align: center;
+    }
+
+    .category-info {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .prediction-card {
         padding: 1rem;
+        border-radius: 12px;
+        margin: 0 0.25rem;
+    }
+
+    .prediction-results {
+        padding: 0.75rem 0.25rem;
     }
 
     .results-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
-    .results-subtitle {
-        font-size: 0.85rem;
+    .profession-name {
+        font-size: 1.3rem;
+        word-break: break-word;
     }
 
-    .section-title {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-    }
-
-    .cards-grid {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .card {
-        min-width: 100%;
-    }
-
-    .card-title {
-        font-size: 0.9rem;
-        min-height: auto;
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem 0;
     }
 
     .stat-value {
         font-size: 1rem;
     }
 
-    .chart-section,
-    .list-section {
-        padding: 1rem;
+    .card-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+        font-size: 0.7rem;
     }
 
-    .results-table th,
-    .results-table td {
-        padding: 0.5rem 0.25rem;
+    .category-info {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    .info-text {
+        font-size: 0.8rem;
+    }
+
+    .info-badge {
         font-size: 0.75rem;
     }
 
-    .compatibility {
-        width: 120px;
+    .scale-labels {
+        font-size: 0.55rem;
     }
 
-    .compat-bar {
-        width: 50px;
+    .scale-marker {
+        font-size: 1rem;
+        top: -10px;
     }
 
-    .compat-value {
+    .compat-label {
+        font-size: 0.8rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .card-header .btn {
+        width: 100%;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .prediction-card {
+        padding: 0.75rem;
+    }
+
+    .profession-name {
+        font-size: 1.1rem;
+    }
+
+    .stat-value {
+        font-size: 0.85rem;
+    }
+
+    .results-title {
+        font-size: 1rem;
+    }
+
+    .info-text {
         font-size: 0.7rem;
     }
-}
-
-/* Small phones */
-@media (max-width: 480px) {
-    .results-table th:nth-child(3),
-    .results-table td:nth-child(3) {
-        min-width: 100px;
-    }
-
-    .cluster {
-        width: 60px;
-    }
-}
-
-/* Loading state */
-.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    color: #64748b;
-}
-
-/* Empty state */
-.empty-state {
-    text-align: center;
-    padding: 3rem;
-    color: #64748b;
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
 }
