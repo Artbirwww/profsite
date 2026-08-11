@@ -57,7 +57,6 @@ export const NoResults: React.FC<NoResultsProps> = ({
                 </button>
             )}
 
-            <Button label={"Получить результат"}/>
         </div>
     );
 };
