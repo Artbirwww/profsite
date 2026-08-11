@@ -24,3 +24,22 @@ const formatTime = (seconds: number): string => {
         const secs = seconds % 60;
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
+    
+export const formatDateTime = (dateTimeString: string) => {
+    try {
+        const date = new Date(dateTimeString);
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+            return 'Неизвестная дата';
+        }
+        return date.toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (e) {
+        return 'Неизвестная дата';
+    }
+};
