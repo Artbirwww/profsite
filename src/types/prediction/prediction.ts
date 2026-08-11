@@ -1,13 +1,19 @@
+export interface PredictionResponse {
+    pupilId: number;
+    cluster: number;
+    predictedProfession: string;
+    nearestSpecialistId: number;
+    distance: number;
+    confidenceCategory: string;
+}
 
 export interface Prediction {
-    id: number
-    pupilId: number
-    filePath: string
-    predictionType: string
-    createdAt: string
-}
-export interface PredictionResult {
-    name: string
-    distance: number
-    cluster: number
+    id: number;
+    pupilId: number;
+    cluster: number;
+    predictedProfession: string;
+    nearestSpecialistId: number;
+    distance: number;
+    confidenceCategory: string;
+    createdAt: string;
 }
